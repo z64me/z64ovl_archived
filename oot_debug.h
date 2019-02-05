@@ -3,6 +3,7 @@
 
 #define OOT_DEBUG 1
 
+#include <stdint.h>
 #include "mips.h"
 #include "actor_oot.h"
 #include "z64ovl.h"
@@ -21,28 +22,44 @@
 #define NAVI              0x8022CBE0
 #define ZTARGETPOINTER    0x80213CEC
 
-// Controller Buttons
-#define INPUT_NONE        0b0000000000000000
-#define INPUT_C_RIGHT     0b0000000000000001
-#define INPUT_C_LEFT      0b0000000000000010
-#define INPUT_C_DOWN      0b0000000000000100
-#define INPUT_C_UP        0b0000000000001000
-#define INPUT_R_TRIGGER   0b0000000000010000
-#define INPUT_L_TRIGGER   0b0000000000100000
-#define INPUT_D_RIGHT     0b0000000100000000
-#define INPUT_D_LEFT      0b0000001000000000
-#define INPUT_D_DOWN      0b0000010000000000
-#define INPUT_D_UP        0b0000100000000000
-#define INPUT_START       0b0001000000000000
-#define INPUT_Z           0b0010000000000000
-#define INPUT_B           0b0100000000000000
-#define INPUT_A           0b1000000000000000
+// Controller Input
+typedef enum {
+	INPUT_NONE = 0b0000000000000000,
+	INPUT_C_RIGHT = 0b0000000000000001,
+	INPUT_C_LEFT = 0b0000000000000010,
+	INPUT_C_DOWN = 0b0000000000000100,
+	INPUT_C_UP = 0b0000000000001000,
+	INPUT_R_TRIGGER = 0b0000000000010000,
+	INPUT_L_TRIGGER = 0b0000000000100000,
+	INPUT_D_RIGHT = 0b0000000100000000,
+	INPUT_D_LEFT = 0b0000001000000000,
+	INPUT_D_DOWN = 0b0000010000000000,
+	INPUT_D_UP = 0b0000100000000000,
+	INPUT_START = 0b0001000000000000,
+	INPUT_Z = 0b0010000000000000,
+	INPUT_B = 0b0100000000000000,
+	INPUT_A = 0b1000000000000000
+} z64_button_t;
 
-enum DISP{
+typedef struct {
+	z64_button_t	button;
+	char	stick_x;
+	char	stick_y;
+	char	errno;
+} OSContPad;
+
+typedef struct {
+	OSContPad current;			/* 0x00 */
+	OSContPad last;					/* 0x06 */
+	OSContPad pressEdge;		/* 0x0C */
+	OSContpad releaseEdge;	/* 0x12 */
+} z64_controller_t;       /* 0x18 */
+
+typedef enum {
 	WORK = 0x01BC,
 	OVERLAY = 0x02B0,
 	POLY_OPA = 0x02C0,
 	POLY_XLU = 0x02D0
-};
+} z64_disp_t;
 
 #endif
