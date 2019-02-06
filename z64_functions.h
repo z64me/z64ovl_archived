@@ -824,7 +824,7 @@ extern void external_func_8002AA44(void);
 		ACTOR_SHADOW_DRAWFUNC_TEARDROP;
 	#if OOT_DEBUG || OOT_U_1_0
 		static inline void actor_init_shadow(z64_actor_t *actor, f32 unk0, void *drawfunc, f32 radius) {
-			_test_shadow( AADDR(actor, 0xB4), unk0, drawfunc, radius );
+			_actor_init_shadow( AADDR(actor, 0xB4), unk0, drawfunc, radius );
 		}
 	#endif
 
