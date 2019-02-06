@@ -1061,7 +1061,7 @@ extern void actor_update_pos(z64_actor_t *actor);
 
 /**
  * Physics, updates XYZ velocity vectors (+0x5C) of an actor
- * Only factors y component of speed rotation xyz (+0x30) 
+ * Only factors y component of speed rotation xyz (+0x30)
  */
 extern void actor_update_vel(z64_actor_t *actor);
 	#if OOT_DEBUG
@@ -2947,7 +2947,7 @@ extern void actor_damage_chart_get(void);
 /**
  * Initializes hitbox structure (different purpose than 8005C364?)
  * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance) 
+ * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance)
  */
 extern void external_func_8005BBF8(void);
 	#if OOT_DEBUG
@@ -2989,9 +2989,9 @@ extern void external_func_8005BE50(void);
 	#endif
 
 /**
- * Loads hitbox variable array to hitbox structure  (different purpose than 8005C4AC?) 
+ * Loads hitbox variable array to hitbox structure  (different purpose than 8005C4AC?)
  * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array 
+ * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
 extern void external_func_8005C050(void);
 	#if OOT_DEBUG
@@ -3025,9 +3025,9 @@ extern void external_func_8005C3AC(void);
 	#endif
 
 /**
- * Loads hitbox variable array to hitbox structure  (different purpose than 8005C4AC?) 
+ * Loads hitbox variable array to hitbox structure  (different purpose than 8005C4AC?)
  * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - hitbox variable array 
+ * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - hitbox variable array
  */
 extern void external_func_8005C3F4(void);
 	#if OOT_DEBUG
@@ -3301,7 +3301,7 @@ extern void external_func_80063E9C(void);
 	#endif
 
 /**
- * Starts cutscene for link 
+ * Starts cutscene for link
  * TODO These notes need converted into a C function prototype
  * A0 - global context | A1 - global context + 0x1D64
  */
@@ -4891,7 +4891,7 @@ extern void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 draw_table, u8
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-extern void actor_skelanime_draw_mtx(u32 gl_ctxt, u32 limb_index, u32 draw_table, u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
+extern void actor_skelanime_draw_mtx(u32 gl_ctxt, u32 limb_index, u32 draw_table, u16 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
@@ -6859,4 +6859,3 @@ extern u32 player_talk_state(u32 global_context);
 	#endif
 
 #endif // __Z64OVL_H__
-
