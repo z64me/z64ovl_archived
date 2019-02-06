@@ -22,6 +22,7 @@
 #define NAVI              0x8022CBE0
 #define ZTARGETPOINTER    0x80213CEC
 
+
 // Controller Input
 typedef enum {
 	INPUT_NONE = 0b0000000000000000,
@@ -49,11 +50,33 @@ typedef struct {
 } OSContPad;
 
 typedef struct {
-	OSContPad current;			/* 0x00 */
-	OSContPad last;					/* 0x06 */
-	OSContPad pressEdge;		/* 0x0C */
-	OSContpad releaseEdge;	/* 0x12 */
-} z64_controller_t;       /* 0x18 */
+	OSContPad current;
+	OSContPad last;
+	OSContPad pressEdge;
+	OSContpad releaseEdge;
+} z64_controller_t;
+
+// Global Context
+typedef struct{
+	int *gfx_ctxt;
+	int *update;
+	int *destuctor;
+	int *init_next;
+	int size;
+	z64_controller_t controller[4];
+	uint32_t heap_size;
+	int *heap;
+	int *heap_free_start;
+	int *heap_free_end;
+	int *unk1;
+	int *unk2;
+	int *unk3;
+	int *unk4;
+	int *unk5;
+	int execute;
+	int update_count;
+	int unk6;
+} z64_game_state_t;
 
 typedef enum {
 	WORK = 0x01BC,
