@@ -3,16 +3,7 @@
 
 #define OOT_DEBUG 1
 
-#include <stdint.h>
-#include "mips.h"
-#include "actor_oot.h"
-#include "z64ovl.h"
-
 // RAM Stuff
-#define P1_CONTROLLER     0x80166AF0
-#define P2_CONTROLLER     0x80166B08
-#define P3_CONTROLLER     0x80166B20
-#define P4_CONTROLLER     0x80166B38
 #define RAM_SEGMENT_TABLE 0x80166FA8
 #define GLOBAL_CONTEXT    0x80212020
 #define VIEW_CONTEXT      0x802140F8
@@ -21,68 +12,5 @@
 #define LINK              0x802245B0
 #define NAVI              0x8022CBE0
 #define ZTARGETPOINTER    0x80213CEC
-
-
-// Controller Input
-typedef enum {
-	INPUT_NONE = 0b0000000000000000,
-	INPUT_C_RIGHT = 0b0000000000000001,
-	INPUT_C_LEFT = 0b0000000000000010,
-	INPUT_C_DOWN = 0b0000000000000100,
-	INPUT_C_UP = 0b0000000000001000,
-	INPUT_R_TRIGGER = 0b0000000000010000,
-	INPUT_L_TRIGGER = 0b0000000000100000,
-	INPUT_D_RIGHT = 0b0000000100000000,
-	INPUT_D_LEFT = 0b0000001000000000,
-	INPUT_D_DOWN = 0b0000010000000000,
-	INPUT_D_UP = 0b0000100000000000,
-	INPUT_START = 0b0001000000000000,
-	INPUT_Z = 0b0010000000000000,
-	INPUT_B = 0b0100000000000000,
-	INPUT_A = 0b1000000000000000
-} z64_button_t;
-
-typedef struct {
-	z64_button_t	button;
-	char	stick_x;
-	char	stick_y;
-	char	errno;
-} OSContPad;
-
-typedef struct {
-	OSContPad current;
-	OSContPad last;
-	OSContPad pressEdge;
-	OSContpad releaseEdge;
-} z64_controller_t;
-
-// Global Context
-typedef struct{
-	int *gfx_ctxt;
-	int *update;
-	int *destuctor;
-	int *init_next;
-	int size;
-	z64_controller_t controller[4];
-	uint32_t heap_size;
-	int *heap;
-	int *heap_free_start;
-	int *heap_free_end;
-	int *unk1;
-	int *unk2;
-	int *unk3;
-	int *unk4;
-	int *unk5;
-	int execute;
-	int update_count;
-	int unk6;
-} z64_game_state_t;
-
-typedef enum {
-	WORK = 0x01BC,
-	OVERLAY = 0x02B0,
-	POLY_OPA = 0x02C0,
-	POLY_XLU = 0x02D0
-} z64_disp_t;
 
 #endif

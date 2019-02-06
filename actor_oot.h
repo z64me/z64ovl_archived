@@ -43,10 +43,6 @@ name =                                                          \
    Data types & structures
    ---------------------------------------------- */
 
-typedef struct vec3f_s {
-	f32 x, y, z;
-} vec3f_t;
-
 typedef struct vec3s_s {
 	s16 x, y, z;
 } vec3s_t;
