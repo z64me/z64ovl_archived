@@ -4852,7 +4852,7 @@ void external_func_800A0B40(void);
  * Must be in draw even after initializing hirearchy without matrices
  * TODO Variable name cleanup, better notes
  */
-void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 draw_table u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
+void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 draw_table, u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw = 0x800A15C8");
 	#elif OOT_U_1_0
