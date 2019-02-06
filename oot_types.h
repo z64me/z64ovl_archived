@@ -119,7 +119,7 @@ typedef struct {
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
   /* 0x20 */ uint32_t unk1;
-} z64_mtx_draw_table_t;
+} z64_skelanime_t;
 
 // Actor Collision
 typedef struct z64_capsule_s{
