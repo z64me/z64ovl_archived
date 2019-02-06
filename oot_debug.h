@@ -4,6 +4,7 @@
 #define OOT_DEBUG 1
 
 #include "mips.h"
+#include "oot_types.h"
 #include "actor_oot.h"
 #include "z64_functions.h"
 
