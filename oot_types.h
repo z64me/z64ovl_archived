@@ -7,6 +7,10 @@
 /* From the Nintendo 64 SDK*/
 typedef void *	OSMesg;
 
+typedef s32	OSPri;
+typedef s32	OSId;
+typedef union	{ struct { f32 f_odd; f32 f_even; } f; f64 d; }	__OSfp;
+
 typedef struct {
 	u64	at, v0, v1, a0, a1, a2, a3;
 	u64	t0, t1, t2, t3, t4, t5, t6, t7;
@@ -48,10 +52,6 @@ typedef struct OSMesgQueue_s {
 	s32		msgCount;	/* Contains total # of messages */
 	OSMesg		*msg;		/* Points to message buffer array */
 } OSMesgQueue;
-
-typedef s32	OSPri;
-typedef s32	OSId;
-typedef union	{ struct { f32 f_odd; f32 f_even; } f; f64 d; }	__OSfp;
 
 // Controller Input
 typedef enum {
