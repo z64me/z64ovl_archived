@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "n64.h"
 #include "mips.h"
+
 // Controller Input
 typedef enum {
 	INPUT_NONE = 0b0000000000000000,
@@ -28,7 +29,7 @@ typedef struct {
 	char	stick_x;
 	char	stick_y;
 	char	errno;
-} z64_input_t;
+} OSContPad;
 
 typedef struct {
 	OSContPad current;
