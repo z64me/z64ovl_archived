@@ -4879,7 +4879,7 @@ extern void external_func_800A0B40(void);
  * Must be in draw even after initializing hirearchy without matrices
  * TODO Variable name cleanup, better notes
  */
-extern void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, z64_skelanime_t *skelanime, u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
+extern void actor_skelanime_draw(u32 gl_ctxt, u32 *limb_index, z64_skelanime_t *skelanime, u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw = 0x800A15C8");
 	#elif OOT_U_1_0
@@ -4891,7 +4891,7 @@ extern void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, z64_skelanime_t *s
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-extern void actor_skelanime_draw_mtx(u32 gl_ctxt, u32 limb_index, z64_skelanime_t *skelanime, u16 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
+extern void actor_skelanime_draw_mtx(u32 gl_ctxt, u32 *limb_index, z64_skelanime_t *skelanime, u16 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
