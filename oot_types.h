@@ -109,6 +109,18 @@ enum DISP{
 	POLY_XLU = 0x02D0
 };
 
+/* Actor Specific? */
+typedef struct {
+  /* 0x00 */ uint16_t limb_count;
+  /* 0x02 */ uint16_t dlist_count;
+  /* 0x04 */ uint32_t *limb_index;
+  /* 0x08 */ uint32_t *anim_current;
+  /* 0x10 */ float anim_frame_count;
+  /* 0x18 */ float anim_current_frame;
+  /* 0x1C */ float anim_playback_speed;
+  /* 0x20 */ uint32_t unk1;
+} z64_mtx_draw_table_t;
+
 // Actor Collision
 typedef struct z64_capsule_s{
 	// Empty Filling
