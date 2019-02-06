@@ -1,11 +1,41 @@
 #ifndef __ZELDA64_ACTOR_OOT_H__
 #define __ZELDA64_ACTOR_OOT_H__
 
+#include <stdint.h>
 #include "mips.h"
 
-typedef struct z64_actor_init_s{
+#define INIT(name,id,type,room,flags,obj,instance,init,dest,main,draw)  \
+z64_actor_init_t                                                        \
+name =                                                                  \
+{                                                                       \
+    (id),                                                               \
+    (type),                                                             \
+    (room),                                                             \
+    (flags),                                                            \
+    (obj),                                                              \
+    0x0000,                                                             \
+    (instance),                                                         \
+    (void *)(init),                                                     \
+    (void *)(dest),                                                     \
+    (void *)(update),                                                   \
+    (void *)(draw)                                                      \
+}                                                                       \
 
+
+typedef struct z64_actor_init_s{
+  int16_t number; /* Actor Number */
+  uint8_t type; /* Actor Type */
+  uint8_t room; /* Room that the instance was spawned in*/
+  int flags; /* Not completely documented */
+  int16_t object; /* Object Number */
+  int16_t padding;
+  int instance_size; /* Size of the actor instance */
+  void *init; /* Constructor */
+  void *dest; /* Destructor */
+  void *main; /* Main Update Function */
+  void *draw; /* Draw Function */
 } z64_actor_init_t;
+
 /* Legacy Macros */
 /* Get a value of arbitrary type from any address in the actor */
 #define AVAL(base,type,offset)                \

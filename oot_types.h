@@ -150,6 +150,13 @@ typedef struct{
 	int *global_context;
 } z64_graphics_context_t;
 
+enum DISP{
+	WORK = 0x01BC,
+	OVERLAY = 0x02B0,
+	POLY_OPA = 0x02C0,
+	POLY_XLU = 0x02D0
+};
+
 // Actor Collision
 typedef struct z64_capsule_s{
 	// Empty Filling

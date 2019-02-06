@@ -5,6 +5,7 @@
 
 #include "mips.h"
 #include "actor_oot.h"
+@include "oot_types.h"
 #include "z64_functions.h"
 
 // RAM Stuff
