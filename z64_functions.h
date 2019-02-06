@@ -4973,7 +4973,7 @@ extern void external_func_800A3BC0(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance + 0x014C (offset to store data) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)  0x10($sp) 0x14($sp) 0x18($sp)
  */
-extern void actor_skelanime_init(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void actor_skelanime_init(u32 gl_ctxt, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
 		asm("actor_skelanime_init = 0x800A457C");
 	#elif OOT_U_1_0
@@ -4985,17 +4985,11 @@ extern void actor_skelanime_init(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, 
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance Address + 0x014C (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-/*wrapper*/static inline void actor_skelanime_init_mtx(u32 global_context, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
-/*internal-use-only*/extern void _actor_skelanime_init_mtx(u32 gl_ctxt, void *matrixtable, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void actor_skelanime_init_mtx(u32 global_context, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
-		asm("_actor_skelanime_init_mtx = 0x800A46F8");
+		asm("actor_skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
-		asm("_actor_skelanime_init_mtx = 0x8008C788");
-	#endif
-	#if OOT_DEBUG || OOT_U_1_0
-		static inline void actor_skelanime_init_mtx(u32 global_context, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2) {
-			_actor_skelanime_init_mtx(global_context, AADDR(actor, 0x14C), skeleton, animation, unk0, unk1, unk2);
-		}
+		asm("actor_skelanime_init_mtx = 0x8008C788");
 	#endif
 
 /**
@@ -5003,7 +4997,7 @@ extern void actor_skelanime_init(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, 
  * TODO Conflict, notes below say actor+0x014C, but taking actor+0x0 is fine?
  * A0 = actor instance + 0x014C (Drawing Table) V0 = 1 if ?, else 0
  */
-extern int actor_anime_frame_update_mtx(z64_actor_t *actor);
+extern int actor_anime_frame_update_mtx(z64_skelanime_t *skelanime);
 	#if OOT_DEBUG
 		asm("actor_anime_frame_update_mtx = 0x800A49FC");
 	#elif OOT_U_1_0
@@ -5026,7 +5020,7 @@ extern void external_func_800A4FE4(void);
  * TODO These notes need converted into a C function prototype
  * A0 = actor instance + 0x014C (Drawing Table) | A1 = New Animation Pointer (in Object File) | A2 = Animation Speed (Floating Point) | A3 = ? | 0x0010(SP) = Number of Frames in Floating Point | 0x0014(SP) = some counter related to how long the animation should be played? | 0x0018(SP) = float transition rate, less than 1
  */
-extern void actor_anime_change(z64_actor_t *actor, u32 animation, f32 playback_speed, f32 unk0, f32 frame_count, u8 unk_1, f32 transition_rate);
+extern void actor_anime_change(z64_skelanime_t *skelanime, u32 animation, f32 playback_speed, f32 unk0, f32 frame_count, u8 unk_1, f32 transition_rate);
 	#if OOT_DEBUG
 		asm("actor_anime_change = 0x800A51A0");
 	#elif OOT_U_1_0
