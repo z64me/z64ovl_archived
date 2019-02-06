@@ -1427,7 +1427,7 @@ void external_func_8002F2CC(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context
  */
-void external_func_8002F2F4(void);
+void external_func_8002F2F4(z64_actor_t *actor, u32 global_context);
 	#if OOT_DEBUG
 		asm("external_func_8002F2F4 = 0x8002F2F4");
 	#elif OOT_U_1_0
@@ -4852,7 +4852,7 @@ void external_func_800A0B40(void);
  * Must be in draw even after initializing hirearchy without matrices
  * TODO Variable name cleanup, better notes
  */
-void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 draw_table u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
+void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 draw_table, u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw = 0x800A15C8");
 	#elif OOT_U_1_0
@@ -4864,7 +4864,7 @@ void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 draw_table u8 limb_dl
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-void actor_skelanime_draw_mtx(u32 gl_ctxt, u32 limb_index, u32 draw table, u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
+void actor_skelanime_draw_mtx(u32 gl_ctxt, u32 limb_index, u32 draw_table, u8 limb_dlists_count, u8 unk0, u8 unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
@@ -4960,9 +4960,9 @@ void actor_skelanime_init(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, u32 ani
  */
 void actor_skelanime_init_mtx(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
-		asm("actor_skelanime_mtx_init = 0x800A46F8");
+		asm("actor_skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
-		asm("actor_skelanime_mtx_init = 0x8008C788");
+		asm("actor_skelanime_init_mtx = 0x8008C788");
 	#endif
 
 /**
@@ -6824,11 +6824,11 @@ void external_func_8010BD88(void);
  * TODO These notes need converted into a C function prototype
  * A0 = global context + 0x20D8 (VIEW struct ptr)
  */
-void external_func_8010BDBC(void);
+u32 player_talk_state(u32 global_context);
 	#if OOT_DEBUG
-		asm("external_func_8010BDBC = 0x8010BDBC");
+		asm("player_talk_state = 0x8010BDBC");
 	#elif OOT_U_1_0
-		asm("external_func_8010BDBC = 0x800DD464");
+		asm("player_talk_state = 0x800DD464");
 	#endif
 
 #endif // __Z64OVL_H__
