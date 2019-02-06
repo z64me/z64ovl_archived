@@ -793,16 +793,29 @@ void external_func_8002AA44(void);
 
 /**
  * Draws shadow until instance is destroyed (use in constructor)
- * dest = actor instance + 0xB4
+ * actor = actor instance
  * unk0 = unknown float, gets stored at dest + 0x08
- * drawfunc = 8002B5EC for circular shadows, 8002B8C4 for teardrop shadows attached to feet, gets stored at dest + 0x0C
- * radius = size of shadow(s), unsure for teardrop, gets stored at dest + 0x10
+ * drawfunc = ACTOR_SHADOW_DRAWFUNC_CIRCLE for circular shadows, ACTOR_SHADOW_DRAWFUNC_TEARDROP for teardrop shadows attached to feet, gets stored at dest + 0x0C
+ * radius = size of shadow(s), gets stored at dest + 0x10
+ * INTERNAL dest = actor instance + 0xB4
  */
-void actor_init_shadow(void *dest, f32 unk0, void *drawfunc, f32 radius);
+/*wrapper*/static inline void actor_init_shadow(z64_actor_t *actor, f32 unk0, void *drawfunc, f32 radius);
+/*internal-use-only*/extern void _actor_init_shadow(void *dest, f32 unk0, void *drawfunc, f32 radius);
 	#if OOT_DEBUG
-		asm("actor_init_shadow = 0x8002B1E0");
+		asm("_actor_init_shadow = 0x8002B1E0");
+		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x8002B5EC");
+		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x8002B8C4");
 	#elif OOT_U_1_0
-		asm("actor_init_shadow = 0x8001EC20");
+		asm("_actor_init_shadow = 0x8001EC20");
+		// TODO Needs 1.0 equivalents!
+	#endif
+	extern char // drawfunc must be the address of one of the following:
+		ACTOR_SHADOW_DRAWFUNC_CIRCLE,
+		ACTOR_SHADOW_DRAWFUNC_TEARDROP;
+	#if OOT_DEBUG || OOT_U_1_0
+		static inline void actor_init_shadow(z64_actor_t *actor, f32 unk0, void *drawfunc, f32 radius) {
+			_test_shadow( AADDR(actor, 0xB4), unk0, drawfunc, radius );
+		}
 	#endif
 
 /**
