@@ -3,11 +3,10 @@
 
 #include "mips.h"
 
+typedef struct z64_actor_init_s{
 
-/* ----------------------------------------------
-   Macros/constants
-   ---------------------------------------------- */
-
+} z64_actor_init_t;
+/* Legacy Macros */
 /* Get a value of arbitrary type from any address in the actor */
 #define AVAL(base,type,offset)                \
 (                                             \
@@ -19,6 +18,7 @@
 (                            \
     (void*)((u8*)(a)+(o))    \
 )
+
 
 /* Make an actor header... */
 #define MK_AHEAD(name,num,typ,stat,u,objn,u2,finit,f1,f2,f3)    \

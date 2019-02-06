@@ -3,6 +3,10 @@
 
 #define OOT_DEBUG 1
 
+#include "mips.h"
+#include "actor_oot.h"
+#include "z64_functions.h"
+
 // RAM Stuff
 #define RAM_SEGMENT_TABLE 0x80166FA8
 #define GLOBAL_CONTEXT    0x80212020
