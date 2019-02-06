@@ -6824,11 +6824,11 @@ void external_func_8010BD88(void);
  * TODO These notes need converted into a C function prototype
  * A0 = global context + 0x20D8 (VIEW struct ptr)
  */
-void external_func_8010BDBC(void);
+u32 player_talk_state(u32 global_context);
 	#if OOT_DEBUG
-		asm("external_func_8010BDBC = 0x8010BDBC");
+		asm("player_talk_state = 0x8010BDBC");
 	#elif OOT_U_1_0
-		asm("external_func_8010BDBC = 0x800DD464");
+		asm("player_talk_state = 0x800DD464");
 	#endif
 
 #endif // __Z64OVL_H__
