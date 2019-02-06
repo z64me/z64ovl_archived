@@ -7,21 +7,6 @@
 /* From the Nintendo 64 SDK*/
 typedef void *	OSMesg;
 
-typedef struct OSMesgQueue_s {
-	OSThread	*mtqueue;	/* Queue to store threads blocked
-					   on empty mailboxes (receive) */
-	OSThread	*fullqueue;	/* Queue to store threads blocked
-					   on full mailboxes (send) */
-	s32		validCount;	/* Contains number of valid message */
-	s32		first;		/* Points to first valid message */
-	s32		msgCount;	/* Contains total # of messages */
-	OSMesg		*msg;		/* Points to message buffer array */
-} OSMesgQueue;
-
-typedef s32	OSPri;
-typedef s32	OSId;
-typedef union	{ struct { f32 f_odd; f32 f_even; } f; f64 d; }	__OSfp;
-
 typedef struct {
 	u64	at, v0, v1, a0, a1, a2, a3;
 	u64	t0, t1, t2, t3, t4, t5, t6, t7;
@@ -52,6 +37,21 @@ typedef struct OSThread_s {
 	__OSThreadprofile_s     *thprof;        /* workarea for thread profiler */
 	__OSThreadContext	context;	/* register/interrupt mask */
 } OSThread;
+
+typedef struct OSMesgQueue_s {
+	OSThread	*mtqueue;	/* Queue to store threads blocked
+					   on empty mailboxes (receive) */
+	OSThread	*fullqueue;	/* Queue to store threads blocked
+					   on full mailboxes (send) */
+	s32		validCount;	/* Contains number of valid message */
+	s32		first;		/* Points to first valid message */
+	s32		msgCount;	/* Contains total # of messages */
+	OSMesg		*msg;		/* Points to message buffer array */
+} OSMesgQueue;
+
+typedef s32	OSPri;
+typedef s32	OSId;
+typedef union	{ struct { f32 f_odd; f32 f_even; } f; f64 d; }	__OSfp;
 
 // Controller Input
 typedef enum {
