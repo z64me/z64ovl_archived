@@ -4985,11 +4985,17 @@ extern void actor_skelanime_init(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, 
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance Address + 0x014C (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void actor_skelanime_init_mtx(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+/*wrapper*/static inline void actor_skelanime_init_mtx(u32 global_context, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+/*internal-use-only*/extern void _actor_skelanime_init_mtx(u32 gl_ctxt, void *matrixtable, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
-		asm("actor_skelanime_init_mtx = 0x800A46F8");
+		asm("_actor_skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
-		asm("actor_skelanime_init_mtx = 0x8008C788");
+		asm("_actor_skelanime_init_mtx = 0x8008C788");
+	#endif
+	#if OOT_DEBUG || OOT_U_1_0
+		static inline void actor_skelanime_init_mtx(u32 global_context, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2) {
+			_actor_skelanime_init_mtx(global_context, AADDR(actor, 0x14C), skeleton, animation, unk0, unk1, unk2);
+		}
 	#endif
 
 /**
