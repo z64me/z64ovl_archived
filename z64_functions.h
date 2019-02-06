@@ -792,11 +792,13 @@ void external_func_8002AA44(void);
 	#endif
 
 /**
- * Draws circular shadow until instance is destroyed (use in constructor)
- * TODO Possible conflict between notes and C function prototype?
- * a0 - actor instance + 0xB4  | a1 - float unknown (will be stored at a0 + 0x08)  | a2 - 8002B5EC (draw function of shadow, will be stored at a0 + 0x0C)  | a3 - float unknown (will be stored at a0 + 0x10)
+ * Draws shadow until instance is destroyed (use in constructor)
+ * dest = actor instance + 0xB4
+ * unk0 = unknown float, gets stored at dest + 0x08
+ * drawfunc = 8002B5EC for circular shadows, 8002B8C4 for teardrop shadows attached to feet, gets stored at dest + 0x0C
+ * radius = radius of circular shadow, unsure for teardrop, gets stored at dest + 0x10
  */
-void actor_init_shadow(z64_actor_t *actor, f32 scale[3], u8 alpha, u32 glbl_ctxt);
+void actor_init_shadow(void *dest, f32 unk0, void *drawfunc, f32 radius);
 	#if OOT_DEBUG
 		asm("actor_init_shadow = 0x8002B1E0");
 	#elif OOT_U_1_0
