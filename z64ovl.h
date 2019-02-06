@@ -1427,7 +1427,7 @@ void external_func_8002F2CC(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context
  */
-void external_func_8002F2F4(void);
+void external_func_8002F2F4(z64_actor_t *actor, u32 global_context);
 	#if OOT_DEBUG
 		asm("external_func_8002F2F4 = 0x8002F2F4");
 	#elif OOT_U_1_0
@@ -4960,9 +4960,9 @@ void actor_skelanime_init(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, u32 ani
  */
 void actor_skelanime_init_mtx(u32 gl_ctxt, z64_actor_t *actor, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
-		asm("actor_skelanime_mtx_init = 0x800A46F8");
+		asm("actor_skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
-		asm("actor_skelanime_mtx_init = 0x8008C788");
+		asm("actor_skelanime_init_mtx = 0x8008C788");
 	#endif
 
 /**
