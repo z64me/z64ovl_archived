@@ -796,7 +796,7 @@ void external_func_8002AA44(void);
  * dest = actor instance + 0xB4
  * unk0 = unknown float, gets stored at dest + 0x08
  * drawfunc = 8002B5EC for circular shadows, 8002B8C4 for teardrop shadows attached to feet, gets stored at dest + 0x0C
- * radius = radius of circular shadow, unsure for teardrop, gets stored at dest + 0x10
+ * radius = size of shadow(s), unsure for teardrop, gets stored at dest + 0x10
  */
 void actor_init_shadow(void *dest, f32 unk0, void *drawfunc, f32 radius);
 	#if OOT_DEBUG
@@ -1918,11 +1918,13 @@ void external_func_80033AEC(void);
 	#endif
 
 /**
- * Draw circular shadow at acxtor coordinates
- * TODO These notes say actor+0x24, but we pass in actor? Which is it?
+ * Draw circular shadow at actor coordinates
+ * xyz = pointer to an actor's internal position array (actor + 0x24)
+ * scale[3] = scale along three axes
+ * alpha = opacity of the shadow
  * a0 actor pointer + 0x24 (position array) | a1  scale, 12 byte array | a2 0x00FF | a3 global context
  */
-void actor_shadow_circle(z64_actor_t *actor, f32 scale[3], u8 alpha, u32 glbl_ctxt);
+void actor_shadow_circle(void *xyz, f32 scale[3], u8 alpha, u32 glbl_ctxt);
 	#if OOT_DEBUG
 		asm("actor_shadow_circle = 0x80033C30");
 	#elif OOT_U_1_0
