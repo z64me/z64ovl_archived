@@ -83,7 +83,7 @@ typedef struct {
 	OSContPad current;
 	OSContPad last;
 	OSContPad pressEdge;
-	OSContpad releaseEdge;
+	OSContPad releaseEdge;
 } z64_controller_t;
 
 // Global Context
