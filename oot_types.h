@@ -113,8 +113,8 @@ enum DISP{
 typedef struct {
   /* 0x00 */ uint16_t limb_count;
   /* 0x02 */ uint16_t dlist_count;
-  /* 0x04 */ int *limb_index;
-  /* 0x08 */ int *anim_current;
+  /* 0x04 */ uint32_t *limb_index;
+  /* 0x08 */ uint32_t *anim_current;
   /* 0x10 */ float anim_frame_count;
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
