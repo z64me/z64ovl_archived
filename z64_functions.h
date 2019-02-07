@@ -1337,10 +1337,17 @@ extern void external_func_8002E1A8(void);
 
 /**
  * possibly primary actor collision call
- * TODO These notes need converted into a C function prototype
+ * required in order for shadow initialized in actor_init_shadow to work
+ * TODO Test this stuff more thoroughly in-game
+ * TODO arguments below/radius may actually be swapped, test these more carefully
+ * below = space below actor coordinates to test if ground is below actor
+ * radius = radius for moving actor out of wall in case it is placed inside wall
+ * above = space above actor coordinates to test if ceiling is above actor
+ * En_Niw_Lady uses the arguments (gctx, &en->actor, 20.0f, 20.0f, 60.0f, 0x0000001D)
+ * old notes for reference:
  * A0 = Global Context | A1 = Actor Instance | A2 = float wallCheckHeight? (26f for Link) | A3 = float wallPushback? (18f/14f for Adult/Child Link) | SP+0x10 float ? (56f/40f for Adult/Child Link) | SP+0x14 int (type?)
  */
-extern void external_func_8002E4B4(void);
+extern void external_func_8002E4B4(u32 global_context, z64_actor_t *actor, f32 below, f32 radius, f32 above, u32 flags);
 	#if OOT_DEBUG
 		asm("external_func_8002E4B4 = 0x8002E4B4");
 	#elif OOT_U_1_0
