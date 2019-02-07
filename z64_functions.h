@@ -3048,7 +3048,9 @@ extern void external_func_8005C450(void);
 
 /**
  * Loads hitbox variable array to hitbox structure
- * TODO These notes need converted into a C function prototype
+ * dest = destination capsule structure within actor instance
+ * actor = actor
+ * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
 extern void external_func_8005C4AC(u32 gl_ctxt, z64_capsule_t *dest, z64_actor_t *actor, z64_capsule_init_t *source);
