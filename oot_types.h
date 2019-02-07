@@ -135,8 +135,24 @@ typedef struct {
 } z64_skelanime_t;
 
 // Actor Collision
-typedef struct z64_capsule_s{
-	// Empty Filling
+typedef struct z64_capsule_s {
+  /* 0x00 */ uint32_t unk1;
+  /* 0x04 */ uint32_t unk2;
+  /* 0x08 */ uint32_t unk3;
+  /* 0x0C */ uint32_t unk4;
+  /* 0x10 */ uint8_t damage_type;
+  /* 0x11 */ uint8_t damage_amount;
+  /* 0x12 */ uint16_t unk5;
+  /* 0x14 */ uint32_t unk6;
+  /* 0x18 */ uint32_t unk7;
+  /* 0x1C */ uint32_t unk8;
+  /* 0x20 */ uint16_t radius;
+  /* 0x22 */ uint16_t height;
+  /* 0x24 */ uint16_t unk9;
+	/* 0x26 */ uint16_t x_pos;
+  /* 0x28 */ uint16_t y_pos;
+	/* 0x2A */ uint16_t z_pos;
+  /* 0x2C */
 } z64_capsule_t;
 
 typedef struct vec3f_s {

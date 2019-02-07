@@ -3005,7 +3005,7 @@ extern void external_func_8005C050(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void external_func_8005C364(void);
+extern void external_func_8005C364(u32 gl_ctxt, void *collision);
 	#if OOT_DEBUG
 		asm("external_func_8005C364 = 0x8005C364");
 	#elif OOT_U_1_0
@@ -3051,7 +3051,7 @@ extern void external_func_8005C450(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void external_func_8005C4AC(void);
+extern void external_func_8005C4AC(u32 gl_ctxt, void *collision, z64_actor_t *actor, z64_capsule_t *collision_array);
 	#if OOT_DEBUG
 		asm("external_func_8005C4AC = 0x8005C4AC");
 	#elif OOT_U_1_0
@@ -3157,7 +3157,7 @@ extern void actor_collision_check_set_ac(void);
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit? | Called directly by actors
  */
-extern void actor_collision_check_set_ot(void);
+extern void actor_collision_check_set_ot(u32 gl_ctxt, u32 col_body_groups, void *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ot = 0x8005DC4C");
 	#elif OOT_U_1_0
@@ -3203,7 +3203,7 @@ extern void external_func_80061EFC(void);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void external_func_800626DC(void);
+extern void external_func_800626DC(z64_actor_t *actor, void* collision);
 	#if OOT_DEBUG
 		asm("external_func_800626DC = 0x800626DC");
 	#elif OOT_U_1_0
