@@ -154,7 +154,7 @@ typedef struct z64_capsule_init_s {
 } z64_capsule_init_t;
 
 typedef struct {
-	uint8 filling[0x4C];
+	uint8_t filling[0x4C];
 } z64_capsule_t;
 
 typedef struct vec3f_s {
