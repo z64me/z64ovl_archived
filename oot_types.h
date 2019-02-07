@@ -111,22 +111,27 @@ enum DISP{
 
 /* Actor Specific? */
 typedef struct {
-  /* 0x00 */ uint16_t limb_count;
-  /* 0x02 */ uint16_t dlist_count;
+  /* 0x00 */ uint8_t limb_count;
+  /* 0x01 */ uint8_t unk1; /* Probably Padding*/
+  /* 0x02 */ uint8_t dlist_count;
+  /* 0x03 */ uint8_t unk2; /* Probably Padding */
   /* 0x04 */ uint32_t limb_index;
   /* 0x08 */ uint32_t anim_current;
+  /* 0x0C */ int unk3; /* 0x00000000 */
   /* 0x10 */ float anim_frame_count;
+  /* 0x14 */ float unk4;
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
-  /* 0x20 */ uint32_t *unk1; /* pointer */
-	/* 0x24 */ uint32_t *unk2; /* pointer */
-	/* 0x28 */ uint32_t unk3;
-	/* 0x2C */ uint32_t unk4;
-	/* 0x30 */ uint32_t unk5;
-	/* 0x34 */ uint32_t func_unk6; /* Some function pointer */
-	/* 0x38 */ int pad1; /* 0x00000000 */
-	/* 0x3C */ int pad2; /* 0x00000000 */
-	/* 0x40 */ int pad3; /* 0x00000000 */
+  /* 0x20 */ uint32_t unk5; /* Actor Drawing Table? */
+  /* 0x24 */ uint32_t unk6;
+  /* 0x28 */ uint32_t unk7;
+  /* 0x2C */ uint32_t unk8;
+  /* 0x30 */ uint32_t func_unk9; /* Some function pointer */
+  /* 0x34 */ int pad1; /* 0x00000000 */
+  /* 0x38 */ int pad2; /* 0x00000000 */
+  /* 0x3C */ uint16_t unk10;
+  /* 0x3E */ uint16_t unk11; /* Probably Padding */
+  /* 0x40 */
 } z64_skelanime_t;
 
 // Actor Collision
