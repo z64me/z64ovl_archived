@@ -71,10 +71,6 @@ name =                                                          \
    Data types & structures
    ---------------------------------------------- */
 
-typedef struct vec3s_s {
-	s16 x, y, z;
-} vec3s_t;
-
 /* A function handler for an actor */
 typedef void (*ZAFunc)( void *, void * );
 

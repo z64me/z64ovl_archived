@@ -135,7 +135,7 @@ typedef struct {
 } z64_skelanime_t;
 
 // Actor Collision
-typedef struct z64_capsule_s {
+typedef struct z64_capsule_init_s {
   /* 0x00 */ uint32_t unk1;
   /* 0x04 */ uint32_t unk2;
   /* 0x08 */ uint32_t unk3;
@@ -148,15 +148,21 @@ typedef struct z64_capsule_s {
   /* 0x1C */ uint32_t unk8;
   /* 0x20 */ uint16_t radius;
   /* 0x22 */ uint16_t height;
-  /* 0x24 */ uint16_t unk9;
-	/* 0x26 */ uint16_t x_pos;
-  /* 0x28 */ uint16_t y_pos;
-	/* 0x2A */ uint16_t z_pos;
+  /* 0x24 */ uint32_t unk9;
+	/* 0x28 */ uint32_t unk10;
   /* 0x2C */
+} z64_capsule_init_t;
+
+typedef struct {
+	uint8 filling[0x4C];
 } z64_capsule_t;
 
 typedef struct vec3f_s {
     f32 x, y, z;
 } vec3f_t, z64_point_t;
+
+typedef struct vec3s_s {
+	s16 x, y, z;
+} vec3s_t;
 
 #endif
