@@ -36,35 +36,10 @@ typedef struct z64_actor_init_s{
 
 /* Legacy Macros */
 /* Get a value of arbitrary type from any address in the actor */
-#define AVAL(base,type,offset)                \
-(                                             \
-    *(type*)((u8*)(base)+(offset))   \
-)
+#define AVAL(base,type,offset)  (*(type*)((u8*)(base)+(offset)))
 
 /* Get the address */
-#define AADDR(a,o)           \
-(                            \
-    (void*)((u8*)(a)+(o))    \
-)
-
-
-/* Make an actor header... */
-#define MK_AHEAD(name,num,typ,stat,u,objn,u2,finit,f1,f2,f3)    \
-struct actor_spec_t                                             \
-name =                                                          \
-{                                                               \
-    (num),                                                      \
-    (typ),                                                      \
-    (stat),                                                     \
-    (u),                                                        \
-    (objn),                                                     \
-    { 0, 0 },                                                   \
-    (u2),                                                       \
-    (ZAFunc)(finit),                                            \
-    (ZAFunc)(f1),                                               \
-    (ZAFunc)(f2),                                               \
-    (ZAFunc)(f3)                                                \
-}
+#define AADDR(a,o)  ((void*)((u8*)(a)+(o)))
 
 
 /* ----------------------------------------------
@@ -90,23 +65,6 @@ struct z64_rot_t
     s16 x;
     s16 y;
     s16 z;
-};
-
-/* The actor's "header" */
-struct actor_spec_t
-{
-    u16     actor_number;
-    u8      actor_type;
-    u8      actor_status;
-    u32     __u0000;
-    u16     object_number;
-    u8      __pad0001[2];
-    u32     __u0001;
-
-    ZAFunc  init;
-    ZAFunc  func_1;
-    ZAFunc  func_2;
-    ZAFunc  func_3;
 };
 
 /* Actor structure */

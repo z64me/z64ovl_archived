@@ -6059,7 +6059,7 @@ extern void matrix_alloc(u32 gfx_ctx, u8 source, u8 line);
  * TODO These notes need converted into a C function prototype
  * A0 = ptr to Vector3 | A1 = ptr to result
  */
-extern void external_func_800D1AF4(void);
+extern void external_func_800D1AF4(vec3f_t *vec3f, void *dest_vec3f);
 	#if OOT_DEBUG
 		asm("external_func_800D1AF4 = 0x800D1AF4");
 	#elif OOT_U_1_0
