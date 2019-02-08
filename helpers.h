@@ -29,4 +29,23 @@ void helper_limb_focus(uint32_t global_context, uint8_t current_limb, uint32_t a
 	}\
 }
 
+/****
+ * basic eye blink function
+ * returns a value 0, 1, or 2, for use with an array of eye texture offsets, corresponding to open, half-open, and closed eye textures, respectively
+ * this function is identical to how NPC eye blinking works in OoT:
+ * 1 the random value range (30, 30) comes from OoT
+ * 2 eyes are open for a random number of frames
+ * 3 half-open for one frame
+ * 4 closed for one frame
+ * 5 back open, restart from the beginning with a new random value
+ ***/
+u8 helper_eye_blink(s16 *frame) {
+	if( *frame == 0 ) // get random number of frames until next blink
+		*frame = math_rand_s16_offset(30, 30);
+	*frame -= 1;
+	if( *frame > 1 ) // open
+		return 0;
+	return 2 - *frame; // half-open for a frame, then closed for a frame
+}
+
 #endif // Z64OVL_HELPERS_H_INCLUDED
