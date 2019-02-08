@@ -190,7 +190,7 @@ typedef struct z64_capsule_s {
 		cso_0x08,
 		cso_0x1C,
 		cso_0x1D,
-		cso_0x1E,
+		cso_0x1E
 	;
 	u8 unk[16];
 	s16
