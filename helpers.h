@@ -13,7 +13,7 @@
  * the address of the function helper_limb_focus can then be used inside actor_skelanime_draw_mtx
  * TODO a2 and a3; names would be nice, although they do seem to be abstracted for us
  * example, from Grog:
- * * #include <z64ovl/helper.h>
+ * * #include <z64ovl/helpers.h>
  * * ...
  * * HELPER_INCLUDE_helper_limb_focus( 9, 300.0f, 1000.0f, 0.0f )
  * * ...
