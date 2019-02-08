@@ -153,8 +153,54 @@ typedef struct z64_capsule_init_s {
   /* 0x2C */
 } z64_capsule_init_t;
 
-typedef struct {
-	uint8_t filling[0x4C];
+typedef struct z64_capsule_s {
+	z64_actor_t *actor; // actor instance; TODO Is this a z64_actor_t or a typeless instance?
+	u32 unk_0x4;
+	z64_actor_t *colliding_actor; // colliding actor instance?; TODO Is this a z64_actor_t or a typeless instance?
+	u32 unk_0xC;
+	// TODO Needs better naming. Also, why are these values out of order?
+	u8
+		cso_0x01,
+		cso_0x02, //if & 0x0002, is detecting a Deku Nut hit?
+		cso_0x03, //bitwise-and compared to opposing collision's 0x13 byte
+		cso_0x04, //bitwise-and compared to opposing collision's 0x12 byte
+		cso_0x00,
+		cso_0x05, //used to reference function pointer, start location at 800EFB4C.
+				  //Basically, on left compare to right, left's value * 0x10 + right's value * 0x04 = pointer look up
+		unk_0x16, // curious that two unknowns somehow lie here; likely cso_0x06
+		unk_0x17 // and cso_0x07; types also unknown
+	;
+	u32 cso_0x0C;
+	u8
+		cso_0x10,
+		cso_0x11, // damage dealt when touched
+		unk_0x1E, // unknown, likely cso_0x12
+		unk_0x1F // and cso_0x13; types also unknown
+	;
+	u32 cso_0x14; // (FFCF FFFF)
+	u8
+		cso_0x18,
+		cso_0x19,
+		unk_0x26, // unknown, likely also "cso" stuff
+		unk_0x27, // types also unknown
+		unk_0x28,
+		unk_0x29,
+		unk_0x2A,
+		unk_0x2B,
+		cso_0x08,
+		cso_0x1C,
+		cso_0x1D,
+		cso_0x1E,
+	;
+	u8 unk[16];
+	s16
+		radius, // or diameter? CSO 0x20
+		height, // CSO 0x22
+		unk_0x44, // CSO 0x24
+		x, // coordinates
+		y,
+		z
+	;
 } z64_capsule_t;
 
 typedef struct vec3f_s {
