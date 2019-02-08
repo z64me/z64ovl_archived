@@ -20,7 +20,7 @@
  * * actor_skelanime_draw_mtx(x, x, x, x, x, &helper_limb_focus, x);
  ***/
 #define HELPER_INCLUDE_helper_limb_focus( TARGET_LIMB, IN_VEC3_X, IN_VEC3_Y, IN_VEC3_Z )\
-void helper_limb_focus(uint32_t global_context, uint8_t current_limb, uint32_t a2, uint32_t a3, z64_actor_t *actor)\
+static void helper_limb_focus(uint32_t global_context, uint8_t current_limb, uint32_t a2, uint32_t a3, z64_actor_t *actor)\
 {\
 	if (current_limb == TARGET_LIMB)\
 	{\
@@ -39,7 +39,7 @@ void helper_limb_focus(uint32_t global_context, uint8_t current_limb, uint32_t a
  * 4 closed for one frame
  * 5 back open, restart from the beginning with a new random value
  ***/
-u8 helper_eye_blink(s16 *frame) {
+static u8 helper_eye_blink(s16 *frame) {
 	if( *frame == 0 ) // get random number of frames until next blink
 		*frame = math_rand_s16_offset(30, 30);
 	*frame -= 1;
