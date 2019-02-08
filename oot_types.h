@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "n64.h"
 #include "mips.h"
+#include "actor_oot.h"
 
 // Controller Input
 typedef enum {
