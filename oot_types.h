@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "n64.h"
 #include "mips.h"
+#include "actor_oot.h" // TODO Merge actor_oot.h into oot_types.h
 
 // Controller Input
 typedef enum {
