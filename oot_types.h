@@ -39,34 +39,12 @@ typedef struct {
 	OSContPad releaseEdge;
 } z64_controller_t;
 
-// Global Context
-typedef struct{
-	int *gfx_ctxt;
-	int *update;
-	int *destuctor;
-	int *init_next;
-	int size;
-	z64_controller_t controller[4];
-	uint32_t heap_size;
-	int *heap;
-	int *heap_free_start;
-	int *heap_free_end;
-	int *unk1;
-	int *unk2;
-	int *unk3;
-	int *unk4;
-	int *unk5;
-	int execute;
-	int update_count;
-	int unk6;
-} z64_game_state_t;
-
 // Graphics Context
 typedef struct{
 	int size;
 	int *disp;
+	int *prepend;
 	int *append;
-	int *append_end;
 } z64_disp_t;
 
 typedef struct{
@@ -102,6 +80,53 @@ typedef struct{
 	int *function; //?
 	int *global_context;
 } z64_graphics_context_t;
+
+// Global Context
+typedef struct{
+	z64_graphics_context_t *gfx_ctxt;
+	int *update;
+	int *destuctor;
+	int *init_next;
+	int size;
+	z64_controller_t controller[4];
+	uint32_t heap_size;
+	int *heap;
+	int *heap_free_start;
+	int *heap_free_end;
+	int *unk1;
+	int *unk2;
+	int *unk3;
+	int *unk4;
+	int *unk5;
+	int execute;
+	int update_count;
+	int unk6;
+} z64_game_state_t;
+
+typedef struct{
+	/* 0x0A0 */ z64_game_state_t common;
+	/* 0x0A4 */ uint16_t current_scene;
+	/* 0x0A6 */ uint8_t unk1[0x1A];
+	/* 0x0C0 */ uint32_t screen_top;
+	/* 0x0C4 */ uint32_t screen_bottom;
+	/* 0x0C8 */ uint32_t screen_left;
+	/* 0x0CC */ uint32_t screen_right;
+	/* 0x0D0 */ float camera_distance;
+	/* 0x0D4 */ float fog_distance;
+	/* 0x0D8 */ float z_distance;
+	/* 0x0DC */ float unk_cam; /* Leave at 1.0 */
+	/* 0x0E0 */ uint8_t unk2[0x194];
+	/* 0x1E0 = Camera Context */
+	/* 0x270 */ z64_actor_t *actor_cam_follow; /* Actor that the camera follows.*/
+	/* 0x274 */ uint8_t unk3[0x19B8];
+	/* 0x1C2C */ uint8_t actor_total;
+	/* 0x1C30 */ z64_actor_t *actor_list[12][2];
+	/* 0x1C86 */ uint8_t unk3[0x42];
+	/* 0x1CC8 */ z64_actor_t *actor_zcursor_follow; /* Actor that the z-target cursor is over */
+	/* 0x1CCC */ z64_actor_t *actor_targeted;
+	/* 0x1CD0 */ uint8_t unk4[0x58];
+	/* 0x1D28 */ //Will finish later.
+} z64_global_context_t;
 
 enum DISP{
 	WORK = 0x01BC,
