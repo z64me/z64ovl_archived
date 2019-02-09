@@ -126,7 +126,7 @@ typedef struct{
 	/* 0x1CCC */ z64_actor_t *actor_targeted;
 	/* 0x1CD0 */ uint8_t unk4[0x58];
 	/* 0x1D28 */ //Will finish later.
-} z64_global_context_t;
+} z64_global_t;
 
 enum DISP{
 	WORK = 0x01BC,
