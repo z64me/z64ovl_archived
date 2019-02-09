@@ -841,7 +841,7 @@ extern void external_func_8002BDB0(void);
 /**
  * Tests if Switch Flag is Set
  */
-extern int flag_get_switch(u32 glbl_ctxt, int flag);
+extern int flag_get_switch(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_get_switch = 0x8002CB40");
 	#elif OOT_U_1_0
@@ -851,7 +851,7 @@ extern int flag_get_switch(u32 glbl_ctxt, int flag);
 /**
  * Sets Switch Flag to 1
  */
-extern void flag_set_switch(u32 glbl_ctxt, int flag);
+extern void flag_set_switch(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_set_switch = 0x8002CB74");
 	#elif OOT_U_1_0
@@ -861,7 +861,7 @@ extern void flag_set_switch(u32 glbl_ctxt, int flag);
 /**
  * Sets Switch Flag to 0
  */
-extern void flag_unset_switch(u32 glbl_ctxt, int flag);
+extern void flag_unset_switch(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_unset_switch = 0x8002CBB4");
 	#elif OOT_U_1_0
@@ -872,7 +872,7 @@ extern void flag_unset_switch(u32 glbl_ctxt, int flag);
  * Tests if Unused Scene Flag is Set
  * This function is not used inside any existing overlay
  */
-extern int flag_get_uscene(u32 glbl_ctxt, int flag);
+extern int flag_get_uscene(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_get_uscene = 0x8002CBF8");
 	#elif OOT_U_1_0
@@ -883,7 +883,7 @@ extern int flag_get_uscene(u32 glbl_ctxt, int flag);
  * Sets Unused Scene Flag to 1
  * This function is not used inside any existing overlay
  */
-extern void flag_set_uscene(u32 glbl_ctxt, int flag);
+extern void flag_set_uscene(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_set_uscene = 0x8002CC2C");
 	#elif OOT_U_1_0
@@ -894,7 +894,7 @@ extern void flag_set_uscene(u32 glbl_ctxt, int flag);
  * Sets Unused Scene Flag to 0
  * This function is not used inside any existing overlay
  */
-extern void flag_unset_uscene(u32 glbl_ctxt, int flag);
+extern void flag_unset_uscene(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_unset_uscene = 0x8002CC6C");
 	#elif OOT_U_1_0
@@ -904,7 +904,7 @@ extern void flag_unset_uscene(u32 glbl_ctxt, int flag);
 /**
  * Tests if a Chest Flag is set
  */
-extern int flag_get_treasure(u32 glbl_ctxt, int flag);
+extern int flag_get_treasure(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_get_treasure = 0x8002CCB0");
 	#elif OOT_U_1_0
@@ -914,7 +914,7 @@ extern int flag_get_treasure(u32 glbl_ctxt, int flag);
 /**
  * Sets Chest Flag to 1
  */
-extern void flag_set_treasure(u32 glbl_ctxt, int flag);
+extern void flag_set_treasure(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_set_treasure = 0x8002CCC4");
 	#elif OOT_U_1_0
@@ -924,7 +924,7 @@ extern void flag_set_treasure(u32 glbl_ctxt, int flag);
 /**
  * Test if a Room Clear Flag is set
  */
-extern int flag_get_roomclear(u32 glbl_ctxt, int flag);
+extern int flag_get_roomclear(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_get_roomclear = 0x8002CCDC");
 	#elif OOT_U_1_0
@@ -934,7 +934,7 @@ extern int flag_get_roomclear(u32 glbl_ctxt, int flag);
 /**
  * Sets Room Clear Flag to 1
  */
-extern void flag_set_roomclear(u32 glbl_ctxt, int flag);
+extern void flag_set_roomclear(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_set_roomclear = 0x8002CCF0");
 	#elif OOT_U_1_0
@@ -954,7 +954,7 @@ extern void external_func_8002CD08(void);
 /**
  * Tests if Global Context + 0x1D40 Flag is set
  */
-extern int flag_get_0x1D40(u32 glbl_ctxt, int flag);
+extern int flag_get_0x1D40(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_get_0x1D40 = 0x8002CD24");
 	#elif OOT_U_1_0
@@ -964,7 +964,7 @@ extern int flag_get_0x1D40(u32 glbl_ctxt, int flag);
 /**
  * Sets Global Context + 0x1D40 Flag to 1
  */
-extern void flag_set_0x1D40(u32 glbl_ctxt, int flag);
+extern void flag_set_0x1D40(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_set_0x1D40 = 0x8002CD38");
 	#elif OOT_U_1_0
@@ -974,7 +974,7 @@ extern void flag_set_0x1D40(u32 glbl_ctxt, int flag);
 /**
  * Tests if Scene Collectible Flag is set
  */
-extern int flag_get_scenecollect(u32 glbl_ctxt, int flag);
+extern int flag_get_scenecollect(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_get_scenecollect = 0x8002CD6C");
 	#elif OOT_U_1_0
@@ -984,7 +984,7 @@ extern int flag_get_scenecollect(u32 glbl_ctxt, int flag);
 /**
  * Sets Scene Collectible Flag to 1
  */
-extern void flag_set_scenecollect(u32 glbl_ctxt, int flag);
+extern void flag_set_scenecollect(z64_global_t *global, int flag);
 	#if OOT_DEBUG
 		asm("flag_set_scenecollect = 0x8002CDA0");
 	#elif OOT_U_1_0
@@ -995,7 +995,7 @@ extern void flag_set_scenecollect(u32 glbl_ctxt, int flag);
  * Boss Title
  * A0 - global context | A1 - A0 + 0x1D4C | A2 - (object pointer + texture offset inside the object)
  */
-extern void actor_boss_title(u32 glbl_ctxt, u32 glbl_ctxt_plus_0x1D4C, u32 texture);
+extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1D4C, u32 texture);
 	#if OOT_DEBUG
 		asm("actor_boss_title = 0x8002CE00");
 	#elif OOT_U_1_0
@@ -1042,7 +1042,7 @@ extern void actor_set_scale(z64_actor_t *actor, f32 scale);
 /**
  * Update CPU Segment 0x06 to point to actor's defined object dependency
  */
-extern void actor_set_object(u32 glbl_ctxt, z64_actor_t *actor);
+extern void actor_set_object(z64_global_t *global, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_set_object = 0x8002D644");
 	#elif OOT_U_1_0
@@ -1347,7 +1347,7 @@ extern void external_func_8002E1A8(void);
  * old notes for reference:
  * A0 = Global Context | A1 = Actor Instance | A2 = float wallCheckHeight? (26f for Link) | A3 = float wallPushback? (18f/14f for Adult/Child Link) | SP+0x10 float ? (56f/40f for Adult/Child Link) | SP+0x14 int (type?)
  */
-extern void external_func_8002E4B4(u32 global_context, z64_actor_t *actor, f32 below, f32 radius, f32 above, u32 flags);
+extern void external_func_8002E4B4(z64_global_t *global, z64_actor_t *actor, f32 below, f32 radius, f32 above, u32 flags);
 	#if OOT_DEBUG
 		asm("external_func_8002E4B4 = 0x8002E4B4");
 	#elif OOT_U_1_0
@@ -1459,7 +1459,7 @@ extern void external_func_8002F2CC(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context
  */
-extern void external_func_8002F2F4(z64_actor_t *actor, u32 global_context);
+extern void external_func_8002F2F4(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_8002F2F4 = 0x8002F2F4");
 	#elif OOT_U_1_0
@@ -1743,7 +1743,7 @@ extern void external_func_8002F9EC(void);
  * TODO Also do something with a2 and a3, how does this translate to C?
  * A0 = Global Context | A1 = actor instance | A2 = actor instance + 0xE4 | A3 = float at actor instance + 0xF0
  */
-extern void actor_set_draw_distance(u32 glbl_ctxt, z64_actor_t *actor, void *a2 /*actor+0xE4*/, float *a3 /*actor+0xF0*/);
+extern void actor_set_draw_distance(z64_global_t *global, z64_actor_t *actor, void *a2 /*actor+0xE4*/, float *a3 /*actor+0xF0*/);
 	#if OOT_DEBUG
 		asm("actor_set_draw_distance = 0x800314D4");
 	#elif OOT_U_1_0
@@ -1755,7 +1755,7 @@ extern void actor_set_draw_distance(u32 glbl_ctxt, z64_actor_t *actor, void *a2 
  * TODO a0 = global context + 0x1C24, do we really pass it in this way?
  * A0 = Global Context + 0x1C24 | A1 = Global Context | A2 = s16 Actor Id | A3 = float x | SP+0x10 = float y | SP+0x14 = float z | SP+0x18 = rotx | SP+0x1C = roty | SP+0x20 = rotz | SP+0x24 = s16 var | V0 = Pointer to new actor, or null
  */
-extern void actor_spawn(u32 a0/*gl_ctx+0x1C24*/, u32 glbl_ctxt, s16 actor_id, f32 x, f32 y, f32 z, s16 rot_x, s16 rot_y, s16 rot_z, u16 variable);
+extern void actor_spawn(u32 a0/*gl_ctx+0x1C24*/, z64_global_t *global, s16 actor_id, f32 x, f32 y, f32 z, s16 rot_x, s16 rot_y, s16 rot_z, u16 variable);
 	#if OOT_DEBUG
 		asm("actor_spawn = 0x80031F50");
 	#elif OOT_U_1_0
@@ -1854,7 +1854,7 @@ extern void external_func_80033480(void);
  * TODO confirm whether "actor collision struct" means the capsule structure, or something else
  * A0 = Global Context | A1 = Actor Collision Struct | V0 = Null or Pointer to Explosive-type actor that collided
  */
-extern z64_actor_t *actor_is_bombed(u32 glbl_ctxt, z64_capsule_t *capsule);
+extern z64_actor_t *actor_is_bombed(z64_global_t *global, z64_capsule_t *capsule);
 	#if OOT_DEBUG
 		asm("actor_is_bombed = 0x80033640");
 	#elif OOT_U_1_0
@@ -1954,7 +1954,7 @@ extern void external_func_80033AEC(void);
  * alpha = opacity of the shadow
  * a0 actor pointer + 0x24 (position array) | a1  scale, 12 byte array | a2 0x00FF | a3 global context
  */
-extern void actor_shadow_circle(void *xyz, f32 scale[3], u8 alpha, u32 glbl_ctxt);
+extern void actor_shadow_circle(void *xyz, f32 scale[3], u8 alpha, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("actor_shadow_circle = 0x80033C30");
 	#elif OOT_U_1_0
@@ -2140,7 +2140,7 @@ extern void external_func_80034F54(void);
 /**
  * Draw a single display list to POLY_OPA_DISP
  */
-extern void draw_static_dlist(u32 glbl_ctxt, u32 dlist);
+extern void draw_static_dlist(z64_global_t *global, u32 dlist);
 	#if OOT_DEBUG
 		asm("draw_static_dlist = 0x80035260");
 	#elif OOT_U_1_0
@@ -2152,7 +2152,7 @@ extern void draw_static_dlist(u32 glbl_ctxt, u32 dlist);
  * TODO There's a question mark, we need to confirm whether Lens of Truth has anything to do with it
  * a0 - global context | a1 - DList segment offset | a2 - Unknown, set to 0
  */
-extern void draw_static_dlist_lens(u32 glbl_ctxt, u32 dlist);
+extern void draw_static_dlist_lens(z64_global_t *global, u32 dlist);
 	#if OOT_DEBUG
 		asm("draw_static_dlist_lens = 0x80035324");
 	#elif OOT_U_1_0
@@ -3012,7 +3012,7 @@ extern void external_func_8005C050(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void external_func_8005C364(u32 gl_ctxt, z64_capsule_t *collision);
+extern void external_func_8005C364(z64_global_t *global, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("external_func_8005C364 = 0x8005C364");
 	#elif OOT_U_1_0
@@ -3060,7 +3060,7 @@ extern void external_func_8005C450(void);
  * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void external_func_8005C4AC(u32 gl_ctxt, z64_capsule_t *dest, z64_actor_t *actor, z64_capsule_init_t *source);
+extern void external_func_8005C4AC(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, z64_capsule_init_t *source);
 	#if OOT_DEBUG
 		asm("external_func_8005C4AC = 0x8005C4AC");
 	#elif OOT_U_1_0
@@ -3142,7 +3142,7 @@ extern void external_func_8005D160(void);
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
  */
-extern void actor_collision_check_set_at(u32 glbl_ctxt, u32 a1 /*glbl_ctxt+0x11E60*/, z64_capsule_t *collision);
+extern void actor_collision_check_set_at(z64_global_t *global, u32 a1 /*glbl_ctxt+0x11E60*/, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_at = 0x8005D79C");
 	#elif OOT_U_1_0
@@ -3166,7 +3166,7 @@ extern void actor_collision_check_set_ac(void);
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit? | Called directly by actors
  */
-extern void actor_collision_check_set_ot(u32 gl_ctxt, u32 col_body_groups, z64_capsule_t *collision);
+extern void actor_collision_check_set_ot(z64_global_t *global, u32 col_body_groups, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ot = 0x8005DC4C");
 	#elif OOT_U_1_0
@@ -3929,7 +3929,7 @@ extern void external_func_800787BC(void);
  * Copy u8[4] array
  * A0 = Destination ptr | A1 = Source ptr
  */
-extern void mem_copy_u8_4(u8 *dest, u8 *src);
+extern void mem_copy_u8_4(void *dest, void *src);
 	#if OOT_DEBUG
 		asm("mem_copy_u8_4 = 0x80078860");
 	#elif OOT_U_1_0
@@ -4149,7 +4149,7 @@ extern void external_func_80084BF4(void);
  * Item Giving Routine
  * one of them at least
  */
-extern void inventory_item_set(u32 glbl_ctxt, u8 item);
+extern void inventory_item_set(z64_global_t *global, u8 item);
 	#if OOT_DEBUG
 		asm("inventory_item_set = 0x80084D10");
 	#elif OOT_U_1_0
@@ -4347,7 +4347,7 @@ extern void external_func_8008E60C(void);
  * TODO How do we reference Link's instance? void should be fine, but test confirm in-game. Also, return value type.
  * A0 = Global Context | A1 = Link Instance | V0 = 1 if true, 0 if false
  */
-extern int player_is_busy(u32 glbl_ctxt, void *link_instance);
+extern int player_is_busy(z64_global_t *global, void *link_instance);
 	#if OOT_DEBUG
 		asm("player_is_busy = 0x8008E8DC");
 	#elif OOT_U_1_0
@@ -4358,7 +4358,7 @@ extern int player_is_busy(u32 glbl_ctxt, void *link_instance);
  * Tests if Link is busy (Calls 8007938C, but also checks if talking?)
  * TODO Confirm return type, test in-game
  */
-extern int player_is_busy_talking(u32 glbl_ctxt);
+extern int player_is_busy_talking(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_is_busy_talking = 0x8008E988");
 	#elif OOT_U_1_0
@@ -4437,7 +4437,7 @@ extern void external_func_8008F034(void);
  * TODO This function needs more explanation, what exactly does it do?
  * A0 = Global Context | V0 = Id
  */
-extern u8 player_get_mask(u32 glbl_ctxt);
+extern u8 player_get_mask(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_get_mask = 0x8008F080");
 	#elif OOT_U_1_0
@@ -4449,7 +4449,7 @@ extern u8 player_get_mask(u32 glbl_ctxt);
  * TODO This function needs more explanation, what exactly does it do?
  * A0 = Global Context
  */
-extern void player_set_mask(u32 glbl_ctxt);
+extern void player_set_mask(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_set_mask = 0x8008F08C");
 	#elif OOT_U_1_0
@@ -4460,7 +4460,7 @@ extern void player_set_mask(u32 glbl_ctxt);
  * Test if Link is wearing the Mirror Shield (Instance + 0x13E)
  * returns 0 on false, 1 on true
  */
-extern int player_is_mirrorshield(u32 global_context);
+extern int player_is_mirrorshield(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_is_mirrorshield = 0x8008F098");
 	#elif OOT_U_1_0
@@ -4888,7 +4888,7 @@ extern void external_func_800A0B40(void);
  * Must be in draw even after initializing hirearchy without matrices
  * TODO Variable name cleanup, better notes
  */
-extern void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 skelanime, u8 limb_dlists_count, void *func_unk0, void *func_unk1, z64_actor_t *actor);
+extern void actor_skelanime_draw(z64_global_t *global, u32 limb_index, u32 skelanime, u8 limb_dlists_count, void *func_unk0, void *func_unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw = 0x800A15C8");
 	#elif OOT_U_1_0
@@ -4900,7 +4900,7 @@ extern void actor_skelanime_draw(u32 gl_ctxt, u32 limb_index, u32 skelanime, u8 
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-extern void actor_skelanime_draw_mtx(u32 gl_ctxt, u32 limb_index, u32 skelanime, u8 limb_dlists_count, void *func_unk0, void *func_unk1, z64_actor_t *actor);
+extern void actor_skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 skelanime, u8 limb_dlists_count, void *func_unk0, void *func_unk1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
@@ -4982,7 +4982,7 @@ extern void external_func_800A3BC0(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance + 0x014C (offset to store data) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)  0x10($sp) 0x14($sp) 0x18($sp)
  */
-extern void actor_skelanime_init(u32 gl_ctxt, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void actor_skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
 		asm("actor_skelanime_init = 0x800A457C");
 	#elif OOT_U_1_0
@@ -4994,7 +4994,7 @@ extern void actor_skelanime_init(u32 gl_ctxt, z64_skelanime_t *skelanime, u32 sk
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance Address + 0x014C (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void actor_skelanime_init_mtx(u32 global_context, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void actor_skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
 		asm("actor_skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
@@ -6861,11 +6861,18 @@ extern void external_func_8010BD88(void);
  * TODO These notes need converted into a C function prototype
  * A0 = global context + 0x20D8 (VIEW struct ptr)
  */
-extern u32 player_talk_state(u32 global_context);
+extern u32 player_talk_state(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_talk_state = 0x8010BDBC");
 	#elif OOT_U_1_0
 		asm("player_talk_state = 0x800DD464");
 	#endif
+
+extern void SetTextRGBA(void * DList, u8 r, u8 g, u8 b, u8 a);
+asm("SetTextRGBA = 0x800FB3AC");
+extern void SetTextXY(void * DList, u16 x, u16 y);
+asm("SetTextXY = 0x800FB41C");
+extern void SetTextString(void * DList, char * format, ...);
+asm("SetTextString = 0x800FBCB4");
 
 #endif // __Z64OVL_H__

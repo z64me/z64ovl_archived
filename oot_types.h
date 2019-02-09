@@ -40,50 +40,44 @@ typedef struct {
 } z64_controller_t;
 
 // Graphics Context
-typedef struct{
-	int size;
-	int *disp;
-	int *prepend;
-	int *append;
-} z64_disp_t;
+typedef struct
+{
+  uint32_t          size;                     /* 0x0000 */
+  uint32_t         *buf;                      /* 0x0004 */
+  uint32_t         *p;                        /* 0x0008 */
+  uint32_t         *d;                        /* 0x000C */
+                                              /* 0x0010 */
+} z64_disp_buf_t;
 
-typedef struct{
-	int *w_poly_opa_start;
-	int *w_poly_xlu_start;
-	int *w_overlay_start;
-	OSMesg unk1[8];
-	OSMesgQueue unk2;
-	int unk3; //Set to 1
-	int unk4; //Set to 4
-	int *ucode_pointer;
-	int ucode_length;
-	int *ucode_pointer_2; //?
-	int ucode_length_2; //?
-	int *dmem_data;
-	int unk5; //Set to 0x0800
-	int *unk6; //Set to 0x8016A240
-	int unk7; // Set to 0x0400
-	int unk8; // Set to 0x80151640
-	int unk9; //Set to 0x80169640
-	int *c_work_disp_start;
-	int c_work_disp_size;
-	int *unk_buffer_start;
-	int unk_buffer_size;
-	int *w_work_disp_start;
-	z64_disp_t work;
-	z64_disp_t overlay;
-	z64_disp_t poly_opa;
-	z64_disp_t poly_xlu;
-	int frame_counter_1;
-	int *w_framebuffer;
-	int frame_counter_2;
-	int *function; //?
-	int *global_context;
-} z64_graphics_context_t;
+typedef struct
+{
+  Gfx              *poly_opa_w;               /* 0x0000 */
+  Gfx              *poly_xlu_w;               /* 0x0004 */
+  char              unk_00_[0x0008];          /* 0x0008 */
+  Gfx              *overlay_w;                /* 0x0010 */
+  char              unk_01_[0x0024];          /* 0x0014 */
+  OSMesg            task_msg[8];              /* 0x0038 */
+  char              unk_02_[0x0004];          /* 0x0058 */
+  OSMesgQueue       task_mq;                  /* 0x005C */
+  char              pad_00_[0x0004];          /* 0x0074 */
+  OSScTask          task;                     /* 0x0078 */
+  char              unk_03_[0x00E0];          /* 0x00D0 */
+  Gfx              *work_w;                   /* 0x01B0 */
+  z64_disp_buf_t    work;                     /* 0x01B4 */
+  char              unk_04_[0x00E4];          /* 0x01C4 */
+  z64_disp_buf_t    overlay;                  /* 0x02A8 */
+  z64_disp_buf_t    poly_opa;                 /* 0x02B8 */
+  z64_disp_buf_t    poly_xlu;                 /* 0x02C8 */
+  uint32_t          frame_count_1;            /* 0x02D8 */
+  void             *frame_buffer;             /* 0x02DC */
+  char              unk_05_[0x0008];          /* 0x02E0 */
+  uint32_t          frame_count_2;            /* 0x02E8 */
+                                              /* 0x02EC */
+} z64_gfx_t;
 
 // Global Context
 typedef struct{
-	z64_graphics_context_t *gfx_ctxt;
+	z64_gfx_t *gfx_ctxt;
 	int *update;
 	int *destuctor;
 	int *init_next;
@@ -104,7 +98,7 @@ typedef struct{
 } z64_game_state_t;
 
 typedef struct{
-	/* 0x0A0 */ z64_game_state_t common;
+	/* 0x000 */ z64_game_state_t common;
 	/* 0x0A4 */ uint16_t current_scene;
 	/* 0x0A6 */ uint8_t unk1[0x1A];
 	/* 0x0C0 */ uint32_t screen_top;
@@ -121,10 +115,10 @@ typedef struct{
 	/* 0x274 */ uint8_t unk3[0x19B8];
 	/* 0x1C2C */ uint8_t actor_total;
 	/* 0x1C30 */ z64_actor_t *actor_list[12][2];
-	/* 0x1C86 */ uint8_t unk3[0x42];
+	/* 0x1C86 */ uint8_t unk4[0x42];
 	/* 0x1CC8 */ z64_actor_t *actor_zcursor_follow; /* Actor that the z-target cursor is over */
 	/* 0x1CCC */ z64_actor_t *actor_targeted;
-	/* 0x1CD0 */ uint8_t unk4[0x58];
+	/* 0x1CD0 */ uint8_t unk5[0x58];
 	/* 0x1D28 */ //Will finish later.
 } z64_global_t;
 
