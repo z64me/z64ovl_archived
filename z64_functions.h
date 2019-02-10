@@ -17,6 +17,17 @@
  * Search this document for actor_init_shadow to see an example.
  ***/
 
+/****
+ * copy `num` bytes from `src` to `dst`
+ * This function is not used inside any existing overlay
+ ***/
+extern void memory_copy(const void *src, void *dst, const u32 num);
+	#if OOT_DEBUG
+		asm("memory_copy = 0x80006F10");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#endif
+
 /**
  * Allocates to the tail end of the given heap (0x10 aligned)
  * TODO These notes need converted into a C function prototype
