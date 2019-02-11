@@ -6,7 +6,19 @@
  * A collection of functions and macros to
  * help simplify custom enemies/NPCs/bosses.
  ***/
- 
+
+ /*static void add_dlist_to_gfx_buffer(z64_global_t *global, z64_disp_buf_t *buffer, uint32_t dlist)
+ {
+   uint32_t mtx = matrix_alloc(&global->common.gfx_ctxt, 0, 0);  //Allocate Display List Matrix
+   uint32_t gfx_array[4] = {                                     //F3DZEX to add to graphics buffer
+     0xDA380003,
+     mtx,
+     0xDE000000,
+     dlist
+   }
+   add_to_gfx_buffer(buffer, gfx_array, 4);                     //Append F3DZEX Data
+ }*/
+
  /****
  * makes helper_limb_focus available
  * helper_limb_focus sets the limb to be Z-Targeted as well as camera focus information

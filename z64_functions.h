@@ -2099,11 +2099,12 @@ extern void external_func_80034A14(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+	* Draw Matrix-Enabled Object with an opacity attribute
+	* TODO Variable name cleanup, better notes
  */
-extern void external_func_80034BA0(void);
+extern void actor_skelanime_draw_mtx_opacity(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, u8 opacity);
 	#if OOT_DEBUG
-		asm("external_func_80034BA0 = 0x80034BA0");
+		asm("actor_skelanime_draw_mtx_opacity = 0x80034BA0");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -4899,7 +4900,7 @@ extern void external_func_800A0B40(void);
  * Must be in draw even after initializing hirearchy without matrices
  * TODO Variable name cleanup, better notes
  */
-extern void actor_skelanime_draw(z64_global_t *global, u32 limb_index, u32 skelanime, u8 limb_dlists_count, void *func_unk0, void *func_unk1, z64_actor_t *actor);
+extern void actor_skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw = 0x800A15C8");
 	#elif OOT_U_1_0
@@ -4911,7 +4912,7 @@ extern void actor_skelanime_draw(z64_global_t *global, u32 limb_index, u32 skela
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-extern void actor_skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 skelanime, u8 limb_dlists_count, void *func_unk0, void *func_unk1, z64_actor_t *actor);
+extern void actor_skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
@@ -6058,7 +6059,7 @@ extern void external_func_800D1A54(void);
  * Converts and Appends the Float Matrix Stack's top matrix to POLY_OPA_DISP end
  * TODO additional arguments `u8 source, u8 line` are debug rom only; does it work fine on 1.0 if we leave them enabled?
  */
-extern void matrix_alloc(u32 gfx_ctx, u8 source, u8 line);
+extern void matrix_alloc(z64_gfx_t *gfx_ctx, u8 source, u8 line);
 	#if OOT_DEBUG
 		asm("matrix_alloc = 0x800D1A88");
 	#elif OOT_U_1_0
