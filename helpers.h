@@ -32,7 +32,7 @@
  * * actor_skelanime_draw_mtx(x, x, x, x, x, &helper_limb_focus, x);
  ***/
 #define HELPER_INCLUDE_helper_limb_focus( TARGET_LIMB, IN_VEC3_X, IN_VEC3_Y, IN_VEC3_Z )\
-static void helper_limb_focus(uint32_t global_context, uint8_t current_limb, uint32_t a2, uint32_t a3, z64_actor_t *actor)\
+static void helper_limb_focus(z64_global_t *global, uint8_t current_limb, uint32_t limb_dlist, vec3s_t *limb_rot, z64_actor_t *actor)\
 {\
 	if (current_limb == TARGET_LIMB)\
 	{\

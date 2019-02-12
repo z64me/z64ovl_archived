@@ -132,7 +132,7 @@ struct z64_actor_s
   float             floor_height;             /* 0x0080 */ //maybe?
   float             water_surface_dist;       /* 0x0084 */
   uint16_t          bgcheck_flags;            /* 0x0088 */
-  int16_t           unk_0x8A_rot;             /* 0x008A */
+  int16_t           rot_toward_link_y;        /* 0x008A */
   float             unk_0x8C;                 /* 0x008C */
   float             dist_from_link_xz;        /* 0x0090 */
   float             dist_from_link_y;         /* 0x0094 */
