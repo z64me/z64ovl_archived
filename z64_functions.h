@@ -2100,6 +2100,7 @@ extern void external_func_80034A14(void);
 
 /**
 	* Draw Matrix-Enabled Object with an opacity attribute
+	* Wrapper for 800A273C
 	* TODO Variable name cleanup, better notes
  */
 extern void actor_skelanime_draw_mtx_opacity(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, u8 opacity);
@@ -4940,11 +4941,11 @@ extern void external_func_800A2288(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * TODO Draw a matrix-enabled object skeleton
  */
-extern void external_func_800A273C(void);
+extern void actor_skelanime_draw_mtx_800A273C(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
 	#if OOT_DEBUG
-		asm("external_func_800A273C = 0x800A273C");
+		asm("actor_skelanime_draw_mtx_800A273C = 0x800A273C");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -6072,7 +6073,7 @@ extern void matrix_alloc(z64_gfx_t *gfx_ctx, u8 source, u8 line);
  * Multiply Float Matrix Stack's top matrix by float Vector3
  * A0 = ptr to Vector3 | A1 = ptr to result
  */
-extern void external_func_800D1AF4(vec3f_t *in, vec3f_t *out);
+extern void external_func_800D1AF4(z64_xyzf_t *in, z64_xyzf_t *out);
 	#if OOT_DEBUG
 		asm("external_func_800D1AF4 = 0x800D1AF4");
 	#elif OOT_U_1_0

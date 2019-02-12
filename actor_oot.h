@@ -50,14 +50,6 @@ typedef struct
                                               /* 0x0006 */
 } z64_xyz_t;
 
-typedef struct
-{
-  float             x;                        /* 0x0000 */
-  float             y;                        /* 0x0004 */
-  float             z;                        /* 0x0008 */
-                                              /* 0x000C */
-} z64_xyzf_t;
-
 typedef uint16_t z64_angle_t;
 typedef struct
 {

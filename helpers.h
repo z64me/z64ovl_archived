@@ -36,8 +36,8 @@ static void helper_limb_focus(z64_global_t *global, uint8_t current_limb, uint32
 {\
 	if (current_limb == TARGET_LIMB)\
 	{\
-		vec3f_t in = { IN_VEC3_X, IN_VEC3_Y, IN_VEC3_Z };\
-		external_func_800D1AF4(&in, AADDR(actor, 0x0038));\
+		z64_xyzf_t in = { IN_VEC3_X, IN_VEC3_Y, IN_VEC3_Z };\
+		external_func_800D1AF4(&in, &actor->pos_3);\
 	}\
 }
 

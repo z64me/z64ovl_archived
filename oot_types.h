@@ -231,4 +231,12 @@ typedef struct vec3s_s {
 	s16 x, y, z;
 } vec3s_t;
 
+typedef struct
+{
+  float             x;                        /* 0x0000 */
+  float             y;                        /* 0x0004 */
+  float             z;                        /* 0x0008 */
+                                              /* 0x000C */
+} z64_xyzf_t;
+
 #endif
