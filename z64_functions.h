@@ -2103,9 +2103,9 @@ extern void external_func_80034A14(void);
 	* Wrapper for 800A273C
 	* TODO Variable name cleanup, better notes
  */
-extern void actor_skelanime_draw_mtx_opacity(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, u8 opacity);
+extern void skelanime_draw_mtx_80034BA0(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, u8 opacity);
 	#if OOT_DEBUG
-		asm("actor_skelanime_draw_mtx_opacity = 0x80034BA0");
+		asm("skelanime_draw_mtx_80034BA0 = 0x80034BA0");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -4901,11 +4901,11 @@ extern void external_func_800A0B40(void);
  * Must be in draw even after initializing hirearchy without matrices
  * TODO Variable name cleanup, better notes
  */
-extern void actor_skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
+extern void skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("actor_skelanime_draw = 0x800A15C8");
+		asm("skelanime_draw = 0x800A15C8");
 	#elif OOT_U_1_0
-		asm("actor_skelanime_draw = 0x8008993C");
+		asm("skelanime_draw = 0x8008993C");
 	#endif
 
 /**
@@ -4913,11 +4913,11 @@ extern void actor_skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, 
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-extern void actor_skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
+extern void skelanime_draw_mtx_800A1AC8(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("actor_skelanime_draw_mtx = 0x800A1AC8");
+		asm("skelanime_draw_mtx_800A1AC8 = 0x800A1AC8");
 	#elif OOT_U_1_0
-		asm("actor_skelanime_draw_mtx = 0x80089D8C");
+		asm("skelanime_draw_mtx = 0x80089D8C");
 	#endif
 
 /**
@@ -4943,9 +4943,9 @@ extern void external_func_800A2288(void);
 /**
  * TODO Draw a matrix-enabled object skeleton
  */
-extern void actor_skelanime_draw_mtx_800A273C(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
+extern void skelanime_draw_mtx_800A273C(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
 	#if OOT_DEBUG
-		asm("actor_skelanime_draw_mtx_800A273C = 0x800A273C");
+		asm("skelanime_draw_mtx_800A273C = 0x800A273C");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -4995,11 +4995,11 @@ extern void external_func_800A3BC0(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance + 0x014C (offset to store data) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)  0x10($sp) 0x14($sp) 0x18($sp)
  */
-extern void actor_skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
-		asm("actor_skelanime_init = 0x800A457C");
+		asm("skelanime_init = 0x800A457C");
 	#elif OOT_U_1_0
-		asm("actor_skelanime_init = 0x8008C684");
+		asm("skelanime_init = 0x8008C684");
 	#endif
 
 /**
@@ -5007,11 +5007,11 @@ extern void actor_skelanime_init(z64_global_t *global, z64_skelanime_t *skelanim
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance Address + 0x014C (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void actor_skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
-		asm("actor_skelanime_init_mtx = 0x800A46F8");
+		asm("skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
-		asm("actor_skelanime_init_mtx = 0x8008C788");
+		asm("skelanime_init_mtx = 0x8008C788");
 	#endif
 
 /**
@@ -6073,7 +6073,7 @@ extern void matrix_alloc(z64_gfx_t *gfx_ctx, u8 source, u8 line);
  * Multiply Float Matrix Stack's top matrix by float Vector3
  * A0 = ptr to Vector3 | A1 = ptr to result
  */
-extern void external_func_800D1AF4(z64_xyzf_t *in, z64_xyzf_t *out);
+extern void external_func_800D1AF4(vec3f_t *in, void *out);
 	#if OOT_DEBUG
 		asm("external_func_800D1AF4 = 0x800D1AF4");
 	#elif OOT_U_1_0
