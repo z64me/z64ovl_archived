@@ -2328,9 +2328,9 @@ extern void external_func_80037D98(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * TODO This function has yet to have a name put to it.
  */
-extern void external_func_80038290(void);
+extern void external_func_80038290(z64_global_t *global, z64_actor_t *actor, void *rot_zx, void *rot_y, float pos_3_x, float pos_3_y, float pos_3_z);
 	#if OOT_DEBUG
 		asm("external_func_80038290 = 0x80038290");
 	#elif OOT_U_1_0
