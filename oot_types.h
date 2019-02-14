@@ -122,12 +122,12 @@ typedef struct{
 	/* 0x1D28 */ //Will finish later.
 } z64_global_t;
 
-enum DISP{
+/*enum DISP{
 	WORK = 0x01BC,
 	OVERLAY = 0x02B0,
 	POLY_OPA = 0x02C0,
 	POLY_XLU = 0x02D0
-};
+};*/
 
 /* Actor Specific? */
 typedef struct {

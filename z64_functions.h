@@ -4943,7 +4943,7 @@ extern void external_func_800A2288(void);
 /**
  * TODO Draw a matrix-enabled object skeleton
  */
-extern void skelanime_draw_mtx_800A273C(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
+extern u32 skelanime_draw_mtx_800A273C(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx_800A273C = 0x800A273C");
 	#elif OOT_U_1_0
@@ -5620,11 +5620,13 @@ extern void external_func_800C3770(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Allocates graphics memory
+ * z_gp is 0x80212020
+ * size is the size of the block to be allocated
  */
-extern void external_func_800C69CC(void);
+extern void graph_alloc(z64_global_t *global, int size);
 	#if OOT_DEBUG
-		asm("external_func_800C69CC = 0x800C69CC");
+		asm("graph_alloc = 0x800C69CC");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -6035,13 +6037,13 @@ extern void external_func_800D1694(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * guMtxF2L -- mtxutil.c from libultra SDK
  */
-extern void external_func_800D1840(void);
+extern void _guMtxF2L(float mf[4][4], Mtx *m);
 	#if OOT_DEBUG
-		asm("external_func_800D1840 = 0x800D1840");
+		asm("_guMtxF2L = 0x800D1840");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("_guMtxF2L = 0x800AB6BC");
 	#endif
 
 /**
@@ -6881,11 +6883,53 @@ extern u32 player_talk_state(z64_global_t *global);
 		asm("player_talk_state = 0x800DD464");
 	#endif
 
+extern void bzero(void *dest, int length);
+asm("bzero = 0x80004450");
+extern int bcmp(const void *s1, const void *s2, int length);
+asm("bcmp = 0x800068C0");
+extern void bcpy(const void *src, void *dst, int length);
+asm("bcpy = 0x80006F10");
 extern void SetTextRGBA(void * DList, u8 r, u8 g, u8 b, u8 a);
 asm("SetTextRGBA = 0x800FB3AC");
 extern void SetTextXY(void * DList, u16 x, u16 y);
 asm("SetTextXY = 0x800FB41C");
 extern void SetTextString(void * DList, char * format, ...);
 asm("SetTextString = 0x800FBCB4");
+
+// /ultra/user/src/pr/libsrc/libultra/gu
+
+extern float sinf(float angle);
+asm("sinf = 0x80100290");
+extern float sins(unsigned short angle);
+asm("sins = 0x80100450");
+extern void guPerspectiveF(float mf[4][4], u16 *perspNorm, float fovy, float aspect, float near, float far, float scale);
+asm("guPerspectiveF = 0x801010D0");
+extern void guPerspective(Mtx *m, u16 *perspNorm, float fovy, float aspect, float near, float far, float scale);
+asm("guPerspective = 0x80101300");
+/*
+* 80101B40 guMtxIdentF?
+* 80101B90
+* 80101E34
+*/
+extern float sqrtf (float value);
+asm("sqrtf = 0x801031E0");
+/*
+* 801032B0
+* 80103A70
+* 80103BB0
+* 80103D58
+* 80103E20
+* 80103FA4
+* 80104450
+* 801045A4
+*/
+extern float cosf(float angle);
+asm("cosf = 0x80104610");
+extern float coss(unsigned short angle);
+asm("coss = 0x80104780");
+extern void guMtxF2L(float mf[4][4], Mtx *m);
+asm("guMtxF2L = 0x801064E0");
+extern float absf(float value);
+asm("absf = 0x801067E0");
 
 #endif // __Z64OVL_H__

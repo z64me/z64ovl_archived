@@ -60,4 +60,7 @@ static u8 helper_eye_blink(s16 *frame) {
 	return 2 - *frame; // half-open for a frame, then closed for a frame
 }
 
+/* Shorthand for referencing Graphics Context display list buffers "Zelda Quick Display List" */
+#define ZQDL(ZQDL_A0, ZQDL_A1) ZQDL_A0->common.gfx_ctxt->ZQDL_A1
+
 #endif // Z64OVL_HELPERS_H_INCLUDED
