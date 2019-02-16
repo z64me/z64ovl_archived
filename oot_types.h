@@ -122,6 +122,17 @@ typedef struct{
 	/* 0x1D28 */ //Will finish later.
 } z64_global_t;
 
+typedef struct {
+	/* 0x00 */ uint32_t printer; /* 0x800FBB60 */
+	/* 0x04 */ uint32_t dlist_end;
+	/* 0x08 */ uint16_t x;
+	/* 0x0A */ uint16_t y;
+	/* 0x0C */ uint16_t unk1;
+	/* 0x0E */ uint8_t unk2;
+	/* 0x0F */ uint8_t unk3;
+	/* 0x10 */ uint32_t unk4;
+} z64_debug_text_t;
+
 /*enum DISP{
 	WORK = 0x01BC,
 	OVERLAY = 0x02B0,

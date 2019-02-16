@@ -6626,10 +6626,9 @@ extern void external_func_800FA0B4(void);
 
 /**
  * set debug text color
- * TODO We need argument mapping
  * This function is not used inside any existing overlay
  */
-extern void debug_set_text_rgba(void);
+extern void debug_set_text_rgba(z64_debug_text_t *text_struct, u8 r, u8 g, u8 b, u8 a);
 	#if OOT_DEBUG
 		asm("debug_set_text_rgba = 0x800FB3AC");
 	#elif OOT_U_1_0
@@ -6638,10 +6637,9 @@ extern void debug_set_text_rgba(void);
 
 /**
  * set debug text coordinates
- * TODO We need argument mapping
  * This function is not used inside any existing overlay
  */
-extern void debug_set_text_xy(void);
+extern void debug_set_text_xy(z64_debug_text_t *text_struct, u16 x, u16 y);
 	#if OOT_DEBUG
 		asm("debug_set_text_xy = 0x800FB41C");
 	#elif OOT_U_1_0
@@ -6652,11 +6650,11 @@ extern void debug_set_text_xy(void);
  * TODO This function is completely undocumented
  * This function is not used inside any existing overlay
  */
-extern void external_func_800FBB8C(void);
+extern void debug_init_text_struct(z64_debug_text_t *text_struct);
 	#if OOT_DEBUG
-		asm("external_func_800FBB8C = 0x800FBB8C");
+		asm("debug_init_text_struct = 0x800FBB8C");
 	#elif OOT_U_1_0
-		asm("external_func_800FBB8C = 0x800CC4AC");
+		asm("debug_init_text_struct = 0x800CC4AC");
 	#endif
 
 /**
@@ -6676,22 +6674,22 @@ extern void external_func_800FBC14(void);
  * TODO These notes need converted into a C function prototype
  * This function is not used inside any existing overlay
  */
-extern void external_func_800FBC1C(void);
+extern void debug_do_text_struct(z64_debug_text_t *text_struct, void *gfx_buffer);
 	#if OOT_DEBUG
-		asm("external_func_800FBC1C = 0x800FBC1C");
+		asm("debug_do_text_struct = 0x800FBC1C");
 	#elif OOT_U_1_0
-		asm("external_func_800FBC1C = 0x800CC508");
+		asm("debug_do_text_struct = 0x800CC508");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  * This function is not used inside any existing overlay
  */
-extern void external_func_800FBC64(void);
+extern u32 debug_update_text_struct(z64_debug_text_t *text_struct);
 	#if OOT_DEBUG
-		asm("external_func_800FBC64 = 0x800FBC64");
+		asm("debug_update_text_struct = 0x800FBC64");
 	#elif OOT_U_1_0
-		asm("external_func_800FBC64 = 0x800CC550");
+		asm("debug_update_text_struct = 0x800CC550");
 	#endif
 
 /**
@@ -6699,7 +6697,7 @@ extern void external_func_800FBC64(void);
  * TODO We need argument mapping
  * This function is not used inside any existing overlay
  */
-extern void debug_set_text_string(void);
+extern void debug_set_text_string(z64_debug_text_t *text_struct, char *format, ...);
 	#if OOT_DEBUG
 		asm("debug_set_text_string = 0x800FBCB4");
 	#elif OOT_U_1_0
@@ -6883,18 +6881,12 @@ extern u32 player_talk_state(z64_global_t *global);
 		asm("player_talk_state = 0x800DD464");
 	#endif
 
-extern void bzero(void *dest, int length);
+extern void z64_bzero(void *dest, int length);
 asm("bzero = 0x80004450");
-extern int bcmp(const void *s1, const void *s2, int length);
+extern int z64_bcmp(const void *s1, const void *s2, int length);
 asm("bcmp = 0x800068C0");
 extern void bcpy(const void *src, void *dst, int length);
 asm("bcpy = 0x80006F10");
-extern void SetTextRGBA(void * DList, u8 r, u8 g, u8 b, u8 a);
-asm("SetTextRGBA = 0x800FB3AC");
-extern void SetTextXY(void * DList, u16 x, u16 y);
-asm("SetTextXY = 0x800FB41C");
-extern void SetTextString(void * DList, char * format, ...);
-asm("SetTextString = 0x800FBCB4");
 
 // /ultra/user/src/pr/libsrc/libultra/gu
 
