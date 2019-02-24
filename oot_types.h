@@ -43,9 +43,9 @@ typedef struct {
 typedef struct
 {
   uint32_t          size;                     /* 0x0000 */
-  uint32_t         *buf;                      /* 0x0004 */
-  uint32_t         *p;                        /* 0x0008 */
-  uint32_t         *d;                        /* 0x000C */
+  Gfx              *buf;                      /* 0x0004 */
+  Gfx              *p;                        /* 0x0008 */
+  Gfx              *d;                        /* 0x000C */
                                               /* 0x0010 */
 } z64_disp_buf_t;
 

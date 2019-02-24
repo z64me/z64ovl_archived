@@ -6625,8 +6625,7 @@ extern void external_func_800FA0B4(void);
 	#endif
 
 /**
- * set debug text color
- * This function is not used inside any existing overlay
+ * Set RGBA color for a string of Debug Text.
  */
 extern void debug_set_text_rgba(z64_debug_text_t *text_struct, u8 r, u8 g, u8 b, u8 a);
 	#if OOT_DEBUG
@@ -6636,8 +6635,7 @@ extern void debug_set_text_rgba(z64_debug_text_t *text_struct, u8 r, u8 g, u8 b,
 	#endif
 
 /**
- * set debug text coordinates
- * This function is not used inside any existing overlay
+ * Set X / Y coordinates for a string of Debug Text.
  */
 extern void debug_set_text_xy(z64_debug_text_t *text_struct, u16 x, u16 y);
 	#if OOT_DEBUG
@@ -6647,8 +6645,7 @@ extern void debug_set_text_xy(z64_debug_text_t *text_struct, u16 x, u16 y);
 	#endif
 
 /**
- * TODO This function is completely undocumented
- * This function is not used inside any existing overlay
+ * Initailize a variable structure for Debug Text.
  */
 extern void debug_init_text_struct(z64_debug_text_t *text_struct);
 	#if OOT_DEBUG
@@ -6671,8 +6668,7 @@ extern void external_func_800FBC14(void);
 
 /**
  * gfxprint_open:２重オープンです related.
- * TODO These notes need converted into a C function prototype
- * This function is not used inside any existing overlay
+ * Write Debug Text display list to main display list buffer.
  */
 extern void debug_do_text_struct(z64_debug_text_t *text_struct, void *gfx_buffer);
 	#if OOT_DEBUG
@@ -6682,8 +6678,7 @@ extern void debug_do_text_struct(z64_debug_text_t *text_struct, void *gfx_buffer
 	#endif
 
 /**
- * TODO This function is completely undocumented
- * This function is not used inside any existing overlay
+ * Return a pointer to the main display list buffer after adding debug text structure.
  */
 extern u32 debug_update_text_struct(z64_debug_text_t *text_struct);
 	#if OOT_DEBUG
@@ -6693,11 +6688,9 @@ extern u32 debug_update_text_struct(z64_debug_text_t *text_struct);
 	#endif
 
 /**
- * set debug text string
- * TODO We need argument mapping
- * This function is not used inside any existing overlay
+ * Set character string for Debug Text.
  */
-extern void debug_set_text_string(z64_debug_text_t *text_struct, char *format, ...);
+extern void debug_set_text_string(z64_debug_text_t *text_struct, const char *format, ...);
 	#if OOT_DEBUG
 		asm("debug_set_text_string = 0x800FBCB4");
 	#elif OOT_U_1_0
