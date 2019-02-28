@@ -188,9 +188,9 @@ extern void external_func_80026B0C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80026CD4(void);
+extern void effect_add(void);
 	#if OOT_DEBUG
-		asm("external_func_80026CD4 = 0x80026CD4");
+		asm("effect_add = 0x80026CD4");
 	#elif OOT_U_1_0
 		asm("external_func_80026CD4 = 0x8001AA5C");
 	#endif

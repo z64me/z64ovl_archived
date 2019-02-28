@@ -63,4 +63,76 @@ static u8 helper_eye_blink(s16 *frame) {
 	return 2 - *frame; // half-open for a frame, then closed for a frame
 }
 
+/****
+* Overlay Display List Drawing
+*****/
+
+typedef struct {
+  u32 timg;
+  f32 width;
+  f32 height;
+  u8  fmt;
+  u8  bitsiz;
+} gfx_texture_t;
+
+typedef struct {
+  f32 x;
+  f32 y;
+  u8  origin_anchor;
+  f32 width;
+  f32 height;
+} gfx_screen_tile_t;
+
+#define G_TX_ANCHOR_C 0b0000
+#define G_TX_ANCHOR_U 0b0001
+#define G_TX_ANCHOR_R 0b0010
+#define G_TX_ANCHOR_D 0b0100
+#define G_TX_ANCHOR_L 0b1000
+#define to_rgba16(r, g, b, a) (((r >> 3) & 0x1F) << 11) | (((g >> 3) & 0x1F) << 6) | (((b >> 3) & 0x1F) << 1) | (((a >> 7) & 0x1) << 0)
+
+static void draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_screen_tile_t *tile)
+{
+  switch (tile->origin_anchor)
+  {
+    case 0b0000: /* Center */
+      tile->x -= (tile->width/2); tile->y -= (tile->height/2);
+    break;
+    case 0b0001: /* Up */
+      tile->height /= 2;
+    break;
+    case 0b0010: /* Right */
+      tile->x -= tile->width;
+    break;
+    case 0b0100: /* Down */
+      tile->y -= tile->height;
+    break;
+    case 0b1000: /* Left */
+      tile->width /= 2;
+    break;
+  }
+
+  gSPDisplayList(buf->p++, 0x801269D0);
+  //gsDPSetCombine()
+  buf->p->hi = 0xFC309661;
+  buf->p->lo = 0x552EFF7F;
+  buf->p++;
+  gDPSetPrimColor(buf->p++, 0, 0, 255, 255, 255, 255);
+  gDPSetEnvColor(buf->p++, 0, 0, 0, 255);
+  //gDPPipeSync(buf->p++);
+  gDPLoadTextureBlock(buf->p++,
+                      img->timg, img->fmt, img->bitsiz,
+                      img->width, img->height,
+                      0,
+                      G_TX_WRAP, G_TX_WRAP,
+                      G_TX_NOMASK, G_TX_NOMASK,
+                      G_TX_NOLOD, G_TX_NOLOD);
+  gSPTextureRectangle(buf->p++,
+                      qs102(tile->x) & ~3,
+                      qs102(tile->y) & ~3,
+                      qs102(tile->x + tile->width) & ~3,
+                      qs102(tile->y + tile->height) & ~3,
+                      G_TX_RENDERTILE,
+                      qu105(0), qu105(0),
+                      qu510(img->width / tile->width), qu510(img->height / tile->height));
+}
 #endif // Z64OVL_HELPERS_H_INCLUDED
