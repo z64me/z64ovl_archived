@@ -2103,9 +2103,9 @@ extern void external_func_80034A14(void);
 	* Wrapper for 800A273C
 	* TODO Variable name cleanup, better notes
  */
-extern void skelanime_draw_mtx_80034BA0(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, u8 opacity);
+extern void skelanime_draw_mtx_xlu(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, u8 opacity);
 	#if OOT_DEBUG
-		asm("skelanime_draw_mtx_80034BA0 = 0x80034BA0");
+		asm("skelanime_draw_mtx_xlu = 0x80034BA0");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -4913,9 +4913,9 @@ extern void skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, u8 lim
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-extern void skelanime_draw_mtx_800A1AC8(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
+extern void skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("skelanime_draw_mtx_800A1AC8 = 0x800A1AC8");
+		asm("skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
 		asm("skelanime_draw_mtx = 0x80089D8C");
 	#endif
@@ -4941,11 +4941,11 @@ extern void external_func_800A2288(void);
 	#endif
 
 /**
- * TODO Draw a matrix-enabled object skeleton
+ * TODO Draw a matrix-enabled object skeleton on a specific destination buffer
  */
-extern u32 skelanime_draw_mtx_800A273C(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
+extern u32 skelanime_draw_mtx_destination(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
 	#if OOT_DEBUG
-		asm("skelanime_draw_mtx_800A273C = 0x800A273C");
+		asm("skelanime_draw_mtx_destination = 0x800A273C");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
