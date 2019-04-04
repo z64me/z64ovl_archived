@@ -2486,7 +2486,7 @@ extern void external_func_8003E30C(void);
  * TODO Actor Index and entity have different meanings; this documentation is conflicting
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id
  */
-extern void dynapolyinfo_set_actor(z64_global_t *global, void *global_plus_0x810, void *entity, void *dynacollision);
+extern u32 dynapolyinfo_set_actor(z64_global_t *global, void *global_plus_0x810, void *entity, void *dynacollision);
 	#if OOT_DEBUG
 		asm("dynapolyinfo_set_actor = 0x8003EA74");
 	#elif OOT_U_1_0
@@ -2540,7 +2540,7 @@ extern void external_func_8003ECA8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id
  */
-extern void dynapolyinfo_delete_reserve(void);
+extern void dynapolyinfo_delete_reserve(z64_global_t *global, void *global_plus_0x810, u32 dynacollision_id);
 	#if OOT_DEBUG
 		asm("dynapolyinfo_delete_reserve = 0x8003ED58");
 	#elif OOT_U_1_0
@@ -2763,7 +2763,7 @@ extern void external_func_8004356C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80043590(z64_global_t *global);
+extern int external_func_80043590(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_80043590 = 0x80043590");
 	#elif OOT_U_1_0
