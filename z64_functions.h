@@ -3649,14 +3649,13 @@ extern void external_func_800776E4(void);
 
 /**
  * memset byte
- * TODO These notes need converted into a C function prototype
- * A0 = Address | A1 = Size | A2 = u8 value
+ * A0 = Address | A1 = length (in bytes) | A2 = u8 value
  */
-extern void external_func_800777E0(void);
+extern void memory_set(void *dst, const u32 len, const u8 value);
 	#if OOT_DEBUG
-		asm("external_func_800777E0 = 0x800777E0");
+		asm("memory_set = 0x800777E0");
 	#elif OOT_U_1_0
-		asm("external_func_800777E0 = 0x80063630");
+		asm("memory_set = 0x80063630");
 	#endif
 
 /**
