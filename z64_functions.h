@@ -2486,11 +2486,11 @@ extern void external_func_8003E30C(void);
  * TODO Actor Index and entity have different meanings; this documentation is conflicting
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id
  */
-extern u32 dynapolyinfo_set_actor(z64_global_t *global, u32 global_plus_0x810, z64_actor_t *actor, u32 dynacollision);
+extern u32 actor_init_dynapoly(z64_global_t *global, u32 global_plus_0x810, z64_actor_t *actor, u32 dynacollision);
 	#if OOT_DEBUG
-		asm("dynapolyinfo_set_actor = 0x8003EA74");
+		asm("actor_init_dynapoly = 0x8003EA74");
 	#elif OOT_U_1_0
-		asm("dynapolyinfo_set_actor = 0x800313A4");
+		asm("actor_init_dynapoly = 0x800313A4");
 	#endif
 
 /**
@@ -2540,9 +2540,9 @@ extern void external_func_8003ECA8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id
  */
-extern void dynapolyinfo_delete_reserve(z64_global_t *global, u32 global_plus_0x810, u32 dynacollision_id);
+extern void dynapoly_free(z64_global_t *global, u32 global_plus_0x810, u32 *dynacollision_id);
 	#if OOT_DEBUG
-		asm("dynapolyinfo_delete_reserve = 0x8003ED58");
+		asm("dynapoly_free = 0x8003ED58");
 	#elif OOT_U_1_0
 		asm("dynapolyinfo_delete_reserve = 0x80031638");
 	#endif
@@ -2564,9 +2564,9 @@ extern void external_func_8003EE6C(void);
  * dynacollision_init()?
  * A0 = Segment Offset to Collision Data | A1 = ptr to store result?
  */
-extern void external_func_80041880(const u32 collision, void *dynacollision);
+extern void dynapoly_alloc(const u32 collision, void *collision_pointer);
 	#if OOT_DEBUG
-		asm("external_func_80041880 = 0x80041880");
+		asm("dynapoly_alloc = 0x80041880");
 	#elif OOT_U_1_0
 		asm("external_func_80041880 = 0x80033EF4");
 	#endif
