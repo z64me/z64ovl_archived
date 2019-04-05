@@ -1721,7 +1721,7 @@ extern void external_func_8002F948(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F974(z64_global_t *global, int unknown);
+extern void external_func_8002F974(z64_actor_t *actor, int unknown);
 	#if OOT_DEBUG
 		asm("external_func_8002F974 = 0x8002F974");
 	#elif OOT_U_1_0
@@ -2486,7 +2486,7 @@ extern void external_func_8003E30C(void);
  * TODO Actor Index and entity have different meanings; this documentation is conflicting
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id
  */
-extern u32 dynapolyinfo_set_actor(z64_global_t *global, void *global_plus_0x810, void *entity, void *dynacollision);
+extern u32 dynapolyinfo_set_actor(z64_global_t *global, void *global_plus_0x810, void *entity, u32 *dynacollision);
 	#if OOT_DEBUG
 		asm("dynapolyinfo_set_actor = 0x8003EA74");
 	#elif OOT_U_1_0
@@ -2713,7 +2713,7 @@ extern void external_func_800433A4(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80043480(void *entity, int unknown);
+extern void external_func_80043480(z64_actor_t *actor, int unknown);
 	#if OOT_DEBUG
 		asm("external_func_80043480 = 0x80043480");
 	#elif OOT_U_1_0
@@ -2763,7 +2763,7 @@ extern void external_func_8004356C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern int external_func_80043590(z64_global_t *global);
+extern int external_func_80043590(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_80043590 = 0x80043590");
 	#elif OOT_U_1_0
@@ -3882,7 +3882,7 @@ extern void external_func_8007809C(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Variable Initializer List ptr
  */
-extern void external_func_800780DC(void *entity, void *unknown);
+extern void external_func_800780DC(z64_actor_t *actor, void *unknown);
 	#if OOT_DEBUG
 		asm("external_func_800780DC = 0x800780DC");
 	#elif OOT_U_1_0
