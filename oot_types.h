@@ -242,4 +242,10 @@ typedef struct vec3s_s {
 	s16 x, y, z;
 } vec3s_t;
 
+typedef struct z64_dynapoly {
+    u8 unk_0[16];
+    u32 id;
+    u8 unk_1[20];
+} z64_dynapoly_t;
+
 #endif
