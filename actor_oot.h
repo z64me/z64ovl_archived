@@ -7,7 +7,7 @@
 
 typedef enum {
   Switch = 0x00,
-  Prop_1 = 0x01,
+  Bg = 0x01,
   Player = 0x02,
   Explosives = 0x03,
   NPC = 0x04,
