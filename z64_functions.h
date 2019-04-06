@@ -76,7 +76,7 @@ extern void external_func_80002E50(void);
  * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance + 0x24 | a2 = drop ID
  */
-extern void item_drop_collectible(z64_global_t *global, z64_actor_t *actor_plus_0x24, u16 drop_id);
+extern void item_drop_collectible(z64_global_t *global, z64_xyzf_t *pos2, u16 drop_id);
 	#if OOT_DEBUG
 		asm("item_drop_collectible = 0x8001F548");
 	#elif OOT_U_1_0
@@ -663,7 +663,15 @@ extern void external_func_80029E24(void);
  * Spawn Particle 0x19
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029E8C(void);
+extern void external_func_80029E8C(
+	z64_global_t *global,
+	float *x, float *y, float *z,
+	int x_rot, int y_rot, int z_rot, // TODO possibly not rotation
+	int unk_0, int unk_1, // TODO possibly floating point?
+	float scale, // TODO possibly not scale
+	int unk_2, int unk_3, int unk_4, int unk_5, int unk_6,
+	u32 dlist
+	);
 	#if OOT_DEBUG
 		asm("external_func_80029E8C = 0x80029E8C");
 	#elif OOT_U_1_0
@@ -1853,7 +1861,12 @@ extern void external_func_80033260(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80033480(void);
+extern void external_func_80033480(
+	z64_global_t *global,
+	float *pos2x,
+	float unk_0, // TODO confirm float/int
+	int unk_1, int unk_2, int unk_3, int unk_4 // TODO confirm float/int
+	);
 	#if OOT_DEBUG
 		asm("external_func_80033480 = 0x80033480");
 	#elif OOT_U_1_0
@@ -1877,7 +1890,7 @@ extern z64_actor_t *actor_is_bombed(z64_global_t *global, z64_capsule_t *capsule
  * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance | v0 = unknown
  */
-extern void external_func_80033684(void);
+extern int external_func_80033684(z64_global_t *global, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_80033684 = 0x80033684");
 	#elif OOT_U_1_0
@@ -2508,7 +2521,7 @@ extern void dynapolyinfo_get_actor(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8003EBF8(void);
+extern void external_func_8003EBF8(z64_global_t *global, uint32_t global_plus_0x810, uint32_t dynapoly_id);
 	#if OOT_DEBUG
 		asm("external_func_8003EBF8 = 0x8003EBF8");
 	#elif OOT_U_1_0
@@ -3380,7 +3393,7 @@ extern void external_func_800694A0(void);
  * TODO Considering this uses an actor instance, is it any different from sound_play_actor?
  * a0 - global context | a1 - actor instance + 0x24 (position array of the sound) | a2 - 0x3C (radius?) | a3 - sound ID
  */
-extern void sound_play_position(z64_global_t *global, z64_actor_t *actor_plus_0x24, int radius, uint16_t sfx_id);
+extern void sound_play_position(z64_global_t *global, z64_xyzf_t *pos2, int radius, uint16_t sfx_id);
 	#if OOT_DEBUG
 		asm("sound_play_position = 0x8006BAD8");
 	#elif OOT_U_1_0
