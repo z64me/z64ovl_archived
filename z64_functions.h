@@ -1721,11 +1721,11 @@ extern void external_func_8002F948(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F974(z64_actor_t *actor, int unknown);
+extern void actor_flag_play_sound(z64_actor_t *actor, u16 sfx_id);
 	#if OOT_DEBUG
-		asm("external_func_8002F974 = 0x8002F974");
+		asm("actor_flag_play_sound = 0x8002F974");
 	#elif OOT_U_1_0
-		asm("external_func_8002F974 = 0x8002313C");
+		asm("actor_flag_play_sound = 0x8002313C");
 	#endif
 
 /**
@@ -2763,11 +2763,11 @@ extern void external_func_8004356C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern int external_func_80043590(z64_actor_t *actor);
+extern int actor_dynapoly_get_link_floorcast(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_80043590 = 0x80043590");
+		asm("actor_dynapoly_get_link_floorcast = 0x80043590");
 	#elif OOT_U_1_0
-		asm("external_func_80043590 = 0x80035388");
+		asm("actor_dynapoly_get_link_floorcast = 0x80035388");
 	#endif
 
 /**
