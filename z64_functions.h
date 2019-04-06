@@ -76,11 +76,11 @@ extern void external_func_80002E50(void);
  * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance + 0x24 | a2 = drop ID
  */
-extern void external_func_8001F548(void);
+extern void item_drop_collectible(z64_global_t *global, z64_actor_t *actor_plus_0x24, u16 drop_id);
 	#if OOT_DEBUG
-		asm("external_func_8001F548 = 0x8001F548");
+		asm("item_drop_collectible = 0x8001F548");
 	#elif OOT_U_1_0
-		asm("external_func_8001F548 = 0x80013678");
+		asm("item_drop_collectible = 0x80013678");
 	#endif
 
 /**
@@ -2568,7 +2568,7 @@ extern void dynapoly_alloc(const u32 collision, void *collision_pointer);
 	#if OOT_DEBUG
 		asm("dynapoly_alloc = 0x80041880");
 	#elif OOT_U_1_0
-		asm("external_func_80041880 = 0x80033EF4");
+		asm("dynapoly_alloc = 0x80033EF4");
 	#endif
 
 /**
@@ -3042,7 +3042,7 @@ extern void external_func_8005C364(z64_global_t *global, z64_capsule_t *collisio
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset where you stored the hitbox struct)
  */
-extern void external_func_8005C3AC(void);
+extern void external_func_8005C3AC(z64_global_t *global, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("external_func_8005C3AC = 0x8005C3AC");
 	#elif OOT_U_1_0
@@ -3172,7 +3172,7 @@ extern void actor_collision_check_set_at(z64_global_t *global, u32 a1 /*glbl_ctx
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
  */
-extern void actor_collision_check_set_ac(void);
+extern void actor_collision_check_set_ac(z64_global_t *global, u32 col_body_groups, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ac = 0x8005D9F4");
 	#elif OOT_U_1_0
@@ -3380,7 +3380,7 @@ extern void external_func_800694A0(void);
  * TODO Considering this uses an actor instance, is it any different from sound_play_actor?
  * a0 - global context | a1 - actor instance + 0x24 (position array of the sound) | a2 - 0x3C (radius?) | a3 - sound ID
  */
-extern void sound_play_position(void);
+extern void sound_play_position(z64_global_t *global, z64_actor_t *actor_plus_0x24, int radius, uint16_t sfx_id);
 	#if OOT_DEBUG
 		asm("sound_play_position = 0x8006BAD8");
 	#elif OOT_U_1_0

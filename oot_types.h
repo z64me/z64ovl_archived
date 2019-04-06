@@ -256,6 +256,7 @@ typedef struct z64_dynapoly_init {
     u32 unk_1;
 		u32 unk_2;
 		u32 unk_3;
+		u32 unk_4;
 } z64_dynapoly_init_t;
 
 enum dynapoly_move_flag {
