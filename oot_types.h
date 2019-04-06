@@ -180,17 +180,17 @@ typedef struct z64_capsule_init_s {
   /* 0x20 */ uint16_t radius;
   /* 0x22 */ uint16_t height;
   /* 0x24 */ uint32_t unk9;
-	/* 0x28 */ uint32_t unk10;
+  /* 0x28 */ uint32_t unk10;
   /* 0x2C */
 } z64_capsule_init_t;
 
 typedef struct z64_capsule_s {
-	z64_actor_t *actor; // actor instance; TODO Is this a z64_actor_t or a typeless instance?
-	u32 unk_0x4;
-	z64_actor_t *colliding_actor; // colliding actor instance?; TODO Is this a z64_actor_t or a typeless instance?
-	u32 unk_0xC;
+/*00*/	z64_actor_t *actor; // actor instance; TODO Is this a z64_actor_t or a typeless instance?
+/*04*/	u32 unk_0x4;
+/*08*/	z64_actor_t *colliding_actor; // colliding actor instance?; TODO Is this a z64_actor_t or a typeless instance?
+/*0C*/	u32 unk_0xC;
 	// TODO Needs better naming. Also, why are these values out of order?
-	u8
+/*10*/	u8
 		cso_0x01,
 		cso_0x02, //if & 0x0002, is detecting a Deku Nut hit?
 		cso_0x03, //bitwise-and compared to opposing collision's 0x13 byte
@@ -201,15 +201,15 @@ typedef struct z64_capsule_s {
 		unk_0x16, // curious that two unknowns somehow lie here; likely cso_0x06
 		unk_0x17 // and cso_0x07; types also unknown
 	;
-	u32 cso_0x0C;
-	u8
+/*18*/	u32 cso_0x0C;
+/*1C*/	u8
 		cso_0x10,
 		cso_0x11, // damage dealt when touched
 		unk_0x1E, // unknown, likely cso_0x12
 		unk_0x1F // and cso_0x13; types also unknown
 	;
-	u32 cso_0x14; // (FFCF FFFF)
-	u8
+/*20*/	u32 cso_0x14; // (FFCF FFFF)
+/*24*/	u8
 		cso_0x18,
 		cso_0x19,
 		unk_0x26, // unknown, likely also "cso" stuff
@@ -223,8 +223,8 @@ typedef struct z64_capsule_s {
 		cso_0x1D,
 		cso_0x1E
 	;
-	u8 unk[16];
-	s16
+/*30*/	u8 unk[16];
+/*40*/	s16
 		radius, // or diameter? CSO 0x20
 		height, // CSO 0x22
 		unk_0x44, // CSO 0x24
@@ -232,7 +232,7 @@ typedef struct z64_capsule_s {
 		y,
 		z
 	;
-} z64_capsule_t;
+} z64_capsule_t; // length 0x5C bytes
 
 typedef struct vec3f_s {
     f32 x, y, z;
