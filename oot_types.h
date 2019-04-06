@@ -248,4 +248,17 @@ typedef struct z64_dynapoly {
     u8 unk_1[20];
 } z64_dynapoly_t;
 
+typedef struct z64_dynapoly_init {
+    u8 unk_0[2];
+    u16 scale;
+    u32 unk_1;
+		u32 unk_2;
+		u32 unk_3;
+} z64_dynapoly_init_t;
+
+enum dynapoly_move_flag {
+	DPM_PLAYER = 0b01,
+ 	DPM_ENEMY = 0b10
+};
+
 #endif

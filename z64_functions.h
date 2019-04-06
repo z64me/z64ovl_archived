@@ -2486,11 +2486,11 @@ extern void external_func_8003E30C(void);
  * TODO Actor Index and entity have different meanings; this documentation is conflicting
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id
  */
-extern u32 actor_init_dynapoly(z64_global_t *global, u32 global_plus_0x810, z64_actor_t *actor, u32 dynacollision);
+extern u32 actor_register_dynapoly(z64_global_t *global, u32 global_plus_0x810, z64_actor_t *actor, u32 dynacollision);
 	#if OOT_DEBUG
-		asm("actor_init_dynapoly = 0x8003EA74");
+		asm("actor_register_dynapoly = 0x8003EA74");
 	#elif OOT_U_1_0
-		asm("actor_init_dynapoly = 0x800313A4");
+		asm("actor_register_dynapoly = 0x800313A4");
 	#endif
 
 /**
@@ -2713,11 +2713,11 @@ extern void external_func_800433A4(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80043480(z64_actor_t *actor, int unknown);
+extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag flags);
 	#if OOT_DEBUG
-		asm("external_func_80043480 = 0x80043480");
+		asm("actor_dynapoly_set_move = 0x80043480");
 	#elif OOT_U_1_0
-		asm("external_func_80043480 = 0x80035260");
+		asm("actor_dynapoly_set_move = 0x80035260");
 	#endif
 
 /**
@@ -3882,11 +3882,11 @@ extern void external_func_8007809C(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Variable Initializer List ptr
  */
-extern void external_func_800780DC(z64_actor_t *actor, void *var_init_list);
+extern void actor_init_dynapoly(z64_actor_t *actor, void *var_init_list);
 	#if OOT_DEBUG
-		asm("external_func_800780DC = 0x800780DC");
+		asm("actor_init_dynapoly = 0x800780DC");
 	#elif OOT_U_1_0
-		asm("external_func_800780DC = 0x80063F7C");
+		asm("actor_init_dynapoly = 0x80063F7C");
 	#endif
 
 /**
