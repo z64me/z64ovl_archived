@@ -3030,11 +3030,11 @@ extern void external_func_8005C050(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void external_func_8005C364(z64_global_t *global, z64_capsule_t *collision);
+extern void actor_init_capsule(z64_global_t *global, z64_capsule_t *collision);
 	#if OOT_DEBUG
-		asm("external_func_8005C364 = 0x8005C364");
+		asm("actor_init_capsule = 0x8005C364");
 	#elif OOT_U_1_0
-		asm("external_func_8005C364 = 0x8004AB7C");
+		asm("actor_init_capsule = 0x8004AB7C");
 	#endif
 
 /**
@@ -3042,11 +3042,11 @@ extern void external_func_8005C364(z64_global_t *global, z64_capsule_t *collisio
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset where you stored the hitbox struct)
  */
-extern void external_func_8005C3AC(z64_global_t *global, z64_capsule_t *collision);
+extern void actor_capsule_free(z64_global_t *global, z64_capsule_t *collision);
 	#if OOT_DEBUG
-		asm("external_func_8005C3AC = 0x8005C3AC");
+		asm("actor_capsule_free = 0x8005C3AC");
 	#elif OOT_U_1_0
-		asm("external_func_8005C3AC = 0x8004ABCC");
+		asm("actor_capsule_free = 0x8004ABCC");
 	#endif
 
 /**
@@ -3078,11 +3078,11 @@ extern void external_func_8005C450(void);
  * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void external_func_8005C4AC(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, z64_capsule_init_t *source);
+extern void actor_capsule_alloc(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, z64_capsule_init_t *source);
 	#if OOT_DEBUG
-		asm("external_func_8005C4AC = 0x8005C4AC");
+		asm("actor_capsule_alloc = 0x8005C4AC");
 	#elif OOT_U_1_0
-		asm("external_func_8005C4AC = 0x8004ACEC");
+		asm("actor_capsule_alloc = 0x8004ACEC");
 	#endif
 
 /**
@@ -3230,11 +3230,11 @@ extern void external_func_80061EFC(void);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void external_func_800626DC(z64_actor_t *actor, void* collision);
+extern void actor_capsule_update(z64_actor_t *actor, void* collision);
 	#if OOT_DEBUG
-		asm("external_func_800626DC = 0x800626DC");
+		asm("actor_capsule_update = 0x800626DC");
 	#elif OOT_U_1_0
-		asm("external_func_800626DC = 0x80050B00");
+		asm("actor_capsule_update = 0x80050B00");
 	#endif
 
 /**
