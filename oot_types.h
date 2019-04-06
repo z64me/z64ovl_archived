@@ -245,7 +245,9 @@ typedef struct vec3s_s {
 typedef struct z64_dynapoly {
     u8 unk_0[16];
     u32 id;
-    u8 unk_1[20];
+    u8 unk_1[16];
+		u8 collided_flag;
+		u8 unk_2[3]; /* for alignment right now */
 } z64_dynapoly_t;
 
 typedef struct z64_dynapoly_init {
