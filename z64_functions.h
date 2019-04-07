@@ -666,10 +666,10 @@ extern void external_func_80029E24(void);
 extern void external_func_80029E8C(
 	z64_global_t *global,
 	float *x, float *y, float *z,
-	int x_rot, int y_rot, int z_rot, // TODO possibly not rotation
-	int unk_0, int unk_1, // TODO possibly floating point?
-	float scale, // TODO possibly not scale
-	int unk_2, int unk_3, int unk_4, int unk_5, int unk_6,
+	s16 unk_0, s16 unk_1, s16 unk_2, s16 unk_3, s16 unk_4,
+	s16 scale, // TODO possibly not scale
+	s16 unk_5, s16 unk_6, s32 unk_7, s16 unk_8,
+	s16 objno,
 	u32 dlist
 	);
 	#if OOT_DEBUG
