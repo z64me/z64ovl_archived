@@ -184,17 +184,104 @@ typedef struct z64_capsule_init_s {
   /* 0x2C */
 } z64_capsule_init_t;
 
+/* Damage chart notes
+ * sword0 and sword1 refer to the Kokiri/Master Sword,
+   longsword refers to the Biggoron Sword / Giant's Knife,
+   and brokensword refers to the broken longsword
+ * everything held together in a union { ... } shares the same setting
+ */
+typedef struct z64_damagechart_init {
+// TODO: would there be a hammer_shockwave, or do actors that respond to it do it differently?
+	u8
+/* 00 */	
+			misc_dekunut
+	;
+/* 01 */	union {
+				u8
+					misc_dekustick,
+			
+					misc_pot
+				;
+			};
+	u8
+/* 02 */	misc_slingshot,
+/* 03 */	misc_explosion,
+/* 04 */	misc_boomerang,
+		
+/* 05 */	arrow,
+		
+/* 06 */	hammer_swing,
+		
+/* 07 */	misc_hookshot,
+		
+/* 08 */	sword0_slash,
+/* 09 */	sword1_slash,
+/* 0A */	longsword_slash,
+		
+/* 0B */	arrow_fire,
+/* 0C */	arrow_ice,
+/* 0D */	arrow_light,
+/* 0E */	arrow_wind,  // TODO are these really Wind/Spirit/Shadow?
+/* 0F */	arrow_spirit,
+/* 10 */	arrow_shadow,
+		
+/* 11 */	magic_fire,
+/* 12 */	magic_ice,   // confirmed
+/* 13 */	magic_light, // confirmed
+		
+/* 14 */	unk0,
+/* 15 */	unk1,
+		
+/* 16 */	sword0_spin,
+/* 17 */	longsword_spin, // TODO confirm if this is correct
+/* 18 */	sword1_spin
+	;
+/* 19 */	union {
+				u8
+					sword0_jump,
+					sword0_bigspin,
+			
+					brokensword_jump,
+					brokensword_bigspin
+				;
+			};
+/* 1A */	union {
+				u8
+					longsword_jump,
+					longsword_bigspin
+				;
+			};
+/* 1B */	union {
+				u8
+					sword1_jump,
+					sword1_bigspin
+				;
+			};
+	u8
+/* 1C */	unk2,
+/* 1D */	unk3,
+/* 1E */	hammer_jump,
+/* 1F */	unk4
+	;
+} z64_damagechart_init_t;
+
 typedef struct z64_capsule_s {
 /*00*/	z64_actor_t *actor; // actor instance; TODO Is this a z64_actor_t or a typeless instance?
 /*04*/	u32 unk_0x4;
 /*08*/	z64_actor_t *colliding_actor; // colliding actor instance?; TODO Is this a z64_actor_t or a typeless instance?
 /*0C*/	u32 unk_0xC;
 	// TODO Needs better naming. Also, why are these values out of order?
-/*10*/	u8
-		cso_0x01,
-		cso_0x02, //if & 0x0002, is detecting a Deku Nut hit?
-		cso_0x03, //bitwise-and compared to opposing collision's 0x13 byte
-		cso_0x04, //bitwise-and compared to opposing collision's 0x12 byte
+
+/* 0010 : 
+ *** old notes say 'if & 0x0002, is detecting a Deku Nut hit?'. I can't verify this.
+ *** However, our Kibako rewrite suggests that & 0x0002 is for detecting any attack from
+ *** Link. Sword swing, Deku Stick swing, ammo, etc.
+*/
+/*10*/	u16 cso_0x01; //if & 0x0002, is detecting a Deku Nut hit?
+
+
+/*12*/	u16 unk_0x12; //bitwise-and compared to opposing collision's 0x13 and 0x12 bytes
+/*14*/	u8
 		cso_0x00,
 		cso_0x05, //used to reference function pointer, start location at 800EFB4C.
 				  //Basically, on left compare to right, left's value * 0x10 + right's value * 0x04 = pointer look up
@@ -233,14 +320,6 @@ typedef struct z64_capsule_s {
 		z
 	;
 } z64_capsule_t; // length 0x5C bytes
-
-typedef struct vec3f_s {
-    f32 x, y, z;
-} vec3f_t, z64_point_t;
-
-typedef struct vec3s_s {
-	s16 x, y, z;
-} vec3s_t;
 
 typedef struct z64_dynapoly {
     u8 unk_0[16];
