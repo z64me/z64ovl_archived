@@ -76,7 +76,7 @@ extern void external_func_80002E50(void);
  * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance + 0x24 | a2 = drop ID
  */
-extern void item_drop_collectible(z64_global_t *global, z64_xyzf_t *pos2, u16 drop_id);
+extern void item_drop_collectible(z64_global_t *global, vec3f_t *pos2, u16 drop_id);
 	#if OOT_DEBUG
 		asm("item_drop_collectible = 0x8001F548");
 	#elif OOT_U_1_0
@@ -487,7 +487,10 @@ extern void external_func_80029444(void);
  * Spawn Particle 0x0A
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002949C(void);
+extern void external_func_8002949C(
+	z64_global_t *global, vec3f_t *pos,
+	int unk0, int unk1, int unk2, int unk3
+);
 	#if OOT_DEBUG
 		asm("external_func_8002949C = 0x8002949C");
 	#elif OOT_U_1_0
@@ -665,7 +668,7 @@ extern void external_func_80029E24(void);
  */
 extern void external_func_80029E8C(
 	z64_global_t *global,
-	float *x, float *y, float *z,
+	vec3f_t *unkv0, vec3f_t *unkv1, vec3f_t *unkv2,
 	s16 unk_0, s16 unk_1, s16 unk_2, s16 unk_3, s16 unk_4,
 	s16 scale, // TODO possibly not scale
 	s16 unk_5, s16 unk_6, s32 unk_7, s16 unk_8,
@@ -1094,7 +1097,7 @@ extern void actor_update_vel(z64_actor_t *actor);
  * TODO These notes need converted into a C function prototype
  * a0 = pointer to start address of actor instance
  */
-extern void external_func_8002D8E0(void);
+extern void external_func_8002D8E0(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_8002D8E0 = 0x8002D8E0");
 	#elif OOT_U_1_0
@@ -1558,7 +1561,7 @@ extern void external_func_8002F554(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context
  */
-extern void external_func_8002F580(void);
+extern void external_func_8002F580(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_8002F580 = 0x8002F580");
 	#elif OOT_U_1_0
@@ -1568,7 +1571,7 @@ extern void external_func_8002F580(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F5A0(void);
+extern int external_func_8002F5A0(void);
 	#if OOT_DEBUG
 		asm("external_func_8002F5A0 = 0x8002F5A0");
 	#elif OOT_U_1_0
@@ -1863,7 +1866,7 @@ extern void external_func_80033260(void);
  */
 extern void external_func_80033480(
 	z64_global_t *global,
-	float *pos2x,
+	vec3f_t *pos,
 	float unk_0, // TODO confirm float/int
 	int unk_1, int unk_2, int unk_3, int unk_4 // TODO confirm float/int
 	);
@@ -3216,10 +3219,12 @@ extern void external_func_8005DFAC(void);
 
 /**
  * initializes damage chart part of actor
+ * given a destination table, a pointer to a z64_damagechart_init_t, and a pointer to the initialization data
+ * itemchart can be null, but damage_init should not be
  * //Actor 0095
- * TODO These notes need converted into a C function prototype
+ * TODO Types
  */
-extern void external_func_80061ED4(void);
+extern void external_func_80061ED4(void *table_dst, z64_damagechart_init_t *itemchart, u32 *damage_init);
 	#if OOT_DEBUG
 		asm("external_func_80061ED4 = 0x80061ED4");
 	#elif OOT_U_1_0
@@ -3393,7 +3398,7 @@ extern void external_func_800694A0(void);
  * TODO Considering this uses an actor instance, is it any different from sound_play_actor?
  * a0 - global context | a1 - actor instance + 0x24 (position array of the sound) | a2 - 0x3C (radius?) | a3 - sound ID
  */
-extern void sound_play_position(z64_global_t *global, z64_xyzf_t *pos2, int radius, uint16_t sfx_id);
+extern void sound_play_position(z64_global_t *global, vec3f_t *pos2, int radius, uint16_t sfx_id);
 	#if OOT_DEBUG
 		asm("sound_play_position = 0x8006BAD8");
 	#elif OOT_U_1_0
@@ -5878,7 +5883,7 @@ extern void external_func_800CE4B8(void);
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | V0 = s16 Rotation
  */
-extern s16 math_atan2s(void);
+extern s16 math_atan2s(float x, float y);
 	#if OOT_DEBUG
 		asm("math_atan2s = 0x800D0664");
 	#elif OOT_U_1_0
@@ -5970,11 +5975,11 @@ extern void external_func_800D0930(void);
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
  */
-extern void external_func_800D0984(void);
+extern void matrix_translate3f(float x, float y, float z, int transform_current);
 	#if OOT_DEBUG
-		asm("external_func_800D0984 = 0x800D0984");
+		asm("matrix_translate3f = 0x800D0984");
 	#elif OOT_U_1_0
-		asm("external_func_800D0984 = 0x800AA7F4");
+		asm("matrix_translate3f = 0x800AA7F4");
 	#endif
 
 /**
@@ -5982,11 +5987,11 @@ extern void external_func_800D0984(void);
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
  */
-extern void external_func_800D0A8C(void);
+extern void matrix_scale3f(float x, float y, float z, int transform_current);
 	#if OOT_DEBUG
-		asm("external_func_800D0A8C = 0x800D0A8C");
+		asm("matrix_scale3f = 0x800D0A8C");
 	#elif OOT_U_1_0
-		asm("external_func_800D0A8C = 0x800AA8FC");
+		asm("matrix_scale3f = 0x800AA8FC");
 	#endif
 
 /**
@@ -6024,11 +6029,11 @@ extern void external_func_800D0ED4(void);
  * TODO These notes need converted into a C function prototype
  * A0 = u16 x rotation | A1 = u16 y rotation | A2 = u16 z rotation | A3 = 0 initializes new matrix, 1 transforms stored matrix
  */
-extern void external_func_800D1084(void);
+extern void matrix_rotate3s(s16 x, s16 y, s16 z, int transform_current);
 	#if OOT_DEBUG
-		asm("external_func_800D1084 = 0x800D1084");
+		asm("matrix_rotate3s = 0x800D1084");
 	#elif OOT_U_1_0
-		asm("external_func_800D1084 = 0x800AAF00");
+		asm("matrix_rotate3s = 0x800AAF00");
 	#endif
 
 /**
@@ -6761,7 +6766,7 @@ extern void external_func_800FD7B4(void);
 /**
  * generates a random number between 0 inclusive and 1 exclusive
  */
-extern f32 math_rand_zero_one(void);
+extern float math_rand_zero_one(void);
 	#if OOT_DEBUG
 		asm("math_rand_zero_one = 0x800FD9AC");
 	#elif OOT_U_1_0
