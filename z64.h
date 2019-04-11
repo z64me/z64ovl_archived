@@ -160,7 +160,7 @@ typedef struct
   int16_t           y;                        /* 0x0002 */
   int16_t           z;                        /* 0x0004 */
                                               /* 0x0006 */
-} z64_xyz_t;
+} z64_xyz_t, vec3s_t;
 
 typedef struct
 {
@@ -168,7 +168,7 @@ typedef struct
   float             y;                        /* 0x0004 */
   float             z;                        /* 0x0008 */
                                               /* 0x000C */
-} z64_xyzf_t;
+} z64_xyzf_t, vec3f_t;
 
 typedef uint16_t z64_angle_t;
 typedef struct
@@ -866,7 +866,7 @@ struct z64_actor_s
   uint8_t           actor_type;               /* 0x0002 */
   int8_t            room_index;               /* 0x0003 */
   uint32_t          flags;                    /* 0x0004 */
-  z64_xyzf_t        pos_1;                    /* 0x0008 */
+  vec3f_t           pos_1;                    /* 0x0008 */
   z64_rot_t         rot_init;                 /* 0x0014 */
   char              unk_01_[0x0002];          /* 0x001A */
   uint16_t          variable;                 /* 0x001C */
@@ -874,16 +874,16 @@ struct z64_actor_s
   char              unk_02_;                  /* 0x001F */
   uint16_t          sound_effect;             /* 0x0020 */
   char              unk_03_[0x0002];          /* 0x0022 */
-  z64_xyzf_t        pos_2;                    /* 0x0024 */
+  vec3f_t           pos_2;                    /* 0x0024 */
   char              unk_04_[0x0002];          /* 0x0030 */
   uint16_t          xz_dir;                   /* 0x0032 */
   char              unk_05_[0x0004];          /* 0x0034 */
-  z64_xyzf_t        pos_3;                    /* 0x0038 */
+  vec3f_t           pos_3;                    /* 0x0038 */
   z64_rot_t         rot_1;                    /* 0x0044 */
   char              unk_06_[0x0002];          /* 0x004A */
   float             unk_07_;                  /* 0x004C */
-  z64_xyzf_t        scale;                    /* 0x0050 */
-  z64_xyzf_t        vel_1;                    /* 0x005C */
+  vec3f_t           scale;                    /* 0x0050 */
+  vec3f_t           vel_1;                    /* 0x005C */
   float             xz_speed;                 /* 0x0068 */
   float             gravity;                  /* 0x006C */
   float             min_vel_y;                /* 0x0070 */
@@ -902,7 +902,7 @@ struct z64_actor_s
   float             dist_from_link_y;         /* 0x0094 */
   /* struct collision_check common */
   void             *damage_table;             /* 0x0098 */
-  z64_xyzf_t        vel_2;                    /* 0x009C */
+  vec3f_t           vel_2;                    /* 0x009C */
   char              unk_0B_[0x0006];          /* 0x00A8 */
   uint8_t           mass;                     /* 0x00AE */
   uint8_t           health;                   /* 0x00AF */
@@ -920,14 +920,14 @@ struct z64_actor_s
   uint8_t           unk_0xC8;                 /* 0x00C8 */
   char              pad_0xC9_[0x0003];        /* 0x00C9 */
   /* struct end */
-  z64_xyzf_t        unk_0xCC;                 /* 0x00CC */
-  z64_xyzf_t        unk_0xD8;                 /* 0x00D8 */
-  z64_xyzf_t        unk_0xE4;                 /* 0x00E4 */
+  vec3f_t           unk_0xCC;                 /* 0x00CC */
+  vec3f_t           unk_0xD8;                 /* 0x00D8 */
+  vec3f_t           unk_0xE4;                 /* 0x00E4 */
   float             unk_0xF0;                 /* 0x00F0 */
   float             unk_0xF4;                 /* 0x00F4 */
   float             unk_0xF8;                 /* 0x00F8 */
   float             unk_0xFC;                 /* 0x00FC */
-  z64_xyzf_t        pos_4;                    /* 0x0100 */
+  vec3f_t           pos_4;                    /* 0x0100 */
   uint16_t          unk_0F_;                  /* 0x010C */
   uint16_t          text_id;                  /* 0x010E */
   int16_t           frozen;                   /* 0x0110 */
