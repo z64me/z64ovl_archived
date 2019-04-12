@@ -41,14 +41,19 @@ extern void external_func_80001FF0(void);
 	#endif
 
 /**
- * padding at func end
- * TODO These notes need converted into a C function prototype
+ * print a debug message to the console
+ * use DEBUG_MESSAGE(), which will disable debug_message() calls unless compiling with DEBUG defined
  */
-extern void external_func_80002130(void);
+extern void debug_message(const char *msg, ...);
+#ifdef DEBUG
+	#define DEBUG_MESSAGE debug_message
+#else
+	#define DEBUG_MESSAGE
+#endif
 	#if OOT_DEBUG
-		asm("external_func_80002130 = 0x80002130");
+		asm("debug_message = 0x80002130");
 	#elif OOT_U_1_0
-		asm("external_func_80002130 = 0x800ACE60");
+		asm("debug_message = 0x800ACE60");
 	#endif
 
 /**
@@ -1534,14 +1539,24 @@ extern int actor_is_held(z64_actor_t *actor);
 
 /**
  * Give Item
- * TODO These notes need converted into a C function prototype
- * A0 = Actor instance //Actor giving item | A1 = Global Context | A2 = Get Item ID | A3 = float, max xz distance from actor to Link that item will be given | SP+10 = float, max y distance from actor to Link that item will be given
+ * TODO get_item_id, is it u8, u16, or u32?
+ * TODO: a different name may be more fitting
+ * A0 = Actor instance //Actor giving item
+ * A1 = Global Context
+ * A2 = Get Item ID
+ * A3 = float, max xz distance from actor to Link that item will be given
+ * SP+10 = float, max y distance from actor to Link that item will be given
  */
-extern void external_func_8002F434(void);
+extern void actor_give_item(
+	z64_actor_t *actor,
+	z64_global_t *global,
+	u32 get_item_id,
+	float range_xz, float range_y
+);
 	#if OOT_DEBUG
-		asm("external_func_8002F434 = 0x8002F434");
+		asm("actor_give_item = 0x8002F434");
 	#elif OOT_U_1_0
-		asm("external_func_8002F434 = 0x80022BD4");
+		asm("actor_give_item = 0x80022BD4");
 	#endif
 
 /**
@@ -2385,13 +2400,16 @@ extern void external_func_8003C940(void);
 	#endif
 
 /**
- * Raycast
- * TODO No notes available
+ * raycast
+ * returns a Y location of where to place actor on success, otherwise RAYCAST_FAIL (-32000.0f)
+ * TODO confirm return type, do something about global_plus_0x7C0, figure out unk[0,1]
  */
-extern void math_raycast(void);
+extern float math_raycast(u32 global_plus_0x7C0, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
 	#if OOT_DEBUG
+		#define RAYCAST_FAIL -32000.0f
 		asm("math_raycast = 0x8003C9A4");
 	#elif OOT_U_1_0
+		#define RAYCAST_FAIL -32000.0f
 		asm("math_raycast = 0x8002F4B8");
 	#endif
 
@@ -3042,19 +3060,19 @@ extern void external_func_8005C050(void);
 	#endif
 
 /**
- * Initializes hitbox structure
+ * allocates memory for capsule
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void actor_init_capsule(z64_global_t *global, z64_capsule_t *collision);
+extern void actor_capsule_alloc(z64_global_t *global, z64_capsule_t *collision);
 	#if OOT_DEBUG
-		asm("actor_init_capsule = 0x8005C364");
+		asm("actor_capsule_alloc = 0x8005C364");
 	#elif OOT_U_1_0
-		asm("actor_init_capsule = 0x8004AB7C");
+		asm("actor_capsule_alloc = 0x8004AB7C");
 	#endif
 
 /**
- * Unloads hitbox structure
+ * frees memory associated with capsule
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset where you stored the hitbox struct)
  */
@@ -3094,11 +3112,11 @@ extern void external_func_8005C450(void);
  * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void actor_capsule_alloc(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, z64_capsule_init_t *source);
+extern void actor_capsule_init(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, z64_capsule_init_t *source);
 	#if OOT_DEBUG
-		asm("actor_capsule_alloc = 0x8005C4AC");
+		asm("actor_capsule_init = 0x8005C4AC");
 	#elif OOT_U_1_0
-		asm("actor_capsule_alloc = 0x8004ACEC");
+		asm("actor_capsule_init = 0x8004ACEC");
 	#endif
 
 /**
@@ -3717,8 +3735,9 @@ extern void external_func_800778AC(void);
 
 /**
  * TODO This function is completely undocumented
+ * TODO possibly some kind of random number function...
  */
-extern void external_func_8007797C(void);
+extern void external_func_8007797C(int *unk0, const int unk1, const int unk2);
 	#if OOT_DEBUG
 		asm("external_func_8007797C = 0x8007797C");
 	#elif OOT_U_1_0
@@ -4889,9 +4908,10 @@ extern void external_func_80097A54(void);
 
 /**
  * Given its number, returns the object's index in the object table, or -1 if it isn't loaded.
- * TODO Need argument mappigns...
+ * TODO Do something with this global_plus_0x117A4; of note is that global_plus_0x117A4 is used by
+        object_get_index() and object_is_loaded()...
  */
-extern int object_get_index(void);
+extern int object_get_index(u32 global_plus_0x117A4, u16 object_id);
 	#if OOT_DEBUG
 		asm("object_get_index = 0x8009812C");
 	#elif OOT_U_1_0
@@ -4902,7 +4922,7 @@ extern int object_get_index(void);
  * Test if object file dependency is loaded (returns 1 on true 0 on false)
  * TODO Need argument mappings...
  */
-extern int object_is_loaded(void);
+extern int object_is_loaded(u16 global_plus_0x117A4, u16 object_id);
 	#if OOT_DEBUG
 		asm("object_is_loaded = 0x80098188");
 	#elif OOT_U_1_0
