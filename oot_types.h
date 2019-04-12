@@ -310,7 +310,8 @@ typedef struct z64_capsule_s {
 		cso_0x1D,
 		cso_0x1E
 	;
-/*30*/	u8 unk[16];
+/*30*/	u8 unk[12];
+/*3C*/  u32 unk_0x3C;
 /*40*/	s16
 		radius, // or diameter? CSO 0x20
 		height, // CSO 0x22
