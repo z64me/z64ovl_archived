@@ -1564,7 +1564,12 @@ extern void actor_give_item(
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = Get Item Id
  */
-extern void external_func_8002F554(z64_actor_t *actor, z64_global_t *global, s8 get_item_id);
+/*wrapper for actor_give_item, provides range_xz and range_y*/
+/*void actor_give_item_50xz_10y(z64_actor_t *actor, z64_global_t *global, char get_item_id)
+{
+   actor_give_item(actor, global, get_item_id, 50.0f, 10.0f);
+}*/
+extern void actor_give_item_50xz_10y(z64_actor_t *actor, z64_global_t *global, s8 get_item_id);
 	#if OOT_DEBUG
 		asm("external_func_8002F554 = 0x8002F554");
 	#elif OOT_U_1_0
@@ -1576,7 +1581,12 @@ extern void external_func_8002F554(z64_actor_t *actor, z64_global_t *global, s8 
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context
  */
-extern void external_func_8002F580(z64_actor_t *actor, z64_global_t *global);
+/*wrapper for actor_give_item_50xz_10y, provides get_item_id*/
+/*void actor_give_item_gid0(z64_actor_t *actor, z64_global_t *global)
+{
+   actor_give_item_50xz_10y(actor, global, 0);
+}*/
+extern void actor_give_item_gid0(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_8002F580 = 0x8002F580");
 	#elif OOT_U_1_0
