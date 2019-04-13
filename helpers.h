@@ -28,6 +28,19 @@ static z64_player_t *helper_get_player(z64_global_t *global) {
 	return (z64_player_t*)p32;
 }
 
+/* Tests if object can be lifted with "grab" action.
+* Give an Item ID of 0
+*/
+static void helper_lift_test(z64_actor_t *a, z64_global_t *gl, float range_xz, float range_y)
+{
+	int temp_v0 = (int)((a->rot_toward_link_y - (helper_get_player(gl)->actor.xz_dir)) << 0x10) >> 0x10;
+	int phi_v1 = (0 - temp_v0);
+	if (temp_v0 >= 0)
+		phi_v1 = temp_v0;
+	if (phi_v1 >= 0x5556)
+		actor_give_item(a, gl, 0, range_xz, range_y);
+}
+
  /*static void add_dlist_to_gfx_buffer(z64_global_t *global, z64_disp_buf_t *buffer, uint32_t dlist)
  {
    uint32_t mtx = matrix_alloc(&global->common.gfx_ctxt, 0, 0);  //Allocate Display List Matrix
