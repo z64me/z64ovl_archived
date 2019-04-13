@@ -1550,7 +1550,7 @@ extern int actor_is_held(z64_actor_t *actor);
 extern void actor_give_item(
 	z64_actor_t *actor,
 	z64_global_t *global,
-	u32 get_item_id,
+	u8 get_item_id,
 	float range_xz, float range_y
 );
 	#if OOT_DEBUG
@@ -1564,7 +1564,7 @@ extern void actor_give_item(
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = Get Item Id
  */
-extern void external_func_8002F554(void);
+extern void external_func_8002F554(z64_actor_t *actor, z64_global_t *global, s8 get_item_id);
 	#if OOT_DEBUG
 		asm("external_func_8002F554 = 0x8002F554");
 	#elif OOT_U_1_0

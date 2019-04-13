@@ -185,5 +185,24 @@ struct z64_actor_s
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);
 
+typedef struct
+{
+  z64_actor_t       actor;                    /* 0x0000 */
+  char              unk_00_[0x02F8];          /* 0x013C */
+  uint8_t           action;                   /* 0x0434 */
+  char              unk_01_[0x0237];          /* 0x0435 */
+  uint32_t          state_flags_1;            /* 0x066C */
+  uint32_t          state_flags_2;            /* 0x0670 */
+  char              unk_02_[0x01B4];          /* 0x0674 */
+  float             linear_vel;               /* 0x0828 */
+  char              unk_03_[0x0002];          /* 0x082C */
+  uint16_t          target_yaw;               /* 0x082E */
+  char              unk_04_[0x0003];          /* 0x0830 */
+  int8_t            sword_state;              /* 0x0833 */
+  char              unk_05_[0x0050];          /* 0x0834 */
+  int16_t           drop_y;                   /* 0x0884 */
+  int16_t           drop_distance;            /* 0x0886 */
+                                              /* 0x0888 */
+} z64_player_t;
 
 #endif /* __ZELDA64_ACTOR_H__ */

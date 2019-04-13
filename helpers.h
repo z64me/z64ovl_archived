@@ -12,10 +12,20 @@
  * helper_get_link_actor
  * Returns a pointer to Link's actor
  ***/
-static z64_actor_t *helper_get_link_actor(z64_global_t *global) {
+/*static z64_actor_t *helper_get_link_actor(z64_global_t *global) {
 	uint8_t *g = (uint8_t*) global + 0x1C44;
 	uint32_t p32 = (g[0]<<24)|(g[1]<<16)|(g[2]<<8)|g[3];
 	return (z64_actor_t*)p32;
+}*/
+
+/****
+ * helper_get_player
+ * Returns a pointer to Link's actor
+ ***/
+static z64_player_t *helper_get_player(z64_global_t *global) {
+	uint8_t *g = (uint8_t*) global + 0x1C44;
+	uint32_t p32 = (g[0]<<24)|(g[1]<<16)|(g[2]<<8)|g[3];
+	return (z64_player_t*)p32;
 }
 
  /*static void add_dlist_to_gfx_buffer(z64_global_t *global, z64_disp_buf_t *buffer, uint32_t dlist)
