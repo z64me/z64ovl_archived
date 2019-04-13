@@ -3739,7 +3739,7 @@ extern void external_func_800778AC(void);
  * TODO This function is completely undocumented
  * TODO possibly some kind of random number function...
  */
-extern void external_func_8007797C(int *unk0, const int unk1, const int unk2);
+extern void external_func_8007797C(s16 *unk0, const int unk1, const int unk2);
 	#if OOT_DEBUG
 		asm("external_func_8007797C = 0x8007797C");
 	#elif OOT_U_1_0
@@ -4924,7 +4924,7 @@ extern int object_get_index(u32 global_plus_0x117A4, u16 object_id);
  * Test if object file dependency is loaded (returns 1 on true 0 on false)
  * TODO Need argument mappings...
  */
-extern int object_is_loaded(u16 global_plus_0x117A4, u16 object_id);
+extern int object_is_loaded(u32 global_plus_0x117A4, char object_idx);
 	#if OOT_DEBUG
 		asm("object_is_loaded = 0x80098188");
 	#elif OOT_U_1_0
