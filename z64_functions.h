@@ -2402,6 +2402,7 @@ extern void external_func_8003C940(void);
 /**
  * raycast
  * returns a Y location of where to place actor on success, otherwise RAYCAST_FAIL (-32000.0f)
+ * use RAYCAST_SUCCESS(result) to validate whether successful
  * TODO confirm return type, do something about global_plus_0x7C0, figure out unk[0,1]
  */
 extern float math_raycast(u32 global_plus_0x7C0, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
@@ -2412,6 +2413,7 @@ extern float math_raycast(u32 global_plus_0x7C0, void *unk0, void *unk1, z64_act
 		#define RAYCAST_FAIL -32000.0f
 		asm("math_raycast = 0x8002F4B8");
 	#endif
+	#define RAYCAST_SUCCESS(RAYCAST_RESULT) ( RAYCAST_RESULT > RAYCAST_FAIL )
 
 /**
  * TODO This function is completely undocumented
