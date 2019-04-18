@@ -17,6 +17,6 @@
 #define LINK              "TODO"
 #define NAVI              "TODO"
 #define ZTARGETPOINTER    "TODO"*/
-#define GLOBAL_IS_NIGHT   0x8011A5E0‬ // u32, 0 if day, 1 if night
+#define GLOBAL_IS_NIGHT   0x8011A5E0 // u32, 0 if day, 1 if night
 
 #endif
