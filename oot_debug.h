@@ -17,5 +17,6 @@
 #define LINK              0x802245B0
 #define NAVI              0x8022CBE0
 #define ZTARGETPOINTER    0x80213CEC
+#define GLOBAL_IS_NIGHT   0x8015E670 // u32, 0 if day, 1 if night
 
 #endif
