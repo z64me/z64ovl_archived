@@ -193,7 +193,11 @@ typedef struct
   char              unk_01_[0x0237];          /* 0x0435 */
   uint32_t          state_flags_1;            /* 0x066C */
   uint32_t          state_flags_2;            /* 0x0670 */
-  char              unk_02_[0x01B4];          /* 0x0674 */
+  uint32_t          unk_02_1;                 /* 0x0674 */
+  uint32_t          unk_02_2                  /* 0x0678 */
+  uint32_t          unk_02_3                  /* 0x067C */
+  uint32_t          reflection_flag           /* 0x0680 */
+  char              unk_02_4[0x01A8]          /* 0x0684 */
   float             linear_vel;               /* 0x0828 */
   char              unk_03_[0x0002];          /* 0x082C */
   uint16_t          target_yaw;               /* 0x082E */
