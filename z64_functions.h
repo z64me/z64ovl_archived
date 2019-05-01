@@ -1802,7 +1802,7 @@ extern void actor_set_draw_distance(z64_global_t *global, z64_actor_t *actor, vo
  * TODO a0 = global context + 0x1C24, do we really pass it in this way?
  * A0 = Global Context + 0x1C24 | A1 = Global Context | A2 = s16 Actor Id | A3 = float x | SP+0x10 = float y | SP+0x14 = float z | SP+0x18 = rotx | SP+0x1C = roty | SP+0x20 = rotz | SP+0x24 = s16 var | V0 = Pointer to new actor, or null
  */
-extern void actor_spawn(u32 a0/*gl_ctx+0x1C24*/, z64_global_t *global, s16 actor_id, f32 x, f32 y, f32 z, s16 rot_x, s16 rot_y, s16 rot_z, u16 variable);
+extern void actor_spawn(void *actor_context/*gl_ctx+0x1C24*/, z64_global_t *global, s16 actor_id, f32 x, f32 y, f32 z, s16 rot_x, s16 rot_y, s16 rot_z, u16 variable);
 	#if OOT_DEBUG
 		asm("actor_spawn = 0x80031F50");
 	#elif OOT_U_1_0
@@ -1928,7 +1928,7 @@ extern int external_func_80033684(z64_global_t *global, z64_actor_t *actor);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80033748(void);
+extern void external_func_80033748(z64_global_t *gl, char *actor_ctxt, z64_actor_t *a, u32 arg_unalignedF);
 	#if OOT_DEBUG
 		asm("external_func_80033748 = 0x80033748");
 	#elif OOT_U_1_0
@@ -2532,7 +2532,7 @@ extern void external_func_8003E30C(void);
  * TODO Actor Index and entity have different meanings; this documentation is conflicting
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id
  */
-extern u32 actor_register_dynapoly(z64_global_t *global, u32 global_plus_0x810, z64_actor_t *actor, u32 dynacollision);
+extern u32 actor_register_dynapoly(z64_global_t *global, void *global_plus_0x810, z64_actor_t *actor, u32 dynacollision);
 	#if OOT_DEBUG
 		asm("actor_register_dynapoly = 0x8003EA74");
 	#elif OOT_U_1_0
@@ -2586,7 +2586,7 @@ extern void external_func_8003ECA8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id
  */
-extern void dynapoly_free(z64_global_t *global, u32 global_plus_0x810, u32 *dynacollision_id);
+extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, u32 *dynacollision_id);
 	#if OOT_DEBUG
 		asm("dynapoly_free = 0x8003ED58");
 	#elif OOT_U_1_0
@@ -3953,7 +3953,7 @@ extern void external_func_80078310(void);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance + xxxx (offset of the float that will change) | a1 - float where you want a0 to be aproximated to | a2 - float (amount?)a3 - float (smaller than a2)
  */
-extern void external_func_8007841C(void);
+extern void external_func_8007841C(float *arg0, s32 arg1, f32 arg2, f32 arg3);
 	#if OOT_DEBUG
 		asm("external_func_8007841C = 0x8007841C");
 	#elif OOT_U_1_0

@@ -626,7 +626,9 @@ typedef struct
   int16_t           entrance_index;           /* 0x11E1A */
   char              unk_24_[0x0042];          /* 0x11E1C */
   uint8_t           fadeout_transition;       /* 0x11E5E */
-  char              unk_25_[0x06B9];          /* 0x11E5F */
+  char              unk_25_;          				/* 0x11E5F */
+	uint32_t          sbc_group_at_1;           /* 0x11E60 */ /*TODO: Document Struct */
+	char              unk_26_[0x06B4];          /* 0x11E64 */
                                               /* 0x12518 */
 } z64_global_t;
 
@@ -785,8 +787,8 @@ typedef struct z64_capsule_s {
  *** However, our Kibako rewrite suggests that & 0x0002 is for detecting any attack from
  *** Link. Sword swing, Deku Stick swing, ammo, etc.
 */
-/*10*/	u16 cso_0x01; //if & 0x0002, is detecting a Deku Nut hit?
-
+/*10*/	u8 cso_0x01; //if & 0x0002, is detecting a Deku Nut hit?
+/*11*/  u8 cso_0x01_02;
 
 /*12*/	u16 unk_0x12; //bitwise-and compared to opposing collision's 0x13 and 0x12 bytes
 /*14*/	u8
