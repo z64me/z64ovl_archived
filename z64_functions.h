@@ -3953,7 +3953,7 @@ extern void external_func_80078310(void);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance + xxxx (offset of the float that will change) | a1 - float where you want a0 to be aproximated to | a2 - float (amount?)a3 - float (smaller than a2)
  */
-extern void external_func_8007841C(float *arg0, s32 arg1, f32 arg2, f32 arg3);
+extern void external_func_8007841C(float *arg0, f32 arg1, f32 arg2, f32 arg3);
 	#if OOT_DEBUG
 		asm("external_func_8007841C = 0x8007841C");
 	#elif OOT_U_1_0
