@@ -1,9 +1,6 @@
 #ifndef __ZELDA64_ACTOR_MM_H__
 #define __ZELDA64_ACTOR_MM_H__
 
-#include <stdint.h>
-#include <mips.h>
-
 typedef enum {
   Switch = 0x00,
   Bg = 0x01,
@@ -32,66 +29,6 @@ typedef struct z64_actor_init_s{
   void *main; /* Main Update Function */
   void *draw; /* Draw Function */
 } z64_actor_init_t;
-
-/* Legacy Macros */
-/* Get a value of arbitrary type from any address in the actor */
-#define AVAL(base,type,offset)  (*(type*)((u8*)(base)+(offset)))
-
-/* Get the address */
-#define AADDR(a,o)  ((void*)((u8*)(a)+(o)))
-
-// Borrowed from OoT gz
-typedef struct
-{
-  int16_t           x;                        /* 0x0000 */
-  int16_t           y;                        /* 0x0002 */
-  int16_t           z;                        /* 0x0004 */
-                                              /* 0x0006 */
-} z64_xyz_t, vec3s_t, z64_point_t;
-
-typedef struct
-{
-  float             x;                        /* 0x0000 */
-  float             y;                        /* 0x0004 */
-  float             z;                        /* 0x0008 */
-                                              /* 0x000C */
-} z64_xyzf_t, vec3f_t;
-
-typedef uint16_t z64_angle_t;
-typedef struct
-{
-  z64_angle_t       x;                        /* 0x0000 */
-  z64_angle_t       y;                        /* 0x0002 */
-  z64_angle_t       z;                        /* 0x0004 */
-                                              /* 0x0006 */
-} z64_rot_t;
-
-typedef struct
-{
-  /* index of z64_col_type in col_hdr */
-  uint16_t          type;                     /* 0x0000 */
-  /* vertex indices, a and b are bitmasked for some reason */
-  struct
-  {
-    uint16_t        unk_00_             : 3;
-    uint16_t        va                  : 13;
-  };                                          /* 0x0002 */
-  struct
-  {
-    uint16_t        unk_01_             : 3;
-    uint16_t        vb                  : 13;
-  };                                          /* 0x0004 */
-  uint16_t          vc;                       /* 0x0006 */
-  /* normal vector */
-  z64_xyz_t         norm;                     /* 0x0008 */
-  /* plane distance from origin */
-  int16_t           dist;                     /* 0x000E */
-                                              /* 0x0010 */
-} z64_col_poly_t;
-
-/* ----------------------------------------------
-   Data types & structures
-   ---------------------------------------------- */
 
 typedef struct
 {
@@ -166,6 +103,4 @@ struct z64_actor_s
                                               /* 0x0144 */
 };
 
-typedef void (z64_actorfunc_t)(void *entity, void *global);
-
-#endif /* __ZELDA64_ACTOR_H__ */
+#endif /* __ZELDA64_ACTOR_MM_H__ */
