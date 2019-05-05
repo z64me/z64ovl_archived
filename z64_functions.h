@@ -414,11 +414,11 @@ extern void external_func_80028CEC(void);
  * Spawn Particle 0x03
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80028E84(void);
+extern void effect_spawn_bomb2(void);
 	#if OOT_DEBUG
-		asm("external_func_80028E84 = 0x80028E84");
+		asm("effect_spawn_bomb2 = 0x80028E84");
 	#elif OOT_U_1_0
-		asm("external_func_80028E84 = 0x8001C97C");
+		asm("effect_spawn_bomb2 = 0x8001C97C");
 	#endif
 
 /**
@@ -448,80 +448,80 @@ extern void external_func_80029024(void);
  * TODO These notes need converted into a C function prototype
  * Bomb Spark
  */
-extern void external_func_80029184(void);
+extern void effect_spawn_spark(void);
 	#if OOT_DEBUG
-		asm("external_func_80029184 = 0x80029184");
+		asm("effect_spawn_spark = 0x80029184");
 	#elif OOT_U_1_0
-		asm("external_func_80029184 = 0x8001CC7C");
+		asm("effect_spawn_spark = 0x8001CC7C");
 	#endif
 
 /**
  * Spawn Particle 0x06 (Wrapper for 8001CE18)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_800293A0(void);
+extern void effect_spawn_fire_breath(void);
 	#if OOT_DEBUG
-		asm("external_func_800293A0 = 0x800293A0");
+		asm("effect_spawn_fire_breath = 0x800293A0");
 	#elif OOT_U_1_0
-		asm("external_func_800293A0 = 0x8001CE98");
+		asm("effect_spawn_fire_breath = 0x8001CE98");
 	#endif
 
 /**
  * Spawn Particle 0x07
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_800293E4(void);
+extern void effect_spawn_water_bubble(void);
 	#if OOT_DEBUG
-		asm("external_func_800293E4 = 0x800293E4");
+		asm("effect_spawn_water_bubble = 0x800293E4");
 	#elif OOT_U_1_0
-		asm("external_func_800293E4 = 0x8001CEDC");
+		asm("effect_spawn_water_bubble = 0x8001CEDC");
 	#endif
 
 /**
  * Spawn Particle 0x09
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029444(void);
+extern void effect_spawn_water_ripple(void);
 	#if OOT_DEBUG
-		asm("external_func_80029444 = 0x80029444");
+		asm("effect_spawn_water_ripple = 0x80029444");
 	#elif OOT_U_1_0
-		asm("external_func_80029444 = 0x8001CF3C");
+		asm("effect_spawn_water_ripple = 0x8001CF3C");
 	#endif
 
 /**
  * Spawn Particle 0x0A
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002949C(
+extern void effect_spawn_water_splash(
 	z64_global_t *global, vec3f_t *pos,
 	int unk0, int unk1, int unk2, int unk3
 );
 	#if OOT_DEBUG
-		asm("external_func_8002949C = 0x8002949C");
+		asm("effect_spawn_water_splash = 0x8002949C");
 	#elif OOT_U_1_0
-		asm("external_func_8002949C = 0x8001CF94");
+		asm("effect_spawn_water_splash = 0x8001CF94");
 	#endif
 
 /**
  * Spawn Particle 0x0B
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029530(void);
+extern void effect_spawn_magma(void);
 	#if OOT_DEBUG
-		asm("external_func_80029530 = 0x80029530");
+		asm("effect_spawn_magma = 0x80029530");
 	#elif OOT_U_1_0
-		asm("external_func_80029530 = 0x8001D028");
+		asm("effect_spawn_magma = 0x8001D028");
 	#endif
 
 /**
  * Spawn Particle 0x0D
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_800295A0(void);
+extern void effect_spawn_lightning(void);
 	#if OOT_DEBUG
-		asm("external_func_800295A0 = 0x800295A0");
+		asm("effect_spawn_lightning = 0x800295A0");
 	#elif OOT_U_1_0
-		asm("external_func_800295A0 = 0x8001D098");
+		asm("effect_spawn_lightning = 0x8001D098");
 	#endif
 
 /**
@@ -573,33 +573,33 @@ extern void external_func_800297A4(void);
  * Spawn Particle 0x11 (Wrapper for 8001D438)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_800299AC(void);
+extern void effect_spawn_splash(void);
 	#if OOT_DEBUG
-		asm("external_func_800299AC = 0x800299AC");
+		asm("effect_spawn_splash = 0x800299AC");
 	#elif OOT_U_1_0
-		asm("external_func_800299AC = 0x8001D4A8");
+		asm("effect_spawn_splash = 0x8001D4A8");
 	#endif
 
 /**
  * Spawn Particle 0x13
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029B90(void);
+extern void effect_spawn_magma2(void);
 	#if OOT_DEBUG
-		asm("external_func_80029B90 = 0x80029B90");
+		asm("effect_spawn_magma2 = 0x80029B90");
 	#elif OOT_U_1_0
-		asm("external_func_80029B90 = 0x8001D68C");
+		asm("effect_spawn_magma2 = 0x8001D68C");
 	#endif
 
 /**
  * Spawn Particle 0x14
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029C00(void);
+extern void effect_spawn_stone1(void);
 	#if OOT_DEBUG
-		asm("external_func_80029C00 = 0x80029C00");
+		asm("effect_spawn_stone1 = 0x80029C00");
 	#elif OOT_U_1_0
-		asm("external_func_80029C00 = 0x8001D6FC");
+		asm("effect_spawn_stone1 = 0x8001D6FC");
 	#endif
 
 /**
@@ -650,11 +650,11 @@ extern void external_func_80029D5C(void);
  * Spawn Particle 0x17
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029DBC(void);
+extern void effect_spawn_k_fire(void);
 	#if OOT_DEBUG
-		asm("external_func_80029DBC = 0x80029DBC");
+		asm("effect_spawn_k_fire = 0x80029DBC");
 	#elif OOT_U_1_0
-		asm("external_func_80029DBC = 0x8001D8C8");
+		asm("effect_spawn_k_fire = 0x8001D8C8");
 	#endif
 
 /**
@@ -668,22 +668,46 @@ extern void external_func_80029E24(void);
 	#endif
 
 /**
- * Spawn Particle 0x19
- * TODO These notes need converted into a C function prototype
+ * Spawn Particle 0x19 (ovl_Effect_Ss_Kakera)
+*************
+Argument Notes
+* gl = Global Context
+* burst_depth_y = The range of the particle fragments along the explosion's y axis (up and down)
+* burst_depth_x = The range of the particle fragments along the explosion's x axis (left and right)
+* gravity_influence = The influence of gravity on the explosion's particle fragments
+* ? - Set to 0x20, 0x40 or 0x60
+* rotation_speed = The number of frames for a particle fragment to complete a full rotation
+* burst_velocity = The outward force of the explosion
+* ? - Set to 0
+* scale = The scale of each particle fragment
+* ? - Set to 0
+* jitter = The aggression that which particle fragments shake with
+* duration = The number of frames for a particle fragment to be drawn.
+* ? - Set to -1
+* object_number = The number of the object containing the particle fragment display list
+* display_list = The display list of the particle fragment
+**************
  */
-extern void external_func_80029E8C(
+extern void effect_spawn_fragment(
 	z64_global_t *global,
-	vec3f_t *unkv0, vec3f_t *unkv1, vec3f_t *unkv2,
-	s16 unk_0, s16 unk_1, s16 unk_2, s16 unk_3, s16 unk_4,
-	s16 scale, // TODO possibly not scale
-	s16 unk_5, s16 unk_6, s32 unk_7, s16 unk_8,
+	vec3f_t *burst_depth_y, vec3f_t *burst_depth_x, vec3f_t *burst_origin,
+	s16 gravity_influence,
+	s16 u0,
+	s16 rotation_speed,
+	s16 burst_velocity,
+	u8 u1,
+	s16 scale,
+	u8 u2,
+	s16 jitter,
+	s32 duration,
+	s16 u3,
 	s16 objno,
 	u32 dlist
 	);
 	#if OOT_DEBUG
-		asm("external_func_80029E8C = 0x80029E8C");
+		asm("effect_spawn_fragment = 0x80029E8C");
 	#elif OOT_U_1_0
-		asm("external_func_80029E8C = 0x8001D998");
+		asm("effect_spawn_fragment = 0x8001D998");
 	#endif
 
 /**
@@ -723,22 +747,22 @@ extern void external_func_8002A2A4(void);
  * Spawn Particle 0x1C (Wrapper for 8001DE40)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A3C4(void);
+extern void effect_spawn_fire_tail(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A3C4 = 0x8002A3C4");
+		asm("effect_spawn_fire_tail = 0x8002A3C4");
 	#elif OOT_U_1_0
-		asm("external_func_8002A3C4 = 0x8001DED8");
+		asm("effect_spawn_fire_tail = 0x8001DED8");
 	#endif
 
 /**
  * Spawn Particle 0x1D
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A4D4(void);
+extern void effect_spawn_en_fire(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A4D4 = 0x8002A4D4");
+		asm("effect_spawn_en_fire = 0x8002A4D4");
 	#elif OOT_U_1_0
-		asm("external_func_8002A4D4 = 0x8001DFEC");
+		asm("effect_spawn_en_fire = 0x8001DFEC");
 	#endif
 
 /**
@@ -755,77 +779,77 @@ extern void external_func_8002A54C(void);
  * Spawn Particle 0x1E
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A5F4(void);
+extern void effect_spawn_extra(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A5F4 = 0x8002A5F4");
+		asm("effect_spawn_extra = 0x8002A5F4");
 	#elif OOT_U_1_0
-		asm("external_func_8002A5F4 = 0x8001E110");
+		asm("effect_spawn_extra = 0x8001E110");
 	#endif
 
 /**
  * Spawn Particle 0x1F
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A65C(void);
+extern void effect_spawn_fcircle(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A65C = 0x8002A65C");
+		asm("effect_spawn_fcircle = 0x8002A65C");
 	#elif OOT_U_1_0
-		asm("external_func_8002A65C = 0x8001E178");
+		asm("effect_spawn_fcircle = 0x8001E178");
 	#endif
 
 /**
  * Spawn Particle 0x20
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A6B8(void);
+extern void effect_spawn_dead_dekubaba(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A6B8 = 0x8002A6B8");
+		asm("effect_spawn_dead_dekubaba = 0x8002A6B8");
 	#elif OOT_U_1_0
-		asm("external_func_8002A6B8 = 0x8001E1D4");
+		asm("effect_spawn_dead_dekubaba = 0x8001E1D4");
 	#endif
 
 /**
  * Spawn Particle 0x21
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A770(void);
+extern void effect_spawn_dead_dodongo(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A770 = 0x8002A770");
+		asm("effect_spawn_dead_dodongo = 0x8002A770");
 	#elif OOT_U_1_0
-		asm("external_func_8002A770 = 0x8001E28C");
+		asm("effect_spawn_dead_dodongo = 0x8001E28C");
 	#endif
 
 /**
  * Spawn Particle 0x22 (Wrapper for 8001E3B0)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A90C(void);
+extern void effect_spawn_dead_deku_scrub(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A90C = 0x8002A90C");
+		asm("effect_spawn_dead_deku_scrub = 0x8002A90C");
 	#elif OOT_U_1_0
-		asm("external_func_8002A90C = 0x8001E428");
+		asm("effect_spawn_dead_deku_scrub = 0x8001E428");
 	#endif
 
 /**
  * Spawn Particle 0x23 (Wrapper for 8001E478)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A9F4(void);
+extern void effect_spawn_dead_sound(void);
 	#if OOT_DEBUG
-		asm("external_func_8002A9F4 = 0x8002A9F4");
+		asm("effect_spawn_dead_sound = 0x8002A9F4");
 	#elif OOT_U_1_0
-		asm("external_func_8002A9F4 = 0x8001E510");
+		asm("effect_spawn_dead_sound = 0x8001E510");
 	#endif
 
 /**
  * Spawn Particle 0x24
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002AA44(void);
+extern void effect_spawn_ice_smoke(void);
 	#if OOT_DEBUG
-		asm("external_func_8002AA44 = 0x8002AA44");
+		asm("effect_spawn_ice_smoke = 0x8002AA44");
 	#elif OOT_U_1_0
-		asm("external_func_8002AA44 = 0x8001E560");
+		asm("effect_spawn_ice_smoke = 0x8001E560");
 	#endif
 
 /**
@@ -1588,9 +1612,9 @@ extern void actor_give_item_50xz_10y(z64_actor_t *actor, z64_global_t *global, s
 }*/
 extern void actor_give_item_gid0(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
-		asm("external_func_8002F580 = 0x8002F580");
+		asm("actor_give_item_gid0 = 0x8002F580");
 	#elif OOT_U_1_0
-		asm("external_func_8002F580 = 0x80022D20");
+		asm("actor_give_item_gid0 = 0x80022D20");
 	#endif
 
 /**
@@ -3206,7 +3230,7 @@ extern void external_func_8005D160(void);
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
  */
-extern void actor_collision_check_set_at(z64_global_t *global, u32 a1 /*glbl_ctxt+0x11E60*/, z64_capsule_t *collision);
+extern void actor_collision_check_set_at(z64_global_t *global, u32 *simple_body_groups, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_at = 0x8005D79C");
 	#elif OOT_U_1_0
@@ -3218,7 +3242,7 @@ extern void actor_collision_check_set_at(z64_global_t *global, u32 a1 /*glbl_ctx
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
  */
-extern void actor_collision_check_set_ac(z64_global_t *global, u32 col_body_groups, z64_capsule_t *collision);
+extern void actor_collision_check_set_ac(z64_global_t *global, u32 *simple_body_groups, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ac = 0x8005D9F4");
 	#elif OOT_U_1_0
@@ -3230,7 +3254,7 @@ extern void actor_collision_check_set_ac(z64_global_t *global, u32 col_body_grou
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit? | Called directly by actors
  */
-extern void actor_collision_check_set_ot(z64_global_t *global, u32 col_body_groups, z64_capsule_t *collision);
+extern void actor_collision_check_set_ot(z64_global_t *global, u32 *simple_body_groups, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ot = 0x8005DC4C");
 	#elif OOT_U_1_0

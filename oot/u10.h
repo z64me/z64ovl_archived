@@ -3,9 +3,8 @@
 
 #define OOT_U_1_0 1
 
-#include "mips.h"
-#include "oot_types.h"
-#include "actor_oot.h"
+#include "../h/mips.h"
+#include "types.h"
 #include "z64_functions.h"
 
 // RAM Stuff

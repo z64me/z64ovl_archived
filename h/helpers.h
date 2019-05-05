@@ -41,18 +41,6 @@ static void helper_lift_test(z64_actor_t *a, z64_global_t *gl, float range_xz, f
 		actor_give_item(a, gl, 0, range_xz, range_y);
 }
 
- /*static void add_dlist_to_gfx_buffer(z64_global_t *global, z64_disp_buf_t *buffer, uint32_t dlist)
- {
-   uint32_t mtx = matrix_alloc(&global->common.gfx_ctxt, 0, 0);  //Allocate Display List Matrix
-   uint32_t gfx_array[4] = {                                     //F3DZEX to add to graphics buffer
-     0xDA380003,
-     mtx,
-     0xDE000000,
-     dlist
-   }
-   add_to_gfx_buffer(buffer, gfx_array, 4);                     //Append F3DZEX Data
- }*/
-
  /* Shorthand for referencing Graphics Context display list buffers "Zelda Quick Display List" */
  #define ZQDL(ZQDL_A0, ZQDL_A1) ZQDL_A0->common.gfx_ctxt->ZQDL_A1
 

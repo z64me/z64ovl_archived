@@ -3,10 +3,9 @@
 
 #define OOT_DEBUG 1
 
-#include "mips.h"
-#include "oot_types.h"
-#include "actor_oot.h"
-#include "z64_functions.h"
+#include "../h/mips.h"
+#include "types.h"
+#include "../z64_functions.h"
 
 // RAM Stuff
 #define GLOBAL_IS_NIGHT   0x8015E670 // u32, 0 if day, 1 if night
