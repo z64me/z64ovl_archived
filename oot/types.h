@@ -669,20 +669,31 @@ typedef struct {
 
 // Actor Collision
 typedef struct z64_capsule_init_s {
-  /* 0x00 */ uint32_t unk1;
-  /* 0x04 */ uint32_t unk2;
-  /* 0x08 */ uint32_t unk3;
-  /* 0x0C */ uint32_t unk4;
+  /* 0x00 */ uint8_t cso_0x00;
+  /* 0x01 */ uint8_t cso_0x01;
+  /* 0x02 */ uint8_t cso_0x01_02;
+  /* 0x03 */ uint8_t unk_0x12;
+  /* 0x04 */ uint8_t unk_0x12_2;
+  /* 0x05 */ uint8_t cso_0x05;
+  /* 0x06 */ PADDING(0x0002);
+  /* 0x08 */ uint8_t cso_0x08;
+  /* 0x09 */ PADDING(0x0003);
+  /* 0x0C */ uint32_t cso_0x0C;
   /* 0x10 */ uint8_t damage_type;
   /* 0x11 */ uint8_t damage_amount;
-  /* 0x12 */ uint16_t unk5;
-  /* 0x14 */ uint32_t unk6;
-  /* 0x18 */ uint32_t unk7;
-  /* 0x1C */ uint32_t unk8;
+  /* 0x12 */ PADDING(0x0002);
+  /* 0x14 */ uint32_t cso_0x14;
+  /* 0x18 */ uint8_t cso_0x18;
+  /* 0x19 */ uint8_t cso_0x19;
+  /* 0x1A */ PADDING(0x0002);
+  /* 0x1C */ uint8_t cso_0x1C;
+  /* 0x1D */ uint8_t cso_0x1D;
+  /* 0x1E */ uint8_t cso_0x1E;
+  /* 0x1F */ PADDING(0x0001);
   /* 0x20 */ uint16_t radius;
   /* 0x22 */ uint16_t height;
-  /* 0x24 */ uint32_t unk9;
-  /* 0x28 */ uint32_t unk10;
+  /* 0x24 */ uint16_t cso_0x24;
+  /* 0x26 */ vec3s_t pos;
   /* 0x2C */
 } z64_capsule_init_t;
 
@@ -782,7 +793,8 @@ typedef struct z64_capsule_s {
 /*10*/	u8 cso_0x01; //if & 0x0002, is detecting a Deku Nut hit?
 /*11*/  u8 cso_0x01_02;
 
-/*12*/	u16 unk_0x12; //bitwise-and compared to opposing collision's 0x13 and 0x12 bytes
+/*12*/	u8 unk_0x12; //bitwise-and compared to opposing collision's 0x13 and 0x12 bytes
+/*13*/  u8 unk_0x12_2;
 /*14*/	u8
 		cso_0x00,
 		cso_0x05, //used to reference function pointer, start location at 800EFB4C.
@@ -845,5 +857,14 @@ enum dynapoly_move_flag {
 	DPM_PLAYER = 0b01,
  	DPM_ENEMY = 0b10
 };
+
+#define DAMAGE_HEARTS(HA0) (int)((HA0) * 16)
+
+enum damage_effect {
+  KNOCKBACK = 0x00,
+  FIRE = 0x01,
+  ICE = 0x02,
+  ELECTRIC = 0x03
+}
 
 #endif
