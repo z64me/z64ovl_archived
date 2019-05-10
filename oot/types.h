@@ -865,6 +865,6 @@ enum damage_effect {
   FIRE = 0x01,
   ICE = 0x02,
   ELECTRIC = 0x03
-}
+};
 
 #endif
