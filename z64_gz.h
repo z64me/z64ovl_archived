@@ -1,7 +1,7 @@
 #ifndef Z64_H
 #define Z64_H
-#include <stdint.h>
-#include <n64.h>
+#include "stdint.h"
+#include "h/n64.h"
 
 #ifndef Z64_VERSION
 #error no z64 version specified
