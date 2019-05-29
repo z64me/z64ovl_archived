@@ -1,7 +1,7 @@
 #ifndef N64_MESSAGE_H
 #define N64_MESSAGE_H
 
-#include <stdint.h>
+#include "../stdint.h"
 #include "thread.h"
 
 #define OS_NUM_EVENTS             15
