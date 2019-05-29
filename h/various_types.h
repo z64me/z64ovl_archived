@@ -1,7 +1,6 @@
 #ifndef __VARIOUS_TYPES_H__
 #define __VARIOUS_TYPES_H__
 
-#include <stdint.h>
 #include "mips.h"
 #include "n64.h"
 
@@ -70,6 +69,11 @@ typedef struct
   float             z;                        /* 0x0008 */
                                               /* 0x000C */
 } z64_xyzf_t, vec3f_t;
+
+typedef struct
+{
+	float r, g, b, a;
+} rgbaf_t;
 
 typedef uint16_t z64_angle_t;
 typedef struct
