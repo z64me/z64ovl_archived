@@ -8,8 +8,7 @@
 #ifndef N64_GBI_H
 #define N64_GBI_H
 
-#include <string.h>
-#include <stdint.h>
+#include "../stdint.h"
 
 /* f3dex2 commands */
 #define G_NOOP                        0x00
