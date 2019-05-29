@@ -1,7 +1,7 @@
 #ifndef N64_PI_H
 #define N64_PI_H
 
-#include <stdint.h>
+#include "../stdint.h"
 
 #define PI_STATUS_DMA_BUSY        0x01
 #define PI_STATUS_IO_BUSY         0x02
