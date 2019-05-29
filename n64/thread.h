@@ -1,7 +1,7 @@
 #ifndef N64_THREAD_H
 #define N64_THREAD_H
 
-#include <stdint.h>
+#include "../stdint.h"
 
 #define OS_STATE_STOPPED          1
 #define OS_STATE_RUNNABLE         2
