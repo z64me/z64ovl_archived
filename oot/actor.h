@@ -42,13 +42,14 @@ struct z64_actor_s
   char              unk_01_[0x0002];          /* 0x001A */
   uint16_t          variable;                 /* 0x001C */
   uint8_t           alloc_index;              /* 0x001E */
-  char              unk_02_;                  /* 0x001F */
+  char              unk1F;                    /* 0x001F */
   uint16_t          sound_effect;             /* 0x0020 */
   char              unk_03_[0x0002];          /* 0x0022 */
   vec3f_t           pos_2;                    /* 0x0024 */
-  char              unk_04_[0x0002];          /* 0x0030 */
-  uint16_t          xz_dir;                   /* 0x0032 */
-  char              unk_05_[0x0004];          /* 0x0034 */
+  int16_t           unk30;                    /* 0x0030 */ // possibly rot_0...
+  int16_t           xz_dir;                   /* 0x0032 */
+  int16_t           unk34;                    /* 0x0034 */
+  uint16_t          unk36;                    /* 0x0036 */
   vec3f_t           pos_3;                    /* 0x0038 */
   z64_rot_t         rot_1;                    /* 0x0044 */
   char              unk_06_[0x0002];          /* 0x004A */
