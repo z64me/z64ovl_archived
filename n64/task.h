@@ -1,7 +1,7 @@
 #ifndef N64_TASK_H
 #define N64_TASK_H
 
-#include <stdint.h>
+#include "../stdint.h"
 #include "message.h"
 
 typedef struct
