@@ -5,7 +5,7 @@
 #define __MIPS_H__
 
 #ifdef __LANGUAGE_C__
-#include <stdint.h>
+#include "../stdint.h"
 typedef uint8_t  u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
@@ -806,4 +806,3 @@ enum
 #endif /* __LANGUAGE_C__ */
 
 #endif /* __MIPS_H__ */
-
