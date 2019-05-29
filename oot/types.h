@@ -1,7 +1,7 @@
 #ifndef __Z64OVL_OOT_TYPES_H__
 #define __Z64OVL_OOT_TYPES_H__
 
-#include <stdint.h>
+#include "../stdint.h"
 #include "../h/mips.h"
 #include "../h/n64.h"
 #include "../h/various_types.h"
@@ -611,7 +611,7 @@ typedef struct
   void             *scene_exit_list;          /* 0x11E04 */
   char              unk_21_[0x0004];          /* 0x11E08 */
   void             *elf_message;              /* 0x11E0C */
-  char              unk_22_[0x0004];          /* 0x11E10 */
+  uint32_t          situdata;                 /* 0x11E10 */ // situational userdata, only known use so far is Arwing
   uint8_t           skybox_type;              /* 0x11E14 */
   int8_t            scene_load_flag;          /* 0x11E15 */
   char              unk_23_[0x0004];          /* 0x11E16 */
@@ -834,7 +834,7 @@ typedef struct z64_capsule_s {
 		y,
 		z
 	;
-} z64_capsule_t; // length 0x5C bytes
+} z64_capsule_t; // length 0x4C bytes
 
 typedef struct z64_dynapoly {
     u8 unk_0[16];
