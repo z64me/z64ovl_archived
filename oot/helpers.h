@@ -9,6 +9,16 @@
 
 
 /****
+ * helper_get_save_context
+ * Returns a pointer to Save Context
+ ***/
+static void *helper_get_save_context(z64_global_t *global)
+{
+	return (void*)AADDR(SAVE_CONTEXT,0);
+}
+
+
+/****
  * helper_get_link_actor
  * Returns a pointer to Link's actor
  ***/
@@ -57,9 +67,9 @@ static void helper_lift_test(z64_actor_t *a, z64_global_t *gl, float range_xz, f
  * * actor_skelanime_draw_mtx(x, x, x, x, x, &helper_limb_focus, x);
  ***/
 #define HELPER_INCLUDE_helper_limb_focus( TARGET_LIMB, IN_VEC3_X, IN_VEC3_Y, IN_VEC3_Z )\
-static void helper_limb_focus(z64_global_t *global, uint8_t current_limb, uint32_t limb_dlist, vec3s_t *limb_rot, z64_actor_t *actor)\
+static void helper_limb_focus(z64_global_t *global, uint8_t limb, uint32_t dlist, vec3s_t *rot, z64_actor_t *actor)\
 {\
-	if (current_limb == TARGET_LIMB)\
+	if (limb == TARGET_LIMB)\
 	{\
 		vec3f_t in = { IN_VEC3_X, IN_VEC3_Y, IN_VEC3_Z };\
 		external_func_800D1AF4(&in, &actor->pos_3);\
