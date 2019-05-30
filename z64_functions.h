@@ -1464,7 +1464,7 @@ extern void external_func_8002EF14(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F194(void);
+extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_8002F194 = 0x8002F194");
 	#elif OOT_U_1_0
@@ -1489,7 +1489,7 @@ extern void actor_npc_trade_request(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = float distance? | A3 = Trade Item Index
  */
-extern void external_func_8002F298(void);
+extern void external_func_8002F298(z64_actor_t *actor, z64_global_t *global, float distance, u8 item_index);
 	#if OOT_DEBUG
 		asm("external_func_8002F298 = 0x8002F298");
 	#elif OOT_U_1_0
@@ -1537,7 +1537,7 @@ extern void external_func_8002F334(void);
  * TODO Look into this a bit more, return type
  * Returns Link Instance + 0x0683
  */
-extern int actor_npc_trade_get(void);
+extern int actor_npc_trade_get(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("actor_npc_trade_get = 0x8002F368");
 	#elif OOT_U_1_0
@@ -1547,7 +1547,7 @@ extern int actor_npc_trade_get(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F374(void);
+extern void external_func_8002F374(z64_global_t *global, z64_actor_t *actor, int16_t *unk0, int16_t *unk1);
 	#if OOT_DEBUG
 		asm("external_func_8002F374 = 0x8002F374");
 	#elif OOT_U_1_0
@@ -1559,7 +1559,7 @@ extern void external_func_8002F374(void);
  * TODO Question marks: let's get to the bottom of this. Also, return type.
  * A0 = Actor Instance | V0 = 0 if Instance + 0x118 is null, else 1
  */
-extern int actor_is_held(z64_actor_t *actor);
+extern int actor_is_held(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("actor_is_held = 0x8002F410");
 	#elif OOT_U_1_0
@@ -3487,7 +3487,7 @@ extern void external_func_8006C318(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8006C360(void);
+extern uint16_t external_func_8006C360(z64_global_t *global, int unk1);
 	#if OOT_DEBUG
 		asm("external_func_8006C360 = 0x8006C360");
 	#elif OOT_U_1_0
@@ -4998,7 +4998,7 @@ extern void skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, u8 lim
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
  */
-extern void skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
+extern void skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *callback0, void *callback1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
@@ -6162,7 +6162,7 @@ extern u32 matrix_alloc(z64_gfx_t *gfx_ctx, const char *string, int line);
  * Multiply Float Matrix Stack's top matrix by float Vector3
  * A0 = ptr to Vector3 | A1 = ptr to result
  */
-extern void external_func_800D1AF4(vec3f_t *in, void *out);
+extern void external_func_800D1AF4(vec3f_t *in, vec3f_t *out);
 	#if OOT_DEBUG
 		asm("external_func_800D1AF4 = 0x800D1AF4");
 	#elif OOT_U_1_0
@@ -6886,7 +6886,7 @@ extern void external_func_80106AA8(void);
  * TODO These notes need converted into a C function prototype
  * V0 = result?
  */
-extern void external_func_80106BC8(void);
+extern int external_func_80106BC8(void *arg1);
 	#if OOT_DEBUG
 		asm("external_func_80106BC8 = 0x80106BC8");
 	#elif OOT_U_1_0
@@ -6920,7 +6920,7 @@ extern void external_func_8010B680(void);
  * TODO These notes need converted into a C function prototype
  * a1 = Response Text ID
  */
-extern void external_func_8010B720(void);
+extern void external_func_8010B720(z64_global_t *global, uint16_t text_id);
 	#if OOT_DEBUG
 		asm("external_func_8010B720 = 0x8010B720");
 	#elif OOT_U_1_0
@@ -6956,7 +6956,7 @@ extern void external_func_8010BD88(void);
  * TODO These notes need converted into a C function prototype
  * A0 = global context + 0x20D8 (VIEW struct ptr)
  */
-extern u32 player_talk_state(z64_global_t *global);
+extern u32 player_talk_state(z64_global_t *gl_20D8);
 	#if OOT_DEBUG
 		asm("player_talk_state = 0x8010BDBC");
 	#elif OOT_U_1_0
