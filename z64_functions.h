@@ -2029,12 +2029,12 @@ extern void external_func_80033AEC(void);
 
 /**
  * Draw circular shadow at actor coordinates
- * xyz = pointer to an actor's internal position array (actor + 0x24)
- * scale[3] = scale along three axes
+ * pos = pointer to an actor's internal position (actor + 0x24) (ex. &en->actor.pos_2)
+ * scale = pointer to scale vector (ex. vec3f_t s={1,1,1}; pass &s in as this argument)
  * alpha = opacity of the shadow
  * a0 actor pointer + 0x24 (position array) | a1  scale, 12 byte array | a2 0x00FF | a3 global context
  */
-extern void actor_shadow_circle(void *xyz, f32 scale[3], u8 alpha, z64_global_t *global);
+extern void actor_shadow_circle(vec3f_t *pos, vec3f_t *scale, u8 alpha, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("actor_shadow_circle = 0x80033C30");
 	#elif OOT_U_1_0
