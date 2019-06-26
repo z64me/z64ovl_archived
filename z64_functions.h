@@ -865,13 +865,12 @@ extern void effect_spawn_ice_smoke(void);
 
 /**
  * Draws shadow until instance is destroyed (use in constructor)
- * actor = actor instance
+ * rot2 = pointer to rotation vector, generally rot_2 in the actor (ex: &en->actor.rot_2)
  * unk0 = unknown float, gets stored at dest + 0x08
  * drawfunc = ACTOR_SHADOW_DRAWFUNC_CIRCLE for circular shadows, ACTOR_SHADOW_DRAWFUNC_TEARDROP for teardrop shadows attached to feet, gets stored at dest + 0x0C
  * radius = size of shadow(s), gets stored at dest + 0x10
- * INTERNAL dest = actor instance + 0xB4
  */
-extern void actor_init_shadow(void *dest, f32 unk0, void *drawfunc, f32 radius);
+extern void actor_init_shadow(vec3f_t *rot2, f32 unk0, void *drawfunc, f32 radius);
 	#if OOT_DEBUG
 		asm("actor_init_shadow = 0x8002B1E0");
 		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x8002B5EC");
