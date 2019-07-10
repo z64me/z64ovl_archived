@@ -17,7 +17,7 @@ typedef unsigned short int   uint16_t;
 typedef unsigned int         uint32_t;
 typedef unsigned long int    uint64_t;
 
-typedef unsigned long int    size_t;
+typedef __SIZE_TYPE__        size_t;
 
 /* Limits of integral types.  */
 
