@@ -75,7 +75,7 @@ typedef struct
 	float r, g, b, a;
 } rgbaf_t;
 
-typedef uint16_t z64_angle_t;
+typedef int16_t z64_angle_t;
 typedef struct
 {
   z64_angle_t       x;                        /* 0x0000 */
