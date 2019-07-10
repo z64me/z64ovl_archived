@@ -170,7 +170,7 @@ typedef struct
                                               /* 0x000C */
 } z64_xyzf_t, vec3f_t;
 
-typedef uint16_t z64_angle_t;
+typedef int16_t z64_angle_t;
 typedef struct
 {
   z64_angle_t       x;                        /* 0x0000 */
