@@ -3046,7 +3046,10 @@ extern void external_func_8005AFB4(void);
 	#if OOT_DEBUG
 		asm("external_func_8005AFB4 = 0x8005AFB4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8005AFB4 = 0x80049D34");
+	#elif MM_U_1_0
+		asm("external_func_8005AFB4 = 0x800E01B8");
+		asm("external_func_800E01B8 = 0x800E01B8");
 	#endif
 
 /**
@@ -4457,6 +4460,9 @@ extern void external_func_800876C8(void);
 		asm("external_func_800876C8 = 0x800876C8");
 	#elif OOT_U_1_0
 		asm("external_func_800876C8 = 0x80072548");
+	#elif MM_U_1_0
+		asm("external_func_800876C8 = 0x80115D5C");
+		asm("external_func_80115D5C = 0x80115D5C");
 	#endif
 
 /**
