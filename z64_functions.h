@@ -1090,7 +1090,7 @@ extern void actor_set_scale(z64_actor_t *actor, f32 scale);
 		asm("actor_set_scale = 0x8002D62C");
 	#elif OOT_U_1_0
 		asm("actor_set_scale = 0x80020F88");
-	#elif MM_U
+	#elif MM_U_1_0
 		asm("actor_set_scale = 0x800B67E0");
 	#endif
 
@@ -1835,7 +1835,7 @@ extern void *actor_spawn(void *actor_context/*gl_ctx+0x1C24*/, z64_global_t *glo
 		asm("actor_spawn = 0x80031F50");
 	#elif OOT_U_1_0
 		asm("actor_spawn = 0x80025110");
-	#elif MM_U
+	#elif MM_U_1_0
 		asm("actor_spawn = 0x800BAC60");
 	#endif
 
@@ -2227,6 +2227,8 @@ extern void draw_static_dlist(z64_global_t *global, u32 dlist);
 		asm("draw_static_dlist = 0x80035260");
 	#elif OOT_U_1_0
 		asm("draw_static_dlist = 0x80028048");
+	#elif MM_U_1_0
+		asm("actor_set_scale = 0x800BDFC0");
 	#endif
 
 /**
