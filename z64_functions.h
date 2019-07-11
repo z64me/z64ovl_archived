@@ -119,6 +119,9 @@ extern void external_func_8001F940(void);
 		asm("external_func_8001F940 = 0x8001F940");
 	#elif OOT_U_1_0
 		asm("external_func_8001F940 = 0x80013A84");
+	#elif MM_U_1_0
+		asm("external_func_8001F940 = 0x800A7D28");
+		asm("external_func_800A7D28 = 0x800A7D28");
 	#endif
 
 /**
@@ -555,6 +558,9 @@ extern void external_func_80029694(void);
 		asm("external_func_80029694 = 0x80029694");
 	#elif OOT_U_1_0
 		asm("external_func_80029694 = 0x8001D18C");
+	#elif MM_U_1_0
+		asm("external_func_80029694 = 0x800B210C")
+		asm("external_func_800B210C = 0x800B210C")
 	#endif
 
 /**
@@ -878,6 +884,9 @@ extern void actor_init_shadow(z64_rot_t *rot2, f32 unk0, void *drawfunc, f32 rad
 	#elif OOT_U_1_0
 		asm("actor_init_shadow = 0x8001EC20");
 		// TODO Needs 1.0 equivalents!
+	#elif MM_U_1_0
+		asm("actor_init_shadow = 0x800B3BA4");
+		// TODO Needs 1.0 equivalents!
 	#endif
 	extern char // drawfunc must be the address of one of the following:
 		ACTOR_SHADOW_DRAWFUNC_CIRCLE,
@@ -1066,6 +1075,8 @@ extern void actor_kill(z64_actor_t *actor);
 		asm("actor_kill = 0x8002D570");
 	#elif OOT_U_1_0
 		asm("actor_kill = 0x80020EB4");
+	#elif MM_U_1_0
+		asm("actor_kill = 0x800B670C");
 	#endif
 
 /**
@@ -1078,6 +1089,8 @@ extern void actor_set_height(z64_actor_t *actor, f32 height);
 		asm("actor_set_height = 0x8002D5B8");
 	#elif OOT_U_1_0
 		asm("actor_set_height = 0x80020F04");
+	#elif MM_U_1_0
+		asm("actor_set_height = 0x800B675C");
 	#endif
 
 /**
@@ -1112,6 +1125,8 @@ extern void actor_update_pos(z64_actor_t *actor);
 		asm("actor_update_pos = 0x8002D7EC");
 	#elif OOT_U_1_0
 		asm("actor_update_pos = 0x80021124");
+	#elif OOT_U_1_0
+		asm("actor_update_pos = 0x800B69AC");
 	#endif
 
 /**
@@ -1407,6 +1422,9 @@ extern void external_func_8002E4B4(z64_global_t *global, z64_actor_t *actor, f32
 		asm("external_func_8002E4B4 = 0x8002E4B4");
 	#elif OOT_U_1_0
 		asm("external_func_8002E4B4 = 0x80021E6C");
+	#elif MM_U_1_0
+		asm("external_func_8002E4B4 = 0x800B78B8");
+		asm("external_func_800B78B8 = 0x800B78B8");
 	#endif
 
 /**
@@ -1729,6 +1747,9 @@ extern void external_func_8002F7A0(void);
 		asm("external_func_8002F7A0 = 0x8002F7A0");
 	#elif OOT_U_1_0
 		asm("external_func_8002F7A0 = 0x80022F48");
+	#elif MM_U_1_0
+		asm("external_func_8002F7A0 = 0x800B8E1C");
+		asm("external_func_800B8E1C = 0x800B8E1C");
 	#endif
 
 /**
@@ -1750,6 +1771,8 @@ extern void sound_play_actor2(z64_actor_t *actor, u16 sound_id);
 		asm("sound_play_actor2 = 0x8002F828");
 	#elif OOT_U_1_0
 		asm("sound_play_actor2 = 0x80022FD0");
+	#elif MM_U_1_0
+		asm("sound_play_actor2 = 0x800B8EC8");
 	#endif
 
 /**
@@ -2228,7 +2251,7 @@ extern void draw_static_dlist(z64_global_t *global, u32 dlist);
 	#elif OOT_U_1_0
 		asm("draw_static_dlist = 0x80028048");
 	#elif MM_U_1_0
-		asm("actor_set_scale = 0x800BDFC0");
+		asm("draw_static_dlist = 0x800BDFC0");
 	#endif
 
 /**
@@ -2493,6 +2516,9 @@ extern void external_func_8003DE84(void);
 		asm("external_func_8003DE84 = 0x8003DE84");
 	#elif OOT_U_1_0
 		asm("external_func_8003DE84 = 0x800308B4");
+	#elif MM_U_1_0
+		asm("external_func_8003DE84 = 0x800C55C4");
+		asm("external_func_800C55C4 = 0x800C55C4");
 	#endif
 
 /**
@@ -3043,6 +3069,8 @@ extern void actor_damage_chart_get(void);
 		asm("actor_damage_chart_get = 0x8005B200");
 	#elif OOT_U_1_0
 		asm("actor_damage_chart_get = 0x80049E10");
+	#elif MM_U_1_0
+		asm("actor_damage_chart_get = 0x800E03A0");
 	#endif
 
 /**
@@ -3055,6 +3083,9 @@ extern void external_func_8005BBF8(void);
 		asm("external_func_8005BBF8 = 0x8005BBF8");
 	#elif OOT_U_1_0
 		asm("external_func_8005BBF8 = 0x8004A484");
+	#elif MM_U_1_0
+		asm("external_func_8005BBF8 = 0x800E0B4C");
+		asm("external_func_800E0B4C = 0x800E0B4C");
 	#endif
 
 /**
@@ -3077,6 +3108,9 @@ extern void external_func_8005BCC8(void);
 		asm("external_func_8005BCC8 = 0x8005BCC8");
 	#elif OOT_U_1_0
 		asm("external_func_8005BCC8 = 0x8004A550");
+	#elif MM_U_1_0
+		asm("external_func_8005BCC8 = 0x800E0C18");
+		asm("external_func_800E0C18 = 0x800E0C18");
 	#endif
 
 /**
@@ -3099,6 +3133,9 @@ extern void external_func_8005C050(void);
 		asm("external_func_8005C050 = 0x8005C050");
 	#elif OOT_U_1_0
 		asm("external_func_8005C050 = 0x8004A874");
+	#elif MM_U_1_0
+		asm("external_func_8005C050 = 0x800E0E60");
+		asm("external_func_800E0E60 = 0x800E0E60");
 	#endif
 
 /**
@@ -3253,6 +3290,8 @@ extern void actor_collision_check_set_ac(z64_global_t *global, void* simple_body
 		asm("actor_collision_check_set_ac = 0x8005D9F4");
 	#elif OOT_U_1_0
 		asm("actor_collision_check_set_ac = 0x8004BF40");
+	#elif MM_U_1_0
+		asm("actor_collision_check_set_ac = 0x800E2740");
 	#endif
 
 /**
@@ -3265,6 +3304,8 @@ extern void actor_collision_check_set_ot(z64_global_t *global, void* simple_body
 		asm("actor_collision_check_set_ot = 0x8005DC4C");
 	#elif OOT_U_1_0
 		asm("actor_collision_check_set_ot = 0x8004C130");
+	#elif MM_U_1_0
+		asm("actor_collision_check_set_ot = 0x800E2928");
 	#endif
 
 /**
@@ -3301,6 +3342,9 @@ extern void external_func_80061EFC(void);
 		asm("external_func_80061EFC = 0x80061EFC");
 	#elif OOT_U_1_0
 		asm("external_func_80061EFC = 0x80050370");
+	#elif MM_U_1_0
+		asm("external_func_80061EFC = 0x800E755C");
+		asm("external_func_800E755C = 0x800E755C");
 	#endif
 
 /**
@@ -3463,6 +3507,8 @@ extern void sound_play_position(z64_global_t *global, vec3f_t *pos2, int radius,
 		asm("sound_play_position = 0x8006BAD8");
 	#elif OOT_U_1_0
 		asm("sound_play_position = 0x80058FF8");
+	#elif MM_U_1_0
+		asm("sound_play_position = 0x800F0568");
 	#endif
 
 /**
@@ -3827,6 +3873,8 @@ extern s16 math_rand_s16_offset(s16 offset, s16 range);
 		asm("math_rand_s16_offset = 0x80077D90");
 	#elif OOT_U_1_0
 		asm("math_rand_s16_offset = 0x80063BF0");
+	#elif MM_U_1_0
+		asm("math_rand_s16_offset = 0x800FF450");
 	#endif
 
 /**
@@ -3976,6 +4024,9 @@ extern void external_func_80078310(void);
 		asm("external_func_80078310 = 0x80078310");
 	#elif OOT_U_1_0
 		asm("external_func_80078310 = 0x80064178");
+	#elif MM_U_1_0
+		asm("external_func_80078310 = 0x800FFCD8");
+		asm("external_func_800FFCD8 = 0x800FFCD8");
 	#endif
 
 /**
@@ -3989,6 +4040,9 @@ extern void external_func_8007841C(float *arg0, f32 arg1, f32 arg2, f32 arg3);
 		asm("external_func_8007841C = 0x8007841C");
 	#elif OOT_U_1_0
 		asm("external_func_8007841C = 0x80064280");
+	#elif MM_U_1_0
+		asm("external_func_8007841C = 0x800FFDF8");
+		asm("external_func_800FFDF8 = 0x800FFDF8");
 	#endif
 
 /**
@@ -4751,6 +4805,9 @@ extern void external_func_80093D84(z64_gfx_t *gfx);
 		asm("external_func_80093D84 = 0x80093D84");
 	#elif OOT_U_1_0
 		asm("external_func_80093D84 = 0x8007E2C0");
+	#elif MM_U_1_0
+		asm("external_func_80093D84 = 0x8012C2DC");
+		asm("external_func_8012C2DC = 0x8012C2DC");
 	#endif
 
 /**
@@ -5807,6 +5864,9 @@ extern void external_func_800CB0C0(void);
 		asm("external_func_800CB0C0 = 0x800CB0C0");
 	#elif OOT_U_1_0
 		asm("external_func_800CB0C0 = 0x800A4F98");
+	#elif MM_U_1_0
+		asm("external_func_800CB0C0 = 0x80179F64");
+		asm("external_func_80179F64 = 0x80179F64");
 	#endif
 
 /**
@@ -6058,6 +6118,8 @@ extern void matrix_scale3f(float x, float y, float z, int transform_current);
 		asm("matrix_scale3f = 0x800D0A8C");
 	#elif OOT_U_1_0
 		asm("matrix_scale3f = 0x800AA8FC");
+	#elif OOT_U_1_0
+		asm("matrix_scale3f = 0x8018039C");
 	#endif
 
 /**
@@ -6088,6 +6150,8 @@ extern void external_func_800D0ED4(float unk0, int current_transform);
 		asm("external_func_800D0ED4 = 0x800D0ED4");
 	#elif OOT_U_1_0
 		asm("external_func_800D0ED4 = 0x800AAD4C");
+	#elif OOT_U_1_0
+		asm("external_func_80180E90 = 0x80180E90");
 	#endif
 
 /**
@@ -6155,6 +6219,8 @@ extern u32 matrix_alloc(z64_gfx_t *gfx_ctx, const char *string, int line);
 		asm("matrix_alloc = 0x800D1A88");
 	#elif OOT_U_1_0
 		asm("matrix_alloc = 0x800AB900");
+	#elif OOT_U_1_0
+		asm("matrix_alloc = 0x80181A40");
 	#endif
 
 /**
@@ -6168,6 +6234,9 @@ extern void external_func_800D1AF4(vec3f_t *in, vec3f_t *out);
 		asm("external_func_800D1AF4 = 0x800D1AF4");
 	#elif OOT_U_1_0
 		asm("external_func_800D1AF4 = 0x800AB958");
+	#elif MM_U_1_0
+		asm("external_func_800D1AF4 = 0x80181A98");
+		asm("external_func_80181A98 = 0x80181A98");
 	#endif
 
 /**
@@ -6201,7 +6270,9 @@ extern void external_func_800D1FD4(void *unk0);
 	#if OOT_DEBUG
 		asm("external_func_800D1FD4 = 0x800D1FD4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800D1FD4 = 0x800ABE54");
+	#elif OOT_U_1_0
+		asm("external_func_801820A0 = 0x801820A0");
 	#endif
 
 /**
@@ -6838,6 +6909,8 @@ extern float math_rand_zero_one(void);
 		asm("math_rand_zero_one = 0x800FD9AC");
 	#elif OOT_U_1_0
 		asm("math_rand_zero_one = 0x800CDCCC");
+	#elif MM_U_1_0
+		asm("math_rand_zero_one = 0x80086FDC");
 	#endif
 
 /**
