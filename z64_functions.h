@@ -3830,6 +3830,8 @@ extern float math_sins(s16 angle);
 		asm("math_sins = 0x80077870");
 	#elif OOT_U_1_0
 		asm("math_sins = 0x800636C4");
+	#elif MM_U_1_0
+		asm("math_sins = 0x800FED84");
 	#endif
 
 /**
@@ -4990,6 +4992,8 @@ extern void external_func_80094E9C(void);
 		asm("f3dzex_gen_settilesize = 0x80094F40");
 	#elif OOT_U_1_0
 		asm("f3dzex_gen_settilesize = 0x8007EB84");
+	#elif MM_U_1_0
+		asm("f3dzex_gen_settilesize = 0x8012CBD0");
 	#endif
 
 /**
@@ -6147,6 +6151,8 @@ extern void matrix_translate3f(float x, float y, float z, int transform_current)
 		asm("matrix_translate3f = 0x800D0984");
 	#elif OOT_U_1_0
 		asm("matrix_translate3f = 0x800AA7F4");
+	#elif MM_U_1_0
+		asm("matrix_translate3f = 0x8018029C");
 	#endif
 
 /**
