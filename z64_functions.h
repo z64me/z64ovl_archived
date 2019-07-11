@@ -6213,9 +6213,20 @@ extern void external_func_800D1A54(void);
 
 /**
  * Converts and Appends the Float Matrix Stack's top matrix to POLY_OPA_DISP end
- * TODO additional arguments `u8 source, u8 line` are debug rom only; does it work fine on 1.0 if we leave them enabled?
+ * please provide only the first two arguments when using this function
  */
-extern u32 matrix_alloc(z64_gfx_t *gfx_ctx, const char *string, int line);
+extern u32 matrix_alloc(
+	  z64_gfx_t *gfx_ctx
+#ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
+	, const char *string
+	, int line
+#endif
+);
+#ifdef RETAIL_NUANCES
+#define matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR) matrix_alloc(MTXALLOC_GFX)
+#else
+#define matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR) matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR, __LINE__)
+#endif
 	#if OOT_DEBUG
 		asm("matrix_alloc = 0x800D1A88");
 	#elif OOT_U_1_0
