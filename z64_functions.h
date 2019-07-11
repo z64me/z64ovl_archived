@@ -1125,7 +1125,7 @@ extern void actor_update_pos(z64_actor_t *actor);
 		asm("actor_update_pos = 0x8002D7EC");
 	#elif OOT_U_1_0
 		asm("actor_update_pos = 0x80021124");
-	#elif OOT_U_1_0
+	#elif MM_U_1_0
 		asm("actor_update_pos = 0x800B69AC");
 	#endif
 
@@ -6118,7 +6118,7 @@ extern void matrix_scale3f(float x, float y, float z, int transform_current);
 		asm("matrix_scale3f = 0x800D0A8C");
 	#elif OOT_U_1_0
 		asm("matrix_scale3f = 0x800AA8FC");
-	#elif OOT_U_1_0
+	#elif MM_U_1_0
 		asm("matrix_scale3f = 0x8018039C");
 	#endif
 
@@ -6150,7 +6150,8 @@ extern void external_func_800D0ED4(float unk0, int current_transform);
 		asm("external_func_800D0ED4 = 0x800D0ED4");
 	#elif OOT_U_1_0
 		asm("external_func_800D0ED4 = 0x800AAD4C");
-	#elif OOT_U_1_0
+	#elif MM_U_1_0
+		asm("external_func_800D0ED4 = 0x80180E90");
 		asm("external_func_80180E90 = 0x80180E90");
 	#endif
 
@@ -6219,7 +6220,7 @@ extern u32 matrix_alloc(z64_gfx_t *gfx_ctx, const char *string, int line);
 		asm("matrix_alloc = 0x800D1A88");
 	#elif OOT_U_1_0
 		asm("matrix_alloc = 0x800AB900");
-	#elif OOT_U_1_0
+	#elif MM_U_1_0
 		asm("matrix_alloc = 0x80181A40");
 	#endif
 
@@ -6271,7 +6272,8 @@ extern void external_func_800D1FD4(void *unk0);
 		asm("external_func_800D1FD4 = 0x800D1FD4");
 	#elif OOT_U_1_0
 		asm("external_func_800D1FD4 = 0x800ABE54");
-	#elif OOT_U_1_0
+	#elif MM_U_1_0
+		asm("external_func_800D1FD4 = 0x801820A0");
 		asm("external_func_801820A0 = 0x801820A0");
 	#endif
 
