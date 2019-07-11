@@ -514,6 +514,8 @@ extern void effect_spawn_water_splash(
 		asm("effect_spawn_water_splash = 0x8002949C");
 	#elif OOT_U_1_0
 		asm("effect_spawn_water_splash = 0x8001CF94");
+	#elif MM_U_1_0
+		asm("effect_spawn_water_splash = 0x800B1F4C");
 	#endif
 
 /**
@@ -883,10 +885,12 @@ extern void actor_init_shadow(z64_rot_t *rot2, f32 unk0, void *drawfunc, f32 rad
 		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x8002B8C4");
 	#elif OOT_U_1_0
 		asm("actor_init_shadow = 0x8001EC20");
-		// TODO Needs 1.0 equivalents!
+		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x8001EFF4");
+		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x8001F280");
 	#elif MM_U_1_0
 		asm("actor_init_shadow = 0x800B3BA4");
-		// TODO Needs 1.0 equivalents!
+		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x800B3FC0");
+		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x800B42F8");
 	#endif
 	extern char // drawfunc must be the address of one of the following:
 		ACTOR_SHADOW_DRAWFUNC_CIRCLE,
@@ -1150,6 +1154,9 @@ extern void external_func_8002D8E0(z64_actor_t *actor);
 		asm("external_func_8002D8E0 = 0x8002D8E0");
 	#elif OOT_U_1_0
 		asm("external_func_8002D8E0 = 0x8002121C");
+	#elif MM_U_1_0
+		asm("external_func_8002D8E0 = 0x800B6A88");
+		asm("external_func_800B6A88 = 0x800B6A88");
 	#endif
 
 /**
@@ -1174,6 +1181,9 @@ extern void external_func_8002D97C(void);
 		asm("external_func_8002D97C = 0x8002D97C");
 	#elif OOT_U_1_0
 		asm("external_func_8002D97C = 0x800212B8");
+	#elif MM_U_1_0
+		asm("external_func_8002D97C = 0x800B6B24");
+		asm("external_func_800B6B24 = 0x800B6B24");
 	#endif
 
 /**
@@ -1569,6 +1579,9 @@ extern void external_func_8002F374(z64_global_t *global, z64_actor_t *actor, int
 		asm("external_func_8002F374 = 0x8002F374");
 	#elif OOT_U_1_0
 		asm("external_func_8002F374 = 0x80022B14");
+	#elif MM_U_1_0
+		asm("external_func_8002F374 = 0x800B8898");
+		asm("external_func_800B8898 = 0x800B8898");
 	#endif
 
 /**
@@ -1717,6 +1730,9 @@ extern void external_func_8002F6D4(void);
 		asm("external_func_8002F6D4 = 0x8002F6D4");
 	#elif OOT_U_1_0
 		asm("external_func_8002F6D4 = 0x80022E7C");
+	#elif MM_U_1_0
+		asm("external_func_8002F6D4 = 0x800B8D50");
+		asm("external_func_800B8D50 = 0x800B8D50");
 	#endif
 
 /**
@@ -2104,6 +2120,8 @@ extern f32 math_rand_f32(float n);
 		asm("math_rand_f32 = 0x80033EF8");
 	#elif OOT_U_1_0
 		asm("math_rand_f32 = 0x80026D64");
+	#elif MM_U_1_0
+		asm("math_rand_f32 = 0x80179594");
 	#endif
 
 /**
@@ -2116,6 +2134,9 @@ extern float external_func_80033F20(float n);
 		asm("external_func_80033F20 = 0x80033F20");
 	#elif OOT_U_1_0
 		asm("external_func_80033F20 = 0x80026D90");
+	#elif MM_U_1_0
+		asm("external_func_80033F20 = 0x801795C0");
+		asm("external_func_801795C0 = 0x801795C0");
 	#endif
 
 /**
@@ -3885,6 +3906,8 @@ extern void math_vec3f_copy(vec3f_t *out, vec3f_t *in);
 		asm("math_vec3f_copy = 0x80077E40");
 	#elif OOT_U_1_0
 		asm("math_vec3f_copy = 0x80063CAC");
+	#elif MM_U_1_0
+		asm("math_vec3f_copy = 0x800FF50C");
 	#endif
 
 /**
@@ -3990,6 +4013,9 @@ extern void external_func_80078068(void);
 		asm("external_func_80078068 = 0x80078068");
 	#elif OOT_U_1_0
 		asm("external_func_80078068 = 0x80063F00");
+	#elif MM_U_1_0
+		asm("external_func_80078068 = 0x800FFA60");
+		asm("external_func_800FFA60 = 0x800FFA60");
 	#endif
 
 /**
@@ -4002,6 +4028,9 @@ extern void external_func_8007809C(void);
 		asm("external_func_8007809C = 0x8007809C");
 	#elif OOT_U_1_0
 		asm("external_func_8007809C = 0x80063F34");
+	#elif MM_U_1_0
+		asm("external_func_8007809C = 0x800FFA94");
+		asm("external_func_800FFA94 = 0x800FFA94");
 	#endif
 
 /**
@@ -4014,6 +4043,8 @@ extern void actor_init_dynapoly(z64_actor_t *actor, void *var_init_list);
 		asm("actor_init_dynapoly = 0x800780DC");
 	#elif OOT_U_1_0
 		asm("actor_init_dynapoly = 0x80063F7C");
+	#elif MM_U_1_0
+		asm("actor_init_dynapoly = 0x800FFADC");
 	#endif
 
 /**
@@ -4064,6 +4095,9 @@ extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, 
 		asm("external_func_8007869C = 0x8007869C");
 	#elif OOT_U_1_0
 		asm("external_func_8007869C = 0x80064508");
+	#elif MM_U_1_0
+		asm("external_func_8007869C = 0x800FFEBC");
+		asm("external_func_800FFEBC = 0x800FFEBC");
 	#endif
 
 /**
@@ -4792,6 +4826,9 @@ extern void external_func_80093D18(z64_gfx_t *gfx);
 		asm("external_func_80093D18 = 0x80093D18");
 	#elif OOT_U_1_0
 		asm("external_func_80093D18 = 0x8007E298");
+	#elif MM_U_1_0
+		asm("external_func_80093D18 = 0x8012C28C");
+		asm("external_func_8012C28C = 0x8012C28C");
 	#endif
 
 /**
@@ -5061,6 +5098,8 @@ extern void skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8
 		asm("skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
 		asm("skelanime_draw_mtx = 0x80089D8C");
+	#elif MM_U_1_0
+		asm("skelanime_draw_mtx = 0x80133F28");
 	#endif
 
 /**
@@ -5155,6 +5194,8 @@ extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime,
 		asm("skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
 		asm("skelanime_init_mtx = 0x8008C788");
+	#elif MM_U_1_0
+		asm("skelanime_init_mtx = 0x80136B30");
 	#endif
 
 /**
