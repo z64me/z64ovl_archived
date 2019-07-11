@@ -870,7 +870,7 @@ extern void effect_spawn_ice_smoke(void);
  * drawfunc = ACTOR_SHADOW_DRAWFUNC_CIRCLE for circular shadows, ACTOR_SHADOW_DRAWFUNC_TEARDROP for teardrop shadows attached to feet, gets stored at dest + 0x0C
  * radius = size of shadow(s), gets stored at dest + 0x10
  */
-extern void actor_init_shadow(vec3f_t *rot2, f32 unk0, void *drawfunc, f32 radius);
+extern void actor_init_shadow(z64_rot_t *rot2, f32 unk0, void *drawfunc, f32 radius);
 	#if OOT_DEBUG
 		asm("actor_init_shadow = 0x8002B1E0");
 		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x8002B5EC");
