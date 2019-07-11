@@ -559,8 +559,8 @@ extern void external_func_80029694(void);
 	#elif OOT_U_1_0
 		asm("external_func_80029694 = 0x8001D18C");
 	#elif MM_U_1_0
-		asm("external_func_80029694 = 0x800B210C")
-		asm("external_func_800B210C = 0x800B210C")
+		asm("external_func_80029694 = 0x800B210C");
+		asm("external_func_800B210C = 0x800B210C");
 	#endif
 
 /**
