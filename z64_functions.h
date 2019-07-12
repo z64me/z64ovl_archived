@@ -2365,13 +2365,15 @@ extern void external_func_800355E4(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Subtracts damage amount (colliding damage source) from *actor's health
  */
-extern void external_func_80035628(void);
+extern void actor_update_health(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_80035628 = 0x80035628");
+		asm("actor_update_health = 0x80035628");
 	#elif OOT_U_1_0
-		asm("external_func_80035628 = 0x80028390");
+		asm("actor_update_health = 0x80028390");
+	#elif MM_U_1_0
+		asm("actor_update_health = 0x800BE22C");
 	#endif
 
 /**
