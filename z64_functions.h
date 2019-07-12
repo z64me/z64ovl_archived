@@ -1567,6 +1567,9 @@ extern void external_func_8002F2F4(z64_actor_t *actor, z64_global_t *global);
 		asm("external_func_8002F2F4 = 0x8002F2F4");
 	#elif OOT_U_1_0
 		asm("external_func_8002F2F4 = 0x80022A90");
+	#elif MM_U_1_0
+		asm("external_func_8002F2F4 = 0x800B863C");
+		asm("external_func_800B863C = 0x800B863C");
 	#endif
 
 /**
@@ -2292,7 +2295,7 @@ extern void draw_static_dlist_opa(z64_global_t *global, u32 dlist);
 	#elif OOT_U_1_0
 		asm("draw_static_dlist_opa = 0x80028048");
 	#elif MM_U_1_0
-		asm("draw_static_dlist_opa = 0x800BE03C");
+		asm("draw_static_dlist_opa = 0x800BDFC0");
 	#endif
 
 /**
@@ -2306,7 +2309,7 @@ extern void draw_static_dlist_xlu(z64_global_t *global, u32 dlist);
 	#elif OOT_U_1_0
 		asm("draw_static_dlist_xlu = 0x800280C8");
 	#elif MM_U_1_0
-		asm("draw_static_dlist_xlu = 0x800BDFC0");
+		asm("draw_static_dlist_xlu = 0x800BE03C");
 	#endif
 
 /**
