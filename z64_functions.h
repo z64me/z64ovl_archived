@@ -5218,6 +5218,8 @@ extern int actor_anime_frame_update_mtx(z64_skelanime_t *skelanime);
 		asm("actor_anime_frame_update_mtx = 0x800A49FC");
 	#elif OOT_U_1_0
 		asm("actor_anime_frame_update_mtx = 0x8008C9C0");
+	#elif MM_U_1_0
+		asm("actor_anime_frame_update_mtx = 0x80136CD0");
 	#endif
 
 /**
