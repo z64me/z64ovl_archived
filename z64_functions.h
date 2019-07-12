@@ -2647,6 +2647,8 @@ extern u32 actor_register_dynapoly(z64_global_t *global, void *global_plus_0x810
 		asm("actor_register_dynapoly = 0x8003EA74");
 	#elif OOT_U_1_0
 		asm("actor_register_dynapoly = 0x800313A4");
+	#elif MM_U_1_0
+		asm("actor_register_dynapoly = 0x800C6188");
 	#endif
 
 /**
@@ -2659,6 +2661,8 @@ extern void dynapolyinfo_get_actor(void);
 		asm("dynapolyinfo_get_actor = 0x8003EB84");
 	#elif OOT_U_1_0
 		asm("dynapolyinfo_get_actor = 0x80031464");
+	#elif MM_U_1_0
+		asm("dynapolyinfo_get_actor = 0x800C6248");
 	#endif
 
 /**
@@ -2700,7 +2704,7 @@ extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, u32 *dy
 	#if OOT_DEBUG
 		asm("dynapoly_free = 0x8003ED58");
 	#elif OOT_U_1_0
-		asm("dynapolyinfo_delete_reserve = 0x80031638");
+		asm("dynapoly_free = 0x80031638");
 	#endif
 
 /**
@@ -2874,6 +2878,8 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 		asm("actor_dynapoly_set_move = 0x80043480");
 	#elif OOT_U_1_0
 		asm("actor_dynapoly_set_move = 0x80035260");
+	#elif OOT_U_1_0
+		asm("actor_dynapoly_set_move = 0x800CAE10");
 	#endif
 
 /**
