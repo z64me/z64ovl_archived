@@ -922,6 +922,8 @@ extern int flag_get_switch(z64_global_t *global, int flag);
 		asm("flag_get_switch = 0x8002CB40");
 	#elif OOT_U_1_0
 		asm("flag_get_switch = 0x8002049C");
+	#elif MM_U_1_0
+		asm("flag_get_switch = 0x800B5BB0");
 	#endif
 
 /**
@@ -932,6 +934,8 @@ extern void flag_set_switch(z64_global_t *global, int flag);
 		asm("flag_set_switch = 0x8002CB74");
 	#elif OOT_U_1_0
 		asm("flag_set_switch = 0x800204D0");
+	#elif MM_U_1_0
+		asm("flag_set_switch = 0x800B5BF4");
 	#endif
 
 /**
@@ -942,6 +946,8 @@ extern void flag_unset_switch(z64_global_t *global, int flag);
 		asm("flag_unset_switch = 0x8002CBB4");
 	#elif OOT_U_1_0
 		asm("flag_unset_switch = 0x80020510");
+	#elif MM_U_1_0
+		asm("flag_unset_switch = 0x800B5C34");
 	#endif
 
 /**
@@ -1030,25 +1036,25 @@ extern void external_func_8002CD08(void);
 /**
  * Tests if Global Context + 0x1D40 Flag is set
  */
-extern int flag_get_0x1D40(z64_global_t *global, int flag);
+extern int temp_clear_flag_get(z64_global_t *global, int flag);
 	#if OOT_DEBUG
-		asm("flag_get_0x1D40 = 0x8002CD24");
+		asm("temp_clear_flag_get = 0x8002CD24");
 	#elif OOT_U_1_0
-		asm("flag_get_0x1D40 = 0x80020694");
+		asm("temp_clear_flag_get = 0x80020694");
 	#elif MM_U_1_0
-		asm("flag_get_0x1D40 = 0x800B5D18");
+		asm("temp_clear_flag_get = 0x800B5D18");
 	#endif
 
 /**
  * Sets Global Context + 0x1D40 Flag to 1
  */
-extern void flag_set_0x1D40(z64_global_t *global, int flag);
+extern void temp_clear_flag_set(z64_global_t *global, int flag);
 	#if OOT_DEBUG
-		asm("flag_set_0x1D40 = 0x8002CD38");
+		asm("temp_clear_flag_set = 0x8002CD38");
 	#elif OOT_U_1_0
-		asm("flag_set_0x1D40 = 0x800206AC");
+		asm("temp_clear_flag_set = 0x800206AC");
 	#elif MM_U_1_0
-		asm("flag_set_0x1D40 = 0x800B5D30");
+		asm("temp_clear_flag_set = 0x800B5D30");
 	#endif
 
 /**
