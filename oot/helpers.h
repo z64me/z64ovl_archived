@@ -9,6 +9,21 @@
 
 
 /****
+ * helper_get_pointer_to_object_data
+ * given an object ID, returns a pointer to its location in ram, or NULL if not loaded
+ ***/
+static u32 *helper_get_pointer_to_object_data(uint16_t object_id, z64_global_t *global)
+{
+	int index = object_get_index((u32)AADDR(global,0x117A4), object_id);
+	
+	if(index < 0)
+		return NULL;
+	
+	return *(u32*)AADDR((((index << 4) + index) << 2) + (u32)global, 0x117B4);
+}
+
+
+/****
  * helper_get_save_context
  * Returns a pointer to Save Context
  ***/
