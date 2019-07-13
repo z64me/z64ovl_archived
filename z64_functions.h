@@ -7105,16 +7105,17 @@ extern void external_func_80106AA8(void);
 	#endif
 
 /**
- * ? Dialog Related, potentially confirm yes/no
- * TODO These notes need converted into a C function prototype
- * V0 = result?
+ * Checks whether the player has selected a text-box option
+ * returns 1 once player has selected yes/no/maybe from a text-box, 0 otherwise
+ * NOTE: If you want to fetch the option selected, look no
+         further than helper_player_textbox_response() in helpers.h
  */
-extern int external_func_80106BC8(void *arg1);
-	#if OOT_DEBUG
-		asm("external_func_80106BC8 = 0x80106BC8");
-	#elif OOT_U_1_0
-		asm("external_func_80106BC8 = 0x800D6110");
-	#endif
+extern int player_responded_to_textbox_query(z64_global_t *global);
+    #if OOT_DEBUG
+        asm("player_responded_to_textbox_query = 0x80106BC8");
+    #elif OOT_U_1_0
+        asm("player_responded_to_textbox_query = 0x800D6110");
+    #endif
 
 /**
  * TODO This function is completely undocumented
