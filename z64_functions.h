@@ -2878,7 +2878,7 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 		asm("actor_dynapoly_set_move = 0x80043480");
 	#elif OOT_U_1_0
 		asm("actor_dynapoly_set_move = 0x80035260");
-	#elif OOT_U_1_0
+	#elif MM_U_1_0
 		asm("actor_dynapoly_set_move = 0x800CAE10");
 	#endif
 
