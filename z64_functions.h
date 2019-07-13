@@ -7108,7 +7108,7 @@ extern void external_func_80106AA8(void);
  * Checks whether the player has selected a text-box option
  * returns 1 once player has selected yes/no/maybe from a text-box, 0 otherwise
  * NOTE: If you want to fetch the option selected, look no
-         further than helper_player_textbox_response() in helpers.h
+         further than helper_player_textbox_selection() in helpers.h
  * NOTE: This function's value is cleared to 0 once per frame, so you
          should test it once per frame if you're in a textbox selection.
  */
