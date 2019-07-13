@@ -40,6 +40,20 @@ extern void memory_copy(const void *src, void *dst, const u32 num);
 	#endif
 
 /**
+ * Swaps Link's equipment to the adult/child version depending on the current age.
+ * It updates boots, tunic, shield, B-Button and C-Button items.
+ * NOTE: Only use this function when the button icons are not on-screen. They
+         may get corrupted otherwise.
+ * NOTE: This function is not used in any existing actor overlay in OoT.
+ */
+extern void player_swap_age_equipment(void);
+    #if OOT_DEBUG
+        asm("player_swap_age_equipment = 0x800846E0");
+    #elif OOT_U_1_0
+        asm("player_swap_age_equipment = 0x8006F804");
+    #endif
+
+/**
  * Allocates to the tail end of the given heap (0x10 aligned)
  * TODO These notes need converted into a C function prototype
  * A0 = Allocation Handle ptr | A1 = Size | V0 = ptr to free space
