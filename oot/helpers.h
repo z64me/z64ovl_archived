@@ -9,6 +9,20 @@
 
 
 /****
+ * helper_player_textbox_selection
+ * use this function if player_responded_to_textbox() returns true (1).
+ * returns the last textbox selection made by the player
+ * 0 = first option was selected
+ * 1 = second
+ * 2 = third
+ ***/
+static int helper_player_textbox_selection(z64_global_t *global)
+{
+	return AVAL(global, uint8_t, 0x104BD);
+}
+
+
+/****
  * helper_get_pointer_to_object_data
  * given an object ID, returns a pointer to its location in ram, or NULL if not loaded
  ***/
