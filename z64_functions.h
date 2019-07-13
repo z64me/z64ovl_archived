@@ -7109,12 +7109,14 @@ extern void external_func_80106AA8(void);
  * returns 1 once player has selected yes/no/maybe from a text-box, 0 otherwise
  * NOTE: If you want to fetch the option selected, look no
          further than helper_player_textbox_response() in helpers.h
+ * NOTE: This function's value is cleared to 0 once per frame, so you
+         should test it once per frame if you're in a textbox selection.
  */
-extern int player_responded_to_textbox_query(z64_global_t *global);
+extern int player_responded_to_textbox(z64_global_t *global);
     #if OOT_DEBUG
-        asm("player_responded_to_textbox_query = 0x80106BC8");
+        asm("player_responded_to_textbox = 0x80106BC8");
     #elif OOT_U_1_0
-        asm("player_responded_to_textbox_query = 0x800D6110");
+        asm("player_responded_to_textbox = 0x800D6110");
     #endif
 
 /**
