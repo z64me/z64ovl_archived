@@ -38,7 +38,7 @@ typedef enum {
 } z64_button_t;
 
 typedef struct {
-	z64_button_t	button;
+	u16	button;
 	char	stick_x;
 	char	stick_y;
 	char	errno;
