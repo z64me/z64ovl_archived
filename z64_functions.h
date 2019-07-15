@@ -5293,7 +5293,7 @@ extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime,
 	#elif OOT_U_1_0
 		asm("skelanime_init_mtx = 0x8008C788");
 	#elif MM_U_1_0
-		asm("skelanime_init_mtx = 0x80136B30");
+		//asm("skelanime_init_mtx = 0x80136B30");
 	#endif
 
 /**
