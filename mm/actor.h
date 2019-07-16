@@ -57,10 +57,13 @@ struct z64_actor_s
   char              unk_03_[0x0002];          /* 0x0022 */
   vec3f_t           pos_2;                    /* 0x0024 */
   z64_rot_t         speedRot;                 /* 0x0030 */
-  uint32_t          unk_0x038;                /* 0x0038 */
+  char              unk_03_[0x0002];          /* 0x0036 */
+  int8_t            unk_0x38;                 /* 0x0038 */
+  uint8_t           unk_0x39;                 /* 0x0039 */
+  char              unk_0x3A[0x0002];         /* 0x003A */
   vec3f_t           pos_3;                    /* 0x003C */
   z64_rot_t         rot_1;                    /* 0x0048 */
-  uint16_t          unk_0x04E;                /* 0x004E */
+  char              unk_0x06_[0x0002];        /* 0x004E */
   uint32_t          unk_0x050;                /* 0x0050 */
   float             unk_0x054;                /* 0x0054 */
   vec3f_t           scale;                    /* 0x0058 */
@@ -88,19 +91,37 @@ struct z64_actor_s
   uint8_t           damage;                   /* 0x00B8 */
   uint8_t           damage_effect;            /* 0x00B9 */
   uint8_t           impact_effect;            /* 0x00BA */
-  char              unk_0D;                   /* 0x00BB */
+  char              unk_0xBB;                 /* 0x00BB */
   z64_rot_t         rot_2;                    /* 0x00BC */
-  char              unk_0E_[0x4D];            /* 0x00C8 */
-  char              runActor;                 /* 0x0115 */
-  char              unk_0F_[0x0F];            /* 0x0119 */
-  z64_actor_t      *prev;                     /* 0x0128 */
-  z64_actor_t      *next;                     /* 0x012C */
-  void             *ctor;                     /* 0x0130 */
-  void             *dtor;                     /* 0x0134 */
-  void             *main_proc;                /* 0x0138 */
-  void             *draw_proc;                /* 0x013C */
-  void             *code_entry;               /* 0x0140 */
-                                              /* 0x0144 */
-};
+  char              unk_0F[0x0002];           /* 0x00C2 */
+  float             unk_0xC4;                 /* 0x00C4 */
+  void              *draw_drop_shadow         /* 0x00C8 */
+  float             unk_0xCC;                 /* 0x00CC */
+  uint8_t           unk_0xD0;                 /* 0x00D0 */
+  vec3f_t           unk_0xD4;                 /* 0x00D4 */
+  vec3f_t           unk_0xE0;                 /* 0x00E0 */
+  vec3f_t           unk_0xEC;                 /* 0x00EC */
+  float             unk_0xF8;                 /* 0x00F8 */
+  float             unk_0xFC;                 /* 0x00FC */
+  float             unk_0x100;                /* 0x0100 */
+  float             unk_0x104;                /* 0x0104 */
+  vec3f_t           pos_4;                    /* 0x0108 */
+  uint16_t          unk_10_;                  /* 0x0114 */
+  uint16_t          text_id;                  /* 0x0116 */
+  int16_t           frozen;                   /* 0x0118 */
+  char              unk_11_[0x0003];          /* 0x011A */
+  uint8_t           active;                   /* 0x011D */
+  char              unk_0x11E;                /* 0x011E */
+  uint8_t           tatl_enemy_text_id;       /* 0x011F */
+  z64_actor_t       *attached_a;              /* 0x0120 */
+  z64_actor_t       *attached_b;              /* 0x0124 */
+  z64_actor_t       *prev;                    /* 0x0128 */
+  z64_actor_t       *next;                    /* 0x012C */
+  void              *ctor;                    /* 0x0130 */
+  void              *dtor;                    /* 0x0134 */
+  void              *main_proc;               /* 0x0138 */
+  void              *draw_proc;               /* 0x013C */
+  void              *code_entry;              /* 0x0140 */
+ };                                           /* 0x0144 */
 
 #endif /* __ZELDA64_ACTOR_MM_H__ */
