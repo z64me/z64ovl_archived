@@ -3240,7 +3240,7 @@ extern void actor_capsule_free(z64_global_t *global, z64_capsule_t *collision);
 	#elif OOT_U_1_0
 		asm("actor_capsule_free = 0x8004ABCC");
 	#elif MM_U_1_0
-		asm("actor_capsule_free = 0x800E11EC");
+		//asm("actor_capsule_free = 0x800E11EC");
 	#endif
 
 /**
