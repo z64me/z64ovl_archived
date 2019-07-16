@@ -4924,7 +4924,7 @@ extern void external_func_80093D18(z64_gfx_t *gfx);
 		asm("external_func_80093D18 = 0x8007E298");
 	#elif MM_U_1_0
 		asm("external_func_80093D18 = 0x8012C28C");
-		asm("external_func_8012C28C = 0x8012C28C");
+		//asm("external_func_8012C28C = 0x8012C28C");
 	#endif
 
 /**
@@ -5197,7 +5197,7 @@ extern void skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8
 	#elif OOT_U_1_0
 		asm("skelanime_draw_mtx = 0x80089D8C");
 	#elif MM_U_1_0
-		asm("skelanime_draw_mtx = 0x80133F28");
+		//asm("skelanime_draw_mtx = 0x80133F28");
 	#endif
 
 /**
