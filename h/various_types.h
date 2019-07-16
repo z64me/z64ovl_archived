@@ -15,6 +15,7 @@ typedef enum{
 #define ROT16(R16A0) (182.044444 * (R16A0))
 #define SGN(SGNA0) (((SGNA0)<0)?-1:((SGNA0)==0)?0:1)
 #define MIN(MINA0, MINA1) (((MINA0)<(MINA1))?(MINA0):(MINA1))
+#define MAX(MAXA0, MAXA1) (((MAXA0)>(MAXA1))?(MAXA0):(MAXA1))
 #define ABS(ABSA0) (((ABSA0)<0)?(-(ABSA0)):ABSA0)
 #define TWEEN_LINEAR(TWL_FROM, TWL_TO, TWL_SPEED) (SGN((TWL_TO)-(TWL_FROM))*MIN(ABS((TWL_TO)-(TWL_FROM)),(TWL_SPEED)))
 
