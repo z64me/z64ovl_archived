@@ -57,7 +57,7 @@ struct z64_actor_s
   char              unk_03_[0x0002];          /* 0x0022 */
   vec3f_t           pos_2;                    /* 0x0024 */
   z64_rot_t         speedRot;                 /* 0x0030 */
-  char              unk_03_[0x0002];          /* 0x0036 */
+  char              unk_04_[0x0002];          /* 0x0036 */
   int8_t            unk_0x38;                 /* 0x0038 */
   uint8_t           unk_0x39;                 /* 0x0039 */
   char              unk_0x3A[0x0002];         /* 0x003A */
@@ -95,7 +95,7 @@ struct z64_actor_s
   z64_rot_t         rot_2;                    /* 0x00BC */
   char              unk_0F[0x0002];           /* 0x00C2 */
   float             unk_0xC4;                 /* 0x00C4 */
-  void              *draw_drop_shadow         /* 0x00C8 */
+  void              *draw_drop_shadow;        /* 0x00C8 */
   float             unk_0xCC;                 /* 0x00CC */
   uint8_t           unk_0xD0;                 /* 0x00D0 */
   vec3f_t           unk_0xD4;                 /* 0x00D4 */
