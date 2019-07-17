@@ -4923,7 +4923,7 @@ extern void external_func_80093D18(z64_gfx_t *gfx);
 	#elif OOT_U_1_0
 		asm("external_func_80093D18 = 0x8007E298");
 	#elif MM_U_1_0
-		asm("external_func_80093D18 = 0x8012C28C");
+		//asm("external_func_80093D18 = 0x8012C28C");
 		//asm("external_func_8012C28C = 0x8012C28C");
 	#endif
 
