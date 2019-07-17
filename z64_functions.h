@@ -1132,7 +1132,7 @@ extern void actor_set_height(z64_actor_t *actor, f32 height);
 	#elif OOT_U_1_0
 		asm("actor_set_height = 0x80020F04");
 	#elif MM_U_1_0
-		asm("actor_set_height = 0x800B675C");
+		//asm("actor_set_height = 0x800B675C");
 	#endif
 
 /**
@@ -1146,7 +1146,7 @@ extern void actor_set_scale(z64_actor_t *actor, f32 scale);
 	#elif OOT_U_1_0
 		asm("actor_set_scale = 0x80020F88");
 	#elif MM_U_1_0
-		asm("actor_set_scale = 0x800B67E0");
+		//asm("actor_set_scale = 0x800B67E0");
 	#endif
 
 /**
@@ -1196,7 +1196,7 @@ extern void external_func_8002D8E0(z64_actor_t *actor);
 		asm("external_func_8002D8E0 = 0x8002121C");
 	#elif MM_U_1_0
 		asm("external_func_8002D8E0 = 0x800B6A88");
-		asm("external_func_800B6A88 = 0x800B6A88");
+		//asm("external_func_800B6A88 = 0x800B6A88");
 	#endif
 
 /**
@@ -1474,7 +1474,7 @@ extern void external_func_8002E4B4(z64_global_t *global, z64_actor_t *actor, f32
 		asm("external_func_8002E4B4 = 0x80021E6C");
 	#elif MM_U_1_0
 		asm("external_func_8002E4B4 = 0x800B78B8");
-		asm("external_func_800B78B8 = 0x800B78B8");
+		//asm("external_func_800B78B8 = 0x800B78B8");
 	#endif
 
 /**
@@ -3240,7 +3240,7 @@ extern void actor_capsule_free(z64_global_t *global, z64_capsule_t *collision);
 	#elif OOT_U_1_0
 		asm("actor_capsule_free = 0x8004ABCC");
 	#elif MM_U_1_0
-		//asm("actor_capsule_free = 0x800E11EC");
+		asm("actor_capsule_free = 0x800E11EC");
 	#endif
 
 /**
@@ -3284,7 +3284,7 @@ extern void actor_capsule_init(z64_global_t *global, z64_capsule_t *dest, z64_ac
 	#elif OOT_U_1_0
 		asm("actor_capsule_init = 0x8004ACEC");
 	#elif MM_U_1_0
-		asm("actor_capsule_init = 0x800E130C");
+		asm("actor_capsule_init = 0x800E1374");
 	#endif
 
 /**
@@ -3396,7 +3396,7 @@ extern void actor_collision_check_set_ot(z64_global_t *global, void* simple_body
 	#elif OOT_U_1_0
 		asm("actor_collision_check_set_ot = 0x8004C130");
 	#elif MM_U_1_0
-		asm("actor_collision_check_set_ot = 0x800E2928");
+		//asm("actor_collision_check_set_ot = 0x800E2928");
 	#endif
 
 /**
@@ -3452,7 +3452,7 @@ extern void actor_capsule_update(z64_actor_t *actor, void* collision);
 	#elif OOT_U_1_0
 		asm("actor_capsule_update = 0x80050B00");
 	#elif MM_U_1_0
-		asm("actor_capsule_update = 0x800E7DF8");
+		//asm("actor_capsule_update = 0x800E7DF8");
 	#endif
 
 /**
@@ -4190,7 +4190,7 @@ extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, 
 		asm("external_func_8007869C = 0x80064508");
 	#elif MM_U_1_0
 		asm("external_func_8007869C = 0x800FFEBC");
-		asm("external_func_800FFEBC = 0x800FFEBC");
+		//asm("external_func_800FFEBC = 0x800FFEBC");
 	#endif
 
 /**
@@ -5293,7 +5293,7 @@ extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime,
 	#elif OOT_U_1_0
 		asm("skelanime_init_mtx = 0x8008C788");
 	#elif MM_U_1_0
-		//asm("skelanime_init_mtx = 0x80136B30");
+		asm("skelanime_init_mtx = 0x80136B30");
 	#endif
 
 /**

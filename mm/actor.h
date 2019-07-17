@@ -124,4 +124,5 @@ struct z64_actor_s
   void              *code_entry;              /* 0x0140 */
  };                                           /* 0x0144 */
 
+typedef void (z64_actorfunc_t)(void *entity, void *global);
 #endif /* __ZELDA64_ACTOR_MM_H__ */
