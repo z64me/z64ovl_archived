@@ -1132,7 +1132,7 @@ extern void actor_set_height(z64_actor_t *actor, f32 height);
 	#elif OOT_U_1_0
 		asm("actor_set_height = 0x80020F04");
 	#elif MM_U_1_0
-		//asm("actor_set_height = 0x800B675C");
+		asm("actor_set_height = 0x800B675C");
 	#endif
 
 /**
@@ -1146,7 +1146,7 @@ extern void actor_set_scale(z64_actor_t *actor, f32 scale);
 	#elif OOT_U_1_0
 		asm("actor_set_scale = 0x80020F88");
 	#elif MM_U_1_0
-		//asm("actor_set_scale = 0x800B67E0");
+		asm("actor_set_scale = 0x800B67E0");
 	#endif
 
 /**
@@ -5197,7 +5197,7 @@ extern void skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8
 	#elif OOT_U_1_0
 		asm("skelanime_draw_mtx = 0x80089D8C");
 	#elif MM_U_1_0
-		//asm("skelanime_draw_mtx = 0x80133F28");
+		asm("skelanime_draw_mtx = 0x80133F28");
 	#endif
 
 /**
