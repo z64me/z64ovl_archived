@@ -1196,7 +1196,6 @@ extern void external_func_8002D8E0(z64_actor_t *actor);
 		asm("external_func_8002D8E0 = 0x8002121C");
 	#elif MM_U_1_0
 		asm("external_func_8002D8E0 = 0x800B6A88");
-		//asm("external_func_800B6A88 = 0x800B6A88");
 	#endif
 
 /**
@@ -1474,7 +1473,6 @@ extern void external_func_8002E4B4(z64_global_t *global, z64_actor_t *actor, f32
 		asm("external_func_8002E4B4 = 0x80021E6C");
 	#elif MM_U_1_0
 		asm("external_func_8002E4B4 = 0x800B78B8");
-		//asm("external_func_800B78B8 = 0x800B78B8");
 	#endif
 
 /**
@@ -3390,13 +3388,13 @@ extern void actor_collision_check_set_ac(z64_global_t *global, void* simple_body
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit? | Called directly by actors
  */
-extern void actor_collision_check_set_ot(z64_global_t *global, void* simple_body_groups, z64_capsule_t *collision);
+extern void actor_collision_check_set_ot(z64_global_t *global, void *simple_body_groups, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ot = 0x8005DC4C");
 	#elif OOT_U_1_0
 		asm("actor_collision_check_set_ot = 0x8004C130");
 	#elif MM_U_1_0
-		//asm("actor_collision_check_set_ot = 0x800E2928");
+		asm("actor_collision_check_set_ot = 0x800E2928");
 	#endif
 
 /**
@@ -3446,13 +3444,13 @@ extern void external_func_80061EFC(void);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void actor_capsule_update(z64_actor_t *actor, void* collision);
+extern void actor_capsule_update(z64_actor_t *actor, z64_capsule_t *collision);
 	#if OOT_DEBUG
 		asm("actor_capsule_update = 0x800626DC");
 	#elif OOT_U_1_0
 		asm("actor_capsule_update = 0x80050B00");
 	#elif MM_U_1_0
-		//asm("actor_capsule_update = 0x800E7DF8");
+		asm("actor_capsule_update = 0x800E7DF8");
 	#endif
 
 /**
@@ -4183,14 +4181,13 @@ extern void external_func_8007848C(float *value, float a, float b);
  * TODO figure out what this function does...
  * A0 = s16 Rotation Pointer (Y this pass) | A1 = s16 ? | A2 = ? | A3 = ?
  */
-extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, int32_t unk2, int unk3);
+extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, int32_t unk2, int unk3, uint32_t unk4);
 	#if OOT_DEBUG
 		asm("external_func_8007869C = 0x8007869C");
 	#elif OOT_U_1_0
 		asm("external_func_8007869C = 0x80064508");
 	#elif MM_U_1_0
 		asm("external_func_8007869C = 0x800FFEBC");
-		//asm("external_func_800FFEBC = 0x800FFEBC");
 	#endif
 
 /**
@@ -4923,8 +4920,7 @@ extern void external_func_80093D18(z64_gfx_t *gfx);
 	#elif OOT_U_1_0
 		asm("external_func_80093D18 = 0x8007E298");
 	#elif MM_U_1_0
-		//asm("external_func_80093D18 = 0x8012C28C");
-		//asm("external_func_8012C28C = 0x8012C28C");
+		asm("external_func_80093D18 = 0x8012C28C");
 	#endif
 
 /**
