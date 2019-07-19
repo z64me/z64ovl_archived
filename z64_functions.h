@@ -5204,6 +5204,8 @@ extern int anime_get_framecount(u32 animation);
 		asm("anime_get_framecount = 0x800A2000");
 	#elif OOT_U_1_0
 		asm("anime_get_framecount = 0x8008A194");
+	#elif MM_U_1_0
+		asm("anime_get_framecount = 0x80134748");
 	#endif
 
 /**
