@@ -513,7 +513,7 @@ extern void effect_spawn_water_bubble(void);
  * Spawn Particle 0x09
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_water_ripple(void);
+extern void effect_spawn_water_ripple(z64_global_t *global, vec3f_t *pos, int unk0, int unk1, int unk2);
 	#if OOT_DEBUG
 		asm("effect_spawn_water_ripple = 0x80029444");
 	#elif OOT_U_1_0
@@ -2668,7 +2668,7 @@ extern u32 actor_register_dynapoly(z64_global_t *global, void *global_plus_0x810
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Mesh Collision Id | V0 = Actor Instance or null
  */
-extern void dynapolyinfo_get_actor(void);
+extern void dynapolyinfo_get_actor(z64_global_t *gl, u32 dynapolyid);
 	#if OOT_DEBUG
 		asm("dynapolyinfo_get_actor = 0x8003EB84");
 	#elif OOT_U_1_0
@@ -2685,6 +2685,8 @@ extern void external_func_8003EBF8(z64_global_t *global, uint32_t global_plus_0x
 		asm("external_func_8003EBF8 = 0x8003EBF8");
 	#elif OOT_U_1_0
 		asm("external_func_8003EBF8 = 0x800314D8");
+	#elif MM_U_1_0
+		asm("external_func_8003EBF8 = 0x800C62BC");
 	#endif
 
 /**
@@ -2717,6 +2719,8 @@ extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, u32 *dy
 		asm("dynapoly_free = 0x8003ED58");
 	#elif OOT_U_1_0
 		asm("dynapoly_free = 0x80031638");
+	#elif MM_U_1_0
+		asm("dynapoly_free = 0x800C64CC");
 	#endif
 
 /**
@@ -3935,7 +3939,7 @@ extern void external_func_8007797C(s16 *unk0, const int unk1, const int unk2);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance + 0x0198 (offset of stored float) | a1 - float value (target float) | a2 - float value (increments or decrements result by this until it reaches the target float) | v0 - returns 0 if it hasn't reached it, 1 if it does
  */
-extern void math_approxf(void);
+extern int math_approxf(float *in_actor, int target, float change);
 	#if OOT_DEBUG
 		asm("math_approxf = 0x80077A00");
 	#elif OOT_U_1_0
@@ -4129,7 +4133,7 @@ extern void external_func_8007809C(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Variable Initializer List ptr
  */
-extern void actor_init_dynapoly(z64_actor_t *actor, void *var_init_list);
+extern void actor_init_dynapoly(z64_actor_t *actor, const uint32_t *var_init_list);
 	#if OOT_DEBUG
 		asm("actor_init_dynapoly = 0x800780DC");
 	#elif OOT_U_1_0
