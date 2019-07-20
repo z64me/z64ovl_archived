@@ -2680,7 +2680,7 @@ extern void dynapolyinfo_get_actor(z64_global_t *gl, u32 dynapolyid);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8003EBF8(z64_global_t *global, uint32_t global_plus_0x810, uint32_t dynapoly_id);
+extern void external_func_8003EBF8(z64_global_t *global, void *global_plus_0x810, uint32_t dynapoly_id);
 	#if OOT_DEBUG
 		asm("external_func_8003EBF8 = 0x8003EBF8");
 	#elif OOT_U_1_0

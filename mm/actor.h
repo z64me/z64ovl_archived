@@ -125,4 +125,20 @@ struct z64_actor_s
  };                                           /* 0x0144 */
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);
+
+typedef struct
+{
+    z64_actor_t         common;                 /* 0x0000 */
+    char                unk_0x144[0x928];       /* 0x0144 */
+    uint32_t            state_flags_1;          /* 0x0A6C */
+    uint32_t            state_flags_2;          /* 0x0A70 */
+    char                unk_0xA74[0x5C];        /* 0x0A74 */
+    float               linear_velocity;        /* 0x0AD0 */
+    uint16_t            movement_angle;         /* 0x0AD4 */
+    char                unk_0xAD6[0x05];        /* 0x0AD6 */
+    uint8_t             sword_active;           /* 0x0ADB */
+    char                unk_0xADC[0x84];        /* 0x0ADC */
+    uint16_t            blast_mask_timer;       /* 0x0B60 */
+} z64_player_t;
+
 #endif /* __ZELDA64_ACTOR_MM_H__ */

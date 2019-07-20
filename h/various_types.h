@@ -39,18 +39,29 @@ typedef enum {
 } z64_button_t;
 
 typedef struct {
-	u16	button;
-	char	stick_x;
-	char	stick_y;
-	char	errno;
-} OSContPad;
-
-typedef struct {
-	OSContPad current;
-	OSContPad last;
-	OSContPad pressEdge;
-	OSContPad releaseEdge;
-} z64_controller_t;
+    union {
+        struct {
+            uint16_t    a   : 1;
+            uint16_t    b   : 1;
+            uint16_t    z   : 1;
+            uint16_t    s   : 1;
+            uint16_t    du  : 1;
+            uint16_t    dd  : 1;
+            uint16_t    dl  : 1;
+            uint16_t    dr  : 1;
+            uint16_t        : 2;
+            uint16_t    l   : 1;
+            uint16_t    r   : 1;
+            uint16_t    cu  : 1;
+            uint16_t    cd  : 1;
+            uint16_t    cl  : 1;
+            uint16_t    cr  : 1;
+        };
+        uint16_t        pad;                /* 0x0000 */
+    };
+    int8_t              x;                  /* 0x0002 */
+    int8_t              y;                  /* 0x0003 */
+} z64_controller_t;                         /* 0x0004 */
 
 /* Legacy Macros */
 /* Get a value of arbitrary type from any address in the actor */
