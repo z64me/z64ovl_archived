@@ -2749,6 +2749,29 @@ extern void dynapoly_alloc(const u32 collision, void *collision_pointer);
 		asm("dynapoly_alloc = 0x800C9564");
 	#endif
 
+
+/**
+ * Wrapper for dynapoly_alloc() and actor_register_dynapoly(), for the purpose
+ * of making code cleaner in actor overlays.
+ * NOTE: This function appears to only exist in MM. A functionally identical
+ *       rewrite for use in OoT has been provided, however.
+ * TODO: Test rewrite in OoT and confirm it works.
+ */
+/* TODO: Does OoT have an equivalent of this function? */
+#if OOT_DEBUG || OOT_U_1_0
+	static inline void actor_dynapoly_new(z64_global_t *gl, z64_actor_t *actor, uint32_t collision)
+	{
+		/* in the entity structure, a dynapoly_t is expected immediately after the actor_t */
+		z64_dynapoly_t *dp = (z64_dynapoly_t*)(((uint8_t*)actor) + sizeof(*actor));
+		uint32_t result = 0;
+		dynapoly_alloc(DP_COLLIDE, &result);
+		dp->id = actor_register_dynapoly(gl, &gl->col_ctxt.sect_size.z, &en->actor, result);
+	}
+#elif MM_U_1_0
+	extern void actor_dynapoly_new(z64_global_t *gl, z64_actor_t *actor, uint32_t collision);
+	asm("actor_dynapoly_new = 0x800CAE34");
+#endif
+
 /**
  * Get PolyType High Word &amp;&gt;&gt; 0x0003 E000
  * TODO These notes need converted into a C function prototype
