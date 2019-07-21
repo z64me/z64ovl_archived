@@ -2521,11 +2521,13 @@ extern void external_func_8003C890(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8003C940(void);
+extern float external_func_8003C940(void *gl830, void *floorpoly, void *unk_sp2C, z64_actor_t *actor, vec3f_t *pos);
 	#if OOT_DEBUG
 		asm("external_func_8003C940 = 0x8003C940");
 	#elif OOT_U_1_0
 		asm("external_func_8003C940 = 0x8002F454");
+	#elif MM_U_1_0
+		asm("external_func_8003C940 = 0x800C411C");
 	#endif
 
 /**
@@ -2692,11 +2694,13 @@ extern void external_func_8003EBF8(z64_global_t *global, void *global_plus_0x810
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8003EC50(void);
+extern void external_func_8003EC50(z64_global_t *gl, void *gl880, uint32_t *collision);;
 	#if OOT_DEBUG
 		asm("external_func_8003EC50 = 0x8003EC50");
 	#elif OOT_U_1_0
 		asm("external_func_8003EC50 = 0x80031530");
+	#elif MM_U_1_0
+		asm("external_func_8003EC50 = 0x800C6314");
 	#endif
 
 /**
@@ -2933,11 +2937,13 @@ extern void external_func_80043548(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8004356C(void);
+extern int external_func_8004356C(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_8004356C = 0x8004356C");
 	#elif OOT_U_1_0
 		asm("external_func_8004356C = 0x80035364");
+	#elif MM_U_1_0
+		asm("external_func_8004356C = 0x800CAF70");
 	#endif
 
 /**
@@ -5969,11 +5975,13 @@ extern void external_func_800C6C28(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800CA720(void);
+extern float external_func_800CA720(float a0);
 	#if OOT_DEBUG
 		asm("external_func_800CA720 = 0x800CA720");
 	#elif OOT_U_1_0
 		asm("external_func_800CA720 = 0x800A45FC");
+	#elif MM_U_1_0
+		asm("external_func_800CA720 = 0x800CA720");
 	#endif
 
 /**
@@ -7078,6 +7086,18 @@ extern float math_rand_zero_one(void);
 		asm("math_rand_zero_one = 0x800CDCCC");
 	#elif MM_U_1_0
 		asm("math_rand_zero_one = 0x80086FDC");
+	#endif
+
+/**
+ * TODO This function is completely undocumented
+ */
+extern int external_func_800FD970(void);
+	#if OOT_DEBUG
+		asm("external_func_800FD970 = 0x800FD970");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#elif MM_U_1_0
+		asm("external_func_800FD970 = 0x80086FA0");
 	#endif
 
 /**
