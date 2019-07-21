@@ -2745,6 +2745,8 @@ extern void dynapoly_alloc(const u32 collision, void *collision_pointer);
 		asm("dynapoly_alloc = 0x80041880");
 	#elif OOT_U_1_0
 		asm("dynapoly_alloc = 0x80033EF4");
+	#elif MM_U_1_0
+		asm("dynapoly_alloc = 0x800C9564");
 	#endif
 
 /**
