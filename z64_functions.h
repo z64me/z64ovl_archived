@@ -2762,7 +2762,7 @@ extern void dynapoly_alloc(const u32 collision, void *collision_pointer);
 	static inline void actor_dynapoly_new(z64_global_t *gl, z64_actor_t *actor, uint32_t collision)
 	{
 		/* in the entity structure, a dynapoly_t is expected immediately after the actor_t */
-		z64_dynapoly_t *dp = (z64_dynapoly_t*)(((uint8_t*)actor) + sizeof(*actor));
+		z64_dynapoly_t *dp = (z64_dynapoly_t*)(actor + 1);
 		uint32_t result = 0;
 		dynapoly_alloc(DP_COLLIDE, &result);
 		dp->id = actor_register_dynapoly(gl, &gl->col_ctxt.sect_size.z, &en->actor, result);
