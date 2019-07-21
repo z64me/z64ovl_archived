@@ -4133,7 +4133,7 @@ extern void external_func_8007809C(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Variable Initializer List ptr
  */
-extern void actor_init_dynapoly(z64_actor_t *actor, const uint32_t *var_init_list);
+extern void actor_init_dynapoly(z64_actor_t *actor, const z64_dynapoly_init_t *var_init_list);
 	#if OOT_DEBUG
 		asm("actor_init_dynapoly = 0x800780DC");
 	#elif OOT_U_1_0
