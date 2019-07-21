@@ -2753,29 +2753,6 @@ extern void dynapoly_alloc(const u32 collision, void *collision_pointer);
 		asm("dynapoly_alloc = 0x800C9564");
 	#endif
 
-
-/**
- * Wrapper for dynapoly_alloc() and actor_register_dynapoly(), for the purpose
- * of making code cleaner in actor overlays.
- * NOTE: This function appears to only exist in MM. A functionally identical
- *       rewrite for use in OoT has been provided, however.
- * TODO: Test rewrite in OoT and confirm it works.
- */
-/* TODO: Does OoT have an equivalent of this function? */
-#if OOT_DEBUG || OOT_U_1_0
-	static inline void actor_dynapoly_new(z64_global_t *gl, z64_actor_t *actor, uint32_t collision)
-	{
-		/* in the entity structure, a dynapoly_t is expected immediately after the actor_t */
-		z64_dynapoly_t *dp = (z64_dynapoly_t*)(actor + 1);
-		uint32_t result = 0;
-		dynapoly_alloc(DP_COLLIDE, &result);
-		dp->id = actor_register_dynapoly(gl, &gl->col_ctxt.sect_size.z, &en->actor, result);
-	}
-#elif MM_U_1_0
-	extern void actor_dynapoly_new(z64_global_t *gl, z64_actor_t *actor, uint32_t collision);
-	asm("actor_dynapoly_new = 0x800CAE34");
-#endif
-
 /**
  * Get PolyType High Word &amp;&gt;&gt; 0x0003 E000
  * TODO These notes need converted into a C function prototype
@@ -4183,7 +4160,6 @@ extern void external_func_80078310(void);
 		asm("external_func_80078310 = 0x80064178");
 	#elif MM_U_1_0
 		asm("external_func_80078310 = 0x800FFCD8");
-		asm("external_func_800FFCD8 = 0x800FFCD8");
 	#endif
 
 /**
@@ -4199,7 +4175,6 @@ extern void external_func_8007841C(float *arg0, f32 arg1, f32 arg2, f32 arg3);
 		asm("external_func_8007841C = 0x80064280");
 	#elif MM_U_1_0
 		asm("external_func_8007841C = 0x800FFDF8");
-		asm("external_func_800FFDF8 = 0x800FFDF8");
 	#endif
 
 /**
