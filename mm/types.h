@@ -212,7 +212,7 @@ typedef struct
 // Global Context
 typedef struct
 {
-  z64_gfx_t        *gfx;                   /* 0x0000 */
+  z64_gfx_t       *gfx_ctxt;                   /* 0x0000 */
   void            *gamestate_update;      /* 0x0004 */
   void            *gamestate_dtor;        /* 0x0008 */
   void            *gamestate_ctor;        /* 0x000C */
