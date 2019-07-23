@@ -678,21 +678,19 @@ typedef struct z64_capsule_init_s {
   /* 0x06 */ PADDING(0x0002);
   /* 0x08 */ uint8_t cso_0x08;
   /* 0x09 */ PADDING(0x0003);
-  /* 0x0C */ uint32_t cso_0x0C;
+  /* 0x0C */ int32_t at_flags;
   /* 0x10 */ uint8_t damage_type;
   /* 0x11 */ uint8_t damage_amount;
   /* 0x12 */ PADDING(0x0002);
-  /* 0x14 */ uint32_t cso_0x14;
-  /* 0x18 */ uint8_t cso_0x18;
-  /* 0x19 */ uint8_t cso_0x19;
-  /* 0x1A */ PADDING(0x0002);
+  /* 0x14 */ uint32_t mask_exclusion;
+  /* 0x18 */ int32_t cso_0x18;
   /* 0x1C */ uint8_t cso_0x1C;
   /* 0x1D */ uint8_t cso_0x1D;
   /* 0x1E */ uint8_t cso_0x1E;
   /* 0x1F */ PADDING(0x0001);
   /* 0x20 */ uint16_t radius;
   /* 0x22 */ uint16_t height;
-  /* 0x24 */ uint16_t cso_0x24;
+  /* 0x24 */ uint16_t y_shift;
   /* 0x26 */ vec3s_t pos;
   /* 0x2C */
 } z64_capsule_init_t;
