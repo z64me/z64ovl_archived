@@ -28,6 +28,15 @@
 	V3A0.z += V3A1.z;          \
 }
 
+#define VEC3_SUB( V3DST, V3A0, V3A1 ) \
+{                                     \
+    V3DST.x = V3A0.x - V3A1.x;        \
+    V3DST.y = V3A0.y - V3A1.y;        \
+    V3DST.z = V3A0.z - V3A1.z;        \
+}
+
+#define SQRT(ARG0) sqrtf((ARG0))
+
 /****
  * copy `num` bytes from `src` to `dst`
  * This function is not used inside any existing overlay
@@ -3288,7 +3297,7 @@ extern void external_func_8005C450(void);
  * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void actor_capsule_init(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, const z64_capsule_init_t *source);
+extern void actor_capsule_init(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, const uint32_t *source);
 	#if OOT_DEBUG
 		asm("actor_capsule_init = 0x8005C4AC");
 	#elif OOT_U_1_0

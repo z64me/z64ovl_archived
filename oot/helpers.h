@@ -7,6 +7,20 @@
  * help simplify custom enemies/NPCs/bosses.
  ***/
 
+/****
+test for Link's age
+***/
+static inline int
+zh_link_is_child(void)
+{
+    return AVAL(SAVE_CONTEXT, int, 0x0004);
+}
+
+static inline int
+zh_link_is_adult(void)
+{
+    return !zh_link_is_child();
+}
 
 /****
  * helper_player_textbox_selection
@@ -29,10 +43,10 @@ static int helper_player_textbox_selection(z64_global_t *global)
 static u32 *helper_get_pointer_to_object_data(uint16_t object_id, z64_global_t *global)
 {
 	int index = object_get_index((u32)AADDR(global,0x117A4), object_id);
-	
+
 	if(index < 0)
 		return NULL;
-	
+
 	return *(u32*)AADDR((((index << 4) + index) << 2) + (u32)global, 0x117B4);
 }
 
