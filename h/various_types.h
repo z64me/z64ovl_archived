@@ -18,6 +18,7 @@ typedef enum{
 #define MAX(MAXA0, MAXA1) (((MAXA0)>(MAXA1))?(MAXA0):(MAXA1))
 #define ABS(ABSA0) (((ABSA0)<0)?(-(ABSA0)):ABSA0)
 #define TWEEN_LINEAR(TWL_FROM, TWL_TO, TWL_SPEED) (SGN((TWL_TO)-(TWL_FROM))*MIN(ABS((TWL_TO)-(TWL_FROM)),(TWL_SPEED)))
+#define SEXT24(SEXTA0) (((SEXTA0) & 0x800000) ? ((uint32_t)(SEXTA0) | 0xff000000):(uint32_t)(SEXTA0))
 
 // Controller Input
 typedef enum {
