@@ -2023,7 +2023,7 @@ extern void external_func_80033480(
  * TODO confirm whether "actor collision struct" means the capsule structure, or something else
  * A0 = Global Context | A1 = Actor Collision Struct | V0 = Null or Pointer to Explosive-type actor that collided
  */
-extern z64_actor_t *actor_is_bombed(z64_global_t *global, z64_capsule_t *capsule);
+extern z64_actor_t *actor_is_bombed(z64_global_t *global, z64_collider_cylinder_main_t *capsule);
 	#if OOT_DEBUG
 		asm("actor_is_bombed = 0x80033640");
 	#elif OOT_U_1_0
@@ -3239,7 +3239,7 @@ extern void external_func_8005C050(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void actor_capsule_alloc(z64_global_t *global, z64_capsule_t *collision);
+extern void actor_capsule_alloc(z64_global_t *global, z64_collider_cylinder_main_t *collision);
 	#if OOT_DEBUG
 		asm("actor_capsule_alloc = 0x8005C364");
 	#elif OOT_U_1_0
@@ -3253,7 +3253,7 @@ extern void actor_capsule_alloc(z64_global_t *global, z64_capsule_t *collision);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset where you stored the hitbox struct)
  */
-extern void actor_capsule_free(z64_global_t *global, z64_capsule_t *collision);
+extern void actor_capsule_free(z64_global_t *global, z64_collider_cylinder_main_t *collision);
 	#if OOT_DEBUG
 		asm("actor_capsule_free = 0x8005C3AC");
 	#elif OOT_U_1_0
@@ -3297,7 +3297,7 @@ extern void external_func_8005C450(void);
  * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void actor_capsule_init(z64_global_t *global, z64_capsule_t *dest, z64_actor_t *actor, const uint32_t *source);
+extern void actor_capsule_init(z64_global_t *global, z64_collider_cylinder_main_t *dest, z64_actor_t *actor, const uint32_t *source);
 	#if OOT_DEBUG
 		asm("actor_capsule_init = 0x8005C4AC");
 	#elif OOT_U_1_0
@@ -3381,7 +3381,7 @@ extern void external_func_8005D160(void);
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
  */
-extern void actor_collision_check_set_at(z64_global_t *global, void* simple_body_groups, z64_capsule_t *collision);
+extern void actor_collision_check_set_at(z64_global_t *global, void* simple_body_groups, z64_collider_cylinder_main_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_at = 0x8005D79C");
 	#elif OOT_U_1_0
@@ -3395,7 +3395,7 @@ extern void actor_collision_check_set_at(z64_global_t *global, void* simple_body
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
  */
-extern void actor_collision_check_set_ac(z64_global_t *global, void* simple_body_groups, z64_capsule_t *collision);
+extern void actor_collision_check_set_ac(z64_global_t *global, void* simple_body_groups, z64_collider_cylinder_main_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ac = 0x8005D9F4");
 	#elif OOT_U_1_0
@@ -3409,7 +3409,7 @@ extern void actor_collision_check_set_ac(z64_global_t *global, void* simple_body
  * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
  * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit? | Called directly by actors
  */
-extern void actor_collision_check_set_ot(z64_global_t *global, void *simple_body_groups, z64_capsule_t *collision);
+extern void actor_collision_check_set_ot(z64_global_t *global, void *simple_body_groups, z64_collider_cylinder_main_t *collision);
 	#if OOT_DEBUG
 		asm("actor_collision_check_set_ot = 0x8005DC4C");
 	#elif OOT_U_1_0
@@ -3465,7 +3465,7 @@ extern void external_func_80061EFC(void);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void actor_capsule_update(z64_actor_t *actor, z64_capsule_t *collision);
+extern void actor_capsule_update(z64_actor_t *actor, z64_collider_cylinder_main_t *collision);
 	#if OOT_DEBUG
 		asm("actor_capsule_update = 0x800626DC");
 	#elif OOT_U_1_0
