@@ -3465,13 +3465,13 @@ extern void external_func_80061EFC(void);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
  */
-extern void actor_capsule_update(z64_actor_t *actor, z64_collider_cylinder_main_t *collision);
+extern void actor_collider_cylinder_update(z64_actor_t *actor, z64_collider_cylinder_main_t *collision);
 	#if OOT_DEBUG
-		asm("actor_capsule_update = 0x800626DC");
+		asm("actor_collider_cylinder_update = 0x800626DC");
 	#elif OOT_U_1_0
-		asm("actor_capsule_update = 0x80050B00");
+		asm("actor_collider_cylinder_update = 0x80050B00");
 	#elif MM_U_1_0
-		asm("actor_capsule_update = 0x800E7DF8");
+		asm("actor_collider_cylinder_update = 0x800E7DF8");
 	#endif
 
 /**
