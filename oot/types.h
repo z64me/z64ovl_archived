@@ -894,54 +894,6 @@ typedef struct z64_damagechart_init {
 	;
 } z64_damagechart_init_t;
 
-typedef struct z64_collider_s { /* Collider Structure */
-    z64_actor_t * actor;
-    z64_actor_t * unk_actor_1;
-    z64_actor_t * unk_actor_2;
-    z64_actor_t * unk_actor_3;
-    uint8_t collider_flags; /* Compared to 0x11 */
-    uint8_t collide_flags; /* Compared to 0x10 */
-    uint8_t mask_a; /* Bitwise-and compared to 0x13 */
-    uint8_t mask_b; /* Bitwise-and compared to 0x12 */
-    uint8_t unk_0x14;
-    uint8_t type; /* Cylinder Collection, Cylinder, Triangle Collection, Quad */
-} z64_collider_t;
-
-typedef struct z64_collider_bump_s {
-    int32_t flags; /* Collision Exclusion Mask */
-    uint8_t effect;
-    uint8_t unk_0x05;
-    int32_t unk_0x08;
-} z64_collider_bump_t;
-
-typedef struct z64_collider_touch_s {
-    int32_t flags; /* Toucher Attack Identifier Flags */
-    uint8_t unk_0x04;
-    uint8_t damage; /* Damage or Stun Timer */
-} z64_collider_touch_t;
-
-typedef struct z64_collider_body_s { /* Collider Body Structure */
-    z64_collider_touch_t toucher;
-    z64_collider_bump_t bumper;
-    uint8_t flags;
-    uint8_t toucher_flags;
-    uint8_t bumper_flags;
-    uint8_t flags_2;
-    int32_t unk_0x18;
-    z64_collider_t * collider;
-    int32_t unk_0x20;
-    void * colliding;
-} z64_collider_body_t;
-
-typedef struct z64_collider_cylinder_main_s { /* Previously (z64_capsule) */
-    z64_collider_t base;
-    z64_collider_body_t body;
-    int16_t radius;
-    int16_t height;
-    int16_t y_shift;
-    vec3s_t position;
-} z64_collider_cylinder_main_t;
-
 typedef struct z64_dynapoly {
     u8 unk_0[16];
     u32 id;
