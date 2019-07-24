@@ -685,13 +685,75 @@ typedef struct {
 } z64_skelanime_t;
 
 // Actor Collision
-typedef struct z64_collider_cylinder_init_s { /* Initialization Variables (in overlay) for z64_collider_cylinder_main_t */
+typedef struct z64_collider_s { /* Collider Structure */
+    z64_actor_t * actor;
+    z64_actor_t * unk_actor_1;
+    z64_actor_t * unk_actor_2;
+    z64_actor_t * unk_actor_3;
+    uint8_t collider_flags; /* Compared to 0x11 */
+    uint8_t collide_flags; /* Compared to 0x10 */
+    uint8_t mask_a; /* Bitwise-and compared to 0x13 */
+    uint8_t mask_b; /* Bitwise-and compared to 0x12 */
+    uint8_t unk_0x14;
+    uint8_t type; /* Cylinder Collection, Cylinder, Triangle Collection, Quad */
+} z64_collider_t;
+
+typedef struct z64_collider_bump_s {
+    int32_t flags; /* Collision Exclusion Mask */
+    uint8_t effect;
+    uint8_t unk_0x05;
+    int32_t unk_0x08;
+} z64_collider_bump_t;
+
+typedef struct z64_collider_touch_s {
+    int32_t flags; /* Toucher Attack Identifier Flags */
+    uint8_t unk_0x04;
+    uint8_t damage; /* Damage or Stun Timer */
+} z64_collider_touch_t;
+
+typedef struct z64_collider_body_s { /* Collider Body typedef structure */
+    z64_collider_touch_t toucher;
+    z64_collider_bump_t bumper;
+    uint8_t flags;
+    uint8_t toucher_flags;
+    uint8_t bumper_flags;
+    uint8_t flags_2;
+    int32_t unk_0x18;
+    z64_collider_t * collider;
+    int32_t unk_0x20;
+    void * colliding;
+} z64_collider_body_t;
+
+typedef struct z64_collider_cylinder_collection_s {
+    z64_collider_t base;
+    int32_t count;
+    z64_collider_cylinder_t * list;
+} z64_collider_cylinder_collection_t;
+
+typedef struct z64_collider_cylinder_s {
+    z64_collider_body_t body;
+    vec3s_t unk_0x28;
+    int16_t unk_0x2E;
+    vec3s_t position;
+    int16_t unk_0x36;
+    int32_t unk_0x38;
+    uint8_t unk_0x3C;
+} z64_collider_cylinder_t;
+
+typedef enum z64_collider_type_e { /* Collider Types */
+    COL_TYPE_CYLINDER=1,
+    COL_TYPE_CYLINDER_GROUP=0,
+    COL_TYPE_QUAD=3,
+    COL_TYPE_TRIANGLE_GROUP=2
+} z64_collider_type_t;
+
+typedef struct z64_collision_body_info_s { /* Initialization Variables (in overlay) for z64_collider */
     uint8_t unk_0x14;
     uint8_t collider_flags; /* Collider Flags */
     uint8_t collide_flags; /* Collide Flags */
     uint8_t mask_a; /* Bitwise-And with Mask B */
     uint8_t mask_b; /* Bitwise-And with Mask A */
-    uint8_t type; /* CollisionBody Type */
+    z64_collider_type_t type; /* Collider Type */
     uint8_t unk_0x06_[2]; /* 0000 */
     uint8_t body_flags;
     uint8_t unk_0x09_[3]; /* 000000 */
@@ -702,14 +764,54 @@ typedef struct z64_collider_cylinder_init_s { /* Initialization Variables (in ov
     int32_t bumper_mask; /* Bumper Exclusion Mask */
     uint8_t unk_0x18_[4]; /* 00000000 */
     uint8_t toucher_flags; /* Attack Toucher Flags */
-    uint8_t bumper_flags; /* Bumber Flags */
+    uint8_t bumper_flags; /* Bumper Flags */
     uint8_t body_flags_2;
     uint8_t unk_0x1F; /* 00 */
+} z64_collision_body_info_t;
+
+typedef struct z64_collider_cylinder_init_s { /* Initialization Variables (in overlay) for z64_collider_cylinder_main_t */
+    z64_collision_body_info_t body;
     int16_t radius; /* Cylinder Radius */
     int16_t height; /* Cylinder Height */
     int16_t y_shift; /* Shift Cylinder on Y Axis */
     vec3s_t position; /* {X, Y, Z} position of Cylinder */
 } z64_collider_cylinder_init_t;
+
+typedef struct z64_collider_cylinder_main_s { /* Previously (z64_capsule) */
+    z64_collider_t base;
+    z64_collider_body_t body;
+    int16_t radius;
+    int16_t height;
+    int16_t y_shift;
+    vec3s_t position;
+} z64_collider_cylinder_main_t;
+
+typedef struct z64_collider_quad_s {
+    z64_collider_t base;
+    z64_collider_body_t body;
+    vec3f_t point_a;
+    vec3f_t point_b;
+    vec3f_t point_c;
+    vec3f_t point_d;
+    vec3s_t bounding_max;
+    vec3s_t bounding_min;
+} z64_collider_quad_t;
+
+typedef struct z64_collider_tri_collection_s {
+    z64_collider_t base;
+    int32_t count;
+    z64_collider_tri_t * list;
+} z64_collider_tri_collection_t;
+
+typedef struct z64_collider_tri_s {
+    z64_collider_body_t body;
+    vec3f_t point_a;
+    vec3f_t point_b;
+    vec3f_t point_c;
+    vec3f_t unit_normal;
+    float normal_dist;
+} z64_collider_tri_t;
+
 
 /* Damage chart notes
  * sword0 and sword1 refer to the Kokiri/Master Sword,
