@@ -668,32 +668,31 @@ typedef struct {
 } z64_skelanime_t;
 
 // Actor Collision
-typedef struct z64_capsule_init_s {
-  /* 0x00 */ uint8_t cso_0x00;
-  /* 0x01 */ uint8_t cso_0x01;
-  /* 0x02 */ uint8_t cso_0x01_02;
-  /* 0x03 */ uint8_t unk_0x12;
-  /* 0x04 */ uint8_t unk_0x12_2;
-  /* 0x05 */ uint8_t cso_0x05;
-  /* 0x06 */ PADDING(0x0002);
-  /* 0x08 */ uint8_t cso_0x08;
-  /* 0x09 */ PADDING(0x0003);
-  /* 0x0C */ int32_t at_flags;
-  /* 0x10 */ uint8_t damage_type;
-  /* 0x11 */ uint8_t damage_amount;
-  /* 0x12 */ PADDING(0x0002);
-  /* 0x14 */ uint32_t mask_exclusion;
-  /* 0x18 */ int32_t cso_0x18;
-  /* 0x1C */ uint8_t cso_0x1C;
-  /* 0x1D */ uint8_t cso_0x1D;
-  /* 0x1E */ uint8_t cso_0x1E;
-  /* 0x1F */ PADDING(0x0001);
-  /* 0x20 */ uint16_t radius;
-  /* 0x22 */ uint16_t height;
-  /* 0x24 */ uint16_t y_shift;
-  /* 0x26 */ vec3s_t pos;
-  /* 0x2C */
-} z64_capsule_init_t;
+typedef struct z64_collider_cylinder_init_s { /* Initialization Variables (in overlay) for z64_collider_cylinder_main_t */
+    uint8_t unk_0x14;
+    uint8_t collider_flags; /* Collider Flags */
+    uint8_t collide_flags; /* Collide Flags */
+    uint8_t mask_a; /* Bitwise-And with Mask B */
+    uint8_t mask_b; /* Bitwise-And with Mask A */
+    uint8_t type; /* CollisionBody Type */
+    uint8_t unk_0x06_[2]; /* 0000 */
+    uint8_t body_flags;
+    uint8_t unk_0x09_[3]; /* 000000 */
+    int32_t toucher_mask; /* Attack Toucher Exclusion Mask */
+    uint8_t bumper_effect; /* Damage Effect (Knockback, Fire, etc.) */
+    uint8_t toucher_damage; /* Damage Amount or Stun Timer */
+    uint8_t unk_0x12_[2]; /* 0000 */
+    int32_t bumper_mask; /* Bumper Exclusion Mask */
+    uint8_t unk_0x18_[4]; /* 00000000 */
+    uint8_t toucher_flags; /* Attack Toucher Flags */
+    uint8_t bumper_flags; /* Bumber Flags */
+    uint8_t body_flags_2;
+    uint8_t unk_0x1F; /* 00 */
+    int16_t radius; /* Cylinder Radius */
+    int16_t height; /* Cylinder Height */
+    int16_t y_shift; /* Shift Cylinder on Y Axis */
+    vec3s_t position; /* {X, Y, Z} position of Cylinder */
+} z64_collider_cylinder_init_t;
 
 /* Damage chart notes
  * sword0 and sword1 refer to the Kokiri/Master Sword,
