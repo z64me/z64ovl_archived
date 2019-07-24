@@ -6,6 +6,26 @@
 #include "../h/n64.h"
 #include "../h/various_types.h"
 
+typedef struct
+{
+  z64_controller_t  raw;                      /* 0x0000 */
+  /* 0x0000: ok */
+  /* 0x0800: device not present */
+  /* 0x0400: transaction error */
+  uint16_t          status;                   /* 0x0004 */
+  z64_controller_t  raw_prev;                 /* 0x0006 */
+  uint16_t          status_prev;              /* 0x000A */
+  uint16_t          pad_pressed;              /* 0x000C */
+  int8_t            x_diff;                   /* 0x000E */
+  int8_t            y_diff;                   /* 0x000F */
+  char              unk_02_[0x0002];          /* 0x0010 */
+  uint16_t          pad_released;             /* 0x0012 */
+  int8_t            adjusted_x;               /* 0x0014 */
+  int8_t            adjusted_y;               /* 0x0015 */
+  char              unk_03_[0x0002];          /* 0x0016 */
+                                              /* 0x0018 */
+} z64_input_t;
+
 // Graphics Context
 typedef struct
 {
@@ -43,25 +63,22 @@ typedef struct
 } z64_gfx_t;
 
 // Global Context
-typedef struct{
-	z64_gfx_t *gfx_ctxt;
-	int *update;
-	int *destuctor;
-	int *init_next;
-	int size;
-	z64_controller_t controller[4];
-	uint32_t heap_size;
-	int *heap;
-	int *heap_free_start;
-	int *heap_free_end;
-	int *unk1;
-	int *unk2;
-	int *unk3;
-	int *unk4;
-	int *unk5;
-	int execute;
-	int update_count;
-	int unk6;
+typedef struct z64_game_state_s { /* Game State Structure */
+    z64_gfx_t * gfx_ctxt; /* Graphics Context Address */
+    void * state_main;
+    void * state_dtor;
+    uint32_t next_ctor;
+    uint32_t next_size;
+    z64_input_t input[4];
+    uint32_t state_heap_size;
+    void * state_heap;
+    void * heap_start;
+    void * heap_end;
+    void * state_heap_node;
+    char unk_00_[16];
+    int32_t state_continue;
+    int32_t state_frames;
+    uint32_t unk_01_;
 } z64_game_state_t;
 
 typedef struct
