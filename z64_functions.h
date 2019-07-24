@@ -240,7 +240,7 @@ extern void effect_add(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002709C(void);
+extern void external_func_8002709C(z64_global_t *gl, uint32_t a1);
 	#if OOT_DEBUG
 		asm("external_func_8002709C = 0x8002709C");
 	#elif OOT_U_1_0
@@ -3349,7 +3349,7 @@ extern void external_func_8005D018(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005D060(void);
+extern void external_func_8005D060(z64_global_t *gl, void *a1);
 	#if OOT_DEBUG
 		asm("external_func_8005D060 = 0x8005D060");
 	#elif OOT_U_1_0
