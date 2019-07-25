@@ -5359,7 +5359,7 @@ extern void actor_anime_change(z64_skelanime_t *skelanime, u32 animation, f32 pl
  * TODO These notes need converted into a C function prototype
  * A0 = ? struct (Anju + 0x13C/ Archery Gerudo + 0x188) | A1 = Segment Offset
  */
-extern void external_func_800A51E8(void);
+extern void external_func_800A51E8(z64_skelanime_t *skelanime, uint32_t animation);
 	#if OOT_DEBUG
 		asm("external_func_800A51E8 = 0x800A51E8");
 	#elif OOT_U_1_0
@@ -5390,8 +5390,9 @@ extern void external_func_800A529C(void);
  * Change Animation
  * TODO These notes need converted into a C function prototype
  * A0 = actor instance + 0x014C (Drawing Table) | A1 = Animation Pointer (in Object File)
+ * Wrapper for actor_anime_change and anime_get_framecount */
  */
-extern void external_func_800A52F8(void);
+extern void actor_anime_set(z64_skelanime_t *skelanime, uint32_t animation);
 	#if OOT_DEBUG
 		asm("external_func_800A52F8 = 0x800A52F8");
 	#elif OOT_U_1_0

@@ -724,12 +724,6 @@ typedef struct z64_collider_body_s { /* Collider Body typedef structure */
     void * colliding;
 } z64_collider_body_t;
 
-typedef struct z64_collider_cylinder_collection_s {
-    z64_collider_t base;
-    int32_t count;
-    z64_collider_cylinder_t * list;
-} z64_collider_cylinder_collection_t;
-
 typedef struct z64_collider_cylinder_s {
     z64_collider_body_t body;
     vec3s_t unk_0x28;
@@ -739,6 +733,21 @@ typedef struct z64_collider_cylinder_s {
     int32_t unk_0x38;
     uint8_t unk_0x3C;
 } z64_collider_cylinder_t;
+
+typedef struct z64_collider_tri_s {
+    z64_collider_body_t body;
+    vec3f_t point_a;
+    vec3f_t point_b;
+    vec3f_t point_c;
+    vec3f_t unit_normal;
+    float normal_dist;
+} z64_collider_tri_t;
+
+typedef struct z64_collider_cylinder_collection_s {
+    z64_collider_t base;
+    int32_t count;
+    z64_collider_cylinder_t * list;
+} z64_collider_cylinder_collection_t;
 
 typedef enum z64_collider_type_e { /* Collider Types */
     COL_TYPE_CYLINDER=1,
@@ -802,16 +811,6 @@ typedef struct z64_collider_tri_collection_s {
     int32_t count;
     z64_collider_tri_t * list;
 } z64_collider_tri_collection_t;
-
-typedef struct z64_collider_tri_s {
-    z64_collider_body_t body;
-    vec3f_t point_a;
-    vec3f_t point_b;
-    vec3f_t point_c;
-    vec3f_t unit_normal;
-    float normal_dist;
-} z64_collider_tri_t;
-
 
 /* Damage chart notes
  * sword0 and sword1 refer to the Kokiri/Master Sword,

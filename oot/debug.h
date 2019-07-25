@@ -10,6 +10,7 @@
 // RAM Stuff
 #define SAVE_CONTEXT      0x8015E660
 #define GLOBAL_IS_NIGHT   0x8015E670 // u32, 0 if day, 1 if night
+#define STATIC_CONTEXT    0x8015FA90
 #define RAM_SEGMENT_TABLE 0x80166FA8
 #define GLOBAL_CONTEXT    0x80212020
 #define AS_A0             (GLOBAL_CONTEXT + 0x001C24) // spawn_actor argument 0
