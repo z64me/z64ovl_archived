@@ -652,14 +652,7 @@ typedef struct {
 	/* 0x10 */ uint32_t unk4;
 } z64_debug_text_t;
 
-/*enum DISP{
-	WORK = 0x01BC,
-	OVERLAY = 0x02B0,
-	POLY_OPA = 0x02C0,
-	POLY_XLU = 0x02D0
-};*/
-
-/* Actor Specific? */
+/* skelanime */
 typedef struct {
   /* 0x00 */ uint8_t limb_count;
   /* 0x01 */ uint8_t unk1; /* Probably Padding*/
@@ -684,7 +677,21 @@ typedef struct {
   /* 0x40 */
 } z64_skelanime_t;
 
-// Actor Collision
+/* collision */
+typedef enum z64_bumper_effect_e { /* Elemental Damage Effects */
+    BUMP_FX_ELECTRIC=3,
+    BUMP_FX_FIRE=1,
+    BUMP_FX_ICE=2,
+    BUMP_FX_KNOCKBACK=0
+} z64_bumper_effect_t;
+
+typedef enum z64_collider_type_e { /* Collider Types */
+    COL_TYPE_CYLINDER=1,
+    COL_TYPE_CYLINDER_GROUP=0,
+    COL_TYPE_QUAD=3,
+    COL_TYPE_TRIANGLE_GROUP=2
+} z64_collider_type_t;
+
 typedef struct z64_collider_s { /* Collider Structure */
     z64_actor_t * actor;
     z64_actor_t * unk_actor_1;
@@ -700,7 +707,7 @@ typedef struct z64_collider_s { /* Collider Structure */
 
 typedef struct z64_collider_bump_s {
     int32_t flags; /* Collision Exclusion Mask */
-    uint8_t effect;
+    z64_bumper_effect_t effect; /* Damage Effect (Knockback, Fire, etc.) */
     uint8_t unk_0x05;
     int32_t unk_0x08;
 } z64_collider_bump_t;
@@ -749,13 +756,6 @@ typedef struct z64_collider_cylinder_collection_s {
     z64_collider_cylinder_t * list;
 } z64_collider_cylinder_collection_t;
 
-typedef enum z64_collider_type_e { /* Collider Types */
-    COL_TYPE_CYLINDER=1,
-    COL_TYPE_CYLINDER_GROUP=0,
-    COL_TYPE_QUAD=3,
-    COL_TYPE_TRIANGLE_GROUP=2
-} z64_collider_type_t;
-
 typedef struct z64_collision_body_info_s { /* Initialization Variables (in overlay) for z64_collider */
     uint8_t unk_0x14;
     uint8_t collider_flags; /* Collider Flags */
@@ -767,7 +767,7 @@ typedef struct z64_collision_body_info_s { /* Initialization Variables (in overl
     uint8_t body_flags;
     uint8_t unk_0x09_[3]; /* 000000 */
     int32_t toucher_mask; /* Attack Toucher Exclusion Mask */
-    uint8_t bumper_effect; /* Damage Effect (Knockback, Fire, etc.) */
+    z64_bumper_effect_t bumper_effect; /* Damage Effect (Knockback, Fire, etc.) */
     uint8_t toucher_damage; /* Damage Amount or Stun Timer */
     uint8_t unk_0x12_[2]; /* 0000 */
     int32_t bumper_mask; /* Bumper Exclusion Mask */
@@ -811,6 +811,29 @@ typedef struct z64_collider_tri_collection_s {
     int32_t count;
     z64_collider_tri_t * list;
 } z64_collider_tri_collection_t;
+
+/* collision, dynapoly */
+typedef struct z64_dynapoly {
+    u8 unk_0[16];
+    u32 id;
+    u8 unk_1[16];
+		u8 collided_flag;
+		u8 unk_2[3]; /* for alignment right now */
+} z64_dynapoly_t;
+
+typedef struct z64_dynapoly_init {
+    u8 unk_0[2];
+    u16 scale;
+    u32 unk_1;
+		u32 unk_2;
+		u32 unk_3;
+		u32 unk_4;
+} z64_dynapoly_init_t;
+
+enum dynapoly_move_flag {
+	DPM_PLAYER = 0b01,
+ 	DPM_ENEMY = 0b10
+};
 
 /* Damage chart notes
  * sword0 and sword1 refer to the Kokiri/Master Sword,
@@ -893,35 +916,6 @@ typedef struct z64_damagechart_init {
 	;
 } z64_damagechart_init_t;
 
-typedef struct z64_dynapoly {
-    u8 unk_0[16];
-    u32 id;
-    u8 unk_1[16];
-		u8 collided_flag;
-		u8 unk_2[3]; /* for alignment right now */
-} z64_dynapoly_t;
-
-typedef struct z64_dynapoly_init {
-    u8 unk_0[2];
-    u16 scale;
-    u32 unk_1;
-		u32 unk_2;
-		u32 unk_3;
-		u32 unk_4;
-} z64_dynapoly_init_t;
-
-enum dynapoly_move_flag {
-	DPM_PLAYER = 0b01,
- 	DPM_ENEMY = 0b10
-};
-
 #define DAMAGE_HEARTS(HA0) (int)((HA0) * 16)
-
-enum damage_effect {
-  KNOCKBACK = 0x00,
-  FIRE = 0x01,
-  ICE = 0x02,
-  ELECTRIC = 0x03
-};
 
 #endif
