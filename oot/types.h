@@ -835,87 +835,63 @@ enum dynapoly_move_flag {
  	DPM_ENEMY = 0b10
 };
 
-/* Damage chart notes
- * sword0 and sword1 refer to the Kokiri/Master Sword,
-   longsword refers to the Biggoron Sword / Giant's Knife,
-   and brokensword refers to the broken longsword
- * everything held together in a union { ... } shares the same setting
- */
-typedef struct z64_damagechart_init {
-// TODO: would there be a hammer_shockwave, or do actors that respond to it do it differently?
-	u8
-/* 00 */
-			misc_dekunut
-	;
-/* 01 */	union {
-				u8
-					misc_dekustick,
+/* damage chart */
+Untitled
+union damage_chart_entry_01 {
+    uint8_t stick; /* Deku Stick Slash */
+    uint8_t pot; /* Tsubo Throw */
+};
 
-					misc_pot
-				;
-			};
-	u8
-/* 02 */	misc_slingshot,
-/* 03 */	misc_explosion,
-/* 04 */	misc_boomerang,
+union damage_chart_entry_19 {
+    uint8_t sword0_jump; /* Kokiri Sword Jump Attack */
+    uint8_t sword0_bigspin; /* Kokiri Sword Spin Attack (Full Charge) */
+    uint8_t broken_jump; /* Broken Giant's Knife Jump Attack */
+    uint8_t broken_bigspin; /* Broken Giant's Knife Spin Attack (Full Charge) */
+};
 
-/* 05 */	arrow,
+union damage_chart_entry_1A {
+    uint8_t sword2_jump; /* Biggoron Sword and Giant's Knife Jump Attack */
+    uint8_t sword2_bigspin; /* Biggoron Sword and Giant's Knife Spin Attack (Full Charge) */
+};
 
-/* 06 */	hammer_swing,
+union damage_chart_entry_1B {
+    uint8_t sword1_jump; /* Master Sword Jump Attack */
+    uint8_t sword1_bigspin; /* Master Sword Spin Attack (Full Charge) */
+};
 
-/* 07 */	misc_hookshot,
-
-/* 08 */	sword0_slash,
-/* 09 */	sword1_slash,
-/* 0A */	longsword_slash,
-
-/* 0B */	arrow_fire,
-/* 0C */	arrow_ice,
-/* 0D */	arrow_light,
-/* 0E */	arrow_wind,  // TODO are these really Wind/Spirit/Shadow?
-/* 0F */	arrow_spirit,
-/* 10 */	arrow_shadow,
-
-/* 11 */	magic_fire,
-/* 12 */	magic_ice,   // confirmed
-/* 13 */	magic_light, // confirmed
-
-/* 14 */	unk0,
-/* 15 */	unk1,
-
-/* 16 */	sword0_spin,
-/* 17 */	longsword_spin, // TODO confirm if this is correct
-/* 18 */	sword1_spin
-	;
-/* 19 */	union {
-				u8
-					sword0_jump,
-					sword0_bigspin,
-
-					brokensword_jump,
-					brokensword_bigspin
-				;
-			};
-/* 1A */	union {
-				u8
-					longsword_jump,
-					longsword_bigspin
-				;
-			};
-/* 1B */	union {
-				u8
-					sword1_jump,
-					sword1_bigspin
-				;
-			};
-	u8
-/* 1C */	unk2,
-/* 1D */	unk3,
-/* 1E */	hammer_jump,
-/* 1F */	unk4
-	;
+struct z64_damagechart_init_s { /* Damage Chart Initialization Variables (& 0xF0 = Effect Type, & 0x0F = Damage Amount) */
+    uint8_t nut; /* Deku Nut */
+    union damage_chart_entry_01 stick_etc;
+    uint8_t slingshot; /* Fairy Slingshot */
+    uint8_t explode; /* Explosions */
+    uint8_t boomerang; /* Boomerang */
+    uint8_t arrow; /* Normal Arrow */
+    uint8_t hammer_swing; /* Hammer Swing (no ground hit) */
+    uint8_t hookshot; /* Hookshot and Longshot */
+    uint8_t sword0_slash; /* Kokiri Sword Slash */
+    uint8_t sword1_slash; /* Master Sword Slash */
+    uint8_t sword2_slash; /* Biggoron Sword and Giant's Knife Slash */
+    uint8_t arrow_fire; /* Fire Arrow */
+    uint8_t arrow_ice; /* Ice Arrow */
+    uint8_t arrow_light; /* Light Arrow */
+    uint8_t arrow_wind; /* (Beta) Wind Arrow */
+    uint8_t arrow_spirit; /* (Beta) Spirit Arrow */
+    uint8_t arrow_shadow; /* (Beta) Shadow Arrow */
+    uint8_t magic_fire; /* Din's Fire */
+    uint8_t magic_ice; /* Ice Magic (Beta?) */
+    uint8_t magic_light; /* Light Magic (Beta?) */
+    uint8_t unk_00; /* Undocumented / Unused */
+    uint8_t unk_01; /* Undocumented / Unused */
+    uint8_t sword0_littlespin; /* Kokiri Sword Spin Attack (Half Charge) */
+    uint8_t sword2_littlespin; /* Biggoron Sword and Giant's Knife Spin Attack (Half Charge) */
+    uint8_t sword1_littlespin; /* Master Sword Spin Attack (Half Charge) */
+    union damage_chart_entry_19 sword0_etc;
+    union damage_chart_entry_1A sword2_etc;
+    union damage_chart_entry_1B sword1_etc;
+    uint8_t unk_02; /* Undocumented / Unused */
+    uint8_t unk_03; /* Undocumented / Unused */
+    uint8_t hammer_jump; /* Hammer Jump Attack */
+    uint8_t unk_04; /* Undocumented / Unused */
 } z64_damagechart_init_t;
-
-#define DAMAGE_HEARTS(HA0) (int)((HA0) * 16)
 
 #endif

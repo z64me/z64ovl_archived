@@ -193,4 +193,85 @@ typedef struct z64_actor_old_s
     /* 0x200 */
 } z64_actor_old_t;
 
+/* Damage chart notes
+ * sword0 and sword1 refer to the Kokiri/Master Sword,
+   longsword refers to the Biggoron Sword / Giant's Knife,
+   and brokensword refers to the broken longsword
+ * everything held together in a union { ... } shares the same setting
+ */
+typedef struct z64_damagechart_init {
+// TODO: would there be a hammer_shockwave, or do actors that respond to it do it differently?
+	u8
+/* 00 */
+			misc_dekunut
+	;
+/* 01 */	union {
+				u8
+					misc_dekustick,
+
+					misc_pot
+				;
+			};
+	u8
+/* 02 */	misc_slingshot,
+/* 03 */	misc_explosion,
+/* 04 */	misc_boomerang,
+
+/* 05 */	arrow,
+
+/* 06 */	hammer_swing,
+
+/* 07 */	misc_hookshot,
+
+/* 08 */	sword0_slash,
+/* 09 */	sword1_slash,
+/* 0A */	longsword_slash,
+
+/* 0B */	arrow_fire,
+/* 0C */	arrow_ice,
+/* 0D */	arrow_light,
+/* 0E */	arrow_wind,  // TODO are these really Wind/Spirit/Shadow?
+/* 0F */	arrow_spirit,
+/* 10 */	arrow_shadow,
+
+/* 11 */	magic_fire,
+/* 12 */	magic_ice,   // confirmed
+/* 13 */	magic_light, // confirmed
+
+/* 14 */	unk0,
+/* 15 */	unk1,
+
+/* 16 */	sword0_spin,
+/* 17 */	longsword_spin, // TODO confirm if this is correct
+/* 18 */	sword1_spin
+	;
+/* 19 */	union {
+				u8
+					sword0_jump,
+					sword0_bigspin,
+
+					brokensword_jump,
+					brokensword_bigspin
+				;
+			};
+/* 1A */	union {
+				u8
+					longsword_jump,
+					longsword_bigspin
+				;
+			};
+/* 1B */	union {
+				u8
+					sword1_jump,
+					sword1_bigspin
+				;
+			};
+	u8
+/* 1C */	unk2,
+/* 1D */	unk3,
+/* 1E */	hammer_jump,
+/* 1F */	unk4
+	;
+} z64_damagechart_init_t_old;
+
 #endif

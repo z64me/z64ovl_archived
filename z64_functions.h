@@ -1535,8 +1535,16 @@ extern void external_func_8002EF14(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * TODO This function is completely undocumented
+/*
+int func_8002F194(z64_actor_t *a, z64_global_t *g)
+{
+	if ((a->flags & 0x0100) != 0)
+	{
+	 a->flags &= 0xFFFFFEFF;
+	 return 1;
+	}
+	return 0;
+}
  */
 extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
@@ -1576,7 +1584,7 @@ extern void external_func_8002F298(z64_actor_t *actor, z64_global_t *global, flo
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = float distance?
  */
-extern void external_func_8002F2CC(void);
+extern void external_func_8002F2CC(z64_actor_t *actor, z64_global_t *gl, float distance);
 	#if OOT_DEBUG
 		asm("external_func_8002F2CC = 0x8002F2CC");
 	#elif OOT_U_1_0
@@ -5391,7 +5399,6 @@ extern void external_func_800A529C(void);
  * TODO These notes need converted into a C function prototype
  * A0 = actor instance + 0x014C (Drawing Table) | A1 = Animation Pointer (in Object File)
  * Wrapper for actor_anime_change and anime_get_framecount */
- */
 extern void actor_anime_set(z64_skelanime_t *skelanime, uint32_t animation);
 	#if OOT_DEBUG
 		asm("external_func_800A52F8 = 0x800A52F8");
