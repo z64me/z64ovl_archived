@@ -836,30 +836,29 @@ enum dynapoly_move_flag {
 };
 
 /* damage chart */
-Untitled
-union damage_chart_entry_01 {
+typedef union damage_chart_entry_01 {
     uint8_t stick; /* Deku Stick Slash */
     uint8_t pot; /* Tsubo Throw */
 };
 
-union damage_chart_entry_19 {
+typedef union damage_chart_entry_19 {
     uint8_t sword0_jump; /* Kokiri Sword Jump Attack */
     uint8_t sword0_bigspin; /* Kokiri Sword Spin Attack (Full Charge) */
     uint8_t broken_jump; /* Broken Giant's Knife Jump Attack */
     uint8_t broken_bigspin; /* Broken Giant's Knife Spin Attack (Full Charge) */
 };
 
-union damage_chart_entry_1A {
+typedef union damage_chart_entry_1A {
     uint8_t sword2_jump; /* Biggoron Sword and Giant's Knife Jump Attack */
     uint8_t sword2_bigspin; /* Biggoron Sword and Giant's Knife Spin Attack (Full Charge) */
 };
 
-union damage_chart_entry_1B {
+typedef union damage_chart_entry_1B {
     uint8_t sword1_jump; /* Master Sword Jump Attack */
     uint8_t sword1_bigspin; /* Master Sword Spin Attack (Full Charge) */
 };
 
-struct z64_damagechart_init_s { /* Damage Chart Initialization Variables (& 0xF0 = Effect Type, & 0x0F = Damage Amount) */
+typedef struct z64_damagechart_init_s { /* Damage Chart Initialization Variables (& 0xF0 = Effect Type, & 0x0F = Damage Amount) */
     uint8_t nut; /* Deku Nut */
     union damage_chart_entry_01 stick_etc;
     uint8_t slingshot; /* Fairy Slingshot */
