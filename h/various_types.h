@@ -20,6 +20,7 @@ typedef enum{
 #define ABS(ABSA0) (((ABSA0)<0)?(-(ABSA0)):ABSA0)
 #define TWEEN_LINEAR(TWL_FROM, TWL_TO, TWL_SPEED) (SGN((TWL_TO)-(TWL_FROM))*MIN(ABS((TWL_TO)-(TWL_FROM)),(TWL_SPEED)))
 #define SEXT24(SEXTA0) (((SEXTA0) & 0x800000) ? ((uint32_t)(SEXTA0) | 0xff000000):(uint32_t)(SEXTA0))
+#define FLOOR(FLA0)	(((FLA0)/(4))*(4))
 
 // Controller Input
 typedef enum {

@@ -1838,7 +1838,7 @@ extern void sound_play_actor(z64_actor_t *actor, u16 sound_id);
 
 /**
  * Play Sound Effect (Actor)
- * TODO There are two identical functions... distinguish the difference and fix names
+ * TODO There are three identical functions... distinguish the difference and fix names
  */
 extern void sound_play_actor2(z64_actor_t *actor, u16 sound_id);
 	#if OOT_DEBUG
@@ -1859,14 +1859,15 @@ extern void external_func_8002F850(void);
 		asm("external_func_8002F850 = 0x80022FFC");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_8002F8F0(void);
+	/**
+	 * Play Sound Effect (Actor)
+	 * TODO There are three identical functions... distinguish the difference and fix names
+	 */
+extern void sound_play_actor3(z64_actor_t *actor, u16 sound_id);
 	#if OOT_DEBUG
-		asm("external_func_8002F8F0 = 0x8002F8F0");
+		asm("sound_play_actor3 = 0x8002F8F0");
 	#elif OOT_U_1_0
-		asm("external_func_8002F8F0 = 0x800230A0");
+		asm("sound_play_actor3 = 0x800230A0");
 	#endif
 
 /**
@@ -2324,13 +2325,13 @@ extern void external_func_80034F54(void);
 /**
  * Draw a single display list to POLY_OPA_DISP
  */
-extern void draw_static_dlist_opa(z64_global_t *global, u32 dlist);
+extern void draw_dlist_opa(z64_global_t *global, u32 dlist);
 	#if OOT_DEBUG
-		asm("draw_static_dlist_opa = 0x80035260");
+		asm("draw_dlist_opa = 0x80035260");
 	#elif OOT_U_1_0
-		asm("draw_static_dlist_opa = 0x80028048");
+		asm("draw_dlist_opa = 0x80028048");
 	#elif MM_U_1_0
-		asm("draw_static_dlist_opa = 0x800BDFC0");
+		asm("draw_dlist_opa = 0x800BDFC0");
 	#endif
 
 /**
@@ -2338,13 +2339,13 @@ extern void draw_static_dlist_opa(z64_global_t *global, u32 dlist);
  * TODO There's a question mark, we need to confirm whether Lens of Truth has anything to do with it
  * a0 - global context | a1 - DList segment offset | a2 - Unknown, set to 0
  */
-extern void draw_static_dlist_xlu(z64_global_t *global, u32 dlist);
+extern void draw_dlist_xlu(z64_global_t *global, u32 dlist);
 	#if OOT_DEBUG
-		asm("draw_static_dlist_xlu = 0x80035324");
+		asm("draw_dlist_xlu = 0x80035324");
 	#elif OOT_U_1_0
-		asm("draw_static_dlist_xlu = 0x800280C8");
+		asm("draw_dlist_xlu = 0x800280C8");
 	#elif MM_U_1_0
-		asm("draw_static_dlist_xlu = 0x800BE03C");
+		asm("draw_dlist_xlu = 0x800BE03C");
 	#endif
 
 /**
@@ -3039,7 +3040,7 @@ extern void external_func_8005A9CC(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005A9F4(void);
+extern int16_t external_func_8005A9F4(uint32_t gl790);
 	#if OOT_DEBUG
 		asm("external_func_8005A9F4 = 0x8005A9F4");
 	#elif OOT_U_1_0
@@ -4278,7 +4279,7 @@ extern void external_func_80078914(u16 sfx_id);
  * Initialize Flame Light (Wrapper for 80065B70)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80079D8C(void);
+extern void external_func_80079D8C(uint16_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
 	#if OOT_DEBUG
 		asm("external_func_80079D8C = 0x80079D8C");
 	#elif OOT_U_1_0
@@ -4288,7 +4289,7 @@ extern void external_func_80079D8C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80079DF0(void);
+extern void external_func_80079DF0(uint16_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
 	#if OOT_DEBUG
 		asm("external_func_80079DF0 = 0x80079DF0");
 	#elif OOT_U_1_0
@@ -4301,7 +4302,7 @@ extern void external_func_80079DF0(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Blue Fire Instance + 0x19C | A1 = byte Red (0x9B this pass) | A2 = byte Green (0xD2 this pass) | A3 = byte Blue | SP + 0x10 = short Alpha?
  */
-extern void external_func_80079E58(void);
+extern void external_func_80079E58(void *a0, uint8_t r, uint8_t g, uint8_t b, uint32_t a1);
 	#if OOT_DEBUG
 		asm("external_func_80079E58 = 0x80079E58");
 	#elif OOT_U_1_0
@@ -4310,8 +4311,9 @@ extern void external_func_80079E58(void);
 
 /**
  * TODO This function is completely undocumented
+ * Possible for initializing a light structure.
  */
-extern void external_func_8007A764(void);
+extern uint32_t *external_func_8007A764(z64_global_t *gl, z64_lighting_t *lighting, uint32_t a3);
 	#if OOT_DEBUG
 		asm("external_func_8007A764 = 0x8007A764");
 	#elif OOT_U_1_0
@@ -4320,8 +4322,9 @@ extern void external_func_8007A764(void);
 
 /**
  * TODO This function is completely undocumented
+ * Possibly for "Freeing" a light structure.
  */
-extern void external_func_8007A7C4(void);
+extern void external_func_8007A7C4(z64_global_t *gl, z64_lighting_t *lighting, void *a3);
 	#if OOT_DEBUG
 		asm("external_func_8007A7C4 = 0x8007A7C4");
 	#elif OOT_U_1_0

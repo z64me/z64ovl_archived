@@ -2,18 +2,18 @@
 #define __Z64OVL_ACTOR_OOT_H__
 
 typedef enum {
-  Switch = 0x00,
-  Bg = 0x01,
-  Player = 0x02,
-  Explosives = 0x03,
-  NPC = 0x04,
-  Enemy = 0x05,
-  Prop = 0x06,
-  Item_Action = 0x07,
-  Misc = 0x08,
-  Boss = 0x09,
-  Door = 0x0A,
-  Chest = 0x0B
+  OVLTYPE_SWITCH = 0x00,
+  OVLTYPE_BG = 0x01,
+  OVLTYPE_PLAYER = 0x02,
+  OVLTYPE_EXPLOSIVE = 0x03,
+  OVLTYPE_NPC = 0x04,
+  OVLTYPE_ENEMY = 0x05,
+  OVLTYPE_PROP = 0x06,
+  OVLTYPE_ITEM = 0x07,
+  OVLTYPE_MISC = 0x08,
+  OVLTYPE_BOSS = 0x09,
+  OVLTYPE_DOOR = 0x0A,
+  OVLTYPE_CHEST = 0x0B
 } z64_actor_type_t;
 
 typedef struct z64_actor_init_s{
@@ -40,7 +40,7 @@ struct z64_actor_s
   vec3f_t           pos_1;                    /* 0x0008 */
   z64_rot_t         rot_init;                 /* 0x0014 */
   char              unk_01_[0x0002];          /* 0x001A */
-  uint16_t          variable;                 /* 0x001C */
+  int16_t          variable;                  /* 0x001C */
   uint8_t           alloc_index;              /* 0x001E */
   char              unk1F;                    /* 0x001F */
   uint16_t          sound_effect;             /* 0x0020 */
