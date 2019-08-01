@@ -707,7 +707,7 @@ typedef struct z64_collider_s { /* Collider Structure */
 
 typedef struct z64_collider_bump_s {
     int32_t flags; /* Collision Exclusion Mask */
-    z64_bumper_effect_t effect; /* Damage Effect (Knockback, Fire, etc.) */
+    uint8_t effect; /* Damage Effect (Knockback, Fire, etc.) */
     uint8_t unk_0x05;
     int32_t unk_0x08;
 } z64_collider_bump_t;
@@ -762,12 +762,12 @@ typedef struct z64_collision_body_info_s { /* Initialization Variables (in overl
     uint8_t collide_flags; /* Collide Flags */
     uint8_t mask_a; /* Bitwise-And with Mask B */
     uint8_t mask_b; /* Bitwise-And with Mask A */
-    z64_collider_type_t type; /* Collider Type */
+    uint8_t type; /* Collider Type */
     uint8_t unk_0x06_[2]; /* 0000 */
     uint8_t body_flags;
     uint8_t unk_0x09_[3]; /* 000000 */
     int32_t toucher_mask; /* Attack Toucher Exclusion Mask */
-    z64_bumper_effect_t bumper_effect; /* Damage Effect (Knockback, Fire, etc.) */
+    uint8_t bumper_effect; /* Damage Effect (Knockback, Fire, etc.) */
     uint8_t toucher_damage; /* Damage Amount or Stun Timer */
     uint8_t unk_0x12_[2]; /* 0000 */
     int32_t bumper_mask; /* Bumper Exclusion Mask */

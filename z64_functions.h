@@ -4279,7 +4279,7 @@ extern void external_func_80078914(u16 sfx_id);
  * Initialize Flame Light (Wrapper for 80065B70)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80079D8C(uint16_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
+extern void external_func_80079D8C(uint32_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
 	#if OOT_DEBUG
 		asm("external_func_80079D8C = 0x80079D8C");
 	#elif OOT_U_1_0
@@ -4289,7 +4289,7 @@ extern void external_func_80079D8C(uint16_t *a0, int a1_x, int a2_y, int a3_z, u
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80079DF0(uint16_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
+extern void external_func_80079DF0(uint32_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
 	#if OOT_DEBUG
 		asm("external_func_80079DF0 = 0x80079DF0");
 	#elif OOT_U_1_0
@@ -4313,7 +4313,7 @@ extern void external_func_80079E58(void *a0, uint8_t r, uint8_t g, uint8_t b, ui
  * TODO This function is completely undocumented
  * Possible for initializing a light structure.
  */
-extern uint32_t *external_func_8007A764(z64_global_t *gl, z64_lighting_t *lighting, uint32_t a3);
+extern void *external_func_8007A764(z64_global_t *gl, z64_lighting_t *lighting, uint32_t a3);
 	#if OOT_DEBUG
 		asm("external_func_8007A764 = 0x8007A764");
 	#elif OOT_U_1_0
