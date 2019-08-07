@@ -75,7 +75,7 @@ static void *helper_get_save_context(z64_global_t *global)
  * helper_get_player
  * Returns a pointer to Link's actor
  ***/
-static z64_player_t *helper_get_player(z64_global_t *global) {
+static z64_player_t *zh_get_player(z64_global_t *global) {
 	uint8_t *g = (uint8_t*) global + 0x1C44;
 	uint32_t p32 = (g[0]<<24)|(g[1]<<16)|(g[2]<<8)|g[3];
 	return (z64_player_t*)p32;
@@ -86,7 +86,7 @@ static z64_player_t *helper_get_player(z64_global_t *global) {
 */
 static void helper_lift_test(z64_actor_t *a, z64_global_t *gl, float range_xz, float range_y)
 {
-	int temp_v0 = (int)((a->rot_toward_link_y - (helper_get_player(gl)->actor.xz_dir)) << 0x10) >> 0x10;
+	int temp_v0 = (int)((a->rot_toward_link_y - (zh_get_player(gl)->actor.xz_dir)) << 0x10) >> 0x10;
 	int phi_v1 = (0 - temp_v0);
 	if (temp_v0 >= 0)
 		phi_v1 = temp_v0;
