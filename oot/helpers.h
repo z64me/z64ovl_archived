@@ -7,6 +7,11 @@
  * help simplify custom enemies/NPCs/bosses.
  ***/
 
+/*** Macros ***/
+
+ /* Shorthand for referencing Graphics Context display list buffers "Zelda Quick Display List" */
+ #define ZQDL(ZQDL_A0, ZQDL_A1) ZQDL_A0->common.gfx_ctxt->ZQDL_A1
+
 /****
 Used for converting a ram segment (relative) address to an absolute RAM pointer.
 ***/
@@ -68,20 +73,9 @@ static void *helper_get_save_context(z64_global_t *global)
 	return (void*)AADDR(SAVE_CONTEXT,0);
 }
 
-
 /****
- * helper_get_link_actor
- * Returns a pointer to Link's actor
- ***/
-/*static z64_actor_t *helper_get_link_actor(z64_global_t *global) {
-	uint8_t *g = (uint8_t*) global + 0x1C44;
-	uint32_t p32 = (g[0]<<24)|(g[1]<<16)|(g[2]<<8)|g[3];
-	return (z64_actor_t*)p32;
-}*/
-
-/****
- * helper_get_player
- * Returns a pointer to Link's actor
+ * zh_get_player
+ * Used to return a pointer to the player's actor instance.
  ***/
 static z64_player_t *zh_get_player(z64_global_t *global) {
 	uint8_t *g = (uint8_t*) global + 0x1C44;
@@ -101,9 +95,6 @@ static void helper_lift_test(z64_actor_t *a, z64_global_t *gl, float range_xz, f
 	if (phi_v1 >= 0x5556)
 		actor_give_item(a, gl, 0, range_xz, range_y);
 }
-
- /* Shorthand for referencing Graphics Context display list buffers "Zelda Quick Display List" */
- #define ZQDL(ZQDL_A0, ZQDL_A1) ZQDL_A0->common.gfx_ctxt->ZQDL_A1
 
  /****
  * makes helper_limb_focus available
