@@ -157,39 +157,80 @@ typedef struct {
   f32 height;
 } gfx_screen_tile_t;
 
-#define G_TX_ANCHOR_C 0b0000
-#define G_TX_ANCHOR_U 0b0001
-#define G_TX_ANCHOR_R 0b0010
-#define G_TX_ANCHOR_D 0b0100
-#define G_TX_ANCHOR_L 0b1000
+#define G_TX_ANCHOR_C  0b0000
+#define G_TX_ANCHOR_U  0b0001
+#define G_TX_ANCHOR_R  0b0010
+#define G_TX_ANCHOR_D  0b0100
+#define G_TX_ANCHOR_L  0b1000
+#define G_TX_ANCHOR_UR G_TX_ANCHOR_U + G_TX_ANCHOR_R
+#define G_TX_ANCHOR_DR G_TX_ANCHOR_D + G_TX_ANCHOR_R
+#define G_TX_ANCHOR_DL G_TX_ANCHOR_D + G_TX_ANCHOR_L
+#define G_TX_ANCHOR_UL G_TX_ANCHOR_U + G_TX_ANCHOR_L
+#define G_TX_ANCHOR_UD G_TX_ANCHOR_U + G_TX_ANCHOR_D
+#define G_TX_ANCHOR_RL G_TX_ANCHOR_R + G_TX_ANCHOR_L
+#define T_ANCHOR(TA0) G_TX_ANCHOR_##(TA0)
 #define to_rgba16(r, g, b, a) (((r >> 3) & 0x1F) << 11) | (((g >> 3) & 0x1F) << 6) | (((b >> 3) & 0x1F) << 1) | (((a >> 7) & 0x1) << 0)
 
-static void draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_screen_tile_t *tile)
+static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_screen_tile_t *tile)
 {
-  switch (tile->origin_anchor)
+  if (tile->origin_anchor == 0x0000)
   {
-    case 0b0000: /* Center */
+    tile->x -= (tile->width/2); tile->y -= (tile->height/2);
+  }
+  else
+  {
+    if (tile->origin_anchor & T_ANCHOR(U))
+      tile->height /= 2;
+    if (tile->origin_anchor & T_ANCHOR(R))
+      tile->x -= tile->width;
+    if (tile->origin_anchor & T_ANCHOR(D))
+      tile->y -= tile->height;
+    if (tile->origin_anchor & T_ANCHOR(L))
+      tile->width /= 2;
+  }
+  /*switch (tile->origin_anchor)
+  {
+    case 0b0000: /* Center
       tile->x -= (tile->width/2); tile->y -= (tile->height/2);
     break;
-    case 0b0001: /* Up */
+    case 0b0001: /* Up
       tile->height /= 2;
     break;
-    case 0b0010: /* Right */
+    case 0b0010: /* Right
       tile->x -= tile->width;
     break;
-    case 0b0100: /* Down */
+    case 0b0100: /* Down
       tile->y -= tile->height;
     break;
-    case 0b1000: /* Left */
+    case 0b1000: /* Left
       tile->width /= 2;
     break;
-  }
+  }*/
+
 
   gSPDisplayList(buf->p++, 0x801269D0);
-  //gsDPSetCombine()
-  buf->p->hi = 0xFC309661;
-  buf->p->lo = 0x552EFF7F;
-  buf->p++;
+  gDPSetCombineLERP(
+    buf->p++
+    , PRIMITIVE
+    , ENVIRONMENT
+    , TEXEL0
+    , ENVIRONMENT
+    , TEXEL0
+    , 0
+    , PRIMATIVE
+    , 0
+    , PRIMITIVE
+    , ENVIRONMENT
+    , TEXEL0
+    , ENVIRONMENT
+    , TEXEL0
+    , 0
+    , PRIMATIVE
+    , 0
+  );
+  //buf->p->hi = 0xFC309661;
+  //buf->p->lo = 0x552EFF7F;
+  //buf->p++;
   gDPSetPrimColor(buf->p++, 0, 0, 255, 255, 255, 255);
   gDPSetEnvColor(buf->p++, 0, 0, 0, 255);
   //gDPPipeSync(buf->p++);
