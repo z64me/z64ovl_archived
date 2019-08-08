@@ -12,7 +12,7 @@ Used for converting a ram segment (relative) address to an absolute RAM pointer.
 ***/
 static uint32_t zh_seg2ram(uint32_t addr)
 {
-  return (AVAL((RAM_SEGMENT_TABLE + ((pointer << 4) >> 28) * 4), uint32_t, 0) + (pointer & 0x00FFFFFF)) | 0x80000000;
+  return (AVAL((RAM_SEGMENT_TABLE + (pointer >> 22) ), uint32_t, 0) + (pointer & 0x00FFFFFF)) | 0x80000000;
 }
 
 /****
