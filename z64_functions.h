@@ -5170,10 +5170,9 @@ extern void external_func_80097A54(void);
 
 /**
  * Given its number, returns the object's index in the object table, or -1 if it isn't loaded.
- * TODO Do something with this global_plus_0x117A4; of note is that global_plus_0x117A4 is used by
-        object_get_index() and object_is_loaded()...
+ * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID, V0 = Object index / -1 if not loaded.
  */
-extern int object_get_index(u32 global_plus_0x117A4, u16 object_id);
+extern int object_get_index(z64_obj_ctxt_t* object_context, u16 object_id);
 	#if OOT_DEBUG
 		asm("object_get_index = 0x8009812C");
 	#elif OOT_U_1_0
@@ -5182,14 +5181,31 @@ extern int object_get_index(u32 global_plus_0x117A4, u16 object_id);
 
 /**
  * Test if object file dependency is loaded (returns 1 on true 0 on false)
- * TODO Need argument mappings...
+ * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID, V0 = 1 if loaded, 0 if not.
  */
-extern int object_is_loaded(u32 global_plus_0x117A4, char object_idx);
+extern int object_is_loaded(z64_obj_ctxt_t* object_context, u16 object_id);
 	#if OOT_DEBUG
 		asm("object_is_loaded = 0x80098188");
 	#elif OOT_U_1_0
 		asm("object_is_loaded = 0x80081688");
 	#endif
+    
+ /**
+ * Load an object into memory. Object is loaded even if
+ * it has already been loaded.
+ * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID,
+ * NOTE: This function is not used in any existing actor overlay in OoT.
+ */
+extern void object_load(z64_obj_ctxt_t* object_context, u16 object_id);
+    #if OOT_DEBUG
+        asm("object_load = 0x80097C00");
+    #elif OOT_U_1_0
+        asm("object_load = 0x800812F0");
+    /* Maybe - args could be different. Would need testing.
+    #elif MM_U_1_0
+        asm("object_load = 0x8012F2E0");       
+    */
+    #endif  
 
 /**
  * TODO This function is completely undocumented
