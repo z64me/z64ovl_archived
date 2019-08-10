@@ -168,7 +168,6 @@ typedef struct {
 #define G_TX_ANCHOR_UL G_TX_ANCHOR_U + G_TX_ANCHOR_L
 #define G_TX_ANCHOR_UD G_TX_ANCHOR_U + G_TX_ANCHOR_D
 #define G_TX_ANCHOR_RL G_TX_ANCHOR_R + G_TX_ANCHOR_L
-#define T_ANCHOR(TA0) G_TX_ANCHOR_##(TA0)
 #define to_rgba16(r, g, b, a) (((r >> 3) & 0x1F) << 11) | (((g >> 3) & 0x1F) << 6) | (((b >> 3) & 0x1F) << 1) | (((a >> 7) & 0x1) << 0)
 
 static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_screen_tile_t *tile)
@@ -179,13 +178,13 @@ static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_scree
   }
   else
   {
-    if (tile->origin_anchor & T_ANCHOR(U))
+    if (tile->origin_anchor & G_TX_ANCHOR_U)
       tile->height /= 2;
-    if (tile->origin_anchor & T_ANCHOR(R))
+    if (tile->origin_anchor & G_TX_ANCHOR_R)
       tile->x -= tile->width;
-    if (tile->origin_anchor & T_ANCHOR(D))
+    if (tile->origin_anchor & G_TX_ANCHOR_D)
       tile->y -= tile->height;
-    if (tile->origin_anchor & T_ANCHOR(L))
+    if (tile->origin_anchor & G_TX_ANCHOR_L)
       tile->width /= 2;
   }
   /*switch (tile->origin_anchor)
