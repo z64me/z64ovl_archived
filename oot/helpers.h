@@ -216,7 +216,7 @@ static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_scree
     , ENVIRONMENT
     , TEXEL0
     , 0
-    , PRIMATIVE
+    , PRIMITIVE
     , 0
     , PRIMITIVE
     , ENVIRONMENT
