@@ -6,11 +6,10 @@
 
 #include "../h/mips.h"
 #include "types.h"
-#include "z64_functions.h"
+#include "../z64_functions.h"
 
 // RAM Stuff
-/*#define RAM_SEGMENT_TABLE "TODO"
-#define NAVI              "TODO"*/
+#define RAM_SEGMENT_TABLE 0x80120C38
 #define GLOBAL_CONTEXT    0x801C84A0
 #define SAVE_CONTEXT      0x8011A5D0
 #define GLOBAL_IS_NIGHT   0x8011A5E0 // u32, 0 if day, 1 if night
