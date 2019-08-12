@@ -5501,7 +5501,7 @@ extern void external_func_800A5F60(void);
  * Draw object that uses a weighted skeleton structure
  * A0 = Entity | A1 = Global Context | A2 = Skeleton | A3 = Callback | 0x0010(SP) = 1, something to do with Y translation?
  */
-extern void skelanime_draw_weighted(entity_t* entity, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, u32 unk0);
+extern void skelanime_draw_weighted(z64_actor_t* entity, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, u32 unk0);
 	#if OOT_DEBUG
 		asm("skelanime_draw_weighted = 0x800A6330");
 	#elif OOT_U_1_0
@@ -5543,7 +5543,7 @@ extern void external_func_800A6408(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Skeleton) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_weighted(z64_global_t *global, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init_weighted(z64_actor_t *global, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init_weighted = 0x800A663C");
 	#elif OOT_U_1_0
