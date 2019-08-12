@@ -677,6 +677,13 @@ typedef struct {
   /* 0x40 */
 } z64_skelanime_t;
 
+typedef struct 
+{
+  u8 unk00[0x4C];
+  z64_skelanime_t skelanime;
+} z64_skelanime_weighted_t;
+
+
 /* collision */
 typedef enum z64_bumper_effect_e { /* Elemental Damage Effects */
     BUMP_FX_ELECTRIC=3,
