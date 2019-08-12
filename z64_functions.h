@@ -5501,7 +5501,7 @@ extern void external_func_800A5F60(void);
  * Draw object that uses a weighted skeleton structure
  * A0 = Entity | A1 = Global Context | A2 = Skeleton | A3 = Callback | 0x0010(SP) = 1, something to do with Y translation?
  */
-extern void skelanime_draw_weighted(entity_t* entity, z64_global_t* global, z64_weighted_skelanime_t* weighted_skelanime, void* callback1, u32 unk0);
+extern void skelanime_draw_weighted(entity_t* entity, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, u32 unk0);
 	#if OOT_DEBUG
 		asm("skelanime_draw_weighted = 0x800A6330");
 	#elif OOT_U_1_0
@@ -5543,7 +5543,7 @@ extern void external_func_800A6408(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Skeleton) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_weighted(z64_global_t *global, z64_weighted_skelanime_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init_weighted(z64_global_t *global, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init_weighted = 0x800A663C");
 	#elif OOT_U_1_0
@@ -5884,9 +5884,10 @@ extern void external_func_800C0AF4(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Triggers a "void out" (where you get reset to the last safe position, i.e when you take too long in the
+ * Dampe Race, fall into a pit, etc.
  */
-extern void external_func_800C0B60(void);
+extern void void_out(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_800C0B60 = 0x800C0B60");
 	#elif OOT_U_1_0
@@ -6488,9 +6489,10 @@ extern void external_func_800D1FD4(void *unk0);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Used to reflect projectiles 
+ * A0 = Link instance + 0x0A20 | A1 = place in stack to store result | a2 = 0? | Stores an array of 3 halfs containing the reflected direction into the address in A1
  */
-extern void external_func_800D20CC(void);
+extern void external_func_800D20CC(float* link_0A20, int16_t* store, int condition);
 	#if OOT_DEBUG
 		asm("external_func_800D20CC = 0x800D20CC");
 	#elif OOT_U_1_0
