@@ -5420,9 +5420,9 @@ extern void external_func_800A529C(void);
  * Wrapper for actor_anime_change and anime_get_framecount */
 extern void actor_anime_set(z64_skelanime_t *skelanime, uint32_t animation);
 	#if OOT_DEBUG
-		asm("external_func_800A52F8 = 0x800A52F8");
+		asm("actor_anime_set = 0x800A52F8");
 	#elif OOT_U_1_0
-		asm("external_func_800A52F8 = 0x8008D2D4");
+		asm("actor_anime_set = 0x8008D2D4");
 	#endif
 
 /**
