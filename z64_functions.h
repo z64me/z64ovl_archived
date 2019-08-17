@@ -2481,6 +2481,26 @@ extern void flag_set_event_chk_inf(int flag);
 	#elif OOT_U_1_0
 		asm("flag_set_event_chk_inf = 0x800288E0");
 	#endif
+    
+/**
+ * Tests if inf_table flag is set
+ */
+extern int flag_get_inf_table(int flag);
+	#if OOT_DEBUG
+		asm("flag_get_inf_table = 0x80035BA4");
+	#elif OOT_U_1_0
+		asm("flag_get_inf_table = 0x80028914");
+	#endif
+
+/**
+ * Sets inf_table flag to 1
+ */
+extern void flag_set_inf_table(int flag);
+	#if OOT_DEBUG
+		asm("flag_set_inf_table = 0x80035BCC");
+	#elif OOT_U_1_0
+		asm("flag_set_inf_table = 0x80028940");
+	#endif
 
 /**
  * Generic NPC Text Handler 7
@@ -5501,7 +5521,7 @@ extern void external_func_800A5F60(void);
  * Draw object that uses a weighted skeleton structure
  * A0 = Entity | A1 = Global Context | A2 = Skeleton | A3 = Callback | 0x0010(SP) = 1, something to do with Y translation?
  */
-extern void skelanime_draw_weighted(z64_actor_t* entity, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, u32 unk0);
+extern void skelanime_draw_weighted(z64_actor_t* actor, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, u32 unk0);
 	#if OOT_DEBUG
 		asm("skelanime_draw_weighted = 0x800A6330");
 	#elif OOT_U_1_0
@@ -5509,14 +5529,15 @@ extern void skelanime_draw_weighted(z64_actor_t* entity, z64_global_t* global, z
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Draw object that uses a weighted skeleton structure. Callback2 lets you set textures. Used by Epona.
+ * A0 = Entity | A1 = Global Context | A2 = Skeleton | A3 = Callback | 0x0014(SP) = Texture setting callback | 0x0014(SP) = 1, something to do with Y translation?
  */
-extern void external_func_800A6360(void);
-	#if OOT_DEBUG
-		asm("external_func_800A6360 = 0x800A6360");
-	#elif OOT_U_1_0
-		asm("external_func_800A6360 = 0x8008E204");
-	#endif
+extern void skelanime_draw_weighted_unk(z64_actor_t* actor, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, void* callback2, u32 unk0);
+    #if OOT_DEBUG
+        asm("skelanime_draw_weighted_unk = 0x800A6360");
+    #elif OOT_U_1_0
+        asm("skelanime_draw_weighted_unk = 0x8008E204");
+    #endif
 
 /**
  * TODO This function is completely undocumented
@@ -5543,7 +5564,7 @@ extern void external_func_800A6408(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Skeleton) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_weighted(z64_actor_t *global, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init_weighted(z64_actor_t *actor, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init_weighted = 0x800A663C");
 	#elif OOT_U_1_0
