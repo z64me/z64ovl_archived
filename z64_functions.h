@@ -4557,10 +4557,10 @@ extern void external_func_80087174(void);
 	#endif
 
 /**
- * TODO These notes need converted into a C function prototype
- * a0 rupees to substract
+ * Adds or removes rupees from the counter (Negative values subtract, positive add)
+ * a0 - Rupee amount.
  */
-extern void external_func_8008730C(void);
+extern void change_rupee_count_by(int num_rupees);
 	#if OOT_DEBUG
 		asm("external_func_8008730C = 0x8008730C");
 	#elif OOT_U_1_0
