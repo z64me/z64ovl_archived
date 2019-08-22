@@ -283,6 +283,15 @@ typedef struct
 
 typedef struct
 {
+  uint32_t          vrom_start;               /* 0x0000 */
+  uint32_t          vrom_end;                 /* 0x0004 */
+  uint32_t          prom_start;               /* 0x0008 */
+  uint32_t          prom_end;                 /* 0x000C */
+                                              /* 0x0010 */
+} z64_ftab_t;
+
+typedef struct
+{
   int16_t           id;                       /* 0x0000 */
   char              pad_00_[0x0002];          /* 0x0002 */
   void             *data;                     /* 0x0004 */

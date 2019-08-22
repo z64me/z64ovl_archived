@@ -38,6 +38,37 @@
 #define SQRT(ARG0) sqrtf((ARG0))
 
 /****
+ * Send OS Message. This function is not used inside any existing overlay.
+ * A0 = 0x80013990 for file reads on Debug, A1 = destination buffer, A2 = OS_MESG_NOBLOCK = 0 / OS_MESG_BLOCK = 1
+ ***/
+extern void osSendMesg(OSMesgQueue* queue, void* dest, int flag);
+	#if OOT_DEBUG
+		asm("osSendMesg = 0x80003060");
+	#elif OOT_U_1_0
+		asm("osSendMesg = 0x80001E20");
+	#endif
+    
+/****
+ * Create a queue. This function is not used inside any existing overlay.
+ ***/    
+extern void osCreateMesgQueue(OSMesgQueue* queue, OSMesg* mesg, int flag);
+	#if OOT_DEBUG
+		asm("osCreateMesgQueue = 0x800061D0");
+	#elif OOT_U_1_0
+		asm("osCreateMesgQueue = 0x80004220");
+	#endif    
+
+/****
+ * Receive message from a queue. This function is not used inside any existing overlay.
+ ***/
+extern void osRecvMesg(OSMesgQueue* queue, OSMesg* mesq, int flag);
+	#if OOT_DEBUG
+		asm("osRecvMesg = 0x800062E0");
+	#elif OOT_U_1_0
+		asm("osRecvMesg = 0x80002030");
+	#endif 
+
+/****
  * copy `num` bytes from `src` to `dst`
  * This function is not used inside any existing overlay
  ***/
@@ -4562,9 +4593,9 @@ extern void external_func_80087174(void);
  */
 extern void change_rupee_count_by(int num_rupees);
 	#if OOT_DEBUG
-		asm("external_func_8008730C = 0x8008730C");
+		asm("change_rupee_count_by = 0x8008730C");
 	#elif OOT_U_1_0
-		asm("external_func_8008730C = 0x800721CC");
+		asm("change_rupee_count_by = 0x800721CC");
 	#endif
 
 /**
@@ -5275,11 +5306,13 @@ extern int anime_get_framecount(u32 animation);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Draw an object skeleton on a specific destination buffer
+ * TODO Variable name cleanup, better notes
+ * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = 0 | 0x0010(SP) = 0 | 0x0014(SP) = Actor Instance Address | 0x0018(SP) = Buffer
  */
-extern void external_func_800A2288(void);
+extern u32 skelanime_draw_destination(z64_global_t *global, u32 limb_index, u32 adt, void* subr0, void* subr1, z64_actor_t *actor, Gfx *gfx_buffer);
 	#if OOT_DEBUG
-		asm("external_func_800A2288 = 0x800A2288");
+		asm("skelanime_draw_destination = 0x800A2288");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -5564,7 +5597,7 @@ extern void external_func_800A6408(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Skeleton) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_weighted(z64_actor_t *actor, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init_weighted(z64_global_t *global, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init_weighted = 0x800A663C");
 	#elif OOT_U_1_0
