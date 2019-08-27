@@ -593,12 +593,12 @@ extern void effect_spawn_magma(void);
  * Spawn Particle 0x0D
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_lightning(void);
-	#if OOT_DEBUG
-		asm("effect_spawn_lightning = 0x800295A0");
-	#elif OOT_U_1_0
-		asm("effect_spawn_lightning = 0x8001D098");
-	#endif
+extern void effect_spawn_lightning(z64_global_t *global, vec3f_t *position, uint32_t *opacity, uint32_t *color, uint16_t size);
+    #if OOT_DEBUG
+        asm("effect_spawn_lightning_test= 0x800295A0");
+    #elif OOT_U_1_0
+        asm("effect_spawn_lightning_test= 0x8001D098");
+    #endif
 
 /**
  * Spawn Particle 0x0E
@@ -4180,7 +4180,7 @@ extern float math_vec3f_distance_xz(vec3f_t *a, vec3f_t *b);
  * TODO These notes need converted into a C function prototype
  * A0 = Coord A ptr | A1 = Coord B ptr | V0 = s16 rotation
  */
-extern void external_func_80078068(void);
+extern s16 math_vec3f_atan2_xz(vec3f_t* coord1, vec3f_t* coord2);
 	#if OOT_DEBUG
 		asm("external_func_80078068 = 0x80078068");
 	#elif OOT_U_1_0
@@ -4195,7 +4195,7 @@ extern void external_func_80078068(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Coord A ptr | A1 = Coord B ptr | V0 = s16 rotation
  */
-extern void external_func_8007809C(void);
+extern s16 math_vec3f_atan2_xz_y(vec3f_t* coord1, vec3f_t* coord2);
 	#if OOT_DEBUG
 		asm("external_func_8007809C = 0x8007809C");
 	#elif OOT_U_1_0
