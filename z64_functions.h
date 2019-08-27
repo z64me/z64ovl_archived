@@ -595,9 +595,9 @@ extern void effect_spawn_magma(void);
  */
 extern void effect_spawn_lightning(z64_global_t *global, vec3f_t *position, uint32_t *opacity, uint32_t *color, uint16_t size);
     #if OOT_DEBUG
-        asm("effect_spawn_lightning_test= 0x800295A0");
+        asm("effect_spawn_lightning= 0x800295A0");
     #elif OOT_U_1_0
-        asm("effect_spawn_lightning_test= 0x8001D098");
+        asm("effect_spawn_lightning= 0x8001D098");
     #endif
 
 /**
