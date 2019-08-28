@@ -2379,11 +2379,11 @@ extern void draw_dlist_xlu(z64_global_t *global, u32 dlist);
  * Finds the closest actor instance of a specified id and type within specified range.
  * a0 - global context | a1 - actor instance | a2 - actor id (-1 = any) | a3 - category | 0x10($sp) distance from actor"
  */
-extern z64_actor_t* find_actor_instance_within_range(z64_global_t *global, z64_actor_t *actor, s16 actor_id, z64_actor_type_t type, float range);
+extern z64_actor_t* find_closest_actor_instance_within_range(z64_global_t *global, z64_actor_t *actor, s16 actor_id, z64_actor_type_t type, float range);
 	#if OOT_DEBUG
-		asm("external_func_800353F4 = 0x800353F4");
+		asm("find_closest_actor_instance_within_range = 0x800353F4");
 	#elif OOT_U_1_0
-		asm("external_func_800353F4 = 0x80028158");
+		asm("find_closest_actor_instance_within_range = 0x80028158");
 	#endif
 
 /**
