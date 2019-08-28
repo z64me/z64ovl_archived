@@ -95,10 +95,9 @@ extern void player_swap_age_equipment(void);
 
 /**
  * Allocates to the tail end of the given heap (0x10 aligned)
- * TODO These notes need converted into a C function prototype
  * A0 = Allocation Handle ptr | A1 = Size | V0 = ptr to free space
  */
-extern void external_func_80001FF0(void);
+extern void* allocate_from_top(void* heap_ptr, int alloc_size);
 	#if OOT_DEBUG
 		asm("external_func_80001FF0 = 0x80001FF0");
 	#elif OOT_U_1_0
@@ -143,7 +142,6 @@ extern void external_func_80002E50(void);
 
 /**
  * Drops a collectible
- * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance + 0x24 | a2 = drop ID
  */
 extern void item_drop_collectible(z64_global_t *global, vec3f_t *pos2, u16 drop_id);
@@ -165,10 +163,9 @@ extern void external_func_8001F77C(void);
 
 /**
  * Randomized item spawn
- * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance | a2 = position array | a3 = drop table ID
  */
-extern void external_func_8001F940(void);
+extern void item_drop_random_collectible(z64_actor_t* global, z64_actor_t* actor, vec3f_t* position, u16 drop_id);
 	#if OOT_DEBUG
 		asm("external_func_8001F940 = 0x8001F940");
 	#elif OOT_U_1_0
@@ -280,11 +277,10 @@ extern void external_func_8002709C(z64_global_t *gl, uint32_t a1);
 
 /**
  * Kill Particle
- * TODO These notes need converted into a C function prototype
  * A0 = Particle Instance Ptr
  * This function is not used inside any existing overlay
  */
-extern void external_func_800274E0(void);
+extern void particle_kill(void* particle_instance);
 	#if OOT_DEBUG
 		asm("external_func_800274E0 = 0x800274E0");
 	#elif OOT_U_1_0
@@ -1587,9 +1583,9 @@ extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 /**
  * NPC Request Trade Item
  * TODO These notes need converted into a C function prototype
- * A0 = Actor Instance | A1 = Global Context | A2 = float (distance 1?) | A3 = float (disstance 2?) | SP+0x10 = Trade Item Index
+ * A0 = Actor Instance | A1 = Global Context | A2 = float (distance 1?) | A3 = float (distance 2?) | SP+0x10 = Trade Item Index
  */
-extern void actor_npc_trade_request(void);
+extern void actor_npc_trade_request(z64_actor_t* actor, z64_global_t* global, float distance, float distance2, u8 item_index);
 	#if OOT_DEBUG
 		asm("actor_npc_trade_request = 0x8002F1C4");
 	#elif OOT_U_1_0
@@ -2383,7 +2379,7 @@ extern void draw_dlist_xlu(z64_global_t *global, u32 dlist);
  * Finds the closest actor instance of a specified id and type within specified range.
  * a0 - global context | a1 - actor instance | a2 - actor id (-1 = any) | a3 - category | 0x10($sp) distance from actor"
  */
-extern void find_actor_instance_within_range(z64_global_t *global, z64_actor_t *actor, s16 actor_id, z64_actor_type_t type, float range);
+extern z64_actor_t* find_actor_instance_within_range(z64_global_t *global, z64_actor_t *actor, s16 actor_id, z64_actor_type_t type, float range);
 	#if OOT_DEBUG
 		asm("external_func_800353F4 = 0x800353F4");
 	#elif OOT_U_1_0
