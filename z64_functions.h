@@ -5278,10 +5278,36 @@ extern void skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, u8 lim
 
 /**
  * Draw Matrix-Enabled Object
+ * callback0 and callback1 should be NULL, or pointers
+   to functions of their respective descriptions
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address
+ * TODO confirm dlist argument of callback0
  */
-extern void skelanime_draw_mtx(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *callback0, void *callback1, z64_actor_t *actor);
+extern
+void
+skelanime_draw_mtx(
+	  z64_global_t *global
+	, uint32_t limb_index
+	, u3uint32_t2 adt
+	, uint8_t limb_dlists_count
+	, void callback0(
+		  z64_global_t *global
+		, uint8_t limb
+		, uint32_t dlist
+		, vec3f_t *translation
+		, vec3s_t *rotation
+		, void *entity
+	  )
+	, void callback1(
+		  z64_global_t *global
+		, uint8_t limb
+		, uint32_t dlist
+		, vec3s_t *rotation
+		, void *entity
+	  )
+	, void *entity
+);
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx = 0x800A1AC8");
 	#elif OOT_U_1_0
