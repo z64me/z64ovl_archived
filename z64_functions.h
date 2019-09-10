@@ -5289,7 +5289,7 @@ void
 skelanime_draw_mtx(
 	  z64_global_t *global
 	, uint32_t limb_index
-	, u3uint32_t2 adt
+	, uint32_t adt
 	, uint8_t limb_dlists_count
 	, void callback0(
 		  z64_global_t *global
