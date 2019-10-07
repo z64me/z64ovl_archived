@@ -38,7 +38,7 @@
 #define SQRT(ARG0) sqrtf((ARG0))
 
 /****
- * Copy data from the ROM into VRAM, usind Direct Memory Access.
+ * Copy data from the ROM into VRAM, using Direct Memory Access.
  ***/
 extern void load_data_from_rom(uint32_t* vram_addr, uint32_t* vrom_addr, uint32_t size, uint32_t unk);
     #if OOT_DEBUG
