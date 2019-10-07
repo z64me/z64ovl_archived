@@ -97,7 +97,8 @@ zh_player_textbox_selection(z64_global_t *global)
 			#if ZH_OOT
 			, 0x104BD
 			#elif ZH_MM
-			#	error zh_player_textbox_selection needs MM equivalent!
+			, 0x16929
+			#warning needs (NZSE) confirmation!
 			#endif
 		)
 	;
@@ -115,9 +116,9 @@ zh_get_pointer_to_object_data(uint16_t object_id, z64_global_t *global)
 {
 	/* TODO use named structure element *
 	 *      instead of magic number     */
-	
+
 	int index;
-	
+
 	index =
 		object_get_index
 		(
@@ -127,7 +128,8 @@ zh_get_pointer_to_object_data(uint16_t object_id, z64_global_t *global)
 				#if ZH_OOT
 				, 0x117A4
 				#elif ZH_MM
-				#	error zh_get_pointer_to_object_data needs MM equivalent!
+				, 0x17D88
+				#warning needs (NZSE) confirmation!
 				#endif
 			)
 			, object_id
@@ -199,7 +201,7 @@ helper_lift_test(
 {
 	int temp_v0;
 	int phi_v1;
-	
+
 	temp_v0 =
 		(int)
 		(
@@ -207,12 +209,12 @@ helper_lift_test(
 			<< 0x10
 		) >> 0x10
 	;
-	
+
 	phi_v1 = (0 - temp_v0);
-	
+
 	if (temp_v0 >= 0)
 		phi_v1 = temp_v0;
-	
+
 	if (phi_v1 >= 0x5556)
 		actor_give_item(a, gl, 0, range_xz, range_y);
 }
