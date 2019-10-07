@@ -7131,7 +7131,9 @@ extern void debug_do_text_struct(z64_debug_text_t *text_struct, void *gfx_buffer
 /**
  * Return a pointer to the main display list buffer after adding debug text structure.
  */
-extern u32 debug_update_text_struct(z64_debug_text_t *text_struct);
+extern
+void *
+debug_update_text_struct(z64_debug_text_t *text_struct);
 	#if OOT_DEBUG
 		asm("debug_update_text_struct = 0x800FBC64");
 	#elif OOT_U_1_0
