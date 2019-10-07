@@ -4310,15 +4310,14 @@ extern void external_func_80078884(void);
 	#endif
 
 /**
- * Play SFX (limited set, Identical to 800646F0)
- * TODO These notes need converted into a C function prototype
+ * Play SFX once. Stops playing the SFX if the same SFX is played again.
  * A0 = SFX
  */
-extern void external_func_800788CC(u16 sfx_id);
+extern void play_sound_global_once(u16 sfx_id);
 	#if OOT_DEBUG
-		asm("external_func_800788CC = 0x800788CC");
+		asm("play_sound_global_once = 0x800788CC");
 	#elif OOT_U_1_0
-		asm("external_func_800788CC = 0x80064738");
+		asm("play_sound_global_once = 0x80064738");
 	#endif
 
 /**
