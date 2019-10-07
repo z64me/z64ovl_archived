@@ -19,17 +19,19 @@
 	zh_get_player(z64_global_t *global)
 	{
 	#if ZH_OOT
-		 /* OoT-specific code */
+		/* OoT-specific code */
 	#elif ZH_MM
-		 /* MM-specific code */
+		/* MM-specific code */
 	#endif
 	}
 #endif
 
 #if OOT_DEBUG || OOT_U_1_0
-    #define ZH_OOT 1
+#	define ZH_OOT 1
 #elif MM_U_1_0
-    #define ZH_MM  1
+#	define ZH_MM  1
+#else
+#	error z64_helpers.h: must define OOT_DEBUG, OOT_U_1_0, or MM_U_1_0 before including!
 #endif
 
 /*** Macros ***/
