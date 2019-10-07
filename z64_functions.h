@@ -38,6 +38,16 @@
 #define SQRT(ARG0) sqrtf((ARG0))
 
 /****
+ * Copy data from the ROM into VRAM, usind Direct Memory Access.
+ ***/
+extern void load_data_from_rom(uint32_t* vram_addr, uint32_t* vrom_addr, uint32_t size, uint32_t unk);
+    #if OOT_DEBUG
+        asm("load_data_from_rom = 0x80001AA0");
+	#elif OOT_U_1_0
+		asm("load_data_from_rom = 0x80000DF0");
+    #endif  
+
+/****
  * Send OS Message. This function is not used inside any existing overlay.
  * A0 = 0x80013990 for file reads on Debug, A1 = destination buffer, A2 = OS_MESG_NOBLOCK = 0 / OS_MESG_BLOCK = 1
  ***/
