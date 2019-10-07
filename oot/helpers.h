@@ -171,83 +171,96 @@ typedef struct {
 #define TIMG_A(TA0) G_TX_ANCHOR_##TA0
 #define to_rgba16(r, g, b, a) (((r >> 3) & 0x1F) << 11) | (((g >> 3) & 0x1F) << 6) | (((b >> 3) & 0x1F) << 1) | (((a >> 7) & 0x1) << 0)
 
-static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_screen_tile_t *tile)
+static
+void
+zh_draw_ui_sprite(
+	z64_disp_buf_t *buf
+	, gfx_texture_t *img
+	, gfx_screen_tile_t *tile
+)
 {
-  if (tile->origin_anchor == 0x0000)
-  {
-    tile->x -= (tile->width/2); tile->y -= (tile->height/2);
-  }
-  else
-  {
-    if (tile->origin_anchor & TIMG_A(U))
-      tile->height /= 2;
-    if (tile->origin_anchor & TIMG_A(R))
-      tile->x -= tile->width;
-    if (tile->origin_anchor & TIMG_A(D))
-      tile->y -= tile->height;
-    if (tile->origin_anchor & TIMG_A(L))
-      tile->width /= 2;
-  }
-  /*switch (tile->origin_anchor)
-  {
-    case 0b0000: /* Center
-      tile->x -= (tile->width/2); tile->y -= (tile->height/2);
-    break;
-    case 0b0001: /* Up
-      tile->height /= 2;
-    break;
-    case 0b0010: /* Right
-      tile->x -= tile->width;
-    break;
-    case 0b0100: /* Down
-      tile->y -= tile->height;
-    break;
-    case 0b1000: /* Left
-      tile->width /= 2;
-    break;
-  }*/
+	gfx_screen_tile_t tile_copy = *tile;
+	tile = &tile_copy;
+	if (tile->origin_anchor == 0x0000)
+	{
+		tile->x -= (tile->width/2); tile->y -= (tile->height/2);
+	}
+	else
+	{
+		if (tile->origin_anchor & TIMG_A(U))
+			tile->height /= 2;
+		if (tile->origin_anchor & TIMG_A(R))
+			tile->x -= tile->width;
+		if (tile->origin_anchor & TIMG_A(D))
+			tile->y -= tile->height;
+		if (tile->origin_anchor & TIMG_A(L))
+			tile->width /= 2;
+	}
+	/*switch (tile->origin_anchor)
+	{
+		case 0b0000: /* Center
+			tile->x -= (tile->width/2); tile->y -= (tile->height/2);
+		break;
+		case 0b0001: /* Up
+			tile->height /= 2;
+		break;
+		case 0b0010: /* Right
+			tile->x -= tile->width;
+		break;
+		case 0b0100: /* Down
+			tile->y -= tile->height;
+		break;
+		case 0b1000: /* Left
+			tile->width /= 2;
+		break;
+	}*/
 
 
-  gSPDisplayList(buf->p++, 0x801269D0);
-  gDPSetCombineLERP(
-    buf->p++
-    , PRIMITIVE
-    , ENVIRONMENT
-    , TEXEL0
-    , ENVIRONMENT
-    , TEXEL0
-    , 0
-    , PRIMITIVE
-    , 0
-    , PRIMITIVE
-    , ENVIRONMENT
-    , TEXEL0
-    , ENVIRONMENT
-    , TEXEL0
-    , 0
-    , PRIMITIVE
-    , 0
-  );
-  //buf->p->hi = 0xFC309661;
-  //buf->p->lo = 0x552EFF7F;
-  //buf->p++;
-  gDPSetPrimColor(buf->p++, 0, 0, 255, 255, 255, 255);
-  gDPSetEnvColor(buf->p++, 0, 0, 0, 255);
-  //gDPPipeSync(buf->p++);
-  gDPLoadTextureBlock(buf->p++,
-                      img->timg, img->fmt, img->bitsiz,
-                      img->width, img->height,
-                      0,
-                      G_TX_WRAP, G_TX_WRAP,
-                      G_TX_NOMASK, G_TX_NOMASK,
-                      G_TX_NOLOD, G_TX_NOLOD);
-  gSPTextureRectangle(buf->p++,
-                      qs102(tile->x) & ~3,
-                      qs102(tile->y) & ~3,
-                      qs102(tile->x + tile->width) & ~3,
-                      qs102(tile->y + tile->height) & ~3,
-                      G_TX_RENDERTILE,
-                      qu105(0), qu105(0),
-                      qu510(img->width / tile->width), qu510(img->height / tile->height));
+	gSPDisplayList(buf->p++, 0x801269D0);
+	gDPSetCombineLERP(
+		buf->p++
+		, PRIMITIVE
+		, ENVIRONMENT
+		, TEXEL0
+		, ENVIRONMENT
+		, TEXEL0
+		, 0
+		, PRIMITIVE
+		, 0
+		, PRIMITIVE
+		, ENVIRONMENT
+		, TEXEL0
+		, ENVIRONMENT
+		, TEXEL0
+		, 0
+		, PRIMITIVE
+		, 0
+	);
+	//buf->p->hi = 0xFC309661;
+	//buf->p->lo = 0x552EFF7F;
+	//buf->p++;
+	gDPSetPrimColor(buf->p++, 0, 0, 255, 255, 255, 255);
+	gDPSetEnvColor(buf->p++, 0, 0, 0, 255);
+	//gDPPipeSync(buf->p++);
+	gDPLoadTextureBlock(
+		buf->p++
+		, img->timg, img->fmt, img->bitsiz
+		, img->width, img->height
+		, 0
+		, G_TX_WRAP, G_TX_WRAP
+		, G_TX_NOMASK, G_TX_NOMASK
+		, G_TX_NOLOD, G_TX_NOLOD
+	);
+	gSPTextureRectangle(
+		buf->p++
+		, qs102(tile->x) & ~3
+		, qs102(tile->y) & ~3
+		, qs102(tile->x + tile->width) & ~3
+		, qs102(tile->y + tile->height) & ~3
+		, G_TX_RENDERTILE
+		, qu105(0), qu105(0)
+		, qu510(img->width / tile->width)
+		, qu510(img->height / tile->height)
+	);
 }
 #endif // Z64OVL_HELPERS_H_INCLUDED
