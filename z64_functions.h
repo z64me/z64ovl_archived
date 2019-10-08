@@ -7309,15 +7309,14 @@ extern void external_func_8010B680(void);
 	#endif
 
 /**
- * Dialog yes/no response?
- * TODO These notes need converted into a C function prototype
- * a1 = Response Text ID
+ * Continue conversation
+ * NOTE: Should NOT be used unless a textbox is already onscreen!
  */
-extern void external_func_8010B720(z64_global_t *global, uint16_t text_id);
+extern void textbox_continue(z64_global_t *global, uint16_t text_id);
 	#if OOT_DEBUG
-		asm("external_func_8010B720 = 0x8010B720");
+		asm("textbox_continue = 0x8010B720");
 	#elif OOT_U_1_0
-		asm("external_func_8010B720 = 0x800DCE80");
+		asm("textbox_continue = 0x800DCE80");
 	#endif
 
 /**
