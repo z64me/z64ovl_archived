@@ -605,7 +605,9 @@ typedef struct
   uint8_t           message_state_2;          /* 0x104BC */
   char              unk_14_[0x0002];          /* 0x104BD */
   uint8_t           message_state_3;          /* 0x104BF */
-  char              unk_15_[0x0030];          /* 0x104C0 */
+  char              unk_15_[0x0020];          /* 0x104C0 */
+  z64_actor_t      *textbox_actor;            /* 0x104E0 */ /* pointer to last actor that called textbox_begin() */
+  char              unk_104E4[0xC];           /* 0x104E4 */
   z64_if_ctxt_t     if_ctxt;                  /* 0x104F0 */
   z64_pause_ctxt_t  pause_ctxt;               /* 0x10760 */
   char              unk_16_[0x000C];          /* 0x10A14 */
