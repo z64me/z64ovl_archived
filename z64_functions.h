@@ -45,6 +45,8 @@ extern void load_data_from_rom(uint32_t* vram_addr, uint32_t* vrom_addr, uint32_
         asm("load_data_from_rom = 0x80001AA0");
 	#elif OOT_U_1_0
 		asm("load_data_from_rom = 0x80000DF0");
+	#elif MM_U_1_0
+		asm("load_data_from_rom = 0x80080C90");
     #endif  
 
 /****
