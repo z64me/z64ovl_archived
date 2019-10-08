@@ -7297,15 +7297,20 @@ extern void external_func_80106CCC(void);
 	#endif
 
 /**
- * Message display-related
- * TODO These notes need converted into a C function prototype
- * a1 = Text ID
+ * Initialize a textbox with message `text_id`
+ * `actor` should either be a pointer to the actor structure
+ *         within the entity, or 0 (NULL)
+ * TODO: Find out what happens when `actor` is non-zero.
+ *       Current theories include:
+ *         * some kind of camera magic
+ *         * a value inside the actor structure is set
+ *           when the textbox advances, closes, or both
  */
-extern void external_func_8010B680(void);
+extern void textbox_begin(z64_global_t *, uint16_t text_id, z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_8010B680 = 0x8010B680");
+		asm("textbox_begin = 0x8010B680");
 	#elif OOT_U_1_0
-		asm("external_func_8010B680 = 0x800DCE14");
+		asm("textbox_begin = 0x800DCE14");
 	#endif
 
 /**
