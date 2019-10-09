@@ -100,7 +100,7 @@ struct z64_actor_s
   float             unk_0xF8;                 /* 0x00F8 */
   float             unk_0xFC;                 /* 0x00FC */
   z64_xyzf_t        pos_4;                    /* 0x0100 */
-  uint8_t           unk_0x10C;                /* 0x010C */
+  uint8_t           unk_0x10C;                /* 0x010C */ /* used for trade sequence... */
   uint8_t           unk_0x10D;                /* 0x010D */
   uint16_t          text_id;                  /* 0x010E */
   int16_t           frozen;                   /* 0x0110 */
