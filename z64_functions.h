@@ -3634,41 +3634,55 @@ extern void external_func_80063E9C(void);
 	#endif
 
 /**
- * Starts cutscene for Link (also disables Z-Targeting)
- * TODO These notes need converted into a C function prototype
- * A0 - global context | A1 - global context + 0x1D64
+ * enable actor-controlled cutscene
+ * disabled Z-Targeting, interface, and adds horizontal black bars
+ * `global_cutscene` refers to `&global->cutscene`
  */
-extern void external_func_80064520(z64_global_t *global, void* global1D64);
+extern void actor_cutscene_enable(z64_global_t *, void *global_cutscene);
 	#if OOT_DEBUG
-		asm("external_func_80064520 = 0x80064520");
+		asm("actor_cutscene_enable = 0x80064520");
 	#elif OOT_U_1_0
-		asm("external_func_80064520 = 0x80052328");
+		asm("actor_cutscene_enable = 0x80052328");
 	#endif
 
 /**
- * Ends cutscene for Link (also enables Z-Targeting)
- * TODO These notes need converted into a C function prototype
- * A0 - global context | A1 - global context + 0x1D64
+ * disable actor-controlled cutscene
+ * NOTE: will not work if (global->cutscene.state == 4)
+ * `global_cutscene` refers to `&global->cutscene`
  */
-extern void external_func_80064534(z64_global_t *global, void* global1D64);
+extern void actor_cutscene_disable(z64_global_t *, void *global_cutscene);
 	#if OOT_DEBUG
-		asm("external_func_80064534 = 0x80064534");
+		asm("actor_cutscene_disable = 0x80064534");
 	#elif OOT_U_1_0
-		asm("external_func_80064534 = 0x80052340");
+		asm("actor_cutscene_disable = 0x80052340");
 	#endif
 
 /**
- * Set Cutscene Pointer (Area Intro Cutscenes Only?)
- * Contains Disk Drive Hook
- * TODO These notes need converted into a C function prototype
- * A0 = Global Context | A1 = Segment Offset
+ * initialize cutscene from a script stored in a ram segment
+ * NOTE: use wrapper `cutscene_play_script` instead (same arguments)
+         if you want  the cutscene to play immediately; otherwise,
+         heed the following note(s)
+ * NOTE: To enable the cutscene, you must set
+         Z64GL_CUTSCENE_PLAY_SCRIPT (byte) to 1
+         after calling this function.
+ * TODO: this is confirmed working with cutscenes stored in scenes
+         by using ram segment 0x02, but what about cutscenes
+         embedded directly into objects (ram segment 0x06)?
+ * TODO: explain what "Contains Disk Drive Hook" means
+ * `segptr` is a segment pointer to cutscene data,
+            typically within a scene file (zscene)
  */
-extern void external_func_800693D8(void);
+extern void cutscene_init_script(z64_global_t *, uint32_t segptr);
 	#if OOT_DEBUG
-		asm("external_func_800693D8 = 0x800693D8");
+		asm("cutscene_init_script = 0x800693D8");
 	#elif OOT_U_1_0
-		asm("external_func_800693D8 = 0x80056F98");
+		asm("cutscene_init_script = 0x80056F98");
 	#endif
+static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
+{
+	cutscene_init_script(gl, segptr);
+	AVAL(Z64GL_CUTSCENE_PLAY_SCRIPT, uint8_t, 0) = 1;
+}
 
 /**
  * TODO This function is completely undocumented
