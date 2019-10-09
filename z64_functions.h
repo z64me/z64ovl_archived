@@ -3635,7 +3635,7 @@ extern void external_func_80063E9C(void);
 
 /**
  * enable actor-controlled cutscene
- * disabled Z-Targeting, interface, and adds horizontal black bars
+ * disables Z-Targeting, interface, and adds horizontal black bars
  * `global_cutscene` refers to `&global->cutscene`
  */
 extern void actor_cutscene_enable(z64_global_t *, void *global_cutscene);
