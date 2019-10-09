@@ -584,10 +584,46 @@ typedef struct
   void             *title_card_texture;       /* 0x01D4C */
   char              unk_0D_[0x0007];          /* 0x01D50 */
   uint8_t           title_card_delay;         /* 0x01D57 */
-  char              unk_0E_[0x0010];          /* 0x01D58 */
-  void             *cutscene_ptr;             /* 0x01D68 */
-  int8_t            cutscene_state;           /* 0x01D6C */
-  char              unk_0F_[0x020B];          /* 0x01D6D */
+  char              unk_0E_[0x000C];          /* 0x01D58 */
+  struct
+  {
+    char            unk_0x01D64[4];           /* 0x01D64 */
+    void           *ptr;                      /* 0x01D68 */
+    int8_t          state;                    /* 0x01D6C */
+                        /* = 0 : No Cutscene                    *
+                         *   1 : Initializing skippable scene   *
+                         *   2 : Skippable cutscene playing     *
+                         *   3 : Initializing unskippable scene *
+                         *   4 : Unskippable cutscene playing   */
+    char            unk_0x01D6D[3];           /* 0x01D6D */
+    uint16_t        frame;                    /* 0x01D70 */
+    char            unk_0x01D72[6];           /* 0x01D72 */
+    uint16_t        frame_lastcmd;            /* 0x01D78 */ /* frame of last cutscene command executed */
+    char            unk_0x01D7A[0xA];         /* 0x01D7A */
+    void           *camera_current;           /* 0x01D84 */
+    
+    /* TODO actor command notes courtesy of Noka; implement them...
+     * at 0x1D88 the actor pointers start, there's 11 actor pointers
+     * in total but 2 are always used by link and navi meaning there's
+     * 9 free slots for custom actors
+     * so there's 11 pointers, starting at 0x1D88
+     * then inside each pointer
+     * * 0x0 -> action
+     * * 0x2 -> start frame s16
+     * * 0x4 -> end frame s16
+     * * 0x6 -> x rot
+     * * 0x8 -> y rot
+     * * 0xA -> z rot
+     * * 0xC -> x start
+     * * 0x10 -> y start
+     * * 0x14 -> z start
+     * * 0x18 -> x end
+     * * 0x1C -> y end
+     * * 0x20 -> z end
+     * call these cutscene actor command struct    
+     */
+  }                 cutscene;                 /* 0x01D64 through 0x01D88 */
+  char              unk_0F_[0x01F0];          /* 0x01D88 */
   z64_sky_ctxt_t    sky_ctxt;                 /* 0x01F78 */
   char              unk_10_[0xE2C0];          /* 0x020C8 */
   char             *message_texture;          /* 0x10388 */
