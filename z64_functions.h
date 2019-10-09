@@ -1597,7 +1597,13 @@ extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = float (distance 1?) | A3 = float (distance 2?) | SP+0x10 = Trade Item Index
  */
-extern void actor_npc_trade_request(z64_actor_t* actor, z64_global_t* global, float distance, float distance2, u8 item_index);
+extern void actor_npc_trade_request(
+	z64_actor_t *actor
+	, z64_global_t *
+	, float dist_xz
+	, float dist_y
+	, u8 item_index
+);
 	#if OOT_DEBUG
 		asm("actor_npc_trade_request = 0x8002F1C4");
 	#elif OOT_U_1_0
