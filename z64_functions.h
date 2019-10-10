@@ -1443,13 +1443,26 @@ extern void external_func_8002DF38(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * make Link perform an action during an actor-controlled cutscene
+ * `actor`   can be `0` or `NULL`; a copy of this pointer gets
+             stored at 0x448 in Link's instance structure
+ * `action`  the action `var_80854B18[action]` in Link's overlay
+             will be executed; note that this is a different table
+             than what is used during scene cutscenes; also, a copy of
+             this value is stored as a `u8` at 0x444 in Link's instance
+ * TODO:     further investigate `actor`; does Link call a callback
+             function that is stored in it, for stringing multiple
+             actions together?
  */
-extern void external_func_8002DF54(void);
+extern void link_set_cutscene_action(
+	z64_global_t    *global
+	, z64_actor_t   *actor
+	, uint8_t        action
+);
 	#if OOT_DEBUG
-		asm("external_func_8002DF54 = 0x8002DF54");
+		asm("link_set_cutscene_action = 0x8002DF54");
 	#elif OOT_U_1_0
-		asm("external_func_8002DF54 = 0x800218EC");
+		asm("link_set_cutscene_action = 0x800218EC");
 	#endif
 
 /**
