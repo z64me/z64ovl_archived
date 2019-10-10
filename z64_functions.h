@@ -5322,10 +5322,10 @@ skelanime_draw_mtx(
 	, uint32_t limb_index
 	, uint32_t adt
 	, uint8_t limb_dlists_count
-	, void callback0(
+	, int callback0(            /* callback0 must return 0 */
 		  z64_global_t *global
-		, uint8_t limb
-		, uint32_t dlist
+		, uint8_t limb           /* limb index in skeleton */
+		, uint32_t *dlist        /* *dlist = 0x06xxxxxx changes limb model */
 		, vec3f_t *translation
 		, vec3s_t *rotation
 		, void *entity
@@ -5333,7 +5333,7 @@ skelanime_draw_mtx(
 	, void callback1(
 		  z64_global_t *global
 		, uint8_t limb
-		, uint32_t dlist
+		, uint32_t dlist         /* different from callback0, needs more research */
 		, vec3s_t *rotation
 		, void *entity
 	  )
