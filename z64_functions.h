@@ -5876,14 +5876,13 @@ extern void external_func_800BFC84(void);
 /**
  * Starts actor cutscene camera
  * returns camera ID
- * TODO These notes need converted into a C function prototype
  * A0 - global context
  */
-extern uint16_t external_func_800C0230(z64_global_t *global);
+extern uint16_t start_cutscene_camera(z64_global_t *global);
 	#if OOT_DEBUG
-		asm("external_func_800C0230 = 0x800C0230");
+		asm("start_cutscene_camera = 0x800C0230");
 	#elif OOT_U_1_0
-		asm("external_func_800C0230 = 0x8009D0F0");
+		asm("start_cutscene_camera = 0x8009D0F0");
 	#endif
 
 /**
@@ -5933,13 +5932,13 @@ extern void external_func_800C04A4(void);
 /**
  * Updates actor camera
  * TODO These notes need converted into a C function prototype
- * a0 - global context, a1 - set to 1 to update the camera , a2 - float array, origin?, a3 - float array, focus point?
+ * a0 - global context, a1 - set to 1 to update the camera , a2 - float array, camera focus point, a3 - float array, camera origin
  */
-extern void external_func_800C04D8(z64_global_t *global, int16_t a1, vec3f_t *cam_pos, vec3f_t *cam_lookat);
+extern void update_cutscene_camera(z64_global_t *global, int16_t a1, vec3f_t *camera_focus_point, vec3f_t *camera_origin);
 	#if OOT_DEBUG
-		asm("external_func_800C04D8 = 0x800C04D8");
+		asm("update_cutscene_camera = 0x800C04D8");
 	#elif OOT_U_1_0
-		asm("external_func_800C04D8 = 0x8009D328");
+		asm("update_cutscene_camera = 0x8009D328");
 	#endif
 
 /**
@@ -5984,15 +5983,14 @@ extern void external_func_800C0808(void);
 
 /**
  * Ends actor cutscene camera
- * TODO These notes need converted into a C function prototype
  * TODO unk0's size must be either 8 or 16 because of alignment found in the Arwing
- * A0 - global context | A1 - unknown, set to 1
+ * A0 - global context | A1 - unknown, set to 1, A2 - End movement speed. If the value is not 0, it calls actor_closeup with arguments: global, 0x3F0, and this value.
  */
-extern void external_func_800C08AC(z64_global_t *global, int16_t unk0, int unk1);
+extern void end_cutscene_camera(z64_global_t *global, int16_t unk0, int end_movement_speed);
 	#if OOT_DEBUG
-		asm("external_func_800C08AC = 0x800C08AC");
+		asm("end_cutscene_camera = 0x800C08AC");
 	#elif OOT_U_1_0
-		asm("external_func_800C08AC = 0x8009D718");
+		asm("end_cutscene_camera = 0x8009D718");
 	#endif
 
 /**
