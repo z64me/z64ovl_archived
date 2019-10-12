@@ -1449,7 +1449,10 @@ extern void external_func_8002DF38(void);
  * `action`  the action `var_80854B18[action]` in Link's overlay
              will be executed; note that this is a different table
              than what is used during scene cutscenes; also, a copy of
-             this value is stored as a `u8` at 0x444 in Link's instance
+             this value is stored as a `u8` at 0x444 in Link's instance.
+             If you end the cutscene you will not have control over Link 
+             until you use action 0x7.
+             
  * TODO:     further investigate `actor`; does Link call a callback
              function that is stored in it, for stringing multiple
              actions together?
