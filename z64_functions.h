@@ -5272,6 +5272,8 @@ extern int object_get_index(z64_obj_ctxt_t* object_context, u16 object_id);
 		asm("object_get_index = 0x8009812C");
 	#elif OOT_U_1_0
 		asm("object_get_index = 0x80081628");
+ 	#elif MM_U_1_0
+		asm("object_get_index = 0x8012F608");       
 	#endif
 
 /**
