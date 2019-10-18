@@ -7264,6 +7264,15 @@ extern int external_func_800FD970(void);
 	#elif MM_U_1_0
 		asm("external_func_800FD970 = 0x80086FA0");
 	#endif
+    
+/**
+ * Seeds the RNG with the given seed. This function is not used inside any existing overlay.
+ */
+extern int srand(uint32_t seed);
+	#if OOT_DEBUG
+		asm("srand = 0x800FD9A0");
+	#elif OOT_U_1_0
+		asm("srand = 0x800CDCC0");
 
 /**
  * TODO math, does something to a floating point value
