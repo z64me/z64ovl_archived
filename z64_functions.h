@@ -1609,7 +1609,7 @@ extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 	#endif
 
 /**
- * Makes a cylinder-shaped region around the actor in which Link is able to speak to trade with the actor.
+ * Makes a cylinder-shaped region around the actor in which Link is able to speak to and trade with the actor.
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xy distance | A3 = float, y distance | SP+0x10 = Trade Item Index
  */
 extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, u8 item_index
@@ -1621,7 +1621,7 @@ extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float 
 	#endif
 
 /**
- * Makes a cube-shaped (or, more specifically, a regular-cylinder-shaped) region around the actor in which Link is able to speak to trade with the actor (Wrapper for 8002F1C4)
+ * Makes a cube-shaped (or, more specifically, a regular-cylinder-shaped) region around the actor in which Link is able to speak to and trade with the actor (Wrapper for 8002F1C4)
  * Passes A2 into A2 and A3 of inner function
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xyz distance | A3 = Trade Item Index
  */
@@ -2333,7 +2333,7 @@ extern void skelanime_draw_mtx_xlu(z64_global_t *global, z64_skelanime_t *skelan
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx_xlu = 0x80034BA0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("skelanime_draw_mtx_xlu = 0x800279CC");
 	#endif
 
 /**
