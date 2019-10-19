@@ -1609,16 +1609,10 @@ extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 	#endif
 
 /**
- * NPC Request Trade Item
- * TODO These notes need converted into a C function prototype
- * A0 = Actor Instance | A1 = Global Context | A2 = float (distance 1?) | A3 = float (distance 2?) | SP+0x10 = Trade Item Index
+ * Makes a cyllinder-shaped region around the actor in which Link is able to speak to trade with the actor.
+ * A0 = Actor Instance | A1 = Global Context | A2 = float, xy distance | A3 = float, y distance | SP+0x10 = Trade Item Index
  */
-extern void actor_npc_trade_request(
-	z64_actor_t *actor
-	, z64_global_t *
-	, float dist_xz
-	, float dist_y
-	, u8 item_index
+extern void actor_poll_trade_cyllinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, u8 item_index
 );
 	#if OOT_DEBUG
 		asm("actor_npc_trade_request = 0x8002F1C4");
@@ -1627,12 +1621,11 @@ extern void actor_npc_trade_request(
 	#endif
 
 /**
- * NPC Request Trade Item | (Wrapper for 80022960)
+ * Makes a cube-shaped (or, more specifically, a regular-cyllinder-shaped) region around the actor in which Link is able to speak to trade with the actor (Wrapper for 8002F1C4)
  * Passes A2 into A2 and A3 of inner function
- * TODO These notes need converted into a C function prototype
- * A0 = Actor Instance | A1 = Global Context | A2 = float distance? | A3 = Trade Item Index
+ * A0 = Actor Instance | A1 = Global Context | A2 = float, xyz distance | A3 = Trade Item Index
  */
-extern void external_func_8002F298(z64_actor_t *actor, z64_global_t *global, float distance, u8 item_index);
+extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, float distance, u8 item_index);
 	#if OOT_DEBUG
 		asm("external_func_8002F298 = 0x8002F298");
 	#elif OOT_U_1_0
@@ -1640,12 +1633,12 @@ extern void external_func_8002F298(z64_actor_t *actor, z64_global_t *global, flo
 	#endif
 
 /**
- * NPC Request Trade Item? | (Wrapper for 80022A34)
+ * Makes a cube-shaped (or, more specifically, a regular-cyllinder-shaped) region around the actor in which Link is able to speak with the actor (Wrapper for 80022A34)
  * Calls wrapped function with A3 = 0
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = float distance?
  */
-extern void external_func_8002F2CC(z64_actor_t *actor, z64_global_t *gl, float distance);
+extern void actor_poll_speak_cube(z64_actor_t *actor, z64_global_t *gl, float distance);
 	#if OOT_DEBUG
 		asm("external_func_8002F2CC = 0x8002F2CC");
 	#elif OOT_U_1_0
