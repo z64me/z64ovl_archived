@@ -1609,10 +1609,10 @@ extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 	#endif
 
 /**
- * Makes a cyllinder-shaped region around the actor in which Link is able to speak to trade with the actor.
+ * Makes a cylinder-shaped region around the actor in which Link is able to speak to trade with the actor.
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xy distance | A3 = float, y distance | SP+0x10 = Trade Item Index
  */
-extern void actor_poll_trade_cyllinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, u8 item_index
+extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, u8 item_index
 );
 	#if OOT_DEBUG
 		asm("actor_npc_trade_request = 0x8002F1C4");
@@ -1621,7 +1621,7 @@ extern void actor_poll_trade_cyllinder(z64_actor_t *actor, z64_global_t *, float
 	#endif
 
 /**
- * Makes a cube-shaped (or, more specifically, a regular-cyllinder-shaped) region around the actor in which Link is able to speak to trade with the actor (Wrapper for 8002F1C4)
+ * Makes a cube-shaped (or, more specifically, a regular-cylinder-shaped) region around the actor in which Link is able to speak to trade with the actor (Wrapper for 8002F1C4)
  * Passes A2 into A2 and A3 of inner function
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xyz distance | A3 = Trade Item Index
  */
@@ -1633,7 +1633,7 @@ extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, floa
 	#endif
 
 /**
- * Makes a cube-shaped (or, more specifically, a regular-cyllinder-shaped) region around the actor in which Link is able to speak with the actor (Wrapper for 80022A34)
+ * Makes a cube-shaped (or, more specifically, a regular-cylinder-shaped) region around the actor in which Link is able to speak with the actor (Wrapper for 80022A34)
  * Calls wrapped function with A3 = 0
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = float distance?
