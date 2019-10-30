@@ -47,44 +47,44 @@ extern void load_data_from_rom(uint32_t* vram_addr, uint32_t* vrom_addr, uint32_
 		asm("load_data_from_rom = 0x80000DF0");
 	#elif MM_U_1_0
 		asm("load_data_from_rom = 0x80080C90");
-    #endif  
+    #endif
 
 /****
  * Send OS Message. This function is not used inside any existing overlay.
  * A0 = 0x80013990 for file reads on Debug, A1 = destination buffer, A2 = OS_MESG_NOBLOCK = 0 / OS_MESG_BLOCK = 1
  ***/
-extern void osSendMesg(OSMesgQueue* queue, void* dest, int flag);
+extern void osSendMesg(OSMesgQueue* queue, void* dest, int32_t flag);
 	#if OOT_DEBUG
 		asm("osSendMesg = 0x80003060");
 	#elif OOT_U_1_0
 		asm("osSendMesg = 0x80001E20");
 	#endif
-    
+
 /****
  * Create a queue. This function is not used inside any existing overlay.
- ***/    
-extern void osCreateMesgQueue(OSMesgQueue* queue, OSMesg* mesg, int flag);
+ ***/
+extern void osCreateMesgQueue(OSMesgQueue* queue, OSMesg* mesg, int32_t flag);
 	#if OOT_DEBUG
 		asm("osCreateMesgQueue = 0x800061D0");
 	#elif OOT_U_1_0
 		asm("osCreateMesgQueue = 0x80004220");
-	#endif    
+	#endif
 
 /****
  * Receive message from a queue. This function is not used inside any existing overlay.
  ***/
-extern void osRecvMesg(OSMesgQueue* queue, OSMesg* mesq, int flag);
+extern void osRecvMesg(OSMesgQueue* queue, OSMesg* mesq, int32_t flag);
 	#if OOT_DEBUG
 		asm("osRecvMesg = 0x800062E0");
 	#elif OOT_U_1_0
 		asm("osRecvMesg = 0x80002030");
-	#endif 
+	#endif
 
 /****
  * copy `num` bytes from `src` to `dst`
  * This function is not used inside any existing overlay
  ***/
-extern void memory_copy(const void *src, void *dst, const u32 num);
+extern void memory_copy(const void *src, void *dst, const uint32_t num);
 	#if OOT_DEBUG
 		asm("memory_copy = 0x80006F10");
 	#elif OOT_U_1_0
@@ -109,7 +109,7 @@ extern void player_swap_age_equipment(void);
  * Allocates to the tail end of the given heap (0x10 aligned)
  * A0 = Allocation Handle ptr | A1 = Size | V0 = ptr to free space
  */
-extern void* allocate_from_top(void* heap_ptr, int alloc_size);
+extern void* allocate_from_top(void* heap_ptr, int32_t alloc_size);
 	#if OOT_DEBUG
 		asm("external_func_80001FF0 = 0x80001FF0");
 	#elif OOT_U_1_0
@@ -117,7 +117,7 @@ extern void* allocate_from_top(void* heap_ptr, int alloc_size);
 	#endif
 
 /**
- * print a debug message to the console
+ * print32_t a debug message to the console
  * use DEBUG_MESSAGE(), which will disable debug_message() calls unless compiling with DEBUG defined
  */
 extern void debug_message(const char *msg, ...);
@@ -156,7 +156,7 @@ extern void external_func_80002E50(void);
  * Drops a collectible
  * a0 = global context | a1 = actor instance + 0x24 | a2 = drop ID
  */
-extern void item_drop_collectible(z64_global_t *global, vec3f_t *pos2, u16 drop_id);
+extern void item_drop_collectible(z64_global_t *global, vec3f_t *pos2, uint16_t drop_id);
 	#if OOT_DEBUG
 		asm("item_drop_collectible = 0x8001F548");
 	#elif OOT_U_1_0
@@ -177,7 +177,7 @@ extern void external_func_8001F77C(void);
  * Randomized item spawn
  * a0 = global context | a1 = actor instance | a2 = position array | a3 = drop table ID
  */
-extern void item_drop_random_collectible(z64_actor_t* global, z64_actor_t* actor, vec3f_t* position, u16 drop_id);
+extern void item_drop_random_collectible(z64_actor_t* global, z64_actor_t* actor, vec3f_t* position, uint16_t drop_id);
 	#if OOT_DEBUG
 		asm("external_func_8001F940 = 0x8001F940");
 	#elif OOT_U_1_0
@@ -561,7 +561,7 @@ extern void effect_spawn_water_bubble(void);
  * Spawn Particle 0x09
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_water_ripple(z64_global_t *global, vec3f_t *pos, int unk0, int unk1, int unk2);
+extern void effect_spawn_water_ripple(z64_global_t *global, vec3f_t *pos, int32_t unk0, int32_t unk1, int32_t unk2);
 	#if OOT_DEBUG
 		asm("effect_spawn_water_ripple = 0x80029444");
 	#elif OOT_U_1_0
@@ -576,7 +576,7 @@ extern void effect_spawn_water_ripple(z64_global_t *global, vec3f_t *pos, int un
  */
 extern void effect_spawn_water_splash(
 	z64_global_t *global, vec3f_t *pos,
-	int unk0, int unk1, int unk2, int unk3
+	int32_t unk0, int32_t unk1, int32_t unk2, int32_t unk3
 );
 	#if OOT_DEBUG
 		asm("effect_spawn_water_splash = 0x8002949C");
@@ -647,7 +647,7 @@ extern void external_func_80029724(void);
 /**
  * Spawn N Particle 0x0F (Wrapper for 8001D21C)
  * TODO These notes need converted into a C function prototype
- * SP+0x18 = s16 Particles to Spawn
+ * SP+0x18 = int16_t Particles to Spawn
  */
 extern void external_func_800297A4(void);
 	#if OOT_DEBUG
@@ -778,18 +778,18 @@ Argument Notes
 extern void effect_spawn_fragment(
 	z64_global_t *global,
 	vec3f_t *burst_depth_y, vec3f_t *burst_depth_x, vec3f_t *burst_origin,
-	s16 gravity_influence,
-	s16 u0,
-	s16 rotation_speed,
-	s16 burst_velocity,
-	u8 u1,
-	s16 scale,
-	u8 u2,
-	s16 jitter,
-	s32 duration,
-	s16 u3,
-	s16 objno,
-	u32 dlist
+	int16_t gravity_influence,
+	int16_t u0,
+	int16_t rotation_speed,
+	int16_t burst_velocity,
+	uint8_t u1,
+	int16_t scale,
+	uint8_t u2,
+	int16_t jitter,
+	int32_t duration,
+	int16_t u3,
+	int16_t objno,
+	uint32_t dlist
 	);
 	#if OOT_DEBUG
 		asm("effect_spawn_fragment = 0x80029E8C");
@@ -979,7 +979,7 @@ extern void external_func_8002BDB0(void);
 /**
  * Tests if Switch Flag is Set
  */
-extern int flag_get_switch(z64_global_t *global, int flag);
+extern int32_t flag_get_switch(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_get_switch = 0x8002CB40");
 	#elif OOT_U_1_0
@@ -991,7 +991,7 @@ extern int flag_get_switch(z64_global_t *global, int flag);
 /**
  * Sets Switch Flag to 1
  */
-extern void flag_set_switch(z64_global_t *global, int flag);
+extern void flag_set_switch(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_set_switch = 0x8002CB74");
 	#elif OOT_U_1_0
@@ -1003,7 +1003,7 @@ extern void flag_set_switch(z64_global_t *global, int flag);
 /**
  * Sets Switch Flag to 0
  */
-extern void flag_unset_switch(z64_global_t *global, int flag);
+extern void flag_unset_switch(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_unset_switch = 0x8002CBB4");
 	#elif OOT_U_1_0
@@ -1016,7 +1016,7 @@ extern void flag_unset_switch(z64_global_t *global, int flag);
  * Tests if Unused Scene Flag is Set
  * This function is not used inside any existing overlay
  */
-extern int flag_get_uscene(z64_global_t *global, int flag);
+extern int32_t flag_get_uscene(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_get_uscene = 0x8002CBF8");
 	#elif OOT_U_1_0
@@ -1027,7 +1027,7 @@ extern int flag_get_uscene(z64_global_t *global, int flag);
  * Sets Unused Scene Flag to 1
  * This function is not used inside any existing overlay
  */
-extern void flag_set_uscene(z64_global_t *global, int flag);
+extern void flag_set_uscene(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_set_uscene = 0x8002CC2C");
 	#elif OOT_U_1_0
@@ -1038,7 +1038,7 @@ extern void flag_set_uscene(z64_global_t *global, int flag);
  * Sets Unused Scene Flag to 0
  * This function is not used inside any existing overlay
  */
-extern void flag_unset_uscene(z64_global_t *global, int flag);
+extern void flag_unset_uscene(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_unset_uscene = 0x8002CC6C");
 	#elif OOT_U_1_0
@@ -1048,7 +1048,7 @@ extern void flag_unset_uscene(z64_global_t *global, int flag);
 /**
  * Tests if a Chest Flag is set
  */
-extern int flag_get_treasure(z64_global_t *global, int flag);
+extern int32_t flag_get_treasure(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_get_treasure = 0x8002CCB0");
 	#elif OOT_U_1_0
@@ -1058,7 +1058,7 @@ extern int flag_get_treasure(z64_global_t *global, int flag);
 /**
  * Sets Chest Flag to 1
  */
-extern void flag_set_treasure(z64_global_t *global, int flag);
+extern void flag_set_treasure(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_set_treasure = 0x8002CCC4");
 	#elif OOT_U_1_0
@@ -1068,7 +1068,7 @@ extern void flag_set_treasure(z64_global_t *global, int flag);
 /**
  * Test if a Room Clear Flag is set
  */
-extern int flag_get_roomclear(z64_global_t *global, int flag);
+extern int32_t flag_get_roomclear(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_get_roomclear = 0x8002CCDC");
 	#elif OOT_U_1_0
@@ -1078,7 +1078,7 @@ extern int flag_get_roomclear(z64_global_t *global, int flag);
 /**
  * Sets Room Clear Flag to 1
  */
-extern void flag_set_roomclear(z64_global_t *global, int flag);
+extern void flag_set_roomclear(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_set_roomclear = 0x8002CCF0");
 	#elif OOT_U_1_0
@@ -1098,7 +1098,7 @@ extern void external_func_8002CD08(void);
 /**
  * Tests if Global Context + 0x1D40 Flag is set
  */
-extern int temp_clear_flag_get(z64_global_t *global, int flag);
+extern int32_t temp_clear_flag_get(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("temp_clear_flag_get = 0x8002CD24");
 	#elif OOT_U_1_0
@@ -1110,7 +1110,7 @@ extern int temp_clear_flag_get(z64_global_t *global, int flag);
 /**
  * Sets Global Context + 0x1D40 Flag to 1
  */
-extern void temp_clear_flag_set(z64_global_t *global, int flag);
+extern void temp_clear_flag_set(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("temp_clear_flag_set = 0x8002CD38");
 	#elif OOT_U_1_0
@@ -1122,7 +1122,7 @@ extern void temp_clear_flag_set(z64_global_t *global, int flag);
 /**
  * Tests if Scene Collectible Flag is set
  */
-extern int flag_get_scenecollect(z64_global_t *global, int flag);
+extern int32_t flag_get_scenecollect(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_get_scenecollect = 0x8002CD6C");
 	#elif OOT_U_1_0
@@ -1134,7 +1134,7 @@ extern int flag_get_scenecollect(z64_global_t *global, int flag);
 /**
  * Sets Scene Collectible Flag to 1
  */
-extern void flag_set_scenecollect(z64_global_t *global, int flag);
+extern void flag_set_scenecollect(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_set_scenecollect = 0x8002CDA0");
 	#elif OOT_U_1_0
@@ -1147,7 +1147,7 @@ extern void flag_set_scenecollect(z64_global_t *global, int flag);
  * Boss Title
  * A0 - global context | A1 - A0 + 0x1D4C | A2 - (object pointer + texture offset inside the object)
  */
-extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1D4C, u32 texture);
+extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1D4C, uint32_t texture);
 	#if OOT_DEBUG
 		asm("actor_boss_title = 0x8002CE00");
 	#elif OOT_U_1_0
@@ -1198,7 +1198,7 @@ extern void actor_set_scale(z64_actor_t *actor, f32 scale);
 	#endif
 
 /**
- * Update CPU Segment 0x06 to point to actor's defined object dependency
+ * Update CPU Segment 0x06 to point32_t to actor's defined object dependency
  */
 extern void actor_set_object(z64_global_t *global, z64_actor_t *actor);
 	#if OOT_DEBUG
@@ -1337,15 +1337,15 @@ extern float math_distance_xyz_actor_actor(z64_actor_t *a, z64_actor_t *b);
 	#endif
 
 /**
- * Calculates XYZ distance between actor (+0x24) and a point  | Wrapper fo 80063E18
+ * Calculates XYZ distance between actor (+0x24) and a point32_t  | Wrapper fo 80063E18
  * TODO These notes need converted into a C function prototype
  * A0 = Actor | A1 = Coordinate ptr | F0 = Result
  */
 extern float math_distance_xyz_actor_point(z64_actor_t *a, z64_point_t *b);
 	#if OOT_DEBUG
-		asm("math_distance_xyz_actor_point = 0x8002DB6C");
+		asm("math_distance_xyz_actor_point32_t = 0x8002DB6C");
 	#elif OOT_U_1_0
-		asm("math_distance_xyz_actor_point = 0x800214D8");
+		asm("math_distance_xyz_actor_point32_t = 0x800214D8");
 	#endif
 
 /**
@@ -1365,9 +1365,9 @@ extern float math_distance_xz_actor_actor(z64_actor_t *a, z64_actor_t *b);
  */
 extern float math_distance_xz_actor_point(z64_actor_t *a, z64_point_t *b);
 	#if OOT_DEBUG
-		asm("math_distance_xz_actor_point = 0x8002DBB0");
+		asm("math_distance_xz_actor_point32_t = 0x8002DBB0");
 	#elif OOT_U_1_0
-		asm("math_distance_xz_actor_point = 0x80021528");
+		asm("math_distance_xz_actor_point32_t = 0x80021528");
 	#endif
 
 /**
@@ -1449,10 +1449,10 @@ extern void external_func_8002DF38(void);
  * `action`  the action `var_80854B18[action]` in Link's overlay
              will be executed; note that this is a different table
              than what is used during scene cutscenes; also, a copy of
-             this value is stored as a `u8` at 0x444 in Link's instance.
-             If you end the cutscene you will not have control over Link 
+             this value is stored as a `uint8_t` at 0x444 in Link's instance.
+             If you end the cutscene you will not have control over Link
              until you use action 0x7.
-             
+
  * TODO:     further investigate `actor`; does Link call a callback
              function that is stored in it, for stringing multiple
              actions together?
@@ -1491,7 +1491,7 @@ extern void external_func_8002DFC8(void);
 /**
  * Detects if the angle to face Link is inside a1 range
  */
-extern int actor_angle_link_in_range(z64_actor_t *actor, int16_t angle);
+extern int32_t actor_angle_link_in_range(z64_actor_t *actor, int16_t angle);
 	#if OOT_DEBUG
 		asm("actor_angle_link_in_range = 0x8002E084");
 	#elif OOT_U_1_0
@@ -1528,9 +1528,9 @@ extern void external_func_8002E1A8(void);
  * above = space above actor coordinates to test if ceiling is above actor
  * En_Niw_Lady uses the arguments (gctx, &en->actor, 20.0f, 20.0f, 60.0f, 0x0000001D)
  * old notes for reference:
- * A0 = Global Context | A1 = Actor Instance | A2 = float wallCheckHeight? (26f for Link) | A3 = float wallPushback? (18f/14f for Adult/Child Link) | SP+0x10 float ? (56f/40f for Adult/Child Link) | SP+0x14 int (type?)
+ * A0 = Global Context | A1 = Actor Instance | A2 = float wallCheckHeight? (26f for Link) | A3 = float wallPushback? (18f/14f for Adult/Child Link) | SP+0x10 float ? (56f/40f for Adult/Child Link) | SP+0x14 int32_t (type?)
  */
-extern void external_func_8002E4B4(z64_global_t *global, z64_actor_t *actor, f32 below, f32 radius, f32 above, u32 flags);
+extern void external_func_8002E4B4(z64_global_t *global, z64_actor_t *actor, f32 below, f32 radius, f32 above, uint32_t flags);
 	#if OOT_DEBUG
 		asm("external_func_8002E4B4 = 0x8002E4B4");
 	#elif OOT_U_1_0
@@ -1591,7 +1591,7 @@ extern void external_func_8002EF14(void);
 	#endif
 
 /*
-int func_8002F194(z64_actor_t *a, z64_global_t *g)
+int32_t func_8002F194(z64_actor_t *a, z64_global_t *g)
 {
 	if ((a->flags & 0x0100) != 0)
 	{
@@ -1601,7 +1601,7 @@ int func_8002F194(z64_actor_t *a, z64_global_t *g)
 	return 0;
 }
  */
-extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
+extern int32_t external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_8002F194 = 0x8002F194");
 	#elif OOT_U_1_0
@@ -1612,7 +1612,7 @@ extern int external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
  * Makes a cylinder-shaped region around the actor in which Link is able to speak to and trade with the actor.
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xy distance | A3 = float, y distance | SP+0x10 = Trade Item Index
  */
-extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, u8 item_index
+extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, uint8_t item_index
 );
 	#if OOT_DEBUG
 		asm("actor_npc_trade_request = 0x8002F1C4");
@@ -1625,7 +1625,7 @@ extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float 
  * Passes A2 into A2 and A3 of inner function
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xyz distance | A3 = Trade Item Index
  */
-extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, float distance, u8 item_index);
+extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, float distance, uint8_t item_index);
 	#if OOT_DEBUG
 		asm("external_func_8002F298 = 0x8002F298");
 	#elif OOT_U_1_0
@@ -1647,7 +1647,7 @@ extern void actor_poll_speak_cube(z64_actor_t *actor, z64_global_t *gl, float di
 
 /**
  * NPC Request Trade Item? | (Wrapper for 80022A68)
- * Calls wrapped function with A2 =(float) s16 Inst. + 0x98 + 50.0f
+ * Calls wrapped function with A2 =(float) int16_t Inst. + 0x98 + 50.0f
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context
  */
@@ -1676,7 +1676,7 @@ extern void external_func_8002F334(void);
  * TODO Look into this a bit more, return type
  * Returns Link Instance + 0x0683
  */
-extern int actor_npc_trade_get(z64_global_t *global);
+extern int32_t actor_npc_trade_get(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("actor_npc_trade_get = 0x8002F368");
 	#elif OOT_U_1_0
@@ -1701,7 +1701,7 @@ extern void external_func_8002F374(z64_global_t *global, z64_actor_t *actor, int
  * TODO Question marks: let's get to the bottom of this. Also, return type.
  * A0 = Actor Instance | V0 = 0 if Instance + 0x118 is null, else 1
  */
-extern int actor_is_held(z64_actor_t *actor, z64_global_t *global);
+extern int32_t actor_is_held(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("actor_is_held = 0x8002F410");
 	#elif OOT_U_1_0
@@ -1710,7 +1710,7 @@ extern int actor_is_held(z64_actor_t *actor, z64_global_t *global);
 
 /**
  * Give Item
- * TODO get_item_id, is it u8, u16, or u32?
+ * TODO get_item_id, is it uint8_t, uint16_t, or uint32_t?
  * TODO: a different name may be more fitting
  * A0 = Actor instance //Actor giving item
  * A1 = Global Context
@@ -1721,7 +1721,7 @@ extern int actor_is_held(z64_actor_t *actor, z64_global_t *global);
 extern void actor_give_item(
 	z64_actor_t *actor,
 	z64_global_t *global,
-	u8 get_item_id,
+	uint8_t get_item_id,
 	float range_xz, float range_y
 );
 	#if OOT_DEBUG
@@ -1740,7 +1740,7 @@ extern void actor_give_item(
 {
    actor_give_item(actor, global, get_item_id, 50.0f, 10.0f);
 }*/
-extern void actor_give_item_50xz_10y(z64_actor_t *actor, z64_global_t *global, s8 get_item_id);
+extern void actor_give_item_50xz_10y(z64_actor_t *actor, z64_global_t *global, int8_t get_item_id);
 	#if OOT_DEBUG
 		asm("external_func_8002F554 = 0x8002F554");
 	#elif OOT_U_1_0
@@ -1767,7 +1767,7 @@ extern void actor_give_item_gid0(z64_actor_t *actor, z64_global_t *global);
 /**
  * TODO This function is completely undocumented
  */
-extern int external_func_8002F5A0(void);
+extern int32_t external_func_8002F5A0(void);
 	#if OOT_DEBUG
 		asm("external_func_8002F5A0 = 0x8002F5A0");
 	#elif OOT_U_1_0
@@ -1883,7 +1883,7 @@ extern void external_func_8002F7A0(void);
 /**
  * Play Sound Effect (Actor)
  */
-extern void sound_play_actor(z64_actor_t *actor, u16 sound_id);
+extern void sound_play_actor(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("sound_play_actor = 0x8002F7DC");
 	#elif OOT_U_1_0
@@ -1894,7 +1894,7 @@ extern void sound_play_actor(z64_actor_t *actor, u16 sound_id);
  * Play Sound Effect (Actor)
  * TODO There are three identical functions... distinguish the difference and fix names
  */
-extern void sound_play_actor2(z64_actor_t *actor, u16 sound_id);
+extern void sound_play_actor2(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("sound_play_actor2 = 0x8002F828");
 	#elif OOT_U_1_0
@@ -1917,7 +1917,7 @@ extern void external_func_8002F850(void);
 	 * Play Sound Effect (Actor)
 	 * TODO There are three identical functions... distinguish the difference and fix names
 	 */
-extern void sound_play_actor3(z64_actor_t *actor, u16 sound_id);
+extern void sound_play_actor3(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("sound_play_actor3 = 0x8002F8F0");
 	#elif OOT_U_1_0
@@ -1937,7 +1937,7 @@ extern void external_func_8002F948(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void actor_flag_play_sound(z64_actor_t *actor, u16 sfx_id);
+extern void actor_flag_play_sound(z64_actor_t *actor, uint16_t sfx_id);
 	#if OOT_DEBUG
 		asm("actor_flag_play_sound = 0x8002F974");
 	#elif OOT_U_1_0
@@ -1980,9 +1980,9 @@ extern void actor_set_draw_distance(z64_global_t *global, z64_actor_t *actor, vo
 /**
  * Spawn Actor
  * TODO a0 = global context + 0x1C24, do we really pass it in this way?
- * A0 = Global Context + 0x1C24 | A1 = Global Context | A2 = s16 Actor Id | A3 = float x | SP+0x10 = float y | SP+0x14 = float z | SP+0x18 = rotx | SP+0x1C = roty | SP+0x20 = rotz | SP+0x24 = s16 var | V0 = Pointer to new actor, or null
+ * A0 = Global Context + 0x1C24 | A1 = Global Context | A2 = int16_t Actor Id | A3 = float x | SP+0x10 = float y | SP+0x14 = float z | SP+0x18 = rotx | SP+0x1C = roty | SP+0x20 = rotz | SP+0x24 = int16_t var | V0 = Pointer to new actor, or null
  */
-extern void *actor_spawn(void *actor_context/*gl_ctx+0x1C24*/, z64_global_t *global, s16 actor_id, f32 x, f32 y, f32 z, s16 rot_x, s16 rot_y, s16 rot_z, u16 variable);
+extern void *actor_spawn(void *actor_context/*gl_ctx+0x1C24*/, z64_global_t *global, int16_t actor_id, f32 x, f32 y, f32 z, int16_t rot_x, int16_t rot_y, int16_t rot_z, uint16_t variable);
 	#if OOT_DEBUG
 		asm("actor_spawn = 0x80031F50");
 	#elif OOT_U_1_0
@@ -1994,12 +1994,12 @@ extern void *actor_spawn(void *actor_context/*gl_ctx+0x1C24*/, z64_global_t *glo
 /**
  * Spawn actor attached to `dest`, returns pointer to new actor `newactor` or NULL on failure
  * `newactor` + 0x118 will be set to `actor_id`
- * `dest` + 0x11C will point to `newactor`
+ * `dest` + 0x11C will point32_t to `newactor`
  * `newactor` will be bound to `dest`'s room unless spawned actor is global (room=-1)
  * TODO do something with a0?
- * A0 = Global Context + 0x1C24 | A1 = Actor* attachToInstance | A2 = Global Context | A3 = s16 Actor Id | SP + 0x10 = float x | SP + 0x14 = float y | SP + 0x18 = float z | SP + 0x1C = s16 rotx | SP + 0x20 = s16 roty | SP + 0x24 = s16 rotz | SP + 0x28 = s16 var | V0 = Pointer to new actor, or null if allocation failed
+ * A0 = Global Context + 0x1C24 | A1 = Actor* attachToInstance | A2 = Global Context | A3 = int16_t Actor Id | SP + 0x10 = float x | SP + 0x14 = float y | SP + 0x18 = float z | SP + 0x1C = int16_t rotx | SP + 0x20 = int16_t roty | SP + 0x24 = int16_t rotz | SP + 0x28 = int16_t var | V0 = Pointer to new actor, or null if allocation failed
  */
-extern z64_actor_t *actor_spawn_attached(u32 a0/*gl_ctx+0x1C24*/, z64_actor_t *dest, s16 actor_id, f32 x, f32 y, f32 z, s16 rot_x, s16 rot_y, s16 rot_z, u16 variable);
+extern z64_actor_t *actor_spawn_attached(uint32_t a0/*gl_ctx+0x1C24*/, z64_actor_t *dest, int16_t actor_id, f32 x, f32 y, f32 z, int16_t rot_x, int16_t rot_y, int16_t rot_z, uint16_t variable);
 	#if OOT_DEBUG
 		asm("actor_spawn_attached = 0x80032458");
 	#elif OOT_U_1_0
@@ -2073,7 +2073,7 @@ extern void external_func_80033480(
 	z64_global_t *global,
 	vec3f_t *pos,
 	float unk_0, // TODO confirm float/int
-	int unk_1, int unk_2, int unk_3, int unk_4 // TODO confirm float/int
+	int32_t unk_1, int32_t unk_2, int32_t unk_3, int32_t unk_4 // TODO confirm float/int
 	);
 	#if OOT_DEBUG
 		asm("external_func_80033480 = 0x80033480");
@@ -2098,7 +2098,7 @@ extern z64_actor_t *actor_is_bombed(z64_global_t *global, z64_collider_cylinder_
  * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance | v0 = unknown
  */
-extern int external_func_80033684(z64_global_t *global, z64_actor_t *actor);
+extern int32_t external_func_80033684(z64_global_t *global, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_80033684 = 0x80033684");
 	#elif OOT_U_1_0
@@ -2108,7 +2108,7 @@ extern int external_func_80033684(z64_global_t *global, z64_actor_t *actor);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80033748(z64_global_t *gl, char *actor_ctxt, z64_actor_t *a, u32 arg_unalignedF);
+extern void external_func_80033748(z64_global_t *gl, char *actor_ctxt, z64_actor_t *a, uint32_t arg_unalignedF);
 	#if OOT_DEBUG
 		asm("external_func_80033748 = 0x80033748");
 	#elif OOT_U_1_0
@@ -2186,7 +2186,7 @@ extern void external_func_80033AEC(void);
  * alpha = opacity of the shadow
  * a0 actor pointer + 0x24 (position array) | a1  scale, 12 byte array | a2 0x00FF | a3 global context
  */
-extern void actor_shadow_circle(vec3f_t *pos, vec3f_t *scale, u8 alpha, z64_global_t *global);
+extern void actor_shadow_circle(vec3f_t *pos, vec3f_t *scale, uint8_t alpha, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("actor_shadow_circle = 0x80033C30");
 	#elif OOT_U_1_0
@@ -2224,7 +2224,7 @@ extern void external_func_80033E88(void);
 	#endif
 
 /**
- * Generates a random floating point between 0 and N exclusive
+ * Generates a random floating point32_t between 0 and N exclusive
  * TODO These notes need converted into a C function prototype
  * F12 = N, exclusive upper bound | F0 = result
  */
@@ -2276,7 +2276,7 @@ extern void external_func_8003424C(void);
 /**
  * TODO what does this one do?
  */
-extern void external_func_8003426C(z64_actor_t *actor, int unk0, int unk1, int unk2, int unk3);
+extern void external_func_8003426C(z64_actor_t *actor, int32_t unk0, int32_t unk1, int32_t unk2, int32_t unk3);
 	#if OOT_DEBUG
 		asm("external_func_8003426C = 0x8003426C");
 	#elif OOT_U_1_0
@@ -2305,7 +2305,7 @@ extern void external_func_800343CC(void);
 
 /**
  * TODO These notes need converted into a C function prototype
- * A0 = s16
+ * A0 = int16_t
  */
 extern void external_func_800347E8(void);
 	#if OOT_DEBUG
@@ -2329,7 +2329,7 @@ extern void external_func_80034A14(void);
 	* Wrapper for 800A273C
 	* TODO Variable name cleanup, better notes
  */
-extern void skelanime_draw_mtx_xlu(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, u8 opacity);
+extern void skelanime_draw_mtx_xlu(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, uint8_t opacity);
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx_xlu = 0x80034BA0");
 	#elif OOT_U_1_0
@@ -2379,7 +2379,7 @@ extern void external_func_80034F54(void);
 /**
  * Draw a single display list to POLY_OPA_DISP
  */
-extern void draw_dlist_opa(z64_global_t *global, u32 dlist);
+extern void draw_dlist_opa(z64_global_t *global, uint32_t dlist);
 	#if OOT_DEBUG
 		asm("draw_dlist_opa = 0x80035260");
 	#elif OOT_U_1_0
@@ -2393,7 +2393,7 @@ extern void draw_dlist_opa(z64_global_t *global, u32 dlist);
  * TODO There's a question mark, we need to confirm whether Lens of Truth has anything to do with it
  * a0 - global context | a1 - DList segment offset | a2 - Unknown, set to 0
  */
-extern void draw_dlist_xlu(z64_global_t *global, u32 dlist);
+extern void draw_dlist_xlu(z64_global_t *global, uint32_t dlist);
 	#if OOT_DEBUG
 		asm("draw_dlist_xlu = 0x80035324");
 	#elif OOT_U_1_0
@@ -2406,7 +2406,7 @@ extern void draw_dlist_xlu(z64_global_t *global, u32 dlist);
  * Finds the closest actor instance of a specified id and type within specified range.
  * a0 - global context | a1 - actor instance | a2 - actor id (-1 = any) | a3 - category | 0x10($sp) distance from actor"
  */
-extern z64_actor_t* find_closest_actor_instance_within_range(z64_global_t *global, z64_actor_t *actor, s16 actor_id, z64_actor_type_t type, float range);
+extern z64_actor_t* find_closest_actor_instance_within_range(z64_global_t *global, z64_actor_t *actor, int16_t actor_id, z64_actor_type_t type, float range);
 	#if OOT_DEBUG
 		asm("find_closest_actor_instance_within_range = 0x800353F4");
 	#elif OOT_U_1_0
@@ -2520,7 +2520,7 @@ extern void external_func_800359B8(void);
 /**
  * Tests if event_chk_inf flag is set
  */
-extern int flag_get_event_chk_inf(int flag);
+extern int32_t flag_get_event_chk_inf(int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_get_event_chk_inf = 0x80035B4C");
 	#elif OOT_U_1_0
@@ -2530,17 +2530,17 @@ extern int flag_get_event_chk_inf(int flag);
 /**
  * Sets event_chk_inf flag to 1
  */
-extern void flag_set_event_chk_inf(int flag);
+extern void flag_set_event_chk_inf(int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_set_event_chk_inf = 0x80035B74");
 	#elif OOT_U_1_0
 		asm("flag_set_event_chk_inf = 0x800288E0");
 	#endif
-    
+
 /**
  * Tests if inf_table flag is set
  */
-extern int flag_get_inf_table(int flag);
+extern int32_t flag_get_inf_table(int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_get_inf_table = 0x80035BA4");
 	#elif OOT_U_1_0
@@ -2550,7 +2550,7 @@ extern int flag_get_inf_table(int flag);
 /**
  * Sets inf_table flag to 1
  */
-extern void flag_set_inf_table(int flag);
+extern void flag_set_inf_table(int32_t flag);
 	#if OOT_DEBUG
 		asm("flag_set_inf_table = 0x80035BCC");
 	#elif OOT_U_1_0
@@ -2629,7 +2629,7 @@ extern float external_func_8003C940(void *gl830, void *floorpoly, void *unk_sp2C
  * use RAYCAST_SUCCESS(result) to validate whether successful
  * TODO confirm return type, do something about global_plus_0x7C0, figure out unk[0,1]
  */
-extern float math_raycast(u32 global_plus_0x7C0, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
+extern float math_raycast(uint32_t global_plus_0x7C0, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
 	#if OOT_DEBUG
 		#define RAYCAST_FAIL -32000.0f
 		asm("math_raycast = 0x8003C9A4");
@@ -2735,7 +2735,7 @@ extern void external_func_8003E0FC(void);
 /**
  * test if a sphere touches geometry in a collision context
  */
-extern int collision_sphere_test(z64_col_ctxt_t *gcollision, vec3f_t *point, float radius);
+extern int32_t collision_sphere_test(z64_col_ctxt_t *gcollision, vec3f_t *point, float radius);
 	#if OOT_DEBUG
 		asm("collision_sphere_test = 0x8003E30C");
 	#elif OOT_U_1_0
@@ -2749,7 +2749,7 @@ extern int collision_sphere_test(z64_col_ctxt_t *gcollision, vec3f_t *point, flo
  * TODO Actor Index and entity have different meanings; this documentation is conflicting
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id
  */
-extern u32 actor_register_dynapoly(z64_global_t *global, void *global_plus_0x810, z64_actor_t *actor, u32 dynacollision);
+extern uint32_t actor_register_dynapoly(z64_global_t *global, void *global_plus_0x810, z64_actor_t *actor, uint32_t dynacollision);
 	#if OOT_DEBUG
 		asm("actor_register_dynapoly = 0x8003EA74");
 	#elif OOT_U_1_0
@@ -2763,7 +2763,7 @@ extern u32 actor_register_dynapoly(z64_global_t *global, void *global_plus_0x810
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Mesh Collision Id | V0 = Actor Instance or null
  */
-extern void dynapolyinfo_get_actor(z64_global_t *gl, u32 dynapolyid);
+extern void dynapolyinfo_get_actor(z64_global_t *gl, uint32_t dynapolyid);
 	#if OOT_DEBUG
 		asm("dynapolyinfo_get_actor = 0x8003EB84");
 	#elif OOT_U_1_0
@@ -2811,7 +2811,7 @@ extern void external_func_8003ECA8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id
  */
-extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, u32 *dynacollision_id);
+extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, uint32_t *dynacollision_id);
 	#if OOT_DEBUG
 		asm("dynapoly_free = 0x8003ED58");
 	#elif OOT_U_1_0
@@ -2837,7 +2837,7 @@ extern void external_func_8003EE6C(void);
  * dynacollision_init()?
  * A0 = Segment Offset to Collision Data | A1 = ptr to store result?
  */
-extern void dynapoly_alloc(const u32 collision, void *collision_pointer);
+extern void dynapoly_alloc(const uint32_t collision, void *collision_pointer);
 	#if OOT_DEBUG
 		asm("dynapoly_alloc = 0x80041880");
 	#elif OOT_U_1_0
@@ -3030,7 +3030,7 @@ extern void external_func_80043548(void);
 /**
  * TODO This function is completely undocumented
  */
-extern int external_func_8004356C(z64_actor_t *actor);
+extern int32_t external_func_8004356C(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_8004356C = 0x8004356C");
 	#elif OOT_U_1_0
@@ -3042,7 +3042,7 @@ extern int external_func_8004356C(z64_actor_t *actor);
 /**
  * TODO This function is completely undocumented
  */
-extern int actor_dynapoly_get_link_floorcast(z64_actor_t *actor);
+extern int32_t actor_dynapoly_get_link_floorcast(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("actor_dynapoly_get_link_floorcast = 0x80043590");
 	#elif OOT_U_1_0
@@ -3156,7 +3156,7 @@ extern void external_func_8005AC60(void);
 /**
  * Cutscene Camera?
  * TODO These notes need converted into a C function prototype
- * A0 = Cutscene Camera struct ptr | A1 = Focus Point Tween List | A2 = Camera Position Tween List | A3 = Actor Instance (tracked actor)
+ * A0 = Cutscene Camera struct ptr | A1 = Focus Point32_t Tween List | A2 = Camera Position Tween List | A3 = Actor Instance (tracked actor)
  */
 extern void external_func_8005AC6C(void);
 	#if OOT_DEBUG
@@ -3519,7 +3519,7 @@ extern void external_func_8005DFAC(void);
  * //Actor 0095
  * TODO Types
  */
-extern void external_func_80061ED4(void *table_dst, z64_damagechart_init_t *itemchart, u32 *damage_init);
+extern void external_func_80061ED4(void *table_dst, z64_damagechart_init_t *itemchart, uint32_t *damage_init);
 	#if OOT_DEBUG
 		asm("external_func_80061ED4 = 0x80061ED4");
 	#elif OOT_U_1_0
@@ -3715,7 +3715,7 @@ extern void external_func_800694A0(void);
  * TODO Considering this uses an actor instance, is it any different from sound_play_actor?
  * a0 - global context | a1 - actor instance + 0x24 (position array of the sound) | a2 - 0x3C (radius?) | a3 - sound ID
  */
-extern void sound_play_position(z64_global_t *global, vec3f_t *pos2, int radius, uint16_t sfx_id);
+extern void sound_play_position(z64_global_t *global, vec3f_t *pos2, int32_t radius, uint16_t sfx_id);
 	#if OOT_DEBUG
 		asm("sound_play_position = 0x8006BAD8");
 	#elif OOT_U_1_0
@@ -3747,7 +3747,7 @@ extern void external_func_8006C318(void);
 /**
  * TODO This function is completely undocumented
  */
-extern uint16_t external_func_8006C360(z64_global_t *global, int unk1);
+extern uint16_t external_func_8006C360(z64_global_t *global, int32_t unk1);
 	#if OOT_DEBUG
 		asm("external_func_8006C360 = 0x8006C360");
 	#elif OOT_U_1_0
@@ -3925,9 +3925,9 @@ extern void external_func_800773A8(void);
 	#endif
 
 /**
- * Return s32 at 8011A5E8 (Event Days)
+ * Return int32_t at 8011A5E8 (Event Days)
  * TODO These notes need converted into a C function prototype
- * V0 = s32 at 8011A5E8
+ * V0 = int32_t at 8011A5E8
  */
 extern void external_func_800775CC(void);
 	#if OOT_DEBUG
@@ -3937,7 +3937,7 @@ extern void external_func_800775CC(void);
 	#endif
 
 /**
- * Zero s32 at 8011A5E8 (Event Days)
+ * Zero int32_t at 8011A5E8 (Event Days)
  * TODO These notes need converted into a C function prototype
  */
 extern void external_func_800775D8(void);
@@ -3950,7 +3950,7 @@ extern void external_func_800775D8(void);
 /**
  * Update Background Music
  * TODO These notes need converted into a C function prototype
- * A0 = s32? value to write to 8011B9DE
+ * A0 = int32_t? value to write to 8011B9DE
  */
 extern void external_func_800775F0(void);
 	#if OOT_DEBUG
@@ -3991,9 +3991,9 @@ extern void external_func_800776E4(void);
 
 /**
  * memset byte
- * A0 = Address | A1 = length (in bytes) | A2 = u8 value
+ * A0 = Address | A1 = length (in bytes) | A2 = uint8_t value
  */
-extern void memory_set(void *dst, const u32 len, const u8 value);
+extern void memory_set(void *dst, const uint32_t len, const uint8_t value);
 	#if OOT_DEBUG
 		asm("memory_set = 0x800777E0");
 	#elif OOT_U_1_0
@@ -4003,9 +4003,9 @@ extern void memory_set(void *dst, const u32 len, const u8 value);
 /**
  * Math, Get cosine of short rotation angle
  * TODO Test in-game
- * A0 = s16 rotation | F0 = cosine of A0
+ * A0 = int16_t rotation | F0 = cosine of A0
  */
-extern float math_coss(s16 angle);
+extern float math_coss(int16_t angle);
 	#if OOT_DEBUG
 		asm("math_coss = 0x80077834");
 	#elif OOT_U_1_0
@@ -4017,9 +4017,9 @@ extern float math_coss(s16 angle);
 /**
  * Math, Get sine of short rotation angle
  * TODO Test in-game
- * A0 = s16 rotation | F0 = sine of A0
+ * A0 = int16_t rotation | F0 = sine of A0
  */
-extern float math_sins(s16 angle);
+extern float math_sins(int16_t angle);
 	#if OOT_DEBUG
 		asm("math_sins = 0x80077870");
 	#elif OOT_U_1_0
@@ -4042,7 +4042,7 @@ extern void external_func_800778AC(void);
  * TODO This function is completely undocumented
  * TODO possibly some kind of random number function...
  */
-extern void external_func_8007797C(s16 *unk0, const int unk1, const int unk2);
+extern void external_func_8007797C(int16_t *unk0, const int32_t unk1, const int32_t unk2);
 	#if OOT_DEBUG
 		asm("external_func_8007797C = 0x8007797C");
 	#elif OOT_U_1_0
@@ -4054,7 +4054,7 @@ extern void external_func_8007797C(s16 *unk0, const int unk1, const int unk2);
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance + 0x0198 (offset of stored float) | a1 - float value (target float) | a2 - float value (increments or decrements result by this until it reaches the target float) | v0 - returns 0 if it hasn't reached it, 1 if it does
  */
-extern int math_approxf(float *in_actor, int target, float change);
+extern int32_t math_approxf(float *in_actor, int32_t target, float change);
 	#if OOT_DEBUG
 		asm("math_approxf = 0x80077A00");
 	#elif OOT_U_1_0
@@ -4085,15 +4085,15 @@ extern void external_func_80077B58(void);
 	#endif
 
 /**
- * Generates random s16 between 0 and `range` (exlusive), and adds `offset`
+ * Generates random int16_t between 0 and `range` (exlusive), and adds `offset`
  */
-extern s16 math_rand_s16_offset(s16 offset, s16 range);
+extern int16_t math_rand_int16_t_offset(int16_t offset, int16_t range);
 	#if OOT_DEBUG
-		asm("math_rand_s16_offset = 0x80077D90");
+		asm("math_rand_int16_t_offset = 0x80077D90");
 	#elif OOT_U_1_0
-		asm("math_rand_s16_offset = 0x80063BF0");
+		asm("math_rand_int16_t_offset = 0x80063BF0");
 	#elif MM_U_1_0
-		asm("math_rand_s16_offset = 0x800FF450");
+		asm("math_rand_int16_t_offset = 0x800FF450");
 	#endif
 
 /**
@@ -4110,7 +4110,7 @@ extern void math_vec3f_copy(vec3f_t *out, vec3f_t *in);
 
 /**
  * convert vec3s_t to vec3f_t
- * Convert s16 Coordinates to Float Coordinates
+ * Convert int16_t Coordinates to Float Coordinates
  */
 extern void math_vec3f_from_vec3s(vec3f_t *out, vec3s_t *in);
 	#if OOT_DEBUG
@@ -4152,7 +4152,7 @@ extern void math_vec3f_sub(vec3f_t *a, vec3f_t *b, vec3f_t *out);
  * out = a - b
  * TODO Note that out, a, and b are ordered differently than the math_vec3f_sub version of this function; confirm whether this is actually correct
  * TODO confirm that it's actually a - b
- * A0 = Result Float Coord ptr (A - B) | A1 = s16 coord A ptr | A2 = s16 coord B ptr
+ * A0 = Result Float Coord ptr (A - B) | A1 = int16_t coord A ptr | A2 = int16_t coord B ptr
  */
 extern void math_vec3s_sub(vec3f_t *out, vec3s_t *a, vec3s_t *b);
 	#if OOT_DEBUG
@@ -4216,9 +4216,9 @@ extern float math_vec3f_distance_xz(vec3f_t *a, vec3f_t *b);
 /**
  * Calculates Arctan2 (X,Z) of two coordinates (A-B) | Wrapper for 800AA4F8
  * TODO These notes need converted into a C function prototype
- * A0 = Coord A ptr | A1 = Coord B ptr | V0 = s16 rotation
+ * A0 = Coord A ptr | A1 = Coord B ptr | V0 = int16_t rotation
  */
-extern s16 math_vec3f_atan2_xz(vec3f_t* coord1, vec3f_t* coord2);
+extern int16_t math_vec3f_atan2_xz(vec3f_t* coord1, vec3f_t* coord2);
 	#if OOT_DEBUG
 		asm("external_func_80078068 = 0x80078068");
 	#elif OOT_U_1_0
@@ -4231,9 +4231,9 @@ extern s16 math_vec3f_atan2_xz(vec3f_t* coord1, vec3f_t* coord2);
 /**
  * Calculates Arctan2 (distance(XZ), Y) of two coordinates | (A-B for Y coordinate)
  * TODO These notes need converted into a C function prototype
- * A0 = Coord A ptr | A1 = Coord B ptr | V0 = s16 rotation
+ * A0 = Coord A ptr | A1 = Coord B ptr | V0 = int16_t rotation
  */
-extern s16 math_vec3f_atan2_xz_y(vec3f_t* coord1, vec3f_t* coord2);
+extern int16_t math_vec3f_atan2_xz_y(vec3f_t* coord1, vec3f_t* coord2);
 	#if OOT_DEBUG
 		asm("external_func_8007809C = 0x8007809C");
 	#elif OOT_U_1_0
@@ -4296,9 +4296,9 @@ extern void external_func_8007848C(float *value, float a, float b);
 
 /**
  * TODO figure out what this function does...
- * A0 = s16 Rotation Pointer (Y this pass) | A1 = s16 ? | A2 = ? | A3 = ?
+ * A0 = int16_t Rotation Pointer (Y this pass) | A1 = int16_t ? | A2 = ? | A3 = ?
  */
-extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, int32_t unk2, int unk3, uint32_t unk4);
+extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, int32_t unk2, int32_t unk3, uint32_t unk4);
 	#if OOT_DEBUG
 		asm("external_func_8007869C = 0x8007869C");
 	#elif OOT_U_1_0
@@ -4318,14 +4318,14 @@ extern void external_func_800787BC(int16_t *rot, int32_t unk0, int16_t unk1, int
 	#endif
 
 /**
- * Copy u8[4] array
+ * Copy uint8_t[4] array
  * A0 = Destination ptr | A1 = Source ptr
  */
-extern void mem_copy_u8_4(void *dest, void *src);
+extern void mem_copy_uint8_t_4(void *dest, void *src);
 	#if OOT_DEBUG
-		asm("mem_copy_u8_4 = 0x80078860");
+		asm("mem_copy_uint8_t_4 = 0x80078860");
 	#elif OOT_U_1_0
-		asm("mem_copy_u8_4 = 0x800646C8");
+		asm("mem_copy_uint8_t_4 = 0x800646C8");
 	#endif
 
 /**
@@ -4344,7 +4344,7 @@ extern void external_func_80078884(void);
  * Play SFX once. Stops playing the SFX if the same SFX is played again.
  * A0 = SFX
  */
-extern void play_sound_global_once(u16 sfx_id);
+extern void play_sound_global_once(uint16_t sfx_id);
 	#if OOT_DEBUG
 		asm("play_sound_global_once = 0x800788CC");
 	#elif OOT_U_1_0
@@ -4356,7 +4356,7 @@ extern void play_sound_global_once(u16 sfx_id);
  * TODO These notes need converted into a C function prototype
  * A0 = SFX
  */
-extern void external_func_80078914(u16 sfx_id);
+extern void external_func_80078914(uint16_t sfx_id);
 	#if OOT_DEBUG
 		asm("external_func_80078914 = 0x80078914");
 	#elif OOT_U_1_0
@@ -4367,7 +4367,7 @@ extern void external_func_80078914(u16 sfx_id);
  * Initialize Flame Light (Wrapper for 80065B70)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80079D8C(uint32_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
+extern void external_func_80079D8C(uint32_t *a0, int32_t a1_x, int32_t a2_y, int32_t a3_z, uint8_t unk_00, uint32_t unk_01);
 	#if OOT_DEBUG
 		asm("external_func_80079D8C = 0x80079D8C");
 	#elif OOT_U_1_0
@@ -4377,7 +4377,7 @@ extern void external_func_80079D8C(uint32_t *a0, int a1_x, int a2_y, int a3_z, u
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80079DF0(uint32_t *a0, int a1_x, int a2_y, int a3_z, uint8_t unk_00, uint32_t unk_01);
+extern void external_func_80079DF0(uint32_t *a0, int32_t a1_x, int32_t a2_y, int32_t a3_z, uint8_t unk_00, uint32_t unk_01);
 	#if OOT_DEBUG
 		asm("external_func_80079DF0 = 0x80079DF0");
 	#elif OOT_U_1_0
@@ -4454,7 +4454,7 @@ extern void actor_closeup(void);
 /**
  * Camera related
  * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - s16 unknown
+ * a0 - global context | a1 - int16_t unknown
  */
 extern void external_func_800803F0(void);
 	#if OOT_DEBUG
@@ -4542,7 +4542,7 @@ extern void external_func_80084BF4(void);
  * Item Giving Routine
  * one of them at least
  */
-extern void inventory_item_set(z64_global_t *global, u8 item);
+extern void inventory_item_set(z64_global_t *global, uint8_t item);
 	#if OOT_DEBUG
 		asm("inventory_item_set = 0x80084D10");
 	#elif OOT_U_1_0
@@ -4554,7 +4554,7 @@ extern void inventory_item_set(z64_global_t *global, u8 item);
  * TODO These notes need converted into a C function prototype
  * A0 = Item Index | V0 = 0xFF if no Item?
  */
-extern u8 inventory_item_get(u8 item);
+extern uint8_t inventory_item_get(uint8_t item);
 	#if OOT_DEBUG
 		asm("inventory_item_get = 0x80086388");
 	#elif OOT_U_1_0
@@ -4565,7 +4565,7 @@ extern u8 inventory_item_get(u8 item);
  * Try Update Trade Quest Item, returns 1 on success 0 otherwise
  * Egg -> Chicken; Ruto's Letter -> Bottle, etc
  */
-extern int inventory_item_update(u8 item_old, u8 item_new);
+extern int32_t inventory_item_update(uint8_t item_old, uint8_t item_new);
 	#if OOT_DEBUG
 		asm("inventory_item_update = 0x800869E4");
 	#elif OOT_U_1_0
@@ -4628,7 +4628,7 @@ extern void external_func_80087174(void);
  * Adds or removes rupees from the counter (Negative values subtract, positive add)
  * a0 - Rupee amount.
  */
-extern void change_rupee_count_by(int num_rupees);
+extern void change_rupee_count_by(int32_t num_rupees);
 	#if OOT_DEBUG
 		asm("change_rupee_count_by = 0x8008730C");
 	#elif OOT_U_1_0
@@ -4743,7 +4743,7 @@ extern void external_func_8008E60C(void);
  * TODO How do we reference Link's instance? void should be fine, but test confirm in-game. Also, return value type.
  * A0 = Global Context | A1 = Link Instance | V0 = 1 if true, 0 if false
  */
-extern int player_is_busy(z64_global_t *global, void *link_instance);
+extern int32_t player_is_busy(z64_global_t *global, void *link_instance);
 	#if OOT_DEBUG
 		asm("player_is_busy = 0x8008E8DC");
 	#elif OOT_U_1_0
@@ -4754,7 +4754,7 @@ extern int player_is_busy(z64_global_t *global, void *link_instance);
  * Tests if Link is busy (Calls 8007938C, but also checks if talking?)
  * TODO Confirm return type, test in-game
  */
-extern int player_is_busy_talking(z64_global_t *global);
+extern int32_t player_is_busy_talking(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_is_busy_talking = 0x8008E988");
 	#elif OOT_U_1_0
@@ -4833,7 +4833,7 @@ extern void external_func_8008F034(void);
  * TODO This function needs more explanation, what exactly does it do?
  * A0 = Global Context | V0 = Id
  */
-extern u8 player_get_mask(z64_global_t *global);
+extern uint8_t player_get_mask(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_get_mask = 0x8008F080");
 	#elif OOT_U_1_0
@@ -4856,7 +4856,7 @@ extern void player_set_mask(z64_global_t *global);
  * Test if Link is wearing the Mirror Shield (Instance + 0x13E)
  * returns 0 on false, 1 on true
  */
-extern int player_is_mirrorshield(z64_global_t *global);
+extern int32_t player_is_mirrorshield(z64_global_t *global);
 	#if OOT_DEBUG
 		asm("player_is_mirrorshield = 0x8008F098");
 	#elif OOT_U_1_0
@@ -4878,7 +4878,7 @@ extern void external_func_8008F0AC(void);
  * TODO How do we reference Link's instance? void should be fine, but test confirm in-game. Also, return value type.
  * returns false (0) true (1)
  */
-extern int player_is_hookshotting(void *link_instance);
+extern int32_t player_is_hookshotting(void *link_instance);
 	#if OOT_DEBUG
 		asm("player_is_hookshotting = 0x8008F104");
 	#elif OOT_U_1_0
@@ -5194,8 +5194,8 @@ extern void external_func_80094E9C(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Graphics Context | A1 = ? (tile descriptor one?) | A2 = upper left S-axis | A3 = upper left T-axis | SP+0x10 = width (whole units) | SP+0x14 = height (whole units) | SP+0x18 = Tile Descriptor Two | SP+0x1C = upper left S-axis 2 | SP+0x20 = Upper left T-axis 2 | SP+0x24 = width (whole units) | SP+0x28 = height (whole units)
  */
- extern u32 f3dzex_gen_settilesize(
-     z64_gfx_t *gfx, int t0, int s0_ul, int t0_ul, int t0_w, int t0_h, int t1, int s1_ul, int t1_ul, int t1_w, int t1_h);
+ extern uint32_t f3dzex_gen_settilesize(
+     z64_gfx_t *gfx, int32_t t0, int32_t s0_ul, int32_t t0_ul, int32_t t0_w, int32_t t0_h, int32_t t1, int32_t s1_ul, int32_t t1_ul, int32_t t1_w, int32_t t1_h);
 	#if OOT_DEBUG
 		asm("f3dzex_gen_settilesize = 0x80094F40");
 	#elif OOT_U_1_0
@@ -5260,42 +5260,42 @@ extern void external_func_80097A54(void);
  * Given its number, returns the object's index in the object table, or -1 if it isn't loaded.
  * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID, V0 = Object index / -1 if not loaded.
  */
-extern int object_get_index(z64_obj_ctxt_t* object_context, u16 object_id);
+extern int32_t object_get_index(z64_obj_ctxt_t* object_context, uint16_t object_id);
 	#if OOT_DEBUG
 		asm("object_get_index = 0x8009812C");
 	#elif OOT_U_1_0
 		asm("object_get_index = 0x80081628");
  	#elif MM_U_1_0
-		asm("object_get_index = 0x8012F608");       
+		asm("object_get_index = 0x8012F608");
 	#endif
 
 /**
  * Test if object file dependency is loaded (returns 1 on true 0 on false)
  * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID, V0 = 1 if loaded, 0 if not.
  */
-extern int object_is_loaded(z64_obj_ctxt_t* object_context, u16 object_id);
+extern int32_t object_is_loaded(z64_obj_ctxt_t* object_context, uint16_t object_id);
 	#if OOT_DEBUG
 		asm("object_is_loaded = 0x80098188");
 	#elif OOT_U_1_0
 		asm("object_is_loaded = 0x80081688");
 	#endif
-    
+
  /**
  * Load an object into memory. Object is loaded even if
  * it has already been loaded.
  * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID,
  * NOTE: This function is not used in any existing actor overlay in OoT.
  */
-extern void object_load(z64_obj_ctxt_t* object_context, u16 object_id);
+extern void object_load(z64_obj_ctxt_t* object_context, uint16_t object_id);
     #if OOT_DEBUG
         asm("object_load = 0x80097C00");
     #elif OOT_U_1_0
         asm("object_load = 0x800812F0");
     /* Maybe - args could be different. Would need testing.
     #elif MM_U_1_0
-        asm("object_load = 0x8012F2E0");       
+        asm("object_load = 0x8012F2E0");
     */
-    #endif  
+    #endif
 
 /**
  * TODO This function is completely undocumented
@@ -5311,7 +5311,7 @@ extern void external_func_800A0B40(void);
  * Must be in draw even after initializing hirearchy without matrices
  * TODO Variable name cleanup, better notes
  */
-extern void skelanime_draw(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
+extern void skelanime_draw(z64_global_t *global, uint32_t limb_index, uint32_t adt, uint8_t limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("skelanime_draw = 0x800A15C8");
 	#elif OOT_U_1_0
@@ -5333,7 +5333,7 @@ skelanime_draw_mtx(
 	, uint32_t limb_index
 	, uint32_t adt
 	, uint8_t limb_dlists_count
-	, int callback0(            /* callback0 must return 0 */
+	, int32_t callback0(            /* callback0 must return 0 */
 		  z64_global_t *global
 		, uint8_t limb           /* limb index in skeleton */
 		, uint32_t *dlist        /* *dlist = 0x06xxxxxx changes limb model */
@@ -5361,7 +5361,7 @@ skelanime_draw_mtx(
 /**
  * Count Animation Frames
  */
-extern int anime_get_framecount(u32 animation);
+extern int32_t anime_get_framecount(uint32_t animation);
 	#if OOT_DEBUG
 		asm("anime_get_framecount = 0x800A2000");
 	#elif OOT_U_1_0
@@ -5375,7 +5375,7 @@ extern int anime_get_framecount(u32 animation);
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = 0 | 0x0010(SP) = 0 | 0x0014(SP) = Actor Instance Address | 0x0018(SP) = Buffer
  */
-extern u32 skelanime_draw_destination(z64_global_t *global, u32 limb_index, u32 adt, void* subr0, void* subr1, z64_actor_t *actor, Gfx *gfx_buffer);
+extern uint32_t skelanime_draw_destination(z64_global_t *global, uint32_t limb_index, uint32_t adt, void* subr0, void* subr1, z64_actor_t *actor, Gfx *gfx_buffer);
 	#if OOT_DEBUG
 		asm("skelanime_draw_destination = 0x800A2288");
 	#elif OOT_U_1_0
@@ -5385,7 +5385,7 @@ extern u32 skelanime_draw_destination(z64_global_t *global, u32 limb_index, u32 
 /**
  * TODO Draw a matrix-enabled object skeleton on a specific destination buffer
  */
-extern u32 skelanime_draw_mtx_destination(z64_global_t *global, u32 limb_index, u32 adt, u8 limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
+extern uint32_t skelanime_draw_mtx_destination(z64_global_t *global, uint32_t limb_index, uint32_t adt, uint8_t limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx_destination = 0x800A273C");
 	#elif OOT_U_1_0
@@ -5437,7 +5437,7 @@ extern void external_func_800A3BC0(void);
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance + 0x014C (offset to store data) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)  0x10($sp) 0x14($sp) 0x18($sp)
  */
-extern void skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, uint32_t skeleton, uint32_t animation, uint8_t unk0, uint8_t unk1, uint8_t unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init = 0x800A457C");
 	#elif OOT_U_1_0
@@ -5449,7 +5449,7 @@ extern void skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, u32
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance Address + 0x014C (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, uint32_t skeleton, uint32_t animation, uint8_t unk0, uint8_t unk1, uint8_t unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
@@ -5463,7 +5463,7 @@ extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime,
  * TODO Conflict, notes below say actor+0x014C, but taking actor+0x0 is fine?
  * A0 = actor instance + 0x014C (Drawing Table) V0 = 1 if ?, else 0
  */
-extern int actor_anime_frame_update_mtx(z64_skelanime_t *skelanime);
+extern int32_t actor_anime_frame_update_mtx(z64_skelanime_t *skelanime);
 	#if OOT_DEBUG
 		asm("actor_anime_frame_update_mtx = 0x800A49FC");
 	#elif OOT_U_1_0
@@ -5489,9 +5489,9 @@ extern void external_func_800A4FE4(void);
  * Change Animation
  * transition rate is between 0.0 and 1.0
  * TODO These notes need converted into a C function prototype
- * A0 = actor instance + 0x014C (Drawing Table) | A1 = New Animation Pointer (in Object File) | A2 = Animation Speed (Floating Point) | A3 = ? | 0x0010(SP) = Number of Frames in Floating Point | 0x0014(SP) = some counter related to how long the animation should be played? | 0x0018(SP) = float transition rate, less than 1
+ * A0 = actor instance + 0x014C (Drawing Table) | A1 = New Animation Pointer (in Object File) | A2 = Animation Speed (Floating Point) | A3 = ? | 0x0010(SP) = Number of Frames in Floating Point32_t | 0x0014(SP) = some counter related to how long the animation should be played? | 0x0018(SP) = float transition rate, less than 1
  */
-extern void actor_anime_change(z64_skelanime_t *skelanime, u32 animation, f32 playback_speed, f32 unk0, f32 frame_count, u8 unk_1, f32 transition_rate);
+extern void actor_anime_change(z64_skelanime_t *skelanime, uint32_t animation, f32 playback_speed, f32 unk0, f32 frame_count, uint8_t unk_1, f32 transition_rate);
 	#if OOT_DEBUG
 		asm("actor_anime_change = 0x800A51A0");
 	#elif OOT_U_1_0
@@ -5619,7 +5619,7 @@ extern void external_func_800A5F60(void);
  * Draw object that uses a weighted skeleton structure
  * A0 = Entity | A1 = Global Context | A2 = Skeleton | A3 = Callback | 0x0010(SP) = 1, something to do with Y translation?
  */
-extern void skelanime_draw_weighted(z64_actor_t* actor, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, u32 unk0);
+extern void skelanime_draw_weighted(z64_actor_t* actor, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, uint32_t unk0);
 	#if OOT_DEBUG
 		asm("skelanime_draw_weighted = 0x800A6330");
 	#elif OOT_U_1_0
@@ -5630,7 +5630,7 @@ extern void skelanime_draw_weighted(z64_actor_t* actor, z64_global_t* global, z6
  * Draw object that uses a weighted skeleton structure. Callback2 lets you set textures. Used by Epona.
  * A0 = Entity | A1 = Global Context | A2 = Skeleton | A3 = Callback | 0x0014(SP) = Texture setting callback | 0x0014(SP) = 1, something to do with Y translation?
  */
-extern void skelanime_draw_weighted_unk(z64_actor_t* actor, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, void* callback2, u32 unk0);
+extern void skelanime_draw_weighted_unk(z64_actor_t* actor, z64_global_t* global, z64_skelanime_weighted_t* weighted_skelanime, void* callback1, void* callback2, uint32_t unk0);
     #if OOT_DEBUG
         asm("skelanime_draw_weighted_unk = 0x800A6360");
     #elif OOT_U_1_0
@@ -5656,19 +5656,19 @@ extern void external_func_800A6408(void);
 	#elif OOT_U_1_0
 		asm("external_func_800A6408 = 0x8008E2AC");
 	#endif
-    
+
 /**
  * Initialize weighted skeleton object with animation
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Skeleton) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_weighted(z64_global_t *global, z64_skelanime_weighted_t *weighted_skelanime, u32 skeleton, u32 animation, u8 unk0, u8 unk1, u8 unk2);
+extern void skelanime_init_weighted(z64_global_t *global, z64_skelanime_weighted_t *weighted_skelanime, uint32_t skeleton, uint32_t animation, uint8_t unk0, uint8_t unk1, uint8_t unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init_weighted = 0x800A663C");
 	#elif OOT_U_1_0
 		asm("skelanime_init_weighted = 0x8008E4EC");
 	#endif
-    
+
 /**
  * TODO This function is completely undocumented
  */
@@ -5885,7 +5885,7 @@ extern uint16_t start_cutscene_camera(z64_global_t *global);
  * TODO These notes need converted into a C function prototype
  * A0 - global context | A1 - unknown, set to 0 | A2 - unknown, set to 1
  */
-extern void external_func_800C0314(z64_global_t *global, int unk0, int flags);
+extern void external_func_800C0314(z64_global_t *global, int32_t unk0, int32_t flags);
 	#if OOT_DEBUG
 		asm("external_func_800C0314 = 0x800C0314");
 	#elif OOT_U_1_0
@@ -5981,7 +5981,7 @@ extern void external_func_800C0808(void);
  * TODO unk0's size must be either 8 or 16 because of alignment found in the Arwing
  * A0 - global context | A1 - unknown, set to 1, A2 - End movement speed. If the value is not 0, it calls actor_closeup with arguments: global, 0x3F0, and this value.
  */
-extern void end_cutscene_camera(z64_global_t *global, int16_t unk0, int end_movement_speed);
+extern void end_cutscene_camera(z64_global_t *global, int16_t unk0, int32_t end_movement_speed);
 	#if OOT_DEBUG
 		asm("end_cutscene_camera = 0x800C08AC");
 	#elif OOT_U_1_0
@@ -6080,7 +6080,7 @@ extern void external_func_800C3770(void);
  * z_gp is 0x80212020
  * size is the size of the block to be allocated
  */
-extern void graph_alloc(z64_global_t *global, int size);
+extern void graph_alloc(z64_global_t *global, int32_t size);
 	#if OOT_DEBUG
 		asm("graph_alloc = 0x800C69CC");
 	#elif OOT_U_1_0
@@ -6090,7 +6090,7 @@ extern void graph_alloc(z64_global_t *global, int size);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800C6AC4(void *unk0, z64_gfx_t *gfx, const char *string, int line);
+extern void external_func_800C6AC4(void *unk0, z64_gfx_t *gfx, const char *string, int32_t line);
 	#if OOT_DEBUG
 		asm("external_func_800C6AC4 = 0x800C6AC4");
 	#elif OOT_U_1_0
@@ -6100,7 +6100,7 @@ extern void external_func_800C6AC4(void *unk0, z64_gfx_t *gfx, const char *strin
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800C6B54(void *unk0, z64_gfx_t *gfx, const char *string, int line);
+extern void external_func_800C6B54(void *unk0, z64_gfx_t *gfx, const char *string, int32_t line);
 	#if OOT_DEBUG
 		asm("external_func_800C6B54 = 0x800C6B54");
 	#elif OOT_U_1_0
@@ -6318,11 +6318,11 @@ extern void external_func_800CE4B8(void);
 
 /**
  * atan2
- * returns rotation in s16 format
+ * returns rotation in int16_t format
  * TODO These notes need converted into a C function prototype
- * F12 = x | F14 = y | V0 = s16 Rotation
+ * F12 = x | F14 = y | V0 = int16_t Rotation
  */
-extern s16 math_atan2s(float x, float y);
+extern int16_t math_atan2s(float x, float y);
 	#if OOT_DEBUG
 		asm("math_atan2s = 0x800D0664");
 	#elif OOT_U_1_0
@@ -6414,7 +6414,7 @@ extern void external_func_800D0930(void);
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
  */
-extern void matrix_translate3f(float x, float y, float z, int transform_current);
+extern void matrix_translate3f(float x, float y, float z, int32_t transform_current);
 	#if OOT_DEBUG
 		asm("matrix_translate3f = 0x800D0984");
 	#elif OOT_U_1_0
@@ -6428,7 +6428,7 @@ extern void matrix_translate3f(float x, float y, float z, int transform_current)
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
  */
-extern void matrix_scale3f(float x, float y, float z, int transform_current);
+extern void matrix_scale3f(float x, float y, float z, int32_t transform_current);
 	#if OOT_DEBUG
 		asm("matrix_scale3f = 0x800D0A8C");
 	#elif OOT_U_1_0
@@ -6440,7 +6440,7 @@ extern void matrix_scale3f(float x, float y, float z, int transform_current);
 /**
  * TODO probably some kind of matrix function
  */
-extern void external_func_800D0B70(float unk0, int transform_current);
+extern void external_func_800D0B70(float unk0, int32_t transform_current);
 	#if OOT_DEBUG
 		asm("external_func_800D0B70 = 0x800D0B70");
 	#elif OOT_U_1_0
@@ -6450,7 +6450,7 @@ extern void external_func_800D0B70(float unk0, int transform_current);
 /**
  * TODO probably some kind of matrix function
  */
-extern void external_func_800D0D20(float unk0, int transform_current);
+extern void external_func_800D0D20(float unk0, int32_t transform_current);
 	#if OOT_DEBUG
 		asm("external_func_800D0D20 = 0x800D0D20");
 	#elif OOT_U_1_0
@@ -6460,7 +6460,7 @@ extern void external_func_800D0D20(float unk0, int transform_current);
 /**
  * TODO some kind of matrix function?
  */
-extern void external_func_800D0ED4(float unk0, int current_transform);
+extern void external_func_800D0ED4(float unk0, int32_t current_transform);
 	#if OOT_DEBUG
 		asm("external_func_800D0ED4 = 0x800D0ED4");
 	#elif OOT_U_1_0
@@ -6473,9 +6473,9 @@ extern void external_func_800D0ED4(float unk0, int current_transform);
 /**
  * Create/Apply x,y,z rotation transformation on Float Matrix Stack
  * TODO These notes need converted into a C function prototype
- * A0 = u16 x rotation | A1 = u16 y rotation | A2 = u16 z rotation | A3 = 0 initializes new matrix, 1 transforms stored matrix
+ * A0 = uint16_t x rotation | A1 = uint16_t y rotation | A2 = uint16_t z rotation | A3 = 0 initializes new matrix, 1 transforms stored matrix
  */
-extern void matrix_rotate3s(s16 x, s16 y, s16 z, int transform_current);
+extern void matrix_rotate3s(int16_t x, int16_t y, int16_t z, int32_t transform_current);
 	#if OOT_DEBUG
 		asm("matrix_rotate3s = 0x800D1084");
 	#elif OOT_U_1_0
@@ -6495,7 +6495,7 @@ extern void external_func_800D1340(void);
 /**
  * Create x,y,z transformation and apply rotation on Float Matrix Stack
  * TODO These notes need converted into a C function prototype
- * F12 = float x | F14 = float y | A2 = float z | A3 = ptr to u16 rotation
+ * F12 = float x | F14 = float y | A2 = float z | A3 = ptr to uint16_t rotation
  */
 extern void external_func_800D1694(void);
 	#if OOT_DEBUG
@@ -6517,9 +6517,9 @@ extern void _guMtxF2L(float mf[4][4], Mtx *m);
 	#endif
 
 /**
- * Converts the Top in the Float Matrix Stack to a fixed point matrix
+ * Converts the Top in the Float Matrix Stack to a fixed point32_t matrix
  * TODO These notes need converted into a C function prototype
- * A0 = Destination for the Fixed Point Matrix
+ * A0 = Destination for the Fixed Point32_t Matrix
  */
 extern void external_func_800D1A54(void);
 	#if OOT_DEBUG
@@ -6532,11 +6532,11 @@ extern void external_func_800D1A54(void);
  * Converts and Appends the Float Matrix Stack's top matrix to POLY_OPA_DISP end
  * please provide only the first two arguments when using this function
  */
-extern u32 matrix_alloc(
+extern uint32_t matrix_alloc(
 	  z64_gfx_t *gfx_ctx
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
 	, const char *string
-	, int line
+	, int32_t line
 #endif
 );
 #ifdef RETAIL_NUANCES
@@ -6606,10 +6606,10 @@ extern void external_func_800D1FD4(void *unk0);
 	#endif
 
 /**
- * Used to reflect projectiles 
+ * Used to reflect projectiles
  * A0 = Link instance + 0x0A20 | A1 = place in stack to store result | a2 = 0? | Stores an array of 3 halfs containing the reflected direction into the address in A1
  */
-extern void external_func_800D20CC(float* link_0A20, int16_t* store, int condition);
+extern void external_func_800D20CC(float* link_0A20, int16_t* store, int32_t condition);
 	#if OOT_DEBUG
 		asm("external_func_800D20CC = 0x800D20CC");
 	#elif OOT_U_1_0
@@ -6788,7 +6788,7 @@ extern void external_func_800F4870(void);
 	#endif
 
 /**
- * Sound? Set u8 80121DFC to A0, u8 80121DFE to 1
+ * Sound? Set uint8_t 80121DFC to A0, uint8_t 80121DFE to 1
  * TODO These notes need converted into a C function prototype
  * A0 = ?
  */
@@ -6860,7 +6860,7 @@ extern void external_func_800F52A0(void);
 	#endif
 
 /**
- * Zero u32? 8010195C
+ * Zero uint32_t? 8010195C
  * TODO These notes need converted into a C function prototype
  */
 extern void external_func_800F5504(void);
@@ -7047,7 +7047,7 @@ extern void external_func_800F7260(void);
  * TODO There's a conflict between these notes and the function prototype
  * A0 = SFX ID | A1 = ? | A2 = ? | A3 = 80104394 this pass
  */
-extern void sound_play_general(u16 sound_id);
+extern void sound_play_general(uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("sound_play_general = 0x800F738C");
 	#elif OOT_U_1_0
@@ -7098,7 +7098,7 @@ extern void external_func_800F8FF4(void);
  * Change background music
  * TODO Confirm music_id type
  */
-extern void sound_set_bgm(u8 music_id);
+extern void sound_set_bgm(uint8_t music_id);
 	#if OOT_DEBUG
 		asm("sound_set_bgm = 0x800FA00C");
 	#elif OOT_U_1_0
@@ -7118,7 +7118,7 @@ extern void external_func_800FA0B4(void);
 /**
  * Set RGBA color for a string of Debug Text.
  */
-extern void debug_set_text_rgba(z64_debug_text_t *text_struct, u8 r, u8 g, u8 b, u8 a);
+extern void debug_set_text_rgba(z64_debug_text_t *text_struct, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 	#if OOT_DEBUG
 		asm("debug_set_text_rgba = 0x800FB3AC");
 	#elif OOT_U_1_0
@@ -7128,7 +7128,7 @@ extern void debug_set_text_rgba(z64_debug_text_t *text_struct, u8 r, u8 g, u8 b,
 /**
  * Set X / Y coordinates for a string of Debug Text.
  */
-extern void debug_set_text_xy(z64_debug_text_t *text_struct, u16 x, u16 y);
+extern void debug_set_text_xy(z64_debug_text_t *text_struct, uint16_t x, uint16_t y);
 	#if OOT_DEBUG
 		asm("debug_set_text_xy = 0x800FB41C");
 	#elif OOT_U_1_0
@@ -7249,7 +7249,7 @@ extern float math_rand_zero_one(void);
 /**
  * TODO This function is completely undocumented
  */
-extern int external_func_800FD970(void);
+extern int32_t external_func_800FD970(void);
 	#if OOT_DEBUG
 		asm("external_func_800FD970 = 0x800FD970");
 	#elif OOT_U_1_0
@@ -7257,18 +7257,18 @@ extern int external_func_800FD970(void);
 	#elif MM_U_1_0
 		asm("external_func_800FD970 = 0x80086FA0");
 	#endif
-    
+
 /**
  * Seeds the RNG with the given seed. This function is not used inside any existing overlay.
  */
-extern int srand(uint32_t seed);
+extern int32_t srand(uint32_t seed);
 	#if OOT_DEBUG
 		asm("srand = 0x800FD9A0");
 	#elif OOT_U_1_0
 		asm("srand = 0x800CDCC0");
 
 /**
- * TODO math, does something to a floating point value
+ * TODO math, does something to a floating point32_t value
  * padding between this and prev func
  * TODO These notes need converted into a C function prototype
  */
@@ -7280,7 +7280,7 @@ extern float external_func_80100290(float n);
 	#endif
 
 /**
- * TODO math, does something to a floating point value
+ * TODO math, does something to a floating point32_t value
  */
 extern float external_func_80104610(float n);
 	#if OOT_DEBUG
@@ -7317,7 +7317,7 @@ extern void external_func_80106AA8(void);
  * NOTE: This function's value is cleared to 0 once per frame, so you
          should test it once per frame if you're in a textbox selection.
  */
-extern int player_responded_to_textbox(z64_global_t *global);
+extern int32_t player_responded_to_textbox(z64_global_t *global);
     #if OOT_DEBUG
         asm("player_responded_to_textbox = 0x80106BC8");
     #elif OOT_U_1_0
@@ -7391,18 +7391,18 @@ extern void external_func_8010BD88(void);
  * TODO These notes need converted into a C function prototype
  * A0 = global context + 0x20D8 (VIEW struct ptr)
  */
-extern u32 player_talk_state(z64_global_t *gl_20D8);
+extern uint32_t player_talk_state(z64_global_t *gl_20D8);
 	#if OOT_DEBUG
 		asm("player_talk_state = 0x8010BDBC");
 	#elif OOT_U_1_0
 		asm("player_talk_state = 0x800DD464");
 	#endif
 
-extern void z64_bzero(void *dest, int length);
+extern void z64_bzero(void *dest, int32_t length);
 asm("bzero = 0x80004450");
-extern int z64_bcmp(const void *s1, const void *s2, int length);
+extern int32_t z64_bcmp(const void *s1, const void *s2, int32_t length);
 asm("bcmp = 0x800068C0");
-extern void bcpy(const void *src, void *dst, int length);
+extern void bcpy(const void *src, void *dst, int32_t length);
 asm("bcpy = 0x80006F10");
 
 // /ultra/user/src/pr/libsrc/libultra/gu
@@ -7411,9 +7411,9 @@ extern float sinf(float angle);
 asm("sinf = 0x80100290");
 extern float sins(unsigned short angle);
 asm("sins = 0x80100450");
-extern void guPerspectiveF(float mf[4][4], u16 *perspNorm, float fovy, float aspect, float near, float far, float scale);
+extern void guPerspectiveF(float mf[4][4], uint16_t *perspNorm, float fovy, float aspect, float near, float far, float scale);
 asm("guPerspectiveF = 0x801010D0");
-extern void guPerspective(Mtx *m, u16 *perspNorm, float fovy, float aspect, float near, float far, float scale);
+extern void guPerspective(Mtx *m, uint16_t *perspNorm, float fovy, float aspect, float near, float far, float scale);
 asm("guPerspective = 0x80101300");
 /*
 * 80101B40 guMtxIdentF?
