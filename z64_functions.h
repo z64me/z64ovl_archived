@@ -811,10 +811,10 @@ extern void external_func_8002A140(void);
 	#endif
 
 /**
- * Spawn Particle 0x1B
+ * Spawn Particle 0x1B (ovl_Effect_Ss_En_Ice)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002A1DC(void);
+extern void external_func_8002A1DC(z64_global_t *gl, void *en, int16_t *unk, uint8_t a3, uint8_t a4, uint8_t a5, uint8_t a6, uint8_t a7, uint8_t a8, uint8_t a9, uint32_t a10);
 	#if OOT_DEBUG
 		asm("external_func_8002A1DC = 0x8002A1DC");
 	#elif OOT_U_1_0
@@ -1563,7 +1563,7 @@ extern void external_func_8002EB44(void);
  * Sets lighting angles for shiny things or something.
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002EBCC(void);
+extern void external_func_8002EBCC(z64_actor_t *a0, z64_global_t *gl, int32_t a2);
 	#if OOT_DEBUG
 		asm("external_func_8002EBCC = 0x8002EBCC");
 	#elif OOT_U_1_0
@@ -1844,7 +1844,6 @@ extern void external_func_8002F6D4(void);
 		asm("external_func_8002F6D4 = 0x80022E7C");
 	#elif MM_U_1_0
 		asm("external_func_8002F6D4 = 0x800B8D50");
-		asm("external_func_800B8D50 = 0x800B8D50");
 	#endif
 
 /**
@@ -1860,11 +1859,13 @@ extern void external_func_8002F71C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F758(void);
+extern void external_func_8002F758(z64_global_t *gl, void *gl830, float a, float b, float *c, void *unk);
 	#if OOT_DEBUG
 		asm("external_func_8002F758 = 0x8002F758");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
+	#elif MM_U_1_0
+		asm("external_func_8002F6D4 = 0x800CA1E8");
 	#endif
 
 /**
@@ -2039,7 +2040,7 @@ extern void external_func_80032E24(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80032F54(void);
+extern void external_func_80032F54(int32_t *a0, uint8_t limb, int32_t a2, int32_t a3, int32_t a4, uint32_t dlist, int32_t a6);
 	#if OOT_DEBUG
 		asm("external_func_80032F54 = 0x80032F54");
 	#elif OOT_U_1_0
@@ -3423,7 +3424,7 @@ extern void external_func_8005CBAC(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005D018(void);
+extern int32_t external_func_8005D018(z64_global_t *gl, int32_t unk0);
 	#if OOT_DEBUG
 		asm("external_func_8005D018 = 0x8005D018");
 	#elif OOT_U_1_0
@@ -3443,7 +3444,7 @@ extern void external_func_8005D060(z64_global_t *gl, void *a1);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005D104(void);
+extern int32_t external_func_8005D104(z64_global_t *gl, z64_collider_t *collider, z64_actor_t *a, z64_collider_cylinder_init_t *col_init);
 	#if OOT_DEBUG
 		asm("external_func_8005D104 = 0x8005D104");
 	#elif OOT_U_1_0
@@ -6136,7 +6137,7 @@ extern float external_func_800CA720(float a0);
 	#elif OOT_U_1_0
 		asm("external_func_800CA720 = 0x800A45FC");
 	#elif MM_U_1_0
-		asm("external_func_800CA720 = 0x800CA720");
+		asm("external_func_800CA720 = 0x801794EC");
 	#endif
 
 /**
@@ -6565,7 +6566,6 @@ extern void external_func_800D1AF4(vec3f_t *in, vec3f_t *out);
 		asm("external_func_800D1AF4 = 0x800AB958");
 	#elif MM_U_1_0
 		asm("external_func_800D1AF4 = 0x80181A98");
-		asm("external_func_80181A98 = 0x80181A98");
 	#endif
 
 /**
