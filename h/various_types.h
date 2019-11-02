@@ -9,7 +9,7 @@ typedef enum{
 	true
 } bool;
 
-#define DAMAGE_HEARTS(HA0) (int)((HA0) * 16)
+#define DAMAGE_HEARTS(HA0) (int32_t)((HA0) * 16)
 #define COMBINE1(COMBINE1A0, COMBINE1A1) COMBINE1A0##COMBINE1A1
 #define COMBINE(COMBINEA0, COMBINEA1) COMBINE1(COMBINEA0, COMBINEA1)
 #define PADDING(PADDINGBYTES) COMBINE(char padding,__LINE__)[PADDINGBYTES]
@@ -68,10 +68,10 @@ typedef struct {
 
 /* Legacy Macros */
 /* Get a value of arbitrary type from any address in the actor */
-#define AVAL(base,type,offset)  (*(type*)((u8*)(base)+(offset)))
+#define AVAL(base,type,offset)  (*(type*)((uint8_t*)(base)+(offset)))
 
 /* Get the address */
-#define AADDR(a,o)  ((void*)((u8*)(a)+(o)))
+#define AADDR(a,o)  ((void*)((uint8_t*)(a)+(o)))
 
 // Borrowed from OoT gz
 typedef struct
