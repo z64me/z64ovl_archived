@@ -37,12 +37,12 @@ struct z64_actor_s { /* Common Actor Instance Structure */
     int8_t room_index; /* Room Index (0xFF means actor won't despawn on room change.) */
     uint32_t flags; /* Special Actor Flags */
     PosRot_t init; /* Initial Spawn Coordinates */
-    int6_tunk_01_[2]; /* Undocumented / Unused */
+    int16_t unk_01_[2]; /* Undocumented / Unused */
     uint16_t variable; /* Actor Variable */
     uint8_t obj_alloc_index; /* Object Table Allocation Index */
-    int6_tunk1F; /* Undocumented / Unused */
+    int16_t unk1F; /* Undocumented / Unused */
     uint16_t sound_effect; /* Actor Sound Effect (Relative to Actor Location) */
-    int6_tunk_03_[2]; /* Undocumented / Unused */
+    int16_t unk_03_[2]; /* Undocumented / Unused */
     vec3f_t pos_2; /* Current Position (2) */
     int16_t unk30; /* Undocumented / Unused */ /* Possibly rot_0 */
     int16_t xz_dir; /* Direction (X and Z axes) */
@@ -50,7 +50,7 @@ struct z64_actor_s { /* Common Actor Instance Structure */
     int16_t unk36; /* Undocumented / Unused */
     vec3f_t pos_3; /* Camera Related Position (3) */
     vec3s_t rot_1; /* Rotation (1) */
-    int6_tunk_06_[2]; /* Undocumented / Unused */
+    int16_t unk_06_[2]; /* Undocumented / Unused */
     float unk_07_; /* Undocumented / Unused */
     vec3f_t scale; /* Actor Scale */
     vec3f_t vel_1; /* Velocity (1) */
@@ -69,7 +69,7 @@ struct z64_actor_s { /* Common Actor Instance Structure */
     float unk_0x8C; /* Undocumented / Unused */
     float dist_from_link_xz; /* Distance From Player (X and Z axes) */
     float dist_from_link_y; /* Distance From Player (Y axis) */
-    z64_damagechart_init_t * damage_table; /* Pointer to Damage Table */
+    z64_damagechart_init_t *damage_table; /* Pointer to Damage Table */
     vec3f_t vel_2; /* Velocity (2) */
     int6_tunk_0B_[6]; /* Undocumented / Unused */
     uint8_t mass; /* Mass */
@@ -79,12 +79,12 @@ struct z64_actor_s { /* Common Actor Instance Structure */
     uint8_t impact_effect; /* Impact Effect */
     int6_tunk_0D; /* Undocumented / Unused */
     vec3s_t rot_2; /* Rotation (2) */
-    int6_tunk_0E_[2]; /* Undocumented / Unused */
+    int16_t unk_0E_[2]; /* Undocumented / Unused */
     float unk_0xBC; /* Collision Mesh Related (Y axis shift?) */
     void *draw_drop_shadow; /* Shadow Draw Function */
     float unk_0xC4; /* Undocumented / Unused */
     uint8_t unk_0xC8; /* Undocumented / Unused */
-    int6_tpad_0xC9_[3]; /* Pad (Controller Related?) */
+    int16_t pad_0xC9_[3]; /* Pad (Controller Related?) */
     vec3f_t unk_0xCC; /* Undocumented / Unused */
     vec3f_t unk_0xD8; /* Undocumented / Unused */
     vec3f_t unk_0xE4; /* Undocumented / Unused */
