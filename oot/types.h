@@ -111,6 +111,56 @@ typedef struct
                                               /* 0x0010 */
 } z64_col_poly_t;
 
+/* damage chart */
+typedef struct z64_damagechart_init_s { /* Damage Chart Initialization Variables (& 0xF0 = Effect Type, & 0x0F = Damage Amount) */
+    uint8_t nut; /* Deku Nut */
+    union damage_chart_entry_01 {
+        uint8_t stick; /* Deku Stick Slash */
+        uint8_t vase; /* Vase / Rock Throw */
+    };
+    uint8_t slingshot; /* Fairy Slingshot */
+    uint8_t explode; /* Explosions */
+    uint8_t boomerang; /* Boomerang */
+    uint8_t arrow; /* Normal Arrow */
+    uint8_t hammer_swing; /* Hammer Swing (no ground hit) */
+    uint8_t hookshot; /* Hookshot and Longshot */
+    uint8_t sword0_slash; /* Kokiri Sword Slash */
+    uint8_t sword1_slash; /* Master Sword Slash */
+    uint8_t sword2_slash; /* Biggoron Sword and Giant's Knife Slash */
+    uint8_t arrow_fire; /* Fire Arrow */
+    uint8_t arrow_ice; /* Ice Arrow */
+    uint8_t arrow_light; /* Light Arrow */
+    uint8_t arrow_wind; /* (Beta) Wind Arrow */
+    uint8_t arrow_spirit; /* (Beta) Spirit Arrow */
+    uint8_t arrow_shadow; /* (Beta) Shadow Arrow */
+    uint8_t magic_fire; /* Din's Fire */
+    uint8_t magic_ice; /* Ice Magic (Beta?) */
+    uint8_t magic_light; /* Light Magic (Beta?) */
+    uint8_t unk_00; /* Undocumented / Unused */
+    uint8_t unk_01; /* Undocumented / Unused */
+    uint8_t sword0_littlespin; /* Kokiri Sword Spin Attack (Half Charge) */
+    uint8_t sword2_littlespin; /* Biggoron Sword and Giant's Knife Spin Attack (Half Charge) */
+    uint8_t sword1_littlespin; /* Master Sword Spin Attack (Half Charge) */
+    union damage_chart_entry_19 {
+        uint8_t sword0_jump; /* Kokiri Sword Jump Attack */
+        uint8_t sword0_bigspin; /* Kokiri Sword Spin Attack (Full Charge) */
+        uint8_t broken_jump; /* Broken Giant's Knife Jump Attack */
+        uint8_t broken_bigspin; /* Broken Giant's Knife Spin Attack (Full Charge) */
+    };
+    union damage_chart_entry_1A {
+        uint8_t sword2_jump; /* Biggoron Sword and Giant's Knife Jump Attack */
+        uint8_t sword2_bigspin; /* Biggoron Sword and Giant's Knife Spin Attack (Full Charge) */
+    };
+    union damage_chart_entry_1B {
+        uint8_t sword1_jump; /* Master Sword Jump Attack */
+        uint8_t sword1_bigspin; /* Master Sword Spin Attack (Full Charge) */
+    };
+    uint8_t unk_02; /* Undocumented / Unused */
+    uint8_t unk_03; /* Undocumented / Unused */
+    uint8_t hammer_jump; /* Hammer Jump Attack */
+    uint8_t unk_04; /* Undocumented / Unused */
+} z64_damagechart_init_t;
+
 #include "actor.h"
 
 typedef struct
@@ -869,20 +919,20 @@ typedef struct z64_collider_tri_collection_s {
 
 /* collision, dynapoly */
 typedef struct z64_dynapoly {
-    u8 unk_0[16];
-    u32 id;
-    u8 unk_1[16];
-		u8 collided_flag;
-		u8 unk_2[3]; /* for alignment right now */
+    uint8_t unk_0[16];
+    uint32_t id;
+    uint8_t unk_1[16];
+		uint8_t collided_flag;
+		uint8_t unk_2[3]; /* for alignment right now */
 } z64_dynapoly_t;
 
 typedef struct z64_dynapoly_init {
-    u8 unk_0[2];
-    u16 scale;
-    u32 unk_1;
-		u32 unk_2;
-		u32 unk_3;
-		u32 unk_4;
+    uint8_t unk_0[2];
+    uint16_t scale;
+    uint32_t unk_1;
+		uint32_t unk_2;
+		uint32_t unk_3;
+		uint32_t unk_4;
 } z64_dynapoly_init_t;
 
 enum dynapoly_move_flag {
@@ -890,55 +940,5 @@ enum dynapoly_move_flag {
 	DPM_PLAYER = 0b01,
  	DPM_ENEMY = 0b10
 };
-
-/* damage chart */
-typedef struct z64_damagechart_init_s { /* Damage Chart Initialization Variables (& 0xF0 = Effect Type, & 0x0F = Damage Amount) */
-    uint8_t nut; /* Deku Nut */
-    union damage_chart_entry_01 {
-        uint8_t stick; /* Deku Stick Slash */
-        uint8_t vase; /* Vase / Rock Throw */
-    };
-    uint8_t slingshot; /* Fairy Slingshot */
-    uint8_t explode; /* Explosions */
-    uint8_t boomerang; /* Boomerang */
-    uint8_t arrow; /* Normal Arrow */
-    uint8_t hammer_swing; /* Hammer Swing (no ground hit) */
-    uint8_t hookshot; /* Hookshot and Longshot */
-    uint8_t sword0_slash; /* Kokiri Sword Slash */
-    uint8_t sword1_slash; /* Master Sword Slash */
-    uint8_t sword2_slash; /* Biggoron Sword and Giant's Knife Slash */
-    uint8_t arrow_fire; /* Fire Arrow */
-    uint8_t arrow_ice; /* Ice Arrow */
-    uint8_t arrow_light; /* Light Arrow */
-    uint8_t arrow_wind; /* (Beta) Wind Arrow */
-    uint8_t arrow_spirit; /* (Beta) Spirit Arrow */
-    uint8_t arrow_shadow; /* (Beta) Shadow Arrow */
-    uint8_t magic_fire; /* Din's Fire */
-    uint8_t magic_ice; /* Ice Magic (Beta?) */
-    uint8_t magic_light; /* Light Magic (Beta?) */
-    uint8_t unk_00; /* Undocumented / Unused */
-    uint8_t unk_01; /* Undocumented / Unused */
-    uint8_t sword0_littlespin; /* Kokiri Sword Spin Attack (Half Charge) */
-    uint8_t sword2_littlespin; /* Biggoron Sword and Giant's Knife Spin Attack (Half Charge) */
-    uint8_t sword1_littlespin; /* Master Sword Spin Attack (Half Charge) */
-    union damage_chart_entry_19 {
-        uint8_t sword0_jump; /* Kokiri Sword Jump Attack */
-        uint8_t sword0_bigspin; /* Kokiri Sword Spin Attack (Full Charge) */
-        uint8_t broken_jump; /* Broken Giant's Knife Jump Attack */
-        uint8_t broken_bigspin; /* Broken Giant's Knife Spin Attack (Full Charge) */
-    };
-    union damage_chart_entry_1A {
-        uint8_t sword2_jump; /* Biggoron Sword and Giant's Knife Jump Attack */
-        uint8_t sword2_bigspin; /* Biggoron Sword and Giant's Knife Spin Attack (Full Charge) */
-    };
-    union damage_chart_entry_1B {
-        uint8_t sword1_jump; /* Master Sword Jump Attack */
-        uint8_t sword1_bigspin; /* Master Sword Spin Attack (Full Charge) */
-    };
-    uint8_t unk_02; /* Undocumented / Unused */
-    uint8_t unk_03; /* Undocumented / Unused */
-    uint8_t hammer_jump; /* Hammer Jump Attack */
-    uint8_t unk_04; /* Undocumented / Unused */
-} z64_damagechart_init_t;
 
 #endif

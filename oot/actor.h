@@ -69,7 +69,7 @@ struct z64_actor_s { /* Common Actor Instance Structure */
     float unk_0x8C; /* Undocumented / Unused */
     float dist_from_link_xz; /* Distance From Player (X and Z axes) */
     float dist_from_link_y; /* Distance From Player (Y axis) */
-    void *damage_table; /* Pointer to Damage Table */
+    z64_damagechart_init_t *damage_table; /* Pointer to Damage Table */
     vec3f_t vel_2; /* Velocity (2) */
     int16_t unk_0B_[6]; /* Undocumented / Unused */
     uint8_t mass; /* Mass */
