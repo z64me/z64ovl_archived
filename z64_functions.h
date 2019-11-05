@@ -1,5 +1,6 @@
 #ifndef __Z64OVL_H__
 #define __Z64OVL_H__
+#endif /* Unterminated ifndef error? */
 
 /****
  * z64ovl.h
@@ -2099,7 +2100,7 @@ extern z64_actor_t *actor_is_bombed(z64_global_t *global, z64_collider_cylinder_
  * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance | v0 = unknown
  */
-extern int32_t external_func_80033684(z64_global_t *global, z64_actor_t *actor);
+extern int32_t external_func_80033684(z64_global_t *global, void *actor);
 	#if OOT_DEBUG
 		asm("external_func_80033684 = 0x80033684");
 	#elif OOT_U_1_0
@@ -2812,7 +2813,7 @@ extern void external_func_8003ECA8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id
  */
-extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, uint32_t *dynacollision_id);
+extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, uint32_t dynacollision_id);
 	#if OOT_DEBUG
 		asm("dynapoly_free = 0x8003ED58");
 	#elif OOT_U_1_0
@@ -3697,7 +3698,7 @@ extern void cutscene_init_script(z64_global_t *, uint32_t segptr);
 static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
 {
 	cutscene_init_script(gl, segptr);
-	AVAL(Z64GL_CUTSCENE_PLAY_SCRIPT, uint8_t, 0) = 1;
+	//AVAL(Z64GL_CUTSCENE_PLAY_SCRIPT, uint8_t, 0) = 1; /* Undefined? */
 }
 
 /**

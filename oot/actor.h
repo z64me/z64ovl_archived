@@ -69,15 +69,15 @@ struct z64_actor_s { /* Common Actor Instance Structure */
     float unk_0x8C; /* Undocumented / Unused */
     float dist_from_link_xz; /* Distance From Player (X and Z axes) */
     float dist_from_link_y; /* Distance From Player (Y axis) */
-    z64_damagechart_init_t *damage_table; /* Pointer to Damage Table */
+    void *damage_table; /* Pointer to Damage Table */
     vec3f_t vel_2; /* Velocity (2) */
-    int6_tunk_0B_[6]; /* Undocumented / Unused */
+    int16_t unk_0B_[6]; /* Undocumented / Unused */
     uint8_t mass; /* Mass */
     uint8_t health; /* Health */
     uint8_t damage; /* Damage Amount */
     uint8_t damage_effect; /* Damage Effect */
     uint8_t impact_effect; /* Impact Effect */
-    int6_tunk_0D; /* Undocumented / Unused */
+    int16_t unk_0D; /* Undocumented / Unused */
     vec3s_t rot_2; /* Rotation (2) */
     int16_t unk_0E_[2]; /* Undocumented / Unused */
     float unk_0xBC; /* Collision Mesh Related (Y axis shift?) */
@@ -117,22 +117,22 @@ typedef void (z64_actorfunc_t)(void *entity, void *global);
 typedef struct
 {
   z64_actor_t       actor;                    /* 0x0000 */
-  int6_t             unk_00_[0x02F8];          /* 0x013C */
+  int16_t             unk_00_[0x02F8];          /* 0x013C */
   uint8_t           action;                   /* 0x0434 */
-  int6_t             unk_01_[0x0237];          /* 0x0435 */
+  int16_t             unk_01_[0x0237];          /* 0x0435 */
   uint32_t          state_flags_1;            /* 0x066C */
   uint32_t          state_flags_2;            /* 0x0670 */
   uint32_t          unk_02_1;                 /* 0x0674 */
   uint32_t          unk_02_2;                 /* 0x0678 */
   uint32_t          unk_02_3;                 /* 0x067C */
   uint32_t          reflection_flag;          /* 0x0680 */
-  int6_t             unk_02_4[0x01A8];         /* 0x0684 */
+  int16_t             unk_02_4[0x01A8];         /* 0x0684 */
   float             linear_vel;               /* 0x0828 */
-  int6_t             unk_03_[0x0002];          /* 0x082C */
+  int16_t             unk_03_[0x0002];          /* 0x082C */
   uint16_t          target_yaw;               /* 0x082E */
-  int6_t             unk_04_[0x0003];          /* 0x0830 */
+  int16_t             unk_04_[0x0003];          /* 0x0830 */
   int8_t            sword_state;              /* 0x0833 */
-  int6_t             unk_05_[0x0050];          /* 0x0834 */
+  int16_t             unk_05_[0x0050];          /* 0x0834 */
   int16_t           drop_y;                   /* 0x0884 */
   int16_t           drop_distance;            /* 0x0886 */
                                               /* 0x0888 */

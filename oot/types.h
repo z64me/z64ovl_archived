@@ -601,7 +601,7 @@ typedef struct
     uint16_t        frame_lastcmd;            /* 0x01D78 */ /* frame of last cutscene command executed */
     char            unk_0x01D7A[0xA];         /* 0x01D7A */
     void           *camera_current;           /* 0x01D84 */
-    
+
     /* TODO actor command notes courtesy of Noka; implement them...
      * at 0x1D88 the actor pointers start, there's 11 actor pointers
      * in total but 2 are always used by link and navi meaning there's
@@ -620,7 +620,7 @@ typedef struct
      * * 0x18 -> x end
      * * 0x1C -> y end
      * * 0x20 -> z end
-     * call these cutscene actor command struct    
+     * call these cutscene actor command struct
      */
   }                 cutscene;                 /* 0x01D64 through 0x01D88 */
   char              unk_0F_[0x01F0];          /* 0x01D88 */
@@ -725,7 +725,7 @@ typedef struct {
   /* 0x40 */
 } z64_skelanime_t;
 
-typedef struct 
+typedef struct
 {
   u8 unk00[0x4C];
   z64_skelanime_t skelanime;
@@ -886,6 +886,7 @@ typedef struct z64_dynapoly_init {
 } z64_dynapoly_init_t;
 
 enum dynapoly_move_flag {
+  DPM_NONE = 0b00,
 	DPM_PLAYER = 0b01,
  	DPM_ENEMY = 0b10
 };

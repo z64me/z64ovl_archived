@@ -114,6 +114,6 @@ typedef struct PosRot
 {
 	vec3f_t pos;
 	z64_rot_t rot;
-} PosRot_t
+} PosRot_t;
 
 #endif
