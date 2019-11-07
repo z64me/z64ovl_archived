@@ -96,15 +96,16 @@ struct z64_actor_s
   z64_xyzf_t        unk_0xD8;                 /* 0x00D8 */
   z64_xyzf_t        unk_0xE4;                 /* 0x00E4 */
   float             unk_0xF0;                 /* 0x00F0 */
-  float             unk_0xF4;                 /* 0x00F4 */
-  float             unk_0xF8;                 /* 0x00F8 */
-  float             unk_0xFC;                 /* 0x00FC */
+  float             draw_distance;            /* 0x00F4 */ /* based on Link's proximity */
+  float             camera_clip_near;         /* 0x00F8 */ /* Potentially Incorrect */
+  float             camera_clip_far;          /* 0x00FC */ /* Potentially Incorrect */
   z64_xyzf_t        pos_4;                    /* 0x0100 */
   uint8_t           unk_0x10C;                /* 0x010C */ /* used for trade sequence... */
   uint8_t           unk_0x10D;                /* 0x010D */
   uint16_t          text_id;                  /* 0x010E */
   int16_t           frozen;                   /* 0x0110 */
-  char              unk_10_[0x0003];          /* 0x0112 */
+  uint16_t          damage_color;             /* 0x0112 */
+  uint8_t           damage_color_timer;       /* 0x0114 */
   uint8_t           active;                   /* 0x0115 */
   uint8_t           unk_11_;                  /* 0x0116 */
   uint8_t           navi_enemy_text_id;       /* 0x0117 */
