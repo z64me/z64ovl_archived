@@ -4250,13 +4250,13 @@ extern int16_t math_vec3f_atan2_xz_y(vec3f_t* coord1, vec3f_t* coord2);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Variable Initializer List ptr
  */
-extern void actor_init_dynapoly(z64_actor_t *actor, const z64_dynapoly_init_t *var_init_list);
+extern void actor_init_ichain(z64_actor_t *actor, uint32_t const *ichain);
 	#if OOT_DEBUG
-		asm("actor_init_dynapoly = 0x800780DC");
+		asm("actor_init_ichain = 0x800780DC");
 	#elif OOT_U_1_0
-		asm("actor_init_dynapoly = 0x80063F7C");
+		asm("actor_init_ichain = 0x80063F7C");
 	#elif MM_U_1_0
-		asm("actor_init_dynapoly = 0x800FFADC");
+		asm("actor_init_ichain = 0x800FFADC");
 	#endif
 
 /**
