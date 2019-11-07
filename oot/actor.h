@@ -31,85 +31,93 @@ typedef struct z64_actor_init_s{
 } z64_actor_init_t;
 
 typedef struct z64_actor_s z64_actor_t;
-struct z64_actor_s { /* Common Actor Instance Structure */
-    int16_t actor_id; /* Actor Number */
-    z64_actor_type_t actor_type; /* Actor Type */
-    int8_t room_index; /* Room Index (0xFF means actor won't despawn on room change.) */
-    uint32_t flags; /* Special Actor Flags */
-    PosRot_t init; /* Initial Spawn Coordinates */
-    int16_t unk_01_[2]; /* Undocumented / Unused */
-    uint16_t variable; /* Actor Variable */
-    uint8_t obj_alloc_index; /* Object Table Allocation Index */
-    int16_t unk1F; /* Undocumented / Unused */
-    uint16_t sound_effect; /* Actor Sound Effect (Relative to Actor Location) */
-    int16_t unk_03_[2]; /* Undocumented / Unused */
-    vec3f_t pos_2; /* Current Position (2) */
-    int16_t unk30; /* Undocumented / Unused */ /* Possibly rot_0 */
-    int16_t xz_dir; /* Direction (X and Z axes) */
-    int16_t unk34; /* Undocumented / Unused */
-    int16_t unk36; /* Undocumented / Unused */
-    vec3f_t pos_3; /* Camera Related Position (3) */
-    vec3s_t rot_1; /* Rotation (1) */
-    int16_t unk_06_[2]; /* Undocumented / Unused */
-    float unk_07_; /* Undocumented / Unused */
-    vec3f_t scale; /* Actor Scale */
-    vec3f_t vel_1; /* Velocity (1) */
-    float xz_speed; /* Speed (X and Z axes) */
-    float gravity; /* Gravity */
-    float min_vel_y; /* Minimum Velocity (Y axis) */
-    z64_col_poly_t *wall_poly; /* Wall Polygon (Actor is touching) */
-    z64_col_poly_t *floor_poly; /* Floor Polygon (Actor is over or touching) */
-    uint8_t wall_poly_source; /* Complex Poly Surface Source */
-    uint8_t floor_poly_source; /* Complex Poly Surface Source */
-    int16_t wall_rot; /* Rotation Towards Wall */
-    float floor_height; /* Height of Floor (Maybe?) */
-    float water_surface_dist; /* Distance to Water Surface */
-    uint16_t bgcheck_flags;
-    int16_t rot_toward_link_y; /* Y Rotation to face Player */
-    float unk_0x8C; /* Undocumented / Unused */
-    float dist_from_link_xz; /* Distance From Player (X and Z axes) */
-    float dist_from_link_y; /* Distance From Player (Y axis) */
-    z64_damagechart_init_t *damage_table; /* Pointer to Damage Table */
-    vec3f_t vel_2; /* Velocity (2) */
-    int16_t unk_0B_[6]; /* Undocumented / Unused */
-    uint8_t mass; /* Mass */
-    uint8_t health; /* Health */
-    uint8_t damage; /* Damage Amount */
-    uint8_t damage_effect; /* Damage Effect */
-    uint8_t impact_effect; /* Impact Effect */
-    int16_t unk_0D; /* Undocumented / Unused */
-    vec3s_t rot_2; /* Rotation (2) */
-    int16_t unk_0E_[2]; /* Undocumented / Unused */
-    float unk_0xBC; /* Collision Mesh Related (Y axis shift?) */
-    void *draw_drop_shadow; /* Shadow Draw Function */
-    float unk_0xC4; /* Undocumented / Unused */
-    uint8_t unk_0xC8; /* Undocumented / Unused */
-    int16_t pad_0xC9_[3]; /* Pad (Controller Related?) */
-    vec3f_t unk_0xCC; /* Undocumented / Unused */
-    vec3f_t unk_0xD8; /* Undocumented / Unused */
-    vec3f_t unk_0xE4; /* Undocumented / Unused */
-    float unk_0xF0; /* Undocumented / Unused */
-    float unk_0xF4; /* Undocumented / Unused */
-    float unk_0xF8; /* Undocumented / Unused */
-    float unk_0xFC; /* Undocumented / Unused */
-    vec3f_t pos_4; /* Final Position (4); Last Frame */
-    uint16_t unk_0F_; /* Undocumented / Unused */
-    uint16_t text_id; /* Actor Message ID */
-    int16_t frozen; /* Used in "ReDead Freeze Attack" */
-    uint16_t damage_color; /* First 12 bits control color which can only be blue, red, or white. The last 4 bits are unknown, but they can't be zero. */
-    uint8_t damage_color_timer; /* Damage Color Effect Timer */
-    uint8_t runActor; /* Determines if Actor Instance should be processed. 01 = True, 00 = False */
-    uint8_t unk_11_; /* Sets a collision related routine. */
-    uint8_t navi_enemy_text_id; /* Navi Info Message ID */
-    z64_actor_t *attached_a; /* Attached Actor A (Interfacing Actor) */
-    z64_actor_t *attached_b; /* Attached Actor B (Attached to Actor) */
-    z64_actor_t *prev; /* Previous Actor */
-    z64_actor_t *next; /* Next Actor */
-    void *ctor; /* Constructor */
-    void *dtor; /* Destructor */
-    void *main_proc; /* Main Function */
-    void *draw_proc; /* Draw Function */
-    void *code_entry; /* Code Entry */
+struct z64_actor_s
+{
+  int16_t           actor_id;                 /* 0x0000 */
+  uint8_t           actor_type;               /* 0x0002 */
+  int8_t            room_index;               /* 0x0003 */
+  uint32_t          flags;                    /* 0x0004 */
+  vec3f_t           pos_1;                    /* 0x0008 */
+  z64_rot_t         rot_init;                 /* 0x0014 */
+  char              unk_01_[0x0002];          /* 0x001A */
+  int16_t          variable;                  /* 0x001C */
+  uint8_t           alloc_index;              /* 0x001E */
+  char              unk1F;                    /* 0x001F */
+  uint16_t          sound_effect;             /* 0x0020 */
+  char              unk_03_[0x0002];          /* 0x0022 */
+  vec3f_t           pos_2;                    /* 0x0024 */
+  int16_t           unk30;                    /* 0x0030 */ // possibly rot_0...
+  int16_t           xz_dir;                   /* 0x0032 */
+  int16_t           unk34;                    /* 0x0034 */
+  uint16_t          unk36;                    /* 0x0036 */
+  vec3f_t           pos_3;                    /* 0x0038 */
+  z64_rot_t         rot_1;                    /* 0x0044 */
+  char              unk_06_[0x0002];          /* 0x004A */
+  float             unk_07_;                  /* 0x004C */
+  vec3f_t           scale;                    /* 0x0050 */
+  vec3f_t           vel_1;                    /* 0x005C */
+  float             xz_speed;                 /* 0x0068 */
+  float             gravity;                  /* 0x006C */
+  float             min_vel_y;                /* 0x0070 */
+  /* struct bgcheck common */
+  z64_col_poly_t   *wall_poly;                /* 0x0074 */
+  z64_col_poly_t   *floor_poly;               /* 0x0078 */
+  uint8_t           wall_poly_source;         /* 0x007C */
+  uint8_t           floor_poly_source;        /* 0x007D */
+  int16_t           wall_rot;                 /* 0x007E */
+  float             floor_height;             /* 0x0080 */ //maybe?
+  float             water_surface_dist;       /* 0x0084 */
+  uint16_t          bgcheck_flags;            /* 0x0088 */
+  int16_t           rot_toward_link_y;        /* 0x008A */
+  float             unk_0x8C;                 /* 0x008C */
+  float             dist_from_link_xz;        /* 0x0090 */
+  float             dist_from_link_y;         /* 0x0094 */
+  /* struct collision_check common */
+  void             *damage_table;             /* 0x0098 */
+  vec3f_t           vel_2;                    /* 0x009C */
+  char              unk_0B_[0x0006];          /* 0x00A8 */
+  uint8_t           mass;                     /* 0x00AE */
+  uint8_t           health;                   /* 0x00AF */
+  uint8_t           damage;                   /* 0x00B0 */
+  uint8_t           damage_effect;            /* 0x00B1 */
+  uint8_t           impact_effect;            /* 0x00B2 */
+  char              unk_0D;                   /* 0x00B3 */
+  /* end CollisionCheck common */
+  /* struct start */
+  z64_rot_t         rot_2;                    /* 0x00B4 */
+  char              unk_0E_[0x0002];          /* 0x00BA */
+  float             unk_0xBC;                 /* 0x00BC */
+  void             *draw_drop_shadow;         /* 0x00C0 */
+  float             unk_0xC4;                 /* 0x00C4 */
+  uint8_t           unk_0xC8;                 /* 0x00C8 */
+  char              pad_0xC9_[0x0003];        /* 0x00C9 */
+  /* struct end */
+  z64_xyzf_t        unk_0xCC;                 /* 0x00CC */
+  z64_xyzf_t        unk_0xD8;                 /* 0x00D8 */
+  z64_xyzf_t        unk_0xE4;                 /* 0x00E4 */
+  float             unk_0xF0;                 /* 0x00F0 */
+  float             unk_0xF4;                 /* 0x00F4 */
+  float             unk_0xF8;                 /* 0x00F8 */
+  float             unk_0xFC;                 /* 0x00FC */
+  z64_xyzf_t        pos_4;                    /* 0x0100 */
+  uint8_t           unk_0x10C;                /* 0x010C */ /* used for trade sequence... */
+  uint8_t           unk_0x10D;                /* 0x010D */
+  uint16_t          text_id;                  /* 0x010E */
+  int16_t           frozen;                   /* 0x0110 */
+  char              unk_10_[0x0003];          /* 0x0112 */
+  uint8_t           active;                   /* 0x0115 */
+  uint8_t           unk_11_;                  /* 0x0116 */
+  uint8_t           navi_enemy_text_id;       /* 0x0117 */
+  z64_actor_t      *attached_a;               /* 0x0118 */
+  z64_actor_t      *attached_b;               /* 0x011C */
+  z64_actor_t      *prev;                     /* 0x0120 */
+  z64_actor_t      *next;                     /* 0x0124 */
+  void             *ctor;                     /* 0x0128 */
+  void             *dtor;                     /* 0x012C */
+  void             *main_proc;                /* 0x0130 */
+  void             *draw_proc;                /* 0x0134 */
+  void             *code_entry;               /* 0x0138 */
+                                              /* 0x013C */
 };
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);

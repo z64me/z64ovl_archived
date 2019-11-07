@@ -5,13 +5,12 @@
  * for use in custom OoT/MM overlays
  ***/
 
-#include <stdint.h> /* integer types */
+#include "../stdint.h" /* integer types */
 #include <stddef.h> /* offsetof */
 
 /* TODO u/s may need to be swapped */
 /* TODO float/vec operations, do those support signedness? */
 /* TODO are s8/s16/s32 values all represented as s16? */
-/* TODO `type` is 7 bits but spans 0 - A inclusive */
 enum ichain_types
 {
 	ICHAIN_U8 = 0            /* sets byte  */
@@ -27,31 +26,41 @@ enum ichain_types
 	, ICHAIN_VEC3S16         /* sets vec3s members to int          */
 };
 
+#define ICHAIN_LAST ((uint32_t)(0x7FFFFFFF))
+
 /****
  * ICHAIN_EX macro is for using a user-specified structure, such
  * as an `entity_t`; identical to ICHAIN otherwise, which assumes
  * a `z64_actor_t` structure, so look there for the actual notes
  ***/
-#define ICHAIN_EX(is_last, type, member, value, structure)  \
-	(uint32_t) (                                             \
-		(((!is_last) & 1) << 31) |                            \
-		((type    & 7) << 28)    |                            \
-		((offsetof(structure, member) & 0x7FF) << 8) |        \
-		(value & 0xFFFF)                                      \
+#define ICHAIN_EX(type, member, value, structure)       \
+	(uint32_t) (                                         \
+		  (1 << 31)                                       \
+		| ((type & 15) << 27)                             \
+		| ((offsetof(structure, member) & 0x7FF) << 16)   \
+		| (value & 0xFFFF)                                \
 	)
 
 /****
  * ICHAIN macro generates a uint32_t of the following form:
- * * (v >> 0x1F) & 1  == Continue Parsing
- * * (v >> 0x1C) & 7  == Type
- * * (v >> 8) & 0x7FF == Offset from start of instance to write initial value
- * * v & 0xFFFF       == Value. 
+ * * (v >> 31) & 0x0001 == Continue Parsing
+ * * (v >> 27) & 0x000F == Type
+ * * (v >> 16) & 0x07FF == Offset from start of instance to write initial value
+ * *  v        & 0xFFFF == Value
  * arguments:
- * * is_last -- use 1 if it's the last in the list
  * * type ----- see `enum ichain_types`
  * * member --- name of member inside `z64_actor_t` structure
  * * value ---- use only int values that can be represented in 16 bits
+ * NOTE
+ * * the very last element in an ichain should be `bitwise and`'d
+ * * against ICHAIN_LAST
+ * example usage:
+ * * const uint32_t ichain[] = {
+ * *     ICHAIN(ICHAIN_VEC3Fdiv1000, scale, 100)
+ * *   , ICHAIN(ICHAIN_F, unk_0xF4, 3000)
+ * *   , ICHAIN(ICHAIN_F, unk_0xF8, 500)
+ * *   , ICHAIN(ICHAIN_F, unk_0xFC, 1000) & ICHAIN_LAST
+ * * };
  ***/
-#define ICHAIN(is_last, type, member, value)                \
-	ICHAIN_EX(is_last, type, member, value, z64_actor_t)
-
+#define ICHAIN(type, member, value)                     \
+	ICHAIN_EX(type, member, value, z64_actor_t)

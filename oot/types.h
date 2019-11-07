@@ -926,15 +926,6 @@ typedef struct z64_dynapoly {
 		uint8_t unk_2[3]; /* for alignment right now */
 } z64_dynapoly_t;
 
-typedef struct z64_dynapoly_init {
-    uint8_t unk_0[2];
-    uint16_t scale;
-    uint32_t unk_1;
-		uint32_t unk_2;
-		uint32_t unk_3;
-		uint32_t unk_4;
-} z64_dynapoly_init_t;
-
 enum dynapoly_move_flag {
   DPM_NONE = 0b00,
 	DPM_PLAYER = 0b01,
