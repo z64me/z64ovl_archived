@@ -5,7 +5,7 @@
  * for use in custom OoT/MM overlays
  ***/
 
-#include "../stdint.h" /* integer types */
+#include <stdint.h> /* integer types */
 #include <stddef.h> /* offsetof */
 
 /* TODO u/s may need to be swapped */
@@ -64,3 +64,7 @@ enum ichain_types
  ***/
 #define ICHAIN(type, member, value)                     \
 	ICHAIN_EX(type, member, value, z64_actor_t)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c9b2f6d9a7e46ab4282d75133b6ee9c7594bc8e
