@@ -2,6 +2,8 @@
 #define __Z64OVL_H__
 #endif /* Unterminated ifndef error? */
 
+#include "h/ichain.h"
+
 /****
  * z64ovl.h
  * Either `#define OOT_DEBUG 1` or `#define OOT_U_1_0 1` before `#include`ing.
