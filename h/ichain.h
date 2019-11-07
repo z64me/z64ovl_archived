@@ -34,20 +34,20 @@ enum ichain_types
  ***/
 #define ICHAIN_EX(is_last, type, member, value, structure)  \
 	(uint32_t) (                                             \
-		(((!is_last) & 1) << 31) |                            \
-		((type    & 7) << 28)    |                            \
-		((offsetof(structure, member) & 0x7FF) << 8) |        \
+		(((!is_last) & 1) << 31)    |                         \
+		((type      & 15) << 27)    |                         \
+		((offsetof(structure, member) & 0x7FF) << 16) |       \
 		(value & 0xFFFF)                                      \
 	)
 
 /****
  * ICHAIN macro generates a uint32_t of the following form:
- * * (v >> 0x1F) & 1  == Continue Parsing
- * * (v >> 0x1C) & 7  == Type
- * * (v >> 8) & 0x7FF == Offset from start of instance to write initial value
- * * v & 0xFFFF       == Value. 
+ * * (v >> 31) & 0x0001 == Continue Parsing
+ * * (v >> 27) & 0x000F == Type
+ * * (v >> 16) & 0x07FF == Offset from start of instance to write initial value
+ * *  v        & 0xFFFF == Value
  * arguments:
- * * is_last -- use 1 if it's the last in the list
+ * * is_last -- use 1 if it's the last in the list; 0 otherwise
  * * type ----- see `enum ichain_types`
  * * member --- name of member inside `z64_actor_t` structure
  * * value ---- use only int values that can be represented in 16 bits
