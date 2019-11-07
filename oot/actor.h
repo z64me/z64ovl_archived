@@ -73,7 +73,7 @@ struct z64_actor_s
   float             dist_from_link_xz;        /* 0x0090 */
   float             dist_from_link_y;         /* 0x0094 */
   /* struct collision_check common */
-  void             *damage_table;             /* 0x0098 */
+  z64_damagechart_init_t *damage_table;       /* 0x0098 */
   vec3f_t           vel_2;                    /* 0x009C */
   char              unk_0B_[0x0006];          /* 0x00A8 */
   uint8_t           mass;                     /* 0x00AE */

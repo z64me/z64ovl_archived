@@ -124,23 +124,31 @@ typedef struct z64_damagechart_init_s { /* Damage Chart Initialization Variables
     uint8_t arrow; /* Normal Arrow */
     uint8_t hammer_swing; /* Hammer Swing (no ground hit) */
     uint8_t hookshot; /* Hookshot and Longshot */
-    uint8_t sword0_slash; /* Kokiri Sword Slash */
-    uint8_t sword1_slash; /* Master Sword Slash */
-    uint8_t sword2_slash; /* Biggoron Sword and Giant's Knife Slash */
-    uint8_t arrow_fire; /* Fire Arrow */
-    uint8_t arrow_ice; /* Ice Arrow */
-    uint8_t arrow_light; /* Light Arrow */
-    uint8_t arrow_wind; /* (Beta) Wind Arrow */
-    uint8_t arrow_spirit; /* (Beta) Spirit Arrow */
-    uint8_t arrow_shadow; /* (Beta) Shadow Arrow */
-    uint8_t magic_fire; /* Din's Fire */
-    uint8_t magic_ice; /* Ice Magic (Beta?) */
-    uint8_t magic_light; /* Light Magic (Beta?) */
+    struct slash {
+      uint8_t sword0; /* Kokiri Sword Slash */
+      uint8_t sword1; /* Master Sword Slash */
+      uint8_t sword2; /* Biggoron Sword and Giant's Knife Slash */
+    };
+    struct arrow {
+      uint8_t fire; /* Fire Arrow */
+      uint8_t ice; /* Ice Arrow */
+      uint8_t light; /* Light Arrow */
+      uint8_t wind; /* (Beta) Wind Arrow */
+      uint8_t spirit; /* (Beta) Spirit Arrow */
+      uint8_t shadow; /* (Beta) Shadow Arrow */
+    };
+    struct magic {
+      uint8_t fire; /* Din's Fire */
+      uint8_t ice; /* Ice Magic (Beta?) */
+      uint8_t light; /* Light Magic (Beta?) */
+    };
     uint8_t unk_00; /* Undocumented / Unused */
     uint8_t unk_01; /* Undocumented / Unused */
-    uint8_t sword0_littlespin; /* Kokiri Sword Spin Attack (Half Charge) */
-    uint8_t sword2_littlespin; /* Biggoron Sword and Giant's Knife Spin Attack (Half Charge) */
-    uint8_t sword1_littlespin; /* Master Sword Spin Attack (Half Charge) */
+    struct littlespin {
+      uint8_t sword0; /* Kokiri Sword Spin Attack (Half Charge) */
+      uint8_t sword2; /* Biggoron Sword and Giant's Knife Spin Attack (Half Charge) */
+      uint8_t sword1; /* Master Sword Spin Attack (Half Charge) */
+    };
     union damage_chart_entry_19 {
         uint8_t sword0_jump; /* Kokiri Sword Jump Attack */
         uint8_t sword0_bigspin; /* Kokiri Sword Spin Attack (Full Charge) */
