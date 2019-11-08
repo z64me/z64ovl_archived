@@ -934,12 +934,25 @@ typedef struct z64_collider_tri_collection_s {
 } z64_collider_tri_collection_t;
 
 /* collision, dynapoly */
-typedef struct z64_dynapoly {
+/*typedef struct z64_dynapoly {
     uint8_t unk_0[16];
     uint32_t id;
     uint8_t unk_1[16];
 		uint8_t collided_flag;
 		uint8_t unk_2[3]; /* for alignment right now */
+/*} z64_dynapoly_t;*/
+
+typedef struct z64_dynapoly {
+  z64_actor_t *actor;     /* 0x0000 */
+  void        *unk_00;    /* 0x0004 */ /* Collision Mesh Pointer? */
+  uint32_t     unk_01;    /* 0x0008 */
+  uint32_t     poly_id;   /* 0x0010 */
+  vec3f_t      scale_0;   /* 0x0014 */
+  vec3s_t      rot_0;     /* 0x0020 */
+  vec3f_t      pos_0;     /* 0x0028 */
+  vec3f_t      scale_1;   /* 0x0014 */
+  vec3s_t      rot_1;     /* 0x0020 */
+  vec3f_t      pos_1;     /* 0x0028 */
 } z64_dynapoly_t;
 
 enum dynapoly_move_flag {
