@@ -881,35 +881,162 @@ typedef struct {
   /* 0x40 */
 } z64_skelanime_t;
 
-// Actor Collision
-typedef struct z64_capsule_init_s {
-  /* 0x00 */ uint8_t cso_0x00;
-  /* 0x01 */ uint8_t cso_0x01;
-  /* 0x02 */ uint8_t cso_0x01_02;
-  /* 0x03 */ uint8_t unk_0x12;
-  /* 0x04 */ uint8_t unk_0x12_2;
-  /* 0x05 */ uint8_t cso_0x05;
-  /* 0x06 */ PADDING(0x0002);
-  /* 0x08 */ uint8_t cso_0x08;
-  /* 0x09 */ PADDING(0x0003);
-  /* 0x0C */ uint32_t cso_0x0C;
-  /* 0x10 */ uint8_t damage_type;
-  /* 0x11 */ uint8_t damage_amount;
-  /* 0x12 */ PADDING(0x0002);
-  /* 0x14 */ uint32_t cso_0x14;
-  /* 0x18 */ uint8_t cso_0x18;
-  /* 0x19 */ uint8_t cso_0x19;
-  /* 0x1A */ PADDING(0x0002);
-  /* 0x1C */ uint8_t cso_0x1C;
-  /* 0x1D */ uint8_t cso_0x1D;
-  /* 0x1E */ uint8_t cso_0x1E;
-  /* 0x1F */ PADDING(0x0001);
-  /* 0x20 */ uint16_t radius;
-  /* 0x22 */ uint16_t height;
-  /* 0x24 */ uint16_t cso_0x24;
-  /* 0x26 */ vec3s_t pos;
-  /* 0x2C */
-} z64_capsule_init_t;
+typedef struct
+{
+  u8 unk00[0x4C];
+  z64_skelanime_t skelanime;
+} z64_skelanime_weighted_t;
+
+
+/* collision */
+typedef enum z64_bumper_effect_e { /* Elemental Damage Effects */
+    BUMP_FX_ELECTRIC=3,
+    BUMP_FX_FIRE=1,
+    BUMP_FX_ICE=2,
+    BUMP_FX_KNOCKBACK=0
+} z64_bumper_effect_t;
+
+typedef enum z64_collider_type_e { /* Collider Types */
+    COL_TYPE_CYLINDER=1,
+    COL_TYPE_CYLINDER_GROUP=0,
+    COL_TYPE_QUAD=3,
+    COL_TYPE_TRIANGLE_GROUP=2
+} z64_collider_type_t;
+
+typedef struct z64_collider_s { /* Collider Structure */
+    z64_actor_t * actor;
+    z64_actor_t * unk_actor_1;
+    z64_actor_t * unk_actor_2;
+    z64_actor_t * unk_actor_3;
+    uint8_t collider_flags; /* Compared to 0x11 */
+    uint8_t collide_flags; /* Compared to 0x10 */
+    uint8_t mask_a; /* Bitwise-and compared to 0x13 */
+    uint8_t mask_b; /* Bitwise-and compared to 0x12 */
+    uint8_t unk_0x14;
+    uint8_t type; /* Cylinder Collection, Cylinder, Triangle Collection, Quad */
+} z64_collider_t;
+
+typedef struct z64_collider_bump_s {
+    int32_t flags; /* Collision Exclusion Mask */
+    uint8_t effect; /* Damage Effect (Knockback, Fire, etc.) */
+    uint8_t unk_0x05;
+    int32_t unk_0x08;
+} z64_collider_bump_t;
+
+typedef struct z64_collider_touch_s {
+    int32_t flags; /* Toucher Attack Identifier Flags */
+    uint8_t unk_0x04;
+    uint8_t damage; /* Damage or Stun Timer */
+} z64_collider_touch_t;
+
+typedef struct z64_collider_body_s { /* Collider Body typedef structure */
+    z64_collider_touch_t toucher;
+    z64_collider_bump_t bumper;
+    uint8_t flags;
+    uint8_t toucher_flags;
+    uint8_t bumper_flags;
+    uint8_t flags_2;
+    int32_t unk_0x18;
+    z64_collider_t * collider;
+    int32_t unk_0x20;
+    void * colliding;
+} z64_collider_body_t;
+
+typedef struct z64_collider_cylinder_s {
+    z64_collider_body_t body;
+    vec3s_t unk_0x28;
+    int16_t unk_0x2E;
+    vec3s_t position;
+    int16_t unk_0x36;
+    int32_t unk_0x38;
+    uint8_t unk_0x3C;
+} z64_collider_cylinder_t;
+
+typedef struct z64_collider_tri_s {
+    z64_collider_body_t body;
+    vec3f_t point_a;
+    vec3f_t point_b;
+    vec3f_t point_c;
+    vec3f_t unit_normal;
+    float normal_dist;
+} z64_collider_tri_t;
+
+typedef struct z64_collider_cylinder_collection_s {
+    z64_collider_t base;
+    int32_t count;
+    z64_collider_cylinder_t * list;
+} z64_collider_cylinder_collection_t;
+
+typedef struct z64_collision_body_info_s { /* Initialization Variables (in overlay) for z64_collider */
+    uint8_t unk_0x14;
+    uint8_t collider_flags; /* Collider Flags */
+    uint8_t collide_flags; /* Collide Flags */
+    uint8_t mask_a; /* Bitwise-And with Mask B */
+    uint8_t mask_b; /* Bitwise-And with Mask A */
+    uint8_t type; /* Collider Type */
+    uint8_t unk_0x06_[2]; /* 0000 */
+    uint8_t body_flags;
+    uint8_t unk_0x09_[3]; /* 000000 */
+    int32_t toucher_mask; /* Attack Toucher Exclusion Mask */
+    uint8_t bumper_effect; /* Damage Effect (Knockback, Fire, etc.) */
+    uint8_t toucher_damage; /* Damage Amount or Stun Timer */
+    uint8_t unk_0x12_[2]; /* 0000 */
+    int32_t bumper_mask; /* Bumper Exclusion Mask */
+    uint8_t unk_0x18_[4]; /* 00000000 */
+    uint8_t toucher_flags; /* Attack Toucher Flags */
+    uint8_t bumper_flags; /* Bumper Flags */
+    uint8_t body_flags_2;
+    uint8_t unk_0x1F; /* 00 */
+} z64_collision_body_info_t;
+
+typedef struct z64_collider_cylinder_init_s { /* Initialization Variables (in overlay) for z64_collider_cylinder_main_t */
+    z64_collision_body_info_t body;
+    int16_t radius; /* Cylinder Radius */
+    int16_t height; /* Cylinder Height */
+    int16_t y_shift; /* Shift Cylinder on Y Axis */
+    vec3s_t position; /* {X, Y, Z} position of Cylinder */
+} z64_collider_cylinder_init_t;
+
+typedef struct z64_collider_cylinder_main_s { /* Previously (z64_capsule) */
+    z64_collider_t base;
+    z64_collider_body_t body;
+    int16_t radius;
+    int16_t height;
+    int16_t y_shift;
+    vec3s_t position;
+} z64_collider_cylinder_main_t;
+
+typedef struct z64_collider_quad_s {
+    z64_collider_t base;
+    z64_collider_body_t body;
+    vec3f_t point_a;
+    vec3f_t point_b;
+    vec3f_t point_c;
+    vec3f_t point_d;
+    vec3s_t bounding_max;
+    vec3s_t bounding_min;
+} z64_collider_quad_t;
+
+typedef struct z64_collider_tri_collection_s {
+    z64_collider_t base;
+    int32_t count;
+    z64_collider_tri_t * list;
+} z64_collider_tri_collection_t;
+
+/* collision, dynapoly */
+typedef struct z64_dynapoly {
+    uint8_t unk_0[16];
+    uint32_t id;
+    uint8_t unk_1[16];
+		uint8_t collided_flag;
+		uint8_t unk_2[3]; /* for alignment right now */
+} z64_dynapoly_t;
+
+enum dynapoly_move_flag {
+  DPM_NONE = 0b00,
+	DPM_PLAYER = 0b01,
+ 	DPM_ENEMY = 0b10
+};
 
 /* Damage chart notes
  * sword0 and sword1 refer to the Kokiri/Master Sword,
@@ -991,86 +1118,6 @@ typedef struct z64_damagechart_init {
 /* 1F */	unk4
 	;
 } z64_damagechart_init_t;
-
-typedef struct z64_capsule_s {
-/*00*/	z64_actor_t *actor; // actor instance; TODO Is this a z64_actor_t or a typeless instance?
-/*04*/	u32 unk_0x4;
-/*08*/	z64_actor_t *colliding_actor; // colliding actor instance?; TODO Is this a z64_actor_t or a typeless instance?
-/*0C*/	u32 unk_0xC;
-	// TODO Needs better naming. Also, why are these values out of order?
-
-/* 0010 :
- *** old notes say 'if & 0x0002, is detecting a Deku Nut hit?'. I can't verify this.
- *** However, our Kibako rewrite suggests that & 0x0002 is for detecting any attack from
- *** Link. Sword swing, Deku Stick swing, ammo, etc.
-*/
-/*10*/	u8 cso_0x01; //if & 0x0002, is detecting a Deku Nut hit?
-/*11*/  u8 cso_0x01_02;
-
-/*12*/	u8 unk_0x12; //bitwise-and compared to opposing collision's 0x13 and 0x12 bytes
-/*13*/  u8 unk_0x12_2;
-/*14*/	u8
-		cso_0x00,
-		cso_0x05, //used to reference function pointer, start location at 800EFB4C.
-				  //Basically, on left compare to right, left's value * 0x10 + right's value * 0x04 = pointer look up
-		unk_0x16, // curious that two unknowns somehow lie here; likely cso_0x06
-		unk_0x17 // and cso_0x07; types also unknown
-	;
-/*18*/	u32 cso_0x0C;
-/*1C*/	u8
-		cso_0x10,
-		cso_0x11, // damage dealt when touched
-		unk_0x1E, // unknown, likely cso_0x12
-		unk_0x1F // and cso_0x13; types also unknown
-	;
-/*20*/	u32 cso_0x14; // (FFCF FFFF)
-/*24*/	u8
-		cso_0x18,
-		cso_0x19,
-		unk_0x26, // unknown, likely also "cso" stuff
-		unk_0x27, // types also unknown
-		unk_0x28,
-		unk_0x29,
-		unk_0x2A,
-		unk_0x2B,
-		cso_0x08,
-		cso_0x1C,
-		cso_0x1D,
-		cso_0x1E
-	;
-/*30*/	u8 unk[12];
-/*3C*/  u32 unk_0x3C;
-/*40*/	s16
-		radius, // or diameter? CSO 0x20
-		height, // CSO 0x22
-		unk_0x44, // CSO 0x24
-		x, // coordinates
-		y,
-		z
-	;
-} z64_capsule_t; // length 0x4C bytes
-
-typedef struct z64_dynapoly {
-    u8 unk_0[16];
-    u32 id;
-    u8 unk_1[16];
-		u8 collided_flag;
-		u8 unk_2[3]; /* for alignment right now */
-} z64_dynapoly_t;
-
-typedef struct z64_dynapoly_init {
-    u8 unk_0[2];
-    u16 scale;
-    u32 unk_1;
-		u32 unk_2;
-		u32 unk_3;
-		u32 unk_4;
-} z64_dynapoly_init_t;
-
-enum dynapoly_move_flag {
-	DPM_PLAYER = 0b01,
- 	DPM_ENEMY = 0b10
-};
 
 #define DAMAGE_HEARTS(HA0) (int)((HA0) * 16)
 

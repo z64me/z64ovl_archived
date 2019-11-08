@@ -179,7 +179,7 @@ zh_get_player(z64_global_t *global)
 #if ZH_OOT
 	g += 0x1C44;
 #elif ZH_MM
-#	error zh_get_player needs MM equivalent!
+	g += 0x1CCC;
 #endif
 	uint32_t p32 = (g[0]<<24)|(g[1]<<16)|(g[2]<<8)|g[3];
 	return (z64_player_t*)p32;
