@@ -6081,10 +6081,13 @@ extern void external_func_800C3770(void);
 
 /**
  * Allocates graphics memory
+ * returns a pointer to allocated graphics memory, which you
+ * can cast to uint8_t or uint32_t, whatever is convenient
  * z_gp is 0x80212020
  * size is the size of the block to be allocated
  */
-extern void graph_alloc(z64_global_t *global, int32_t size);
+extern void *
+graph_alloc(z64_global_t *global, int32_t size);
 	#if OOT_DEBUG
 		asm("graph_alloc = 0x800C69CC");
 	#elif OOT_U_1_0
