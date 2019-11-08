@@ -829,10 +829,12 @@ typedef struct {
     char                unk_0x16829[0x02];      /* 0x16929 */
     uint8_t             message_state_3;        /* 0x1692B */
     char                unk_0x1692C[0x145C];    /* 0x1692C */
-    z64_obj_ctxt_t       obj_ctx;                /* 0x17D88 */
-    z64_room_ctxt_t      room_ctx;               /* 0x186E0 */
+    z64_obj_ctxt_t      obj_ctx;                /* 0x17D88 */
+    z64_room_ctxt_t     room_ctx;               /* 0x186E0 */
     uint8_t             room_cnt;               /* 0x18760 */
-    char                unk_0x18761[0x114];     /* 0x18761 */
+    char                unk_0x18761[0xDF];      /* 0x18761 */
+    uint32_t            gameplay_frames;        /* 0x18840 */
+    char                unk__LINE__[0x31];      /* 0x18844 */
     uint8_t             scene_load_flag;        /* 0x18875 */
     char                unk_0x18876[0x04];      /* 0x18876 */
     uint16_t            entrance_index;         /* 0x18878 */
