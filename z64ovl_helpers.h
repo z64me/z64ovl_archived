@@ -64,7 +64,7 @@ inline
 int
 zh_link_is_child(void)
 {
-	return AVAL(SAVE_CONTEXT, int, 0x0004);
+	return AVAL(Z64GL_SAVE_CONTEXT, int, 0x0004);
 }
 
 static
@@ -160,7 +160,7 @@ zh_get_save_context(z64_global_t *global)
 {
 	/* TODO returning type z64_saveContext_t would be nice */
 	/* TODO also, grab it from within global to avoid magic numbers */
-	return (void*)AADDR(SAVE_CONTEXT, 0);
+	return (void*)AADDR(Z64GL_SAVE_CONTEXT, 0);
 }
 
 /****
