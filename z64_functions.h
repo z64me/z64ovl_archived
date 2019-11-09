@@ -2076,8 +2076,11 @@ extern void external_func_80033260(void);
 extern void external_func_80033480(
 	z64_global_t *global,
 	vec3f_t *pos,
-	float unk_0, // TODO confirm float/int
-	int32_t unk_1, int32_t unk_2, int32_t unk_3, int32_t unk_4 // TODO confirm float/int
+	float unk_0,
+	int32_t unk_1,
+	int16_t unk_2,
+	int16_t unk_3,
+	int8_t unk_4
 	);
 	#if OOT_DEBUG
 		asm("external_func_80033480 = 0x80033480");
