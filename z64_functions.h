@@ -2071,16 +2071,16 @@ extern void external_func_80033260(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * TODO Document arguments more thoroughly. Current arguments are Nokaubure's findings.
  */
 extern void external_func_80033480(
 	z64_global_t *global,
 	vec3f_t *pos,
-	float unk_0,
-	int32_t unk_1,
-	int16_t unk_2,
-	int16_t unk_3,
-	int8_t unk_4
+	float radius,
+	int32_t particle_count,
+	int16_t scale_a,
+	int16_t scale_b,
+	int8_t type
 	);
 	#if OOT_DEBUG
 		asm("external_func_80033480 = 0x80033480");
