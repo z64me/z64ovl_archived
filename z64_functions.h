@@ -63,6 +63,18 @@ extern void osSendMesg(OSMesgQueue* queue, void* dest, int32_t flag);
 		asm("osSendMesg = 0x80001E20");
 	#endif
 
+/*extern int _Printf(
+	void *(*pfn)(void *, const char *, size_t),
+	void *arg,
+	const char *fmt,
+	__VA_ARGS__
+);
+	#if OOT_DEBUG
+		asm("_Printf = 0x800052E0");
+	#elif OOT_U_1_0
+		asm("_Printf = 0x800D1D00");
+	#endif*/
+
 /****
  * Create a queue. This function is not used inside any existing overlay.
  ***/

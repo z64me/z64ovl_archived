@@ -296,7 +296,33 @@ typedef struct {
 #define G_TX_ANCHOR_UD G_TX_ANCHOR_U + G_TX_ANCHOR_D
 #define G_TX_ANCHOR_RL G_TX_ANCHOR_R + G_TX_ANCHOR_L
 #define TIMG_A(TA0) G_TX_ANCHOR_##TA0
-#define to_rgba16(r, g, b, a) (((r >> 3) & 0x1F) << 11) | (((g >> 3) & 0x1F) << 6) | (((b >> 3) & 0x1F) << 1) | (((a >> 7) & 0x1) << 0)
+#define COLOR32(r, g, b, a) (uint32_t)((r << 24) | (g << 16) | (b << 8) | a)
+#define RED32(RGBA0) (uint8_t)(((RGBA0) >> 24) & 0xFF)
+#define GREEN32(RGBA0) (uint8_t)(((RGBA0) >> 16) & 0xFF)
+#define BLUE32(RGBA0) (uint8_t)(((RGBA0) >> 8) & 0xFF)
+#define ALPHA32(RGBA0) (uint8_t)(((RGBA0)) & 0xFF)
+
+/* TODO: Support Format Specifiers*/
+static
+void
+zh_draw_debug_text(
+z64_global_t *gl,              /* Global Context */
+z64_debug_text_t *text_struct, /* Reserved Text Struct */
+uint32_t rgba,                 /* RGBA 32-Bit Color */
+uint8_t x,                     /* X Coordinate */
+uint8_t y,                     /* Y Coordinate */
+const char *string             /* Text String */
+)
+{
+#define GFX_OVERLAY ZQDL(gl, overlay)
+z64_disp_buf_t *ovl = &GFX_OVERLAY;
+debug_init_text_struct(text_struct);
+debug_do_text_struct(text_struct, ovl->p);
+debug_set_text_rgba(text_struct, RED32(rgba), GREEN32(rgba), BLUE32(rgba), ALPHA32(rgba));
+debug_set_text_xy(text_struct, x, y);
+debug_set_text_string(text_struct, string);
+ovl->p = (Gfx *)debug_update_text_struct(text_struct);
+}
 
 static
 void
@@ -323,25 +349,6 @@ zh_draw_ui_sprite(
 		if (tile->origin_anchor & TIMG_A(L))
 			tile->width /= 2;
 	}
-	/*switch (tile->origin_anchor)
-	{
-		case 0b0000: /* Center
-			tile->x -= (tile->width/2); tile->y -= (tile->height/2);
-		break;
-		case 0b0001: /* Up
-			tile->height /= 2;
-		break;
-		case 0b0010: /* Right
-			tile->x -= tile->width;
-		break;
-		case 0b0100: /* Down
-			tile->y -= tile->height;
-		break;
-		case 0b1000: /* Left
-			tile->width /= 2;
-		break;
-	}*/
-
 
 	gSPDisplayList(buf->p++, 0x801269D0);
 	gDPSetCombineLERP(
@@ -363,9 +370,6 @@ zh_draw_ui_sprite(
 		, PRIMITIVE
 		, 0
 	);
-	//buf->p->hi = 0xFC309661;
-	//buf->p->lo = 0x552EFF7F;
-	//buf->p++;
 	gDPSetPrimColor(buf->p++, 0, 0, 255, 255, 255, 255);
 	gDPSetEnvColor(buf->p++, 0, 0, 0, 255);
 	//gDPPipeSync(buf->p++);
