@@ -756,14 +756,14 @@ typedef struct
 } z64_global_t;
 
 typedef struct {
-	/* 0x00 */ uint32_t printer; /* 0x800FBB60 */
+	/* 0x00 */ void *printer; /* 0x800FBB60 */
 	/* 0x04 */ uint32_t dlist_end;
 	/* 0x08 */ uint16_t x;
 	/* 0x0A */ uint16_t y;
 	/* 0x0C */ uint16_t unk1;
-	/* 0x0E */ uint8_t unk2;
-	/* 0x0F */ uint8_t unk3;
-	/* 0x10 */ uint32_t unk4;
+	/* 0x0E */ uint8_t unk2; /* Set to 0 */
+	/* 0x0F */ uint8_t unk3; /* Stuff happens with this. */
+	/* 0x10 */ uint32_t string_rgba;
 } z64_debug_text_t;
 
 /* skelanime */
