@@ -79,6 +79,21 @@ zh_seg2ram(uint32_t addr)
 }
 
 /****
+ * _Printf printer. Write text to a RAM address.
+ ***/
+ static
+ inline
+ void
+ *zh_ram_printer(void *a0, const char *a1, size_t a2)
+ {
+ 	if (a2 == 0) return 0;
+ 	char *dst = a0;
+ 	while (a2--)
+ 	*(dst++) = *(a1++);
+ 	return dst;
+ }
+
+/****
  * test for Link's age
  ***/
 static
@@ -324,7 +339,6 @@ typedef struct {
 #define BLUE32(RGBA0) (uint8_t)(((RGBA0) >> 8) & 0xFF)
 #define ALPHA32(RGBA0) (uint8_t)(((RGBA0)) & 0xFF)
 
-/* TODO: Support Format Specifiers*/
 static
 void
 zh_draw_debug_text(
