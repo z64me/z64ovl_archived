@@ -26,6 +26,28 @@
 	}
 #endif
 
+/* external, self-contained helpers */
+#include "zh/sprintf.h"
+/*
+void
+zh_sprintf(char *dst, char *fmt, struct va_arr *va_arr)
+
+example:
+	char buf[128];
+	int x = 0xABC;
+	zh_sprintf(
+		buf
+		, "%s-%c, under the sea... 0x%X, %d, %f"
+		, VA_ARR(
+			"tunafish"
+			, VA_ARR_c('Z')
+			, &x
+			, VA_ARR_d(256)
+			, VA_ARR_f(1024.56789f)
+		)
+	);
+*/
+
 #if OOT_DEBUG || OOT_U_1_0
 #	define ZH_OOT 1
 #elif MM_U_1_0
