@@ -3146,10 +3146,13 @@ extern int16_t external_func_8005A9F4(uint32_t gl790);
 	#endif
 
 /**
- * Camera earthquake?
- * TODO These notes need converted into a C function prototype
+ * Shakes the camera with specified strength and duration
+ * a0 - global context + 0x1E0
+ * a1 - u16 unknown, set to 2
+ * a2 - u16 earthquake strength
+ * a3 - u16 earthquake duration
  */
-extern void external_func_8005AA1C(void);
+extern void camera_earthquake(void* global1E0, uint16_t unk, uint16_t strength, uint16_t duration);
 	#if OOT_DEBUG
 		asm("external_func_8005AA1C = 0x8005AA1C");
 	#elif OOT_U_1_0
@@ -3622,13 +3625,12 @@ extern void external_func_800628A4(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
  */
-extern void external_func_80062CD4(void);
+extern void effect_spawn_metalspark(z64_global_t* global, vec3f_t position);
 	#if OOT_DEBUG
-		asm("external_func_80062CD4 = 0x80062CD4");
+		asm("effect_spawn_metalspark = 0x80062CD4");
 	#elif OOT_U_1_0
-		asm("external_func_80062CD4 = 0x80051124");
+		asm("effect_spawn_metalspark = 0x80051124");
 	#endif
 
 /**
