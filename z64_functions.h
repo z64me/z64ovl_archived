@@ -4030,7 +4030,7 @@ extern void memory_set(void *dst, const uint32_t len, const uint8_t value);
  */
 extern float math_coss(int16_t angle);
 	#if OOT_DEBUG
-		asm("math_coss = 0x80077834");
+		asm("math_coss = 0x80077834"); /* Alternatively 0x80104780 */
 	#elif OOT_U_1_0
 		asm("math_coss = 0x80063684");
 	#elif MM_U_1_0
@@ -4044,7 +4044,7 @@ extern float math_coss(int16_t angle);
  */
 extern float math_sins(int16_t angle);
 	#if OOT_DEBUG
-		asm("math_sins = 0x80077870");
+		asm("math_sins = 0x80077870"); /* Alternatively 0x80100450 */
 	#elif OOT_U_1_0
 		asm("math_sins = 0x800636C4");
 	#elif MM_U_1_0
@@ -7293,25 +7293,33 @@ extern int32_t srand(uint32_t seed);
 		asm("srand = 0x800CDCC0");
 
 /**
- * TODO math, does something to a floating point32_t value
- * padding between this and prev func
- * TODO These notes need converted into a C function prototype
+ * Returns sine of a floating point value.
  */
-extern float external_func_80100290(float n);
+extern float math_sinf(float angle);
 	#if OOT_DEBUG
-		asm("external_func_80100290 = 0x80100290");
+		asm("math_sinf = 0x80100290");
 	#elif OOT_U_1_0
-		asm("external_func_80100290 = 0x800CF470");
+		asm("math_sinf = 0x800CF470");
 	#endif
 
 /**
- * TODO math, does something to a floating point32_t value
+ * Returns the square root of a floating point number.
  */
-extern float external_func_80104610(float n);
+extern float math_sqrtf(float value);
 	#if OOT_DEBUG
-		asm("external_func_80104610 = 0x80104610");
+		asm("math_sqrtf = 0x801031E0");
 	#elif OOT_U_1_0
-		asm("external_func_80104610 = 0x800D2CD0");
+		// TODO Needs 1.0 equivalent!
+	#endif
+
+/**
+ * Returns cosine of a floating point value.
+ */
+extern float math_cosf(float angle);
+	#if OOT_DEBUG
+		asm("math_cosf = 0x80104610");
+	#elif OOT_U_1_0
+		asm("math_cosf = 0x800D2CD0");
 	#endif
 
 /**
@@ -7320,6 +7328,26 @@ extern float external_func_80104610(float n);
 extern void external_func_80104780(void);
 	#if OOT_DEBUG
 		asm("external_func_80104780 = 0x80104780");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#endif
+
+/**
+ * Returns the absolute value of a floating point number.
+ */
+extern float math_fabsf(float value);
+	#if OOT_DEBUG
+		asm("math_fabsf = 0x801067E0");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#endif
+
+/**
+ * Returns the modulous of two floating point numbers.
+ */
+extern float math_fmodf(float a, float b)
+	#if OOT_DEBUG
+		asm("math_fmodf = 0x801067F0");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
@@ -7423,6 +7451,7 @@ extern uint32_t player_talk_state(z64_global_t *gl_20D8);
 		asm("player_talk_state = 0x800DD464");
 	#endif
 
+// TODO: Reorganize these, also confirm if correct.
 extern void z64_bzero(void *dest, int32_t length);
 asm("bzero = 0x80004450");
 extern int32_t z64_bcmp(const void *s1, const void *s2, int32_t length);
@@ -7432,38 +7461,11 @@ asm("bcpy = 0x80006F10");
 
 // /ultra/user/src/pr/libsrc/libultra/gu
 
-extern float sinf(float angle);
-asm("sinf = 0x80100290");
-extern float sins(unsigned short angle);
-asm("sins = 0x80100450");
 extern void guPerspectiveF(float mf[4][4], uint16_t *perspNorm, float fovy, float aspect, float near, float far, float scale);
 asm("guPerspectiveF = 0x801010D0");
 extern void guPerspective(Mtx *m, uint16_t *perspNorm, float fovy, float aspect, float near, float far, float scale);
 asm("guPerspective = 0x80101300");
-/*
-* 80101B40 guMtxIdentF?
-* 80101B90
-* 80101E34
-*/
-extern float sqrtf (float value);
-asm("sqrtf = 0x801031E0");
-/*
-* 801032B0
-* 80103A70
-* 80103BB0
-* 80103D58
-* 80103E20
-* 80103FA4
-* 80104450
-* 801045A4
-*/
-extern float cosf(float angle);
-asm("cosf = 0x80104610"); // OOTDBG
-extern float coss(unsigned short angle);
-asm("coss = 0x80104780"); // OOTDBG
 extern void guMtxF2L(float mf[4][4], Mtx *m);
 asm("guMtxF2L = 0x801064E0"); // OOTDBG
-extern float absf(float value);
-asm("absf = 0x801067E0"); // OOTDBG
 
 #endif // __Z64OVL_H__
