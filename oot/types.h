@@ -943,16 +943,16 @@ typedef struct z64_collider_tri_collection_s {
 /*} z64_dynapoly_t;*/
 
 typedef struct z64_dynapoly {
-    uint32_t    polyID;                /* 0x013C  counter, starts from 0, each dynapoly actor gets a new id*/
-    char        unk_01[0x000C];        /* 0x0140 */
-    uint32_t    dynapoly_pointer;      /* 0x014C  (optional)*/
-    float       unk_02;                /* 0x0150 */
-    float       unk_03;                /* 0x0154 */
-    uint16_t    unk_04;                /* 0x0158 */
-    uint16_t    unk_05;                /* 0x015A */
-    uint32_t    movement;              /* 0x015C 00 = ignores actors on top, 01 = updates actor positions on top */
-    uint8_t     flags;                 /* 0x0160 */
-    char        padding[0x0003]; 
+    uint32_t    polyID;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/
+    char        unk_01[0x000C];        /* 0x0004 */
+    uint32_t    dynapoly_pointer;      /* 0x0010  (optional)*/
+    float       unk_02;                /* 0x0014 */
+    float       unk_03;                /* 0x0018 */
+    uint16_t    unk_04;                /* 0x001A */
+    uint16_t    unk_05;                /* 0x001C */
+    uint32_t    movement;              /* 0x0020 00 = ignores actors on top, 01 = updates actor positions on top */
+    uint8_t     flags;                 /* 0x0024 */
+    char        padding[0x0003];       
 } z64_dynapoly_t;
 
 enum dynapoly_move_flag {
