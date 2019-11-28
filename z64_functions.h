@@ -6239,9 +6239,9 @@ extern void external_func_800CB594(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Return a^2 + b^2 + c^2" Args="A0 = pointer to float array | F0 = a^2 + b^2 + c^2"
  */
-extern void external_func_800CB600(void);
+extern float external_func_800CB600(vec3f_t *in);
 	#if OOT_DEBUG
 		asm("external_func_800CB600 = 0x800CB600");
 	#elif OOT_U_1_0
@@ -6259,9 +6259,9 @@ extern void external_func_800CB628(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Compute Distance Squared" Args="A0 = pointer to float array (xyz) | A1 = pointer to float array | F0 = define A2 = (A0 - A1), return (A2.a)^2 + (A2.b)^2 + (A2.c)^2"
  */
-extern void external_func_800CB650(void);
+extern void external_func_800CB650(vec3f_t *in, vec3f_t *in_2);
 	#if OOT_DEBUG
 		asm("external_func_800CB650 = 0x800CB650");
 	#elif OOT_U_1_0
@@ -6896,9 +6896,9 @@ extern void external_func_800F5504(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * no args
  */
-extern void external_func_800F5718(void);
+extern void play_windmill_music(void);
 	#if OOT_DEBUG
 		asm("external_func_800F5718 = 0x800F5718");
 	#elif OOT_U_1_0
@@ -6936,11 +6936,10 @@ extern void external_func_800F5A58(void);
 	#endif
 
 /**
- * Change background music until enemies are defeated?
- * TODO These notes need converted into a C function prototype
+ * Change background music until enemies are defeated
  * a0 - music ID
  */
-extern void external_func_800F5ACC(void);
+extern void play_midboss_music(uint32_t musicID);
 	#if OOT_DEBUG
 		asm("external_func_800F5ACC = 0x800F5ACC");
 	#elif OOT_U_1_0
