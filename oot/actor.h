@@ -118,7 +118,7 @@ struct z64_actor_s
   void             *main_proc;                /* 0x0130 */
   void             *draw_proc;                /* 0x0134 */
   void             *code_entry;               /* 0x0138 */
-                                              /* 0x013C */
+  unsigned char    unk0x13C[0x10];            /* 0x013C */
 };
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);
