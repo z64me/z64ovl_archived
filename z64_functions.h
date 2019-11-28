@@ -7345,7 +7345,7 @@ extern float math_fabsf(float value);
 /**
  * Returns the modulous of two floating point numbers.
  */
-extern float math_fmodf(float a, float b)
+extern float math_fmodf(float a, float b);
 	#if OOT_DEBUG
 		asm("math_fmodf = 0x801067F0");
 	#elif OOT_U_1_0
