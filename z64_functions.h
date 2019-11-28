@@ -6261,7 +6261,7 @@ extern void external_func_800CB628(void);
 /**
  * Compute Distance Squared" Args="A0 = pointer to float array (xyz) | A1 = pointer to float array | F0 = define A2 = (A0 - A1), return (A2.a)^2 + (A2.b)^2 + (A2.c)^2"
  */
-extern void external_func_800CB650(vec3f_t *in, vec3f_t *in_2);
+extern float external_func_800CB650(vec3f_t *in, vec3f_t *in_2);
 	#if OOT_DEBUG
 		asm("external_func_800CB650 = 0x800CB650");
 	#elif OOT_U_1_0
