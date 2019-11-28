@@ -943,7 +943,7 @@ typedef struct z64_collider_tri_collection_s {
 /*} z64_dynapoly_t;*/
 
 typedef struct z64_dynapoly {
-    uint32_t    polyID;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/*/
+    uint32_t    polyID;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/
     float       unk_02;                /* 0x0004 */
     float       unk_03;                /* 0x0008 */
     uint16_t    unk_04;                /* 0x000A */
