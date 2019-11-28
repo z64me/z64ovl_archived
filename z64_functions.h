@@ -6733,9 +6733,9 @@ extern void external_func_800F4254(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * TODO a0 = actor instance + E4 | a1 = sfx id | a2 = unknown float (radius?)
  */
-extern void external_func_800F436C(void);
+extern void sound_play_loop(uint32_t unk, uint16_t sfx, float radius);
 	#if OOT_DEBUG
 		asm("external_func_800F436C = 0x800F436C");
 	#elif OOT_U_1_0
