@@ -1253,10 +1253,9 @@ extern void actor_update_vel(z64_actor_t *actor);
 
 /**
  * Function to move in direction (0x32) at set velocity (0x68)
- * TODO These notes need converted into a C function prototype
  * a0 = pointer to start address of actor instance
  */
-extern void external_func_8002D8E0(z64_actor_t *actor);
+extern void actor_move_towards_direction(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_8002D8E0 = 0x8002D8E0");
 	#elif OOT_U_1_0
@@ -1540,7 +1539,6 @@ extern void external_func_8002E1A8(void);
 /**
  * possibly primary actor collision call
  * required in order for shadow initialized in actor_init_shadow to work
- * TODO Test this stuff more thoroughly in-game
  * TODO arguments below/radius may actually be swapped, test these more carefully
  * below = space below actor coordinates to test if ground is below actor
  * radius = radius for moving actor out of wall in case it is placed inside wall
@@ -1549,7 +1547,7 @@ extern void external_func_8002E1A8(void);
  * old notes for reference:
  * A0 = Global Context | A1 = Actor Instance | A2 = float wallCheckHeight? (26f for Link) | A3 = float wallPushback? (18f/14f for Adult/Child Link) | SP+0x10 float ? (56f/40f for Adult/Child Link) | SP+0x14 int32_t (type?)
  */
-extern void external_func_8002E4B4(z64_global_t *global, z64_actor_t *actor, f32 below, f32 radius, f32 above, uint32_t flags);
+extern void actor_collision_routine(z64_global_t *global, z64_actor_t *actor, f32 below, f32 radius, f32 above, uint32_t flags);
 	#if OOT_DEBUG
 		asm("external_func_8002E4B4 = 0x8002E4B4");
 	#elif OOT_U_1_0
