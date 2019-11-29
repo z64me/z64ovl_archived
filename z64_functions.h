@@ -3898,9 +3898,9 @@ extern void external_func_8006EF10(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * A0 = s16 end frame | A1 = s16 start frame? | A2 = s16 current frame? | F2 = Value between 0.0 (current frame smaller than start frame) and 1.0 (current frame >= end frame)
  */
-extern void external_func_8006F93C(void);
+extern float math_linear_tween(uint16_t endframe, uint16_t startframe, uint16_t currentframe);
 	#if OOT_DEBUG
 		asm("external_func_8006F93C = 0x8006F93C");
 	#elif OOT_U_1_0
@@ -6241,7 +6241,7 @@ extern void external_func_800CB594(void);
 /**
  * Return a^2 + b^2 + c^2" Args="A0 = pointer to float array | F0 = a^2 + b^2 + c^2"
  */
-extern float external_func_800CB600(vec3f_t *in);
+extern float math_vec3f_sum_squares(vec3f_t *in);
 	#if OOT_DEBUG
 		asm("external_func_800CB600 = 0x800CB600");
 	#elif OOT_U_1_0
@@ -6261,7 +6261,7 @@ extern void external_func_800CB628(void);
 /**
  * Compute Distance Squared" Args="A0 = pointer to float array (xyz) | A1 = pointer to float array | F0 = define A2 = (A0 - A1), return (A2.a)^2 + (A2.b)^2 + (A2.c)^2"
  */
-extern float external_func_800CB650(vec3f_t *in, vec3f_t *in_2);
+extern float math_distance_squared(vec3f_t *in, vec3f_t *in_2);
 	#if OOT_DEBUG
 		asm("external_func_800CB650 = 0x800CB650");
 	#elif OOT_U_1_0
