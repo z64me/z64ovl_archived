@@ -3007,7 +3007,7 @@ extern void external_func_800433A4(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * flags: | 1 updates position of actors on top, | 2 updates rotation of actors on top
  */
 extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag flags);
 	#if OOT_DEBUG
@@ -3019,9 +3019,9 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Sets dynapoly flag 1
  */
-extern void external_func_800434A8(void);
+extern void dynapoly_set_flag_1(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_800434A8 = 0x800434A8");
 	#elif OOT_U_1_0
@@ -3029,9 +3029,9 @@ extern void external_func_800434A8(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Sets dynapoly flag 8
  */
-extern void external_func_80043538(void);
+extern void dynapoly_set_flag_8(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_80043538 = 0x80043538");
 	#elif OOT_U_1_0
@@ -3039,9 +3039,9 @@ extern void external_func_80043538(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Returns 0 or 1 depending on dynapoly flag & 1
  */
-extern void external_func_80043548(void);
+extern uint16_t dynapoly_check_flag_1(void);
 	#if OOT_DEBUG
 		asm("external_func_80043548 = 0x80043548");
 	#elif OOT_U_1_0
@@ -3049,15 +3049,35 @@ extern void external_func_80043548(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Returns 0 or 1 depending on dynapoly flag & 2
  */
-extern int32_t external_func_8004356C(z64_actor_t *actor);
+extern uint16_t dynapoly_check_flag_2(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_8004356C = 0x8004356C");
 	#elif OOT_U_1_0
 		asm("external_func_8004356C = 0x80035364");
 	#elif MM_U_1_0
 		asm("external_func_8004356C = 0x800CAF70");
+	#endif
+
+/**
+ * Returns 0 or 1 depending on dynapoly flag & 4
+ */
+extern uint16_t dynapoly_check_flag_4(z64_actor_t *actor);
+	#if OOT_DEBUG
+		asm("external_func_8004356C = 0x80043590");
+	#elif OOT_U_1_0
+		asm("external_func_8004356C = 0x80035388");
+	#endif
+
+/**
+ * Returns 0 or 1 depending on dynapoly flag & 8
+ */
+extern uint16_t dynapoly_check_flag_8(z64_actor_t *actor);
+	#if OOT_DEBUG
+		asm("external_func_8004356C = 0x800435B4");
+	#elif OOT_U_1_0
+		asm("external_func_8004356C = 0x800353AC");
 	#endif
 
 /**
