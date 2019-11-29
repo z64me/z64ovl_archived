@@ -97,8 +97,8 @@ struct z64_actor_s
   z64_xyzf_t        unk_0xE4;                 /* 0x00E4 */
   float             unk_0xF0;                 /* 0x00F0 */
   float             draw_distance;            /* 0x00F4 */ /* based on Link's proximity */
-  float             camera_clip_near;         /* 0x00F8 */ /* Potentially Incorrect */
-  float             camera_clip_far;          /* 0x00FC */ /* Potentially Incorrect */
+  float             camera_clip_near;         /* 0x00F8 */ /* TODO confirm this is correct */
+  float             camera_clip_far;          /* 0x00FC */ /* TODO confirm this is correct */
   z64_xyzf_t        pos_4;                    /* 0x0100 */
   uint8_t           unk_0x10C;                /* 0x010C */ /* used for trade sequence... */
   uint8_t           unk_0x10D;                /* 0x010D */
@@ -118,8 +118,10 @@ struct z64_actor_s
   void             *main_proc;                /* 0x0130 */
   void             *draw_proc;                /* 0x0134 */
   void             *code_entry;               /* 0x0138 */
-  unsigned char    unk0x13C[0x10];            /* 0x013C */
-};
+#ifdef OOT_DEBUG
+  unsigned char    unk0x13C[0x10];            /* 0x013C */ /* debug rom only */
+#endif
+};                                            /* 0x014C */ /* (length) */
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);
 
