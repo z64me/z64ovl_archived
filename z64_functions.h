@@ -1189,7 +1189,7 @@ extern void actor_kill(z64_actor_t *actor);
 	#endif
 
 /**
- * Sets the actor height (used by navi, target arrows, camera face when an npc is talking, etc)
+ * Refreshes z-target position, use on each frame if the actor moves
  * actor - actor instance
  * height - float Y position from actor origin
  */
@@ -4281,9 +4281,9 @@ extern void actor_init_ichain(z64_actor_t *actor, uint32_t const *ichain);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * unknown float func" Args="a0 - actor instance + xxxx (offset of the float that will change) | a1 - float | a2 - float  | a3 - float | 0x0010($sp) float"
  */
-extern void external_func_80078310(void);
+extern void external_func_80078310(float *output, float unk1, float unk2, float unk3, float unk4);
 	#if OOT_DEBUG
 		asm("external_func_80078310 = 0x80078310");
 	#elif OOT_U_1_0
