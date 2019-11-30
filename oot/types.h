@@ -933,23 +933,15 @@ typedef struct z64_collider_tri_collection_s {
     z64_collider_tri_t * list;
 } z64_collider_tri_collection_t;
 
-/* collision, dynapoly */
-/*typedef struct z64_dynapoly {
-    uint8_t unk_0[16];
-    uint32_t id;
-    uint8_t unk_1[16];
-		uint8_t collided_flag;
-		uint8_t unk_2[3]; /* for alignment right now */
-/*} z64_dynapoly_t;*/
 
 typedef struct z64_dynapoly {
     uint32_t    polyID;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/
-    float       unk_02;                /* 0x0004 */
+    float       push_movement;                /* 0x0004 */
     float       unk_03;                /* 0x0008 */
-    uint16_t    unk_04;                /* 0x000A */
+    uint16_t    push_direction;                /* 0x000A */
     uint16_t    unk_05;                /* 0x000C */
     uint32_t    movement;              /* 0x0010 &>>01 updates position of actors on top, &>>02 updates rotation of actors on top */
-    uint8_t     flags;                 /* 0x0014 */
+    uint8_t     flags;                 /* 0x0014 &>>01 actor on top &>>02 Link on top &>>04 Link above it or on top &>>08 heavy actor on top */
     char        padding[0x0003];       
 } z64_dynapoly_t;
 
