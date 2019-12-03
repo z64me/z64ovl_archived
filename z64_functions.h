@@ -3198,11 +3198,10 @@ extern void external_func_8005AC60(void);
 	#endif
 
 /**
- * Cutscene Camera?
- * TODO These notes need converted into a C function prototype
+ * Acts like a relative cammera command in scene cutscenes
  * A0 = Cutscene Camera struct ptr | A1 = Focus Point32_t Tween List | A2 = Camera Position Tween List | A3 = Actor Instance (tracked actor)
  */
-extern void external_func_8005AC6C(void);
+extern void cutscene_set_relative_camera_command(void* global1E0, void*focus_tween_list, void*focus_point_list,z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_8005AC6C = 0x8005AC6C");
 	#elif OOT_U_1_0
