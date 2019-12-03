@@ -4508,10 +4508,9 @@ extern void external_func_800803F0(void);
 
 /**
  * Enters cutscene mode and focuses the actor for a short time
- * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance
  */
-extern void external_func_80080480(void);
+extern void actor_one_point_cutscene(z64_global_t *, z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("external_func_80080480 = 0x80080480");
 	#elif OOT_U_1_0
@@ -4520,10 +4519,9 @@ extern void external_func_80080480(void);
 
 /**
  * Enters cutscene mode and focuses the actor for a short time, playing a sound?
- * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance | a2 - sound ID?
  */
-extern void external_func_800806BC(void);
+extern void actor_one_point_cutscene_sound(z64_global_t *, z64_actor_t *actor, uint16_t sound);
 	#if OOT_DEBUG
 		asm("external_func_800806BC = 0x800806BC");
 	#elif OOT_U_1_0
