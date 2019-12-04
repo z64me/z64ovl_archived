@@ -1549,11 +1549,11 @@ extern void external_func_8002E1A8(void);
  */
 extern void actor_collision_routine(z64_global_t *global, z64_actor_t *actor, f32 below, f32 radius, f32 above, uint32_t flags);
 	#if OOT_DEBUG
-		asm("external_func_8002E4B4 = 0x8002E4B4");
+		asm("actor_collision_routine = 0x8002E4B4");
 	#elif OOT_U_1_0
-		asm("external_func_8002E4B4 = 0x80021E6C");
+		asm("actor_collision_routine = 0x80021E6C");
 	#elif MM_U_1_0
-		asm("external_func_8002E4B4 = 0x800B78B8");
+		asm("actor_collision_routine = 0x800B78B8");
 	#endif
 
 /**
