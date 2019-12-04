@@ -1257,11 +1257,11 @@ extern void actor_update_vel(z64_actor_t *actor);
  */
 extern void actor_move_towards_direction(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_8002D8E0 = 0x8002D8E0");
+		asm("actor_move_towards_direction  = 0x8002D8E0");
 	#elif OOT_U_1_0
-		asm("external_func_8002D8E0 = 0x8002121C");
+		asm("actor_move_towards_direction  = 0x8002121C");
 	#elif MM_U_1_0
-		asm("external_func_8002D8E0 = 0x800B6A88");
+		asm("actor_move_towards_direction  = 0x800B6A88");
 	#endif
 
 /**
