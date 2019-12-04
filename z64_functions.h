@@ -3023,9 +3023,9 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
  */
 extern void dynapoly_set_flag_1(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_800434A8 = 0x800434A8");
+		asm("dynapoly_set_flag_1 = 0x800434A8");
 	#elif OOT_U_1_0
-		asm("external_func_800434A8 = 0x80035290");
+		asm("dynapoly_set_flag_1 = 0x80035290");
 	#endif
 
 /**
@@ -3033,9 +3033,9 @@ extern void dynapoly_set_flag_1(z64_actor_t *actor);
  */
 extern void dynapoly_set_flag_8(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_80043538 = 0x80043538");
+		asm("dynapoly_set_flag_8 = 0x80043538");
 	#elif OOT_U_1_0
-		asm("external_func_80043538 = 0x8003532C");
+		asm("dynapoly_set_flag_8 = 0x8003532C");
 	#endif
 
 /**
@@ -3043,9 +3043,9 @@ extern void dynapoly_set_flag_8(z64_actor_t *actor);
  */
 extern uint16_t dynapoly_check_flag_1(void);
 	#if OOT_DEBUG
-		asm("external_func_80043548 = 0x80043548");
+		asm("dynapoly_check_flag_1 = 0x80043548");
 	#elif OOT_U_1_0
-		asm("external_func_80043548 = 0x80035340");
+		asm("dynapoly_check_flag_1 = 0x80035340");
 	#endif
 
 /**
@@ -3053,11 +3053,11 @@ extern uint16_t dynapoly_check_flag_1(void);
  */
 extern uint16_t dynapoly_check_flag_2(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_8004356C = 0x8004356C");
+		asm("dynapoly_check_flag_2 = 0x8004356C");
 	#elif OOT_U_1_0
-		asm("external_func_8004356C = 0x80035364");
+		asm("dynapoly_check_flag_2 = 0x80035364");
 	#elif MM_U_1_0
-		asm("external_func_8004356C = 0x800CAF70");
+		asm("dynapoly_check_flag_2 = 0x800CAF70");
 	#endif
 
 /**
@@ -3065,9 +3065,9 @@ extern uint16_t dynapoly_check_flag_2(z64_actor_t *actor);
  */
 extern uint16_t dynapoly_check_flag_4(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_8004356C = 0x80043590");
+		asm("dynapoly_check_flag_4 = 0x80043590");
 	#elif OOT_U_1_0
-		asm("external_func_8004356C = 0x80035388");
+		asm("dynapoly_check_flag_4 = 0x80035388");
 	#endif
 
 /**
@@ -3075,9 +3075,9 @@ extern uint16_t dynapoly_check_flag_4(z64_actor_t *actor);
  */
 extern uint16_t dynapoly_check_flag_8(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_8004356C = 0x800435B4");
+		asm("dynapoly_check_flag_8 = 0x800435B4");
 	#elif OOT_U_1_0
-		asm("external_func_8004356C = 0x800353AC");
+		asm("dynapoly_check_flag_8 = 0x800353AC");
 	#endif
 
 /**
@@ -3921,9 +3921,9 @@ extern void external_func_8006EF10(void);
  */
 extern float math_linear_tween(uint16_t endframe, uint16_t startframe, uint16_t currentframe);
 	#if OOT_DEBUG
-		asm("external_func_8006F93C = 0x8006F93C");
+		asm("math_linear_tween = 0x8006F93C");
 	#elif OOT_U_1_0
-		asm("external_func_8006F93C = 0x8005C690");
+		asm("math_linear_tween = 0x8005C690");
 	#endif
 
 /**
@@ -4511,9 +4511,9 @@ extern void external_func_800803F0(void);
  */
 extern void actor_one_point_cutscene(z64_global_t *, z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_80080480 = 0x80080480");
+		asm("actor_one_point_cutscene = 0x80080480");
 	#elif OOT_U_1_0
-		asm("external_func_80080480 = 0x8006BA10");
+		asm("actor_one_point_cutscene = 0x8006BA10");
 	#endif
 
 /**
@@ -4522,9 +4522,9 @@ extern void actor_one_point_cutscene(z64_global_t *, z64_actor_t *actor);
  */
 extern void actor_one_point_cutscene_sound(z64_global_t *, z64_actor_t *actor, uint16_t sound);
 	#if OOT_DEBUG
-		asm("external_func_800806BC = 0x800806BC");
+		asm("actor_one_point_cutscene_sound = 0x800806BC");
 	#elif OOT_U_1_0
-		asm("external_func_800806BC = 0x8006BB7C");
+		asm("actor_one_point_cutscene_sound = 0x8006BB7C");
 	#endif
 
 /**
@@ -6260,9 +6260,9 @@ extern void external_func_800CB594(void);
  */
 extern float math_vec3f_sum_squares(vec3f_t *in);
 	#if OOT_DEBUG
-		asm("external_func_800CB600 = 0x800CB600");
+		asm("math_vec3f_sum_squares = 0x800CB600");
 	#elif OOT_U_1_0
-		asm("external_func_800CB600 = 0x800A54E4");
+		asm("math_vec3f_sum_squares = 0x800A54E4");
 	#endif
 
 /**
@@ -6280,9 +6280,9 @@ extern void external_func_800CB628(void);
  */
 extern float math_distance_squared(vec3f_t *in, vec3f_t *in_2);
 	#if OOT_DEBUG
-		asm("external_func_800CB650 = 0x800CB650");
+		asm("math_distance_squared = 0x800CB650");
 	#elif OOT_U_1_0
-		asm("external_func_800CB650 = 0x800A5538");
+		asm("math_distance_squared = 0x800A5538");
 	#endif
 
 /**
