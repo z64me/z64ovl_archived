@@ -4129,13 +4129,13 @@ extern void external_func_80077B58(void);
 /**
  * Generates random int16_t between 0 and `range` (exlusive), and adds `offset`
  */
-extern int16_t math_rand_int16_t_offset(int16_t offset, int16_t range);
+extern int16_t math_rand_s16_offset(int16_t offset, int16_t range);
 	#if OOT_DEBUG
-		asm("math_rand_int16_t_offset = 0x80077D90");
+		asm("math_rand_s16_offset = 0x80077D90");
 	#elif OOT_U_1_0
-		asm("math_rand_int16_t_offset = 0x80063BF0");
+		asm("math_rand_s16_offset = 0x80063BF0");
 	#elif MM_U_1_0
-		asm("math_rand_int16_t_offset = 0x800FF450");
+		asm("math_rand_s16_offset = 0x800FF450");
 	#endif
 
 /**
