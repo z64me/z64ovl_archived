@@ -1,6 +1,5 @@
 #ifndef __Z64OVL_H__
 #define __Z64OVL_H__
-#endif /* Unterminated ifndef error? */
 
 #include "h/ichain.h"
 
@@ -7307,6 +7306,7 @@ extern int32_t srand(uint32_t seed);
 		asm("srand = 0x800FD9A0");
 	#elif OOT_U_1_0
 		asm("srand = 0x800CDCC0");
+	#endif
 
 /**
  * Returns sine of a floating point value.
