@@ -61,6 +61,16 @@ example:
  /* Shorthand for referencing Graphics Context display list buffers "Zelda Quick Display List" */
 #define ZQDL(ZQDL_A0, ZQDL_A1) ZQDL_A0->common.gfx_ctxt->ZQDL_A1
 
+static inline float zh_math_fminf(float a, float b)
+{
+	return a < b ? a : b;
+}
+
+static inline float zh_math_fmaxf(float a, float b)
+{
+	return a > b ? a : b;
+}
+
 /****
  * convert a relative segment address to an absolute RAM address
  ***/
@@ -305,6 +315,8 @@ helper_eye_blink(int16_t *frame) {
 * Overlay Display List Drawing
 *****/
 
+#include "zh/colors.h"
+
 typedef struct {
   u32 timg;
   f32 width;
@@ -333,11 +345,6 @@ typedef struct {
 #define G_TX_ANCHOR_UD G_TX_ANCHOR_U + G_TX_ANCHOR_D
 #define G_TX_ANCHOR_RL G_TX_ANCHOR_R + G_TX_ANCHOR_L
 #define TIMG_A(TA0) G_TX_ANCHOR_##TA0
-#define COLOR32(r, g, b, a) (uint32_t)((r << 24) | (g << 16) | (b << 8) | a)
-#define RED32(RGBA0) (uint8_t)(((RGBA0) >> 24) & 0xFF)
-#define GREEN32(RGBA0) (uint8_t)(((RGBA0) >> 16) & 0xFF)
-#define BLUE32(RGBA0) (uint8_t)(((RGBA0) >> 8) & 0xFF)
-#define ALPHA32(RGBA0) (uint8_t)(((RGBA0)) & 0xFF)
 
 static
 void

@@ -20,7 +20,8 @@ typedef enum{
 #define ABS(ABSA0) (((ABSA0)<0)?(-(ABSA0)):ABSA0)
 #define TWEEN_LINEAR(TWL_FROM, TWL_TO, TWL_SPEED) (SGN((TWL_TO)-(TWL_FROM))*MIN(ABS((TWL_TO)-(TWL_FROM)),(TWL_SPEED)))
 #define SEXT24(SEXTA0) (((SEXTA0) & 0x800000) ? ((uint32_t)(SEXTA0) | 0xff000000):(uint32_t)(SEXTA0))
-#define FLOOR(FLA0)	(((FLA0)/(4))*(4))
+#define FLOOR(FLA0)	((uint32_t)(FLA0))
+#define CEIL(CLA0) (CLA0-(uint32_t)(CLA0)>0?(uint32_t)(CLA0+1):(uint32_t)(CLA0))
 #define enum8(x) uint8_t
 
 // Controller Input
@@ -116,5 +117,18 @@ typedef struct PosRot
 	vec3f_t pos;
 	z64_rot_t rot;
 } PosRot_t;
+
+float fminf(float a, float b)
+{
+	return a < b ? a : b;
+}
+
+float fmaxf(float a, float b)
+{
+	return a > b ? a : b;
+}
+
+#define min_f(a, b, c) (fminf(a, fminf(b, c)))
+#define max_f(a, b, c)  (fmaxf(a, fmaxf(b, c)))
 
 #endif
