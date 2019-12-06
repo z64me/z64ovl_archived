@@ -21,9 +21,9 @@ typedef struct
 
 typedef struct
 {
-  int16_t h;
-  int16_t s;
-  int16_t v;
+  float h;
+  float s;
+  float v;
 } hsvf_t;
 
 /*** Macros ***/
@@ -53,6 +53,12 @@ typedef struct
 
 /* Isolate a blue value from a COLOR24. */
 #define BLUE24(RGBA0) (uint8_t)(((RGBA0)) & 0xFF)
+
+/* Convert a pecentage to a radian value. */
+#define PRAD(PERA0) (float)((PERA0) * 0.06283f)
+
+/* Convert a radian value to a percentage. */
+#define RPER(RADA0) (float)((RADA0) * 15.91549f)
 
 static inline void zh_color_hsv2rgb(float h, float s, float v, rgba8_t *out, uint32_t init)
 {
@@ -189,7 +195,14 @@ static inline rgb8_t *zh_color24_to_rgb8(uint32_t color)
   return out;
 }
 
-static inline void zh_color_rainbow_cycle(float *hue, int16_t speed, rgba8_t *out)
+static inline hsvf_t *zh_color32_to_hsvf(uint32_t color)
+{
+  hsvf_t *out;
+  zh_color_rgb2hsv(color, out);
+  return out;
+}
+
+static inline void zh_color_rainbow_cycle(float *hue, float speed, rgba8_t *out)
 {
   if (*hue >= 0.0f && *hue < 360.0f)
     *hue += speed;
@@ -197,4 +210,14 @@ static inline void zh_color_rainbow_cycle(float *hue, int16_t speed, rgba8_t *ou
     *hue = 0.0f;
 
   zh_color_hsv2rgb(*hue, 1.0f, 1.0f, out, 0xFF0000FF);
+}
+
+static inline void zh_color_flash(uint32_t init, float min_val, float timer, hsvf_t *in, rgba8_t *out)
+{
+  if (timer > 10) /* Cap Maximum Timer Value at 10 */
+    timer -= 10;
+
+  zh_color_rgb2hsv(init, in);
+  float val = ((math_cosf(timer) + 1.0f) / 2) * (1.0f - min_val) + min_val;
+  zh_color_hsv2rgb(in->h, in->s, val, out, init);
 }
