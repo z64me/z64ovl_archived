@@ -4567,6 +4567,16 @@ extern void external_func_800849EC(void);
 	#endif
 
 /**
+ * Update Item Icon for Interface
+ */
+extern void gfx_update_item_icon(z64_global_t *gl, uint8_t button_id);
+	#if OOT_DEBUG
+		asm("gfx_update_item_icon = 0x80084A6C");
+	#elif OOT_U_1_0
+		asm("gfx_update_item_icon = 0x8006FB50");
+	#endif
+
+/**
  * TODO This function is completely undocumented
  * This function is not used inside any existing overlay
  */
