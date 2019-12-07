@@ -393,7 +393,10 @@ zh_draw_ui_sprite(
 			tile->width /= 2;
 	}
 
-	gSPDisplayList(buf->p++, 0x801269D0);
+	#if OOT_DEBUG
+		gSPDisplayList(buf->p++, 0x801269D0);
+	#elif	OOT_U_1_0
+		gSPDisplayList(buf->p++, 0x800F8480);
 	gDPSetCombineLERP(
 		buf->p++
 		, PRIMITIVE
