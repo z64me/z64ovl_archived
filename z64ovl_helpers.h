@@ -396,7 +396,7 @@ zh_draw_ui_sprite(
 	#if OOT_DEBUG
 		gSPDisplayList(buf->p++, 0x801269D0);
 	#elif	OOT_U_1_0
-		gSPDisplayList(buf->p++, 0x800F8480);
+		gSPDisplayList(buf->p++, 0x800F84A0);
 	#endif
 
 	gDPSetCombineLERP(
@@ -430,6 +430,8 @@ zh_draw_ui_sprite(
 		, G_TX_NOMASK, G_TX_NOMASK
 		, G_TX_NOLOD, G_TX_NOLOD
 	);
+	if (tile->width == 0) tile->width++;
+	if (tile->height == 0) tile->height++;
 	gSPTextureRectangle(
 		buf->p++
 		, qs102(tile->x) & ~3
