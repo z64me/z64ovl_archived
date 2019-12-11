@@ -7477,6 +7477,16 @@ extern uint32_t player_talk_state(z64_global_t *gl_20D8);
 		asm("player_talk_state = 0x800DD464");
 	#endif
 
+/**
+ Refresh Link's instance equipment, a0 = global context, a1 = link instance
+ */
+extern uint32_t player_refresh_equipment(z64_global_t *global, z64_actor_t *actor);
+	#if OOT_DEBUG
+		asm("player_refresh_equipment = 0x8008ECAC");
+	#elif OOT_U_1_0
+		asm("player_refresh_equipment = 0x80079764");
+	#endif
+
 // TODO: Reorganize these, also confirm if correct.
 extern void z64_bzero(void *dest, int32_t length);
 asm("bzero = 0x80004450");
