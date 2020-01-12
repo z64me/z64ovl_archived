@@ -3143,6 +3143,29 @@ extern void external_func_8005A77C(void);
 	#elif OOT_U_1_0
 		asm("external_func_8005A77C = 0x800495BC");
 	#endif
+    
+/**
+ * Sets the current camera type to the one specified by the parameter.
+ * A0 = Camera context (Global Context + 0x01E0) | A1 = Camera type
+ */    
+extern void set_current_camera_type(void *camera_context, uint16_t camera_type);
+	#if OOT_DEBUG
+		asm("set_current_camera_type = 0x8005A548");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#endif
+    
+/**
+ * Sets the current camera id to the one specified by the parameter. Needs to be called every frame to work.
+ * This function is not used inside any existing overlay
+ * A0 = Camera context (Global Context + 0x01E0) | A1 = Camera ID
+ */    
+extern void set_current_camera_id(void *camera_context, uint16_t camera_id);
+	#if OOT_DEBUG
+		asm("set_current_camera_id = 0x8005A7A8");
+	#elif OOT_U_1_0
+		asm("set_current_camera_id = 0x800495E8");
+	#endif
 
 /**
  * TODO This function is completely undocumented
