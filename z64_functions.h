@@ -2876,9 +2876,9 @@ extern void dynapoly_alloc(const uint32_t collision, void *collision_pointer);
  */
 extern uint32_t get_collision_polytype(z64_col_ctxt_t *collision_cotext, void *Polygon, uint16_t mesh, bool word);
 	#if OOT_DEBUG
-		asm("get_camera_id_for_current_polygon = 0x800419B0");
+		asm("get_collision_polytype = 0x800419B0");
 	#elif OOT_U_1_0
-		asm("get_camera_id_for_current_polygon = 0x80034028");
+		asm("get_collision_polytype = 0x80034028");
 	#endif
 
 /**
