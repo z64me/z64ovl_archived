@@ -3165,9 +3165,9 @@ extern void external_func_8005A77C(void);
  */    
 extern void set_camera_type(void *camera_context, uint16_t camera_type);
 	#if OOT_DEBUG
-		asm("set_current_camera_type = 0x8005A548");
+		asm("set_camera_type = 0x8005A548");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("set_camera_type = 0x800495E8");
 	#endif
     
 /**
@@ -3177,9 +3177,9 @@ extern void set_camera_type(void *camera_context, uint16_t camera_type);
  */    
 extern void set_camera_id(void *camera_context, uint16_t camera_id);
 	#if OOT_DEBUG
-		asm("set_current_camera_id = 0x8005A7A8");
+		asm("set_camera_id = 0x8005A7A8");
 	#elif OOT_U_1_0
-		asm("set_current_camera_id = 0x800495E8");
+		asm("set_camera_id = 0x800495E8");
 	#endif
 
 /**
