@@ -2865,6 +2865,21 @@ extern void dynapoly_alloc(const uint32_t collision, void *collision_pointer);
 	#elif MM_U_1_0
 		asm("dynapoly_alloc = 0x800C9564");
 	#endif
+    
+/**
+* Gets the collision polytype
+* A0 = Global Context + 0x7C0
+* A1 = Polygon*
+* A2 = Mesh Collision Id 0x32 = Scene
+* A3 = 0 returns high word, 1 turns low word
+* V0 = High (0x00) or Low (0x04) word
+ */
+extern uint32_t get_collision_polytype(z64_col_ctxt_t *collision_cotext, void *Polygon, uint16_t mesh, bool word);
+	#if OOT_DEBUG
+		asm("get_camera_id_for_current_polygon = 0x800419B0");
+	#elif OOT_U_1_0
+		asm("get_camera_id_for_current_polygon = 0x80034028");
+	#endif
 
 /**
  * Get PolyType High Word &amp;&gt;&gt; 0x0003 E000
@@ -3148,7 +3163,7 @@ extern void external_func_8005A77C(void);
  * Sets the current camera type to the one specified by the parameter.
  * A0 = Camera context (Global Context + 0x01E0) | A1 = Camera type
  */    
-extern void set_current_camera_type(void *camera_context, uint16_t camera_type);
+extern void set_camera_type(void *camera_context, uint16_t camera_type);
 	#if OOT_DEBUG
 		asm("set_current_camera_type = 0x8005A548");
 	#elif OOT_U_1_0
@@ -3160,7 +3175,7 @@ extern void set_current_camera_type(void *camera_context, uint16_t camera_type);
  * This function is not used inside any existing overlay
  * A0 = Camera context (Global Context + 0x01E0) | A1 = Camera ID
  */    
-extern void set_current_camera_id(void *camera_context, uint16_t camera_id);
+extern void set_camera_id(void *camera_context, uint16_t camera_id);
 	#if OOT_DEBUG
 		asm("set_current_camera_id = 0x8005A7A8");
 	#elif OOT_U_1_0
