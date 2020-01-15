@@ -6192,7 +6192,7 @@ extern void external_func_800C3770(void);
  * size is the size of the block to be allocated
  */
 extern void *
-graph_alloc(z64_gfx_t *global, int32_t size);
+graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 	#if OOT_DEBUG
 		asm("graph_alloc = 0x800C69CC");
 	#elif OOT_U_1_0
