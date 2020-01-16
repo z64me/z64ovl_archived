@@ -933,6 +933,20 @@ typedef struct z64_collider_tri_collection_s {
     z64_collider_tri_t * list;
 } z64_collider_tri_collection_t;
 
+typedef struct {
+  uint8_t unk_9_[8];
+  uint16_t unk_1;
+  uint16_t hitbox_count;
+  void *hitbox_data;
+} z64_hitbox_header_t;
+
+typedef struct z64_collider_cylinder_hit_init_s { /* Initialization Variables (in overlay) for z64_collider_cylinder_main_t */
+    z64_collision_body_info_t body;
+    int16_t radius; /* Cylinder Radius */
+    int16_t height; /* Cylinder Height */
+    //int16_t y_shift; /* Shift Cylinder on Y Axis */
+    //vec3s_t position; /* {X, Y, Z} position of Cylinder */
+} z64_collider_cylinder_hit_init_t;
 
 typedef struct z64_dynapoly {
     uint32_t    polyID;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/
@@ -942,7 +956,7 @@ typedef struct z64_dynapoly {
     uint16_t    unk_05;                /* 0x000C */
     uint32_t    movement;              /* 0x0010 &>>01 updates position of actors on top, &>>02 updates rotation of actors on top */
     uint8_t     flags;                 /* 0x0014 &>>01 actor on top &>>02 Link on top &>>04 Link above it or on top &>>08 heavy actor on top */
-    char        padding[0x0003];       
+    char        padding[0x0003];
 } z64_dynapoly_t;
 
 enum dynapoly_move_flag {

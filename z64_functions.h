@@ -2865,7 +2865,7 @@ extern void dynapoly_alloc(const uint32_t collision, void *collision_pointer);
 	#elif MM_U_1_0
 		asm("dynapoly_alloc = 0x800C9564");
 	#endif
-    
+
 /**
 * Gets the collision polytype
 * A0 = Global Context + 0x7C0
@@ -3158,23 +3158,23 @@ extern void external_func_8005A77C(void);
 	#elif OOT_U_1_0
 		asm("external_func_8005A77C = 0x800495BC");
 	#endif
-    
+
 /**
  * Sets the current camera type to the one specified by the parameter.
  * A0 = Camera context (Global Context + 0x01E0) | A1 = Camera type
- */    
+ */
 extern void set_camera_type(void *camera_context, uint16_t camera_type);
 	#if OOT_DEBUG
 		asm("set_camera_type = 0x8005A548");
 	#elif OOT_U_1_0
 		asm("set_camera_type = 0x800495E8");
 	#endif
-    
+
 /**
  * Sets the current camera id to the one specified by the parameter. Needs to be called every frame to work.
  * This function is not used inside any existing overlay
  * A0 = Camera context (Global Context + 0x01E0) | A1 = Camera ID
- */    
+ */
 extern void set_camera_id(void *camera_context, uint16_t camera_id);
 	#if OOT_DEBUG
 		asm("set_camera_id = 0x8005A7A8");
@@ -3410,14 +3410,13 @@ extern void external_func_8005BE50(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void external_func_8005C050(void);
+extern void actor_collider_hitbox_init(z64_global_t *gl, void *dest, z64_actor_t *actor, void *hitbox_init_data);
 	#if OOT_DEBUG
-		asm("external_func_8005C050 = 0x8005C050");
+		asm("actor_collider_hitbox_init = 0x8005C050");
 	#elif OOT_U_1_0
-		asm("external_func_8005C050 = 0x8004A874");
+		asm("actor_collider_hitbox_init = 0x8004A874");
 	#elif MM_U_1_0
-		asm("external_func_8005C050 = 0x800E0E60");
-		asm("external_func_800E0E60 = 0x800E0E60");
+		asm("actor_collider_hitbox_init = 0x800E0E60");
 	#endif
 
 /**
@@ -5106,9 +5105,9 @@ extern void external_func_80093774(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Write DE000000 80126D30 to Display List
  */
-extern void external_func_800937C0(void);
+extern Gfx* external_func_800937C0(Gfx *p);
 	#if OOT_DEBUG
 		asm("external_func_800937C0 = 0x800937C0");
 	#elif OOT_U_1_0
