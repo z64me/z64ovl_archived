@@ -3044,10 +3044,12 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
     static inline void actor_dynapoly_new(z64_global_t *global, z64_actor_t *actor, uint32_t dynacollision)
     {
         /* in the entity structure, a dynapoly_t is expected immediately after the actor_t */
+		 /*
         z64_dynapoly_t *dynapoly = (z64_dynapoly_t*)(actor + 1);
         uint32_t result = 0;
         dynapoly_alloc(DP_COLLIDE, &result);
         en->dynapoly.polyID = actor_register_dynapoly(global, AADR(global, 0x810), &en->actor, result);
+		  */
     }
 #elif MM_U_1_0
     extern void actor_dynapoly_new(z64_global_t *global, z64_actor_t *actor, uint32_t dynacollision);
@@ -6191,7 +6193,7 @@ extern void external_func_800C3770(void);
  * size is the size of the block to be allocated
  */
 extern void *
-graph_alloc(z64_global_t *global, int32_t size);
+graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 	#if OOT_DEBUG
 		asm("graph_alloc = 0x800C69CC");
 	#elif OOT_U_1_0
