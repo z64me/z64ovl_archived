@@ -3484,7 +3484,7 @@ extern void external_func_8005C450(void);
  * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void actor_collider_cylinder_init(z64_global_t *global, z64_collider_cylinder_main_t *dest, z64_actor_t *actor, const z64_collider_cylinder_init_t *src);
+extern void actor_collider_cylinder_init(z64_global_t *global, z64_collider_cylinder_main_t *dest, z64_actor_t *actor, void *src);
 	#if OOT_DEBUG
 		asm("actor_collider_cylinder_init = 0x8005C4AC");
 	#elif OOT_U_1_0

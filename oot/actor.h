@@ -30,6 +30,20 @@ typedef struct z64_actor_init_s{
   void *draw;        /* Draw Function */
 } z64_actor_init_t;
 
+typedef struct collision_check_s { /* Substruct 0x0098 */
+  z64_damagechart_t *damage_table;
+  vec3f_t           vel_2;
+  int16_t           unk_0B_0;
+  int16_t           unk_0B_1;
+  uint16_t          unk_0B_2;
+  uint8_t           mass;
+  uint8_t           health;
+  uint8_t           damage;
+  uint8_t           damage_effect;
+  uint8_t           impact_effect;
+  int8_t            unk_0D;
+} z64_collision_check_t;
+
 typedef struct z64_actor_s z64_actor_t;
 struct z64_actor_s
 {
@@ -72,18 +86,8 @@ struct z64_actor_s
   float             unk_0x8C;                 /* 0x008C */
   float             dist_from_link_xz;        /* 0x0090 */
   float             dist_from_link_y;         /* 0x0094 */
-  /* struct collision_check common */
-  z64_damagechart_t *damage_table;            /* 0x0098 */
-  vec3f_t           vel_2;                    /* 0x009C */
-  char              unk_0B_[0x0006];          /* 0x00A8 */
-  uint8_t           mass;                     /* 0x00AE */
-  uint8_t           health;                   /* 0x00AF */
-  uint8_t           damage;                   /* 0x00B0 */
-  uint8_t           damage_effect;            /* 0x00B1 */
-  uint8_t           impact_effect;            /* 0x00B2 */
-  char              unk_0D;                   /* 0x00B3 */
-  /* end CollisionCheck common */
-  /* struct start */
+  z64_collision_check_t collision_check;      /* 0x0098 */
+  /* Substruct 0x00B4 */
   z64_rot_t         rot_2;                    /* 0x00B4 */
   char              unk_0E_[0x0002];          /* 0x00BA */
   float             unk_0xBC;                 /* 0x00BC */
@@ -91,7 +95,7 @@ struct z64_actor_s
   float             unk_0xC4;                 /* 0x00C4 */
   uint8_t           unk_0xC8;                 /* 0x00C8 */
   char              pad_0xC9_[0x0003];        /* 0x00C9 */
-  /* struct end */
+  /* 0x00B4 End */
   z64_xyzf_t        unk_0xCC;                 /* 0x00CC */
   z64_xyzf_t        unk_0xD8;                 /* 0x00D8 */
   z64_xyzf_t        unk_0xE4;                 /* 0x00E4 */
