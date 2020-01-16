@@ -940,14 +940,6 @@ typedef struct {
   void *hitbox_data;
 } z64_hitbox_header_t;
 
-typedef struct z64_collider_cylinder_hit_init_s { /* Initialization Variables (in overlay) for z64_collider_cylinder_main_t */
-    z64_collision_body_info_t body;
-    int16_t radius; /* Cylinder Radius */
-    int16_t height; /* Cylinder Height */
-    //int16_t y_shift; /* Shift Cylinder on Y Axis */
-    //vec3s_t position; /* {X, Y, Z} position of Cylinder */
-} z64_collider_cylinder_hit_init_t;
-
 typedef struct z64_dynapoly {
     uint32_t    polyID;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/
     float       push_movement;                /* 0x0004 */

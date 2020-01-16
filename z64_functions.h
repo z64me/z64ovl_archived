@@ -3309,7 +3309,6 @@ extern void external_func_8005AFB4(void);
 		asm("external_func_8005AFB4 = 0x80049D34");
 	#elif MM_U_1_0
 		asm("external_func_8005AFB4 = 0x800E01B8");
-		asm("external_func_800E01B8 = 0x800E01B8");
 	#endif
 
 /**
@@ -3362,14 +3361,13 @@ extern void actor_damage_chart_get(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance)
  */
-extern void external_func_8005BBF8(void);
+extern void actor_collider_cylinder_array_alloc(z64_global_t *global, void *collision);
 	#if OOT_DEBUG
-		asm("external_func_8005BBF8 = 0x8005BBF8");
+		asm("actor_collider_cylinder_array_alloc = 0x8005BBF8");
 	#elif OOT_U_1_0
-		asm("external_func_8005BBF8 = 0x8004A484");
+		asm("actor_collider_cylinder_array_alloc = 0x8004A484");
 	#elif MM_U_1_0
-		asm("external_func_8005BBF8 = 0x800E0B4C");
-		asm("external_func_800E0B4C = 0x800E0B4C");
+		asm("actor_collider_cylinder_array_alloc = 0x800E0B4C");
 	#endif
 
 /**
@@ -3394,7 +3392,6 @@ extern void external_func_8005BCC8(void);
 		asm("external_func_8005BCC8 = 0x8004A550");
 	#elif MM_U_1_0
 		asm("external_func_8005BCC8 = 0x800E0C18");
-		asm("external_func_800E0C18 = 0x800E0C18");
 	#endif
 
 /**
@@ -3412,13 +3409,13 @@ extern void external_func_8005BE50(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void actor_collider_hitbox_init(z64_global_t *gl, void *dest, z64_actor_t *actor, void *hitbox_init_data);
+extern void actor_collider_cylinder_array_init(z64_global_t *gl, void *dest, z64_actor_t *actor, void *hitbox_init_data);
 	#if OOT_DEBUG
-		asm("actor_collider_hitbox_init = 0x8005C050");
+		asm("actor_collider_cylinder_array_init = 0x8005C050");
 	#elif OOT_U_1_0
-		asm("actor_collider_hitbox_init = 0x8004A874");
+		asm("actor_collider_cylinder_array_init = 0x8004A874");
 	#elif MM_U_1_0
-		asm("actor_collider_hitbox_init = 0x800E0E60");
+		asm("actor_collider_cylinder_array_init = 0x800E0E60");
 	#endif
 
 /**
