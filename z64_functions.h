@@ -5594,9 +5594,8 @@ extern void external_func_800A4FE4(void);
 
 /**
  * Change Animation
- * transition rate is between 0.0 and 1.0
  * TODO These notes need converted into a C function prototype
- * A0 = actor instance + 0x014C (Drawing Table) | A1 = New Animation Pointer (in Object File) | A2 = Animation Speed (Floating Point) | A3 = ? | 0x0010(SP) = Number of Frames in Floating Point32_t | 0x0014(SP) = some counter related to how long the animation should be played? | 0x0018(SP) = float transition rate, less than 1
+ * A0 = actor instance + 0x014C (Drawing Table) | A1 = New Animation Pointer (in Object File) | A2 = Animation Speed (Floating Point) | A3 = ? | 0x0010(SP) = Number of Frames in Floating Point32_t | 0x0014(SP) = some counter related to how long the animation should be played? | 0x0018(SP) = float transition rate
  */
 extern void actor_anime_change(z64_skelanime_t *skelanime, uint32_t animation, f32 playback_speed, f32 unk0, f32 frame_count, uint8_t unk_1, f32 transition_rate);
 	#if OOT_DEBUG
