@@ -717,7 +717,9 @@ typedef struct
   uint16_t          death_state;              /* 0x10A20 */
   char              unk_17_[0x0012];          /* 0x10A22 */
   uint8_t           sky_image_idx[2];         /* 0x10A34 */
-  char              unk_18_[0x00CE];          /* 0x10A36 */
+  char              unk_18_[0x007A];          /* 0x10A36 */
+  int16_t           unk_0x10AB0[6];           /* 0x10AB0 */
+  char              unk_18_1_[0x0048];        /* 0x10ABC */
   uint8_t           day_phase;                /* 0x10B04 */
   char              unk_19_[0x000D];          /* 0x10B05 */
   uint8_t           rain_effect_1;            /* 0x10B12 */
@@ -779,11 +781,11 @@ typedef struct {
   /* 0x14 */ float unk4;
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
-  /* 0x20 */ uint32_t unk5; /* Actor Drawing Table? */
-  /* 0x24 */ uint32_t unk6;
+  /* 0x20 */ uint32_t draw_table_start; /* Actor Drawing Table? */
+  /* 0x24 */ uint32_t draw_table_end;
   /* 0x28 */ uint32_t unk7;
   /* 0x2C */ uint32_t unk8;
-  /* 0x30 */ uint32_t func_unk9; /* Some function pointer */
+  /* 0x30 */ void *draw_table_func; /* Some function pointer */
   /* 0x34 */ int pad1; /* 0x00000000 */
   /* 0x38 */ int pad2; /* 0x00000000 */
   /* 0x3C */ uint16_t unk10;

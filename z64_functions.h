@@ -355,11 +355,20 @@ extern void external_func_80027F80(void);
  * Spawn Particle 0x00 Type 0 (Wrapper for 8001BCE0)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002829C(void);
+extern void effect_spawn_dust(
+	z64_global_t *gl
+	, void *a
+	, void *b
+	, void *c
+	, void *d
+	, void *e
+	, int f
+	, int g
+);
 	#if OOT_DEBUG
-		asm("external_func_8002829C = 0x8002829C");
+		asm("effect_spawn_dust = 0x8002829C");
 	#elif OOT_U_1_0
-		asm("external_func_8002829C = 0x8001BD94");
+		asm("effect_spawn_dust = 0x8001BD94");
 	#endif
 
 /**
@@ -505,10 +514,24 @@ extern void external_func_80028CEC(void);
 	#endif
 
 /**
- * Spawn Particle 0x03
- * TODO These notes need converted into a C function prototype
+* Spawn Particle 0x03 (ovl_Effect_Ss_Bomb2)
+*************
+Argument Notes
+* gl = Global Context
+* position = The (x, y, z) position of the explosion cloud.
+* burst_gravity = The influence of gravity on the explosion cloud along a particular axis.
+* burst_velocity = The speed and direction that the explosion cloud is to follow. (0, 0.5, 0) is to move with 0.5 speed along the y axis.
+* scale = The initial size of the explosion cloud, multiplied by 100. (ex. 0.5 * 100 = 50)
+* growth_velocity = The speed at which the explosion cloud grows and dissipates. (Default = ((Z Rotation * 6) + 19))
  */
-extern void effect_spawn_bomb2(void);
+extern void effect_spawn_bomb2(
+	z64_global_t *gl
+	, vec3f_t *position
+	, vec3f_t *burst_gravity
+	, vec3f_t *burst_velocity
+	, uint16_t scale
+	, uint16_t growth_velocity
+);
 	#if OOT_DEBUG
 		asm("effect_spawn_bomb2 = 0x80028E84");
 	#elif OOT_U_1_0
@@ -530,11 +553,16 @@ extern void external_func_80028F84(void);
  * Spawn Particle 0x04 (Wrapper for 8001CAD0)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029024(void);
+extern void effect_spawn_blast_ring(
+	z64_global_t *gl
+	, vec3f_t *position
+	, float *y
+	, float *z
+);
 	#if OOT_DEBUG
-		asm("external_func_80029024 = 0x80029024");
+		asm("effect_spawn_blast_ring = 0x80029024");
 	#elif OOT_U_1_0
-		asm("external_func_80029024 = 0x8001CB1C");
+		asm("effect_spawn_blast_ring = 0x8001CB1C");
 	#endif
 
 /**
@@ -542,7 +570,13 @@ extern void external_func_80029024(void);
  * TODO These notes need converted into a C function prototype
  * Bomb Spark
  */
-extern void effect_spawn_spark(void);
+extern void effect_spawn_spark(
+	z64_global_t *gl
+	, z64_actor_t *actor
+	, vec3f_t *position
+	, float *y
+	, float *z
+);
 	#if OOT_DEBUG
 		asm("effect_spawn_spark = 0x80029184");
 	#elif OOT_U_1_0
@@ -579,7 +613,13 @@ extern void effect_spawn_water_bubble(void);
  * Spawn Particle 0x09
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_water_ripple(z64_global_t *global, vec3f_t *pos, int32_t unk0, int32_t unk1, int32_t unk2);
+extern void effect_spawn_water_ripple(
+	z64_global_t *global
+	, vec3f_t *pos
+	, int32_t unk0
+	, int32_t unk1
+	, int32_t unk2
+);
 	#if OOT_DEBUG
 		asm("effect_spawn_water_ripple = 0x80029444");
 	#elif OOT_U_1_0
@@ -593,8 +633,12 @@ extern void effect_spawn_water_ripple(z64_global_t *global, vec3f_t *pos, int32_
  * TODO These notes need converted into a C function prototype
  */
 extern void effect_spawn_water_splash(
-	z64_global_t *global, vec3f_t *pos,
-	int32_t unk0, int32_t unk1, int32_t unk2, int32_t unk3
+	z64_global_t *global
+	, vec3f_t *pos
+	, int32_t unk0
+	, int32_t unk1
+	, int32_t unk2
+	, int32_t unk3
 );
 	#if OOT_DEBUG
 		asm("effect_spawn_water_splash = 0x8002949C");
@@ -619,7 +663,13 @@ extern void effect_spawn_magma(void);
  * Spawn Particle 0x0D
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_lightning(z64_global_t *global, vec3f_t *position, uint32_t *opacity, uint32_t *color, uint16_t size);
+extern void effect_spawn_lightning(
+	z64_global_t *global
+	, vec3f_t *position
+	, uint32_t *opacity
+	, uint32_t *color
+	, uint16_t size
+);
     #if OOT_DEBUG
         asm("effect_spawn_lightning= 0x800295A0");
     #elif OOT_U_1_0
@@ -648,7 +698,6 @@ extern void external_func_80029694(void);
 		asm("external_func_80029694 = 0x8001D18C");
 	#elif MM_U_1_0
 		asm("external_func_80029694 = 0x800B210C");
-		asm("external_func_800B210C = 0x800B210C");
 	#endif
 
 /**
@@ -941,7 +990,14 @@ extern void effect_spawn_dead_deku_scrub(void);
  * Spawn Particle 0x23 (Wrapper for 8001E478)
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_dead_sound(void);
+extern void effect_spawn_dead_sound(
+	z64_global_t *gl
+	, z64_xyzf_t *a
+	, uint16_t sound_id /* ? */
+	, int32_t b
+	, int32_t c
+	, int32_t d
+);
 	#if OOT_DEBUG
 		asm("effect_spawn_dead_sound = 0x8002A9F4");
 	#elif OOT_U_1_0
@@ -980,9 +1036,9 @@ extern void actor_init_shadow(z64_rot_t *rot2, f32 unk0, void *drawfunc, f32 rad
 		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x800B3FC0");
 		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x800B42F8");
 	#endif
-	extern char // drawfunc must be the address of one of the following:
-		ACTOR_SHADOW_DRAWFUNC_CIRCLE,
-		ACTOR_SHADOW_DRAWFUNC_TEARDROP;
+	extern void // drawfunc must be the address of one of the following:
+		*ACTOR_SHADOW_DRAWFUNC_CIRCLE,
+		*ACTOR_SHADOW_DRAWFUNC_TEARDROP;
 
 /**
  * TODO This function is completely undocumented
@@ -1656,9 +1712,9 @@ extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, floa
  */
 extern void actor_poll_speak_cube(z64_actor_t *actor, z64_global_t *gl, float distance);
 	#if OOT_DEBUG
-		asm("external_func_8002F2CC = 0x8002F2CC");
+		asm("actor_poll_speak_cube = 0x8002F2CC");
 	#elif OOT_U_1_0
-		asm("external_func_8002F2CC = 0x80022A68");
+		asm("actor_poll_speak_cube = 0x80022A68");
 	#endif
 
 /**
@@ -1674,13 +1730,12 @@ extern void external_func_8002F2F4(z64_actor_t *actor, z64_global_t *global);
 		asm("external_func_8002F2F4 = 0x80022A90");
 	#elif MM_U_1_0
 		asm("external_func_8002F2F4 = 0x800B863C");
-		asm("external_func_800B863C = 0x800B863C");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F334(void);
+extern uint32_t external_func_8002F334(z64_actor_t *actor, z64_global_t *gl);
 	#if OOT_DEBUG
 		asm("external_func_8002F334 = 0x8002F334");
 	#elif OOT_U_1_0
@@ -1709,7 +1764,6 @@ extern void external_func_8002F374(z64_global_t *global, z64_actor_t *actor, int
 		asm("external_func_8002F374 = 0x80022B14");
 	#elif MM_U_1_0
 		asm("external_func_8002F374 = 0x800B8898");
-		asm("external_func_800B8898 = 0x800B8898");
 	#endif
 
 /**
@@ -1923,7 +1977,7 @@ extern void sound_play_actor2(z64_actor_t *actor, uint16_t sound_id);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F850(void);
+extern void external_func_8002F850(z64_global_t *gl, z64_actor_t *a);
 	#if OOT_DEBUG
 		asm("external_func_8002F850 = 0x8002F850");
 	#elif OOT_U_1_0
@@ -3233,9 +3287,9 @@ extern int16_t external_func_8005A9F4(uint32_t gl790);
  */
 extern void camera_earthquake(void* global1E0, uint16_t unk, uint16_t strength, uint16_t duration);
 	#if OOT_DEBUG
-		asm("external_func_8005AA1C = 0x8005AA1C");
+		asm("camera_earthquake = 0x8005AA1C");
 	#elif OOT_U_1_0
-		asm("external_func_8005AA1C = 0x800497A4");
+		asm("camera_earthquake = 0x800497A4");
 	#endif
 
 /**
@@ -3385,13 +3439,13 @@ extern void external_func_8005BC28(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x0150 (offset where you stored the hitbox struct)
  */
-extern void external_func_8005BCC8(void);
+extern void actor_collider_cylinder_array_free(z64_global_t *global, void *list);
 	#if OOT_DEBUG
-		asm("external_func_8005BCC8 = 0x8005BCC8");
+		asm("actor_collider_cylinder_array_free = 0x8005BCC8");
 	#elif OOT_U_1_0
-		asm("external_func_8005BCC8 = 0x8004A550");
+		asm("actor_collider_cylinder_array_free = 0x8004A550");
 	#elif MM_U_1_0
-		asm("external_func_8005BCC8 = 0x800E0C18");
+		asm("actor_collider_cylinder_array_free = 0x800E0C18");
 	#endif
 
 /**
@@ -3409,7 +3463,7 @@ extern void external_func_8005BE50(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void actor_collider_cylinder_array_init(z64_global_t *gl, void *dest, z64_actor_t *actor, void *hitbox_init_data);
+extern void actor_collider_cylinder_array_init(z64_global_t *gl, void *dest, z64_actor_t *actor, void *hitbox_init_data, void *list);
 	#if OOT_DEBUG
 		asm("actor_collider_cylinder_array_init = 0x8005C050");
 	#elif OOT_U_1_0
@@ -3437,7 +3491,7 @@ extern void actor_collider_cylinder_alloc(z64_global_t *global, z64_collider_cyl
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance + 0x014C (offset where you stored the hitbox struct)
  */
-extern void actor_collider_cylinder_free(z64_global_t *global, z64_collider_cylinder_main_t *collision);
+extern void actor_collider_cylinder_free(z64_global_t *global, void *collision);
 	#if OOT_DEBUG
 		asm("actor_collider_cylinder_free = 0x8005C3AC");
 	#elif OOT_U_1_0
@@ -3481,7 +3535,7 @@ extern void external_func_8005C450(void);
  * source = capsule initialization data
  * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
  */
-extern void actor_collider_cylinder_init(z64_global_t *global, z64_collider_cylinder_main_t *dest, z64_actor_t *actor, void *src);
+extern void actor_collider_cylinder_init(z64_global_t *global, void *dest, z64_actor_t *actor, void *src);
 	#if OOT_DEBUG
 		asm("actor_collider_cylinder_init = 0x8005C4AC");
 	#elif OOT_U_1_0
@@ -3691,7 +3745,7 @@ extern void external_func_800627A0(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800628A4(void);
+extern void external_func_800628A4(int32_t a, void *b);
 	#if OOT_DEBUG
 		asm("external_func_800628A4 = 0x800628A4");
 	#elif OOT_U_1_0
@@ -4397,7 +4451,7 @@ extern void external_func_8007848C(float *value, float a, float b);
  * TODO figure out what this function does...
  * A0 = int16_t Rotation Pointer (Y this pass) | A1 = int16_t ? | A2 = ? | A3 = ?
  */
-extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, int32_t unk2, int32_t unk3, uint32_t unk4);
+extern int32_t external_func_8007869C(int16_t *rot, int16_t unk0, int16_t unk1, int16_t unk2, int16_t unk3, int16_t unk4);
 	#if OOT_DEBUG
 		asm("external_func_8007869C = 0x8007869C");
 	#elif OOT_U_1_0
@@ -4915,7 +4969,7 @@ extern void external_func_8008EF44(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8008EF5C(void);
+extern int32_t external_func_8008EF5C(z64_global_t *gl, vec3f_t *a, float b, float c);
 	#if OOT_DEBUG
 		asm("external_func_8008EF5C = 0x8008EF5C");
 	#elif OOT_U_1_0
@@ -5161,7 +5215,6 @@ extern void external_func_80093D84(z64_gfx_t *gfx);
 		asm("external_func_80093D84 = 0x8007E2C0");
 	#elif MM_U_1_0
 		asm("external_func_80093D84 = 0x8012C2DC");
-		asm("external_func_8012C2DC = 0x8012C2DC");
 	#endif
 
 /**
@@ -5189,7 +5242,7 @@ extern void external_func_80094044(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context
  */
-extern void external_func_800943C8(void);
+extern void external_func_800943C8(z64_gfx_t *gfx);
 	#if OOT_DEBUG
 		asm("external_func_800943C8 = 0x800943C8");
 	#elif OOT_U_1_0
@@ -5556,7 +5609,7 @@ extern void skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, uin
  * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Actor Instance Address + 0x014C (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, uint32_t skeleton, uint32_t animation, uint8_t unk0, uint8_t unk1, uint8_t unk2);
+extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, uint32_t skeleton, uint32_t animation, void *unk0, void *unk1, uint32_t unk2);
 	#if OOT_DEBUG
 		asm("skelanime_init_mtx = 0x800A46F8");
 	#elif OOT_U_1_0
@@ -5850,7 +5903,7 @@ extern void external_func_800A9F6C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800AA000(void);
+extern void external_func_800AA000(float a, z64_actor_t *b, uint8_t c, uint8_t d, uint8_t e);
 	#if OOT_DEBUG
 		asm("external_func_800AA000 = 0x800AA000");
 	#elif OOT_U_1_0
@@ -6607,7 +6660,7 @@ extern void external_func_800D1340(void);
  * TODO These notes need converted into a C function prototype
  * F12 = float x | F14 = float y | A2 = float z | A3 = ptr to uint16_t rotation
  */
-extern void external_func_800D1694(void);
+extern void external_func_800D1694(float x, float y, uint32_t a0, uint32_t a1, float z, int16_t *rot);
 	#if OOT_DEBUG
 		asm("external_func_800D1694 = 0x800D1694");
 	#elif OOT_U_1_0
