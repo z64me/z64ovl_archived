@@ -38,25 +38,38 @@ typedef struct {
 #define TEXT_IGNORE_COLOR 1
 #define TEXT_SKIP_RENDER 2
 
-static
-void
-zh_draw_debug_text(
-z64_global_t *gl,              /* Global Context */
-z64_debug_text_t *text_struct, /* Reserved Text Struct */
-uint32_t rgba,                 /* RGBA 32-Bit Color */
-uint8_t x,                     /* X Coordinate */
-uint8_t y,                     /* Y Coordinate */
-const char *string             /* Text String */
-)
-{
-#define GFX_OVERLAY ZQDL(gl, overlay)
-z64_disp_buf_t *ovl = &GFX_OVERLAY;
-debug_init_text_struct(text_struct);
-debug_do_text_struct(text_struct, ovl->p);
-debug_set_text_rgba(text_struct, RED32(rgba), GREEN32(rgba), BLUE32(rgba), ALPHA32(rgba));
-debug_set_text_xy(text_struct, x, y);
-debug_set_text_string(text_struct, string);
-ovl->p = (Gfx *)debug_update_text_struct(text_struct);
+/* draw debug text (supports format specifiers);         *
+ * this example displays the string "hello z64ovl"       *
+ * at the upper left corner of the screen:               *
+ *   zh_draw_debug_text(                                 *
+ *      gl                                               *
+ *      , 0xFFFFFFFF                                     *
+ *      , 1, 1                                           *
+ *      , "hello z%dovl"                                 *
+ *      , 64                                             *
+ *   );                                                  */
+#define zh_draw_debug_text(                              \
+   z64_global_t *gl          /* Global Context       */  \
+   , uint32_t rgba           /* RGBA 32-Bit Color    */  \
+   , uint8_t x               /* X Coordinate         */  \
+   , uint8_t y               /* Y Coordinate         */  \
+   , const char *fmt         /* Format String        */  \
+   , ...                     /* Extra Arguments      */  \
+{                                                        \
+   z64_debug_text_t dbtx = {0};                          \
+   z64_disp_buf_t *ovl = &gl->common.gfx_ctxt->overlay;  \
+   debug_init_text_struct(&dbtx);                        \
+   debug_do_debug_text(text_struct, ovl->p);             \
+   debug_set_text_rgba(                                  \
+      &dbtx                                              \
+      , RED32(rgba)                                      \
+      , GREEN32(rgba)                                    \
+      , BLUE32(rgba)                                     \
+      , ALPHA32(rgba)                                    \
+   );                                                    \
+   debug_set_text_xy(&dbtx, x, y);                       \
+   debug_set_text_string(&dbtx, fmt, __VA_ARGS__);       \
+   ovl->p = (Gfx *)debug_update_text_struct(&dbtx);      \
 }
 
 static void zh_set_palette(z64_disp_buf_t *buf, int32_t addr)
