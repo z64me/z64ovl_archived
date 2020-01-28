@@ -49,12 +49,12 @@ typedef struct {
  *      , 64                                             *
  *   );                                                  */
 #define zh_draw_debug_text(                              \
-   z64_global_t *gl          /* Global Context       */  \
-   , uint32_t rgba           /* RGBA 32-Bit Color    */  \
-   , uint8_t x               /* X Coordinate         */  \
-   , uint8_t y               /* Y Coordinate         */  \
-   , const char *fmt         /* Format String        */  \
-   , ...                     /* Extra Arguments      */  \
+   z64_global_t  gl          /* Global Context    */     \
+   , uint32_t rgba           /* RGBA 32-Bit Color */     \
+   , uint8_t x               /* X Coordinate      */     \
+   , uint8_t y               /* Y Coordinate      */     \
+   , const char *fmt         /* Format String     */     \
+   , ...                     /* Extra Arguments   */     \
 {                                                        \
    z64_debug_text_t dbtx = {0};                          \
    z64_disp_buf_t *ovl = &gl->common.gfx_ctxt->overlay;  \
