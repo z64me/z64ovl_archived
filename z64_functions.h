@@ -3044,7 +3044,10 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
     static inline void actor_dynapoly_new(z64_global_t *global, z64_actor_t *actor, uint32_t dynacollision)
     {
         /* in the entity structure, a dynapoly_t is expected immediately after the actor_t */
-		 /*
+		 /* FIXME at least write a TODO or a FIXME when
+		          you make weird changes like this @noka,
+		          and a description as to why the change
+		          was made and what is broken would be nice...
         z64_dynapoly_t *dynapoly = (z64_dynapoly_t*)(actor + 1);
         uint32_t result = 0;
         dynapoly_alloc(DP_COLLIDE, &result);
