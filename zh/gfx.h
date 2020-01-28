@@ -60,7 +60,7 @@ typedef struct {
    z64_debug_text_t dbtx = {0};                          \
    z64_disp_buf_t *ovl = &gl->common.gfx_ctxt->overlay;  \
    debug_init_text_struct(&dbtx);                        \
-   debug_do_debug_text(text_struct, ovl->p);             \
+   debug_do_debug_text(&dbtx, ovl->p);                   \
    debug_set_text_rgba(                                  \
       &dbtx                                              \
       , RED32(rgba)                                      \
