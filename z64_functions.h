@@ -3047,27 +3047,43 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 	#endif
 
 /**
- * Wrapper for dynapoly_alloc() and actor_register_dynapoly(), for the purpose
- * of making code cleaner in actor overlays.
- * NOTE: This function appears to only exist in MM. A functionally identical
- *       rewrite for use in OoT has been provided, however.
+ * Wrapper for dynapoly_alloc() and actor_register_dynapoly(), so
+ * MM-style dynapoly can work in OoT.
+ * NOTE: This function appears to only exist in MM. A functionally
+ *       identical rewrite for use in OoT has been provided, however.
+ * NOTE: in the entity structure, a dynapoly_t must immediately
+ *       follow the actor_t whose pointer you provide
  * TODO: Test rewrite in OoT and confirm it works.
  */
 /* TODO: Does OoT have an equivalent of this function? */
 #if OOT_DEBUG || OOT_U_1_0
-    static inline void actor_dynapoly_new(z64_global_t *global, z64_actor_t *actor, uint32_t dynacollision)
-    {
-        /* in the entity structure, a dynapoly_t is expected immediately after the actor_t */
-		 /*
-        z64_dynapoly_t *dynapoly = (z64_dynapoly_t*)(actor + 1);
-        uint32_t result = 0;
-        dynapoly_alloc(DP_COLLIDE, &result);
-        en->dynapoly.polyID = actor_register_dynapoly(global, AADR(global, 0x810), &en->actor, result);
-		  */
-    }
+	static inline void
+	actor_dynapoly_new(
+		z64_global_t *global
+		, z64_actor_t *actor
+		, uint32_t dynacollision  /* ex. 0x06000B70 (Obj_Kibako2) */
+	)
+	{
+		/* the actor_t is followed by a dynapoly_t */
+		z64_dynapoly_t *dynapoly = (z64_dynapoly_t*)(actor + 1);
+		uint32_t result = 0;
+		dynapoly_alloc(dynacollision, &result);
+		dynapoly->polyID =
+		actor_register_dynapoly(
+			global
+			, AADR(global, 0x810)  /* TODO use a named variable */
+			, actor
+			, result
+		);
+	}
 #elif MM_U_1_0
-    extern void actor_dynapoly_new(z64_global_t *global, z64_actor_t *actor, uint32_t dynacollision);
-    asm("actor_dynapoly_new = 0x800CAE34");
+	extern void
+	actor_dynapoly_new(
+		z64_global_t *global
+		, z64_actor_t *actor
+		, uint32_t dynacollision
+	);
+	asm("actor_dynapoly_new = 0x800CAE34");
 #endif
 
 /**

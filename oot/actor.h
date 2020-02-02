@@ -86,8 +86,19 @@ struct z64_actor_s
   float             unk_0x8C;                 /* 0x008C */
   float             dist_from_link_xz;        /* 0x0090 */
   float             dist_from_link_y;         /* 0x0094 */
-  z64_collision_check_t collision_check;      /* 0x0098 */
-  /* Substruct 0x00B4 */
+  /* struct collision_check common */
+  void             *damage_table;             /* 0x0098 */
+  vec3f_t           vel_2;                    /* 0x009C */
+  int16_t           unk_0B_0;                 /* 0x00A8 */
+  int16_t           unk_0B_1;                 /* 0x00AA */
+  uint16_t          unk_0B_2;                 /* 0x00AC */
+  uint8_t           mass;                     /* 0x00AE */
+  uint8_t           health;                   /* 0x00AF */
+  uint8_t           damage;                   /* 0x00B0 */
+  uint8_t           damage_effect;            /* 0x00B1 */
+  uint8_t           impact_effect;            /* 0x00B2 */
+  char              unk_0D;                   /* 0x00B3 */
+  /* end CollisionCheck common */
   z64_rot_t         rot_2;                    /* 0x00B4 */
   char              unk_0E_[0x0002];          /* 0x00BA */
   float             unk_0xBC;                 /* 0x00BC */
