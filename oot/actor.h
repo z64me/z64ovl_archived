@@ -54,9 +54,9 @@ struct z64_actor_s
   vec3f_t           pos_1;                    /* 0x0008 */
   z64_rot_t         rot_init;                 /* 0x0014 */
   char              unk_01_[0x0002];          /* 0x001A */
-  int16_t          variable;                  /* 0x001C */
+  int16_t           variable;                 /* 0x001C */
   uint8_t           alloc_index;              /* 0x001E */
-  char              unk1F;                    /* 0x001F */
+  char              target_distance_index;    /* 0x001F */ // Indexes into table at 0x80115FFC
   uint16_t          sound_effect;             /* 0x0020 */
   char              unk_03_[0x0002];          /* 0x0022 */
   vec3f_t           pos_2;                    /* 0x0024 */
