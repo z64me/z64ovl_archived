@@ -40,17 +40,17 @@ typedef struct {
 
 /* for drawing multiple debug text strings optimally,     *
  * use the following macros like so:                      *
- *   zh_text_init_cxy(global, 0xFFFFFFFF, 1, 1);          *
+ *   zh_text_init(global, 0xFFFFFFFF, 1, 1);              *
  *     zh_text_draw("hello z%dovl", 64);                  *
  *     zh_text_draw("another line...");                   *
  *   zh_text_done();                                      *
  * [@] any variables declared between init() and done()   *
  *     have scope only in that region                     *
  * [@] you can draw with custom position and color using  *
- *     zh_text_draw_cxy                                   *
+ *     zh_text_draw_ex                                    *
  * if you don't understand this, use the simpler macro    *
  * zh_draw_debug_text() for your text rendering needs     */
-#define zh_text_init(/*z64_global_tP*/ gl)                \
+#define zh_text_init_ex(/*z64_global_tP*/ gl)             \
 {                                                         \
    z64_global_t *__LGL = gl; /* local copy */             \
    int __X = 0;                                           \
@@ -59,7 +59,7 @@ typedef struct {
    z64_disp_buf_t *ovl = &__LGL->common.gfx_ctxt->overlay;\
    debug_init_text_struct(&dbtx);                         \
    debug_do_text_struct(&dbtx, ovl->p);   
-#define zh_text_init_cxy(                                 \
+#define zh_text_init(                                     \
 	/*z64_global_tP*/  gl                                  \
    , /*uint32_t*/     rgba   /* RGBA 32-Bit Color */      \
    , /*uint8_t*/      x      /* X Coordinate      */      \
@@ -80,7 +80,7 @@ typedef struct {
       , BLUE32(rgba)                                      \
       , ALPHA32(rgba)                                     \
    );
-#define zh_text_draw_cxy(                                 \
+#define zh_text_draw_ex(                                  \
    /*uint32_t*/       rgba   /* RGBA 32-Bit Color */      \
    , /*uint8_t*/      x      /* X Coordinate      */      \
    , /*uint8_t*/      y      /* Y Coordinate      */      \
