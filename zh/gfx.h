@@ -56,7 +56,7 @@ typedef struct {
    debug_init_text_struct(&dbtx);                         \
    debug_do_text_struct(&dbtx, ovl->p);   
 #define zh_draw_debug_text(                               \
-   , /*uint32_t*/     rgba   /* RGBA 32-Bit Color */      \
+   /*uint32_t*/       rgba   /* RGBA 32-Bit Color */      \
    , /*uint8_t*/      x      /* X Coordinate      */      \
    , /*uint8_t*/      y      /* Y Coordinate      */      \
    , /*const charP*/  fmt    /* Format String     */      \
