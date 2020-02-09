@@ -61,7 +61,7 @@ typedef struct {
    debug_do_text_struct(&dbtx, ovl->p);   
 #define zh_text_init_cxy(                                 \
 	/*z64_global_tP*/  gl                                  \
-   /*uint32_t*/       rgba   /* RGBA 32-Bit Color */      \
+   , /*uint32_t*/     rgba   /* RGBA 32-Bit Color */      \
    , /*uint8_t*/      x      /* X Coordinate      */      \
    , /*uint8_t*/      y      /* Y Coordinate      */      \
 )                                                         \
