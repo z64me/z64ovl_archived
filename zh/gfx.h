@@ -59,7 +59,7 @@ typedef struct {
    z64_disp_buf_t *ovl = &__LGL->common.gfx_ctxt->overlay;\
    debug_init_text_struct(&dbtx);                         \
    debug_do_text_struct(&dbtx, ovl->p);   
-#define zh_text_init_cxy(
+#define zh_text_init_cxy(                                 \
 	/*z64_global_tP*/  gl                                  \
    /*uint32_t*/       rgba   /* RGBA 32-Bit Color */      \
    , /*uint8_t*/      x      /* X Coordinate      */      \
