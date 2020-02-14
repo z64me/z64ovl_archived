@@ -4100,6 +4100,7 @@ extern void external_func_80077624(void);
 
 /**
  * TODO This function is completely undocumented
+ * mem_copy
  */
 extern void external_func_80077684(void);
 	#if OOT_DEBUG
@@ -4110,6 +4111,7 @@ extern void external_func_80077684(void);
 
 /**
  * TODO This function is completely undocumented
+ * mem_clear
  */
 extern void external_func_800776E4(void);
 	#if OOT_DEBUG
@@ -4121,6 +4123,7 @@ extern void external_func_800776E4(void);
 /**
  * memset byte
  * A0 = Address | A1 = length (in bytes) | A2 = uint8_t value
+ * mem_cmp
  */
 extern void memory_set(void *dst, const uint32_t len, const uint8_t value);
 	#if OOT_DEBUG
@@ -4133,6 +4136,7 @@ extern void memory_set(void *dst, const uint32_t len, const uint8_t value);
  * Math, Get cosine of short rotation angle
  * TODO Test in-game
  * A0 = int16_t rotation | F0 = cosine of A0
+ * cos_s
  */
 extern float math_coss(int16_t angle);
 	#if OOT_DEBUG
@@ -4147,6 +4151,7 @@ extern float math_coss(int16_t angle);
  * Math, Get sine of short rotation angle
  * TODO Test in-game
  * A0 = int16_t rotation | F0 = sine of A0
+ * sin_s
  */
 extern float math_sins(int16_t angle);
 	#if OOT_DEBUG
@@ -4159,6 +4164,7 @@ extern float math_sins(int16_t angle);
 
 /**
  * TODO This function is completely undocumented
+ * chase_angle
  */
 extern void external_func_800778AC(void);
 	#if OOT_DEBUG
@@ -4170,6 +4176,8 @@ extern void external_func_800778AC(void);
 /**
  * TODO This function is completely undocumented
  * TODO possibly some kind of random number function...
+ * Short approximator?
+ * chase_s
  */
 extern void external_func_8007797C(int16_t *unk0, const int32_t unk1, const int32_t unk2);
 	#if OOT_DEBUG
@@ -4182,6 +4190,7 @@ extern void external_func_8007797C(int16_t *unk0, const int32_t unk1, const int3
  * Float approximator
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance + 0x0198 (offset of stored float) | a1 - float value (target float) | a2 - float value (increments or decrements result by this until it reaches the target float) | v0 - returns 0 if it hasn't reached it, 1 if it does
+ * chase_s
  */
 extern int32_t math_approxf(float *in_actor, int32_t target, float change);
 	#if OOT_DEBUG
@@ -4195,6 +4204,8 @@ extern int32_t math_approxf(float *in_actor, int32_t target, float change);
 /**
  * i
  * TODO These notes need converted into a C function prototype
+ * chase_xyz_t
+ * vec3f_t approximator?
  */
 extern void external_func_80077AF8(void);
 	#if OOT_DEBUG
@@ -4205,6 +4216,8 @@ extern void external_func_80077AF8(void);
 
 /**
  * TODO This function is completely undocumented
+ * inter_float
+ * Interpolate Floating Point?
  */
 extern void external_func_80077B58(void);
 	#if OOT_DEBUG
@@ -4215,6 +4228,7 @@ extern void external_func_80077B58(void);
 
 /**
  * Generates random int16_t between 0 and `range` (exlusive), and adds `offset`
+ * get_random_timer
  */
 extern int16_t math_rand_s16_offset(int16_t offset, int16_t range);
 	#if OOT_DEBUG
@@ -4227,6 +4241,7 @@ extern int16_t math_rand_s16_offset(int16_t offset, int16_t range);
 
 /**
  * Copy vec3f_t
+ * xyz_t_move
  */
 extern void math_vec3f_copy(vec3f_t *out, vec3f_t *in);
 	#if OOT_DEBUG
@@ -4240,6 +4255,7 @@ extern void math_vec3f_copy(vec3f_t *out, vec3f_t *in);
 /**
  * convert vec3s_t to vec3f_t
  * Convert int16_t Coordinates to Float Coordinates
+ * xyz_t_move_s_xyz
  */
 extern void math_vec3f_from_vec3s(vec3f_t *out, vec3s_t *in);
 	#if OOT_DEBUG
@@ -4253,6 +4269,7 @@ extern void math_vec3f_from_vec3s(vec3f_t *out, vec3s_t *in);
 /**
  * get the sum of two vec3f_t types
  * out = a + b
+ * xyz_t_add
  */
 extern void math_vec3f_add(vec3f_t *a, vec3f_t *b, vec3f_t *out);
 	#if OOT_DEBUG
@@ -4266,6 +4283,7 @@ extern void math_vec3f_add(vec3f_t *a, vec3f_t *b, vec3f_t *out);
 /**
  * get the difference of two vec3f_t types
  * out = a - b
+ * xyz_t_sub
  */
 extern void math_vec3f_sub(vec3f_t *a, vec3f_t *b, vec3f_t *out);
 	#if OOT_DEBUG
@@ -4282,6 +4300,7 @@ extern void math_vec3f_sub(vec3f_t *a, vec3f_t *b, vec3f_t *out);
  * TODO Note that out, a, and b are ordered differently than the math_vec3f_sub version of this function; confirm whether this is actually correct
  * TODO confirm that it's actually a - b
  * A0 = Result Float Coord ptr (A - B) | A1 = int16_t coord A ptr | A2 = int16_t coord B ptr
+ *
  */
 extern void math_vec3s_sub(vec3f_t *out, vec3s_t *a, vec3s_t *b);
 	#if OOT_DEBUG
@@ -4297,6 +4316,7 @@ extern void math_vec3s_sub(vec3f_t *out, vec3s_t *a, vec3s_t *b);
  * x *= scale
  * TODO is the scalar a float or an integer? Confirm in-game
  * A0 = Coord ptr | A1 = Scalar Value
+ * xyz_t_mult_v
  */
 extern void math_vec3f_mul_scalar(vec3f_t *x, f32 scale);
 	#if OOT_DEBUG
