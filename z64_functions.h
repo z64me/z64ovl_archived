@@ -2,6 +2,7 @@
 #define __Z64OVL_H__
 
 #include "h/ichain.h"
+#include "common.h"
 
 /****
  * z64ovl.h
@@ -6485,17 +6486,21 @@ extern int16_t math_atan2s(float x, float y);
 		asm("math_atan2s = 0x800D0664");
 	#elif OOT_U_1_0
 		asm("math_atan2s = 0x800AA4F8");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
  * padding at func end
- * TODO These notes need converted into a C function prototype
+ * TODO what does that even mean
  */
 extern void external_func_800D07D4(void);
 	#if OOT_DEBUG
 		asm("external_func_800D07D4 = 0x800D07D4");
 	#elif OOT_U_1_0
 		asm("external_func_800D07D4 = 0x800AA670");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
@@ -6505,11 +6510,13 @@ extern void external_func_800D07D4(void);
  * This function is not used inside any existing overlay
  * new_Matrix
  */
-extern void external_func_800D0810(void);
+extern void matrix_stack_new(void);
 	#if OOT_DEBUG
-		asm("external_func_800D0810 = 0x800D0810");
+		asm("matrix_stack_new = 0x800D0810");
 	#elif OOT_U_1_0
-		asm("external_func_800D0810 = 0x800AA6B0");
+		asm("matrix_stack_new = 0x800AA6B0");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
@@ -6517,23 +6524,29 @@ extern void external_func_800D0810(void);
  * TODO These notes need converted into a C function prototype
  * Matrix_push
  */
-extern void external_func_800D084C(void);
+extern void matrix_push(void);
 	#if OOT_DEBUG
-		asm("external_func_800D084C = 0x800D084C");
+		asm("matrix_push = 0x800D084C");
 	#elif OOT_U_1_0
-		asm("external_func_800D084C = 0x800AA6EC");
+		asm("matrix_push = 0x800AA6EC");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
  * Pops top level matrix in the Float Matrix Stack
  * TODO These notes need converted into a C function prototype
  * Matrix_pull
+ * aka glPopMatrix
+ * 
  */
-extern void external_func_800D0884(void);
+extern void matrix_pop(void);
 	#if OOT_DEBUG
-		asm("external_func_800D0884 = 0x800D0884");
+		asm("matrix_pop = 0x800D0884");
 	#elif OOT_U_1_0
-		asm("external_func_800D0884 = 0x800AA724");
+		asm("matrix_pop = 0x800AA724");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
@@ -6541,25 +6554,30 @@ extern void external_func_800D0884(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Destination
  * Matrix_get
+ * aka glGetX(GL_MODELVIEW_MATRIX, destination);
  */
-extern void external_func_800D08D8(void);
+extern void matrix_get(void *destination);
 	#if OOT_DEBUG
-		asm("external_func_800D08D8 = 0x800D08D8");
+		asm("matrix_get = 0x800D08D8");
 	#elif OOT_U_1_0
-		asm("external_func_800D08D8 = 0x800AA740");
+		asm("matrix_get = 0x800AA740");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
  * Overwrites top level matrix in the Float Matrix Stack
- * TODO These notes need converted into a C function prototype
  * A0 = Source Matrix
  * Matrix_put
+ * aka glLoadMatrix
  */
-extern void external_func_800D08FC(void);
+extern void matrix_load(void *matrix);
 	#if OOT_DEBUG
 		asm("external_func_800D08FC = 0x800D08FC");
 	#elif OOT_U_1_0
 		asm("external_func_800D08FC = 0x800AA764");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
@@ -6570,84 +6588,94 @@ extern void external_func_800D0930(void);
 		asm("external_func_800D0930 = 0x800D0930");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
  * Create/Apply x,y,z transformation on Float Matrix Stack
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
- Matrix_translate
+ * Matrix_translate
+ * aka glTranslatef
+ * formerly matrix_translate3f
  */
-extern void matrix_translate3f(float x, float y, float z, int32_t apply);
+extern void matrix_translate(float x, float y, float z, enum mtxmod mod);
 	#if OOT_DEBUG
-		asm("matrix_translate3f = 0x800D0984");
+		asm("matrix_translate = 0x800D0984");
 	#elif OOT_U_1_0
-		asm("matrix_translate3f = 0x800AA7F4");
+		asm("matrix_translate = 0x800AA7F4");
 	#elif MM_U_1_0
-		asm("matrix_translate3f = 0x8018029C");
+		asm("matrix_translate = 0x8018029C");
 	#endif
 
 /**
  * Create/Apply x,y,z scalar transformation on Float Matrix Stack
- * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
  * Matrix_scale
+ * aka glScalef
+ * formerly matrix_scale3f
  */
-extern void matrix_scale3f(float x, float y, float z, int32_t apply);
+extern void matrix_scale(float x, float y, float z, enum mtxmod mod);
 	#if OOT_DEBUG
-		asm("matrix_scale3f = 0x800D0A8C");
+		asm("matrix_scale = 0x800D0A8C");
 	#elif OOT_U_1_0
-		asm("matrix_scale3f = 0x800AA8FC");
+		asm("matrix_scale = 0x800AA8FC");
 	#elif MM_U_1_0
-		asm("matrix_scale3f = 0x8018039C");
+		asm("matrix_scale = 0x8018039C");
 	#endif
 
 /**
- * TODO probably some kind of matrix function
  * Matrix_RotateX
  */
-extern void matrix_rotate_x(float x, int32_t apply);
+extern void matrix_rotate_x(float x, enum mtxmod mod);
 	#if OOT_DEBUG
-		asm("external_func_800D0B70 = 0x800D0B70");
+		asm("matrix_rotate_x = 0x800D0B70");
 	#elif OOT_U_1_0
-		asm("external_func_800D0B70 = 0x800AA9E0");
+		asm("matrix_rotate_x = 0x800AA9E0");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
- * TODO probably some kind of matrix function
  * Matrix_RotateY
  */
-extern void matrix_rotate_y(float y, int32_t apply);
+extern void matrix_rotate_y(float y, enum mtxmod mod);
 	#if OOT_DEBUG
-		asm("external_func_800D0D20 = 0x800D0D20");
+		asm("matrix_rotate_y = 0x800D0D20");
 	#elif OOT_U_1_0
-		asm("external_func_800D0D20 = 0x800AAB94");
+		asm("matrix_rotate_y = 0x800AAB94");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
- * TODO some kind of matrix function?
  * Matrix_RotateZ
  */
-extern void matrix_rotate_z(float z, int32_t apply);
+extern void matrix_rotate_z(float z, enum mtxmod mod);
 	#if OOT_DEBUG
-		asm("external_func_800D0ED4 = 0x800D0ED4");
+		asm("matrix_rotate_z = 0x800D0ED4");
 	#elif OOT_U_1_0
-		asm("external_func_800D0ED4 = 0x800AAD4C");
+		asm("matrix_rotate_z = 0x800AAD4C");
 	#elif MM_U_1_0
-		asm("external_func_800D0ED4 = 0x80180E90");
+		asm("matrix_rotate_z = 0x80180E90");
 	#endif
 
 /**
  * Create/Apply x,y,z rotation transformation on Float Matrix Stack
- * TODO These notes need converted into a C function prototype
- * A0 = uint16_t x rotation | A1 = uint16_t y rotation | A2 = uint16_t z rotation | A3 = 0 initializes new matrix, 1 transforms stored matrix
+ * A0 = int16_t x rotation
+ * A1 = int16_t y rotation
+ * A2 = int16_t z rotation
+ * A3 = 0 initializes new matrix, 1 transforms stored matrix
  * Matrix_RotateXYZ
  */
-extern void matrix_rotate3s(int16_t x, int16_t y, int16_t z, int32_t apply);
+extern void matrix_rotate(int16_t x, int16_t y, int16_t z, enum mtxmod mod);
 	#if OOT_DEBUG
-		asm("matrix_rotate3s = 0x800D1084");
+		asm("matrix_rotate = 0x800D1084");
 	#elif OOT_U_1_0
-		asm("matrix_rotate3s = 0x800AAF00");
+		asm("matrix_rotate = 0x800AAF00");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
@@ -6738,15 +6766,17 @@ extern void external_func_800D1AF4(vec3f_t *in, vec3f_t *out);
 
 /**
  * Float Matrix Copy
+ * copy src over dst
  * poorly optimized?
- * TODO These notes need converted into a C function prototype
  * A0 = Destination | A1 = Source
  */
-extern void external_func_800D1BA8(void);
+extern void matrix_copy(void *dst, void *src);
 	#if OOT_DEBUG
 		asm("external_func_800D1BA8 = 0x800D1BA8");
 	#elif OOT_U_1_0
 		asm("external_func_800D1BA8 = 0x800ABA10");
+	#elif MM_U_1_0
+		/* TODO */
 	#endif
 
 /**
