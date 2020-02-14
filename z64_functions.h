@@ -5211,7 +5211,6 @@ extern void external_func_80093D84(z64_gfx_t *gfx);
 		asm("external_func_80093D84 = 0x8007E2C0");
 	#elif MM_U_1_0
 		asm("external_func_80093D84 = 0x8012C2DC");
-		asm("external_func_8012C2DC = 0x8012C2DC");
 	#endif
 
 /**
@@ -6504,6 +6503,7 @@ extern void external_func_800D07D4(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context
  * This function is not used inside any existing overlay
+ * new_Matrix
  */
 extern void external_func_800D0810(void);
 	#if OOT_DEBUG
@@ -6515,6 +6515,7 @@ extern void external_func_800D0810(void);
 /**
  * Clones the top level matrix in the Float Matrix Stack | (Increments Append Start by 0x40)
  * TODO These notes need converted into a C function prototype
+ * Matrix_push
  */
 extern void external_func_800D084C(void);
 	#if OOT_DEBUG
@@ -6526,6 +6527,7 @@ extern void external_func_800D084C(void);
 /**
  * Pops top level matrix in the Float Matrix Stack
  * TODO These notes need converted into a C function prototype
+ * Matrix_pull
  */
 extern void external_func_800D0884(void);
 	#if OOT_DEBUG
@@ -6538,6 +6540,7 @@ extern void external_func_800D0884(void);
  * Copies the top level matrix in the Float Matrix Stack
  * TODO These notes need converted into a C function prototype
  * A0 = Destination
+ * Matrix_get
  */
 extern void external_func_800D08D8(void);
 	#if OOT_DEBUG
@@ -6550,6 +6553,7 @@ extern void external_func_800D08D8(void);
  * Overwrites top level matrix in the Float Matrix Stack
  * TODO These notes need converted into a C function prototype
  * A0 = Source Matrix
+ * Matrix_put
  */
 extern void external_func_800D08FC(void);
 	#if OOT_DEBUG
@@ -6572,8 +6576,9 @@ extern void external_func_800D0930(void);
  * Create/Apply x,y,z transformation on Float Matrix Stack
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
+ Matrix_translate
  */
-extern void matrix_translate3f(float x, float y, float z, int32_t transform_current);
+extern void matrix_translate3f(float x, float y, float z, int32_t apply);
 	#if OOT_DEBUG
 		asm("matrix_translate3f = 0x800D0984");
 	#elif OOT_U_1_0
@@ -6586,8 +6591,9 @@ extern void matrix_translate3f(float x, float y, float z, int32_t transform_curr
  * Create/Apply x,y,z scalar transformation on Float Matrix Stack
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
+ * Matrix_scale
  */
-extern void matrix_scale3f(float x, float y, float z, int32_t transform_current);
+extern void matrix_scale3f(float x, float y, float z, int32_t apply);
 	#if OOT_DEBUG
 		asm("matrix_scale3f = 0x800D0A8C");
 	#elif OOT_U_1_0
@@ -6598,8 +6604,9 @@ extern void matrix_scale3f(float x, float y, float z, int32_t transform_current)
 
 /**
  * TODO probably some kind of matrix function
+ * Matrix_RotateX
  */
-extern void external_func_800D0B70(float unk0, int32_t transform_current);
+extern void matrix_rotate_x(float x, int32_t apply);
 	#if OOT_DEBUG
 		asm("external_func_800D0B70 = 0x800D0B70");
 	#elif OOT_U_1_0
@@ -6608,8 +6615,9 @@ extern void external_func_800D0B70(float unk0, int32_t transform_current);
 
 /**
  * TODO probably some kind of matrix function
+ * Matrix_RotateY
  */
-extern void external_func_800D0D20(float unk0, int32_t transform_current);
+extern void matrix_rotate_y(float y, int32_t apply);
 	#if OOT_DEBUG
 		asm("external_func_800D0D20 = 0x800D0D20");
 	#elif OOT_U_1_0
@@ -6618,23 +6626,24 @@ extern void external_func_800D0D20(float unk0, int32_t transform_current);
 
 /**
  * TODO some kind of matrix function?
+ * Matrix_RotateZ
  */
-extern void external_func_800D0ED4(float unk0, int32_t current_transform);
+extern void matrix_rotate_z(float z, int32_t apply);
 	#if OOT_DEBUG
 		asm("external_func_800D0ED4 = 0x800D0ED4");
 	#elif OOT_U_1_0
 		asm("external_func_800D0ED4 = 0x800AAD4C");
 	#elif MM_U_1_0
 		asm("external_func_800D0ED4 = 0x80180E90");
-		asm("external_func_80180E90 = 0x80180E90");
 	#endif
 
 /**
  * Create/Apply x,y,z rotation transformation on Float Matrix Stack
  * TODO These notes need converted into a C function prototype
  * A0 = uint16_t x rotation | A1 = uint16_t y rotation | A2 = uint16_t z rotation | A3 = 0 initializes new matrix, 1 transforms stored matrix
+ * Matrix_RotateXYZ
  */
-extern void matrix_rotate3s(int16_t x, int16_t y, int16_t z, int32_t transform_current);
+extern void matrix_rotate3s(int16_t x, int16_t y, int16_t z, int32_t apply);
 	#if OOT_DEBUG
 		asm("matrix_rotate3s = 0x800D1084");
 	#elif OOT_U_1_0
@@ -6643,6 +6652,7 @@ extern void matrix_rotate3s(int16_t x, int16_t y, int16_t z, int32_t transform_c
 
 /**
  * TODO This function is completely undocumented
+ * Matrix_softcv3_mult
  */
 extern void external_func_800D1340(void);
 	#if OOT_DEBUG
