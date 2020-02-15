@@ -77,6 +77,19 @@ extern void osSendMesg(OSMesgQueue* queue, void* dest, int32_t flag);
 		asm("osSendMesg = 0x80001E20");
 	#endif
 
+/****
+ * zero `num` bytes starting at `dst`
+ * This function is not used inside any existing overlay
+ ***/
+extern void z_bzero(void *dst, const int num);
+	#if OOT_DEBUG
+		asm("z_bzero = 0x80004450");
+	#elif OOT_U_1_0
+		// TODO
+	#elif MM_U_1_0
+		// TODO
+	#endif
+
 extern int _Printf(
 	void *pfn(void *, const char *, size_t), void *arg, const char *fmt, ...);
 	#if OOT_DEBUG
@@ -114,8 +127,22 @@ extern void osRecvMesg(OSMesgQueue* queue, OSMesg* mesq, int32_t flag);
 	#endif
 
 /****
+ * compare byte sequences `s1` and `s2` of length `n`
+ * if they are equal, or `n == 0`, z_bcmp returns 0; non-zero otherwise
+ ***/
+extern int z_bcmp(const void *s1, const void *s2, int n);
+	#if OOT_DEBUG
+		asm("z_bcmp = 0x800068C0");
+	#elif OOT_U_1_0
+		// TODO
+	#elif MM_U_1_0
+		// TODO
+	#endif
+
+/****
  * copy `num` bytes from `src` to `dst`
  * This function is not used inside any existing overlay
+ * formerly memory_copy
  ***/
 extern void z_bcopy(const void *src, void *dst, const uint32_t num);
 	#if OOT_DEBUG
@@ -4127,12 +4154,13 @@ extern void external_func_800776E4(void);
  * memset byte
  * A0 = Address | A1 = length (in bytes) | A2 = uint8_t value
  * mem_cmp
+ * formerly memory_set
  */
-extern void memory_set(void *dst, const uint32_t len, const uint8_t value);
+extern void z_memset(void *dst, const uint32_t len, const uint8_t value);
 	#if OOT_DEBUG
-		asm("memory_set = 0x800777E0");
+		asm("z_memset = 0x800777E0");
 	#elif OOT_U_1_0
-		asm("memory_set = 0x80063630");
+		asm("z_memset = 0x80063630");
 	#endif
 
 /**
@@ -4140,14 +4168,15 @@ extern void memory_set(void *dst, const uint32_t len, const uint8_t value);
  * TODO Test in-game
  * A0 = int16_t rotation | F0 = cosine of A0
  * cos_s
+ * formerly math_coss
  */
-extern float math_coss(int16_t angle);
+extern float z_cos_s(int16_t angle);
 	#if OOT_DEBUG
-		asm("math_coss = 0x80077834"); /* Alternatively 0x80104780 */
+		asm("z_cos_s = 0x80077834"); /* Alternatively 0x80104780 */
 	#elif OOT_U_1_0
-		asm("math_coss = 0x80063684");
+		asm("z_cos_s = 0x80063684");
 	#elif MM_U_1_0
-		asm("math_coss = 0x800FED44");
+		asm("z_cos_s = 0x800FED44");
 	#endif
 
 /**
@@ -4155,14 +4184,15 @@ extern float math_coss(int16_t angle);
  * TODO Test in-game
  * A0 = int16_t rotation | F0 = sine of A0
  * sin_s
+ * formerly math_sins
  */
-extern float math_sins(int16_t angle);
+extern float z_sin_s(int16_t angle);
 	#if OOT_DEBUG
-		asm("math_sins = 0x80077870"); /* Alternatively 0x80100450 */
+		asm("z_sin_s = 0x80077870"); /* Alternatively 0x80100450 */
 	#elif OOT_U_1_0
-		asm("math_sins = 0x800636C4");
+		asm("z_sin_s = 0x800636C4");
 	#elif MM_U_1_0
-		asm("math_sins = 0x800FED84");
+		asm("z_sin_s = 0x800FED84");
 	#endif
 
 /**
@@ -6549,12 +6579,13 @@ extern void external_func_800CE4B8(void);
  * returns rotation in int16_t format
  * TODO These notes need converted into a C function prototype
  * F12 = x | F14 = y | V0 = int16_t Rotation
+ * formerly math_atan2s
  */
-extern int16_t math_atan2s(float x, float y);
+extern int16_t z_atan2_s(float x, float y);
 	#if OOT_DEBUG
-		asm("math_atan2s = 0x800D0664");
+		asm("z_atan2_s = 0x800D0664");
 	#elif OOT_U_1_0
-		asm("math_atan2s = 0x800AA4F8");
+		asm("z_atan2_s = 0x800AA4F8");
 	#elif MM_U_1_0
 		/* TODO */
 	#endif
@@ -7526,42 +7557,48 @@ extern int32_t external_func_800FD970(void);
 
 /**
  * Seeds the RNG with the given seed. This function is not used inside any existing overlay.
+ * formerly srand
+ * TODO in the C standard library, srand does not return anything...
+ *      please confirm whether this returns anything, and if so, what
  */
-extern int32_t srand(uint32_t seed);
+extern int32_t z_srand(uint32_t seed);
 	#if OOT_DEBUG
-		asm("srand = 0x800FD9A0");
+		asm("z_srand = 0x800FD9A0");
 	#elif OOT_U_1_0
-		asm("srand = 0x800CDCC0");
+		asm("z_srand = 0x800CDCC0");
 	#endif
 
 /**
  * Returns sine of a floating point value.
+ * formerly math_sinf
  */
-extern float math_sinf(float angle);
+extern float z_sin(float angle);
 	#if OOT_DEBUG
-		asm("math_sinf = 0x80100290");
+		asm("z_sin = 0x80100290");
 	#elif OOT_U_1_0
-		asm("math_sinf = 0x800CF470");
+		asm("z_sin = 0x800CF470");
 	#endif
 
 /**
  * Returns the square root of a floating point number.
+ * formerly math_sqrtf
  */
-extern float math_sqrtf(float value);
+extern float z_sqrt(float value);
 	#if OOT_DEBUG
-		asm("math_sqrtf = 0x801031E0");
+		asm("z_sqrt = 0x801031E0");
 	#elif OOT_U_1_0
-		asm("math_sqrtf = 0x800D0DC0");
+		asm("z_sqrt = 0x800D0DC0");
 	#endif
 
 /**
  * Returns cosine of a floating point value.
+ * formerly math_cosf
  */
-extern float math_cosf(float angle);
+extern float z_cos(float angle);
 	#if OOT_DEBUG
-		asm("math_cosf = 0x80104610");
+		asm("z_cos = 0x80104610");
 	#elif OOT_U_1_0
-		asm("math_cosf = 0x800D2CD0");
+		asm("z_cos = 0x800D2CD0");
 	#endif
 
 /**
@@ -7576,20 +7613,22 @@ extern void external_func_80104780(void);
 
 /**
  * Returns the absolute value of a floating point number.
+ * formerly math_fabsf
  */
-extern float math_fabsf(float value);
+extern float z_fabs(float value);
 	#if OOT_DEBUG
-		asm("math_fabsf = 0x801067E0");
+		asm("z_fabs = 0x801067E0");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
 
 /**
  * Returns the modulous of two floating point numbers.
+ * formerly math_fmodf
  */
-extern float math_fmodf(float a, float b);
+extern float z_fmod(float a, float b);
 	#if OOT_DEBUG
-		asm("math_fmodf = 0x801067F0");
+		asm("z_fmod = 0x801067F0");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
