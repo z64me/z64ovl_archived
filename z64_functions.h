@@ -44,13 +44,13 @@
  * Copy data from the ROM into VRAM, using Direct Memory Access (DMA)
  ***/
 
- extern uint32_t load_data_from_rom(
-	  uint32_t* vram_addr,
-      uint32_t* vrom_addr,
-      uint32_t size,
+extern uint32_t load_data_from_rom(
+	uint32_t *vram_addr
+	, uint32_t *vrom_addr
+	, uint32_t size
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
-	  const char *string,
-	  int32_t line
+	, const char *string
+	, int32_t line
 #endif
 );
 #ifdef RETAIL_NUANCES
