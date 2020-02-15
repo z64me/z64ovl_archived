@@ -602,16 +602,21 @@ typedef struct
   uint16_t          scene_index;              /* 0x000A4 */
   char              unk_00_[0x000A];          /* 0x000A6 */
   void             *scene_file;               /* 0x000B0 */
-  char              unk_01_[0x000C];          /* 0x000B4 */
-  uint32_t          screen_top;               /* 0x000C0 */
-  uint32_t          screen_bottom;            /* 0x000C4 */
-  uint32_t          screen_left;              /* 0x000C8 */
-  uint32_t          screen_right;             /* 0x000CC */
-  float             camera_distance;          /* 0x000D0 */
-  float             fog_distance;             /* 0x000D4 */
-  float             z_distance;               /* 0x000D8 */
-  float             unk_02_;                  /* 0x000DC */
-  char              unk_03_[0x0100];          /* 0x000E0 */
+  char              unk_01_[4];               /* 0x000B4 */
+  struct
+  {
+    char              unk[8];                   /* 0x000B8 */
+    uint32_t          screen_top;               /* 0x000C0 */
+    uint32_t          screen_bottom;            /* 0x000C4 */
+    uint32_t          screen_left;              /* 0x000C8 */
+    uint32_t          screen_right;             /* 0x000CC */
+    float             camera_distance;          /* 0x000D0 */
+    float             fog_distance;             /* 0x000D4 */
+    float             z_distance;               /* 0x000D8 */
+    float             unk_02_;                  /* 0x000DC */
+    vec3f_t           eye;                      /* 0x000E0 */
+    char              unk_03_[0x00F4];          /* 0x000EC */
+  } view; /* starts at 00B8 */
   struct
   {
     char              unk_0[0x90];              /* 0x001E0 */
