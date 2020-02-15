@@ -624,7 +624,7 @@ typedef struct
     int16_t           event_flag;               /* 0x004AC */
     char              unk_07_[0x02E2];          /* 0x004AE */
     void             *pointer[4];               /* 0x00790 */
-    int16_t           unk_5C0;                  /* 0x007A0 */
+    int16_t           active;  /* active cam (0-3) 0x007A0 */
     int16_t           unk_5C2;                  /* 0x007A2 */
   } camera;
   uint8_t           seq_idx;                  /* 0x007A4 */
