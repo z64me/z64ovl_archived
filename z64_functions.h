@@ -4585,11 +4585,11 @@ extern void external_func_8007AE10(void);
  * a0 = size, v0 = alloced address
  * 0x8007AE90 seems to do the same thing?
  */
- extern void *z_malloc(
-	  uint32_t size,
+extern void *z_malloc(
+	uint32_t size
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
-	  const char *string,
-	  int32_t line
+	, const char *string
+	, int32_t line
 #endif
 );
 #ifdef RETAIL_NUANCES
@@ -4608,11 +4608,11 @@ extern void external_func_8007AE10(void);
  * a0 = size, v0 = alloced address
  * 0x8007AF3C seems to do the same thing?
  */
- extern void *z_malloc_reverse(
-	  uint32_t size,
+extern void *z_malloc_reverse(
+	uint32_t size
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
-	  const char *string,
-	  int32_t line
+	, const char *string
+	, int32_t line
 #endif
 );
 #ifdef RETAIL_NUANCES
