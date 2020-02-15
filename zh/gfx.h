@@ -38,6 +38,78 @@ typedef struct {
 #define TEXT_IGNORE_COLOR 1
 #define TEXT_SKIP_RENDER 2
 
+/* for drawing multiple debug text strings optimally,     *
+ * use the following macros like so:                      *
+ *   zh_text_init(global, 0xFFFFFFFF, 1, 1);              *
+ *     zh_text_draw("hello z%dovl", 64);                  *
+ *     zh_text_draw("another line...");                   *
+ *   zh_text_done();                                      *
+ * [@] any variables declared between init() and done()   *
+ *     have scope only in that region                     *
+ * [@] you can draw with custom position and color using  *
+ *     zh_text_draw_ex                                    *
+ * if you don't understand this, use the simpler macro    *
+ * zh_draw_debug_text() for your text rendering needs     */
+#define zh_text_init_ex(/*z64_global_tP*/ gl)             \
+{                                                         \
+   z64_global_t *__LGL = gl; /* local copy */             \
+   int __X = 0;                                           \
+   int __Y = 0;                                           \
+   z64_debug_text_t dbtx = {0};                           \
+   z64_disp_buf_t *ovl = &__LGL->common.gfx_ctxt->overlay;\
+   debug_init_text_struct(&dbtx);                         \
+   debug_do_text_struct(&dbtx, ovl->p);   
+#define zh_text_init(                                     \
+	/*z64_global_tP*/  gl                                  \
+   , /*uint32_t*/     rgba   /* RGBA 32-Bit Color */      \
+   , /*uint8_t*/      x      /* X Coordinate      */      \
+   , /*uint8_t*/      y      /* Y Coordinate      */      \
+)                                                         \
+{                                                         \
+   z64_global_t *__LGL = gl; /* local copy */             \
+   int __X = x;                                           \
+   int __Y = y;                                           \
+   z64_debug_text_t dbtx = {0};                           \
+   z64_disp_buf_t *ovl = &__LGL->common.gfx_ctxt->overlay;\
+   debug_init_text_struct(&dbtx);                         \
+   debug_do_text_struct(&dbtx, ovl->p);                   \
+   debug_set_text_rgba(                                   \
+      &dbtx                                               \
+      , RED32(rgba)                                       \
+      , GREEN32(rgba)                                     \
+      , BLUE32(rgba)                                      \
+      , ALPHA32(rgba)                                     \
+   );
+#define zh_text_draw_ex(                                  \
+   /*uint32_t*/       rgba   /* RGBA 32-Bit Color */      \
+   , /*uint8_t*/      x      /* X Coordinate      */      \
+   , /*uint8_t*/      y      /* Y Coordinate      */      \
+   , /*const charP*/  fmt    /* Format String     */      \
+   , ...                     /* Extra Arguments   */      \
+)                                                         \
+   debug_set_text_rgba(                                   \
+      &dbtx                                               \
+      , RED32(rgba)                                       \
+      , GREEN32(rgba)                                     \
+      , BLUE32(rgba)                                      \
+      , ALPHA32(rgba)                                     \
+   );                                                     \
+   debug_set_text_xy(&dbtx, x, y);                        \
+   __X = x;                                               \
+   __Y = y + 1;                                           \
+   debug_set_text_string(&dbtx, fmt, __VA_ARGS__);
+#define zh_text_draw(                                     \
+   /*const charP*/  fmt      /* Format String     */      \
+   , ...                     /* Extra Arguments   */      \
+)                                                         \
+   debug_set_text_xy(&dbtx, __X, __Y);                    \
+   ++__Y; /* advance to next line */                      \
+   debug_set_text_string(&dbtx, fmt, __VA_ARGS__);
+#define zh_text_done(x)                                   \
+   ovl->p = (Gfx *)debug_update_text_struct(&dbtx);       \
+}
+
+/* this version allows you to draw with one call: */
 /* draw debug text (supports format specifiers);         *
  * this example displays the string "hello z64ovl"       *
  * at the upper left corner of the screen:               *
