@@ -4547,6 +4547,74 @@ extern void external_func_8007A7C4(z64_global_t *gl, z64_lighting_t *lighting, v
 	#elif OOT_U_1_0
 		asm("external_func_8007A7C4 = 0x80066610");
 	#endif
+   
+
+/**
+ * z_malloc_r, possibly?
+ */
+extern void external_func_8007AE10(void);
+	#if OOT_DEBUG
+		asm("external_func_8007AE10 = 0x8007AE10");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#endif   
+    
+/**
+ * Allocates bytes in the arena, rounded up to nearest 16.
+ * a0 = size, v0 = alloced address
+ * 0x8007AE90 seems to do the same thing?
+ */
+ extern void *z_malloc(
+	  uint32_t size,
+#ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
+	  const char *string,
+	  int32_t line
+#endif
+);
+#ifdef RETAIL_NUANCES
+#define z_malloc(SIZE, STR) z_malloc(SIZE)
+#else
+#define z_malloc(SIZE, STR) z_malloc(SIZE, STR, __LINE__)
+#endif
+    #if OOT_DEBUG
+        asm("z_malloc = 0x8007AEE0");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+    #endif
+    
+/**
+ * Allocates bytes in the arena, rounded up to nearest 16, starting from the highest free address.
+ * a0 = size, v0 = alloced address
+ * 0x8007AF3C seems to do the same thing?
+ */
+ extern void *z_malloc_reverse(
+	  uint32_t size,
+#ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
+	  const char *string,
+	  int32_t line
+#endif
+);
+#ifdef RETAIL_NUANCES
+#define z_malloc_reverse(SIZE, STR) z_malloc_reverse(SIZE)
+#else
+#define z_malloc_reverse(SIZE, STR) z_malloc_reverse(SIZE, STR, __LINE__)
+#endif
+    #if OOT_DEBUG
+        asm("z_malloc_reverse = 0x8007AF8C");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+    #endif
+    
+/**
+ * Frees bytes from the arena.
+ * a0 = allocated address
+ */
+extern void z_free(void *address);
+	#if OOT_DEBUG
+		asm("z_free = 0x8007B0D4");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#endif   
 
 /**
  * TODO This function is completely undocumented
