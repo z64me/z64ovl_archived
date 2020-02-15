@@ -6259,14 +6259,13 @@ extern void external_func_800C0CB8(void);
 
 /**
  * Check if Game Updates are Disabled
- * TODO These notes need converted into a C function prototype
- * V0 = 1 if Global Context + 0x7B8 &gt; 0
+ * returns 1 (V0 = 1) if Global Context + 0x7B8 > 0
  */
-extern void external_func_800C0D28(void);
+extern void game_updates_off(z64_global_t *global);
 	#if OOT_DEBUG
-		asm("external_func_800C0D28 = 0x800C0D28");
+		asm("game_updates_off = 0x800C0D28");
 	#elif OOT_U_1_0
-		asm("external_func_800C0D28 = 0x8009DB54");
+		asm("game_updates_off = 0x8009DB54");
 	#endif
 
 /**
