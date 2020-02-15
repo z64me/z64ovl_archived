@@ -117,11 +117,13 @@ extern void osRecvMesg(OSMesgQueue* queue, OSMesg* mesq, int32_t flag);
  * copy `num` bytes from `src` to `dst`
  * This function is not used inside any existing overlay
  ***/
-extern void memory_copy(const void *src, void *dst, const uint32_t num);
+extern void z_bcopy(const void *src, void *dst, const uint32_t num);
 	#if OOT_DEBUG
-		asm("memory_copy = 0x80006F10");
+		asm("z_bcopy = 0x80006F10");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("z_bcopy = 0x80004DC0");
+	#elif MM_U_1_0
+		asm("z_bcopy = 0x800912C0");
 	#endif
 
 /**
