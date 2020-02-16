@@ -7682,6 +7682,8 @@ extern void textbox_begin(z64_global_t *, uint16_t text_id, z64_actor_t *actor);
 		asm("textbox_begin = 0x8010B680");
 	#elif OOT_U_1_0
 		asm("textbox_begin = 0x800DCE14");
+ 	#elif MM_U_1_0
+		asm("textbox_begin = 0x801518B0");
 	#endif
 
 /**
