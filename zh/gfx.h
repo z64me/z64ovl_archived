@@ -87,6 +87,7 @@ typedef struct {
    , /*const charP*/  fmt    /* Format String     */      \
    , ...                     /* Extra Arguments   */      \
 )                                                         \
+{                                                         \
    debug_set_text_rgba(                                   \
       &dbtx                                               \
       , RED32(rgba)                                       \
@@ -97,14 +98,17 @@ typedef struct {
    debug_set_text_xy(&dbtx, x, y);                        \
    __X = x;                                               \
    __Y = y + 1;                                           \
-   debug_set_text_string(&dbtx, fmt, __VA_ARGS__);
+   debug_set_text_string(&dbtx, fmt, __VA_ARGS__);        \
+}
 #define zh_text_draw(                                     \
    /*const charP*/  fmt      /* Format String     */      \
    , ...                     /* Extra Arguments   */      \
 )                                                         \
+{                                                         \
    debug_set_text_xy(&dbtx, __X, __Y);                    \
    ++__Y; /* advance to next line */                      \
-   debug_set_text_string(&dbtx, fmt, __VA_ARGS__);
+   debug_set_text_string(&dbtx, fmt, __VA_ARGS__);        \
+}
 #define zh_text_done(x)                                   \
    ovl->p = (Gfx *)debug_update_text_struct(&dbtx);       \
 }
