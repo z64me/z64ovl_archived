@@ -56,7 +56,9 @@ struct z64_actor_s
 	uint16_t          sound_effect;             /* 0x0020 */
 	char              unk_03_[0x0002];          /* 0x0022 */
 	vec3f_t           pos_2;                    /* 0x0024 */
-	z64_rot_t         speedRot;                 /* 0x0030 */
+	int16_t           speedRot_unk30;           /* 0x0030 */ // possibly rot_0...
+	int16_t           xz_dir;                   /* 0x0032 */
+	int16_t           unk34;                    /* 0x0034 */
 	char              unk_04_[0x0002];          /* 0x0036 */
 	int8_t            unk_0x38;                 /* 0x0038 */
 	uint8_t           unk_0x39;                 /* 0x0039 */

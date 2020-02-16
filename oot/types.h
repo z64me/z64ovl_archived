@@ -602,24 +602,36 @@ typedef struct
   uint16_t          scene_index;              /* 0x000A4 */
   char              unk_00_[0x000A];          /* 0x000A6 */
   void             *scene_file;               /* 0x000B0 */
-  char              unk_01_[0x000C];          /* 0x000B4 */
-  uint32_t          screen_top;               /* 0x000C0 */
-  uint32_t          screen_bottom;            /* 0x000C4 */
-  uint32_t          screen_left;              /* 0x000C8 */
-  uint32_t          screen_right;             /* 0x000CC */
-  float             camera_distance;          /* 0x000D0 */
-  float             fog_distance;             /* 0x000D4 */
-  float             z_distance;               /* 0x000D8 */
-  float             unk_02_;                  /* 0x000DC */
-  char              unk_03_[0x0190];          /* 0x000E0 */
-  z64_actor_t      *camera_focus;             /* 0x00270 */
-  char              unk_04_[0x00AE];          /* 0x00274 */
-  uint16_t          camera_mode;              /* 0x00322 */
-  char              unk_05_[0x001A];          /* 0x00324 */
-  uint16_t          camera_flag_1;            /* 0x0033E */
-  char              unk_06_[0x016C];          /* 0x00340 */
-  int16_t           event_flag;               /* 0x004AC */
-  char              unk_07_[0x02F6];          /* 0x004AE */
+  char              unk_01_[4];               /* 0x000B4 */
+  struct
+  {
+    char              unk[8];                   /* 0x000B8 */
+    uint32_t          screen_top;               /* 0x000C0 */
+    uint32_t          screen_bottom;            /* 0x000C4 */
+    uint32_t          screen_left;              /* 0x000C8 */
+    uint32_t          screen_right;             /* 0x000CC */
+    float             camera_distance;          /* 0x000D0 */
+    float             fog_distance;             /* 0x000D4 */
+    float             z_distance;               /* 0x000D8 */
+    float             unk_02_;                  /* 0x000DC */
+    vec3f_t           eye;                      /* 0x000E0 */
+    char              unk_03_[0x00F4];          /* 0x000EC */
+  } view; /* starts at 00B8 */
+  struct
+  {
+    char              unk_0[0x90];              /* 0x001E0 */
+    z64_actor_t      *focus;                    /* 0x00270 */
+    char              unk_04_[0x00AE];          /* 0x00274 */
+    uint16_t          mode;                     /* 0x00322 */
+    char              unk_05_[0x001A];          /* 0x00324 */
+    uint16_t          flag_1;                   /* 0x0033E */
+    char              unk_06_[0x016C];          /* 0x00340 */
+    int16_t           event_flag;               /* 0x004AC */
+    char              unk_07_[0x02E2];          /* 0x004AE */
+    void             *pointer[4];               /* 0x00790 */
+    int16_t           active;  /* active cam (0-3) 0x007A0 */
+    int16_t           unk_5C2;                  /* 0x007A2 */
+  } camera;
   uint8_t           seq_idx;                  /* 0x007A4 */
   uint8_t           night_sfx;                /* 0x007A5 */
   char              unk_08_[0x0002];          /* 0x007A6 */
