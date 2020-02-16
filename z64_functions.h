@@ -4180,11 +4180,11 @@ extern void external_func_800778AC(void);
  * Short approximator?
  * chase_s
  */
-extern void external_func_8007797C(int16_t *unk0, const int32_t unk1, const int32_t unk2);
+extern int16_t math_approxs(int16_t *in_actor, int16_t target, int16_t change);
 	#if OOT_DEBUG
-		asm("external_func_8007797C = 0x8007797C");
+		asm("math_approxs = 0x8007797C");
 	#elif OOT_U_1_0
-		asm("external_func_8007797C = 0x800637D4");
+		asm("math_approxs = 0x800637D4");
 	#endif
 
 /**
@@ -5249,7 +5249,7 @@ extern void external_func_800943C8(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80094520(void);
+extern void external_func_80094520(z64_gfx_t *gfx_ctxt);
 	#if OOT_DEBUG
 		asm("external_func_80094520 = 0x80094520");
 	#elif OOT_U_1_0
@@ -6338,7 +6338,6 @@ extern void external_func_800CB0C0(void);
 		asm("external_func_800CB0C0 = 0x800A4F98");
 	#elif MM_U_1_0
 		asm("external_func_800CB0C0 = 0x80179F64");
-		asm("external_func_80179F64 = 0x80179F64");
 	#endif
 
 /**
@@ -6538,7 +6537,7 @@ extern void matrix_push(void);
  * TODO These notes need converted into a C function prototype
  * Matrix_pull
  * aka glPopMatrix
- * 
+ *
  */
 extern void matrix_pop(void);
 	#if OOT_DEBUG
