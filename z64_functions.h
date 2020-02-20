@@ -4600,7 +4600,7 @@ extern void external_func_8007A7C4(z64_global_t *gl, z64_lighting_t *lighting, v
 	#elif OOT_U_1_0
 		asm("external_func_8007A7C4 = 0x80066610");
 	#endif
-   
+
 
 /**
  * z_malloc_r, possibly?
@@ -4610,8 +4610,8 @@ extern void external_func_8007AE10(void);
 		asm("external_func_8007AE10 = 0x8007AE10");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
-	#endif   
-    
+	#endif
+
 /**
  * Allocates bytes in the arena, rounded up to nearest 16.
  * a0 = size, v0 = alloced address
@@ -4634,7 +4634,7 @@ extern void *z_malloc(
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
     #endif
-    
+
 /**
  * Allocates bytes in the arena, rounded up to nearest 16, starting from the highest free address.
  * a0 = size, v0 = alloced address
@@ -4657,7 +4657,7 @@ extern void *z_malloc_reverse(
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
     #endif
-    
+
 /**
  * Frees bytes from the arena.
  * a0 = allocated address
@@ -4667,7 +4667,7 @@ extern void z_free(void *address);
 		asm("z_free = 0x8007B0D4");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
-	#endif   
+	#endif
 
 /**
  * TODO This function is completely undocumented
@@ -4743,6 +4743,16 @@ extern void external_func_80080728(void);
 		asm("external_func_80080728 = 0x80080728");
 	#elif OOT_U_1_0
 		asm("external_func_80080728 = 0x8006BBF4");
+	#endif
+
+/**
+ * Draw Compass Arrows
+ */
+extern void interface_draw_compass(z64_global_t *gl);
+	#if OOT_DEBUG
+		asm("interface_draw_compass = 0x80081240");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
 	#endif
 
 /**
@@ -5260,6 +5270,16 @@ extern void external_func_80093774(void);
 extern Gfx* external_func_800937C0(Gfx *p);
 	#if OOT_DEBUG
 		asm("external_func_800937C0 = 0x800937C0");
+	#elif OOT_U_1_0
+		// TODO Needs 1.0 equivalent!
+	#endif
+
+/**
+ * Write DE000000 80126A60 to Overlay
+ */
+extern void external_func_80094A14(z64_gfx_t *g);
+	#if OOT_DEBUG
+		asm("external_func_80094A14 = 0x80094A14");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
 	#endif
