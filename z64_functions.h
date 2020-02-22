@@ -3858,10 +3858,10 @@ static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
 	//AVAL(Z64GL_CUTSCENE_PLAY_SCRIPT, uint8_t, 0) = 1; /* Undefined? */
 }
 
-/**
- * TODO This function is completely undocumented
+/** draws get item model (check ids here https://wiki.cloudmodding.com/oot/Code_(File)/Debug/Get_Item_Models)
+ * A0 = Global Context | A1 = s16 Get Item Model Id (0 = Bottle)
  */
-extern void external_func_800694A0(void);
+extern void draw_get_item(z64_global_t *global, uint16_t model_id);
 	#if OOT_DEBUG
 		asm("external_func_800694A0 = 0x800694A0");
 	#elif OOT_U_1_0
