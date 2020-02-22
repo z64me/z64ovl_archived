@@ -3863,9 +3863,9 @@ static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
  */
 extern void draw_get_item(z64_global_t *global, uint16_t model_id);
 	#if OOT_DEBUG
-		asm("external_func_800694A0 = 0x800694A0");
+		asm("draw_get_item = 0x800694A0");
 	#elif OOT_U_1_0
-		asm("external_func_800694A0 = 0x800570C0");
+		asm("draw_get_item = 0x800570C0");
 	#endif
 
 /**
