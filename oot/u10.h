@@ -6,7 +6,7 @@
 
 #include "../h/mips.h"
 #include "types.h"
-#include "../z64_functions.h"
+
 
 // RAM Stuff
 #define Z64GL_SAVE_CONTEXT  0x8011A5D0
@@ -17,5 +17,6 @@
 #define OS_A0               (GLOBAL_CONTEXT + 0x0117A4) // spawn_object argument 0
 
 #include "shared.h"
+#include "../z64_functions.h"
 
 #endif
