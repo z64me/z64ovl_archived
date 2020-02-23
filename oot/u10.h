@@ -2,6 +2,7 @@
 #define __Z64OVL_OOT_U_10_H__
 
 #define OOT_U_1_0 1
+#define CZLE 1
 #define RETAIL_NUANCES 1
 
 #include "../h/mips.h"

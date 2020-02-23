@@ -2,6 +2,7 @@
 #define __Z64OVL_MM_U_10_H__
 
 #define MM_U_1_0 1
+#define NZSE 1
 #define RETAIL_NUANCES 1
 
 #include "../h/mips.h"

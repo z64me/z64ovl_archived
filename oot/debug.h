@@ -2,6 +2,7 @@
 #define __Z64OVL_OOT_DEBUG_H__
 
 #define OOT_DEBUG 1
+#define NZLE 1
 
 #include "../h/mips.h"
 #include "types.h"
