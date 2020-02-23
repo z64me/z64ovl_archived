@@ -3,6 +3,7 @@
 
 #include "h/ichain.h"
 #include "common.h"
+#include "oldnames.h"
 
 /****
  * z64ovl.h
