@@ -5,7 +5,7 @@
 
 #include "../h/mips.h"
 #include "types.h"
-#include "../z64_functions.h"
+
 
 // RAM Stuff
 #define Z64GL_SAVE_CONTEXT          0x8015E660
@@ -17,5 +17,6 @@
 #define NAVI                        0x8022CBE0
 
 #include "shared.h"
+#include "../z64_functions.h"
 
 #endif
