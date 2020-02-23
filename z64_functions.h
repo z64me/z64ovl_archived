@@ -3002,25 +3002,25 @@ extern void external_func_80042048(void);
 	#endif
 
 /**
- * TODO These notes need converted into a C function prototype
+ * Collision, poly surface, return Conveyor Surface Speed
  * A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result
  */
-extern void external_func_800420C0(void);
+extern uint32_t get_collision_conveyor_speed(z64_col_ctxt_t *collision_cotext, void *Polygon, uint16_t mesh);
 	#if OOT_DEBUG
-		asm("external_func_800420C0 = 0x800420C0");
+		asm("get_collision_conveyor_speed = 0x800420C0");
 	#elif OOT_U_1_0
-		asm("external_func_800420C0 = 0x80034778");
+		asm("get_collision_conveyor_speed = 0x80034778");
 	#endif
 
 /**
- * TODO These notes need converted into a C function prototype
+ * Collision, poly surface, return Conveyor Surface Direction
  * A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result
  */
-extern void external_func_800420E4(void);
+extern uint32_t get_collision_conveyor_direction(z64_col_ctxt_t *collision_cotext, void *Polygon, uint16_t mesh);
 	#if OOT_DEBUG
-		asm("external_func_800420E4 = 0x800420E4");
+		asm("get_collision_conveyor_direction = 0x800420E4");
 	#elif OOT_U_1_0
-		asm("external_func_800420E4 = 0x800347A0");
+		asm("get_collision_conveyor_direction = 0x800347A0");
 	#endif
 
 /**
