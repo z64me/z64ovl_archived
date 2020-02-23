@@ -3858,15 +3858,22 @@ static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
 	//AVAL(Z64GL_CUTSCENE_PLAY_SCRIPT, uint8_t, 0) = 1; /* Undefined? */
 }
 
-/** draws get item model (check ids here https://wiki.cloudmodding.com/oot/Code_(File)/Debug/Get_Item_Models)
- * A0 = Global Context | A1 = s16 Get Item Model Id (0 = Bottle)
- */
-extern void draw_get_item(z64_global_t *global, uint16_t model_id);
-	#if OOT_DEBUG
-		asm("draw_get_item = 0x800694A0");
-	#elif OOT_U_1_0
-		asm("draw_get_item = 0x800570C0");
-	#endif
+/* Draws "Get Item" Model with defined draw function from a table at:
+* 0x8011E320 (NZLE RAM)
+* 0x801BB170 (NZSE RAM)
+* Source Code Reference File: "z_draw.c"
+*/
+extern void z_draw_gi_model(
+z64_global_t* gl /* Global Context */
+, int16_t id /* Get Item Model ID (See: https://wiki.cloudmodding.com/oot/Code_(File)/Debug/Get_Item_Models)*/
+);
+#if NZLE
+  asm("draw_get_item = 0x800694A0");
+#elif CZLE
+  asm("draw_get_item = 0x800570C0");
+#elif NZSE
+  asm("draw_get_item = 0x800EE320");
+#endif
 
 /**
  * plays sound at position
