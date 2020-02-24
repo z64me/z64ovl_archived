@@ -3863,17 +3863,18 @@ static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
 * 0x8011E320 (NZLE RAM)
 * 0x801BB170 (NZSE RAM)
 * Source Code Reference File: "z_draw.c"
+* formerly `draw_get_item`
 */
 extern void z_draw_gi_model(
 z64_global_t* gl /* Global Context */
 , int16_t id /* Get Item Model ID (See: https://wiki.cloudmodding.com/oot/Code_(File)/Debug/Get_Item_Models)*/
 );
 #if NZLE
-  asm("draw_get_item = 0x800694A0");
+  asm("z_draw_gi_model = 0x800694A0");
 #elif CZLE
-  asm("draw_get_item = 0x800570C0");
+  asm("z_draw_gi_model = 0x800570C0");
 #elif NZSE
-  asm("draw_get_item = 0x800EE320");
+  asm("z_draw_gi_model = 0x800EE320");
 #endif
 
 /**
