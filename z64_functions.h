@@ -3869,11 +3869,11 @@ extern void z_draw_gi_model(
 z64_global_t* gl /* Global Context */
 , int16_t id /* Get Item Model ID (See: https://wiki.cloudmodding.com/oot/Code_(File)/Debug/Get_Item_Models)*/
 );
-#if NZLE
+#if OOT_DEBUG
   asm("z_draw_gi_model = 0x800694A0");
-#elif CZLE
+#elif OOT_U_1_0
   asm("z_draw_gi_model = 0x800570C0");
-#elif NZSE
+#elif MM_U_1_0
   asm("z_draw_gi_model = 0x800EE320");
 #endif
 
