@@ -1355,15 +1355,20 @@ extern void external_func_8002D9A4(void);
 		asm("external_func_8002D9A4 = 0x800212E4");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_8002DA78(void);
-	#if OOT_DEBUG
-		asm("external_func_8002DA78 = 0x8002DA78");
-	#elif OOT_U_1_0
-		asm("external_func_8002DA78 = 0x800213B4");
-	#endif
+/* Return angle of rotation to face another actor.
+* Source Code Reference File: "z_actor.c"
+*/
+extern int16_t z_actor_math_yaw_actor(
+z64_actor_t* a /* Actor to Derive Angle */
+, z64_actor_t* target /* Actor to Target */
+);
+#if OOT_DEBUG
+  asm("z_actor_math_yaw_actor = 0x8002DAC0");
+#elif OOT_U_1_0
+  asm("z_actor_math_yaw_actor = 0x8002140C");
+#elif MM_U_1_0
+  /*asm("z_actor_math_yaw_actor = 0xDEADBEEF");*/
+#endif
 
 /* Return angle of rotation to reach target (provided a vec3f_t)
 * Source Code Reference File: "z_actor.c"
