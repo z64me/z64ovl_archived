@@ -3787,7 +3787,7 @@ extern void external_func_8005DFAC(void);
 */
 extern void z_actor_damage_table_init(
 void* out /* Destination for initialized table. */
-, z64_damagechar_init_t* damage_chart /* Initialization Variables for Damage Table */
+, z64_damagechart_init_t* damage_chart /* Initialization Variables for Damage Table */
 , uint32_t* init_data
 );
 #if OOT_DEBUG
@@ -4411,7 +4411,7 @@ int16_t offset /* Offset to Add */
 */
 extern void z_lib_vec3f_copy(
 vec3f_t *out /* Destination Pointer */
-vec3f_t *in /* Input Vector */
+, vec3f_t *in /* Input Vector */
 );
 #if OOT_DEBUG
   asm("z_lib_vec3f_copy = 0x80077E40");

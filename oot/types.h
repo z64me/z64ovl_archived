@@ -963,7 +963,7 @@ typedef struct z64_dynapoly {
     char        padding[0x0003];
 } z64_dynapoly_t;
 
-struct z64_particle_t;
+/*struct z64_particle_t;
 typedef struct
 {
   vec3f_t position;
@@ -979,7 +979,7 @@ typedef struct
   int16_t life;
   uint8_t priority;
   uint8_t type;
-} z64_particle_t;
+} z64_particle_t;*/
 
 enum dynapoly_move_flag {
   DPM_NONE = 0b00,
