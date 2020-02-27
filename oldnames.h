@@ -1,1 +1,3 @@
 #define draw_get_item z_draw_gi_model
+#define draw_dlist_opa z_cheap_proc_draw_opa
+#define draw_dlist_xlu z_cheap_proc_draw_xlu

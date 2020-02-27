@@ -2441,31 +2441,37 @@ extern void external_func_80034F54(void);
 		asm("external_func_80034F54 = 0x80027D30");
 	#endif
 
-/**
- * Draw a single display list to POLY_OPA_DISP
- */
-extern void draw_dlist_opa(z64_global_t *global, uint32_t dlist);
-	#if OOT_DEBUG
-		asm("draw_dlist_opa = 0x80035260");
-	#elif OOT_U_1_0
-		asm("draw_dlist_opa = 0x80028048");
-	#elif MM_U_1_0
-		asm("draw_dlist_opa = 0x800BDFC0");
-	#endif
+/* Draws a display list to "poly_opa".
+* Source Code Reference File: "z_cheap_proc.c"
+* Formerly `draw_dlist_opa`
+*/
+extern void z_cheap_proc_draw_opa(
+	z64_global_t *gl /* Global Context */
+	, uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
+);
+#if OOT_DEBUG
+	asm("z_cheap_proc_draw_opa = 0x80035260");
+#elif OOT_U_1_0
+	asm("z_cheap_proc_draw_opa = 0x80028048");
+#elif MM_U_1_0
+	asm("z_cheap_proc_draw_opa = 0x800BDFC0");
+#endif
 
-/**
- * Draw a single display list, affected by Lens of Truth?
- * TODO There's a question mark, we need to confirm whether Lens of Truth has anything to do with it
- * a0 - global context | a1 - DList segment offset | a2 - Unknown, set to 0
- */
-extern void draw_dlist_xlu(z64_global_t *global, uint32_t dlist);
-	#if OOT_DEBUG
-		asm("draw_dlist_xlu = 0x80035324");
-	#elif OOT_U_1_0
-		asm("draw_dlist_xlu = 0x800280C8");
-	#elif MM_U_1_0
-		asm("draw_dlist_xlu = 0x800BE03C");
-	#endif
+/* Draws a display list to "poly_xlu".
+* Source Code Reference File: "z_cheap_proc.c"
+* Formerly `draw_dlist_xlu`
+*/
+extern void z_cheap_proc_draw_xlu(
+	z64_global_t *gl /* Global Context */
+	, uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
+);
+#if OOT_DEBUG
+	asm("z_cheap_proc_draw_xlu = 0x80035324");
+#elif OOT_U_1_0
+	asm("z_cheap_proc_draw_xlu = 0x800280C8");
+#elif MM_U_1_0
+	asm("z_cheap_proc_draw_xlu = 0x800BE03C");
+#endif
 
 /**
  * Finds the closest actor instance of a specified id and type within specified range.
@@ -2679,7 +2685,7 @@ extern void external_func_8003C890(void);
 /**
  * TODO This function is completely undocumented
  */
-extern float external_func_8003C940(void *gl830, void *floorpoly, void *unk_sp2C, z64_actor_t *actor, vec3f_t *pos);
+extern float external_func_8003C940(void *col_ctxt, void *floorpoly, void *unk_sp2C, z64_actor_t *actor, vec3f_t *pos);
 	#if OOT_DEBUG
 		asm("external_func_8003C940 = 0x8003C940");
 	#elif OOT_U_1_0
@@ -3863,7 +3869,7 @@ static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
 * 0x8011E320 (NZLE RAM)
 * 0x801BB170 (NZSE RAM)
 * Source Code Reference File: "z_draw.c"
-* formerly `draw_get_item`
+* Formerly `draw_get_item`
 */
 extern void z_draw_gi_model(
 z64_global_t* gl /* Global Context */
