@@ -6,3 +6,8 @@
 #define external_func_80061ED4 z_actor_damage_table_init
 #define actor_update_health z_actor_update_health
 #define effect_spawn_fcircle z_effect_spawn_flame_circle
+#define item_drop_random_collectible z_item_drop_random
+#define math_distance_xz_actor_point z_actor_math_dist_xz_vec3f
+#define external_func_8007869C z_lib_smooth_scale_max_min_s
+#define external_func_8007841C z_lib_smooth_scale_max_f
+#define actor_anime_set z_skelanime_anim_set

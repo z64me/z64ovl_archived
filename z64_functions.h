@@ -236,19 +236,22 @@ extern void external_func_8001F77C(void);
 		asm("external_func_8001F77C = 0x800138B0");
 	#endif
 
-/**
- * Randomized item spawn
- * a0 = global context | a1 = actor instance | a2 = position array | a3 = drop table ID
- */
-extern void item_drop_random_collectible(z64_actor_t* global, z64_actor_t* actor, vec3f_t* position, uint16_t drop_id);
-	#if OOT_DEBUG
-		asm("external_func_8001F940 = 0x8001F940");
-	#elif OOT_U_1_0
-		asm("external_func_8001F940 = 0x80013A84");
-	#elif MM_U_1_0
-		asm("external_func_8001F940 = 0x800A7D28");
-		asm("external_func_800A7D28 = 0x800A7D28");
-	#endif
+/* Spawn Random Collectible Item
+* Source Code Reference File: "z_en_item00.c"
+*/
+extern void z_item_drop_random(
+z64_global_t* gl /* Global Context */
+, z64_actor_t* a /* Actor Instance */
+, vec3f_t* position /* X, Y, and Z Position */
+, uint32_t id /* Drop Table Item ID */
+);
+#if OOT_DEBUG
+  asm("z_item_drop_random = 0x8001F940");
+#elif OOT_U_1_0
+  asm("z_item_drop_random = 0x80013A84");
+#elif MM_U_1_0
+  asm("z_item_drop_random = 0x800A7D28");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -1362,15 +1365,20 @@ extern void external_func_8002DA78(void);
 		asm("external_func_8002DA78 = 0x800213B4");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_8002DAC0(void);
-	#if OOT_DEBUG
-		asm("external_func_8002DAC0 = 0x8002DAC0");
-	#elif OOT_U_1_0
-		asm("external_func_8002DAC0 = 0x8002140C");
-	#endif
+/* Return angle of rotation to reach target (provided a vec3f_t)
+* Source Code Reference File: "z_actor.c"
+*/
+extern int16_t z_actor_math_yaw_vec3f(
+z64_actor_t* a /* Actor to Derive Angle */
+, vec3f_t* target /* Target Vector */
+);
+#if OOT_DEBUG
+  asm("z_actor_math_yaw_vec3f = 0x8002DAC0");
+#elif OOT_U_1_0
+  asm("z_actor_math_yaw_vec3f = 0x8002140C");
+#elif MM_U_1_0
+  /*asm("z_actor_math_yaw_vec3f = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -1428,16 +1436,20 @@ extern float math_distance_xz_actor_actor(z64_actor_t *a, z64_actor_t *b);
 		asm("math_distance_xz_actor_actor = 0x800214FC");
 	#endif
 
-/**
- * Calculates XZ distance between actor (+0x24) and a Point
- * Wrapper for 80063EB8
- */
-extern float math_distance_xz_actor_point(z64_actor_t *a, z64_point_t *b);
-	#if OOT_DEBUG
-		asm("math_distance_xz_actor_point32_t = 0x8002DBB0");
-	#elif OOT_U_1_0
-		asm("math_distance_xz_actor_point32_t = 0x80021528");
-	#endif
+/* Calculate the XZ distance between an actor and an arbitrary vec3f (point)
+* Source Code Reference File: "z_actor.c"
+*/
+extern float z_actor_math_dist_xz_vec3f(
+z64_actor_t* a /* Actor to Derive Position */
+, vec3f_t* target /* Target Vector */
+);
+#if OOT_DEBUG
+  asm("z_actor_math_dist_xz_vec3f = 0x8002DBB0");
+#elif OOT_U_1_0
+  asm("z_actor_math_dist_xz_vec3f = 0x80021528");
+#elif MM_U_1_0
+  /*asm("z_actor_math_dist_xz_vec3f = 0xDEADBEEF");*/
+#endif
 
 /**
  * Returns vertical, horizontal and front distance between 2 points taking rotation of instance into account
@@ -2365,15 +2377,21 @@ extern void external_func_8003424C(void);
 		asm("external_func_8003424C = 0x80027070");
 	#endif
 
-/**
- * TODO what does this one do?
- */
-extern void external_func_8003426C(z64_actor_t *actor, int32_t unk0, int32_t unk1, int32_t unk2, int32_t unk3);
-	#if OOT_DEBUG
-		asm("external_func_8003426C = 0x8003426C");
-	#elif OOT_U_1_0
-		asm("external_func_8003426C = 0x80027090");
-	#endif
+/* Modify Actor Damage Color
+* Plays `NA_SE_EN_LIGHT_ARROW_HIT`
+* Source Code Reference File: "z_actor.c"
+*/
+extern void z_actor_damage_light(
+z64_actor_t* a /* Actor to Modify */
+, int16_t a1, int16_t a2, int16_t a3, int16_t sp10 /* Unidentified Arguments */
+);
+#if OOT_DEBUG
+  asm("z_actor_damage_light = 0x8003426C");
+#elif OOT_U_1_0
+  asm("z_actor_damage_light = 0x80027090");
+#elif MM_U_1_0
+  /*asm("z_actor_damage_light = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -4505,20 +4523,23 @@ extern void external_func_80078310(float *output, float unk1, float unk2, float 
 		asm("external_func_80078310 = 0x800FFCD8");
 	#endif
 
-/**
- * smoothly aproximates a0 to a1, commonly used for smooth movement
- * keyword: tweening
- * TODO These notes need converted into a C function prototype
- * a0 - actor instance + xxxx (offset of the float that will change) | a1 - float where you want a0 to be aproximated to | a2 - float (amount?)a3 - float (smaller than a2)
- */
-extern void external_func_8007841C(float *arg0, f32 arg1, f32 arg2, f32 arg3);
-	#if OOT_DEBUG
-		asm("external_func_8007841C = 0x8007841C");
-	#elif OOT_U_1_0
-		asm("external_func_8007841C = 0x80064280");
-	#elif MM_U_1_0
-		asm("external_func_8007841C = 0x800FFDF8");
-	#endif
+/* Smoothly Transition (Scale) float to Target
+* Keywords: Tweening
+* Source Code Reference File: "z_lib.c"
+*/
+extern void z_lib_smooth_scale_max_f(
+float* src /* Source Float */
+, float target /* Target Float */
+, float scale /* Scale */
+, float max /* Maximum Value to Change By */
+);
+#if OOT_DEBUG
+  asm("z_lib_smooth_scale_max_f = 0x8007841C");
+#elif OOT_U_1_0
+  asm("z_lib_smooth_scale_max_f = 0x80064280");
+#elif MM_U_1_0
+  asm("z_lib_smooth_scale_max_f = 0x800FFDF8");
+#endif
 
 /**
  * TODO probably some kind of tweening function
@@ -4530,28 +4551,40 @@ extern void external_func_8007848C(float *value, float a, float b);
 		asm("external_func_8007848C = 0x800642F0");
 	#endif
 
-/**
- * TODO figure out what this function does...
- * A0 = int16_t Rotation Pointer (Y this pass) | A1 = int16_t ? | A2 = ? | A3 = ?
- */
-extern int32_t external_func_8007869C(int16_t *rot, int32_t unk0, int16_t unk1, int32_t unk2, int32_t unk3, uint32_t unk4);
-	#if OOT_DEBUG
-		asm("external_func_8007869C = 0x8007869C");
-	#elif OOT_U_1_0
-		asm("external_func_8007869C = 0x80064508");
-	#elif MM_U_1_0
-		asm("external_func_8007869C = 0x800FFEBC");
-	#endif
+/* Smoothly Transition (Scale) int16_t to Target
+* Source Code Reference File: "z_lib.c"
+*/
+extern int16_t z_lib_smooth_scale_max_min_s(
+int16_t* src /* Source Short */
+, int16_t target /* Target Short*/
+, int16_t invScale /* Derived from Decomp */
+, int16_t max /* Maximum Value to Scale By */
+, int16_t min /* Minimum Value to Scale By */
+);
+#if OOT_DEBUG
+  asm("z_lib_smooth_scale_max_min_s = 0x8007869C");
+#elif OOT_U_1_0
+  asm("z_lib_smooth_scale_max_min_s = 0x80064508");
+#elif MM_U_1_0
+  asm("z_lib_smooth_scale_max_min_s = 0x800FFEBC");
+#endif
 
-/**
- * TODO figure out what this function does
- */
-extern void external_func_800787BC(int16_t *rot, int32_t unk0, int16_t unk1, int32_t unk2);
-	#if OOT_DEBUG
-		asm("external_func_800787BC = 0x800787BC");
-	#elif OOT_U_1_0
-		asm("external_func_800787BC = 0x80064624");
-	#endif
+/* Smoothly Transition (Scale) int16_t to Target
+* Source Code Reference File: "z_lib.c"
+*/
+extern void z_lib_smooth_scale_max_s(
+int16_t* src /* Source Short */
+, int16_t target /* Target Short*/
+, int16_t invScale /* Derived from Decomp */
+, int16_t max /* Maximum Value to Scale By */
+);
+#if OOT_DEBUG
+  asm("z_lib_smooth_scale_max_min_s = 0x800787BC");
+#elif OOT_U_1_0
+  asm("z_lib_smooth_scale_max_min_s = 0x80064624");
+#elif MM_U_1_0
+  /*asm("z_lib_smooth_scale_max_min_s = 0xDEADBEEF");*/
+#endif
 
 /**
  * Copy uint8_t[4] array
@@ -5830,58 +5863,94 @@ extern void actor_anime_change(z64_skelanime_t *skelanime, uint32_t animation, f
 		asm("actor_anime_change = 0x801373E8");
 	#endif
 
-/**
- * TODO These notes need converted into a C function prototype
- * A0 = ? struct (Anju + 0x13C/ Archery Gerudo + 0x188) | A1 = Segment Offset
- */
-extern void external_func_800A51E8(z64_skelanime_t *skelanime, uint32_t animation);
-	#if OOT_DEBUG
-		asm("external_func_800A51E8 = 0x800A51E8");
-	#elif OOT_U_1_0
-		asm("external_func_800A51E8 = 0x8008D1C4");
-	#endif
+/* Change Animation
+* Playback speed defaulted to 1.0f
+* Start frame defaulted to 0
+* Source Code Reference File: "z_skelanime.c"
+*/
+extern void z_skelanime_change_speed_1(
+z64_skelanime_t* s /* Skelanime Structure */
+, uint32_t anim /* Segment-relative Animation Address */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_change_speed_1 = 0x800A51E8");
+#elif OOT_U_1_0
+  asm("z_skelanime_change_speed_1 = 0x8008D1C4");
+#elif MM_U_1_0
+  /*asm("z_skelanime_change_speed_1 = 0xDEADBEEF");*/
+#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_800A5240(void);
-	#if OOT_DEBUG
-		asm("external_func_800A5240 = 0x800A5240");
-	#elif OOT_U_1_0
-		asm("external_func_800A5240 = 0x8008D21C");
-	#endif
+/* Change Animation and Frame Count
+* Playback speed defaulted to 1.0f
+* Start frame defaulted to 0
+* Source Code Reference File: "z_skelanime.c"
+*/
+extern void z_skelanime_change_anim_frame_count(
+float frame_count /* New Frame Count */
+, z64_skelanime_t* s /* Skelanime Structure */
+, uint32_t anim /* Segment-relative Animation Address */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_change_anim_frame_count = 0x800A5240");
+#elif OOT_U_1_0
+  asm("z_skelanime_change_anim_frame_count = 0x8008D21C");
+#elif MM_U_1_0
+  /*asm("z_skelanime_change_anim_frame_count = 0xDEADBEEF");*/
+#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_800A529C(void);
-	#if OOT_DEBUG
-		asm("external_func_800A529C = 0x800A529C");
-	#elif OOT_U_1_0
-		asm("external_func_800A529C = 0x8008D278");
-	#endif
+/* Change Animation
+* Modify Frame Count
+* Modify Playback Speed
+* Source Code Reference File: "z_skelanime.c"
+*/
+extern void z_skelanime_change_anim_nframe_pspeed(
+float frame_count /* New Frame Count */
+, z64_skelanime_t* s /* Skelanime Structure */
+, uint32_t anim /* Segment-relative Animation Address */
+, float speed /* Animation Playback Speed */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_change_anim_nframe_pspeed = 0x800A529C");
+#elif OOT_U_1_0
+  asm("z_skelanime_change_anim_nframe_pspeed = 0x8008D278");
+#elif MM_U_1_0
+  /*asm("z_skelanime_change_anim_nframe_pspeed = 0xDEADBEEF");*/
+#endif
 
-/**
- * Change Animation
- * TODO These notes need converted into a C function prototype
- * A0 = actor instance + 0x014C (Drawing Table) | A1 = Animation Pointer (in Object File)
- * Wrapper for actor_anime_change and anime_get_framecount */
-extern void actor_anime_set(z64_skelanime_t *skelanime, uint32_t animation);
-	#if OOT_DEBUG
-		asm("actor_anime_set = 0x800A52F8");
-	#elif OOT_U_1_0
-		asm("actor_anime_set = 0x8008D2D4");
-	#endif
+/* Set Animation
+* Wrapper for `z_skelanime_change_anim`
+* Wrapper for `z_skelanime_get_frame_count`
+* Source Code Reference File: "z_skelanime.c"
+*/
+extern void z_skelanime_anim_set(
+z64_skelanime_t* s /* Skelanime Structure */
+, uint32_t anim /* Segment-relative Animation Address */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_anim_set = 0x800A52F8");
+#elif OOT_U_1_0
+  asm("z_skelanime_anim_set = 0x8008D2D4");
+#elif MM_U_1_0
+  /*asm("z_skelanime_anim_set = 0xDEADBEEF");*/
+#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_800A534C(void);
-	#if OOT_DEBUG
-		asm("external_func_800A534C = 0x800A534C");
-	#elif OOT_U_1_0
-		asm("external_func_800A534C = 0x8008D328");
-	#endif
+/* Change Animation
+* Playback speed defaulted to 1.0f
+* Start frame defaulted to 0
+* Source Code Reference File: "z_skelanime.c"
+*/
+extern void z_skelanime_change_frame_count(
+z64_skelanime_t* s /* Skelanime Structure */
+, uint32_t anim /* Segment-relative Animation Address */
+, float frame_count /* New Frame Count */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_change_frame_count = 0x800A534C");
+#elif OOT_U_1_0
+  asm("z_skelanime_change_frame_count = 0x8008D328");
+#elif MM_U_1_0
+  /*asm("z_skelanime_change_frame_count = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -5913,17 +5982,20 @@ extern void external_func_800A5428(void);
 		asm("external_func_800A5428 = 0x8008D408");
 	#endif
 
-/**
- * Checks if the animation is at specific frame
- * TODO These notes need converted into a C function prototype
- * a0 = animation struct | a1 = frame (float) | v0 = true/false
- */
-extern void external_func_800A56C8(void);
-	#if OOT_DEBUG
-		asm("external_func_800A56C8 = 0x800A56C8");
-	#elif OOT_U_1_0
-		asm("external_func_800A56C8 = 0x8008D6A8");
-	#endif
+/* Test if an animation is at a specific frame.
+* Source Code Reference File: "z_skelanime.c"
+*/
+extern int32_t z_skelanime_frame_index_test(
+z64_skelanime_t* s /* Skelanime Struct */
+, float frame /* Frame Index */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_frame_index_test = 0x800A56C8");
+#elif OOT_U_1_0
+  asm("z_skelanime_frame_index_test = 0x8008D6A8");
+#elif MM_U_1_0
+  /*asm("z_skelanime_frame_index_test = 0x80137594");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
