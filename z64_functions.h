@@ -2472,6 +2472,7 @@ extern void external_func_80034F54(void);
 * Source Code Reference File: "z_cheap_proc.c"
 * Formerly `draw_dlist_opa`
 */
+#define z_draw_dlist_opa z_cheap_proc_draw_opa //#SHORTNAME
 extern void z_cheap_proc_draw_opa(
 z64_global_t* gl /* Global Context */
 , uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
@@ -2488,6 +2489,7 @@ z64_global_t* gl /* Global Context */
 * Source Code Reference File: "z_cheap_proc.c"
 * Formerly `draw_dlist_xlu`
 */
+#define z_draw_dlist_xlu z_cheap_proc_draw_xlu //#SHORTNAME
 extern void z_cheap_proc_draw_xlu(
 z64_global_t* gl /* Global Context */
 , uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
@@ -3899,7 +3901,7 @@ extern void cutscene_init_script(z64_global_t *, uint32_t segptr);
 static inline void cutscene_play_script(z64_global_t *gl, uint32_t segptr)
 {
 	cutscene_init_script(gl, segptr);
-	//AVAL(Z64GL_CUTSCENE_PLAY_SCRIPT, uint8_t, 0) = 1; /* Undefined? */
+	AVAL(Z64GL_CUTSCENE_PLAY_SCRIPT, uint8_t, 0) = 1;
 }
 
 /* Draws "Get Item" Model with defined draw function from a table at:
