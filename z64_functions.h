@@ -704,8 +704,8 @@ extern void external_func_80029694(void);
 extern void z_effect_spawn_hahen(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
-, vec3f_t* a2
-, vec3f_t* a3
+, vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
+, vec3f_t* acceleration /* Acceleration along the X, Y, and Z axes */
 , int16_t xr, int16_t yr, int16_t zr /* X, Y, and Z Rotation (Unconfirmed) */
 , int16_t sp20
 , int32_t sp24
@@ -725,14 +725,14 @@ z64_global_t* gl /* Global Context */
 extern void z_effect_spawn_hahen_n(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
-, uint32_t a2 /* Floating Point */
+, float y_speed /* Acceleration along the Y axis */
 , int16_t a3
 , int16_t srand_offset /* `offset` for z_lib_math_rand_s16_offset */
 , int16_t srand_range /* `range` for z_lib_math_rand_s16_offset */
 , int16_t count /* Particle Count */
 , int16_t sp20
 , int16_t sp24
-, int16_t sp28
+, int32_t sp28
 );
 #if OOT_DEBUG
   asm("z_effect_spawn_hahen_n = 0x800297A4");

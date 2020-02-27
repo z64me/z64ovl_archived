@@ -963,6 +963,24 @@ typedef struct z64_dynapoly {
     char        padding[0x0003];
 } z64_dynapoly_t;
 
+struct z64_particle_t;
+typedef struct
+{
+  vec3f_t position;
+  vec3f_t velocity;
+  vec3f_t acceleration;
+  void(*update)(z64_global_t*, int32_t, z64_particle_t*);
+  void(*draw)(z64_global_t*, int32_t, z64_particle_t*);
+  vec3f_t unk_2C;
+  uint32_t unk_38;
+  uint32_t unk_3C;
+  uint16_t unk_30[13];
+  uint16_t flags;
+  int16_t life;
+  uint8_t priority;
+  uint8_t type;
+} z64_particle_t;
+
 enum dynapoly_move_flag {
   DPM_NONE = 0b00,
 	DPM_PLAYER = 0b01,
