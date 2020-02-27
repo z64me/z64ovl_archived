@@ -1,3 +1,8 @@
 #define draw_get_item z_draw_gi_model
 #define draw_dlist_opa z_cheap_proc_draw_opa
 #define draw_dlist_xlu z_cheap_proc_draw_xlu
+#define actor_spawn_attached z_actor_spawn_attached
+#define actor_spawn z_actor_spawn
+#define external_func_80061ED4 z_actor_damage_table_init
+#define actor_update_health z_actor_update_health
+#define effect_spawn_fcircle z_effect_spawn_flame_circle

@@ -938,16 +938,23 @@ extern void effect_spawn_extra(void);
 		asm("effect_spawn_extra = 0x8001E110");
 	#endif
 
-/**
- * Spawn Particle 0x1F
- * TODO These notes need converted into a C function prototype
- */
-extern void effect_spawn_fcircle(void);
-	#if OOT_DEBUG
-		asm("effect_spawn_fcircle = 0x8002A65C");
-	#elif OOT_U_1_0
-		asm("effect_spawn_fcircle = 0x8001E178");
-	#endif
+/* Spawn Flame Circle
+* Source Code Reference File: "z_effect_soft_sprite.c"
+*/
+extern void z_effect_spawn_flame_circle(
+z64_global_t* gl /* Global Context */
+, z64_actor_t* a /* Actor Instance */
+, vec3f_t* position /* X, Y, and Z Position */
+, uint16_t radius /* Flame Cylinder Radius */
+, uint16_t height /* Flame Cylinder Height */
+);
+#if OOT_DEBUG
+  asm("z_effect_spawn_flame_circle = 0x8002A65C");
+#elif OOT_U_1_0
+  asm("z_effect_spawn_flame_circle = 0x8001E178");
+#elif MM_U_1_0
+  /*asm("z_effect_spawn_flame_circle = 0xDEADBEEF");*/
+#endif
 
 /**
  * Spawn Particle 0x20
@@ -2039,34 +2046,49 @@ extern void actor_set_draw_distance(z64_global_t *global, z64_actor_t *actor, vo
 		asm("actor_set_draw_distance = 0x800249DC");
 	#endif
 
-/**
- * Spawn Actor
- * TODO a0 = global context + 0x1C24, do we really pass it in this way?
- * A0 = Global Context + 0x1C24 | A1 = Global Context | A2 = int16_t Actor Id | A3 = float x | SP+0x10 = float y | SP+0x14 = float z | SP+0x18 = rotx | SP+0x1C = roty | SP+0x20 = rotz | SP+0x24 = int16_t var | V0 = Pointer to new actor, or null
- */
-extern void *actor_spawn(void *actor_context/*gl_ctx+0x1C24*/, z64_global_t *global, int16_t actor_id, f32 x, f32 y, f32 z, int16_t rot_x, int16_t rot_y, int16_t rot_z, uint16_t variable);
-	#if OOT_DEBUG
-		asm("actor_spawn = 0x80031F50");
-	#elif OOT_U_1_0
-		asm("actor_spawn = 0x80025110");
-	#elif MM_U_1_0
-		asm("actor_spawn = 0x800BAC60");
-	#endif
+/* Spawn an actor. Returns a pointer to the spawned actor, or NULL if it fails.
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_spawn`
+*/
+extern z64_actor_t* z_actor_spawn(
+void* actor_ctxt /* Actor Context within Global Context */
+, z64_global_t *gl /* Global Context */
+, int16_t id /* Actor ID */
+, float x, float y, float z /* X, Y, and Z Position */
+, int16_t xr, int16_t yr, int16_t zr /* X, Y, and Z Rotation */
+, uint16_t variable /* Actor Variable */
+);
+#if OOT_DEBUG
+  asm("z_actor_spawn = 0x80031F50");
+#elif OOT_U_1_0
+  asm("z_actor_spawn = 0x80025110");
+#elif MM_U_1_0
+  asm("z_actor_spawn = 0x800BAC60");
+#endif
 
-/**
- * Spawn actor attached to `dest`, returns pointer to new actor `newactor` or NULL on failure
- * `newactor` + 0x118 will be set to `actor_id`
- * `dest` + 0x11C will point32_t to `newactor`
- * `newactor` will be bound to `dest`'s room unless spawned actor is global (room=-1)
- * TODO do something with a0?
- * A0 = Global Context + 0x1C24 | A1 = Actor* attachToInstance | A2 = Global Context | A3 = int16_t Actor Id | SP + 0x10 = float x | SP + 0x14 = float y | SP + 0x18 = float z | SP + 0x1C = int16_t rotx | SP + 0x20 = int16_t roty | SP + 0x24 = int16_t rotz | SP + 0x28 = int16_t var | V0 = Pointer to new actor, or null if allocation failed
- */
-extern z64_actor_t *actor_spawn_attached(uint32_t a0/*gl_ctx+0x1C24*/, z64_actor_t *dest, int16_t actor_id, f32 x, f32 y, f32 z, int16_t rot_x, int16_t rot_y, int16_t rot_z, uint16_t variable);
-	#if OOT_DEBUG
-		asm("actor_spawn_attached = 0x80032458");
-	#elif OOT_U_1_0
-		asm("actor_spawn_attached = 0x800253F0");
-	#endif
+/* Spawn an actor and attach it to `host`. Returns a pointer to the spawned actor, or NULL if it fails.
+* return->attached_a will be set to `id`.
+* host->attached_b will be set to the return value.
+* The spawned actor will be bound to the host actor's room unless the room is -1. (0xFF)
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_spawn_attached`
+*/
+extern z64_actor_t* z_actor_spawn_attached(
+void* actor_ctxt /* Actor Context within Global Context */
+, z64_actor_t* host /* Actor to Attach To */
+, z64_global_t *gl /* Global Context */
+, int16_t id /* Actor ID */
+, float x, float y, float z /* X, Y, and Z Position */
+, int16_t xr, int16_t yr, int16_t zr /* X, Y, and Z Rotation */
+, uint16_t variable /* Actor Variable */
+);
+#if OOT_DEBUG
+  asm("z_actor_spawn_attached = 0x80032458");
+#elif OOT_U_1_0
+  asm("z_actor_spawn_attached = 0x800253F0");
+#elif MM_U_1_0
+  /*asm("z_actor_spawn_attached = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -2078,15 +2100,20 @@ extern void external_func_80032C3C(void);
 		asm("external_func_80032C3C = 0x80025B0C");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_80032C7C(void);
-	#if OOT_DEBUG
-		asm("external_func_80032C7C = 0x80032C7C");
-	#elif OOT_U_1_0
-		asm("external_func_80032C7C = 0x80025B4C");
-	#endif
+/* Plays `NA_SE_EN_LAST_DAMAGE` at actor position.
+* Source Code Reference File: "z_actor.c"
+*/
+extern void z_actor_play_sound_defeated(
+z64_global_t* gl /* Global Context */
+, z64_actor_t *a /* Actor to derive position */
+);
+#if OOT_DEBUG
+  asm("z_actor_play_sound_defeated = 0x80032C7C");
+#elif OOT_U_1_0
+  asm("z_actor_play_sound_defeated = 0x80025B4C");
+#elif MM_U_1_0
+  asm("z_actor_play_sound_defeated = 0x800BBA88");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -2446,8 +2473,8 @@ extern void external_func_80034F54(void);
 * Formerly `draw_dlist_opa`
 */
 extern void z_cheap_proc_draw_opa(
-	z64_global_t *gl /* Global Context */
-	, uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
+z64_global_t* gl /* Global Context */
+, uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
 );
 #if OOT_DEBUG
 	asm("z_cheap_proc_draw_opa = 0x80035260");
@@ -2462,8 +2489,8 @@ extern void z_cheap_proc_draw_opa(
 * Formerly `draw_dlist_xlu`
 */
 extern void z_cheap_proc_draw_xlu(
-	z64_global_t *gl /* Global Context */
-	, uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
+z64_global_t* gl /* Global Context */
+, uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
 );
 #if OOT_DEBUG
 	asm("z_cheap_proc_draw_xlu = 0x80035324");
@@ -2526,27 +2553,35 @@ extern void external_func_800355E4(void);
 		asm("external_func_800355E4 = 0x8002834C");
 	#endif
 
-/**
- * Subtracts damage amount (colliding damage source) from *actor's health
- */
-extern void actor_update_health(z64_actor_t *actor);
-	#if OOT_DEBUG
-		asm("actor_update_health = 0x80035628");
-	#elif OOT_U_1_0
-		asm("actor_update_health = 0x80028390");
-	#elif MM_U_1_0
-		asm("actor_update_health = 0x800BE22C");
-	#endif
+/* Apply damage to an actor's health.
+* Source Code Reference File: "z_actor.c"
+*/
+extern void z_actor_update_health(
+z64_actor_t* a /* Actor to be damaged. */
+);
+#if OOT_DEBUG
+  asm("z_actor_update_health = 0x80035628");
+#elif OOT_U_1_0
+  asm("z_actor_update_health = 0x80028390");
+#elif MM_U_1_0
+  asm("z_actor_update_health = 0x800BE22C");
+#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_80035650(void);
-	#if OOT_DEBUG
-		asm("external_func_80035650 = 0x80035650");
-	#elif OOT_U_1_0
-		asm("external_func_80035650 = 0x800283BC");
-	#endif
+/* Collision Related
+* Source Code Reference File: "z_actor.c"
+*/
+extern void external_func_80035650(
+z64_actor_t* a
+, z64_collider_body_t* collider
+, int32_t is_frozen
+);
+#if OOT_DEBUG
+  asm("external_func_80035650 = 0x80035650");
+#elif OOT_U_1_0
+  asm("external_func_80035650 = 0x800283BC");
+#elif MM_U_1_0
+  /*asm("external_func_80035650 = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -3679,22 +3714,24 @@ extern void external_func_8005DFAC(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * initializes damage chart part of actor
- * given a destination table, a pointer to a z64_damagechart_init_t, and a pointer to the initialization data
- * itemchart can be null, but damage_init should not be
- * //Actor 0095
- * TODO Types
- */
-extern void external_func_80061ED4(void *table_dst, z64_damagechart_init_t *itemchart, uint32_t *damage_init);
-	#if OOT_DEBUG
-		asm("external_func_80061ED4 = 0x80061ED4");
-	#elif OOT_U_1_0
-		asm("external_func_80061ED4 = 0x80050344");
-	#elif MM_U_1_0
-		asm("external_func_80061ED4 = 0x800E7530");
-		asm("external_func_800E7530 = 0x800E7530");
-	#endif
+/* Initializes an actor's damage chart. (Perhaps allocation is more accurate?)
+* `damage_chart` can be NULL.
+* `init_data` should not be NULL.
+* Source Code Reference File: "z_actor.c"
+* Formerly `external_func_80061ED4`
+*/
+extern void z_actor_damage_table_init(
+void* out /* Destination for initialized table. */
+, z64_damagechar_init_t* damage_chart /* Initialization Variables for Damage Table */
+, uint32_t* init_data
+);
+#if OOT_DEBUG
+  asm("z_actor_damage_table_init = 0x80061ED4");
+#elif OOT_U_1_0
+  asm("z_actor_damage_table_init = 0x80050344");
+#elif MM_U_1_0
+  asm("z_actor_damage_table_init = 0x800E7530");
+#endif
 
 /**
  * initializes damage chart part of actor
