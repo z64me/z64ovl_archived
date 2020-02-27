@@ -696,31 +696,51 @@ extern void external_func_80029694(void);
 		asm("external_func_80029694 = 0x8001D18C");
 	#elif MM_U_1_0
 		asm("external_func_80029694 = 0x800B210C");
-		asm("external_func_800B210C = 0x800B210C");
 	#endif
 
-/**
- * Spawn Particle 0x0F
- * TODO These notes need converted into a C function prototype
- */
-extern void external_func_80029724(void);
-	#if OOT_DEBUG
-		asm("external_func_80029724 = 0x80029724");
-	#elif OOT_U_1_0
-		asm("external_func_80029724 = 0x8001D21C");
-	#endif
+/* Spawn ovl_Effect_Ss_Hahen (Fragment)
+* Source Code Reference File: "z_effect_soft_sprite.c"
+*/
+extern void z_effect_spawn_hahen(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, vec3f_t* a2
+, vec3f_t* a3
+, int16_t xr, int16_t yr, int16_t zr /* X, Y, and Z Rotation (Unconfirmed) */
+, int16_t sp20
+, int32_t sp24
+);
+#if OOT_DEBUG
+  asm("z_effect_spawn_hahen = 0x80029724");
+#elif OOT_U_1_0
+  asm("z_effect_spawn_hahen = 0x8001D21C");
+#elif MM_U_1_0
+  /*asm("z_effect_spawn_hahen = 0xDEADBEEF");*/
+#endif
 
-/**
- * Spawn N Particle 0x0F (Wrapper for 8001D21C)
- * TODO These notes need converted into a C function prototype
- * SP+0x18 = int16_t Particles to Spawn
- */
-extern void external_func_800297A4(void);
-	#if OOT_DEBUG
-		asm("external_func_800297A4 = 0x800297A4");
-	#elif OOT_U_1_0
-		asm("external_func_800297A4 = 0x8001D29C");
-	#endif
+/* Spawn ovl_Effect_Ss_Hahen
+* Wrapper to modify the amount of particles spawned.
+* Source Code Reference File: "z_effect_soft_sprite.c"
+*/
+extern void z_effect_spawn_hahen_n(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, uint32_t a2 /* Floating Point */
+, int16_t a3
+, int16_t srand_offset /* `offset` for z_lib_math_rand_s16_offset */
+, int16_t srand_range /* `range` for z_lib_math_rand_s16_offset */
+, int16_t count /* Particle Count */
+, int16_t sp20
+, int16_t sp24
+, int16_t sp28
+);
+#if OOT_DEBUG
+  asm("z_effect_spawn_hahen_n = 0x800297A4");
+#elif OOT_U_1_0
+  asm("z_effect_spawn_hahen_n = 0x8001D29C");
+#elif MM_U_1_0
+  /*asm("z_effect_spawn_hahen_n = 0xDEADBEEF");*/
+#endif
 
 /**
  * Spawn Particle 0x11 (Wrapper for 8001D438)
@@ -956,19 +976,39 @@ z64_global_t* gl /* Global Context */
 #elif OOT_U_1_0
   asm("z_effect_spawn_flame_circle = 0x8001E178");
 #elif MM_U_1_0
+	/* ovl_Effect_Ss_Fcircle does not exist in MM */
   /*asm("z_effect_spawn_flame_circle = 0xDEADBEEF");*/
 #endif
 
-/**
- * Spawn Particle 0x20
- * TODO These notes need converted into a C function prototype
- */
-extern void effect_spawn_dead_dekubaba(void);
-	#if OOT_DEBUG
-		asm("effect_spawn_dead_dekubaba = 0x8002A6B8");
-	#elif OOT_U_1_0
-		asm("effect_spawn_dead_dekubaba = 0x8001E1D4");
-	#endif
+/* Spawn ovl_Effect_Ss_Dead_Db (Dead Deku Baba)
+* Particles on Deku Baba Death
+* Source Code Reference File: "z_effect_soft_sprite.c"
+*/
+extern void z_effect_spawn_dead_db(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, vec3f_t* a2
+, vec3f_t* a3
+, uint16_t sp10
+, uint16_t sp14
+, uint8_t sp18
+, uint8_t sp1C
+, uint8_t sp20
+, uint8_t sp24
+, uint8_t sp28
+, uint8_t sp2C
+, uint8_t sp30
+, uint16_t sp34
+, uint32_t sp38
+, uint16_t sp3C
+);
+#if OOT_DEBUG
+  asm("z_effect_spawn_dead_db = 0x8002A6B8");
+#elif OOT_U_1_0
+  asm("z_effect_spawn_dead_db = 0x8001E1D4");
+#elif MM_U_1_0
+  asm("z_effect_spawn_dead_db = 0x800B2F80");
+#endif
 
 /**
  * Spawn Particle 0x21
@@ -2395,7 +2435,7 @@ z64_actor_t* a /* Actor to Modify */
 #elif OOT_U_1_0
   asm("z_actor_damage_light = 0x80027090");
 #elif MM_U_1_0
-  /*asm("z_actor_damage_light = 0xDEADBEEF");*/
+  asm("z_actor_damage_light = 0x800BCB70");
 #endif
 
 /**
@@ -4272,44 +4312,56 @@ extern float z_sin_s(int16_t angle);
 		asm("z_sin_s = 0x800FED84");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- * chase_angle
- */
-extern void external_func_800778AC(void);
-	#if OOT_DEBUG
-		asm("external_func_800778AC = 0x800778AC");
-	#elif OOT_U_1_0
-		asm("external_func_800778AC = 0x80063704");
-	#endif
+/* Approximate to an angle.
+* In animal crossing, this is called `chase_angle`
+* Source Code Reference File: "z_lib.c"
+*/
+extern int32_t z_lib_approx_angle_s(
+int16_t* angle /* Angle to Change */
+, int16_t target /* Angle to Approximate To */
+, int16_t change /* Value to Change By */
+);
+#if OOT_DEBUG
+  asm("z_lib_approx_angle_s = 0x800778AC");
+#elif OOT_U_1_0
+  asm("z_lib_approx_angle_s = 0x80063704");
+#elif MM_U_1_0
+  asm("z_lib_approx_angle_s = 0x800FEE70");
+#endif
 
-/**
- * TODO This function is completely undocumented
- * TODO possibly some kind of random number function...
- * Short approximator?
- * chase_s
- */
-extern int16_t math_approxs(int16_t *in_actor, int16_t target, int16_t change);
-	#if OOT_DEBUG
-		asm("math_approxs = 0x8007797C");
-	#elif OOT_U_1_0
-		asm("math_approxs = 0x800637D4");
-	#endif
+/* Approximate to an int16_t
+* In animal crossing, this is called `chase_s`
+* Source Code Reference File: "z_lib.c"
+*/
+extern int16_t z_lib_approx_s(
+int16_t* out /* Integer to Change */
+, int16_t target /* Integer to Approximate To */
+, int16_t change /* Value to Change By */
+);
+#if OOT_DEBUG
+  asm("z_lib_approx_s = 0x8007797C");
+#elif OOT_U_1_0
+  asm("z_lib_approx_s = 0x80063704");
+#elif MM_U_1_0
+  asm("z_lib_approx_s = 0x800FEF2C");
+#endif
 
-/**
- * Float approximator
- * TODO These notes need converted into a C function prototype
- * a0 - actor instance + 0x0198 (offset of stored float) | a1 - float value (target float) | a2 - float value (increments or decrements result by this until it reaches the target float) | v0 - returns 0 if it hasn't reached it, 1 if it does
- * chase_s
- */
-extern int32_t math_approxf(float *in_actor, int32_t target, float change);
-	#if OOT_DEBUG
-		asm("math_approxf = 0x80077A00");
-	#elif OOT_U_1_0
-		asm("math_approxf = 0x8006385C");
-	#elif MM_U_1_0
-		asm("math_approxf = 0x800FF03C");
-	#endif
+/* Approximate to a float
+* In animal crossing, this is called `chase_f`
+* Source Code Reference File: "z_lib.c"
+*/
+extern int32_t z_lib_approx_f(
+float* out /* Integer to Change */
+, float target /* Float to Approximate To */
+, float change /* Value to Change By */
+);
+#if OOT_DEBUG
+  asm("z_lib_approx_f = 0x80077A00");
+#elif OOT_U_1_0
+  asm("z_lib_approx_f = 0x8006385C");
+#elif MM_U_1_0
+  asm("z_lib_approx_f = 0x800FF03C");
+#endif
 
 /**
  * i
@@ -4336,31 +4388,38 @@ extern void external_func_80077B58(void);
 		asm("external_func_80077B58 = 0x800639B8");
 	#endif
 
-/**
- * Generates random int16_t between 0 and `range` (exlusive), and adds `offset`
- * get_random_timer
- */
-extern int16_t math_rand_s16_offset(int16_t offset, int16_t range);
-	#if OOT_DEBUG
-		asm("math_rand_s16_offset = 0x80077D90");
-	#elif OOT_U_1_0
-		asm("math_rand_s16_offset = 0x80063BF0");
-	#elif MM_U_1_0
-		asm("math_rand_s16_offset = 0x800FF450");
-	#endif
+/* Generate a random int16_t.
+* Range is [0, range) (Exclusive)
+* Adds `offset` to the generated integer.
+* Source Code Reference File: "z_lib.c"
+*/
+extern int16_t z_lib_math_rand_s16_offset(
+int16_t offset /* Offset to Add */
+, int16_t range /* Range Limit */
+);
+#if OOT_DEBUG
+  asm("z_lib_math_rand_s16_offset = 0x80077D90");
+#elif OOT_U_1_0
+  asm("z_lib_math_rand_s16_offset = 0x80063BF0");
+#elif MM_U_1_0
+  asm("z_lib_math_rand_s16_offset = 0x800FF450");
+#endif
 
-/**
- * Copy vec3f_t
- * xyz_t_move
- */
-extern void math_vec3f_copy(vec3f_t *out, vec3f_t *in);
-	#if OOT_DEBUG
-		asm("math_vec3f_copy = 0x80077E40");
-	#elif OOT_U_1_0
-		asm("math_vec3f_copy = 0x80063CAC");
-	#elif MM_U_1_0
-		asm("math_vec3f_copy = 0x800FF50C");
-	#endif
+/* Copy a vec3f_t to a destination.
+* In animal crossing, this is called `xyz_t_move`
+* Source Code Reference File: "z_lib.c"
+*/
+extern void z_lib_vec3f_copy(
+vec3f_t *out /* Destination Pointer */
+vec3f_t *in /* Input Vector */
+);
+#if OOT_DEBUG
+  asm("z_lib_vec3f_copy = 0x80077E40");
+#elif OOT_U_1_0
+  asm("z_lib_vec3f_copy = 0x80063CAC");
+#elif MM_U_1_0
+  asm("z_lib_vec3f_copy = 0x800FF50C");
+#endif
 
 /**
  * convert vec3s_t to vec3f_t
@@ -7681,17 +7740,19 @@ extern void external_func_800FD7B4(void);
 		asm("external_func_800FD7B4 = 0x800CDB00");
 	#endif
 
-/**
- * generates a random number between 0 inclusive and 1 exclusive
- */
-extern float math_rand_zero_one(void);
-	#if OOT_DEBUG
-		asm("math_rand_zero_one = 0x800FD9AC");
-	#elif OOT_U_1_0
-		asm("math_rand_zero_one = 0x800CDCCC");
-	#elif MM_U_1_0
-		asm("math_rand_zero_one = 0x80086FDC");
-	#endif
+/* Generate a random float that is smaller than 1.
+* Range is [0, 1) (Exclusive)
+* Adds `offset` to the generated integer.
+* Source Code Reference File: "code_800FD970.s"
+*/
+extern float z_math_rand_zero_one(void);
+#if OOT_DEBUG
+  asm("z_math_rand_zero_one = 0x800FD9AC");
+#elif OOT_U_1_0
+  asm("z_math_rand_zero_one = 0x800CDCCC");
+#elif MM_U_1_0
+  asm("z_math_rand_zero_one = 0x80086FDC");
+#endif
 
 /**
  * TODO This function is completely undocumented

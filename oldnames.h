@@ -11,3 +11,8 @@
 #define external_func_8007869C z_lib_smooth_scale_max_min_s
 #define external_func_8007841C z_lib_smooth_scale_max_f
 #define actor_anime_set z_skelanime_anim_set
+#define math_rand_s16_offset z_lib_math_rand_s16_offset
+#define math_rand_zero_one z_math_rand_zero_one
+#define math_approxs z_lib_approx_s
+#define math_approxf z_lib_approx_f
+#define math_vec3f_copy z_lib_vec3f_copy
