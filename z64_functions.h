@@ -2254,15 +2254,22 @@ extern int32_t external_func_80033684(z64_global_t *global, void *actor);
 		asm("external_func_80033684 = 0x8002650C");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_80033748(z64_global_t *gl, char *actor_ctxt, z64_actor_t *a, uint32_t arg_unalignedF);
-	#if OOT_DEBUG
-		asm("external_func_80033748 = 0x80033748");
-	#elif OOT_U_1_0
-		asm("external_func_80033748 = 0x800265D4");
-	#endif
+/* Change Actor Type
+* Source Code Reference File: "z_actor.c"
+*/
+extern void z_actor_type_change(
+z64_global_t* gl /* Global Context */
+, void* actor_ctxt /* Actor Context within Global Context */
+, z64_actor_t* a /* Actor To Modify */
+, uint8_t type /* Type to Change To */
+);
+#if OOT_DEBUG
+  asm("z_actor_type_change = 0x80033748");
+#elif OOT_U_1_0
+  asm("z_actor_type_change = 0x800265D4");
+#elif MM_U_1_0
+  /*asm("z_actor_type_change = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
