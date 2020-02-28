@@ -987,17 +987,13 @@ z64_global_t* gl /* Global Context */
 extern void z_effect_spawn_dead_db(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
-, vec3f_t* a2
-, vec3f_t* a3
-, uint16_t sp10
+, void* a2
+, void* a3
+, uint16_t scale /* Scale * 100 */
 , uint16_t sp14
-, uint8_t sp18
-, uint8_t sp1C
-, uint8_t sp20
-, uint8_t sp24
-, uint8_t sp28
-, uint8_t sp2C
-, uint8_t sp30
+, uint8_t smoke_ir, uint8_t smoke_ig, uint8_t smoke_ib /* RGB of Inner Smoke Cloud */
+, uint8_t smoke_a /* Smoke Cloud Alpha */
+, uint8_t smoke_or, uint8_t smoke_og, uint8_t smoke_ob /* RGB of Outer Smoke Cloud */
 , uint16_t sp34
 , uint32_t sp38
 , uint16_t sp3C
