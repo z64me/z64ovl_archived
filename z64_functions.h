@@ -5958,8 +5958,8 @@ z64_global_t* gl /* Global Context */
 , z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t skeleton /* Segment-relative offset of Skeleton */
 , uint32_t anim /* Segment-relative offset of animation to initialize with */
-, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations)*/
-, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions)*/
+, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations) If 0, the game automatically allocates memory for this. */
+, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions) If 0, the game automatically allocates memory for this. */
 , uint32_t nlimb /* Total Limb Count + 1 */
 );
 #if OOT_DEBUG
@@ -5967,7 +5967,7 @@ z64_global_t* gl /* Global Context */
 #elif OOT_U_1_0
   asm("z_skelanime_init = 0x8008C684");
 #elif MM_U_1_0
-  /*asm("z_skelanime_init = 0xDEADBEEF");*/
+  /*asm("z_skelanime_init = 0xDEADBEEF"); FIXME needs MM equivalent */
 #endif
 
 /* Initialize a "Skelanime Structure"
@@ -5980,8 +5980,8 @@ z64_global_t* gl /* Global Context */
 , z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t skeleton /* Segment-relative offset of Skeleton */
 , uint32_t anim /* Segment-relative offset of animation to initialize with */
-, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations)*/
-, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions)*/
+, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations) If 0, the game automatically allocates memory for this. */
+, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions) If 0, the game automatically allocates memory for this. */
 , uint32_t nlimb /* Total Limb Count + 1 */
 );
 #if OOT_DEBUG
