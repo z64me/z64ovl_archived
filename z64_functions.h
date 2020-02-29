@@ -5924,49 +5924,47 @@ extern void external_func_800A3BC0(void);
 	#endif
 
 /* Initialize a "Skelanime Structure"
-* This does not support matrices.
+* This function will use the matrix-specific function if you provide
+* a non-zero value for is_matrix.
 * Source Code Reference File: "z_skelanime.c"
 * Formerly `skelanime_init`
 */
-extern void z_skelanime_init(
+static inline void z_skelanime_init(
 z64_global_t* gl /* Global Context */
+, int is_matrix
 , z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t skeleton /* Segment-relative offset of Skeleton */
 , uint32_t anim /* Segment-relative offset of animation to initialize with */
-, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations) If 0, the game automatically allocates memory for this. */
-, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions) If 0, the game automatically allocates memory for this. */
-, uint32_t nlimb /* Total Limb Count + 1 */
-);
-#if OOT_DEBUG
-  asm("z_skelanime_init = 0x800A457C");
-#elif OOT_U_1_0
-  asm("z_skelanime_init = 0x8008C684");
-#elif MM_U_1_0
-  asm("z_skelanime_init = 0x80136A7C");
-#endif
+)
+{
+	if (is_matrix)
+		_z_skelanime_mtx_init(gl, sk, skeleton, anim, 0, 0, 0);
+	
+	else
+		_z_skelanime_init(gl, sk, skeleton, anim, 0, 0, 0);
+}
 
 /* Initialize a "Skelanime Structure"
-* This supports matrices
-* Source Code Reference File: "z_skelanime.c"
-* Formerly `skelanime_init_mtx`
-* like z_skelanime_init, but with matrix support
+* Same as above, but with extended functionality; you can manually specify
+* pre-allocated draw table blocks, usually from the instance structure.
 */
-extern void z_skelanime_mtx_init(
+static inline void z_skelanime_init_ext(
 z64_global_t* gl /* Global Context */
+, int is_matrix
 , z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t skeleton /* Segment-relative offset of Skeleton */
 , uint32_t anim /* Segment-relative offset of animation to initialize with */
 , vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations) If 0, the game automatically allocates memory for this. */
 , vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions) If 0, the game automatically allocates memory for this. */
 , uint32_t nlimb /* Total Limb Count + 1 */
-);
-#if OOT_DEBUG
-  asm("z_skelanime_mtx_init = 0x800A46F8");
-#elif OOT_U_1_0
-  asm("z_skelanime_mtx_init = 0x8008C788");
-#elif MM_U_1_0
-  asm("z_skelanime_mtx_init = 0x80136B30");
-#endif
+)
+{
+	if (is_matrix)
+		_z_skelanime_mtx_init(gl, sk, skeleton, anim, dt_rot, dt_pos, nlimb);
+	
+	else
+		_z_skelanime_init(gl, sk, skeleton, anim, dt_rot, dt_pos, nlimb);
+}
 
 /* This executes an actor's `skelanime draw table function`
 * Source Code Reference File: "z_skelanime.c"
