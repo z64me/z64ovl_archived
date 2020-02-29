@@ -5974,6 +5974,7 @@ z64_global_t* gl /* Global Context */
 * This supports matrices
 * Source Code Reference File: "z_skelanime.c"
 * Formerly `skelanime_init_mtx`
+* like z_skelanime_init, but with matrix support
 */
 extern void z_skelanime_mtx_init(
 z64_global_t* gl /* Global Context */
@@ -5985,11 +5986,11 @@ z64_global_t* gl /* Global Context */
 , uint32_t nlimb /* Total Limb Count + 1 */
 );
 #if OOT_DEBUG
-  asm("z_skelanime_init = 0x800A46F8");
+  asm("z_skelanime_mtx_init = 0x800A46F8");
 #elif OOT_U_1_0
-  asm("z_skelanime_init = 0x8008C788");
+  asm("z_skelanime_mtx_init = 0x8008C788");
 #elif MM_U_1_0
-  asm("z_skelanime_init = 0x80136B30");
+  asm("z_skelanime_mtx_init = 0x80136B30");
 #endif
 
 /* This executes an actor's `skelanime draw table function`
