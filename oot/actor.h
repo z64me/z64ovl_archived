@@ -103,7 +103,7 @@ struct z64_actor_s
   char              unk_0E_[0x0002];          /* 0x00BA */
   float             unk_0xBC;                 /* 0x00BC */
   void             *draw_drop_shadow;         /* 0x00C0 */
-  float             unk_0xC4;                 /* 0x00C4 */
+  float             shadow_radius;            /* 0x00C4 */
   uint8_t           unk_0xC8;                 /* 0x00C8 */
   char              pad_0xC9_[0x0003];        /* 0x00C9 */
   /* 0x00B4 End */

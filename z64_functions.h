@@ -987,15 +987,15 @@ z64_global_t* gl /* Global Context */
 extern void z_effect_spawn_dead_db(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
-, void* a2
-, void* a3
+, vec3f_t* a2
+, vec3f_t* a3
 , uint16_t scale /* Scale * 100 */
 , uint16_t sp14
 , uint8_t smoke_ir, uint8_t smoke_ig, uint8_t smoke_ib /* RGB of Inner Smoke Cloud */
 , uint8_t smoke_a /* Smoke Cloud Alpha */
 , uint8_t smoke_or, uint8_t smoke_og, uint8_t smoke_ob /* RGB of Outer Smoke Cloud */
 , uint16_t sp34
-, uint32_t sp38
+, uint32_t duration /* Duration of Effect in Frames */
 , uint16_t sp3C
 );
 #if OOT_DEBUG
@@ -1050,30 +1050,30 @@ extern void effect_spawn_ice_smoke(void);
 		asm("effect_spawn_ice_smoke = 0x8001E560");
 	#endif
 
-/**
- * Draws shadow until instance is destroyed (use in constructor)
- * rot2 = pointer to rotation vector, generally rot_2 in the actor (ex: &en->actor.rot_2)
- * unk0 = unknown float, gets stored at dest + 0x08
- * drawfunc = ACTOR_SHADOW_DRAWFUNC_CIRCLE for circular shadows, ACTOR_SHADOW_DRAWFUNC_TEARDROP for teardrop shadows attached to feet, gets stored at dest + 0x0C
- * radius = size of shadow(s), gets stored at dest + 0x10
- */
-extern void actor_init_shadow(z64_rot_t *rot2, f32 unk0, void *drawfunc, f32 radius);
-	#if OOT_DEBUG
-		asm("actor_init_shadow = 0x8002B1E0");
-		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x8002B5EC");
-		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x8002B8C4");
-	#elif OOT_U_1_0
-		asm("actor_init_shadow = 0x8001EC20");
-		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x8001EFF4");
-		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x8001F280");
-	#elif MM_U_1_0
-		asm("actor_init_shadow = 0x800B3BA4");
-		asm("ACTOR_SHADOW_DRAWFUNC_CIRCLE = 0x800B3FC0");
-		asm("ACTOR_SHADOW_DRAWFUNC_TEARDROP = 0x800B42F8");
-	#endif
-	extern char // drawfunc must be the address of one of the following:
-		ACTOR_SHADOW_DRAWFUNC_CIRCLE,
-		ACTOR_SHADOW_DRAWFUNC_TEARDROP;
+/* Initialize the process to draw a drop shadow.
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_init_shadow`
+*/
+extern void z_actor_shadow_init(
+void* a /* Sub Structure at `actor->0x00B4`, formerly `rot_2` */
+, float f0
+, void* fdraw /* Shadow Draw Function */
+, float radius /* Radius of Shadow */
+);
+#if OOT_DEBUG
+  asm("z_actor_shadow_init = 0x8002B1E0");
+  asm("Z_SHADOW_CIRCLE = 0x8002B5EC");
+  asm("Z_SHADOW_TEARDROP = 0x8002B8C4");
+#elif OOT_U_1_0
+  asm("z_actor_shadow_init = 0x8001EC20");
+  asm("Z_SHADOW_CIRCLE = 0x8001EFF4");
+  asm("Z_SHADOW_TEARDROP = 0x8001F280");
+#elif MM_U_1_0
+  asm("z_actor_shadow_init = 0x800B3BA4");
+  asm("Z_SHADOW_CIRCLE = 0x800B3FC0");
+  asm("Z_SHADOW_TEARDROP = 0x800B42F8");
+#endif
+extern void *Z_SHADOW_CIRCLE, *Z_SHADOW_TEARDROP;
 
 /**
  * TODO This function is completely undocumented
@@ -1265,32 +1265,40 @@ extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1
 		asm("actor_boss_title = 0x800B5E0C");
 	#endif
 
-/**
- * Kill Actor (nulls draw/update, but does not deallocate)
- * actor - actor instance
- */
-extern void actor_kill(z64_actor_t *actor);
-	#if OOT_DEBUG
-		asm("actor_kill = 0x8002D570");
-	#elif OOT_U_1_0
-		asm("actor_kill = 0x80020EB4");
-	#elif MM_U_1_0
-		asm("actor_kill = 0x800B670C");
-	#endif
+/* This kills an actor process.
+* Does not de-allocate an actor.
+* Sets `main_proc` and `draw_proc` to 0x0.
+* Set `flags` to -1.
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_kill`
+*/
+extern void z_actor_kill(
+z64_actor_t* a /* Actor to Kill */
+);
+#if OOT_DEBUG
+  asm("z_actor_kill = 0x8002D570");
+#elif OOT_U_1_0
+  asm("z_actor_kill = 0x80020EB4");
+#elif MM_U_1_0
+  asm("z_actor_kill = 0x800B670C");
+#endif
 
-/**
- * Refreshes z-target position, use on each frame if the actor moves
- * actor - actor instance
- * height - float Y position from actor origin
- */
-extern void actor_set_height(z64_actor_t *actor, f32 height);
-	#if OOT_DEBUG
-		asm("actor_set_height = 0x8002D5B8");
-	#elif OOT_U_1_0
-		asm("actor_set_height = 0x80020F04");
-	#elif MM_U_1_0
-		asm("actor_set_height = 0x800B675C");
-	#endif
+/* Set Actor Height
+* Refreshes Z-Target Position
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_set_height`
+*/
+extern void z_actor_set_height(
+z64_actor_t* a /* Actor to Reference */
+, float height /* Y position relative to Actor Origin */
+);
+#if OOT_DEBUG
+  asm("z_actor_set_height = 0x8002D5B8");
+#elif OOT_U_1_0
+  asm("z_actor_set_height = 0x80020F04");
+#elif MM_U_1_0
+  asm("z_actor_set_height = 0x800B675C");
+#endif
 
 /**
  * Scale Actor
@@ -1341,18 +1349,22 @@ extern void actor_update_vel(z64_actor_t *actor);
 		asm("actor_update_vel = 0x800211A4");
 	#endif
 
-/**
- * Function to move in direction (0x32) at set velocity (0x68)
- * a0 = pointer to start address of actor instance
- */
-extern void actor_move_towards_direction(z64_actor_t *actor);
-	#if OOT_DEBUG
-		asm("actor_move_towards_direction  = 0x8002D8E0");
-	#elif OOT_U_1_0
-		asm("actor_move_towards_direction  = 0x8002121C");
-	#elif MM_U_1_0
-		asm("actor_move_towards_direction  = 0x800B6A88");
-	#endif
+/* Move actor towards direction.
+* Direction is set at `actor->0x0032`
+* Speed/Velocity is set at `actor->0x0068`
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_move_towards_direction`
+*/
+extern void z_actor_move_dir_vel(
+z64_actor_t* a /* Actor Instance to Modify */
+);
+#if OOT_DEBUG
+  asm("z_actor_move_dir_vel = 0x8002D8E0");
+#elif OOT_U_1_0
+  asm("z_actor_move_dir_vel = 0x8002121C");
+#elif MM_U_1_0
+  asm("z_actor_move_dir_vel = 0x800B6A88");
+#endif
 
 /**
  * Physics, updates XYZ velocity vectors (+0x5C) of an actor
@@ -1640,25 +1652,26 @@ extern void external_func_8002E1A8(void);
 		asm("external_func_8002E1A8 = 0x80021B54");
 	#endif
 
-/**
- * possibly primary actor collision call
- * required in order for shadow initialized in actor_init_shadow to work
- * TODO arguments below/radius may actually be swapped, test these more carefully
- * below = space below actor coordinates to test if ground is below actor
- * radius = radius for moving actor out of wall in case it is placed inside wall
- * above = space above actor coordinates to test if ceiling is above actor
- * En_Niw_Lady uses the arguments (gctx, &en->actor, 20.0f, 20.0f, 60.0f, 0x0000001D)
- * old notes for reference:
- * A0 = Global Context | A1 = Actor Instance | A2 = float wallCheckHeight? (26f for Link) | A3 = float wallPushback? (18f/14f for Adult/Child Link) | SP+0x10 float ? (56f/40f for Adult/Child Link) | SP+0x14 int32_t (type?)
- */
-extern void actor_collision_routine(z64_global_t *global, z64_actor_t *actor, f32 below, f32 radius, f32 above, uint32_t flags);
-	#if OOT_DEBUG
-		asm("actor_collision_routine = 0x8002E4B4");
-	#elif OOT_U_1_0
-		asm("actor_collision_routine = 0x80021E6C");
-	#elif MM_U_1_0
-		asm("actor_collision_routine = 0x800B78B8");
-	#endif
+/* Primary Actor Collision Call (?)
+* Required for a shadow to draw.
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_collision_routine`
+*/
+extern void z_actor_find_bounds(
+z64_global_t* gl /* Global Context */
+, z64_actor_t* a /* Actor to Reference */
+, float below /* space below actor coordinates to test if ground is below actor */
+, float radius /* radius for moving actor out of wall in case it is placed inside wall */
+, float above /* space above actor coordinates to test if ceiling is above actor */
+, uint32_t flags /* Type? */
+);
+#if OOT_DEBUG
+  asm("z_actor_find_bounds = 0x8002E4B4");
+#elif OOT_U_1_0
+  asm("z_actor_find_bounds = 0x80021E6C");
+#elif MM_U_1_0
+  asm("z_actor_find_bounds = 0x800B78B8");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -2012,18 +2025,22 @@ extern void sound_play_actor(z64_actor_t *actor, uint16_t sound_id);
 		asm("sound_play_actor = 0x80022F84");
 	#endif
 
-/**
- * Play Sound Effect (Actor)
- * TODO There are three identical functions... distinguish the difference and fix names
- */
-extern void sound_play_actor2(z64_actor_t *actor, uint16_t sound_id);
-	#if OOT_DEBUG
-		asm("sound_play_actor2 = 0x8002F828");
-	#elif OOT_U_1_0
-		asm("sound_play_actor2 = 0x80022FD0");
-	#elif MM_U_1_0
-		asm("sound_play_actor2 = 0x800B8EC8");
-	#endif
+/* Play a sound effect.
+* Wrapper for 80078914 (a wrapper for sound_play_system)
+* References `actor->unk_0xE4`; Likely a position vector to place the sound origin.
+* Source Code Reference File: "z_actor.c"
+*/
+extern void z_actor_play_sfx2(
+z64_actor_t* a /* Actor to derive position */
+, uint16_t sfx /* Sound Effect ID (See: https://wiki.cloudmodding.com/oot/Sound_Effect_Ids)*/
+);
+#if OOT_DEBUG
+  asm("z_actor_play_sfx2 = 0x8002F828");
+#elif OOT_U_1_0
+  asm("z_actor_play_sfx2 = 0x80022FD0");
+#elif MM_U_1_0
+  asm("z_actor_play_sfx2 = 0x800B8EC8");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -2426,19 +2443,23 @@ extern void external_func_8003424C(void);
 	#endif
 
 /* Modify Actor Damage Color
+* Commonly used to turn an actor blue when stunned.
 * Plays `NA_SE_EN_LIGHT_ARROW_HIT`
 * Source Code Reference File: "z_actor.c"
 */
-extern void z_actor_damage_light(
+extern void z_actor_damage_color(
 z64_actor_t* a /* Actor to Modify */
-, int16_t a1, int16_t a2, int16_t a3, int16_t sp10 /* Unidentified Arguments */
+, int16_t a1
+, int16_t a2
+, int16_t a3
+, int16_t timer /* Timer in Frames; How long the actor is a particular color */
 );
 #if OOT_DEBUG
-  asm("z_actor_damage_light = 0x8003426C");
+  asm("z_actor_damage_color = 0x8003426C");
 #elif OOT_U_1_0
-  asm("z_actor_damage_light = 0x80027090");
+  asm("z_actor_damage_color = 0x80027090");
 #elif MM_U_1_0
-  asm("z_actor_damage_light = 0x800BCB70");
+  asm("z_actor_damage_color = 0x800BCB70");
 #endif
 
 /**
@@ -3588,33 +3609,37 @@ extern void actor_collider_cylinder_array_init(z64_global_t *gl, void *dest, z64
 		asm("actor_collider_cylinder_array_init = 0x800E0E60");
 	#endif
 
-/**
- * allocates memory for capsule
- * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
- */
-extern void actor_collider_cylinder_alloc(z64_global_t *global, z64_collider_cylinder_main_t *collision);
-	#if OOT_DEBUG
-		asm("actor_collider_cylinder_alloc = 0x8005C364");
-	#elif OOT_U_1_0
-		asm("actor_collider_cylinder_alloc = 0x8004AB7C");
-	#elif MM_U_1_0
-		asm("actor_collider_cylinder_alloc = 0x800E119C");
-	#endif
+/* Allocate a z64_collider_cylinder_main_t structure.
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collider_cylinder_alloc`
+*/
+extern void z_collider_cylinder_alloc(
+z64_global_t* gl /* Global Context */
+, z64_collider_cylinder_main_t* c /* Collider to Allocate */
+);
+#if OOT_DEBUG
+  asm("z_collider_cylinder_alloc = 0x8005C364");
+#elif OOT_U_1_0
+  asm("z_collider_cylinder_alloc = 0x8004AB7C");
+#elif MM_U_1_0
+  asm("z_collider_cylinder_alloc = 0x800E119C");
+#endif
 
-/**
- * frees memory associated with capsule
- * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x014C (offset where you stored the hitbox struct)
- */
-extern void actor_collider_cylinder_free(z64_global_t *global, z64_collider_cylinder_main_t *collision);
-	#if OOT_DEBUG
-		asm("actor_collider_cylinder_free = 0x8005C3AC");
-	#elif OOT_U_1_0
-		asm("actor_collider_cylinder_free = 0x8004ABCC");
-	#elif MM_U_1_0
-		asm("actor_collider_cylinder_free = 0x800E11EC");
-	#endif
+/* Deallocate a z64_collider_cylinder_main_t structure.
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collider_cylinder_free`
+*/
+extern void z_collider_cylinder_free(
+z64_global_t* gl /* Global Context */
+, z64_collider_cylinder_main_t* c /* Collider to Deallocate */
+);
+#if OOT_DEBUG
+  asm("z_collider_cylinder_free = 0x8005C3AC");
+#elif OOT_U_1_0
+  asm("z_collider_cylinder_free = 0x8004ABCC");
+#elif MM_U_1_0
+  asm("z_collider_cylinder_free = 0x800E11EC");
+#endif
 
 /**
  * Loads hitbox variable array to hitbox structure  (different purpose than 8005C4AC?)
@@ -3644,21 +3669,23 @@ extern void external_func_8005C450(void);
 		asm("external_func_800E12A4 = 0x800E12A4");
 	#endif
 
-/**
- * Loads hitbox variable array to hitbox structure
- * dest = destination capsule structure within actor instance
- * actor = actor
- * source = capsule initialization data
- * a0 - global context | a1 - actor instance + 0x014C (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
- */
-extern void actor_collider_cylinder_init(z64_global_t *global, z64_collider_cylinder_main_t *dest, z64_actor_t *actor, void *src);
-	#if OOT_DEBUG
-		asm("actor_collider_cylinder_init = 0x8005C4AC");
-	#elif OOT_U_1_0
-		asm("actor_collider_cylinder_init = 0x8004ACEC");
-	#elif MM_U_1_0
-		asm("actor_collider_cylinder_init = 0x800E1374");
-	#endif
+/* Initialize a z64_collider_cylinder_main_t structure.
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collider_cylinder_init`
+*/
+extern void z_collider_cylinder_init(
+z64_global_t* gl /* Global Context */
+, z64_collider_cylinder_main_t* c /* Collider to Initialize */
+, z64_actor_t* a /* Actor Instance to Reference */
+, const z64_collider_cylinder_init_t* source /* Initialization Variables */
+);
+#if OOT_DEBUG
+  asm("z_collider_cylinder_init = 0x8005C4AC");
+#elif OOT_U_1_0
+  asm("z_collider_cylinder_init = 0x8004ACEC");
+#elif MM_U_1_0
+  asm("z_collider_cylinder_init = 0x800E1374");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -3730,47 +3757,59 @@ extern void external_func_8005D160(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * Subscribe to collision pool 1, non-complex poly types | Called directly by actors
- * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
- * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
- */
-extern void actor_collision_check_set_at(z64_global_t *global, void* simple_body_groups, z64_collider_cylinder_main_t *collision);
-	#if OOT_DEBUG
-		asm("actor_collision_check_set_at = 0x8005D79C");
-	#elif OOT_U_1_0
-		asm("actor_collision_check_set_at = 0x8004BD50");
-	#elif MM_U_1_0
-		asm("actor_collision_check_set_at = 0x800E2634");
-	#endif
+/* Subscribe to Collision Pool 1
+* (AT; Attack Toucher)
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collision_check_set_at`
+*/
+extern void z_collider_set_at(
+z64_global_t* gl /* Global Context */
+, z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
+, z64_collider_cylinder_main_t* c /* Collider Structure */
+);
+#if OOT_DEBUG
+  asm("z_collider_set_at = 0x8005D79C");
+#elif OOT_U_1_0
+  asm("z_collider_set_at = 0x8004BD50");
+#elif MM_U_1_0
+  asm("z_collider_set_at = 0x800E2634");
+#endif
 
-/**
- * //Subscribe to collision pool 2, non-complex poly types | //Called directly by actors
- * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
- * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?
- */
-extern void actor_collision_check_set_ac(z64_global_t *global, void* simple_body_groups, z64_collider_cylinder_main_t *collision);
-	#if OOT_DEBUG
-		asm("actor_collision_check_set_ac = 0x8005D9F4");
-	#elif OOT_U_1_0
-		asm("actor_collision_check_set_ac = 0x8004BF40");
-	#elif MM_U_1_0
-		asm("actor_collision_check_set_ac = 0x800E2740");
-	#endif
+/* Subscribe to Collision Pool 2
+* (AC; Attack Checker)
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collision_check_set_ac`
+*/
+extern void z_collider_set_ac(
+z64_global_t* gl /* Global Context */
+, z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
+, z64_collider_cylinder_main_t* c /* Collider Structure */
+);
+#if OOT_DEBUG
+  asm("z_collider_set_ac = 0x8005D9F4");
+#elif OOT_U_1_0
+  asm("z_collider_set_ac = 0x8004BF40");
+#elif MM_U_1_0
+  asm("z_collider_set_ac = 0x800E2740");
+#endif
 
-/**
- * Subscribe to collision pool 3, non-complex poly types
- * TODO Look into actors that use this function, there are conflicts between these notes and the function prototype, define a type for collision and figure out the return type
- * A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit? | Called directly by actors
- */
-extern void actor_collision_check_set_ot(z64_global_t *global, void *simple_body_groups, z64_collider_cylinder_main_t *collision);
-	#if OOT_DEBUG
-		asm("actor_collision_check_set_ot = 0x8005DC4C");
-	#elif OOT_U_1_0
-		asm("actor_collision_check_set_ot = 0x8004C130");
-	#elif MM_U_1_0
-		asm("actor_collision_check_set_ot = 0x800E2928");
-	#endif
+/* Subscribe to Collision Pool 3
+* (OT; (Object?) Toucher)
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collision_check_set_ot`
+*/
+extern void z_collider_set_ot(
+z64_global_t* gl /* Global Context */
+, z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
+, z64_collider_cylinder_main_t* c /* Collider Structure */
+);
+#if OOT_DEBUG
+  asm("z_collider_set_ot = 0x8005DC4C");
+#elif OOT_U_1_0
+  asm("z_collider_set_ot = 0x8004C130");
+#elif MM_U_1_0
+  asm("z_collider_set_ot = 0x800E2928");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -3791,7 +3830,7 @@ extern void external_func_8005DFAC(void);
 extern void z_actor_damage_table_init(
 void* out /* Destination for initialized table. */
 , z64_damagechart_init_t* damage_chart /* Initialization Variables for Damage Table */
-, uint32_t* init_data
+, const uint32_t* init_data
 );
 #if OOT_DEBUG
   asm("z_actor_damage_table_init = 0x80061ED4");
@@ -3813,22 +3852,23 @@ extern void external_func_80061EFC(void);
 		asm("external_func_80061EFC = 0x80050370");
 	#elif MM_U_1_0
 		asm("external_func_80061EFC = 0x800E755C");
-		asm("external_func_800E755C = 0x800E755C");
 	#endif
 
-/**
- * Enables hitbox, only needs to be used one time?
- * TODO These notes need converted into a C function prototype
- * a0 - actor instance | a1 - actor instance + 0x014C (offset of hitbox struct in the instance)
- */
-extern void actor_collider_cylinder_update(z64_actor_t *actor, z64_collider_cylinder_main_t *collision);
-	#if OOT_DEBUG
-		asm("actor_collider_cylinder_update = 0x800626DC");
-	#elif OOT_U_1_0
-		asm("actor_collider_cylinder_update = 0x80050B00");
-	#elif MM_U_1_0
-		asm("actor_collider_cylinder_update = 0x800E7DF8");
-	#endif
+/* Dynamically Update Collider Structure
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collider_cylinder_update`
+*/
+extern void z_collider_cylinder_update(
+z64_actor_t* a /* Actor to Reference */
+, z64_collider_cylinder_main_t* c /* Collider Structure */
+);
+#if OOT_DEBUG
+  asm("z_collider_cylinder_update = 0x800626DC");
+#elif OOT_U_1_0
+  asm("z_collider_cylinder_update = 0x80050B00");
+#elif MM_U_1_0
+  asm("z_collider_cylinder_update = 0x800E7DF8");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -4300,20 +4340,20 @@ extern float z_cos_s(int16_t angle);
 	#endif
 
 /**
- * Math, Get sine of short rotation angle
- * TODO Test in-game
- * A0 = int16_t rotation | F0 = sine of A0
- * sin_s
- * formerly math_sins
- */
-extern float z_sin_s(int16_t angle);
-	#if OOT_DEBUG
-		asm("z_sin_s = 0x80077870"); /* Alternatively 0x80100450 */
-	#elif OOT_U_1_0
-		asm("z_sin_s = 0x800636C4");
-	#elif MM_U_1_0
-		asm("z_sin_s = 0x800FED84");
-	#endif
+/* Return Sine of Rotation Angle
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_sins`
+*/
+extern float z_sin_s(
+int16_t angle /* 16-bit Angle */
+);
+#if OOT_DEBUG
+  asm("z_sin_s = 0x80077870"); /* Alternatively 0x80100450 */
+#elif OOT_U_1_0
+  asm("z_sin_s = 0x800636C4");
+#elif MM_U_1_0
+  asm("z_sin_s = 0x800FED84");
+#endif
 
 /* Approximate to an angle.
 * In animal crossing, this is called `chase_angle`
@@ -4546,7 +4586,6 @@ extern int16_t math_vec3f_atan2_xz(vec3f_t* coord1, vec3f_t* coord2);
 		asm("external_func_80078068 = 0x80063F00");
 	#elif MM_U_1_0
 		asm("external_func_80078068 = 0x800FFA60");
-		asm("external_func_800FFA60 = 0x800FFA60");
 	#endif
 
 /**
@@ -4561,22 +4600,23 @@ extern int16_t math_vec3f_atan2_xz_y(vec3f_t* coord1, vec3f_t* coord2);
 		asm("external_func_8007809C = 0x80063F34");
 	#elif MM_U_1_0
 		asm("external_func_8007809C = 0x800FFA94");
-		asm("external_func_800FFA94 = 0x800FFA94");
 	#endif
 
-/**
- * Instance Init, Initialize Variable Chain
- * TODO These notes need converted into a C function prototype
- * A0 = Actor Instance | A1 = Variable Initializer List ptr
- */
-extern void actor_init_ichain(z64_actor_t *actor, uint32_t const *ichain);
-	#if OOT_DEBUG
-		asm("actor_init_ichain = 0x800780DC");
-	#elif OOT_U_1_0
-		asm("actor_init_ichain = 0x80063F7C");
-	#elif MM_U_1_0
-		asm("actor_init_ichain = 0x800FFADC");
-	#endif
+/* Process a chain of variables for the "compact initialization format".
+* Source Code Reference File: "z_lib.c"
+* Formerly `actor_init_ichain`
+*/
+extern void z_lib_ichain_init(
+z64_actor_t* a /* Actor to Reference */
+, const uint32_t* data /* "Initiailization Chain Data" */
+);
+#if OOT_DEBUG
+  asm("z_lib_ichain_init = 0x800780DC");
+#elif OOT_U_1_0
+  asm("z_lib_ichain_init = 0x80063F7C");
+#elif MM_U_1_0
+  asm("z_lib_ichain_init = 0x800FFADC");
+#endif
 
 /**
  * unknown float func" Args="a0 - actor instance + xxxx (offset of the float that will change) | a1 - float | a2 - float  | a3 - float | 0x0010($sp) float"
@@ -4621,7 +4661,7 @@ extern void external_func_8007848C(float *value, float a, float b);
 /* Smoothly Transition (Scale) int16_t to Target
 * Source Code Reference File: "z_lib.c"
 */
-extern int16_t z_lib_smooth_scale_max_min_s(
+extern void z_lib_smooth_scale_max_min_s(
 int16_t* src /* Source Short */
 , int16_t target /* Target Short*/
 , int16_t invScale /* Derived from Decomp */
@@ -4646,11 +4686,11 @@ int16_t* src /* Source Short */
 , int16_t max /* Maximum Value to Scale By */
 );
 #if OOT_DEBUG
-  asm("z_lib_smooth_scale_max_min_s = 0x800787BC");
+  asm("z_lib_smooth_scale_max_s = 0x800787BC");
 #elif OOT_U_1_0
-  asm("z_lib_smooth_scale_max_min_s = 0x80064624");
+  asm("z_lib_smooth_scale_max_s = 0x80064624");
 #elif MM_U_1_0
-  /*asm("z_lib_smooth_scale_max_min_s = 0xDEADBEEF");*/
+  /*asm("z_lib_smooth_scale_max_s = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -5738,16 +5778,40 @@ extern void external_func_800A0B40(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * Must be in draw even after initializing hirearchy without matrices
- * TODO Variable name cleanup, better notes
- */
-extern void skelanime_draw(z64_global_t *global, uint32_t limb_index, uint32_t adt, uint8_t limb_dlists_count, void *internal0, void *internal1, z64_actor_t *actor);
-	#if OOT_DEBUG
-		asm("skelanime_draw = 0x800A15C8");
-	#elif OOT_U_1_0
-		asm("skelanime_draw = 0x8008993C");
-	#endif
+/* Draw a `skelanime` structure.
+* This does not support `matrix-enabled` skeletons.
+* Debug strings dub this function `Si2_draw()` (Skeleton Info 2; Draw)?
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `skelanime_draw`
+*/
+extern void z_skelanime_draw(
+z64_global_t* gl /* Global Context */
+, uint32_t limb_index /* Skelanime Limb Index */
+, void* dtstart /* Skelanime Draw Table Start */
+, int32_t callback0( /* This must return 0 */
+	z64_global_t* gl /* Global Context */
+	, int32_t limb /* Current Limb */
+	, uint32_t* dlist /* Display List Pointer */
+	, vec3f_t* translation /* Limb Translation */
+	, vec3s_t* rotation /* Limb Rotation */
+	, void* instance /* Current instance pointer (entity_t) */
+	)
+, void callback1( /* An internal callback function. */
+	z64_global_t* gl /* Global Context */
+	, int32_t limb /* Current Limb */
+	, uint32_t dlist /* Display List */
+	, vec3s_t* rotation /* Limb Rotation */
+	, void* instance /* Current instance pointer (entity_t) */
+	)
+, void* instance /* A pointer to the actor instance containing the skelanime structure. */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_draw = 0x800A15C8");
+#elif OOT_U_1_0
+  asm("z_skelanime_draw = 0x8008993C");
+#elif MM_U_1_0
+  asm("z_skelanime_draw = 0x80133B3C");
+#endif
 
 /**
  * Draw Matrix-Enabled Object
@@ -5760,26 +5824,26 @@ extern void skelanime_draw(z64_global_t *global, uint32_t limb_index, uint32_t a
 extern
 void
 skelanime_draw_mtx(
+  z64_global_t *global
+, uint32_t limb_index
+, uint32_t adt
+, uint8_t limb_dlists_count
+, int32_t callback0(            /* callback0 must return 0 */
 	  z64_global_t *global
-	, uint32_t limb_index
-	, uint32_t adt
-	, uint8_t limb_dlists_count
-	, int32_t callback0(            /* callback0 must return 0 */
-		  z64_global_t *global
-		, uint8_t limb           /* limb index in skeleton */
-		, uint32_t *dlist        /* *dlist = 0x06xxxxxx changes limb model */
-		, vec3f_t *translation
-		, vec3s_t *rotation
-		, void *entity
-	  )
-	, void callback1(
-		  z64_global_t *global
-		, uint8_t limb
-		, uint32_t dlist         /* different from callback0, needs more research */
-		, vec3s_t *rotation
-		, void *entity
-	  )
+	, uint8_t limb           /* limb index in skeleton */
+	, uint32_t *dlist        /* *dlist = 0x06xxxxxx changes limb model */
+	, vec3f_t *translation
+	, vec3s_t *rotation
 	, void *entity
+  )
+, void callback1(
+	  z64_global_t *global
+	, uint8_t limb
+	, uint32_t dlist         /* different from callback0, needs more research */
+	, vec3s_t *rotation
+	, void *entity
+  )
+, void *entity
 );
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx = 0x800A1AC8");
@@ -5789,17 +5853,20 @@ skelanime_draw_mtx(
 		asm("skelanime_draw_mtx = 0x80133F28");
 	#endif
 
-/**
- * Count Animation Frames
- */
-extern int32_t anime_get_framecount(uint32_t animation);
-	#if OOT_DEBUG
-		asm("anime_get_framecount = 0x800A2000");
-	#elif OOT_U_1_0
-		asm("anime_get_framecount = 0x8008A194");
-	#elif MM_U_1_0
-		asm("anime_get_framecount = 0x80134748");
-	#endif
+/* Return Animation Frame Count
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `anime_get_framecount`
+*/
+extern int32_t z_skelanime_anim_nframes(
+uint32_t anim /* Segment-relative Animation Offset */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_anim_nframes = 0x800A2000");
+#elif OOT_U_1_0
+  asm("z_skelanime_anim_nframes = 0x8008A194");
+#elif MM_U_1_0
+  asm("z_skelanime_anim_nframes = 0x80134748");
+#endif
 
 /**
  * Draw an object skeleton on a specific destination buffer
@@ -5863,17 +5930,25 @@ extern void external_func_800A3BC0(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * Initializes hierarchy without matrices
- * TODO Unknown variables, do something about that
- * a0 = Global Context | a1 = Actor Instance + 0x014C (offset to store data) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)  0x10($sp) 0x14($sp) 0x18($sp)
- */
-extern void skelanime_init(z64_global_t *global, z64_skelanime_t *skelanime, uint32_t skeleton, uint32_t animation, uint8_t unk0, uint8_t unk1, uint8_t unk2);
-	#if OOT_DEBUG
-		asm("skelanime_init = 0x800A457C");
-	#elif OOT_U_1_0
-		asm("skelanime_init = 0x8008C684");
-	#endif
+/* Initialize a "Skelanime Structure"
+* This does not support matrices.
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `skelanime_init`
+*/
+extern void z_skelanime_init(
+z64_global_t* gl /* Global Context */
+, z64_skelanime_t* sk /* Skelanime Structure */
+, uint32_t skeleton /* Segment-relative offset of Skeleton */
+, uint32_t anim /* Segment-relative offset of animation to initialize with */
+, uint32_t sp10, uint32_t sp14, uint32_t sp18 /* Unidentified */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_init = 0x800A457C");
+#elif OOT_U_1_0
+  asm("z_skelanime_init = 0x8008C684");
+#elif MM_U_1_0
+  /*asm("z_skelanime_init = 0xDEADBEEF");*/
+#endif
 
 /**
  * Initialize Matrix-Enabled Object with Animation
@@ -5889,19 +5964,20 @@ extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime,
 		asm("skelanime_init_mtx = 0x80136B30");
 	#endif
 
-/**
- * Update Animation for Matrix-Enabled Object
- * TODO Conflict, notes below say actor+0x014C, but taking actor+0x0 is fine?
- * A0 = actor instance + 0x014C (Drawing Table) V0 = 1 if ?, else 0
- */
-extern int32_t actor_anime_frame_update_mtx(z64_skelanime_t *skelanime);
-	#if OOT_DEBUG
-		asm("actor_anime_frame_update_mtx = 0x800A49FC");
-	#elif OOT_U_1_0
-		asm("actor_anime_frame_update_mtx = 0x8008C9C0");
-	#elif MM_U_1_0
-		asm("actor_anime_frame_update_mtx = 0x80136CD0");
-	#endif
+/* This executes an actor's `skelanime draw table function`
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `actor_anime_frame_update_mtx`
+*/
+extern int32_t z_skelanime_draw_table(
+z64_skelanime_t* s /* Skelanime Structure */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_draw_table = 0x800A49FC");
+#elif OOT_U_1_0
+  asm("z_skelanime_draw_table = 0x8008C9C0");
+#elif MM_U_1_0
+  asm("z_skelanime_draw_table = 0x80136CD0");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -5916,72 +5992,74 @@ extern void external_func_800A4FE4(void);
 		asm("external_func_8013722C = 0x8013722C");
 	#endif
 
-/**
- * Change Animation
- * TODO These notes need converted into a C function prototype
- * A0 = actor instance + 0x014C (Drawing Table) | A1 = New Animation Pointer (in Object File) | A2 = Animation Speed (Floating Point) | A3 = Frame to start at | 0x0010(SP) = Number of Frames in Floating Point32_t | 0x0014(SP) = some counter related to how long the animation should be played? | 0x0018(SP) = float transition rate
- */
-extern void actor_anime_change(z64_skelanime_t *skelanime, uint32_t animation, f32 playback_speed, f32 start_frame, f32 frame_count, uint8_t unk_1, f32 transition_rate);
-	#if OOT_DEBUG
-		asm("actor_anime_change = 0x800A51A0");
-	#elif OOT_U_1_0
-		asm("actor_anime_change = 0x8008D17C");
-	#elif MM_U_1_0
-		asm("actor_anime_change = 0x801373E8");
-	#endif
+/* Change an actor's current animation.
+* Wrapper for 800A4FE4
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `actor_anime_change`
+*/
+extern void z_skelanime_change_anim(
+z64_skelanime_t* sk /* Skelanime Structure */
+, uint32_t anim /* Segment-relative Animation Offset */
+, float speed /* Speed at which to play back the animation */
+, float frame_begin /* Starting Animation Frame */
+, uint32_t unk_1 /* Unidentified */
+, float xrate /* Transition Rate (Automatic Interpolation Between Frames) */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_change_anim = 0x800A51A0");
+#elif OOT_U_1_0
+  asm("z_skelanime_change_anim = 0x8008D17C");
+#elif MM_U_1_0
+  asm("z_skelanime_change_anim = 0x801373E8");
+#endif
 
 /* Change Animation
-* Playback speed defaulted to 1.0f
-* Start frame defaulted to 0
 * Source Code Reference File: "z_skelanime.c"
 */
-extern void z_skelanime_change_speed_1(
+extern void z_skelanime_change_anim_inst(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
+, void* instance /* Actor Instance */
 );
 #if OOT_DEBUG
-  asm("z_skelanime_change_speed_1 = 0x800A51E8");
+  asm("z_skelanime_change_anim_inst = 0x800A51E8");
 #elif OOT_U_1_0
-  asm("z_skelanime_change_speed_1 = 0x8008D1C4");
+  asm("z_skelanime_change_anim_inst = 0x8008D1C4");
 #elif MM_U_1_0
-  /*asm("z_skelanime_change_speed_1 = 0xDEADBEEF");*/
+  /*asm("z_skelanime_change_anim_inst = 0xDEADBEEF");*/
 #endif
 
-/* Change Animation and Frame Count
-* Playback speed defaulted to 1.0f
-* Start frame defaulted to 0
+/* Change Animation and Transition Rate
 * Source Code Reference File: "z_skelanime.c"
 */
-extern void z_skelanime_change_anim_frame_count(
-float frame_count /* New Frame Count */
-, z64_skelanime_t* s /* Skelanime Structure */
+extern void z_skelanime_change_anim_trate(
+z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
+, float trate /* Transition Rate */
 );
 #if OOT_DEBUG
-  asm("z_skelanime_change_anim_frame_count = 0x800A5240");
+  asm("z_skelanime_change_anim_trate = 0x800A5240");
 #elif OOT_U_1_0
-  asm("z_skelanime_change_anim_frame_count = 0x8008D21C");
+  asm("z_skelanime_change_anim_trate = 0x8008D21C");
 #elif MM_U_1_0
-  /*asm("z_skelanime_change_anim_frame_count = 0xDEADBEEF");*/
+  /*asm("z_skelanime_change_anim_trate = 0xDEADBEEF");*/
 #endif
 
 /* Change Animation
-* Modify Frame Count
-* Modify Playback Speed
+* Modify Start Frame
 * Source Code Reference File: "z_skelanime.c"
 */
-extern void z_skelanime_change_anim_nframe_pspeed(
-float frame_count /* New Frame Count */
-, z64_skelanime_t* s /* Skelanime Structure */
+extern void z_skelanime_change_anim_bframe(
+z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
-, float speed /* Animation Playback Speed */
+, int32_t frame_begin /* Starting Frame */
 );
 #if OOT_DEBUG
-  asm("z_skelanime_change_anim_nframe_pspeed = 0x800A529C");
+  asm("z_skelanime_change_anim_bframe = 0x800A529C");
 #elif OOT_U_1_0
-  asm("z_skelanime_change_anim_nframe_pspeed = 0x8008D278");
+  asm("z_skelanime_change_anim_bframe = 0x8008D278");
 #elif MM_U_1_0
-  /*asm("z_skelanime_change_anim_nframe_pspeed = 0xDEADBEEF");*/
+  /*asm("z_skelanime_change_anim_bframe = 0xDEADBEEF");*/
 #endif
 
 /* Set Animation
@@ -6921,21 +6999,21 @@ extern void matrix_translate(float x, float y, float z, enum mtxmod mod);
 		asm("matrix_translate = 0x8018029C");
 	#endif
 
-/**
- * Create/Apply x,y,z scalar transformation on Float Matrix Stack
- * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
- * Matrix_scale
- * aka glScalef
- * formerly matrix_scale3f
- */
-extern void matrix_scale(float x, float y, float z, enum mtxmod mod);
-	#if OOT_DEBUG
-		asm("matrix_scale = 0x800D0A8C");
-	#elif OOT_U_1_0
-		asm("matrix_scale = 0x800AA8FC");
-	#elif MM_U_1_0
-		asm("matrix_scale = 0x8018039C");
-	#endif
+/* Scale a matrix along the X, Y, and Z axes.
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_scale`
+*/
+extern void z_matrix_scale_3f(
+float x, float y, float z /* X, Y, and Z Scale */
+, int32_t apply /* 0 initializes a new matrix and scales it; 1 modifies the current matrix on the stack. */
+);
+#if OOT_DEBUG
+  asm("z_matrix_scale_3f = 0x800D0A8C");
+#elif OOT_U_1_0
+  asm("z_matrix_scale_3f = 0x800AA8FC");
+#elif MM_U_1_0
+  asm("z_matrix_scale_3f = 0x8018039C");
+#endif
 
 /**
  * Matrix_RotateX
