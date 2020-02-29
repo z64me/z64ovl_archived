@@ -35,3 +35,4 @@
 #define actor_collision_check_set_ot z_collider_set_ot
 #define actor_collision_check_set_at z_collider_set_at
 #define actor_set_height z_actor_set_height
+#define skelanime_init_mtx z_skelanime_mtx_init

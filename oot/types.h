@@ -956,8 +956,8 @@ typedef struct {
   /* 0x14 */ float unk4;
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
-  /* 0x20 */ void* draw_table_start;/*uint32_t unk5;*/ /* Actor Drawing Table? */
-  /* 0x24 */ void* draw_table_end;/*uint32_t unk6;*/
+  /* 0x20 */ void* draw_table_rot;/*uint32_t unk5;*/ /* Actor Drawing Table? */
+  /* 0x24 */ void* draw_table_pos;/*uint32_t unk6;*/
   /* 0x28 */ uint32_t unk7;
   /* 0x2C */ uint32_t unk8;
   /* 0x30 */ void* draw_table_func;/*uint32_t func_unk9;*/ /* Some function pointer */

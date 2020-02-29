@@ -32,7 +32,7 @@
 		float b;
 		float c;
 	} entity_t;
-	
+
 	Z64OVL_STATIC_ASSERT(offsetof(entity_t, a) == 0);
 	Z64OVL_STATIC_ASSERT(offsetof(entity_t, b) == 4);
 	Z64OVL_STATIC_ASSERT(offsetof(entity_t, c) == 8);
@@ -5958,7 +5958,9 @@ z64_global_t* gl /* Global Context */
 , z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t skeleton /* Segment-relative offset of Skeleton */
 , uint32_t anim /* Segment-relative offset of animation to initialize with */
-, uint32_t sp10, uint32_t sp14, uint32_t sp18 /* Unidentified */
+, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations)*/
+, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions)*/
+, uint32_t nlimb /* Total Limb Count + 1 */
 );
 #if OOT_DEBUG
   asm("z_skelanime_init = 0x800A457C");
@@ -5968,19 +5970,27 @@ z64_global_t* gl /* Global Context */
   /*asm("z_skelanime_init = 0xDEADBEEF");*/
 #endif
 
-/**
- * Initialize Matrix-Enabled Object with Animation
- * TODO Unknown variables, do something about that
- * a0 = Global Context | a1 = Actor Instance Address + 0x014C (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
- */
-extern void skelanime_init_mtx(z64_global_t *global, z64_skelanime_t *skelanime, uint32_t skeleton, uint32_t animation, uint8_t unk0, uint8_t unk1, uint8_t unk2);
-	#if OOT_DEBUG
-		asm("skelanime_init_mtx = 0x800A46F8");
-	#elif OOT_U_1_0
-		asm("skelanime_init_mtx = 0x8008C788");
-	#elif MM_U_1_0
-		asm("skelanime_init_mtx = 0x80136B30");
-	#endif
+/* Initialize a "Skelanime Structure"
+* This supports matrices
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `skelanime_init_mtx`
+*/
+extern void z_skelanime_mtx_init(
+z64_global_t* gl /* Global Context */
+, z64_skelanime_t* sk /* Skelanime Structure */
+, uint32_t skeleton /* Segment-relative offset of Skeleton */
+, uint32_t anim /* Segment-relative offset of animation to initialize with */
+, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations)*/
+, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions)*/
+, uint32_t nlimb /* Total Limb Count + 1 */
+);
+#if OOT_DEBUG
+  asm("z_skelanime_init = 0x800A46F8");
+#elif OOT_U_1_0
+  asm("z_skelanime_init = 0x8008C788");
+#elif MM_U_1_0
+  asm("z_skelanime_init = 0x80136B30");
+#endif
 
 /* This executes an actor's `skelanime draw table function`
 * Source Code Reference File: "z_skelanime.c"
