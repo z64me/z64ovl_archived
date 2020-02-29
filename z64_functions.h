@@ -25,6 +25,24 @@
  * M A C R O S
  ***/
 
+/* compile-time assertion; example usage:
+
+	typedef struct entity {
+		float a;
+		float b;
+		float c;
+	} entity_t;
+	
+	Z64OVL_STATIC_ASSERT(offsetof(entity_t, a) == 0);
+	Z64OVL_STATIC_ASSERT(offsetof(entity_t, b) == 4);
+	Z64OVL_STATIC_ASSERT(offsetof(entity_t, c) == 8);
+*/
+#define Z64OVL_STATIC_ASSERT(e)          \
+   extern                                \
+   char                                  \
+   (*__z64ovl_static_assertion__(void))  \
+   [sizeof(char[1 - 2*!(e)])]
+
 #define VEC3_ADD( V3A0, V3A1 ) \
 {                              \
 	V3A0.x += V3A1.x;          \
