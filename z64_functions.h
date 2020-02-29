@@ -5967,7 +5967,7 @@ z64_global_t* gl /* Global Context */
 #elif OOT_U_1_0
   asm("z_skelanime_init = 0x8008C684");
 #elif MM_U_1_0
-  /*asm("z_skelanime_init = 0xDEADBEEF"); FIXME needs MM equivalent */
+  asm("z_skelanime_init = 0x80136A7C");
 #endif
 
 /* Initialize a "Skelanime Structure"
