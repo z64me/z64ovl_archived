@@ -5954,18 +5954,20 @@ extern void external_func_800A3BC0(void);
 * Formerly `skelanime_init`
 */
 extern void z_skelanime_init(
-z64_global_t* gl /* Global Context */
-, z64_skelanime_t* sk /* Skelanime Structure */
-, uint32_t skeleton /* Segment-relative offset of Skeleton */
-, uint32_t anim /* Segment-relative offset of animation to initialize with */
-, uint32_t sp10, uint32_t sp14, uint32_t sp18 /* Unidentified */
+z64_global_t* gl       /* Global Context */
+, z64_skelanime_t* sk  /* Skelanime Structure */
+, uint32_t skeleton    /* Segment offset of Skeleton */
+, uint32_t anim        /* Segment offset of animation to initialize with */
+, vec3s_t* dt_rot      /* Prealloc'd rotation draw table (if 0, game allocs it for you) */
+, vec3s_t* dt_pos      /* Prealloc'd location draw table (if 0, game allocs it for you) */
+, uint32_t nlimb       /* Total Limb Count + 1 */
 );
 #if OOT_DEBUG
   asm("z_skelanime_init = 0x800A457C");
 #elif OOT_U_1_0
   asm("z_skelanime_init = 0x8008C684");
 #elif MM_U_1_0
-  /*asm("z_skelanime_init = 0xDEADBEEF");*/
+  /*asm("z_skelanime_init = 0xDEADBEEF"); FIXME needs MM equivalent */
 #endif
 
 /**
