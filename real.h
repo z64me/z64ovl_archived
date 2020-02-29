@@ -72,12 +72,57 @@ _z_skelanime_draw_mtx(
   )
 , void *entity
 );
-	#if OOT_DEBUG
-		asm("_z_skelanime_draw_mtx = 0x800A1AC8");
-	#elif OOT_U_1_0
-		asm("_z_skelanime_draw_mtx = 0x80089D8C");
-	#elif MM_U_1_0
-		asm("_z_skelanime_draw_mtx = 0x80133F28");
-	#endif
+#if OOT_DEBUG
+	asm("_z_skelanime_draw_mtx = 0x800A1AC8");
+#elif OOT_U_1_0
+	asm("_z_skelanime_draw_mtx = 0x80089D8C");
+#elif MM_U_1_0
+	asm("_z_skelanime_draw_mtx = 0x80133F28");
+#endif
+
+/* Initialize a "Skelanime Structure"
+* This does not support matrices.
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `skelanime_init`
+*/
+extern void _z_skelanime_init(
+z64_global_t* gl /* Global Context */
+, z64_skelanime_t* sk /* Skelanime Structure */
+, uint32_t skeleton /* Segment-relative offset of Skeleton */
+, uint32_t anim /* Segment-relative offset of animation to initialize with */
+, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations) If 0, the game automatically allocates memory for this. */
+, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions) If 0, the game automatically allocates memory for this. */
+, uint32_t nlimb /* Total Limb Count + 1 */
+);
+#if OOT_DEBUG
+  asm("_z_skelanime_init = 0x800A457C");
+#elif OOT_U_1_0
+  asm("_z_skelanime_init = 0x8008C684");
+#elif MM_U_1_0
+  asm("_z_skelanime_init = 0x80136A7C");
+#endif
+
+/* Initialize a "Skelanime Structure"
+* This supports matrices
+* Source Code Reference File: "z_skelanime.c"
+* Formerly `skelanime_init_mtx`
+* like z_skelanime_init, but with matrix support
+*/
+extern void _z_skelanime_mtx_init(
+z64_global_t* gl /* Global Context */
+, z64_skelanime_t* sk /* Skelanime Structure */
+, uint32_t skeleton /* Segment-relative offset of Skeleton */
+, uint32_t anim /* Segment-relative offset of animation to initialize with */
+, vec3s_t* dt_rot /* Limb-based variable size structure (Draw Table Rotations) If 0, the game automatically allocates memory for this. */
+, vec3s_t* dt_pos /* Limb-based variable size structure (Draw Table Positions) If 0, the game automatically allocates memory for this. */
+, uint32_t nlimb /* Total Limb Count + 1 */
+);
+#if OOT_DEBUG
+  asm("_z_skelanime_mtx_init = 0x800A46F8");
+#elif OOT_U_1_0
+  asm("_z_skelanime_mtx_init = 0x8008C788");
+#elif MM_U_1_0
+  asm("_z_skelanime_mtx_init = 0x80136B30");
+#endif
 
 #endif /* Z64OVL_REAL_H_INCLUDED */
