@@ -5517,20 +5517,20 @@ extern void external_func_80093C80(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * Write Jump to Display List 800F8200 on POLY_OPA_DISP
- * Get Item Models
- * TODO These notes need converted into a C function prototype
- * A0 = Graphics Context
- */
-extern void external_func_80093D18(z64_gfx_t *gfx);
-	#if OOT_DEBUG
-		asm("external_func_80093D18 = 0x80093D18");
-	#elif OOT_U_1_0
-		asm("external_func_80093D18 = 0x8007E298");
-	#elif MM_U_1_0
-		asm("external_func_80093D18 = 0x8012C28C");
-	#endif
+/* This appends `DE000000 80126730 (NZLE)` to the POLY_OPA Display List Buffer
+* This display list seems to contain a preset combiner and geometry mode.
+* Source Code Reference File: "z_rcp.c"
+*/
+extern void z_rcp_append_preset(
+z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
+);
+#if OOT_DEBUG
+  asm("z_rcp_append_preset = 0x80093D18");
+#elif OOT_U_1_0
+  asm("z_rcp_append_preset = 0x8007E298");
+#elif MM_U_1_0
+  asm("z_rcp_append_preset = 0x8012C28C");
+#endif
 
 /**
  * Write Jump to Display List 800F8200 on POLY_XLU_DISP
@@ -5746,29 +5746,39 @@ extern void external_func_80097A54(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * Given its number, returns the object's index in the object table, or -1 if it isn't loaded.
- * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID, V0 = Object index / -1 if not loaded.
- */
-extern int32_t object_get_index(z64_obj_ctxt_t* object_context, uint16_t object_id);
-	#if OOT_DEBUG
-		asm("object_get_index = 0x8009812C");
-	#elif OOT_U_1_0
-		asm("object_get_index = 0x80081628");
- 	#elif MM_U_1_0
-		asm("object_get_index = 0x8012F608");
-	#endif
+/* Return the index of a loaded object index.
+* Source Code Reference File: "z_scene.c"
+* Formerly `object_get_index`
+*/
+extern int32_t z_scene_object_get_index(
+z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
+, int32_t id /* The object file ID */
+);
+#if OOT_DEBUG
+  asm("z_scene_object_get_index = 0x8009812C");
+#elif OOT_U_1_0
+  asm("z_scene_object_get_index = 0x80081628");
+#elif MM_U_1_0
+  asm("z_scene_object_get_index = 0x8012F608")
+#endif
 
-/**
- * Test if object file dependency is loaded (returns 1 on true 0 on false)
- * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID, V0 = 1 if loaded, 0 if not.
- */
-extern int32_t object_is_loaded(z64_obj_ctxt_t* object_context, uint16_t object_id);
-	#if OOT_DEBUG
-		asm("object_is_loaded = 0x80098188");
-	#elif OOT_U_1_0
-		asm("object_is_loaded = 0x80081688");
-	#endif
+
+/* Check if an object is loaded in the scene.
+* Returns 0 on false, 1 on true
+* Source Code Reference File: "z_scene.c"
+* Formerly `object_is_loaded`
+*/
+extern int32_t z_scene_object_is_loaded(
+z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
+, int32_t id /* The object file ID */
+);
+#if OOT_DEBUG
+  asm("z_scene_object_is_loaded = 0x80098188");
+#elif OOT_U_1_0
+  asm("z_scene_object_is_loaded = 0x80081688");
+#elif MM_U_1_0
+  asm("z_scene_object_is_loaded = 0x8012F668");
+#endif
 
  /**
  * Load an object into memory. Object is loaded even if
@@ -5939,7 +5949,7 @@ z64_global_t* gl /* Global Context */
 {
 	if (is_matrix)
 		_z_skelanime_mtx_init(gl, sk, skeleton, anim, 0, 0, 0);
-	
+
 	else
 		_z_skelanime_init(gl, sk, skeleton, anim, 0, 0, 0);
 }
@@ -5961,7 +5971,7 @@ z64_global_t* gl /* Global Context */
 {
 	if (is_matrix)
 		_z_skelanime_mtx_init(gl, sk, skeleton, anim, dt_rot, dt_pos, nlimb);
-	
+
 	else
 		_z_skelanime_init(gl, sk, skeleton, anim, dt_rot, dt_pos, nlimb);
 }
@@ -6247,6 +6257,17 @@ extern void external_func_800A6EF4(void);
 	#elif OOT_U_1_0
 		asm("external_func_800A6EF4 = 0x8008ED08");
 	#endif
+
+/**
+ * TODO This function is completely undocumented
+ */
+extern void external_func_800A6FA0(void);
+	#if OOT_DEBUG
+		asm("external_func_800A6FA0 = 0x800A6FA0");
+	#elif OOT_U_1_0
+		/*asm("external_func_800A6EF4 = 0x8008ED08");*/
+	#endif
+
 
 /**
  * TODO This function is completely undocumented
@@ -6638,25 +6659,41 @@ graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_800C6AC4(void *unk0, z64_gfx_t *gfx, const char *string, int32_t line);
-	#if OOT_DEBUG
-		asm("external_func_800C6AC4 = 0x800C6AC4");
-	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
-	#endif
+/* Allocates graphics debugging information to memory.
+* This function seems to only exist in the Debug ROM.
+* Source Code Reference File: "code.c"
+*/
+extern void z_debug_graph_alloc(
+Gfx* buffer /* Display List Graphics Buffer */
+, z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
+, char* filename /* The Source String, Usually a filename */
+, int32_t line /* Source Line Number */
+);
+#if OOT_DEBUG
+  asm("z_debug_graph_alloc = 0x800C6AC4");
+#elif OOT_U_1_0
+  /*asm("z_debug_graph_alloc = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_debug_graph_alloc = 0xDEADBEEF")*/
+#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_800C6B54(void *unk0, z64_gfx_t *gfx, const char *string, int32_t line);
-	#if OOT_DEBUG
-		asm("external_func_800C6B54 = 0x800C6B54");
-	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
-	#endif
+/* Writes graphics debugging information to memory. (?)
+* This function seems to only exist in the Debug ROM.
+* Source Code Reference File: "code.c"
+*/
+extern void z_debug_graph_write(
+Gfx* buffer /* Display List Graphics Buffer */
+, z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
+, char* filename /* The Source String, Usually a filename */
+, int32_t line /* Source Line Number */
+);
+#if OOT_DEBUG
+  asm("z_debug_graph_write = 0x800C6B54");
+#elif OOT_U_1_0
+  /*asm("z_debug_graph_write = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_debug_graph_write = 0xDEADBEEF")*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -6972,17 +7009,20 @@ extern void matrix_load(void *matrix);
 		/* TODO */
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_800D0930(void);
-	#if OOT_DEBUG
-		asm("external_func_800D0930 = 0x800D0930");
-	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
-	#elif MM_U_1_0
-		/* TODO */
-	#endif
+/* Multiply the top float matrix in the stack by a given float matrix. (?)
+* Source Code Reference File: "sys_matrix.c"
+*/
+extern void z_matrixf_top_multiply(
+float* in /* Float Matrix to Multiply By */
+, int32_t apply /* 0 copies the new matrix to the top one in the stack; 1 modifies the current matrix on the stack. */
+);
+#if OOT_DEBUG
+  asm("z_matrixf_top_multiply = 0x800D0930");
+#elif OOT_U_1_0
+  /*asm("z_matrixf_top_multiply = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_matrixf_top_multiply = 0xDEADBEEF");*/
+#endif
 
 /**
  * Create/Apply x,y,z transformation on Float Matrix Stack
@@ -7041,17 +7081,21 @@ extern void matrix_rotate_y(float y, enum mtxmod mod);
 		/* TODO */
 	#endif
 
-/**
- * Matrix_RotateZ
- */
-extern void matrix_rotate_z(float z, enum mtxmod mod);
-	#if OOT_DEBUG
-		asm("matrix_rotate_z = 0x800D0ED4");
-	#elif OOT_U_1_0
-		asm("matrix_rotate_z = 0x800AAD4C");
-	#elif MM_U_1_0
-		asm("matrix_rotate_z = 0x80180E90");
-	#endif
+/* Rotate a matrix along the Z axis (Roll a matrix).
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_rotate_z`
+*/
+extern void z_matrix_roll(
+float z /* The angle in degrees to roll the matrix by. */
+, int32_t apply /* 0 initializes a new matrix and rolls it; 1 modifies the current matrix on the stack. */
+);
+#if OOT_DEBUG
+  asm("z_matrix_roll = 0x800D0ED4");
+#elif OOT_U_1_0
+  asm("z_matrix_roll = 0x800AAD4C");
+#elif MM_U_1_0
+  asm("z_matrix_roll = 0x80180E90");
+#endif
 
 /**
  * Create/Apply x,y,z rotation transformation on Float Matrix Stack
@@ -7121,7 +7165,7 @@ extern void external_func_800D1A54(void);
  * Converts and Appends the Float Matrix Stack's top matrix to POLY_OPA_DISP end
  * please provide only the first two arguments when using this function
  */
-extern uint32_t matrix_alloc(
+extern uint32_t z_matrix_alloc(
 	  z64_gfx_t *gfx_ctx
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
 	, const char *string
@@ -7129,16 +7173,16 @@ extern uint32_t matrix_alloc(
 #endif
 );
 #ifdef RETAIL_NUANCES
-#define matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR) matrix_alloc(MTXALLOC_GFX)
+#define z_matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR) z_matrix_alloc(MTXALLOC_GFX)
 #else
-#define matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR) matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR, __LINE__)
+#define z_matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR) z_matrix_alloc(MTXALLOC_GFX, MTXALLOC_STR, __LINE__)
 #endif
 	#if OOT_DEBUG
-		asm("matrix_alloc = 0x800D1A88");
+		asm("z_matrix_alloc = 0x800D1A88");
 	#elif OOT_U_1_0
-		asm("matrix_alloc = 0x800AB900");
+		asm("z_matrix_alloc = 0x800AB900");
 	#elif MM_U_1_0
-		asm("matrix_alloc = 0x80181A40");
+		asm("z_matrix_alloc = 0x80181A40");
 	#endif
 
 /**

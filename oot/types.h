@@ -612,10 +612,10 @@ typedef enum z64_collider_type_e { /* Collider Types */
 } z64_collider_type_t;
 
 typedef struct z64_collider_s { /* Collider Structure */
-    z64_actor_t * actor;
-    z64_actor_t * unk_actor_1;
-    z64_actor_t * unk_actor_2;
-    z64_actor_t * unk_actor_3;
+    z64_actor_t* actor; /* Actor Instance */
+    z64_actor_t* unk_actor_1;
+    z64_actor_t* colliding_actor; /* Hit with an item */
+    z64_actor_t* unk_actor_3;
     uint8_t collider_flags; /* Compared to 0x11 */
     uint8_t collide_flags; /* Compared to 0x10 */
     uint8_t mask_a; /* Bitwise-and compared to 0x13 */
@@ -904,7 +904,9 @@ typedef struct
   char              unk_1B_[0x0C8D];          /* 0x10B17 */
   z64_obj_ctxt_t    obj_ctxt;                 /* 0x117A4 */
   z64_room_ctxt_t   room_ctxt;                /* 0x11CBC */
-  char              unk_1C_[0x00A8];          /* 0x11D3C */
+  char              unk_1C_[0x0064];          /* 0x11D3C */
+  float             unk_player_matrix[16];    /* 0x11DA0 */ /* Float Matrix Related to Link's Coordinates */
+  char              unk_1C_2[0x0004];         /* 0x11DE0 */
   uint32_t          gameplay_frames;          /* 0x11DE4 */
   uint8_t           link_age;                 /* 0x11DE8 */
   char              unk_1D_;                  /* 0x11DE9 */

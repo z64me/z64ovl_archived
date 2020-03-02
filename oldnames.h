@@ -36,3 +36,8 @@
 #define actor_collision_check_set_at z_collider_set_at
 #define actor_set_height z_actor_set_height
 #define skelanime_init_mtx z_skelanime_mtx_init
+#define object_is_loaded z_scene_object_is_loaded
+#define object_get_index z_scene_object_get_index
+#define matrix_alloc z_matrix_alloc
+#define external_func_80093D18 z_rcp_append_preset
+#define matrix_rotate_z z_matrix_roll
