@@ -15,6 +15,7 @@
 #define GLOBAL_CONTEXT              0x80212020
 #define AS_A0                       (GLOBAL_CONTEXT + 0x001C24) // spawn_actor argument 0
 #define OS_A0                       (GLOBAL_CONTEXT + 0x0117A4) // spawn_object argument 0
+#define LINK                        0x802245B0
 #define NAVI                        0x8022CBE0
 
 #include "shared.h"
