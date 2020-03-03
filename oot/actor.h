@@ -142,26 +142,71 @@ typedef void (z64_actorfunc_t)(void *entity, void *global);
 
 typedef struct
 {
-  z64_actor_t       actor;                    /* 0x0000 */
-  int16_t             unk_00_[0x02F8];          /* 0x013C */
-  uint8_t           action;                   /* 0x0434 */
-  int16_t             unk_01_[0x0237];          /* 0x0435 */
-  uint32_t          state_flags_1;            /* 0x066C */
-  uint32_t          state_flags_2;            /* 0x0670 */
-  uint32_t          unk_02_1;                 /* 0x0674 */
-  uint32_t          unk_02_2;                 /* 0x0678 */
-  uint32_t          unk_02_3;                 /* 0x067C */
-  uint32_t          reflection_flag;          /* 0x0680 */
-  int16_t             unk_02_4[0x01A8];         /* 0x0684 */
-  float             linear_vel;               /* 0x0828 */
-  int16_t             unk_03_[0x0002];          /* 0x082C */
-  uint16_t          target_yaw;               /* 0x082E */
-  int16_t             unk_04_[0x0003];          /* 0x0830 */
-  int8_t            sword_state;              /* 0x0833 */
-  int16_t             unk_05_[0x0050];          /* 0x0834 */
-  int16_t           drop_y;                   /* 0x0884 */
-  int16_t           drop_distance;            /* 0x0886 */
+  //z64_actor_t       actor;                    /* 0x0000 */
+  //int16_t           unk_00_[0x02F8];          /* 0x013C */
+  //uint8_t           action;                   /* 0x0434 */
+  //int16_t           unk_01_[0x0237];          /* 0x0435 */
+  //uint32_t          state_flags_1;            /* 0x066C */
+  //uint32_t          state_flags_2;            /* 0x0670 */
+  //uint32_t          unk_02_1;                 /* 0x0674 */
+  //uint32_t          unk_02_2;                 /* 0x0678 */
+  //uint32_t          unk_02_3;                 /* 0x067C */
+  //uint32_t          reflection_flag;          /* 0x0680 */
+  //int16_t           unk_02_4[0x01A8];         /* 0x0684 */
+  //float             linear_vel;               /* 0x0828 */
+  //int16_t           unk_03_[0x0002];          /* 0x082C */
+  //uint16_t          target_yaw;               /* 0x082E */
+  //int16_t           unk_04_[0x0003];          /* 0x0830 */
+  //int8_t            sword_state;              /* 0x0833 */
+  //int16_t           unk_05_[0x0050];          /* 0x0834 */
+  //int16_t           drop_y;                   /* 0x0884 */
+  //int16_t           drop_distance;            /* 0x0886 */
                                               /* 0x0888 */
+  z64_actor_t actor; /* Base Actor */
+  //char debug_ex[16]; /* Debug Extended Actor */
+  uint8_t tunic_idx; /* Equipped Tunic Index */
+  uint8_t sword_idx; /* Equipped Sword Index (?) */
+  uint8_t shield_idx; /* Equipped Shield Index */
+  uint8_t boot_idx; /* Equipped Boots Index */
+  uint8_t held_button; /* Held Item (Button ID) */
+  uint8_t held_action; /* Held Item (Action Parameter) */
+  uint8_t held_c_order; /* Held Item (C-Item Ordering) */
+  uint8_t inst0153;
+  uint8_t held_action_2; /* Held Item (Action Parameter 2) */
+  uint8_t inst0155[3];
+  uint8_t shield_on_back; /* (?) 0 = no, 1 = yes */
+  uint8_t inst0159[2];
+  uint8_t shield_in_hand; /* (?) 1 = yes */
+  uint8_t inst015C;
+  uint8_t right_hand_item; /* Possible? 08 = Neutral, 09 = Too heavy to shield, 0A = shielding */
+  uint8_t mask_now; /* Current Mask Index */
+  uint8_t inst015F[2];
+  uint32_t * rhand_dlist; /* Right Hand Display List */
+  uint32_t * lhand_dlist; /* Left Hand Display List */
+  uint32_t * sheath_dlist; /* Sheath Display List */
+  uint32_t * torso_dlist; /* Torso Display List */
+  uint8_t inst0174[60];
+  void * title_card; /* Title Card / Get Item Object File */
+  uint8_t inst01B4;
+  uint8_t inst01B5[75];
+  uint8_t anime_now_1[86]; /* Current Animation Raw Data 1 */
+  uint8_t inst0256[58];
+  uint8_t anime_now_2[86]; /* Current Animation Raw Data 2 */
+  uint8_t inst02E6[198];
+  z64_actor_t * held_actor; /* Held Item Actor (Like Arms_Hook) */
+  uint8_t inst03B0[708];
+  void * state_function; /* Machine State */
+  void * age_properties; /* Collision, Sound Effects, Other */
+  uint32_t state_flags_1;
+  uint32_t state_flags_2;
+  uint8_t inst0684[8];
+  z64_actor_t * navi; /* Navi's Instance */
+  uint16_t navi_msg; /* Message ID for Navi's Info */
+  uint8_t inst0692[62];
+  uint32_t anime_now_id; /* Current Animation ID */
+  uint8_t inst06D4[844];
+  float floatA20;
+  uint8_t inst0A24[96];
 } z64_player_t;
 
 #endif
