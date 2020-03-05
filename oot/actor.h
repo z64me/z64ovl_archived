@@ -205,7 +205,7 @@ typedef struct
   uint8_t inst0692[62];
   uint32_t anime_now_id; /* Current Animation ID */
   uint8_t inst06D4[844];
-  float matrix_A20[4][4];
+  float shield_mf[4][4]; /* Shield Floating Point Matrix */
   uint8_t inst0A24[8];
 } z64_player_t;
 
