@@ -4047,20 +4047,23 @@ z64_global_t* gl /* Global Context */
   asm("z_draw_gi_model = 0x800EE320");
 #endif
 
-/**
- * plays sound at position
- * TODO These notes need converted into a C function prototype
- * TODO Considering this uses an actor instance, is it any different from sound_play_actor?
- * a0 - global context | a1 - actor instance + 0x24 (position array of the sound) | a2 - 0x3C (radius?) | a3 - sound ID
- */
-extern void sound_play_position(z64_global_t *global, vec3f_t *pos2, int32_t radius, uint16_t sfx_id);
-	#if OOT_DEBUG
-		asm("sound_play_position = 0x8006BAD8");
-	#elif OOT_U_1_0
-		asm("sound_play_position = 0x80058FF8");
-	#elif MM_U_1_0
-		asm("sound_play_position = 0x800F0568");
-	#endif
+/* Play a sound within a given radius at a given set of coordinates.
+* Source Code Reference File: "code.c"
+* Formerly `sound_play_position`
+*/
+extern void z_sfx_play_position(
+z64_global_t* gl /* Global Context */
+, vec3f_t* pos /* Global Coordiantes to act as the origin of the sound effect. */
+, int32_t radius /* The radius in which you can hear the sound. */
+, uint16_t id /* The sound effect ID */
+);
+#if OOT_DEBUG
+  asm("z_sfx_play_position = 0x8006BAD8");
+#elif OOT_U_1_0
+  asm("z_sfx_play_position = 0x80058FF8");
+#elif MM_U_1_0
+  asm("z_sfx_play_position = 0x800F0568");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -7243,7 +7246,7 @@ extern void external_func_800D1FD4(void *unk0);
  * Used to reflect projectiles
  * A0 = Link instance + 0x0A20 | A1 = place in stack to store result | a2 = 0? | Stores an array of 3 halfs containing the reflected direction into the address in A1
  */
-extern void external_func_800D20CC(float* link_0A20, int16_t* store, int32_t condition);
+extern void external_func_800D20CC(float* mf, vec3s_t* vec, int32_t flag);
 	#if OOT_DEBUG
 		asm("external_func_800D20CC = 0x800D20CC");
 	#elif OOT_U_1_0

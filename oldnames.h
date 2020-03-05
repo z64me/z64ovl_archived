@@ -41,3 +41,4 @@
 #define matrix_alloc z_matrix_alloc
 #define external_func_80093D18 z_rcp_append_preset
 #define matrix_rotate_z z_matrix_roll
+#define sound_play_position z_sfx_play_position
