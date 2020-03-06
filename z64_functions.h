@@ -7242,16 +7242,23 @@ extern void external_func_800D1FD4(void *unk0);
 		asm("external_func_801820A0 = 0x801820A0");
 	#endif
 
-/**
- * Used to reflect projectiles
- * A0 = Link instance + 0x0A20 | A1 = place in stack to store result | a2 = 0? | Stores an array of 3 halfs containing the reflected direction into the address in A1
- */
-extern void external_func_800D20CC(float* mf, vec3s_t* vec, int32_t flag);
-	#if OOT_DEBUG
-		asm("external_func_800D20CC = 0x800D20CC");
-	#elif OOT_U_1_0
-		asm("external_func_800D20CC = 0x800ABF50");
-	#endif
+/* Extract rotations from a 3x3 matrix within a 4x4 transformation matrix.
+* Used to deflect projectiles.
+* Source Code Reference File: "code.c"
+* Formerly `external_func_800D20CC`
+*/
+extern void z_vec3s_from_mtxf(
+float* mf /* Float Matrix for angles to be derived from. */
+, vec3s_t* /* Where the derived vector is stored. */
+, int32_t flag /* Likely, "matrix_has_scale" */
+);
+#if OOT_DEBUG
+  asm("z_vec3s_from_mtxf = 0x800D20CC");
+#elif OOT_U_1_0
+  asm("z_vec3s_from_mtxf = 0x800ABF50");
+#elif MM_U_1_0
+  /*asm("z_vec3s_from_mtxf = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -7839,11 +7846,21 @@ extern void external_func_800FCC6C(void);
 /**
  * TODO What does this function do?
  */
-extern float external_func_800FD250(float unk0, float unk1);
+extern float z_atan_fast(float in);
 	#if OOT_DEBUG
-		asm("external_func_800FD250 = 0x800FD250");
+		asm("z_atan_fast = 0x800FD0C4");
 	#elif OOT_U_1_0
-		asm("external_func_800FD250 = 0x800CD76C");
+		/*asm("external_func_800FD250 = 0x800CD76C");*/
+	#endif
+
+/**
+ * TODO What does this function do?
+ */
+extern float z_atan2_(float y, float x);
+	#if OOT_DEBUG
+		asm("z_atan2_ = 0x800FD250");
+	#elif OOT_U_1_0
+		asm("z_atan2_ = 0x800CD76C");
 	#endif
 
 /**
