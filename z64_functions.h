@@ -2678,17 +2678,17 @@ z64_actor_t* a /* Actor to be damaged. */
 /* Collision Related
 * Source Code Reference File: "z_actor.c"
 */
-extern void external_func_80035650(
+extern void z_actor_is_frozen(
 z64_actor_t* a
 , z64_collider_body_t* collider
 , int32_t is_frozen
 );
 #if OOT_DEBUG
-  asm("external_func_80035650 = 0x80035650");
+  asm("z_actor_is_frozen = 0x80035650");
 #elif OOT_U_1_0
-  asm("external_func_80035650 = 0x800283BC");
+  asm("z_actor_is_frozen = 0x800283BC");
 #elif MM_U_1_0
-  /*asm("external_func_80035650 = 0xDEADBEEF");*/
+  /*asm("z_actor_is_frozen = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -6004,7 +6004,6 @@ extern void external_func_800A4FE4(void);
 		asm("external_func_800A4FE4 = 0x8008CFC0");
 	#elif MM_U_1_0
 		asm("external_func_800A4FE4 = 0x8013722C");
-		asm("external_func_8013722C = 0x8013722C");
 	#endif
 
 /* Change an actor's current animation.
