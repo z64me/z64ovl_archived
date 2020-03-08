@@ -234,16 +234,22 @@ extern void external_func_80002E50(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * Drops a collectible
- * a0 = global context | a1 = actor instance + 0x24 | a2 = drop ID
- */
-extern void item_drop_collectible(z64_global_t *global, vec3f_t *pos2, uint16_t drop_id);
-	#if OOT_DEBUG
-		asm("item_drop_collectible = 0x8001F548");
-	#elif OOT_U_1_0
-		asm("item_drop_collectible = 0x80013678");
-	#endif
+/* Spawn Collectible Item
+* Source Code Reference File: "z_en_item00.c"
+* Formerly `item_drop_collectible`
+*/
+extern void z_item_drop(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, uint32_t id /* Drop Table Item ID */
+);
+#if OOT_DEBUG
+  asm("z_item_drop = 0x8001F548");
+#elif OOT_U_1_0
+  asm("z_item_drop = 0x80013678");
+#elif MM_U_1_0
+  /*asm("z_item_drop = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -472,16 +478,25 @@ extern void external_func_8002865C(void);
 		asm("external_func_8002865C = 0x8001C154");
 	#endif
 
-/**
- * Spawn Particle 0x00 Type 5 (Wrapper for 8001BCE0)
- * TODO These notes need converted into a C function prototype
- */
-extern void external_func_800286CC(void);
-	#if OOT_DEBUG
-		asm("external_func_800286CC = 0x800286CC");
-	#elif OOT_U_1_0
-		asm("external_func_800286CC = 0x8001C1C4");
-	#endif
+/* Spawn ovl_Effect_Ss_Dust (Dust)
+* Type 5
+* Source Code Reference File: "z_effect_soft_sprite_old_init.c"
+*/
+extern void z_effect_spawn_dust_5(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
+, vec3f_t* acceleration /* Acceleration along the X, Y, and Z axes */
+, int16_t sp10
+, int16_t sp14
+);
+#if OOT_DEBUG
+  asm("z_effect_spawn_dust_5 = 0x800286CC");
+#elif OOT_U_1_0
+  asm("z_effect_spawn_dust_5 = 0x8001C1C4");
+#elif MM_U_1_0
+  /*asm("z_effect_spawn_dust_5 = 0xDEADBEEF");*/
+#endif
 
 /**
  * Spawn Particle 0x00 Type 4 (Wrapper for 8001BCE0)
@@ -948,16 +963,26 @@ extern void effect_spawn_fire_tail(void);
 		asm("effect_spawn_fire_tail = 0x8001DED8");
 	#endif
 
-/**
- * Spawn Particle 0x1D
- * TODO These notes need converted into a C function prototype
- */
-extern void effect_spawn_en_fire(void);
-	#if OOT_DEBUG
-		asm("effect_spawn_en_fire = 0x8002A4D4");
-	#elif OOT_U_1_0
-		asm("effect_spawn_en_fire = 0x8001DFEC");
-	#endif
+/* Spawn ovl_Effect_Ss_En_Fire (Fire)
+* Source Code Reference File: "z_effect_soft_sprite_old_init.c"
+* Formerly `effect_spawn_en_fire`
+*/
+extern void z_effect_spawn_fire(
+z64_global_t* gl /* Global Context */
+, z64_actor_t* a /* Actor to Reference */
+, vec3f_t* position /* X, Y, and Z Position */
+, int16_t a3
+, int16_t sp10
+, int16_t sp14
+, int16_t count /* Particle Count */
+);
+#if OOT_DEBUG
+  asm("z_effect_spawn_fire = 0x8002A4D4");
+#elif OOT_U_1_0
+  asm("z_effect_spawn_fire = 0x8001DFEC");
+#elif MM_U_1_0
+  /*asm("z_effect_spawn_fire = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -1319,19 +1344,21 @@ z64_actor_t* a /* Actor to Reference */
   asm("z_actor_set_height = 0x800B675C");
 #endif
 
-/**
- * Scale Actor
- * actor - actor instance
- * scale - float value
- */
-extern void actor_set_scale(z64_actor_t *actor, f32 scale);
-	#if OOT_DEBUG
-		asm("actor_set_scale = 0x8002D62C");
-	#elif OOT_U_1_0
-		asm("actor_set_scale = 0x80020F88");
-	#elif MM_U_1_0
-		asm("actor_set_scale = 0x800B67E0");
-	#endif
+/* Set Actor Scale
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_set_scale`
+*/
+extern void z_actor_set_scale(
+z64_actor_t* a /* Actor to Reference */
+, float scale /* X, Y, and Z scale of actor */
+);
+#if OOT_DEBUG
+  asm("z_actor_set_scale = 0x8002D62C");
+#elif OOT_U_1_0
+  asm("z_actor_set_scale = 0x80020F88");
+#elif MM_U_1_0
+  asm("z_actor_set_scale = 0x800B67E0");
+#endif
 
 /**
  * Update CPU Segment 0x06 to point32_t to actor's defined object dependency
@@ -1641,15 +1668,21 @@ extern void external_func_8002DFC8(void);
 		asm("external_func_8002DFC8 = 0x80021968");
 	#endif
 
-/**
- * Detects if the angle to face Link is inside a1 range
- */
-extern int32_t actor_angle_link_in_range(z64_actor_t *actor, int16_t angle);
-	#if OOT_DEBUG
-		asm("actor_angle_link_in_range = 0x8002E084");
-	#elif OOT_U_1_0
-		asm("actor_angle_link_in_range = 0x80021A28");
-	#endif
+/* Tests if the angle to face Link is within range (rot)
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_angle_link_in_range`
+*/
+extern float z_actor_player_in_range(
+z64_actor_t* a /* Actor Instance to Reference */
+, int16_t rot /* 16-bit Angle (range) */
+);
+#if OOT_DEBUG
+  asm("z_actor_player_in_range = 0x8002E084");
+#elif OOT_U_1_0
+  asm("z_actor_player_in_range = 0x80021A28");
+#elif MM_U_1_0
+  /*asm("z_actor_player_in_range = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -1846,20 +1879,23 @@ extern void external_func_8002F374(z64_global_t *global, z64_actor_t *actor, int
 		asm("external_func_8002F374 = 0x80022B14");
 	#elif MM_U_1_0
 		asm("external_func_8002F374 = 0x800B8898");
-		asm("external_func_800B8898 = 0x800B8898");
 	#endif
 
-/**
- * Is Actor Held? Or Interacting?
- * TODO Question marks: let's get to the bottom of this. Also, return type.
- * A0 = Actor Instance | V0 = 0 if Instance + 0x118 is null, else 1
- */
-extern int32_t actor_is_held(z64_actor_t *actor, z64_global_t *global);
-	#if OOT_DEBUG
-		asm("actor_is_held = 0x8002F410");
-	#elif OOT_U_1_0
-		asm("actor_is_held = 0x80022BB0");
-	#endif
+/* Test if an actor->attached_a is present.
+* Commonly used to test if an actor is held or has been picked up by the player.
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_is_held`
+*/
+extern int32_t z_actor_is_attached(
+z64_actor_t* a /* Actor to Reference */
+);
+#if OOT_DEBUG
+  asm("z_actor_is_attached = 0x8002F410");
+#elif OOT_U_1_0
+  asm("z_actor_is_attached = 0x80022BB0");
+#elif MM_U_1_0
+  /*asm("z_actor_is_attached = 0xDEADBEEF");*/
+#endif
 
 /**
  * Give Item
@@ -1883,22 +1919,25 @@ extern void actor_give_item(
 		asm("actor_give_item = 0x80022BD4");
 	#endif
 
-/**
- * Give Item Wrapper (80022BD4) | Sets A3 to 50.0f, SP+0x10 to 10.0f
- * TODO These notes need converted into a C function prototype
- * A0 = Actor Instance | A1 = Global Context | A2 = Get Item Id
- */
-/*wrapper for actor_give_item, provides range_xz and range_y*/
-/*void actor_give_item_50xz_10y(z64_actor_t *actor, z64_global_t *global, char get_item_id)
-{
-   actor_give_item(actor, global, get_item_id, 50.0f, 10.0f);
-}*/
-extern void actor_give_item_50xz_10y(z64_actor_t *actor, z64_global_t *global, int8_t get_item_id);
-	#if OOT_DEBUG
-		asm("external_func_8002F554 = 0x8002F554");
-	#elif OOT_U_1_0
-		asm("external_func_8002F554 = 0x80022CF4");
-	#endif
+/* Give Item
+* Wrapper for 8002F434
+* XZ Range set to 50.0f
+* Y Range set to 10.0f
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_give_item_50xz_10y`
+*/
+extern void z_actor_give_item_50_10(
+z64_actor_t* a /* Actor to Reference */
+, z64_global_t* gl /* Global Context */
+, uint32_t id /* Get Item ID (See: https://wiki.cloudmodding.com/oot/Ovl_player_actor/Get_Items#Get_Item_Table)*/
+);
+#if OOT_DEBUG
+  asm("z_actor_give_item_50_10 = 0x8002F554");
+#elif OOT_U_1_0
+  asm("z_actor_give_item_50_10 = 0x80022CF4");
+#elif MM_U_1_0
+  /*asm("z_actor_give_item_50_10 = 0xDEADBEEF");*/
+#endif
 
 /**
  * Give Item Wrapper (80022CF4) | Sets A2 to 0
@@ -2479,6 +2518,10 @@ z64_actor_t* a /* Actor to Modify */
   asm("z_actor_damage_color = 0x80027090");
 #elif MM_U_1_0
   asm("z_actor_damage_color = 0x800BCB70");
+#elif MM_J_1_0
+  asm("z_actor_damage_color = 0x800BE6E8");
+#elif MM_DEBUG
+  asm("z_actor_damage_color = 0x800D1508");
 #endif
 
 /**
@@ -2691,15 +2734,21 @@ z64_actor_t* a
   /*asm("z_actor_is_frozen = 0xDEADBEEF");*/
 #endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_8003573C(void);
-	#if OOT_DEBUG
-		asm("external_func_8003573C = 0x8003573C");
-	#elif OOT_U_1_0
-		asm("external_func_8003573C = 0x800284A8");
-	#endif
+/* Collision Collection Related
+* Source Code Reference File: "z_actor.c"
+*/
+extern void z_actor_is_frozen_clist(
+z64_actor_t* a
+, z64_collider_cylinder_collection_t* clist
+, int32_t is_frozen
+);
+#if OOT_DEBUG
+  asm("z_actor_is_frozen_clist = 0x8003573C");
+#elif OOT_U_1_0
+  asm("z_actor_is_frozen_clist = 0x800284A8");
+#elif MM_U_1_0
+  /*asm("z_actor_is_frozen_clist = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -2805,15 +2854,21 @@ extern void external_func_80038290(z64_global_t *global, z64_actor_t *actor, voi
 		asm("external_func_80038290 = 0x8002B024");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_80038A28(void);
-	#if OOT_DEBUG
-		asm("external_func_80038A28 = 0x80038A28");
-	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
-	#endif
+/* Initialize a matrix for a collision polytype (?)
+* Source Code Reference File: "z_bgcheck.c"
+*/
+extern void z_bg_poly_mtxf_init(
+z64_col_poly_t* poly /* Collision Poly */
+, vec3f_t* x, vec3f_t* y, vec3f_t* z /* X, Y, and Z Translation */
+, float* mf /* Float Matrix */
+);
+#if OOT_DEBUG
+  asm("z_bg_poly_mtxf_init = 0x80038A28");
+#elif OOT_U_1_0
+  /*asm("z_bg_poly_mtxf_init = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_bg_poly_mtxf_init = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -3566,19 +3621,21 @@ extern void actor_damage_chart_get(void);
 		asm("actor_damage_chart_get = 0x800E03A0");
 	#endif
 
-/**
- * Initializes hitbox structure (different purpose than 8005C364?)
- * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance)
- */
-extern void actor_collider_cylinder_array_alloc(z64_global_t *global, void *collision);
-	#if OOT_DEBUG
-		asm("actor_collider_cylinder_array_alloc = 0x8005BBF8");
-	#elif OOT_U_1_0
-		asm("actor_collider_cylinder_array_alloc = 0x8004A484");
-	#elif MM_U_1_0
-		asm("actor_collider_cylinder_array_alloc = 0x800E0B4C");
-	#endif
+/* Allocate a z64_collider_cylinder_collection_t structure.
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collider_cylinder_array_alloc`
+*/
+extern void z_collider_cylinder_list_alloc(
+z64_global_t* gl /* Global Context */
+, z64_collider_cylinder_collection_t* c /* Collider List to Allocate */
+);
+#if OOT_DEBUG
+  asm("z_collider_cylinder_list_alloc = 0x8005BBF8");
+#elif OOT_U_1_0
+  asm("z_collider_cylinder_list_alloc = 0x8004A484");
+#elif MM_U_1_0
+  asm("z_collider_cylinder_list_alloc = 0x800E0B4C");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -3590,19 +3647,20 @@ extern void external_func_8005BC28(void);
 		asm("external_func_8005BC28 = 0x8004A4B0");
 	#endif
 
-/**
- * Unloads hitbox structure  (different purpose than 8005C3AC?)
- * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x0150 (offset where you stored the hitbox struct)
- */
-extern void external_func_8005BCC8(void);
-	#if OOT_DEBUG
-		asm("external_func_8005BCC8 = 0x8005BCC8");
-	#elif OOT_U_1_0
-		asm("external_func_8005BCC8 = 0x8004A550");
-	#elif MM_U_1_0
-		asm("external_func_8005BCC8 = 0x800E0C18");
-	#endif
+/* Dellocate a z64_collider_cylinder_collection_t structure.
+* Source Code Reference File: "z_collision_check.c"
+*/
+extern void z_collider_cylinder_list_free(
+z64_global_t* gl /* Global Context */
+, z64_collider_cylinder_collection_t* c /* Collider List to Deallocate */
+);
+#if OOT_DEBUG
+  asm("z_collider_cylinder_list_free = 0x8005BCC8");
+#elif OOT_U_1_0
+  asm("z_collider_cylinder_list_free = 0x8004A550");
+#elif MM_U_1_0
+  asm("z_collider_cylinder_list_free = 0x800E0C18");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -3614,19 +3672,23 @@ extern void external_func_8005BE50(void);
 		asm("external_func_8005BE50 = 0x8004A6BC");
 	#endif
 
-/**
- * Loads hitbox variable array to hitbox structure  (different purpose than 8005C4AC?)
- * TODO These notes need converted into a C function prototype
- * a0 - global context | a1 - actor instance + 0x0150 (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array
- */
-extern void actor_collider_cylinder_array_init(z64_global_t *gl, void *dest, z64_actor_t *actor, void *hitbox_init_data);
-	#if OOT_DEBUG
-		asm("actor_collider_cylinder_array_init = 0x8005C050");
-	#elif OOT_U_1_0
-		asm("actor_collider_cylinder_array_init = 0x8004A874");
-	#elif MM_U_1_0
-		asm("actor_collider_cylinder_array_init = 0x800E0E60");
-	#endif
+/* Initiailize a z64_collider_cylinder_collection_t structure.
+* Source Code Reference File: "z_collision_check.c"
+* Formerly `actor_collider_cylinder_array_init`
+*/
+extern void z_collider_cylinder_list_init(
+z64_global_t* gl /* Global Context */
+, z64_collider_cylinder_collection_t* c /* Collider List to Initiailize */
+, z64_collider_cylinder_collection_init_t* init /* Collider List Header */
+, void* list /* Individual Collider Structures in Instance */
+);
+#if OOT_DEBUG
+  asm("z_collider_cylinder_list_init = 0x8005C050");
+#elif OOT_U_1_0
+  asm("z_collider_cylinder_list_init = 0x8004A874");
+#elif MM_U_1_0
+  asm("z_collider_cylinder_list_init = 0x800E0E60");
+#endif
 
 /* Allocate a z64_collider_cylinder_main_t structure.
 * Source Code Reference File: "z_collision_check.c"
@@ -3919,15 +3981,21 @@ extern void external_func_800627A0(void);
 		asm("external_func_800627A0 = 0x80050BD4");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_800628A4(void);
-	#if OOT_DEBUG
-		asm("external_func_800628A4 = 0x800628A4");
-	#elif OOT_U_1_0
-		asm("external_func_800628A4 = 0x80050CE4");
-	#endif
+/* Translate a collider to a predetermined matrix.
+* Commonly used to assign collision to a particular limb.
+* Source Code Reference File: "z_collision_check.c"
+*/
+extern void z_collider_translate_to_matrix(
+int32_t c_index /* Cylinder Index */
+, z64_collider_cylinder_collection_t* clist /* Cylinder List */
+);
+#if OOT_DEBUG
+  asm("z_collider_translate_to_matrix = 0x800628A4");
+#elif OOT_U_1_0
+  asm("z_collider_translate_to_matrix = 0x80050CE4");
+#elif MM_U_1_0
+  /*asm("z_collider_translate_to_matrix = 0xDEADBEEF");*/
+#endif
 
 /**
  */
@@ -4346,20 +4414,20 @@ extern void z_memset(void *dst, const uint32_t len, const uint8_t value);
 	#endif
 
 /**
- * Math, Get cosine of short rotation angle
- * TODO Test in-game
- * A0 = int16_t rotation | F0 = cosine of A0
- * cos_s
- * formerly math_coss
- */
-extern float z_cos_s(int16_t angle);
-	#if OOT_DEBUG
-		asm("z_cos_s = 0x80077834"); /* Alternatively 0x80104780 */
-	#elif OOT_U_1_0
-		asm("z_cos_s = 0x80063684");
-	#elif MM_U_1_0
-		asm("z_cos_s = 0x800FED44");
-	#endif
+/* Return Coine of Rotation Angle
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_coss`
+*/
+extern float z_cos_s(
+int16_t angle /* 16-bit Angle */
+);
+#if OOT_DEBUG
+  asm("z_cos_s = 0x80077834"); /* Alternatively 0x80104780 */
+#elif OOT_U_1_0
+  asm("z_cos_s = 0x80063684");
+#elif MM_U_1_0
+  asm("z_cos_s = 0x800FED44");
+#endif
 
 /**
 /* Return Sine of Rotation Angle
@@ -4585,30 +4653,38 @@ extern float math_vec3f_distance_sub(vec3f_t *a, vec3f_t *b, vec3f_t *out);
 		asm("math_vec3f_distance_sub = 0x80063E5C");
 	#endif
 
-/**
- * calculates XZ distance between two vec3f_t types
- * TODO These notes need converted into a C function prototype
- */
-extern float math_vec3f_distance_xz(vec3f_t *a, vec3f_t *b);
-	#if OOT_DEBUG
-		asm("math_vec3f_distance_xz = 0x80078028");
-	#elif OOT_U_1_0
-		asm("math_vec3f_distance_xz = 0x80063EB8");
-	#endif
+/* Utilizes the pythagorean theorem to calculate the distance between two vec3f_t vectors (a, b)
+* c = √(a^2 + b^2)
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_distance_xz`
+*/
+extern float z_lib_distance_xz_vec3f(
+vec3f_t* a /* Vector A */
+, vec3f_t* b /* Vector B */
+);
+#if OOT_DEBUG
+  asm("z_lib_distance_xz_vec3f = 0x80078028");
+#elif OOT_U_1_0
+  asm("z_lib_distance_xz_vec3f = 0x80063EB8");
+#elif MM_U_1_0
+  /*asm("z_lib_distance_xz_vec3f = 0xDEADBEEF");*/
+#endif
 
-/**
- * Calculates Arctan2 (X,Z) of two coordinates (A-B) | Wrapper for 800AA4F8
- * TODO These notes need converted into a C function prototype
- * A0 = Coord A ptr | A1 = Coord B ptr | V0 = int16_t rotation
- */
-extern int16_t math_vec3f_atan2_xz(vec3f_t* coord1, vec3f_t* coord2);
-	#if OOT_DEBUG
-		asm("external_func_80078068 = 0x80078068");
-	#elif OOT_U_1_0
-		asm("external_func_80078068 = 0x80063F00");
-	#elif MM_U_1_0
-		asm("external_func_80078068 = 0x800FFA60");
-	#endif
+/* Calculate arctan2 (x, z) of two vec3f_t vectors (a, b)
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_atan2_xz`
+*/
+extern int16_t z_lib_atan2_xz_vec3f(
+vec3f_t* a /* Vector A */
+, vec3f_t* b /* Vector B */
+);
+#if OOT_DEBUG
+  asm("z_lib_atan2_xz_vec3f = 0x80078068");
+#elif OOT_U_1_0
+  asm("z_lib_atan2_xz_vec3f = 0x80063F00");
+#elif MM_U_1_0
+  asm("z_lib_atan2_xz_vec3f = 0x800FFA60");
+#endif
 
 /**
  * Calculates Arctan2 (distance(XZ), Y) of two coordinates | (A-B for Y coordinate)
@@ -5524,15 +5600,15 @@ extern void external_func_80093C80(void);
 * This display list seems to contain a preset combiner and geometry mode.
 * Source Code Reference File: "z_rcp.c"
 */
-extern void z_rcp_append_preset(
+extern void z_rcp_append_preset_opa(
 z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
 );
 #if OOT_DEBUG
-  asm("z_rcp_append_preset = 0x80093D18");
+  asm("z_rcp_append_preset_opa = 0x80093D18");
 #elif OOT_U_1_0
-  asm("z_rcp_append_preset = 0x8007E298");
+  asm("z_rcp_append_preset_opa = 0x8007E298");
 #elif MM_U_1_0
-  asm("z_rcp_append_preset = 0x8012C28C");
+  asm("z_rcp_append_preset_opa = 0x8012C28C");
 #endif
 
 /**
@@ -5560,15 +5636,20 @@ extern void external_func_80093F34(void);
 		// TODO Needs 1.0 equivalent!
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_80094044(void);
-	#if OOT_DEBUG
-		asm("external_func_80094044 = 0x80094044");
-	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
-	#endif
+/* This appends `DE000000 80126AC0 (NZLE)` to the POLY_XLU Display List Buffer
+* This display list seems to contain a preset combiner and geometry mode.
+* Source Code Reference File: "z_rcp.c"
+*/
+extern void z_rcp_append_preset_xlu(
+z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
+);
+#if OOT_DEBUG
+  asm("z_rcp_append_preset_xlu = 0x80094044");
+#elif OOT_U_1_0
+  /*asm("z_rcp_append_preset_xlu = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_rcp_append_preset_xlu = 0xDEADBEEF");*/
+#endif
 
 /**
  * Write Jump to Display List 800F8440 on POLY_OPA_DISP
@@ -6980,36 +7061,35 @@ extern void matrix_pop(void);
 		/* TODO */
 	#endif
 
-/**
- * Copies the top level matrix in the Float Matrix Stack
- * TODO These notes need converted into a C function prototype
- * A0 = Destination
- * Matrix_get
- * aka glGetX(GL_MODELVIEW_MATRIX, destination);
- */
-extern void matrix_get(void *destination);
-	#if OOT_DEBUG
-		asm("matrix_get = 0x800D08D8");
-	#elif OOT_U_1_0
-		asm("matrix_get = 0x800AA740");
-	#elif MM_U_1_0
-		/* TODO */
-	#endif
+/* Copy the floating point matrix from the top of the stack to mf.
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_get`
+*/
+extern void z_mtxf_get_top(
+float* mf
+);
+#if OOT_DEBUG
+  asm("z_mtxf_get_top = 0x800D08D8");
+#elif OOT_U_1_0
+  asm("z_mtxf_get_top = 0x800AA740");
+#elif MM_U_1_0
+  /*asm("z_mtxf_get_top = 0xDEADBEEF");*/
+#endif
 
-/**
- * Overwrites top level matrix in the Float Matrix Stack
- * A0 = Source Matrix
- * Matrix_put
- * aka glLoadMatrix
- */
-extern void matrix_load(void *matrix);
-	#if OOT_DEBUG
-		asm("external_func_800D08FC = 0x800D08FC");
-	#elif OOT_U_1_0
-		asm("external_func_800D08FC = 0x800AA764");
-	#elif MM_U_1_0
-		/* TODO */
-	#endif
+/* Copy mf to the matrix at the top of the matrix stack.
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_load`
+*/
+extern void z_mtxf_put_top(
+float* mf
+);
+#if OOT_DEBUG
+  asm("z_mtxf_put_top = 0x800D08FC");
+#elif OOT_U_1_0
+  asm("z_mtxf_put_top = 0x800AA764");
+#elif MM_U_1_0
+  /*asm("z_mtxf_put_top = 0xDEADBEEF");*/
+#endif
 
 /* Multiply the top float matrix in the stack by a given float matrix. (?)
 * Source Code Reference File: "sys_matrix.c"
@@ -7026,22 +7106,21 @@ float* in /* Float Matrix to Multiply By */
   /*asm("z_matrixf_top_multiply = 0xDEADBEEF");*/
 #endif
 
-/**
- * Create/Apply x,y,z transformation on Float Matrix Stack
- * TODO These notes need converted into a C function prototype
- * F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix
- * Matrix_translate
- * aka glTranslatef
- * formerly matrix_translate3f
- */
-extern void matrix_translate(float x, float y, float z, enum mtxmod mod);
-	#if OOT_DEBUG
-		asm("matrix_translate = 0x800D0984");
-	#elif OOT_U_1_0
-		asm("matrix_translate = 0x800AA7F4");
-	#elif MM_U_1_0
-		asm("matrix_translate = 0x8018029C");
-	#endif
+/* Translate a matrix along the X, Y, and Z axes.
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_translate`
+*/
+extern void z_matrix_translate_3f(
+float x, float y, float z /* X, Y, and Z Position */
+, int32_t apply /* 0 initializes a new matrix and translates it; 1 modifies the current matrix on the stack. */
+);
+#if OOT_DEBUG
+  asm("z_matrix_translate_3f = 0x800D0984");
+#elif OOT_U_1_0
+  asm("z_matrix_translate_3f = 0x800AA7F4");
+#elif MM_U_1_0
+  asm("z_matrix_translate_3f = 0x8018029C");
+#endif
 
 /* Scale a matrix along the X, Y, and Z axes.
 * Source Code Reference File: "sys_matrix.c"
@@ -7071,17 +7150,21 @@ extern void matrix_rotate_x(float x, enum mtxmod mod);
 		/* TODO */
 	#endif
 
-/**
- * Matrix_RotateY
- */
-extern void matrix_rotate_y(float y, enum mtxmod mod);
-	#if OOT_DEBUG
-		asm("matrix_rotate_y = 0x800D0D20");
-	#elif OOT_U_1_0
-		asm("matrix_rotate_y = 0x800AAB94");
-	#elif MM_U_1_0
-		/* TODO */
-	#endif
+/* Rotate a matrix along the Y axis (Yaw a matrix).
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_rotate_y`
+*/
+extern void z_matrix_yaw(
+float z /* The angle in degrees to yaw the matrix by. */
+, int32_t apply /* 0 initializes a new matrix and yaws it; 1 modifies the current matrix on the stack. */
+);
+#if OOT_DEBUG
+  asm("z_matrix_yaw = 0x800D0D20");
+#elif OOT_U_1_0
+  asm("z_matrix_yaw = 0x800AAB94");
+#elif MM_U_1_0
+  /*asm("z_matrix_yaw = 0xDEADBEEF");*/
+#endif
 
 /* Rotate a matrix along the Z axis (Roll a matrix).
 * Source Code Reference File: "sys_matrix.c"
@@ -7099,22 +7182,21 @@ float z /* The angle in degrees to roll the matrix by. */
   asm("z_matrix_roll = 0x80180E90");
 #endif
 
-/**
- * Create/Apply x,y,z rotation transformation on Float Matrix Stack
- * A0 = int16_t x rotation
- * A1 = int16_t y rotation
- * A2 = int16_t z rotation
- * A3 = 0 initializes new matrix, 1 transforms stored matrix
- * Matrix_RotateXYZ
- */
-extern void matrix_rotate(int16_t x, int16_t y, int16_t z, enum mtxmod mod);
-	#if OOT_DEBUG
-		asm("matrix_rotate = 0x800D1084");
-	#elif OOT_U_1_0
-		asm("matrix_rotate = 0x800AAF00");
-	#elif MM_U_1_0
-		/* TODO */
-	#endif
+/* Rotate a matrix along the X, Y, and Z axes.
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_rotate`
+*/
+extern void z_matrix_rotate_3s(
+int16_t x, int16_t y, int16_t z /* X, Y, and Z Rotation */
+, int32_t apply /* 0 initializes a new matrix and rotates it; 1 modifies the current matrix on the stack. */
+);
+#if OOT_DEBUG
+  asm("z_matrix_rotate_3s = 0x800D1084");
+#elif OOT_U_1_0
+  asm("z_matrix_rotate_3s = 0x800AAF00");
+#elif MM_U_1_0
+  /*asm("z_matrix_rotate_3s = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -7926,15 +8008,20 @@ extern int32_t z_srand(uint32_t seed);
 	#endif
 
 /**
- * Returns sine of a floating point value.
- * formerly math_sinf
- */
-extern float z_sin(float angle);
-	#if OOT_DEBUG
-		asm("z_sin = 0x80100290");
-	#elif OOT_U_1_0
-		asm("z_sin = 0x800CF470");
-	#endif
+/* Return Sine of Rotation Angle
+* Source Code Reference File: "code.c"
+* Formerly `z_sin`
+*/
+extern float z_sin_f(
+float angle /* Floating Point Angle */
+);
+#if OOT_DEBUG
+  asm("z_sin_f = 0x80100290");
+#elif OOT_U_1_0
+  asm("z_sin_f = 0x800CF470");
+#elif MM_U_1_0
+  /*asm("z_sin_f = 0xDEADBEEF");*/
+#endif
 
 /**
  * Returns the square root of a floating point number.

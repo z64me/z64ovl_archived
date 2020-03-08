@@ -675,6 +675,17 @@ typedef struct z64_collider_cylinder_collection_s {
     z64_collider_cylinder_t * list;
 } z64_collider_cylinder_collection_t;
 
+typedef struct z64_collider_cylinder_collection_init_s {
+  uint8_t unk_0x0000;
+  uint8_t unk_0x0001;
+  uint8_t unk_0x0002;
+  uint8_t unk_0x0003;
+  uint8_t unk_0x0004;
+  uint8_t pad_0x0005; /* Likely Padding for Alignment */
+  uint32_t collider_n; /* Number of Colliders */
+  void* pointer; /* Pointer to Collider Initialization Data */
+} z64_collider_cylinder_collection_init_t;
+
 typedef struct z64_collision_body_info_s { /* Initialization Variables (in overlay) for z64_collider */
     uint8_t unk_0x14;
     uint8_t collider_flags; /* Collider Flags */
