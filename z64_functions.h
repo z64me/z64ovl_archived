@@ -991,7 +991,7 @@ extern void external_func_8002A54C(void);
 	#if OOT_DEBUG
 		asm("external_func_8002A54C = 0x8002A54C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8002A54C = 0x8001E064");
 	#endif
 
 /**
@@ -1116,6 +1116,14 @@ void* a /* Sub Structure at `actor->0x00B4`, formerly `rot_2` */
   asm("z_actor_shadow_init = 0x800B3BA4");
   asm("Z_SHADOW_CIRCLE = 0x800B3FC0");
   asm("Z_SHADOW_TEARDROP = 0x800B42F8");
+#elif MM_J_1_0
+  asm("z_actor_shadow_init = 0x800B5784");
+  asm("Z_SHADOW_CIRCLE = 0x800B5BA0");
+  asm("Z_SHADOW_TEARDROP = 0x800B5ED8");
+#elif MM_DEBUG
+  asm("z_actor_shadow_init = 0x800C61DC");
+  asm("Z_SHADOW_CIRCLE = 0x800C6634");
+  asm("Z_SHADOW_TEARDROP = 0x800C6A4C");
 #endif
 extern void *Z_SHADOW_CIRCLE, *Z_SHADOW_TEARDROP;
 
@@ -1245,7 +1253,7 @@ extern void external_func_8002CD08(void);
 	#if OOT_DEBUG
 		asm("external_func_8002CD08 = 0x8002CD08");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8002CD08 = 0x80020674");
 	#endif
 
 /**
@@ -1732,7 +1740,7 @@ extern void external_func_8002EABC(void);
 	#if OOT_DEBUG
 		asm("external_func_8002EABC = 0x8002EABC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8002EABC = 0x800223C8");
 	#endif
 
 /**
@@ -1742,7 +1750,7 @@ extern void external_func_8002EB44(void);
 	#if OOT_DEBUG
 		asm("external_func_8002EB44 = 0x8002EB44");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8002EB44 = 0x80022400");
 	#endif
 
 /**
@@ -1773,7 +1781,7 @@ extern void external_func_8002EF14(void);
 	#if OOT_DEBUG
 		asm("external_func_8002EF14 = 0x8002EF14");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8002EF14 = 0x800226A4");
 	#endif
 
 /*
@@ -1844,7 +1852,6 @@ extern void external_func_8002F2F4(z64_actor_t *actor, z64_global_t *global);
 		asm("external_func_8002F2F4 = 0x80022A90");
 	#elif MM_U_1_0
 		asm("external_func_8002F2F4 = 0x800B863C");
-		asm("external_func_800B863C = 0x800B863C");
 	#endif
 
 /**
@@ -1894,7 +1901,7 @@ z64_actor_t* a /* Actor to Reference */
 #elif OOT_U_1_0
   asm("z_actor_is_attached = 0x80022BB0");
 #elif MM_U_1_0
-  /*asm("z_actor_is_attached = 0xDEADBEEF");*/
+  asm("z_actor_is_attached = 0x800B89F8");
 #endif
 
 /**
@@ -1917,6 +1924,8 @@ extern void actor_give_item(
 		asm("actor_give_item = 0x8002F434");
 	#elif OOT_U_1_0
 		asm("actor_give_item = 0x80022BD4");
+	#elif MM_U_1_0
+		asm("actor_give_item = 0x800B8A1C");
 	#endif
 
 /* Give Item
@@ -1936,7 +1945,7 @@ z64_actor_t* a /* Actor to Reference */
 #elif OOT_U_1_0
   asm("z_actor_give_item_50_10 = 0x80022CF4");
 #elif MM_U_1_0
-  /*asm("z_actor_give_item_50_10 = 0xDEADBEEF");*/
+  asm("z_actor_give_item_50_10 = 0x800B8B84");
 #endif
 
 /**
@@ -2023,7 +2032,7 @@ extern void external_func_8002F698(void);
 	#if OOT_DEBUG
 		asm("external_func_8002F698 = 0x8002F698");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8002F698 = 0x80022E3C");
 	#endif
 
 /**
@@ -2055,7 +2064,7 @@ extern void external_func_8002F758(z64_global_t *gl, void *gl830, float a, float
 	#if OOT_DEBUG
 		asm("external_func_8002F758 = 0x8002F758");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8002F758 = 0x80022F00");
 	#elif MM_U_1_0
 		asm("external_func_8002F6D4 = 0x800CA1E8");
 	#endif
@@ -2070,7 +2079,6 @@ extern void external_func_8002F7A0(void);
 		asm("external_func_8002F7A0 = 0x80022F48");
 	#elif MM_U_1_0
 		asm("external_func_8002F7A0 = 0x800B8E1C");
-		asm("external_func_800B8E1C = 0x800B8E1C");
 	#endif
 
 /**
@@ -2191,7 +2199,7 @@ void* actor_ctxt /* Actor Context within Global Context */
 #elif OOT_U_1_0
   asm("z_actor_spawn = 0x80025110");
 #elif MM_U_1_0
-  asm("z_actor_spawn = 0x800BAC60");
+  asm("z_actor_spawn = 0x800BAE14");
 #endif
 
 /* Spawn an actor and attach it to `host`. Returns a pointer to the spawned actor, or NULL if it fails.
@@ -2427,7 +2435,7 @@ extern void external_func_80033DB8(void);
 	#if OOT_DEBUG
 		asm("external_func_80033DB8 = 0x80033DB8");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80033DB8 = 0x80026C1C");
 	#endif
 
 /**
@@ -2437,7 +2445,7 @@ extern void external_func_80033E1C(void);
 	#if OOT_DEBUG
 		asm("external_func_80033E1C = 0x80033E1C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80033E1C = 0x80026C84");
 	#endif
 
 /**
@@ -2476,7 +2484,6 @@ extern float external_func_80033F20(float n);
 		asm("external_func_80033F20 = 0x80026D90");
 	#elif MM_U_1_0
 		asm("external_func_80033F20 = 0x801795C0");
-		asm("external_func_801795C0 = 0x801795C0");
 	#endif
 
 /**
@@ -2486,7 +2493,7 @@ extern void external_func_80033F54(void);
 	#if OOT_DEBUG
 		asm("external_func_80033F54 = 0x80033F54");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80033F54 = 0x80026DC8");
 	#endif
 
 /**
@@ -2531,7 +2538,7 @@ extern void external_func_8003435C(void);
 	#if OOT_DEBUG
 		asm("external_func_8003435C = 0x8003435C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8003435C = 0x80027188");
 	#endif
 
 /**
@@ -2584,7 +2591,7 @@ extern void external_func_80034CC4(void);
 	#if OOT_DEBUG
 		asm("external_func_80034CC4 = 0x80034CC4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80034CC4 = 0x80027AC4");
 	#endif
 
 /**
@@ -2767,7 +2774,7 @@ extern void external_func_800358DC(void);
 	#if OOT_DEBUG
 		asm("external_func_800358DC = 0x800358DC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800358DC = 0x80028644");
 	#endif
 
 /**
@@ -2865,7 +2872,7 @@ z64_col_poly_t* poly /* Collision Poly */
 #if OOT_DEBUG
   asm("z_bg_poly_mtxf_init = 0x80038A28");
 #elif OOT_U_1_0
-  /*asm("z_bg_poly_mtxf_init = 0xDEADBEEF");*/
+  asm("z_bg_poly_mtxf_init = 0x8002B668");
 #elif MM_U_1_0
   /*asm("z_bg_poly_mtxf_init = 0xDEADBEEF");*/
 #endif
@@ -2948,7 +2955,6 @@ extern void external_func_8003DE84(void);
 		asm("external_func_8003DE84 = 0x800308B4");
 	#elif MM_U_1_0
 		asm("external_func_8003DE84 = 0x800C55C4");
-		asm("external_func_800C55C4 = 0x800C55C4");
 	#endif
 
 /**
@@ -3466,7 +3472,7 @@ extern void external_func_8005A970(void);
 	#if OOT_DEBUG
 		asm("external_func_8005A970 = 0x8005A970");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8005A970 = 0x80049730");
 	#endif
 
 /**
@@ -3476,7 +3482,7 @@ extern void external_func_8005A9CC(void);
 	#if OOT_DEBUG
 		asm("external_func_8005A9CC = 0x8005A9CC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8005A9CC = 0x80049754");
 	#endif
 
 /**
@@ -3510,7 +3516,7 @@ extern void external_func_8005AA90(void);
 	#if OOT_DEBUG
 		asm("external_func_8005AA90 = 0x8005AA90");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8005AA90 = 0x80049818");
 	#endif
 
 /**
@@ -3734,7 +3740,6 @@ extern void external_func_8005C3F4(void);
 		asm("external_func_8005C3F4 = 0x8004AC1C");
 	#elif MM_U_1_0
 		asm("external_func_8005C3F4 = 0x800E123C");
-		asm("external_func_800E123C = 0x800E123C");
 	#endif
 
 /**
@@ -3747,7 +3752,6 @@ extern void external_func_8005C450(void);
 		asm("external_func_8005C450 = 0x8004AC84");
 	#elif MM_U_1_0
 		asm("external_func_8005C450 = 0x800E12A4");
-		asm("external_func_800E12A4 = 0x800E12A4");
 	#endif
 
 /* Initialize a z64_collider_cylinder_main_t structure.
@@ -3835,7 +3839,7 @@ extern void external_func_8005D160(void);
 	#if OOT_DEBUG
 		asm("external_func_8005D160 = 0x8005D160");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8005D160 = 0x8004B9C8");
 	#endif
 
 /* Subscribe to Collision Pool 1
@@ -3899,7 +3903,7 @@ extern void external_func_8005DFAC(void);
 	#if OOT_DEBUG
 		asm("external_func_8005DFAC = 0x8005DFAC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8005DFAC = 0x8004C430");
 	#endif
 
 /* Initializes an actor's damage chart. (Perhaps allocation is more accurate?)
@@ -3962,7 +3966,7 @@ extern void external_func_80062718(void);
 	#if OOT_DEBUG
 		asm("external_func_80062718 = 0x80062718");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80062718 = 0x80050B44");
 	#endif
 
 /**
@@ -4174,7 +4178,7 @@ extern void external_func_8006C3D0(void);
 	#if OOT_DEBUG
 		asm("external_func_8006C3D0 = 0x8006C3D0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8006C3D0 = 0x80059840");
 	#endif
 
 /**
@@ -4184,7 +4188,7 @@ extern void external_func_8006C438(void);
 	#if OOT_DEBUG
 		asm("external_func_8006C438 = 0x8006C438");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8006C438 = 0x800598AC");
 	#endif
 
 /**
