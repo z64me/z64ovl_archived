@@ -4051,7 +4051,7 @@ extern void external_func_80063E9C(void);
 	#if OOT_DEBUG
 		asm("external_func_80063E9C = 0x80063E9C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80063E9C = 0x80051E70");
 	#endif
 
 /**
@@ -4208,7 +4208,7 @@ extern void external_func_8006C750(void);
 	#if OOT_DEBUG
 		asm("external_func_8006C750 = 0x8006C750");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8006C750 = 0x80059BD0");
 	#endif
 
 /**
@@ -4218,7 +4218,7 @@ extern void external_func_8006C778(void);
 	#if OOT_DEBUG
 		asm("external_func_8006C778 = 0x8006C778");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8006C778 = 0x80059C00");
 	#endif
 
 /**
@@ -4258,7 +4258,7 @@ extern void external_func_8006CF6C(void);
 	#if OOT_DEBUG
 		asm("external_func_8006CF6C = 0x8006CF6C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8006CF6C = 0x8005A36C");
 	#endif
 
 /**
@@ -4288,7 +4288,7 @@ extern void external_func_8006EF10(void);
 	#if OOT_DEBUG
 		asm("external_func_8006EF10 = 0x8006EF10");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8006EF10 = 0x8005BD78");
 	#endif
 
 /**
@@ -4318,7 +4318,7 @@ extern void external_func_80070600(void);
 	#if OOT_DEBUG
 		asm("external_func_80070600 = 0x80070600");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80070600 = 0x8005D2B4");
 	#endif
 
 /**
@@ -4405,7 +4405,7 @@ extern void external_func_800776E4(void);
 	#if OOT_DEBUG
 		asm("external_func_800776E4 = 0x800776E4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800776E4 = 0x80063534");
 	#endif
 
 /**
@@ -4909,7 +4909,7 @@ extern void external_func_8007AE10(void);
 	#if OOT_DEBUG
 		asm("external_func_8007AE10 = 0x8007AE10");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8007AE10 = 0x80066C10");
 	#endif
 
 /**
@@ -4932,7 +4932,7 @@ extern void *z_malloc(
     #if OOT_DEBUG
         asm("z_malloc = 0x8007AEE0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("z_malloc = 0x80066C60");
     #endif
 
 /**
@@ -4966,7 +4966,7 @@ extern void z_free(void *address);
 	#if OOT_DEBUG
 		asm("z_free = 0x8007B0D4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("z_free = 0x80066C90");
 	#endif
 
 /**
@@ -5072,7 +5072,7 @@ extern void external_func_800849A8(void);
 	#if OOT_DEBUG
 		asm("external_func_800849A8 = 0x800849A8");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800849A8 = 0x8006FA88");
 	#endif
 
 /**
@@ -5233,7 +5233,6 @@ extern void external_func_800876C8(void);
 		asm("external_func_800876C8 = 0x80072548");
 	#elif MM_U_1_0
 		asm("external_func_800876C8 = 0x80115D5C");
-		asm("external_func_80115D5C = 0x80115D5C");
 	#endif
 
 /**
@@ -5263,7 +5262,7 @@ extern void external_func_80088AF0(void);
 	#if OOT_DEBUG
 		asm("external_func_80088AF0 = 0x80088AF0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80088AF0 = 0x80073938");
 	#endif
 
 /**
@@ -5438,7 +5437,7 @@ extern void external_func_8008F0AC(void);
 	#if OOT_DEBUG
 		asm("external_func_8008F0AC = 0x8008F0AC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8008F0AC = 0x80079B7C");
 	#endif
 
 /**
@@ -5541,7 +5540,7 @@ extern void external_func_80093370(void);
 	#if OOT_DEBUG
 		asm("external_func_80093370 = 0x80093370");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80093370 = 0x8007DC40");
 	#endif
 
 /**
@@ -5551,7 +5550,7 @@ extern void external_func_80093708(void);
 	#if OOT_DEBUG
 		asm("external_func_80093708 = 0x80093708");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80093708 = 0x8007DF4C");
 	#endif
 
 /**
@@ -5561,7 +5560,7 @@ extern void external_func_80093774(void);
 	#if OOT_DEBUG
 		asm("external_func_80093774 = 0x80093774");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80093774 = 0x8007DFBC");
 	#endif
 
 /**
@@ -5571,7 +5570,7 @@ extern Gfx* external_func_800937C0(Gfx *p);
 	#if OOT_DEBUG
 		asm("external_func_800937C0 = 0x800937C0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800937C0 = 0x8007E008");
 	#endif
 
 /**
@@ -5581,7 +5580,7 @@ extern void external_func_80094A14(z64_gfx_t *g);
 	#if OOT_DEBUG
 		asm("external_func_80094A14 = 0x80094A14");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094A14 = 0x8007E09C");
 	#endif
 
 /**
@@ -5591,7 +5590,7 @@ extern void external_func_80093C14(void);
 	#if OOT_DEBUG
 		asm("external_func_80093C14 = 0x80093C14");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80093C14 = 0x8007E204");
 	#endif
 
 /**
@@ -5601,7 +5600,7 @@ extern void external_func_80093C80(void);
 	#if OOT_DEBUG
 		asm("external_func_80093C80 = 0x80093C80");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80093C80 = 0x8007E22C");
 	#endif
 
 /* This appends `DE000000 80126730 (NZLE)` to the POLY_OPA Display List Buffer
@@ -5674,11 +5673,11 @@ extern void external_func_800943C8(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80094520(z64_gfx_t *gfx_ctxt);
+extern void interface_jump_to_main_dlist(z64_gfx_t *gfx_ctxt);
 	#if OOT_DEBUG
 		asm("external_func_80094520 = 0x80094520");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094520 = 0x8007E5BC");
 	#endif
 
 /**
@@ -5688,7 +5687,7 @@ extern void external_func_8009457C(void);
 	#if OOT_DEBUG
 		asm("external_func_8009457C = 0x8009457C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8009457C = 0x8007E63C");
 	#endif
 
 /**
@@ -5698,7 +5697,7 @@ extern void external_func_8009460C(void);
 	#if OOT_DEBUG
 		asm("external_func_8009460C = 0x8009460C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_8009460C = 0x8007E690");
 	#endif
 
 /**
@@ -5708,7 +5707,7 @@ extern void external_func_80094968(void);
 	#if OOT_DEBUG
 		asm("external_func_80094968 = 0x80094968");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094968 = 0x8007E824");
 	#endif
 
 /**
@@ -5718,7 +5717,7 @@ extern void external_func_80094B58(void);
 	#if OOT_DEBUG
 		asm("external_func_80094B58 = 0x80094B58");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094B58 = 0x8007E908");
 	#endif
 
 /**
@@ -5728,7 +5727,7 @@ extern void external_func_80094BC4(void);
 	#if OOT_DEBUG
 		asm("external_func_80094BC4 = 0x80094BC4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094BC4 = 0x8007E930");
 	#endif
 
 /**
@@ -5738,7 +5737,7 @@ extern void external_func_80094C50(void);
 	#if OOT_DEBUG
 		asm("external_func_80094C50 = 0x80094C50");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094C50 = 0x8007E978");
 	#endif
 
 /**
@@ -5748,7 +5747,7 @@ extern void external_func_80094D28(void);
 	#if OOT_DEBUG
 		asm("external_func_80094D28 = 0x80094D28");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094D28 = 0x8007E9C8");
 	#endif
 
 /**
@@ -5758,17 +5757,17 @@ extern void external_func_80094E78(void);
 	#if OOT_DEBUG
 		asm("external_func_80094E78 = 0x80094E78");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094E78 = 0x8007EADC");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * f3dzex_gen_1_settilesize
  */
 extern void external_func_80094E9C(void);
 	#if OOT_DEBUG
 		asm("external_func_80094E9C = 0x80094E9C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80094E9C = 0x8007EB00");
 	#endif
 
 /**
@@ -5793,7 +5792,7 @@ extern void external_func_80095068(void);
 	#if OOT_DEBUG
 		asm("external_func_80095068 = 0x80095068");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80095068 = 0x8007ECA4");
 	#endif
 
 /**
@@ -5803,7 +5802,7 @@ extern void external_func_800951D0(void);
 	#if OOT_DEBUG
 		asm("external_func_800951D0 = 0x800951D0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800951D0 = 0x8007EE04");
 	#endif
 
 /**
@@ -5835,42 +5834,9 @@ extern void external_func_80097A54(void);
 	#if OOT_DEBUG
 		asm("external_func_80097A54 = 0x80097A54");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80097A54 = 0x80081188");
 	#endif
 
-/* Return the index of a loaded object index.
-* Source Code Reference File: "z_scene.c"
-* Formerly `object_get_index`
-*/
-extern int32_t z_scene_object_get_index(
-z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
-, int32_t id /* The object file ID */
-);
-#if OOT_DEBUG
-  asm("z_scene_object_get_index = 0x8009812C");
-#elif OOT_U_1_0
-  asm("z_scene_object_get_index = 0x80081628");
-#elif MM_U_1_0
-  asm("z_scene_object_get_index = 0x8012F608")
-#endif
-
-
-/* Check if an object is loaded in the scene.
-* Returns 0 on false, 1 on true
-* Source Code Reference File: "z_scene.c"
-* Formerly `object_is_loaded`
-*/
-extern int32_t z_scene_object_is_loaded(
-z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
-, int32_t id /* The object file ID */
-);
-#if OOT_DEBUG
-  asm("z_scene_object_is_loaded = 0x80098188");
-#elif OOT_U_1_0
-  asm("z_scene_object_is_loaded = 0x80081688");
-#elif MM_U_1_0
-  asm("z_scene_object_is_loaded = 0x8012F668");
-#endif
 
  /**
  * Load an object into memory. Object is loaded even if
@@ -5889,6 +5855,39 @@ extern void object_load(z64_obj_ctxt_t* object_context, uint16_t object_id);
     */
     #endif
 
+/* Return the index of a loaded object index.
+* Source Code Reference File: "z_scene.c"
+* Formerly `object_get_index`
+*/
+extern int32_t z_scene_object_get_index(
+z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
+, int32_t id /* The object file ID */
+);
+#if OOT_DEBUG
+  asm("z_scene_object_get_index = 0x8009812C");
+#elif OOT_U_1_0
+  asm("z_scene_object_get_index = 0x80081628");
+#elif MM_U_1_0
+  asm("z_scene_object_get_index = 0x8012F608")
+#endif
+
+/* Check if an object is loaded in the scene.
+* Returns 0 on false, 1 on true
+* Source Code Reference File: "z_scene.c"
+* Formerly `object_is_loaded`
+*/
+extern int32_t z_scene_object_is_loaded(
+z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
+, int32_t id /* The object file ID */
+);
+#if OOT_DEBUG
+  asm("z_scene_object_is_loaded = 0x80098188");
+#elif OOT_U_1_0
+  asm("z_scene_object_is_loaded = 0x80081688");
+#elif MM_U_1_0
+  asm("z_scene_object_is_loaded = 0x8012F668");
+#endif
+
 /**
  * TODO This function is completely undocumented
  */
@@ -5896,7 +5895,7 @@ extern void external_func_800A0B40(void);
 	#if OOT_DEBUG
 		asm("external_func_800A0B40 = 0x800A0B40");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800A0B40 = 0x8008902C");
 	#endif
 
 /* Draw a `skelanime` structure.
@@ -5972,7 +5971,7 @@ extern uint32_t skelanime_draw_destination(z64_global_t *global, uint32_t limb_i
 	#if OOT_DEBUG
 		asm("skelanime_draw_destination = 0x800A2288");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("skelanime_draw_destination = 0x8008A1DC");
 	#endif
 
 /**
@@ -5982,7 +5981,7 @@ extern uint32_t skelanime_draw_mtx_destination(z64_global_t *global, uint32_t li
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx_destination = 0x800A273C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("skelanime_draw_mtx_destination = 0x8008A608");
 	#endif
 
 /**
@@ -6022,7 +6021,7 @@ extern void external_func_800A3BC0(void);
 	#if OOT_DEBUG
 		asm("external_func_800A3BC0 = 0x800A3BC0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800A3BC0 = 0x8008BCA4");
 	#endif
 
 /* Initialize a "Skelanime Structure"
@@ -6262,7 +6261,7 @@ extern void external_func_800A5F60(void);
 	#if OOT_DEBUG
 		asm("external_func_800A5F60 = 0x800A5F60");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800A5F60 = 0x8008DE88");
 	#endif
 
 /**
@@ -6294,7 +6293,7 @@ extern void external_func_800A63CC(void);
 	#if OOT_DEBUG
 		asm("external_func_800A63CC = 0x800A63CC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800A63CC = 0x8008E270");
 	#endif
 
 /**
@@ -6350,13 +6349,13 @@ extern void external_func_800A6EF4(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Multiply Matrix
  */
-extern void external_func_800A6FA0(void);
+extern void z_skin_mtx_multiply(float* in, float* mult, float* out);
 	#if OOT_DEBUG
 		asm("external_func_800A6FA0 = 0x800A6FA0");
 	#elif OOT_U_1_0
-		/*asm("external_func_800A6EF4 = 0x8008ED08");*/
+		asm("external_func_800A6EF4 = 0x8008EDB8");
 	#endif
 
 
@@ -6367,7 +6366,7 @@ extern void external_func_800A7B04(void);
 	#if OOT_DEBUG
 		asm("external_func_800A7B04 = 0x800A7B04");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800A7B04 = 0x8008F890");
 	#endif
 
 /**
@@ -6377,7 +6376,7 @@ extern void external_func_800A7E70(void);
 	#if OOT_DEBUG
 		asm("external_func_800A7E70 = 0x800A7E70");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800A7E70 = 0x8008FC98");
 	#endif
 
 /**
@@ -6474,7 +6473,7 @@ extern void external_func_800BB2B4(void);
 	#if OOT_DEBUG
 		asm("external_func_800BB2B4 = 0x800BB2B4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800BB2B4 = 0x800999A4");
 	#endif
 
 /**
@@ -6484,7 +6483,7 @@ extern void external_func_800BC490(void);
 	#if OOT_DEBUG
 		asm("external_func_800BC490 = 0x800BC490");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800BC490 = 0x8009A1B0");
 	#endif
 
 /**
@@ -6504,7 +6503,7 @@ extern void external_func_800BC590(void);
 	#if OOT_DEBUG
 		asm("external_func_800BC590 = 0x800BC590");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800BC590 = 0x8009A284");
 	#endif
 
 /**
@@ -6514,7 +6513,7 @@ extern void external_func_800BC8A0(void);
 	#if OOT_DEBUG
 		asm("external_func_800BC8A0 = 0x800BC8A0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800BC8A0 = 0x8009A574");
 	#endif
 
 /**
@@ -6747,7 +6746,7 @@ graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 	#if OOT_DEBUG
 		asm("graph_alloc = 0x800C69CC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		// This function seems to only exist in the Debug ROM.
 	#endif
 
 /* Allocates graphics debugging information to memory.
@@ -6793,7 +6792,7 @@ extern void external_func_800C6C20(void);
 	#if OOT_DEBUG
 		asm("external_func_800C6C20 = 0x800C6C20");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800C6C20 = 0x800A1AA0");
 	#endif
 
 /**
@@ -6803,7 +6802,7 @@ extern void external_func_800C6C28(void);
 	#if OOT_DEBUG
 		asm("external_func_800C6C28 = 0x800C6C28");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800C6C28 = 0x800A1AAC");
 	#endif
 
 /**
@@ -7109,7 +7108,7 @@ float* in /* Float Matrix to Multiply By */
 #if OOT_DEBUG
   asm("z_matrixf_top_multiply = 0x800D0930");
 #elif OOT_U_1_0
-  /*asm("z_matrixf_top_multiply = 0xDEADBEEF");*/
+  asm("z_matrixf_top_multiply = 0x800AA79C");
 #elif MM_U_1_0
   /*asm("z_matrixf_top_multiply = 0xDEADBEEF");*/
 #endif
@@ -7214,7 +7213,7 @@ extern void external_func_800D1340(void);
 	#if OOT_DEBUG
 		asm("external_func_800D1340 = 0x800D1340");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800D1340 = 0x800AB1BC");
 	#endif
 
 /**
@@ -7314,7 +7313,7 @@ extern void external_func_800D1EF4(void);
 	#if OOT_DEBUG
 		asm("external_func_800D1EF4 = 0x800D1EF4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800D1EF4 = 0x800ABD6C");
 	#endif
 
 /**
@@ -7328,7 +7327,6 @@ extern void external_func_800D1FD4(void *unk0);
 		asm("external_func_800D1FD4 = 0x800ABE54");
 	#elif MM_U_1_0
 		asm("external_func_800D1FD4 = 0x801820A0");
-		asm("external_func_801820A0 = 0x801820A0");
 	#endif
 
 /* Extract rotations from a 3x3 matrix within a 4x4 transformation matrix.
@@ -7417,7 +7415,7 @@ extern void external_func_800F4190(void);
 	#if OOT_DEBUG
 		asm("external_func_800F4190 = 0x800F4190");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F4190 = 0x800C4ED0");
 	#endif
 
 /**
@@ -7467,7 +7465,7 @@ extern void external_func_800F44EC(void);
 	#if OOT_DEBUG
 		asm("external_func_800F44EC = 0x800F44EC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F44EC = 0x800C522C");
 	#endif
 
 /**
@@ -7497,7 +7495,7 @@ extern void external_func_800F46E0(void);
 	#if OOT_DEBUG
 		asm("external_func_800F46E0 = 0x800F46E0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F46E0 = 0x800C5420");
 	#endif
 
 /**
@@ -7539,7 +7537,7 @@ extern void external_func_800F4B58(void);
 	#if OOT_DEBUG
 		asm("external_func_800F4B58 = 0x800F4B58");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F4B58 = 0x800C5898");
 	#endif
 
 /**
@@ -7549,7 +7547,7 @@ extern void external_func_800F4BE8(void);
 	#if OOT_DEBUG
 		asm("external_func_800F4BE8 = 0x800F4BE8");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F4BE8 = 0x800C5928");
 	#endif
 
 /**
@@ -7701,7 +7699,7 @@ extern void external_func_800F6268(void);
 	#if OOT_DEBUG
 		asm("external_func_800F6268 = 0x800F6268");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F6268 = 0x800C6F9C");
 	#endif
 
 /**
@@ -7741,7 +7739,7 @@ extern void external_func_800F68BC(void);
 	#if OOT_DEBUG
 		asm("external_func_800F68BC = 0x800F68BC");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F68BC = 0x800C75DC");
 	#endif
 
 /**
@@ -7751,7 +7749,7 @@ extern void external_func_800F6D58(void);
 	#if OOT_DEBUG
 		asm("external_func_800F6D58 = 0x800F6D58");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800F6D58 = 0x800C7A78");
 	#endif
 
 /**
@@ -7844,7 +7842,7 @@ extern void external_func_800FA0B4(void);
 	#if OOT_DEBUG
 		asm("external_func_800FA0B4 = 0x800FA0B4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800FA0B4 = 0x800CAB18");
 	#endif
 
 /**
@@ -7929,7 +7927,7 @@ extern void external_func_800FCC6C(void);
 	#if OOT_DEBUG
 		asm("external_func_800FCC6C = 0x800FCC6C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800FCC6C = 0x800CCED4");
 	#endif
 
 /**
@@ -7939,7 +7937,7 @@ extern float z_atan_fast(float in);
 	#if OOT_DEBUG
 		asm("z_atan_fast = 0x800FD0C4");
 	#elif OOT_U_1_0
-		/*asm("external_func_800FD250 = 0x800CD76C");*/
+		asm("z_atan_fast = 0x800CD648");
 	#endif
 
 /**
@@ -7997,7 +7995,7 @@ extern int32_t external_func_800FD970(void);
 	#if OOT_DEBUG
 		asm("external_func_800FD970 = 0x800FD970");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800FD970 = 0x800CDC90");
 	#elif MM_U_1_0
 		asm("external_func_800FD970 = 0x80086FA0");
 	#endif
@@ -8056,11 +8054,11 @@ extern float z_cos(float angle);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80104780(void);
+extern int16_t coss(int16_t angle);
 	#if OOT_DEBUG
 		asm("external_func_80104780 = 0x80104780");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80104780 = 0x800D2FA0");
 	#endif
 
 /**
