@@ -325,7 +325,7 @@ extern void external_func_80026690(void);
 	#if OOT_DEBUG
 		asm("external_func_80026690 = 0x80026690");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80026690 = 0x8001A4AC");
 	#endif
 
 /**
@@ -335,7 +335,7 @@ extern void external_func_80026860(void);
 	#if OOT_DEBUG
 		asm("external_func_80026860 = 0x80026860");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80026860 = 0x8001A654");
 	#endif
 
 /**
@@ -345,7 +345,7 @@ extern void external_func_80026A6C(void);
 	#if OOT_DEBUG
 		asm("external_func_80026A6C = 0x80026A6C");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80026A6C = 0x8001A83C");
 	#endif
 
 /**
@@ -453,7 +453,7 @@ extern void external_func_800283D4(void);
 	#if OOT_DEBUG
 		asm("external_func_800283D4 = 0x800283D4");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_800283D4 = 0x8001BECC");
 	#endif
 
 /**
@@ -871,7 +871,7 @@ extern void external_func_80029E24(void);
 	#if OOT_DEBUG
 		asm("external_func_80029E24 = 0x80029E24");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80029E24 = 0x8001D930");
 	#endif
 
 /**
@@ -3919,6 +3919,10 @@ void* out /* Destination for initialized table. */
   asm("z_actor_damage_table_init = 0x80050344");
 #elif MM_U_1_0
   asm("z_actor_damage_table_init = 0x800E7530");
+#elif MM_J_1_0
+  asm("z_actor_damage_table_init = 0x800E90CC");
+#elif MM_DEBUG
+  asm("z_actor_damage_table_init = 0x8010174C");
 #endif
 
 /**
@@ -5044,7 +5048,7 @@ extern void interface_draw_compass(z64_global_t *gl);
 	#if OOT_DEBUG
 		asm("interface_draw_compass = 0x80081240");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("interface_draw_compass = 0x8008921C"); /* TODO: Confirm */
 	#endif
 
 /**
@@ -5633,7 +5637,7 @@ extern void external_func_80093F34(void);
 	#if OOT_DEBUG
 		asm("external_func_80093F34 = 0x80093F34");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80093F34 = 0x8007E388");
 	#endif
 
 /* This appends `DE000000 80126AC0 (NZLE)` to the POLY_XLU Display List Buffer
@@ -5646,7 +5650,7 @@ z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
 #if OOT_DEBUG
   asm("z_rcp_append_preset_xlu = 0x80094044");
 #elif OOT_U_1_0
-  /*asm("z_rcp_append_preset_xlu = 0xDEADBEEF");*/
+  asm("z_rcp_append_preset_xlu = 0x8007E544");
 #elif MM_U_1_0
   /*asm("z_rcp_append_preset_xlu = 0xDEADBEEF");*/
 #endif
