@@ -5860,22 +5860,26 @@ extern void external_func_80097A54(void);
 	#endif
 
 
- /**
- * Load an object into memory. Object is loaded even if
- * it has already been loaded.
- * A0 = object context (OoT: global + 117A4, MM: global + 17D88), A1 = Object ID,
- * NOTE: This function is not used in any existing actor overlay in OoT.
- */
-extern void object_load(z64_obj_ctxt_t* object_context, uint16_t object_id);
-    #if OOT_DEBUG
-        asm("object_load = 0x80097C00");
-    #elif OOT_U_1_0
-        asm("object_load = 0x800812F0");
-    /* Maybe - args could be different. Would need testing.
-    #elif MM_U_1_0
-        asm("object_load = 0x8012F2E0");
-    */
-    #endif
+/* Load an object from ROM into RAM and allocates it in the scene.
+* This loads an object into memory even if it is already loaded.
+* Source Code Reference File: "z_scene.c"
+* Formerly `object_load`
+*/
+extern int32_t z_scene_object_load(
+z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
+, int32_t id /* The object file ID */
+);
+#if OOT_DEBUG
+  asm("z_scene_object_load = 0x80097C00");
+#elif OOT_U_1_0
+  asm("z_scene_object_load = 0x800812F0");
+#elif MM_U_1_0
+  asm("z_scene_object_load = 0x8012F2E0");
+#elif MM_J_1_0
+  asm("z_scene_object_load = 0x80130D50");
+#elif MM_DEBUG
+  asm("z_scene_object_load = 0x80155220");
+#endif
 
 /* Return the index of a loaded object index.
 * Source Code Reference File: "z_scene.c"
@@ -5891,6 +5895,10 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
   asm("z_scene_object_get_index = 0x80081628");
 #elif MM_U_1_0
   asm("z_scene_object_get_index = 0x8012F608")
+#elif MM_J_1_0
+  asm("z_scene_object_get_index = 0x80131078")
+#elif MM_J_1_0
+  asm("z_scene_object_get_index = 0x80155650")
 #endif
 
 /* Check if an object is loaded in the scene.
@@ -5908,6 +5916,10 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
   asm("z_scene_object_is_loaded = 0x80081688");
 #elif MM_U_1_0
   asm("z_scene_object_is_loaded = 0x8012F668");
+#elif MM_J_1_0
+  asm("z_scene_object_is_loaded = 0x801310D8");
+#elif MM_DEBUG
+  asm("z_scene_object_is_loaded = 0x801556B0");
 #endif
 
 /**
