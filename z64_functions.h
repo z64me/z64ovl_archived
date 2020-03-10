@@ -105,7 +105,7 @@ extern void z_bzero(void *dst, const int num);
 	#if OOT_DEBUG
 		asm("z_bzero = 0x80004450");
 	#elif OOT_U_1_0
-		// TODO
+		asm("z_bzero = 0x80002E80");
 	#elif MM_U_1_0
 		// TODO
 	#endif
@@ -123,7 +123,7 @@ extern int _Putfld(
 	#if OOT_DEBUG
 		asm("_Putfld = 0x80005928");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("_Putfld = 0x800D1690");
 	#endif
 
 /****
@@ -154,7 +154,7 @@ extern int z_bcmp(const void *s1, const void *s2, int n);
 	#if OOT_DEBUG
 		asm("z_bcmp = 0x800068C0");
 	#elif OOT_U_1_0
-		// TODO
+		asm("z_bcmp = 0x800D4390");
 	#elif MM_U_1_0
 		// TODO
 	#endif
@@ -211,17 +211,18 @@ extern void debug_message(const char *msg, ...);
 	#if OOT_DEBUG
 		asm("debug_message = 0x80002130");
 	#elif OOT_U_1_0
-		asm("debug_message = 0x800ACE60");
+		asm("debug_message = 0x800ADBF8"); /* 15BC */
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * This prints a debug string that doesn't exist in 1.0
+ * Perhaps this function doesn't, either.
  */
 extern void external_func_80002E10(void);
 	#if OOT_DEBUG
 		asm("external_func_80002E10 = 0x80002E10");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		// TODO Needs 1.0 equivalent! /* Write a Macro to function equivalently? */
 	#endif
 
 /**
@@ -231,7 +232,7 @@ extern void external_func_80002E50(void);
 	#if OOT_DEBUG
 		asm("external_func_80002E50 = 0x80002E50");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		asm("external_func_80002E50 = 0x80001B38");
 	#endif
 
 /* Spawn Collectible Item
@@ -1444,7 +1445,6 @@ extern void external_func_8002D97C(void);
 		asm("external_func_8002D97C = 0x800212B8");
 	#elif MM_U_1_0
 		asm("external_func_8002D97C = 0x800B6B24");
-		asm("external_func_800B6B24 = 0x800B6B24");
 	#endif
 
 /**
