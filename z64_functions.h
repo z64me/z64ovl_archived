@@ -222,7 +222,7 @@ extern void external_func_80002E10(void);
 	#if OOT_DEBUG
 		asm("external_func_80002E10 = 0x80002E10");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent! /* Write a Macro to function equivalently? */
+		#define external_func_80002E10(...) do { /* nothing */ } while (0)
 	#endif
 
 /**
