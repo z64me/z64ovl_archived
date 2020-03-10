@@ -8069,10 +8069,17 @@ extern float z_fabs(float value);
 	#if OOT_DEBUG
 		asm("z_fabs = 0x801067E0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		// TODO does a 1.0 equivalent really not exist? compare a
+		//      debug actor that uses it to its retail counterpart
+		static inline float z_fabs(float value) {
+			if (value < 0)
+				return -value;
+			return value;
+		}
 	#endif
 
 /**
+ * floating-point remainder function
  * Returns the modulous of two floating point numbers.
  * formerly math_fmodf
  */
@@ -8080,7 +8087,15 @@ extern float z_fmod(float a, float b);
 	#if OOT_DEBUG
 		asm("z_fmod = 0x801067F0");
 	#elif OOT_U_1_0
-		// TODO Needs 1.0 equivalent!
+		// TODO does a 1.0 equivalent really not exist? compare a
+		//      debug actor that uses it to its retail counterpart
+		static inline float z_fmod(float a, float b) {
+			if (b == 0.00000000)
+				a = 0.00000000;
+			else
+				a = a - (a / b) * b;
+			return a;
+		}
 	#endif
 
 /**
