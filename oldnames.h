@@ -59,3 +59,4 @@
 #define matrix_load z_mtxf_put_top
 #define actor_collider_cylinder_array_init z_collider_cylinder_list_init
 #define actor_collider_cylinder_array_alloc z_collider_cylinder_list_alloc
+#define f3dzex_gen_settilesize z_rcp_gen_2_settilesize

@@ -5760,30 +5760,52 @@ extern void external_func_80094E78(void);
 		asm("external_func_80094E78 = 0x8007EADC");
 	#endif
 
-/**
- * f3dzex_gen_1_settilesize
- */
-extern void external_func_80094E9C(void);
-	#if OOT_DEBUG
-		asm("external_func_80094E9C = 0x80094E9C");
-	#elif OOT_U_1_0
-		asm("external_func_80094E9C = 0x8007EB00");
-	#endif
+/* This alocates an 0x18 byte `settilesize` structure.
+* 0xE8, 0xF2, 0xDF
+* Source Code Reference File: "z_rcp.c"
+*/
+extern Gfx* z_rcp_gen_1_settilesize(
+z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
+, int32_t tile0 /* Tile Descriptor 0; Layer 1 */
+, int32_t s0_ul /* Upper-left S(X) Coordinate for Tile 0 */
+, int32_t t0_ul /* Upper-left T(Y) Coordinate for Tile 0 */
+, int32_t t0_w /* Tile 0 Width */
+, int32_t t0_h /* Tile 0 Height */
+);
+#if OOT_DEBUG
+  asm("z_rcp_gen_1_settilesize = 0x80094E9C");
+#elif OOT_U_1_0
+  asm("z_rcp_gen_1_settilesize = 0x8007EB00");
+#elif MM_U_1_0
+  asm("z_rcp_gen_1_settilesize = 0x8012CB4C");
+#endif
 
-/**
- * Animate Tile |  | Generates G_SETTILESIZE commands at the tail end of the POLY_OPA dlist | //E8, F2, E8, F2, DF command sequence
- * TODO These notes need converted into a C function prototype
- * A0 = Graphics Context | A1 = ? (tile descriptor one?) | A2 = upper left S-axis | A3 = upper left T-axis | SP+0x10 = width (whole units) | SP+0x14 = height (whole units) | SP+0x18 = Tile Descriptor Two | SP+0x1C = upper left S-axis 2 | SP+0x20 = Upper left T-axis 2 | SP+0x24 = width (whole units) | SP+0x28 = height (whole units)
- */
- extern uint32_t f3dzex_gen_settilesize(
-     z64_gfx_t *gfx, int32_t t0, int32_t s0_ul, int32_t t0_ul, int32_t t0_w, int32_t t0_h, int32_t t1, int32_t s1_ul, int32_t t1_ul, int32_t t1_w, int32_t t1_h);
-	#if OOT_DEBUG
-		asm("f3dzex_gen_settilesize = 0x80094F40");
-	#elif OOT_U_1_0
-		asm("f3dzex_gen_settilesize = 0x8007EB84");
-	#elif MM_U_1_0
-		asm("f3dzex_gen_settilesize = 0x8012CBD0");
-	#endif
+/* This alocates a 0x28 byte `settilesize` structure.
+* 0xE8, 0xF2, 0xE8, 0xF2, 0xDF
+* Commonly used for animating two multitextured tiles.
+* Source Code Reference File: "z_rcp.c"
+* Formerly `f3dzex_gen_settilesize`
+*/
+extern Gfx* z_rcp_gen_2_settilesize(
+z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
+, int32_t tile0 /* Tile Descriptor 0; Layer 1 */
+, int32_t s0_ul /* Upper-left S(X) Coordinate for Tile 0 */
+, int32_t t0_ul /* Upper-left T(Y) Coordinate for Tile 0 */
+, int32_t t0_w /* Tile 0 Width */
+, int32_t t0_h /* Tile 0 Height */
+, int32_t tile1 /* Tile Descriptor 1; Layer 2 */
+, int32_t s1_ul /* Upper-left S(X) Coordinate for Tile 1 */
+, int32_t t1_ul /* Upper-left T(Y) Coordinate for Tile 1 */
+, int32_t t1_w /* Tile 1 Width */
+, int32_t t1_h /* Tile 1 Height */
+);
+#if OOT_DEBUG
+  asm("z_rcp_gen_2_settilesize = 0x80094F40");
+#elif OOT_U_1_0
+  asm("z_rcp_gen_2_settilesize = 0x8007EB84");
+#elif MM_U_1_0
+  asm("z_rcp_gen_2_settilesize = 0x8012CBD0");
+#endif
 
 /**
  * TODO This function is completely undocumented
