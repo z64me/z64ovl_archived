@@ -6779,8 +6779,17 @@ extern void *
 graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 	#if OOT_DEBUG
 		asm("graph_alloc = 0x800C69CC");
-	#elif OOT_U_1_0
+	#else
 		// This function seems to only exist in the Debug ROM.
+		// Therefore, we implement it directly in other roms.
+		static void *
+		graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size)
+		{
+			/* TODO confirm this works in 1.0 */
+			/* TODO compile-time error checking: #error if (size & 7) */
+			gfx->poly_opa.d -= size / 8;
+			return gfx->poly_opa.d;
+		}
 	#endif
 
 /* Allocates graphics debugging information to memory.
