@@ -5894,11 +5894,11 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 #elif OOT_U_1_0
   asm("z_scene_object_get_index = 0x80081628");
 #elif MM_U_1_0
-  asm("z_scene_object_get_index = 0x8012F608")
+  asm("z_scene_object_get_index = 0x8012F608");
 #elif MM_J_1_0
-  asm("z_scene_object_get_index = 0x80131078")
+  asm("z_scene_object_get_index = 0x80131078");
 #elif MM_J_1_0
-  asm("z_scene_object_get_index = 0x80155650")
+  asm("z_scene_object_get_index = 0x80155650");
 #endif
 
 /* Check if an object is loaded in the scene.
@@ -6809,12 +6809,21 @@ extern void external_func_800C3770(void);
  * z_gp is 0x80212020
  * size is the size of the block to be allocated
  */
-extern void *
-graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 	#if OOT_DEBUG
+		extern void *
+		graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 		asm("graph_alloc = 0x800C69CC");
-	#elif OOT_U_1_0
+	#else
 		// This function seems to only exist in the Debug ROM.
+		// Therefore, we implement it directly in other roms.
+		static void *
+		graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size)
+		{
+			/* TODO confirm this works in 1.0 */
+			/* TODO compile-time error checking: #error if (size & 7) */
+			gfx_ctxt->poly_opa.d -= size / 8;
+			return gfx_ctxt->poly_opa.d;
+		}
 	#endif
 
 /* Allocates graphics debugging information to memory.

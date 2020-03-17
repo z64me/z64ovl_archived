@@ -259,6 +259,14 @@ typedef struct
                                               /* 0x0010 */
 } z64_col_poly_t;
 
+typedef struct
+{
+    struct attack {
+        uint8_t damage : 4;
+        uint8_t effect : 4;
+    } attack[0x20];
+} z64_damagechart_t;
+
 #include "actor.h"
 
 typedef struct
@@ -858,7 +866,7 @@ typedef struct {
 	POLY_XLU = 0x02D0
 };*/
 
-/* Actor Specific? */
+/* skelanime */
 typedef struct {
   /* 0x00 */ uint8_t limb_count;
   /* 0x01 */ uint8_t unk1; /* Probably Padding*/
@@ -866,18 +874,18 @@ typedef struct {
   /* 0x03 */ uint8_t unk2; /* Probably Padding */
   /* 0x04 */ uint32_t limb_index;
   /* 0x08 */ uint32_t anim_current;
-  /* 0x0C */ int unk3; /* 0x00000000 */
+  /* 0x0C */ int32_t unk3; /* 0x00000000 */
   /* 0x10 */ float anim_frame_count;
   /* 0x14 */ float unk4;
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
-  /* 0x20 */ uint32_t unk5; /* Actor Drawing Table? */
-  /* 0x24 */ uint32_t unk6;
+  /* 0x20 */ void* draw_table_rot;/*uint32_t unk5;*/ /* Actor Drawing Table? */
+  /* 0x24 */ void* draw_table_pos;/*uint32_t unk6;*/
   /* 0x28 */ uint32_t unk7;
   /* 0x2C */ uint32_t unk8;
-  /* 0x30 */ uint32_t func_unk9; /* Some function pointer */
-  /* 0x34 */ int pad1; /* 0x00000000 */
-  /* 0x38 */ int pad2; /* 0x00000000 */
+  /* 0x30 */ void* draw_table_func;/*uint32_t func_unk9;*/ /* Some function pointer */
+  /* 0x34 */ int32_t pad1; /* 0x00000000 */
+  /* 0x38 */ int32_t pad2; /* 0x00000000 */
   /* 0x3C */ uint16_t unk10;
   /* 0x3E */ uint16_t unk11; /* Probably Padding */
   /* 0x40 */
@@ -888,6 +896,7 @@ typedef struct
   u8 unk00[0x4C];
   z64_skelanime_t skelanime;
 } z64_skelanime_weighted_t;
+
 
 
 /* collision */
@@ -906,10 +915,10 @@ typedef enum z64_collider_type_e { /* Collider Types */
 } z64_collider_type_t;
 
 typedef struct z64_collider_s { /* Collider Structure */
-    z64_actor_t * actor;
-    z64_actor_t * unk_actor_1;
-    z64_actor_t * unk_actor_2;
-    z64_actor_t * unk_actor_3;
+    z64_actor_t* actor; /* Actor Instance */
+    z64_actor_t* unk_actor_1;
+    z64_actor_t* colliding_actor; /* Hit with an item */
+    z64_actor_t* unk_actor_3;
     uint8_t collider_flags; /* Compared to 0x11 */
     uint8_t collide_flags; /* Compared to 0x10 */
     uint8_t mask_a; /* Bitwise-and compared to 0x13 */
@@ -968,6 +977,17 @@ typedef struct z64_collider_cylinder_collection_s {
     int32_t count;
     z64_collider_cylinder_t * list;
 } z64_collider_cylinder_collection_t;
+
+typedef struct z64_collider_cylinder_collection_init_s {
+  uint8_t unk_0x0000;
+  uint8_t unk_0x0001;
+  uint8_t unk_0x0002;
+  uint8_t unk_0x0003;
+  uint8_t unk_0x0004;
+  uint8_t pad_0x0005; /* Likely Padding for Alignment */
+  uint32_t collider_n; /* Number of Colliders */
+  void* pointer; /* Pointer to Collider Initialization Data */
+} z64_collider_cylinder_collection_init_t;
 
 typedef struct z64_collision_body_info_s { /* Initialization Variables (in overlay) for z64_collider */
     uint8_t unk_0x14;
@@ -1033,8 +1053,19 @@ typedef struct z64_dynapoly {
     uint16_t    unk_05;                /* 0x000C */
     uint32_t    movement;              /* 0x0010 &>>01 updates position of actors on top, &>>02 updates rotation of actors on top */
     uint8_t     flags;                 /* 0x0014 &>>01 actor on top &>>02 Link on top &>>04 Link above it or on top &>>08 heavy actor on top */
-    char        padding[0x0003];       
+    char        padding[0x0003];
 } z64_dynapoly_t;
+
+typedef struct
+{
+  int16_t n_at;
+  uint32_t hz_0x02;
+  z64_collider_t* at_list[50];
+  int32_t n_ac;
+  z64_collider_t* ac_list[60];
+  int32_t n_ot;
+  z64_collider_t* ot_list[50];
+} z64_hit_ctxt_t;
 
 enum dynapoly_move_flag {
   DPM_NONE = 0b00,
