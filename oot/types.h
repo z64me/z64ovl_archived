@@ -962,7 +962,7 @@ typedef struct {
   /* 0x01 */ uint8_t unk1; /* Probably Padding*/
   /* 0x02 */ uint8_t dlist_count;
   /* 0x03 */ uint8_t unk2; /* Probably Padding */
-  /* 0x04 */ uint32_t limb_index;
+  /* 0x04 */ void* limb_index;
   /* 0x08 */ uint32_t anim_current;
   /* 0x0C */ int32_t unk3; /* 0x00000000 */
   /* 0x10 */ float anim_frame_count;

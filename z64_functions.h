@@ -5933,6 +5933,40 @@ extern void external_func_800A0B40(void);
 	#endif
 
 /* Draw a `skelanime` structure.
+* This supports matrices and a `Level Of Detail` hierarchy.
+* This function is used to draw Link.
+* Source Code Reference File: "z_skelanime.c"
+*/
+extern Gfx* z_skelanime_draw_mtx_lod(
+z64_global_t* gl /* Global Context */
+, uint32_t skeleton
+, uint32_t animation
+, uint32_t limb_dlists_count
+, int32_t callback0(            /* callback0 must return 0 */
+	  z64_global_t *global
+	, uint8_t limb           /* limb index in skeleton */
+	, uint32_t *dlist        /* *dlist = 0x06xxxxxx changes limb model */
+	, vec3f_t *translation
+	, vec3s_t *rotation
+	, void *entity
+  )
+, void callback1(
+	  z64_global_t *global
+	, uint8_t limb
+	, uint32_t dlist         /* different from callback0, needs more research */
+	, vec3s_t *rotation
+	, void *entity
+  )
+, void* instance
+, Gfx* dest
+);
+#if OOT_DEBUG
+  asm("z_skelanime_draw_mtx_lod = 0x800A273C"); /* 0x800A106C */
+#elif OOT_U_1_0
+  asm("z_skelanime_draw_mtx_lod = 0x800894A4");
+#endif
+
+/* Draw a `skelanime` structure.
 * This function supports both matrix and non-matrix formats; specify
 * the number of limbs using matrices for a matrix format, 0 otherwise.
 * Debug strings dub this function `Si2_draw()` (Skeleton Info 2; Draw)?
@@ -6011,7 +6045,7 @@ extern uint32_t skelanime_draw_destination(z64_global_t *global, uint32_t limb_i
 /**
  * TODO Draw a matrix-enabled object skeleton on a specific destination buffer
  */
-extern uint32_t skelanime_draw_mtx_destination(z64_global_t *global, uint32_t limb_index, uint32_t adt, uint8_t limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
+extern uint32_t skelanime_draw_mtx_destination(z64_global_t *global, uint32_t limb_index, void* adt, uint8_t limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
 	#if OOT_DEBUG
 		asm("skelanime_draw_mtx_destination = 0x800A273C");
 	#elif OOT_U_1_0
