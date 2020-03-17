@@ -866,7 +866,7 @@ typedef struct {
 	POLY_XLU = 0x02D0
 };*/
 
-/* Actor Specific? */
+/* skelanime */
 typedef struct {
   /* 0x00 */ uint8_t limb_count;
   /* 0x01 */ uint8_t unk1; /* Probably Padding*/
@@ -874,18 +874,18 @@ typedef struct {
   /* 0x03 */ uint8_t unk2; /* Probably Padding */
   /* 0x04 */ uint32_t limb_index;
   /* 0x08 */ uint32_t anim_current;
-  /* 0x0C */ int unk3; /* 0x00000000 */
+  /* 0x0C */ int32_t unk3; /* 0x00000000 */
   /* 0x10 */ float anim_frame_count;
   /* 0x14 */ float unk4;
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
-  /* 0x20 */ uint32_t unk5; /* Actor Drawing Table? */
-  /* 0x24 */ uint32_t unk6;
+  /* 0x20 */ void* draw_table_rot;/*uint32_t unk5;*/ /* Actor Drawing Table? */
+  /* 0x24 */ void* draw_table_pos;/*uint32_t unk6;*/
   /* 0x28 */ uint32_t unk7;
   /* 0x2C */ uint32_t unk8;
-  /* 0x30 */ uint32_t func_unk9; /* Some function pointer */
-  /* 0x34 */ int pad1; /* 0x00000000 */
-  /* 0x38 */ int pad2; /* 0x00000000 */
+  /* 0x30 */ void* draw_table_func;/*uint32_t func_unk9;*/ /* Some function pointer */
+  /* 0x34 */ int32_t pad1; /* 0x00000000 */
+  /* 0x38 */ int32_t pad2; /* 0x00000000 */
   /* 0x3C */ uint16_t unk10;
   /* 0x3E */ uint16_t unk11; /* Probably Padding */
   /* 0x40 */
@@ -896,6 +896,7 @@ typedef struct
   u8 unk00[0x4C];
   z64_skelanime_t skelanime;
 } z64_skelanime_weighted_t;
+
 
 
 /* collision */

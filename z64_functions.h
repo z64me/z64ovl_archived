@@ -5894,11 +5894,11 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 #elif OOT_U_1_0
   asm("z_scene_object_get_index = 0x80081628");
 #elif MM_U_1_0
-  asm("z_scene_object_get_index = 0x8012F608")
+  asm("z_scene_object_get_index = 0x8012F608");
 #elif MM_J_1_0
-  asm("z_scene_object_get_index = 0x80131078")
+  asm("z_scene_object_get_index = 0x80131078");
 #elif MM_J_1_0
-  asm("z_scene_object_get_index = 0x80155650")
+  asm("z_scene_object_get_index = 0x80155650");
 #endif
 
 /* Check if an object is loaded in the scene.
