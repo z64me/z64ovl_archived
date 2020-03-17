@@ -6775,9 +6775,9 @@ extern void external_func_800C3770(void);
  * z_gp is 0x80212020
  * size is the size of the block to be allocated
  */
-extern void *
-graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 	#if OOT_DEBUG
+		extern void *
+		graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 		asm("graph_alloc = 0x800C69CC");
 	#else
 		// This function seems to only exist in the Debug ROM.
