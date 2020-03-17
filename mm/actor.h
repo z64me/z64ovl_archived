@@ -2,42 +2,47 @@
 #define __ZELDA64_ACTOR_MM_H__
 
 typedef enum {
-	Switch = 0x00,
-	Bg = 0x01,
-	Player = 0x02,
-	Explosives = 0x03,
-	NPC = 0x04,
-	Enemy = 0x05,
-	Prop = 0x06,
-	Item_Action = 0x07,
-	Misc = 0x08,
-	Boss = 0x09,
-	Door = 0x0A,
-	Chest = 0x0B
+	OVLTYPE_SWITCH = 0x00,
+	OVLTYPE_BG = 0x01,
+	OVLTYPE_PLAYER = 0x02,
+	OVLTYPE_EXPLOSIVE = 0x03,
+	OVLTYPE_NPC = 0x04,
+	OVLTYPE_ENEMY = 0x05,
+	OVLTYPE_PROP = 0x06,
+	OVLTYPE_ITEM = 0x07,
+	OVLTYPE_MISC = 0x08,
+	OVLTYPE_BOSS = 0x09,
+	OVLTYPE_DOOR = 0x0A,
+	OVLTYPE_CHEST = 0x0B
 } z64_actor_type_t;
 
 typedef struct z64_actor_init_s{
-	int16_t number; /* Actor Number */
-	uint8_t type; /* Actor Type */
-	uint8_t room; /* Room that the instance was spawned in*/
-	int flags; /* Not completely documented */
-	int16_t object; /* Object Number */
+	int16_t number;    /* Actor Number */
+	uint8_t type;      /* Actor Type */
+	uint8_t room;      /* Room that the instance was spawned in*/
+	int32_t flags;         /* Not completely documented */
+	int16_t object;    /* Object Number */
 	int16_t padding;
-	int instance_size; /* Size of the actor instance */
-	void *init; /* Constructor */
-	void *dest; /* Destructor */
-	void *main; /* Main Update Function */
-	void *draw; /* Draw Function */
+	int32_t instance_size; /* Size of the actor instance */
+	void *init;        /* Constructor */
+	void *dest;        /* Destructor */
+	void *main;        /* Main Update Function */
+	void *draw;        /* Draw Function */
 } z64_actor_init_t;
 
-typedef struct
-{
-	struct
-	{
-	char damage : 4;
-	char effect : 4;
-	} attack[0x20];
-} z64_damage_table_t;
+typedef struct collision_check_s { /* Substruct 0x0098 */
+	z64_damagechart_t *damage_table;
+	vec3f_t           vel_2;
+	int16_t           unk_0B_0;
+	int16_t           unk_0B_1;
+	uint16_t          unk_0B_2;
+	uint8_t           mass;
+	uint8_t           health;
+	uint8_t           damage;
+	uint8_t           damage_effect;
+	uint8_t           impact_effect;
+	int8_t            unk_0D;
+} z64_collision_check_t;
 
 /* Actor Structure : */
 typedef struct z64_actor_s z64_actor_t;
@@ -52,7 +57,7 @@ struct z64_actor_s
 	char              unk_01_[0x0002];          /* 0x001A */
 	uint16_t          variable;                 /* 0x001C */
 	uint8_t           alloc_index;              /* 0x001E */
-	char              unk_02_;                  /* 0x001F */
+	char              target_distance_index;    /* 0x001F */
 	uint16_t          sound_effect;             /* 0x0020 */
 	char              unk_03_[0x0002];          /* 0x0022 */
 	vec3f_t           pos_2;                    /* 0x0024 */
@@ -98,20 +103,21 @@ struct z64_actor_s
 	char              unk_0F[0x0002];           /* 0x00C2 */
 	float             unk_0xC4;                 /* 0x00C4 */
 	void              *draw_drop_shadow;        /* 0x00C8 */
-	float             unk_0xCC;                 /* 0x00CC */
+	float             shadow_radius;            /* 0x00CC */
 	uint8_t           unk_0xD0;                 /* 0x00D0 */
 	vec3f_t           unk_0xD4;                 /* 0x00D4 */
 	vec3f_t           unk_0xE0;                 /* 0x00E0 */
 	vec3f_t           unk_0xEC;                 /* 0x00EC */
 	float             unk_0xF8;                 /* 0x00F8 */
-	float             unk_0xFC;                 /* 0x00FC */
-	float             unk_0x100;                /* 0x0100 */
-	float             unk_0x104;                /* 0x0104 */
+	float             draw_distance;            /* 0x00FC */
+	float             camera_clip_near;         /* 0x0100 */
+	float             camera_clip_far;          /* 0x0104 */
 	vec3f_t           pos_4;                    /* 0x0108 */
 	uint16_t          unk_10_;                  /* 0x0114 */
 	uint16_t          text_id;                  /* 0x0116 */
 	int16_t           frozen;                   /* 0x0118 */
-	char              unk_11_[0x0003];          /* 0x011A */
+	uint16_t          damage_color;             /* 0x011A */
+    uint8_t           damage_color_timer;       /* 0x011C */
 	uint8_t           active;                   /* 0x011D */
 	char              unk_0x11E;                /* 0x011E */
 	uint8_t           tatl_enemy_text_id;       /* 0x011F */
@@ -128,6 +134,7 @@ struct z64_actor_s
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);
 
+/* This still needs updated! */
 typedef struct
 {
 	z64_actor_t         actor;                  /* 0x0000 */
