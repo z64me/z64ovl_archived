@@ -90,7 +90,7 @@ struct z64_actor_s
 	float             unk_0x94;                 /* 0x0094 */
 	float             dist_from_link_xz;        /* 0x0098 */
 	float             dist_from_link_y;         /* 0x009C */
-	z64_damage_table_t *damage_table;           /* 0x00A0 */
+	void             *damage_table;           /* 0x00A0 */
 	vec3f_t           vel_2;                    /* 0x00A4 */
 	char              unk_0B_[0x0006];          /* 0x00B0 */
 	uint8_t           mass;                     /* 0x00B6 */

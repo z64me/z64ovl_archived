@@ -259,6 +259,14 @@ typedef struct
                                               /* 0x0010 */
 } z64_col_poly_t;
 
+typedef struct
+{
+    struct attack {
+        uint8_t damage : 4;
+        uint8_t effect : 4;
+    } attack[0x20];
+} z64_damagechart_t;
+
 #include "actor.h"
 
 typedef struct
