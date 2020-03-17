@@ -6787,8 +6787,8 @@ graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size);
 		{
 			/* TODO confirm this works in 1.0 */
 			/* TODO compile-time error checking: #error if (size & 7) */
-			gfx->poly_opa.d -= size / 8;
-			return gfx->poly_opa.d;
+			gfx_ctxt->poly_opa.d -= size / 8;
+			return gfx_ctxt->poly_opa.d;
 		}
 	#endif
 
