@@ -3504,9 +3504,9 @@ extern int16_t external_func_8005A9F4(uint32_t gl790);
  */
 extern void camera_earthquake(void* global1E0, uint16_t unk, uint16_t strength, uint16_t duration);
 	#if OOT_DEBUG
-		asm("external_func_8005AA1C = 0x8005AA1C");
+		asm("camera_earthquake = 0x8005AA1C");
 	#elif OOT_U_1_0
-		asm("external_func_8005AA1C = 0x800497A4");
+		asm("camera_earthquake = 0x800497A4");
 	#endif
 
 /**
