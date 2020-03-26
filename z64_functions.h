@@ -3488,7 +3488,7 @@ extern void external_func_8005A9CC(void);
 /**
  * TODO This function is completely undocumented
  */
-extern int16_t external_func_8005A9F4(uint32_t gl790);
+extern int16_t external_func_8005A9F4(void* gl790);
 	#if OOT_DEBUG
 		asm("external_func_8005A9F4 = 0x8005A9F4");
 	#elif OOT_U_1_0
@@ -5226,7 +5226,7 @@ extern void external_func_80087680(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800876C8(void);
+extern void external_func_800876C8(z64_global_t *gl);
 	#if OOT_DEBUG
 		asm("external_func_800876C8 = 0x800876C8");
 	#elif OOT_U_1_0
@@ -8148,7 +8148,7 @@ extern float z_fabs(float value);
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
 		//      debug actor that uses it to its retail counterpart
-		static inline float z_fabs(float value) {
+		inline float z_fabs(float value) {
 			if (value < 0)
 				return -value;
 			return value;
@@ -8166,7 +8166,7 @@ extern float z_fmod(float a, float b);
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
 		//      debug actor that uses it to its retail counterpart
-		static inline float z_fmod(float a, float b) {
+		inline float z_fmod(float a, float b) {
 			if (b == 0.00000000)
 				a = 0.00000000;
 			else

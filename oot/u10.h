@@ -14,6 +14,7 @@
 #define STATIC_CONTEXT      0x8011BA00
 #define RAM_SEGMENT_TABLE   0x80120C38
 #define GLOBAL_CONTEXT      0x801C84A0
+#define LINK                0x801DAA30
 #define AS_A0               (GLOBAL_CONTEXT + 0x001C24) // spawn_actor argument 0
 #define OS_A0               (GLOBAL_CONTEXT + 0x0117A4) // spawn_object argument 0
 
