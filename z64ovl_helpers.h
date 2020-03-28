@@ -61,6 +61,12 @@ example:
  /* Shorthand for referencing Graphics Context display list buffers "Zelda Quick Display List" */
 #define ZQDL(ZQDL_A0, ZQDL_A1) ZQDL_A0->common.gfx_ctxt->ZQDL_A1
 
+/* Check to see if a particlar object is loaded.
+* OBJA0 = z64_obj_ctxt_t
+* OBJA1 = Object ID
+*/
+#define OBJ_IS_LOADED(OBJA0, OBJA1) ((z_scene_object_get_index((OBJA0), (OBJA1)) < 0) ? 0 : 1) 
+
 static inline float zh_math_fminf(float a, float b)
 {
 	return a < b ? a : b;
@@ -194,7 +200,6 @@ zh_get_pointer_to_object_data(uint16_t object_id, z64_global_t *global)
 		)
 	;
 }
-
 
 /****
  * zh_get_save_context
