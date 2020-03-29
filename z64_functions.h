@@ -3312,7 +3312,7 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 		dynapoly->polyID =
 		actor_register_dynapoly(
 			global
-			, AADR(global, 0x810)  /* TODO use a named variable */
+			, AADDR(global, 0x810)  /* TODO use a named variable */
 			, actor
 			, result
 		);
