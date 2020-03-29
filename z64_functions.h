@@ -2414,19 +2414,23 @@ extern void external_func_80033AEC(void);
 		asm("external_func_80033AEC = 0x80026984");
 	#endif
 
-/**
- * Draw circular shadow at actor coordinates
- * pos = pointer to an actor's internal position (actor + 0x24) (ex. &en->actor.pos_2)
- * scale = pointer to scale vector (ex. vec3f_t s={1,1,1}; pass &s in as this argument)
- * alpha = opacity of the shadow
- * a0 actor pointer + 0x24 (position array) | a1  scale, 12 byte array | a2 0x00FF | a3 global context
- */
-extern void actor_shadow_circle(vec3f_t *pos, vec3f_t *scale, uint8_t alpha, z64_global_t *global);
-	#if OOT_DEBUG
-		asm("actor_shadow_circle = 0x80033C30");
-	#elif OOT_U_1_0
-		asm("actor_shadow_circle = 0x80026AD0");
-	#endif
+/* Draw a circular shadow provided vec3f_t types.
+* Source Code Reference File: "z_actor.c"
+* Formerly `actor_shadow_circle`
+*/
+extern void z_actor_shadow_draw_vec3f(
+vec3f_t* pos /* X, Y, and Z Position */
+, vec3f_t* scale /* X, Y, and Z Scale */
+, uint32_t opacity /* Shadow Opacity */
+, z64_global_t* gl /* Global Context */
+);
+#if OOT_DEBUG
+  asm("z_actor_shadow_draw_vec3f = 0x80033C30");
+#elif OOT_U_1_0
+  asm("z_actor_shadow_draw_vec3f = 0x80026AD0");
+#elif MM_U_1_0
+  /*asm("z_actor_shadow_draw_vec3f = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented

@@ -61,3 +61,4 @@
 #define actor_collider_cylinder_array_alloc z_collider_cylinder_list_alloc
 #define f3dzex_gen_settilesize z_rcp_gen_2_settilesize
 #define object_load z_scene_object_load
+#define actor_shadow_circle z_actor_shadow_draw_vec3f
