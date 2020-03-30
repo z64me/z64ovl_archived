@@ -31,7 +31,7 @@ typedef struct
 #define COLOR24(r, g, b) (uint32_t)((r << 16) | (g << 8) | b)
 
 /* Create a 32-bit integer, representing a red, green, blue and alpha value. */
-#define COLOR32(r, g, b, a) (uint32_t)((r << 24) | (g << 16) | (b << 8) | a)
+#define COLOR32(r, g, b, a) (uint32_t)(((r) << 24) | ((g) << 16) | ((b) << 8) | (a))
 
 /* Isolate a red value from a COLOR32. */
 #define RED32(RGBA0) (uint8_t)(((RGBA0) >> 24) & 0xFF)
@@ -59,6 +59,22 @@ typedef struct
 
 /* Convert a radian value to a percentage. */
 #define RPER(RADA0) (float)((RADA0) * 15.91549f)
+
+#define COLOR16_TO_COLOR32(CARG0) (                 \
+      COLOR32((((CARG0) & 0xF800) >> 11) /* red */  \
+    , (((CARG0) & 0x07C0) >> 6) /* green */         \
+    , (((CARG0) & 0x003E) >> 1) /* blue  */         \
+    , ((((CARG0) & 0x1) > 0) ? 255 : 0) /* alpha */ \
+))
+
+#define COLOR32_TO_COLOR16(CARG0) (              \
+      (((CARG0) & 0xF8000000) >> 16) /* red   */  \
+    | (((CARG0) & 0x00F80000) >> 13) /* green */  \
+    | (((CARG0) & 0x0000F800) >> 10) /* blue  */  \
+    | (((CARG0) & 0x00000080) >>  7) /* alpha */  \
+) /* Thanks, z64.me! */
+
+#define COLOR16(r, g, b, a) COLOR32_TO_COLOR16(COLOR32((r), (g), (b), (a)))
 
 static inline void zh_color_hsv2rgb(float h, float s, float v, rgba8_t *out, uint32_t init)
 {
