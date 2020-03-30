@@ -3316,7 +3316,7 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 		dynapoly->polyID =
 		actor_register_dynapoly(
 			global
-			, &globalCtx->col_ctxt.unk_00_
+			, &global->col_ctxt.unk_00_
 			, actor
 			, result
 		);
@@ -5622,20 +5622,20 @@ z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
   asm("z_rcp_append_preset_opa = 0x8012C28C");
 #endif
 
-/**
- * Write Jump to Display List 800F8200 on POLY_XLU_DISP
- * Get Item Models
- * TODO These notes need converted into a C function prototype
- * A0 = Graphics Context
- */
-extern void external_func_80093D84(z64_gfx_t *gfx);
-	#if OOT_DEBUG
-		asm("external_func_80093D84 = 0x80093D84");
-	#elif OOT_U_1_0
-		asm("external_func_80093D84 = 0x8007E2C0");
-	#elif MM_U_1_0
-		asm("external_func_80093D84 = 0x8012C2DC");
-	#endif
+/* This appends `DE000000 80126730 (NZLE)` to the POLY_XLU Display List Buffer
+* This display list seems to contain a preset combiner and geometry mode.
+* Source Code Reference File: "z_rcp.c"
+*/
+extern void z_rcp_append_preset_xlu_80093D84(
+z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
+);
+#if OOT_DEBUG
+  asm("z_rcp_append_preset_xlu_80093D84 = 0x80093D84");
+#elif OOT_U_1_0
+  asm("z_rcp_append_preset_xlu_80093D84 = 0x80093D84");
+#elif MM_U_1_0
+  /*asm("z_rcp_append_preset_xlu_80093D84 = 0xDEADBEEF");*/
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -5651,15 +5651,15 @@ extern void external_func_80093F34(void);
 * This display list seems to contain a preset combiner and geometry mode.
 * Source Code Reference File: "z_rcp.c"
 */
-extern void z_rcp_append_preset_xlu(
+extern void z_rcp_append_preset_xlu_80094044(
 z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
 );
 #if OOT_DEBUG
-  asm("z_rcp_append_preset_xlu = 0x80094044");
+  asm("z_rcp_append_preset_xlu_80094044 = 0x80094044");
 #elif OOT_U_1_0
-  asm("z_rcp_append_preset_xlu = 0x8007E544");
+  asm("z_rcp_append_preset_xlu_80094044 = 0x8007E544");
 #elif MM_U_1_0
-  /*asm("z_rcp_append_preset_xlu = 0xDEADBEEF");*/
+  /*asm("z_rcp_append_preset_xlu_80094044 = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -7226,24 +7226,28 @@ float x, float y, float z /* X, Y, and Z Scale */
   asm("z_matrix_scale_3f = 0x8018039C");
 #endif
 
-/**
- * Matrix_RotateX
- */
-extern void matrix_rotate_x(float x, enum mtxmod mod);
-	#if OOT_DEBUG
-		asm("matrix_rotate_x = 0x800D0B70");
-	#elif OOT_U_1_0
-		asm("matrix_rotate_x = 0x800AA9E0");
-	#elif MM_U_1_0
-		/* TODO */
-	#endif
+/* Rotate a matrix along the X axis (Pitch a matrix).
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `matrix_rotate_x`
+*/
+extern void z_matrix_pitch(
+float x /* The angle in degrees to pitch the matrix by. */
+, int32_t apply /* 0 initializes a new matrix and pitches it; 1 modifies the current matrix on the stack. */
+);
+#if OOT_DEBUG
+  asm("z_matrix_pitch = 0x800D0B70");
+#elif OOT_U_1_0
+  asm("z_matrix_pitch = 0x800AA9E0");
+#elif MM_U_1_0
+  /*asm("z_matrix_pitch = 0xDEADBEEF");*/
+#endif
 
 /* Rotate a matrix along the Y axis (Yaw a matrix).
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_rotate_y`
 */
 extern void z_matrix_yaw(
-float z /* The angle in degrees to yaw the matrix by. */
+float y /* The angle in degrees to yaw the matrix by. */
 , int32_t apply /* 0 initializes a new matrix and yaws it; 1 modifies the current matrix on the stack. */
 );
 #if OOT_DEBUG

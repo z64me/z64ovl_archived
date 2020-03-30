@@ -140,8 +140,7 @@ struct z64_actor_s
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);
 
-typedef struct
-{
+/* z64_player_t_old */
   //z64_actor_t       actor;                    /* 0x0000 */
   //int16_t           unk_00_[0x02F8];          /* 0x013C */
   //uint8_t           action;                   /* 0x0434 */
@@ -162,51 +161,53 @@ typedef struct
   //int16_t           drop_y;                   /* 0x0884 */
   //int16_t           drop_distance;            /* 0x0886 */
                                               /* 0x0888 */
-  z64_actor_t actor; /* Base Actor */
-  //char debug_ex[16]; /* Debug Extended Actor */
-  uint8_t tunic_idx; /* Equipped Tunic Index */
-  uint8_t sword_idx; /* Equipped Sword Index (?) */
-  uint8_t shield_idx; /* Equipped Shield Index */
-  uint8_t boot_idx; /* Equipped Boots Index */
-  uint8_t held_button; /* Held Item (Button ID) */
-  uint8_t held_action; /* Held Item (Action Parameter) */
-  uint8_t held_c_order; /* Held Item (C-Item Ordering) */
-  uint8_t inst0153;
-  uint8_t held_action_2; /* Held Item (Action Parameter 2) */
-  uint8_t inst0155[3];
-  uint8_t shield_on_back; /* (?) 0 = no, 1 = yes */
-  uint8_t inst0159[2];
-  uint8_t shield_in_hand; /* (?) 1 = yes */
-  uint8_t inst015C;
-  uint8_t right_hand_item; /* Possible? 08 = Neutral, 09 = Too heavy to shield, 0A = shielding */
-  uint8_t mask_now; /* Current Mask Index */
-  uint8_t inst015F[2];
-  uint32_t * rhand_dlist; /* Right Hand Display List */
-  uint32_t * lhand_dlist; /* Left Hand Display List */
-  uint32_t * sheath_dlist; /* Sheath Display List */
-  uint32_t * torso_dlist; /* Torso Display List */
-  uint8_t inst0174[60];
-  void * title_card; /* Title Card / Get Item Object File */
-  uint8_t inst01B4;
-  uint8_t inst01B5[75];
-  uint8_t anime_now_1[86]; /* Current Animation Raw Data 1 */
-  uint8_t inst0256[58];
-  uint8_t anime_now_2[86]; /* Current Animation Raw Data 2 */
-  uint8_t inst02E6[198];
-  z64_actor_t * held_actor; /* Held Item Actor (Like Arms_Hook) */
-  uint8_t inst03B0[708];
-  void * state_function; /* Machine State */
-  void * age_properties; /* Collision, Sound Effects, Other */
-  uint32_t state_flags_1;
-  uint32_t state_flags_2;
-  uint8_t inst0684[8];
-  z64_actor_t * navi; /* Navi's Instance */
-  uint16_t navi_msg; /* Message ID for Navi's Info */
-  uint8_t inst0692[62];
-  uint32_t anime_now_id; /* Current Animation ID */
-  uint8_t inst06D4[844];
-  float shield_mf[4][4]; /* Shield Floating Point Matrix */
-  uint8_t inst0A24[8];
+typedef struct {
+    z64_actor_t actor; /* Base Actor */
+    //char debug_ex[16]; /* Debug Extended Actor */
+    uint8_t tunic_idx; /* Equipped Tunic Index */
+    uint8_t sword_idx; /* Equipped Sword Index (?) */
+    uint8_t shield_idx; /* Equipped Shield Index */
+    uint8_t boot_idx; /* Equipped Boots Index */
+    uint8_t held_button; /* Held Item (Button ID) */
+    uint8_t held_action; /* Held Item (Action Parameter) */
+    uint8_t held_item_id; /* Held Item ID */
+    uint8_t field_0x153;
+    uint8_t held_action_2; /* Held Item (Action Parameter 2) */
+    uint8_t field_0x155[3];
+    uint8_t shield_on_back; /* (?) 0 = no, 1 = yes */
+    uint8_t field_0x159[2];
+    uint8_t shield_in_hand; /* (?) 1 = yes */
+    uint8_t field_0x15c;
+    uint8_t right_hand_item; /* Possible? 08 = Neutral, 09 = Too heavy to shield, 0A = shielding */
+    uint8_t mask_now; /* Current Mask Index */
+    uint8_t inst015F[2];
+    uint32_t * rhand_dlist; /* Right Hand Display List */
+    uint32_t * lhand_dlist; /* Left Hand Display List */
+    uint32_t * sheath_dlist; /* Sheath Display List */
+    uint32_t * torso_dlist; /* Torso Display List */
+    uint8_t field_0x174[60];
+    void * title_card; /* Title Card / Get Item Object File */
+    uint8_t field_0x1b4;
+    uint8_t field_0x1b5[75];
+    uint8_t anime_now_1[134]; /* Current Animation Raw Data 1 */
+    uint8_t field_0x286[10];
+    uint8_t anime_now_2[134]; /* Current Animation Raw Data 2 */
+    uint8_t field_0x316[148];
+    z64_actor_t * held_actor; /* Held Item Actor (Like Arms_Hook) */
+    uint8_t inst03B0[708];
+    void * state_function; /* Machine State */
+    uint32_t * age_properties; /* Collision, Sound Effects, Other */
+    uint32_t state_flags_1;
+    uint32_t state_flags_2;
+    uint8_t field_0x684[8];
+    z64_actor_t * navi; /* Navi's Instance */
+    uint16_t navi_msg; /* Message ID for Navi's Info */
+    uint8_t field_0x692[62];
+    uint32_t anime_now_id; /* Current Animation ID */
+    uint8_t field_0x6d4[780];
+    float sword_mf[4][4]; /* Sword / Left Hand Floating Point Matrix */
+    float shield_mf[4][4]; /* Shield / Right Hand Floating Point Matrix */
+    uint8_t field_0xa60[8];
 } z64_player_t;
 
 #endif
