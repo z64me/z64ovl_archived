@@ -587,6 +587,27 @@ typedef struct
 
 typedef struct
 {
+  vec3s_t pos;
+  rgb8_t color;
+  uint8_t unk;
+  int16_t radius;
+} z64_light_params_pos_t;
+
+typedef struct
+{
+  uint8_t type;
+  z64_light_params_pos_t params;
+} z64_lightinfo_pos_t;
+
+typedef struct
+{
+  uint8_t type;
+  uint8_t _pad;
+  uint16_t params;
+} z64_lightinfo_t;
+
+typedef struct
+{
   int8_t            numlights;                /* 0x0000 */
   char              pad_00_[0x0007];          /* 0x0001 */
   Lightsn           lites;                    /* 0x0008 */

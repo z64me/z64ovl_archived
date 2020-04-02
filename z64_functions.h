@@ -4850,15 +4850,21 @@ extern void external_func_80078914(uint16_t sfx_id);
 	#endif
 
 /**
- * Initialize Flame Light (Wrapper for 80065B70)
- * TODO These notes need converted into a C function prototype
+ * Initiailize a positional point light. (Type 0)
+ * Wrapper for 80079D30
+ * Source Code Reference File: "z_lights.c"
  */
-extern void external_func_80079D8C(uint32_t *a0, int32_t a1_x, int32_t a2_y, int32_t a3_z, uint8_t unk_00, uint32_t unk_01);
-	#if OOT_DEBUG
-		asm("external_func_80079D8C = 0x80079D8C");
-	#elif OOT_U_1_0
-		asm("external_func_80079D8C = 0x80065BCC");
-	#endif
+extern void z_lights_init_pos_0(
+z64_lightinfo_pos_t* info
+, int16_t x, int16_t y, int16_t z
+, uint8_t r, uint8_t g, uint8_t b
+, int16_t radius
+);
+#if OOT_DEBUG
+	asm("z_lights_init_pos_0 = 0x80079D8C");
+#elif OOT_U_1_0
+	asm("z_lights_init_pos_0 = 0x80065BCC");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -4884,27 +4890,34 @@ extern void external_func_80079E58(void *a0, uint8_t r, uint8_t g, uint8_t b, ui
 	#endif
 
 /**
- * TODO This function is completely undocumented
- * Possible for initializing a light structure.
+ * Initializing and allocating a [point?] light strucutre in memory.
+ * Source Code Reference File: "z_lights.c"
  */
-extern void *external_func_8007A764(z64_global_t *gl, z64_lighting_t *lighting, uint32_t a3);
-	#if OOT_DEBUG
-		asm("external_func_8007A764 = 0x8007A764");
-	#elif OOT_U_1_0
-		asm("external_func_8007A764 = 0x800665B0");
-	#endif
+extern z64_light_node_t* z_lights_insert(
+z64_global_t* gl /* Global Context */
+, z64_lighting_t* lighting /* Lighting Struct */
+, z64_lightinfo_t* info /* Initialization Info */
+);
+#if OOT_DEBUG
+	asm("z_lights_insert = 0x8007A764");
+#elif OOT_U_1_0
+	asm("z_lights_insert = 0x800665B0");
+#endif
 
 /**
- * TODO This function is completely undocumented
- * Possibly for "Freeing" a light structure.
+ * Freeing the memory used for a light structure.
+ * Source Code Reference File: "z_lights.c"
  */
-extern void external_func_8007A7C4(z64_global_t *gl, z64_lighting_t *lighting, void *a3);
-	#if OOT_DEBUG
-		asm("external_func_8007A7C4 = 0x8007A7C4");
-	#elif OOT_U_1_0
-		asm("external_func_8007A7C4 = 0x80066610");
-	#endif
-
+extern void z_lights_kill(
+z64_global_t* gl /* Global Context */
+, z64_lighting_t* lighting /* Lighting Struct */
+, z64_light_node_t* light /* Light Node */
+);
+#if OOT_DEBUG
+	asm("z_lights_kill = 0x8007A7C4");
+#elif OOT_U_1_0
+	asm("z_lights_kill = 0x80066610");
+#endif
 
 /**
  * z_malloc_r, possibly?
@@ -7858,16 +7871,22 @@ extern void external_func_800F7260(void);
 	#endif
 
 /**
- * Global Play Sfx?
- * TODO There's a conflict between these notes and the function prototype
- * A0 = SFX ID | A1 = ? | A2 = ? | A3 = 80104394 this pass
+ * Play a sound effect (at a system level)
+ * Source Code Reference File: `code.c`
  */
-extern void sound_play_general(uint16_t sound_id);
-	#if OOT_DEBUG
-		asm("sound_play_general = 0x800F738C");
-	#elif OOT_U_1_0
-		asm("sound_play_general = 0x800C806C");
-	#endif
+extern void z_sfx_play_system(
+uint16_t sound_id
+, vec3f_t* pos
+, int32_t a2
+, float* a3
+, float* a4
+, float* a5
+);
+#if OOT_DEBUG
+	asm("z_sfx_play_system = 0x800F738C");
+#elif OOT_U_1_0
+	asm("z_sfx_play_system = 0x800C806C");
+#endif
 
 /**
  * TODO This function is completely undocumented
