@@ -4,6 +4,7 @@
  **/
 
 /*** Structs ***/
+#if 0 /* moved to various_types.h */
 typedef struct
 {
   uint8_t r;
@@ -18,6 +19,7 @@ typedef struct
   uint8_t b;
   uint8_t a;
 } rgba8_t;
+#endif
 
 typedef struct
 {
