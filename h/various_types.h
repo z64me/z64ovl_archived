@@ -75,6 +75,23 @@ typedef struct {
 /* Get the address */
 #define AADDR(a,o)  ((void*)((uint8_t*)(a)+(o)))
 
+/* rgb888 color */
+typedef struct
+{
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
+} rgb8_t;
+
+/* rgba8888 color */
+typedef struct
+{
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
+  uint8_t a;
+} rgba8_t;
+
 // Borrowed from OoT gz
 typedef struct
 {
