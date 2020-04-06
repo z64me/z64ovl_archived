@@ -588,7 +588,9 @@ typedef struct
 typedef struct
 {
   vec3s_t pos;
-  rgb8_t color;
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
   uint8_t unk;
   int16_t radius;
 } z64_light_params_pos_t;

@@ -4338,7 +4338,7 @@ extern void external_func_80074CE8(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800773A8(void);
+extern void external_func_800773A8(z64_global_t*gl, float a, float b, float c);
 	#if OOT_DEBUG
 		asm("external_func_800773A8 = 0x800773A8");
 	#elif OOT_U_1_0
@@ -4855,7 +4855,7 @@ extern void external_func_80078914(uint16_t sfx_id);
  * Source Code Reference File: "z_lights.c"
  */
 extern void z_lights_init_pos_0(
-z64_lightinfo_pos_t* info
+void* info
 , int16_t x, int16_t y, int16_t z
 , uint8_t r, uint8_t g, uint8_t b
 , int16_t radius
@@ -5253,9 +5253,10 @@ extern void external_func_800876C8(z64_global_t *gl);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Subtract Magic Routine
+ * A0 = Global Context, A1 = Magic Amount to Subtract
  */
-extern void external_func_80087708(void);
+extern int32_t external_func_80087708(z64_global_t* gl, int16_t a1, int16_t a2);
 	#if OOT_DEBUG
 		asm("external_func_80087708 = 0x80087708");
 	#elif OOT_U_1_0
@@ -6478,7 +6479,7 @@ extern void external_func_800A9CD4(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A9F6C(void);
+extern void external_func_800A9F6C(float a, uint8_t b, uint8_t c, uint8_t d);
 	#if OOT_DEBUG
 		asm("external_func_800A9F6C = 0x800A9F6C");
 	#elif OOT_U_1_0
@@ -6488,7 +6489,7 @@ extern void external_func_800A9F6C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800AA000(void);
+extern void external_func_800AA000(float a, uint8_t b, uint8_t c, uint8_t d);
 	#if OOT_DEBUG
 		asm("external_func_800AA000 = 0x800AA000");
 	#elif OOT_U_1_0
@@ -6606,7 +6607,7 @@ extern void external_func_800BC8A0(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | V0 = 1 if ?, else 0
  */
-extern void external_func_800BFC84(void);
+extern int32_t external_func_800BFC84(z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_800BFC84 = 0x800BFC84");
 	#elif OOT_U_1_0
@@ -7529,7 +7530,7 @@ extern void external_func_800F41E0(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800F4254(void);
+extern void external_func_800F4254(vec3f_t* a0, uint32_t a1);
 	#if OOT_DEBUG
 		asm("external_func_800F4254 = 0x800F4254");
 	#elif OOT_U_1_0
@@ -7878,9 +7879,9 @@ extern void z_sfx_play_system(
 uint16_t sound_id
 , vec3f_t* pos
 , int32_t a2
-, float* a3
-, float* a4
-, float* a5
+, float a3
+, float a4
+, float a5
 );
 #if OOT_DEBUG
 	asm("z_sfx_play_system = 0x800F738C");
