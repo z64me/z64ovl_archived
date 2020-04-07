@@ -1,197 +1,102 @@
 #ifndef __ZELDA64_DEPRECIATED_H__
 #define __ZELDA64_DEPRECIATED_H__
 
-#include "actor_oot.h"
+#include "actor.h"
 
 /* Old structure... */
-typedef struct z64_actor_old_s
+typedef struct z64_actor_old_s z64_actor_old_t;
+struct z64_actor_old_s
 {
-    u16 actor_number;           /* actor number                         */
-    u8  actor_type;             /* 2 = link 4 = npcs etc.               */
-    u8  actor_status;           /* unknown (Z-Target related, perhaps?) */
-    u32 unknown_;
-    f32 x_unknown;              /* Does not affect actual x position, but is constantly written to */
-    f32 y_unknown;              /* Same, but for Y                      */
-
-    /*0x10*/
-    f32 z_unknown;              /* Same, but for Z                      */
-    u16 initial_x_rot;          /* Needs to be confirmed - But I think it is only written to upon loading the actor */
-    u16 initial_y_rot;          /* Same, but for Y                      */
-    u16 initial_z_rot;          /* Same, but for Z                      */
-    u16 buffer;                 /* I *think* this is a buffer so the next part has 4 byte alignment */
-    u16 variable;               /* Actor Variable                       */
-    u16 unknown_2;              /* Unknown                              */
-
-    /*0x20*/
-    u32 unknown_3;              /* Unknown                              */
-    f32 x_rw;                   /* Same as x_unknown, but when written to it /does/ affect the actor's x pos */
-    f32 y_rw;                   /* Same, but for Y                      */
-    f32 z_rw;                   /* Same, but for Z                      */
-
-    /*0x30*/
-    u16 x_rot_unknown_1;        /* Copy of initial_x rot?               */
-    u16 y_rot_unknown_1;        /* Same, but for Y                      */
-    u16 z_rot_unknown_1;        /* Same, but for Z                      */
-    u16 unknown_4;              /* Buffer?                              */
-    f32 unknown_5;              /* X pos + small rand? constantly changing */
-    f32 unknown_6;              /* Same? (for Y)                        */
-
-    /*0x40*/
-    f32 unknown_7;              /* Same? (for Z)                        */
-    u16 x_rot_unknown_2;        /* Copy of initial_x rot?               */
-    u16 y_rot_unknown_2;        /* Same, but for Y                      */
-    u16 z_rot_unknown_2;        /* Same, but for Z                      */
-    u16 unknown_8;              /* Buffer?                              */
-    u32 unknown_9;              /* Unknown                              */
-
-    /*0x50*/
-    f32 x_scale;                 /* X scale for model, if applicable    */
-    f32 y_scale;                 /* Same, but for Y                     */
-    f32 z_scale;                 /* Same, but for Z                     */
-
-    f32 x_accel;
-    f32 y_accel;
-    f32 z_accel;
-
-    f32 _0x0068;
-    int _0x006C;
-    /* 0x70 */
-    int _0x0070;
-    int _0x0074;
-    int _0x0078;
-    int _0x007C;
-    /* 0x80 */
-    int _0x0080;
-    int _0x0084;
-    int _0x0088;
-    int _0x008C;
-    /* 0x90 */
-    int _0x0090;
-    int _0x0094;
-    int _0x0098;
-    int _0x009C;
-    /* 0xA0 */
-    int _0x00A0;
-    int _0x00A4;
-    int _0x00A8;
-    u16 _0x00AC;
-    u8  _0x00AE;
-    u8  _0x00AF;
-    /* 0xB0 */
-    int _0x00B0;
-    u16 _0x00B4;
-    u16 _0x00B6;
-    int _0x00B8;
-    f32 _0x00BC;
-    /* 0xC0 */
-    int _0x00C0;
-    int _0x00C4;
-    int _0x00C8;
-    int _0x00CC;
-    /* 0xD0 */
-    int _0x00D0;
-    int _0x00D4;
-    int _0x00D8;
-    int _0x00DC;
-    /* 0xE0 */
-    int _0x00E0;
-    int _0x00E4;
-    int _0x00E8;
-    int _0x00EC;
-    /* 0xF0 */
-    int _0x00F0;
-    int _0x00F4;
-    int _0x00F8;
-    int _0x00FC;
-    /* 0x100 */
-    int _0x0100;
-    int _0x0104;
-    int _0x0108;
-    int _0x010C;
-    /* 0x110 */
-    int _0x0110;
-    int _0x0114;
-    int _0x0118;
-    int _0x011C;
-    /* 0x120 */
-
-    /* Previous actor in list */
-    struct z64_actor_s * previous;
-
-    /* Next actor in list */
-    struct z64_actor_s * next;
-
-    u32 actor_init;
-    u32 actor_rotuine_1;
-    /* 0x130 */
-    u32 actor_routine_2;
-    u32 actor_routine_3;
-    u32 actor_code_entry;
-    u32 v013C;
-    /* 0x140 */
-    u32 v0140;
-    u32 v0144;
-    u32 v0148;
-    u32 v014C;
-    /* 0x150 */
-    u32 v0150;
-    u32 v0154;
-    u32 v0158;
-    u32 v015C;
-    /* 0x160 */
-    u32 v0160;
-    u32 v0164;
-    f32 v0168;
-    u32 v016C;
-    /* 0x170 */
-    u32 v0170;
-    u32 v0174;
-    u32 v0178;
-    u32 v017C;
-    /* 0x180 */
-    u32 v0180;
-    u32 v0184;
-    u32 v0188;
-    u32 v018C;
-    /* 0x190 */
-    u32 next_routine;
-    u32 v0194;
-    u32 v0198;
-    u16 v019C;
-    u16 v019E;
-    /* 0x1A0 */
-    f32 v01A0;
-    f32 v01A4;
-    f32 v01A8;
-    f32 v01AC;
-    /* 0x1B0 */
-    f32 v01B0;
-    f32 v01B4;
-    f32 v01B8;
-    f32 v01BC;
-    /* 0x1C0 */
-    u16 v01C0;
-    u16 v01C2;
-    u32 v01C4;
-    u32 v01C8;
-    u32 v01CC;
-    /* 0x1D0 */
-    u32 v01D0;
-    u32 v01D4;
-    u32 v01D8;
-    u32 v01DC;
-    /* 0x1E0 */
-    u32 v01E0;
-    u32 v01E4;
-    u32 v01E8;
-    u32 v01EC;
-    /* 0x1F0 */
-    u32 v01F0;
-    u32 v01F4;
-    u32 v01F8;
-    u32 v01FC;
-    /* 0x200 */
-} z64_actor_old_t;
+  int16_t           actor_id;                 /* 0x0000 */
+  uint8_t           actor_type;               /* 0x0002 */
+  int8_t            room_index;               /* 0x0003 */
+  uint32_t          flags;                    /* 0x0004 */
+  vec3f_t           pos_1;                    /* 0x0008 */
+  z64_rot_t         rot_init;                 /* 0x0014 */
+  char              unk_01_[0x0002];          /* 0x001A */
+  int16_t           variable;                 /* 0x001C */
+  uint8_t           alloc_index;              /* 0x001E */
+  char              target_distance_index;    /* 0x001F */ // Indexes into table at 0x80115FFC
+  uint16_t          sound_effect;             /* 0x0020 */
+  char              unk_03_[0x0002];          /* 0x0022 */
+  vec3f_t           pos_2;                    /* 0x0024 */
+  int16_t           unk30;                    /* 0x0030 */ // possibly rot_0...
+  int16_t           xz_dir;                   /* 0x0032 */
+  int16_t           unk34;                    /* 0x0034 */
+  uint16_t          unk36;                    /* 0x0036 */
+  vec3f_t           pos_3;                    /* 0x0038 */
+  z64_rot_t         rot_1;                    /* 0x0044 */
+  char              unk_06_[0x0002];          /* 0x004A */
+  float             unk_07_;                  /* 0x004C */
+  vec3f_t           scale;                    /* 0x0050 */
+  vec3f_t           vel_1;                    /* 0x005C */
+  float             xz_speed;                 /* 0x0068 */
+  float             gravity;                  /* 0x006C */
+  float             min_vel_y;                /* 0x0070 */
+  /* struct bgcheck common */
+  z64_col_poly_t   *wall_poly;                /* 0x0074 */
+  z64_col_poly_t   *floor_poly;               /* 0x0078 */
+  uint8_t           wall_poly_source;         /* 0x007C */
+  uint8_t           floor_poly_source;        /* 0x007D */
+  int16_t           wall_rot;                 /* 0x007E */
+  float             floor_height;             /* 0x0080 */ //maybe?
+  float             water_surface_dist;       /* 0x0084 */
+  uint16_t          bgcheck_flags;            /* 0x0088 */
+  int16_t           rot_toward_link_y;        /* 0x008A */
+  float             unk_0x8C;                 /* 0x008C */
+  float             dist_from_link_xz;        /* 0x0090 */
+  float             dist_from_link_y;         /* 0x0094 */
+  /* struct collision_check common */
+  void             *damage_table;             /* 0x0098 */
+  vec3f_t           vel_2;                    /* 0x009C */
+  int16_t           unk_0B_0;                 /* 0x00A8 */
+  int16_t           unk_0B_1;                 /* 0x00AA */
+  uint16_t          unk_0B_2;                 /* 0x00AC */
+  uint8_t           mass;                     /* 0x00AE */
+  uint8_t           health;                   /* 0x00AF */
+  uint8_t           damage;                   /* 0x00B0 */
+  uint8_t           damage_effect;            /* 0x00B1 */
+  uint8_t           impact_effect;            /* 0x00B2 */
+  char              unk_0D;                   /* 0x00B3 */
+  /* end CollisionCheck common */
+  z64_rot_t         rot_2;                    /* 0x00B4 */
+  char              unk_0E_[0x0002];          /* 0x00BA */
+  float             unk_0xBC;                 /* 0x00BC */
+  void             *draw_drop_shadow;         /* 0x00C0 */
+  float             shadow_radius;            /* 0x00C4 */
+  uint8_t           unk_0xC8;                 /* 0x00C8 */
+  char              pad_0xC9_[0x0003];        /* 0x00C9 */
+  /* 0x00B4 End */
+  z64_xyzf_t        unk_0xCC;                 /* 0x00CC */
+  z64_xyzf_t        unk_0xD8;                 /* 0x00D8 */
+  z64_xyzf_t        unk_0xE4;                 /* 0x00E4 */
+  float             unk_0xF0;                 /* 0x00F0 */
+  float             draw_distance;            /* 0x00F4 */ /* based on Link's proximity */
+  float             camera_clip_near;         /* 0x00F8 */ /* TODO confirm this is correct */
+  float             camera_clip_far;          /* 0x00FC */ /* TODO confirm this is correct */
+  z64_xyzf_t        pos_4;                    /* 0x0100 */
+  uint8_t           unk_0x10C;                /* 0x010C */ /* used for trade sequence... */
+  uint8_t           unk_0x10D;                /* 0x010D */
+  uint16_t          text_id;                  /* 0x010E */
+  int16_t           frozen;                   /* 0x0110 */
+  uint16_t          damage_color;             /* 0x0112 */
+  uint8_t           damage_color_timer;       /* 0x0114 */
+  uint8_t           active;                   /* 0x0115 */
+  uint8_t           unk_11_;                  /* 0x0116 */
+  uint8_t           navi_enemy_text_id;       /* 0x0117 */
+  z64_actor_old_t      *attached_a;               /* 0x0118 */
+  z64_actor_old_t      *attached_b;               /* 0x011C */
+  z64_actor_old_t      *prev;                     /* 0x0120 */
+  z64_actor_old_t      *next;                     /* 0x0124 */
+  void             *ctor;                     /* 0x0128 */
+  void             *dtor;                     /* 0x012C */
+  void             *main_proc;                /* 0x0130 */
+  void             *draw_proc;                /* 0x0134 */
+  void             *code_entry;               /* 0x0138 */
+#ifdef OOT_DEBUG
+  unsigned char    unk0x13C[0x10];            /* 0x013C */ /* debug rom only */
+#endif
+};                                            /* 0x014C */ /* (length) */
 
 /* Damage chart notes
  * sword0 and sword1 refer to the Kokiri/Master Sword,
