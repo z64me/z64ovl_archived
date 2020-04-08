@@ -587,16 +587,24 @@ extern void external_func_80028CEC(void);
 		asm("external_func_80028CEC = 0x8001C7E4");
 	#endif
 
-/**
- * Spawn Particle 0x03
- * TODO These notes need converted into a C function prototype
- */
-extern void effect_spawn_bomb2(void);
-	#if OOT_DEBUG
-		asm("effect_spawn_bomb2 = 0x80028E84");
-	#elif OOT_U_1_0
-		asm("effect_spawn_bomb2 = 0x8001C97C");
-	#endif
+/* Spawn ovl_Effect_Ss_Bomb2 (Bomb Explosion)
+* Source Code Reference File: "z_effect_soft_sprite_old_init.c"
+*/
+extern void z_effect_spawn_bomb2(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, vec3f_t* burst_gravity /* Gravity along the X, Y, and Z axes */
+, vec3f_t* burst_velocity /* Velocity along the X, Y, and Z axes */
+, uint16_t scale /* Explosion Scale */
+, int16_t growth_velocty /* How fast the explosion cloud increases its size */
+);
+#if OOT_DEBUG
+  asm("z_effect_spawn_bomb2 = 0x80028E84");
+#elif OOT_U_1_0
+  asm("z_effect_spawn_bomb2 = 0x8001C97C");
+#elif MM_U_1_0
+  /*asm("z_effect_spawn_bomb2 = 0xDEADBEEF");*/
+#endif
 
 /**
  * Spawn Particle 0x04 (Wrapper for 8001C9EC)
@@ -662,7 +670,7 @@ extern void effect_spawn_water_bubble(void);
  * Spawn Particle 0x09
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_water_ripple(z64_global_t *global, vec3f_t *pos, int32_t unk0, int32_t unk1, int32_t unk2);
+extern void effect_spawn_water_ripple(z64_global_t* global, vec3f_t* pos, int32_t unk0, int32_t unk1, int32_t unk2);
 	#if OOT_DEBUG
 		asm("effect_spawn_water_ripple = 0x80029444");
 	#elif OOT_U_1_0
