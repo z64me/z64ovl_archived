@@ -257,7 +257,7 @@ helper_lift_test(
 	temp_v0 =
 		(int)
 		(
-			(a->rot_toward_link_y - (zh_get_player(gl)->actor.xz_dir))
+			(a->rot_toward_link_y - (zh_get_player(gl)->actor.dir.y))
 			<< 0x10
 		) >> 0x10
 	;

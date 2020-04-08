@@ -86,6 +86,13 @@ extern uint32_t load_data_from_rom(
 		asm("load_data_from_rom = 0x80080C90");
     #endif
 
+extern int32_t z_sprintf(char* dst, const char* fmt, ...);
+	#if OOT_DEBUG
+		asm("z_sprintf = 0x80002F44");
+	#elif OOT_U_1_0
+		/*asm("z_sprintf = 0x80001E20");*/
+	#endif
+
 /****
  * Send OS Message. This function is not used inside any existing overlay.
  * A0 = 0x80013990 for file reads on Debug, A1 = destination buffer, A2 = OS_MESG_NOBLOCK = 0 / OS_MESG_BLOCK = 1
