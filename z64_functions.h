@@ -90,7 +90,7 @@ extern int32_t z_sprintf(char* dst, const char* fmt, ...);
 	#if OOT_DEBUG
 		asm("z_sprintf = 0x80002F44");
 	#elif OOT_U_1_0
-		/*asm("z_sprintf = 0x80001E20");*/
+		asm("z_sprintf = 0x800CE7B4");
 	#endif
 
 /****
