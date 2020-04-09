@@ -1,3 +1,4 @@
+#if 0 /* no longer necessary, just use z_sprintf instead */
 /**
  * sprintf.h  <z64.me>
  * a basic implementation of sprintf using va_arr.h;
@@ -200,3 +201,4 @@ zh_sprintf(char *dst, char *fmt, struct va_arr *va_arr)
 }
 
 #endif /* ZH_SPRINTF_H_INCLUDED */
+#endif /* 0 */
