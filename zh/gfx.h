@@ -20,17 +20,22 @@ typedef struct {
   float height;
 } gfx_screen_tile_t;
 
+typedef struct {
+   gfx_texture_t texture;
+   gfx_screen_tile_t tile;
+} zh_ui_sprite_t;
+
 #define G_TX_ANCHOR_C  0b0000
 #define G_TX_ANCHOR_U  0b0001
 #define G_TX_ANCHOR_R  0b0010
 #define G_TX_ANCHOR_D  0b0100
 #define G_TX_ANCHOR_L  0b1000
-#define G_TX_ANCHOR_UR G_TX_ANCHOR_U + G_TX_ANCHOR_R
-#define G_TX_ANCHOR_DR G_TX_ANCHOR_D + G_TX_ANCHOR_R
-#define G_TX_ANCHOR_DL G_TX_ANCHOR_D + G_TX_ANCHOR_L
-#define G_TX_ANCHOR_UL G_TX_ANCHOR_U + G_TX_ANCHOR_L
-#define G_TX_ANCHOR_UD G_TX_ANCHOR_U + G_TX_ANCHOR_D
-#define G_TX_ANCHOR_RL G_TX_ANCHOR_R + G_TX_ANCHOR_L
+#define G_TX_ANCHOR_UR (G_TX_ANCHOR_U + G_TX_ANCHOR_R)
+#define G_TX_ANCHOR_DR (G_TX_ANCHOR_D + G_TX_ANCHOR_R)
+#define G_TX_ANCHOR_DL (G_TX_ANCHOR_D + G_TX_ANCHOR_L)
+#define G_TX_ANCHOR_UL (G_TX_ANCHOR_U + G_TX_ANCHOR_L)
+#define G_TX_ANCHOR_UD (G_TX_ANCHOR_U + G_TX_ANCHOR_D)
+#define G_TX_ANCHOR_RL (G_TX_ANCHOR_R + G_TX_ANCHOR_L)
 #define TIMG_A(TA0) G_TX_ANCHOR_##TA0
 #define TEXT_DIR_LTR 0b00
 #define TEXT_DIR_RTL 0b01
@@ -167,25 +172,29 @@ zh_draw_ui_sprite(
 	z64_disp_buf_t *buf
 	, gfx_texture_t *img
 	, gfx_screen_tile_t *tile
+   , uint32_t rgba
 )
 {
 	gfx_screen_tile_t tile_copy = *tile;
 	tile = &tile_copy;
-	if (tile->origin_anchor == 0x0000)
-	{
-		tile->x -= (tile->width/2); tile->y -= (tile->height/2);
-	}
-	else
-	{
-		if (tile->origin_anchor & TIMG_A(U))
-			tile->height /= 2;
-		if (tile->origin_anchor & TIMG_A(R))
-			tile->x -= tile->width;
-		if (tile->origin_anchor & TIMG_A(D))
-			tile->y -= tile->height;
-		if (tile->origin_anchor & TIMG_A(L))
-			tile->width /= 2;
-	}
+
+   /* Anchor Coordinates */
+   if (tile->origin_anchor == G_TX_ANCHOR_C) /* Center */
+   {
+      tile->x -= (tile->width/2);
+      tile->y -= (tile->height/2);
+   }
+   else
+   {
+      if (tile->origin_anchor & TIMG_A(U))
+         tile->y += 0; /* Default */
+      if (tile->origin_anchor & TIMG_A(R))
+         tile->x = tile->width;
+      if (tile->origin_anchor & TIMG_A(D))
+         tile->y = tile->height;
+      if (tile->origin_anchor & TIMG_A(L))
+         tile->x += 0; /* Default */ 
+   }
 
 	#if OOT_DEBUG
 		gSPDisplayList(buf->p++, 0x801269D0);
@@ -212,7 +221,7 @@ zh_draw_ui_sprite(
 		, PRIMITIVE
 		, 0
 	);
-	gDPSetPrimColor(buf->p++, 0, 0, 255, 255, 255, 255);
+	gDPSetPrimColor(buf->p++, 0, 0, RED32(rgba), GREEN32(rgba), BLUE32(rgba), ALPHA32(rgba));
 	gDPSetEnvColor(buf->p++, 0, 0, 0, 255);
 	//gDPPipeSync(buf->p++);
   gDPLoadTextureBlock(
@@ -237,4 +246,153 @@ zh_draw_ui_sprite(
 		, qu510(img->width / tile->width)
 		, qu510(img->height / tile->height)
 	);
+}
+
+static int zh_max_int(int a, int b)
+{
+    return a > b ? a : b;
+}
+
+static void zh_draw_numeric_text(
+    z64_global_t* gl
+    , int32_t is_ammo
+    , int32_t n, int32_t length
+    , float x, float y
+    , uint32_t rgba
+)
+{
+    z64_disp_buf_t* ovl = &ZQDL(gl, overlay);
+    float lw = is_ammo ? 6 : 8; 				/* Character Width */
+    int digits = 1;
+	for (int x = n / 10; x; x /= 10) ++digits;
+	digits = zh_max_int(digits, length);         /* Total Integer Digits */
+    x += lw * digits; 
+	zh_ui_sprite_t digit = {
+		.texture = {
+			.timg = is_ammo ? G_IM_TEX_DIGIT_AMMO_TIMG : G_IM_TEX_DIGIT_TIMG
+			, .width = 8
+			, .height = is_ammo ? 8 : 16
+			, .fmt = is_ammo ? G_IM_FMT_IA : G_IM_FMT_I
+			, .bitsiz = G_IM_SIZ_8b
+		},
+		.tile = {
+			.x = x
+			, .y = y
+			, .origin_anchor = G_TX_ANCHOR_UL
+			, .width = 8
+			, .height = is_ammo ? 8 : 16
+		}
+	};
+    uint32_t sz = is_ammo ? 0x40 : 0x80;
+
+    while(digits--)
+    {
+        int32_t i = n % 10;
+        n /= 10;
+
+		uint32_t tex = (is_ammo ? G_IM_TEX_DIGIT_AMMO_TIMG : G_IM_TEX_DIGIT_TIMG) + i * sz;
+		digit.texture.timg = (uint32_t)gl->if_ctxt.parameter + tex;
+
+		digit.tile.x -= lw;
+        zh_draw_ui_sprite(ovl, &digit.texture, &digit.tile, rgba); /* Draw digit. */
+    }
+}
+
+static void zh_draw_numeric_timer(
+	z64_global_t* gl
+	, int32_t minutes
+	, int32_t seconds
+	, float x
+	, float y
+	, uint32_t rgba
+)
+{
+    float lw = 8; /* letter width */
+    char buf[16];
+    z64_disp_buf_t* ovl = &ZQDL(gl, overlay);
+    
+	/* Clock */
+	gfx_texture_t clock = { /* Grab our digit texture. */
+		(uint32_t)gl->if_ctxt.parameter + G_IM_TEX_CLOCK_TIMG
+		, 16
+		, 16
+		, G_IM_FMT_IA
+		, G_IM_SIZ_8b
+	};
+
+	gfx_screen_tile_t clock_tile = { /* Create a tile for our digit texture. */
+		x
+		, y
+		, G_TX_ANCHOR_UL
+		, 16
+		, 16
+	};
+
+	zh_draw_ui_sprite(ovl, &clock, &clock_tile, 0xFFFFFFFF); /* Draw Clock. */
+
+	/* Timer Digits */
+    z_sprintf(buf, "%02d:%02d", minutes, seconds);
+    
+    for (char *str = buf; *str; ++str)
+    {
+        int i = *str - '0';
+
+        gfx_texture_t digit = { /* Grab our digit texture. */
+            (uint32_t)gl->if_ctxt.parameter + (G_IM_TEX_DIGIT_TIMG + (i * 0x80))
+            , 8
+            , 16
+            , G_IM_FMT_I
+            , G_IM_SIZ_8b
+        };
+
+        gfx_screen_tile_t digit_tile = { /* Create a tile for our digit texture. */
+            (x += lw) + 8
+            , y
+            , G_TX_ANCHOR_UL
+            , 8
+            , 16
+        };
+
+        zh_draw_ui_sprite(ovl, &digit, &digit_tile, rgba); /* Draw digit. */
+    }
+}
+
+static void zh_draw_nes_font(
+	z64_global_t* gl
+	, uint32_t nes_font_static
+	, char* format
+	, float x, float y
+	, float scale
+	, uint32_t rgba
+)
+{
+    float *width = (float*)0x80153A00;
+    char buf[64];
+    z64_disp_buf_t* ovl = &ZQDL(gl, overlay);
+
+	z_sprintf(buf, format);
+    
+    for (char *str = buf; *str; ++str)
+    {
+        int i = *str - ' ';
+
+        gfx_texture_t letter = { /* Grab our character texture. */
+            nes_font_static + (i * 0x80)
+            , 16
+            , 16
+            , G_IM_FMT_I
+            , G_IM_SIZ_4b
+        };
+
+        gfx_screen_tile_t letter_tile = { /* Create a tile for our character texture. */
+            x
+            , y
+            , G_TX_ANCHOR_UL
+            , 16 * scale
+            , 16 * scale
+        };
+		x += width[i] * scale;
+
+        zh_draw_ui_sprite(ovl, &letter, &letter_tile, rgba); /* Draw character. */
+    }
 }
