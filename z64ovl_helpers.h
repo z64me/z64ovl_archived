@@ -77,6 +77,11 @@ static inline float zh_math_fmaxf(float a, float b)
 	return a > b ? a : b;
 }
 
+static inline int zh_max_int(int a, int b)
+{
+    return a > b ? a : b;
+}
+
 /****
  * convert a relative segment address to an absolute RAM address
  ***/
