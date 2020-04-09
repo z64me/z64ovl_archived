@@ -10,6 +10,7 @@
 
 // RAM Stuff
 #define Z64GL_SAVE_CONTEXT          0x8015E660
+#define Z64GL_NES_FONT_WIDTH_TABLE  0x80153A00
 #define STATIC_CONTEXT              0x8015FA90
 #define RAM_SEGMENT_TABLE           0x80166FA8
 #define GLOBAL_CONTEXT              0x80212020
