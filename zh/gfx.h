@@ -25,6 +25,10 @@ typedef struct {
    gfx_screen_tile_t tile;
 } zh_ui_sprite_t;
 
+#define G_IM_TEX_DIGIT_TIMG 0x3040 /* Counter Digits */
+#define G_IM_TEX_DIGIT_AMMO_TIMG 0x35C0 /* Ammo Digits */
+#define G_IM_TEX_CLOCK_TIMG 0x2000 /* Clock Icon */
+#define G_IM_TEX_LETTER 0x0000 /* Char 0 Space */
 #define G_TX_ANCHOR_C  0b0000
 #define G_TX_ANCHOR_U  0b0001
 #define G_TX_ANCHOR_R  0b0010
