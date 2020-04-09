@@ -248,11 +248,6 @@ zh_draw_ui_sprite(
 	);
 }
 
-static int zh_max_int(int a, int b)
-{
-    return a > b ? a : b;
-}
-
 static void zh_draw_numeric_text(
     z64_global_t* gl
     , int32_t is_ammo
@@ -366,7 +361,7 @@ static void zh_draw_nes_font(
 	, uint32_t rgba
 )
 {
-    float *width = (float*)0x80153A00;
+    float *width = (float*)Z64GL_NES_FONT_WIDTH_TABLE;
     char buf[64];
     z64_disp_buf_t* ovl = &ZQDL(gl, overlay);
 
