@@ -170,18 +170,8 @@ static void zh_set_palette(z64_disp_buf_t *buf, int32_t addr)
   gSPSetOtherMode(buf->p++, G_SETOTHERMODE_H, G_MDSFT_TEXTLUT, 2, 0x00008000);
 }
 
-static
-void
-zh_draw_ui_sprite(
-	z64_disp_buf_t *buf
-	, gfx_texture_t *img
-	, gfx_screen_tile_t *tile
-   , uint32_t rgba
-)
+static void zh_draw_set_tile_anchor(gfx_screen_tile_t *tile)
 {
-	gfx_screen_tile_t tile_copy = *tile;
-	tile = &tile_copy;
-
    /* Anchor Coordinates */
    if (tile->origin_anchor == G_TX_ANCHOR_C) /* Center */
    {
@@ -199,6 +189,14 @@ zh_draw_ui_sprite(
       if (tile->origin_anchor & TIMG_A(L))
          tile->x += 0; /* Default */ 
    }
+}
+
+static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_screen_tile_t *tile, uint32_t rgba)
+{
+	gfx_screen_tile_t tile_copy = *tile;
+	tile = &tile_copy;
+
+   zh_draw_set_tile_anchor(tile);
 
 	#if OOT_DEBUG
 		gSPDisplayList(buf->p++, 0x801269D0);
@@ -227,16 +225,16 @@ zh_draw_ui_sprite(
 	);
 	gDPSetPrimColor(buf->p++, 0, 0, RED32(rgba), GREEN32(rgba), BLUE32(rgba), ALPHA32(rgba));
 	gDPSetEnvColor(buf->p++, 0, 0, 0, 255);
-	//gDPPipeSync(buf->p++);
-  gDPLoadTextureBlock(
-    buf->p++
-    , img->timg, img->fmt, img->bitsiz
-    , img->width, img->height
-    , 0
-    , G_TX_WRAP, G_TX_WRAP
-    , G_TX_NOMASK, G_TX_NOMASK
-    , G_TX_NOLOD, G_TX_NOLOD
-  );
+	gDPPipeSync(buf->p++);
+   gDPLoadTextureBlock(
+      buf->p++
+      , img->timg, img->fmt, img->bitsiz
+      , img->width, img->height
+      , 0
+      , G_TX_WRAP, G_TX_WRAP
+      , G_TX_NOMASK, G_TX_NOMASK
+      , G_TX_NOLOD, G_TX_NOLOD
+   );
 	if (tile->width == 0) tile->width++;
 	if (tile->height == 0) tile->height++;
 	gSPTextureRectangle(
@@ -362,6 +360,7 @@ static void zh_draw_nes_font(
 	, char* format
 	, float x, float y
 	, float scale
+   , int32_t has_shadow
 	, uint32_t rgba
 )
 {
@@ -387,11 +386,145 @@ static void zh_draw_nes_font(
             x
             , y
             , G_TX_ANCHOR_UL
-            , 16 * scale
-            , 16 * scale
+            , FLOOR(16 * scale)
+            , FLOOR(16 * scale)
         };
-		x += width[i] * scale;
+		   x += FLOOR(width[i] * scale);
+
+      if (has_shadow)
+      {
+         letter_tile.x++;
+         letter_tile.y++;
+         zh_draw_ui_sprite(ovl, &letter, &letter_tile, 0x000000FF); /* Draw shadow character.*/
+         letter_tile.x--;
+         letter_tile.y--;
+      }
 
         zh_draw_ui_sprite(ovl, &letter, &letter_tile, rgba); /* Draw character. */
     }
+}
+
+/* Message Box */
+
+static void zh_draw_ui_message_box(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_screen_tile_t *tile, uint32_t rgba)
+{
+	gfx_screen_tile_t tile_copy = *tile;
+	tile = &tile_copy;
+
+   /* Anchor Coordinates */
+   if (tile->origin_anchor == G_TX_ANCHOR_C) /* Center */
+   {
+      tile->x -= (tile->width/2);
+      tile->y -= (tile->height/2);
+   }
+   else
+   {
+      if (tile->origin_anchor & TIMG_A(U))
+         tile->y += 0; /* Default */
+      if (tile->origin_anchor & TIMG_A(R))
+         tile->x = tile->width;
+      if (tile->origin_anchor & TIMG_A(D))
+         tile->y = tile->height;
+      if (tile->origin_anchor & TIMG_A(L))
+         tile->x += 0; /* Default */ 
+   }
+
+	#if OOT_DEBUG
+		gSPDisplayList(buf->p++, 0x801269D0);
+	#elif	OOT_U_1_0
+		gSPDisplayList(buf->p++, 0x800F84A0);
+	#endif
+	gDPPipeSync(buf->p++);
+	gDPSetPrimColor(buf->p++, 0, 0, RED32(rgba), GREEN32(rgba), BLUE32(rgba), ALPHA32(rgba));
+	gDPLoadTextureBlock_4b(
+		buf->p++
+		, img->timg, img->fmt
+		, img->width, img->height
+		, 0
+		, G_TX_MIRROR, G_TX_NOMIRROR
+		, 7, G_TX_NOMASK
+		, G_TX_NOLOD, G_TX_NOLOD
+	);
+	if (tile->width == 0) tile->width++;
+	if (tile->height == 0) tile->height++;
+	gSPTextureRectangle(
+		buf->p++
+		, qs102(tile->x) & ~3
+		, qs102(tile->y) & ~3
+		, qs102(tile->x + (tile->width * 2)) & ~3
+		, qs102(tile->y + tile->height) & ~3
+		, G_TX_RENDERTILE
+		, qu105(0), qu105(0)
+		, qu510(img->width / tile->width)
+		, qu510(img->height / tile->height)
+	);
+}
+
+static void zh_draw_message_box(z64_global_t* gl, uint32_t message_static, int32_t box_type, float x, float y)
+{
+	z64_disp_buf_t* ovl = &ZQDL(gl, overlay);
+
+	int32_t texture = 0;
+	uint32_t color = 0;
+
+	switch(box_type)
+	{
+		case 0:
+			texture = 0x0000;
+			color = 0x000000AA;
+			break;
+		case 1:
+			texture = 0x1000;
+			color = 0x46321EE6;
+			break;
+		case 2:
+			texture = 0x2000;
+			color = 0xFF0000B4;
+			break;
+		case 3:
+			texture = 0x3000;
+			color = 0x000A32AA;
+			break;
+	}
+
+	int32_t format = (texture > 0x0000 && texture < 0x3000) ? G_IM_FMT_IA : G_IM_FMT_I;
+
+	gfx_texture_t box = {
+		message_static + texture
+		, 128
+		, 64
+		, format
+		, G_IM_SIZ_4b
+	};
+
+	gfx_screen_tile_t box_tile = {
+		x
+		, y
+		, G_TX_ANCHOR_UL
+		, 128
+		, 64
+	};
+
+	zh_draw_ui_message_box(ovl, &box, &box_tile, color);
+}
+
+static int32_t zh_draw_message_icon(z64_global_t* gl, uint32_t texture_addr, int32_t dim, float x, float y)
+{
+		int32_t x_off = (dim == 32) ? 9 : 7;
+		int32_t y_off = (dim == 32) ? 16 : 20;
+		zh_ui_sprite_t icon = {
+		.texture = {
+			.timg = texture_addr
+			, dim, dim
+			, G_IM_FMT_RGBA, G_IM_SIZ_32b
+		},
+		.tile = {
+			.x = x - x_off, .y = y + y_off
+			, .origin_anchor = G_TX_ANCHOR_UL
+			, .width = dim, .height = dim
+		}
+	};
+	zh_draw_ui_sprite(&ZQDL(gl, overlay), &icon.texture, &icon.tile, 0xFFFFFFFF);
+
+	return 1;
 }

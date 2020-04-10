@@ -85,7 +85,7 @@ static inline void zh_color_hsv2rgb(float h, float s, float v, rgba8_t *out, uin
 	float blue = BLUE32(init);
 
 	float c = (v * s);
-	float x = c * (1 - math_fabsf(math_fmodf((h / 60.0f), 2) - 1));
+	float x = c * (1 - z_fabs(z_fmod((h / 60.0f), 2) - 1));
 	float m = (v - c);
 
 	if (h >= 0.0f && h < 60.0f)
@@ -159,7 +159,7 @@ static inline void zh_color_rgb2hsv(uint32_t rgba, hsvf_t *out)
 
 		/* Hue */
 		if (cmax == red)
-			out->h = (60 * math_fmodf(((green - blue) / delta), 6));
+			out->h = (60 * z_fmod(((green - blue) / delta), 6));
 		else if (cmax == green)
 			out->h = (60 * (((blue - red) / delta) + 2));
 		else
@@ -236,6 +236,6 @@ static inline void zh_color_flash(uint32_t init, float min_val, float timer, hsv
     timer -= 10;
 
   zh_color_rgb2hsv(init, in);
-  float val = ((math_cosf(timer) + 1.0f) / 2) * (1.0f - min_val) + min_val;
+  float val = ((z_cos(timer) + 1.0f) / 2) * (1.0f - min_val) + min_val;
   zh_color_hsv2rgb(in->h, in->s, val, out, init);
 }
