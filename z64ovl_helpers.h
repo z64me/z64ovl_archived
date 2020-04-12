@@ -295,7 +295,7 @@ static void helper_limb_focus(z64_global_t *global, uint8_t limb, uint32_t dlist
 	if (limb == TARGET_LIMB)\
 	{\
 		vec3f_t in = { IN_VEC3_X, IN_VEC3_Y, IN_VEC3_Z };\
-		external_func_800D1AF4(&in, &actor->pos_3);\
+		external_func_800D1AF4(&in, &actor->pos_focus);\
 	}\
 }
 
