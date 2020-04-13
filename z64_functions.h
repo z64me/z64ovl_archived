@@ -8093,7 +8093,7 @@ extern void debug_set_text_string(z64_debug_text_t *text_struct, const char *for
 /**
  * Relocates an overlay from virtual RAM to real RAM.
  */
-extern void z_overlay_do_relocation(void* overlay_file, void* overlay_header, void* vram_start)
+extern void z_overlay_do_relocation(void* overlay_file, void* overlay_header, void* vram_start);
 	#if OOT_DEBUG
 		asm("z_overlay_do_relocation = 0x800FC2C0");
 	#elif OOT_U_1_0
