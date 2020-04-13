@@ -5309,6 +5309,46 @@ extern void external_func_80088B34(void);
 	#endif
 
 /**
+ * Draw an A button to the HUD overlay.
+ */
+extern void z_parameter_draw_action_button(z64_global_t* gl);
+	#if OOT_DEBUG
+		asm("z_parameter_draw_action_button = 0x8008A1BC");
+	#elif OOT_U_1_0
+		/*asm("z_parameter_draw_action_button = 0xDEADBEEF");*/
+	#endif
+
+/**
+ * TODO This function is completely undocumented
+ */
+extern void external_func_8008A3E0(z64_global_t* gl);
+	#if OOT_DEBUG
+		asm("external_func_8008A3E0 = 0x8008A3E0");
+	#elif OOT_U_1_0
+		/*asm("external_func_8008A3E0 = 0xDEADBEEF");*/
+	#endif
+
+/**
+ * TODO This function is completely undocumented
+ */
+extern void external_func_8008A8B8(z64_global_t* gl, int32_t a1, int32_t a2, int32_t a3, int32_t sp10);
+	#if OOT_DEBUG
+		asm("external_func_8008A8B8 = 0x8008A8B8");
+	#elif OOT_U_1_0
+		/*asm("external_func_8008A8B8 = 0xDEADBEEF");*/
+	#endif
+
+/**
+ * TODO This function is completely undocumented
+ */
+extern void external_func_8008A994(z64_if_ctxt_t* if_ctxt);
+	#if OOT_DEBUG
+		asm("external_func_8008A994 = 0x8008A994");
+	#elif OOT_U_1_0
+		/*asm("external_func_8008A994 = 0xDEADBEEF");*/
+	#endif
+
+/**
  * TODO This function is completely undocumented
  */
 extern void external_func_8008E4E0(void);
@@ -5604,6 +5644,16 @@ extern Gfx* external_func_800937C0(Gfx *p);
 		asm("external_func_800937C0 = 0x800937C0");
 	#elif OOT_U_1_0
 		asm("external_func_800937C0 = 0x8007E008");
+	#endif
+
+/**
+ * Jump To Display List
+ */
+extern void external_func_80094520(z64_gfx_t *g);
+	#if OOT_DEBUG
+		asm("external_func_80094520 = 0x80094520");
+	#elif OOT_U_1_0
+		/*asm("external_func_80094520 = 0xDEADBEEF");*/
 	#endif
 
 /**
@@ -8038,6 +8088,16 @@ extern void debug_set_text_string(z64_debug_text_t *text_struct, const char *for
 		asm("debug_set_text_string = 0x800FBCB4");
 	#elif OOT_U_1_0
 		asm("debug_set_text_string = 0x800CC588");
+	#endif
+
+/**
+ * Relocates an overlay from virtual RAM to real RAM.
+ */
+extern void z_overlay_do_relocation(void* overlay_file, void* overlay_header, void* vram_start)
+	#if OOT_DEBUG
+		asm("z_overlay_do_relocation = 0x800FC2C0");
+	#elif OOT_U_1_0
+		asm("z_overlay_do_relocation = 0x800CC8F0");
 	#endif
 
 /**
