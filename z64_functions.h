@@ -1836,9 +1836,9 @@ extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float 
  */
 extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, float distance, uint8_t item_index);
 	#if OOT_DEBUG
-		asm("external_func_8002F298 = 0x8002F298");
+		asm("actor_poll_trade_cube = 0x8002F298");
 	#elif OOT_U_1_0
-		asm("external_func_8002F298 = 0x80022A34");
+		asm("actor_poll_trade_cube = 0x80022A34");
 	#endif
 
 /**
@@ -1849,9 +1849,9 @@ extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, floa
  */
 extern void actor_poll_speak_cube(z64_actor_t *actor, z64_global_t *gl, float distance);
 	#if OOT_DEBUG
-		asm("external_func_8002F2CC = 0x8002F2CC");
+		asm("actor_poll_speak_cube = 0x8002F2CC");
 	#elif OOT_U_1_0
-		asm("external_func_8002F2CC = 0x80022A68");
+		asm("actor_poll_speak_cube = 0x80022A68");
 	#endif
 
 /**
