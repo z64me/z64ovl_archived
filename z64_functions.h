@@ -6255,6 +6255,7 @@ z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Offset */
 , float speed /* Speed at which to play back the animation */
 , float frame_begin /* Starting Animation Frame */
+, int frame_count /* The amount of frames to play from this animation, 0 to play them all. */
 , uint32_t unk_1 /* Unidentified */
 , float xrate /* Transition Rate (Automatic Interpolation Between Frames) */
 );
