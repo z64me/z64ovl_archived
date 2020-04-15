@@ -5911,6 +5911,16 @@ extern void external_func_800951D0(void);
 	#endif
 
 /**
+ * TODO This function is completely undocumented
+ */
+extern void external_func_80095248(z64_gfx_t* gfx, uint8_t a1, uint8_t a2, uint8_t a3);
+	#if OOT_DEBUG
+		asm("external_func_80095248 = 0x80095248");
+	#elif OOT_U_1_0
+		/*asm("external_func_800951D0 = 0xDEADBEEF");*/
+	#endif
+
+/**
  * Load Room
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x11CBC (Room Context) | A2 = Room ID
@@ -6598,9 +6608,18 @@ extern void external_func_800AA358(void);
 
 /**
  * TODO This function is completely undocumented
- * This function is not used inside any existing overlay
  */
-extern void external_func_800AAA50(void);
+extern void external_func_800AA4FC(void* view, void* viewport);
+	#if OOT_DEBUG
+		asm("external_func_800AA4FC = 0x800AA4FC");
+	#elif OOT_U_1_0
+		/*asm("external_func_800AA4FC = 0xDEADBEEF");*/
+	#endif
+
+/**
+ * TODO This function is completely undocumented
+ */
+extern void external_func_800AAA50(void* view, int32_t a1);
 	#if OOT_DEBUG
 		asm("external_func_800AAA50 = 0x800AAA50");
 	#elif OOT_U_1_0
