@@ -6,13 +6,12 @@
 #define STATE_DOWN 2
 
 typedef struct {
-	uint8_t buttonOffset;
 	uint8_t buttonState;
-	float invokeTime;
+	float invokeTime; // It is best to not overwrite this, just store a separate time for last [good] invoke time. Ask Drahsid for logic help if needed
+	float timeDown; // This does not work for cyclic holding, for that use the suggestion proposed above. Use this if you just need to detect button holding
 } button_t;
 
 typedef struct {
-	z64_controller_t* controller;
 	button_t a;
 	button_t b;
 	button_t z;
@@ -21,7 +20,9 @@ typedef struct {
 	button_t dd;
 	button_t dl;
 	button_t dr;
+#ifdef DEBUG
 	button_t pad[2];
+#endif
 	button_t l;
 	button_t r;
 	button_t cu;
@@ -29,38 +30,39 @@ typedef struct {
 	button_t cl;
 	button_t cr;
 	float jx, jy;
-	float deadzone;
-	float clipzone;
+	z64_controller_t* controller;
+#ifdef DEBUG
 	uint64_t end;
+#endif
 } z64_inputHandler_t;
 
-void construct_button_t(button_t* button, uint8_t buttonOffset) {
-	button->buttonOffset = buttonOffset;
+void construct_button_t(button_t* button) {
 	button->buttonState = STATE_UP;
 	button->invokeTime = 0;
+	button->timeDown = 0;
 }
 
 void construct_z64_inputHandler_t(z64_inputHandler_t* inputHandler, z64_controller_t* controller) {
-	inputHandler->controller = controller;
-	construct_button_t(&inputHandler->a, 0);
-	construct_button_t(&inputHandler->b, 1);
-	construct_button_t(&inputHandler->z, 2);
-	construct_button_t(&inputHandler->s, 3);
-	construct_button_t(&inputHandler->du, 4);
-	construct_button_t(&inputHandler->dd, 5);
-	construct_button_t(&inputHandler->dl, 6);
-	construct_button_t(&inputHandler->dr, 7);
-	construct_button_t(&inputHandler->l, 10);
-	construct_button_t(&inputHandler->r, 11);
-	construct_button_t(&inputHandler->cu, 12);
-	construct_button_t(&inputHandler->cd, 13);
-	construct_button_t(&inputHandler->cl, 14);
-	construct_button_t(&inputHandler->cr, 15);
+	construct_button_t(&inputHandler->a);
+	construct_button_t(&inputHandler->b);
+	construct_button_t(&inputHandler->z);
+	construct_button_t(&inputHandler->s);
+	construct_button_t(&inputHandler->du);
+	construct_button_t(&inputHandler->dd);
+	construct_button_t(&inputHandler->dl);
+	construct_button_t(&inputHandler->dr);
+	construct_button_t(&inputHandler->l);
+	construct_button_t(&inputHandler->r);
+	construct_button_t(&inputHandler->cu);
+	construct_button_t(&inputHandler->cd);
+	construct_button_t(&inputHandler->cl);
+	construct_button_t(&inputHandler->cr);
 	inputHandler->jx = 0;
 	inputHandler->jy = 0;
-	inputHandler->deadzone = 0.05f;
-	inputHandler->clipzone = 0.95f;
+	inputHandler->controller = controller;
+#ifdef DEBUG
 	inputHandler->end = 0xDEADBEEFBEEFDEAD;
+#endif
 }
 
 void updateButton(button_t* thisButton, uint8_t buttonDown, float currentTime) {
@@ -82,7 +84,10 @@ void updateButton(button_t* thisButton, uint8_t buttonDown, float currentTime) {
 			break;
 
 		case(STATE_DOWN):
-			if (!buttonDown) {
+			if (buttonDown) {
+				thisButton->timeDown = currentTime - thisButton->invokeTime;
+			}
+			else {
 				thisButton->buttonState = STATE_UP;
 				thisButton->invokeTime = 0;
 			}
@@ -136,8 +141,8 @@ void update_z64_inputHandler_t(z64_inputHandler_t* inputHandler, float currentTi
 	buttonDown = inputHandler->controller->cr;
 	updateButton(&inputHandler->cr, buttonDown, currentTime);
 
-	inputHandler->jx = (float)inputHandler->controller->x / 128.0f;
-	inputHandler->jy = (float)inputHandler->controller->y / 128.0f;
+	inputHandler->jx = (float)inputHandler->controller->x * 0.0078125f;
+	inputHandler->jy = (float)inputHandler->controller->y * 0.0078125f;
 }
 
 #endif
