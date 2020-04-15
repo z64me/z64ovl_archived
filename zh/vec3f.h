@@ -137,8 +137,10 @@ static inline float vec3f_dot(vec3f_t lhs, vec3f_t rhs) {
 
 /* TODO benchmark me */
 static inline uint32_t vec3f_is_empty(vec3f_t lhs) {
-    return *(uint32_t*)(&lhs.x) | *(uint32_t*)(&lhs.y) | *(uint32_t*)(&lhs.z);
+    return !(*(uint32_t*)(&lhs.x) || *(uint32_t*)(&lhs.y) || *(uint32_t*)(&lhs.z));
 }
+
+#define vec3f_is_zero vec3f_is_empty
 
 #endif
 
