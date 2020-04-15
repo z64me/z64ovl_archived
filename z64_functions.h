@@ -5339,13 +5339,13 @@ extern void external_func_8008A8B8(z64_global_t* gl, int32_t a1, int32_t a2, int
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Initializes a 320 x 240 viewport for the game's HUD and writes a projection matrix to RAM.
  */
-extern void external_func_8008A994(z64_if_ctxt_t* if_ctxt);
+extern void z_if_viewport_init(z64_if_ctxt_t* if_ctxt);
 	#if OOT_DEBUG
-		asm("external_func_8008A994 = 0x8008A994");
+		asm("z_if_viewport_init = 0x8008A994");
 	#elif OOT_U_1_0
-		/*asm("external_func_8008A994 = 0xDEADBEEF");*/
+		asm("z_if_viewport_init = 0x800756A8");
 	#endif
 
 /**

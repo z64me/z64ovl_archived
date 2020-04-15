@@ -794,6 +794,14 @@ typedef struct
   z64_collider_t* ot_list[50];
 } z64_hit_ctxt_t;
 
+typedef struct
+{
+  int32_t top;    /* Upper Left Y */
+  int32_t bottom; /* Lower Right Y */
+  int32_t left;   /* Upper Left X */
+  int32_t right;  /* Lower Right X */
+} z64_viewport_t;
+
 /* game context */
 typedef struct
 {
