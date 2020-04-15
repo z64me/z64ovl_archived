@@ -4581,151 +4581,179 @@ vec3f_t *out /* Destination Pointer */
   asm("z_lib_vec3f_copy = 0x800FF50C");
 #endif
 
-/**
- * convert vec3s_t to vec3f_t
- * Convert int16_t Coordinates to Float Coordinates
- * xyz_t_move_s_xyz
- */
-extern void math_vec3f_from_vec3s(vec3f_t *out, vec3s_t *in);
-	#if OOT_DEBUG
-		asm("math_vec3f_from_vec3s = 0x80077E5C");
-	#elif OOT_U_1_0
-		asm("math_vec3f_from_vec3s = 0x80063CCC");
-	#elif MM_U_1_0
-		asm("math_vec3f_from_vec3s = 0x800FF54C");
-	#endif
+/* Convert vec3s_t to vec3f_t
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_from_vec3s`
+*/
+extern void z_lib_vec3s_to_vec3f(
+vec3f_t* out
+, vec3s_t* in
+);
+#if OOT_DEBUG
+    asm("z_lib_vec3s_to_vec3f = 0x80077E5C");
+#elif OOT_U_1_0
+    asm("z_lib_vec3s_to_vec3f = 0x80063CCC");
+#elif MM_U_1_0
+    asm("z_lib_vec3s_to_vec3f = 0x800FF54C");
+#endif
 
-/**
- * get the sum of two vec3f_t types
- * out = a + b
- * xyz_t_add
- */
-extern void math_vec3f_add(vec3f_t *a, vec3f_t *b, vec3f_t *out);
-	#if OOT_DEBUG
-		asm("math_vec3f_add = 0x80077E9C");
-	#elif OOT_U_1_0
-		asm("math_vec3f_add = 0x80063D10");
-	#elif MM_U_1_0
-		asm("math_vec3f_add = 0x800FF5BC");
-	#endif
+/* Sum of two vec3f_t structures.
+* out = a + b;
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_add`
+*/
+extern void z_lib_vec3f_sum(
+vec3f_t* a
+, vec3f_t* b
+, vec3f_t* out
+);
+#if OOT_DEBUG
+    asm("z_lib_vec3f_sum = 0x80077E9C");
+#elif OOT_U_1_0
+    asm("z_lib_vec3f_sum = 0x80063D10");
+#elif MM_U_1_0
+    asm("z_lib_vec3f_sum = 0x800FF5BC");
+#endif
 
-/**
- * get the difference of two vec3f_t types
- * out = a - b
- * xyz_t_sub
- */
-extern void math_vec3f_sub(vec3f_t *a, vec3f_t *b, vec3f_t *out);
-	#if OOT_DEBUG
-		asm("math_vec3f_sub = 0x80077ED0");
-	#elif OOT_U_1_0
-		asm("math_vec3f_sub = 0x80063D48");
-	#elif MM_U_1_0
-		asm("math_vec3f_sub = 0x800FF5F4");
-	#endif
+/* Difference of two vec3f_t structures.
+* out = a - b;
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_sub`
+*/
+extern void z_lib_vec3f_diff(
+vec3f_t* a
+, vec3f_t* b
+, vec3f_t* out
+);
+#if OOT_DEBUG
+    asm("z_lib_vec3f_diff = 0x80077ED0");
+#elif OOT_U_1_0
+    asm("z_lib_vec3f_diff = 0x80063D48");
+#elif MM_U_1_0
+    asm("z_lib_vec3f_diff = 0x800FF5F4");
+#endif
 
-/**
- * get the difference of two vec3s_t types, stored as a vec3f_t
- * out = a - b
- * TODO Note that out, a, and b are ordered differently than the math_vec3f_sub version of this function; confirm whether this is actually correct
- * TODO confirm that it's actually a - b
- * A0 = Result Float Coord ptr (A - B) | A1 = int16_t coord A ptr | A2 = int16_t coord B ptr
- *
- */
-extern void math_vec3s_sub(vec3f_t *out, vec3s_t *a, vec3s_t *b);
-	#if OOT_DEBUG
-		asm("math_vec3s_sub = 0x80077F04");
-	#elif OOT_U_1_0
-		asm("math_vec3s_sub = 0x80063D80");
-	#elif MM_U_1_0
-		asm("math_vec3s_sub = 0x800FF62C");
-	#endif
+/* Difference of two vec3s_t structures.
+* Store the result as a vec3f_t.
+* out = a - b;
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3s_sub`
+*/
+extern void z_lib_vec3s_diff_to_vec3f(
+vec3f_t* out
+, vec3s_t* a
+, vec3s_t* b
+);
+#if OOT_DEBUG
+    asm("z_lib_vec3s_diff = 0x80077F04");
+#elif OOT_U_1_0
+    asm("z_lib_vec3s_diff = 0x80063D80");
+#elif MM_U_1_0
+    asm("z_lib_vec3s_diff = 0x800FF62C");
+#endif
 
-/**
- * multiply vec3f_t by scalar value
- * x *= scale
- * TODO is the scalar a float or an integer? Confirm in-game
- * A0 = Coord ptr | A1 = Scalar Value
- * xyz_t_mult_v
- */
-extern void math_vec3f_mul_scalar(vec3f_t *x, f32 scale);
-	#if OOT_DEBUG
-		asm("math_vec3f_mul_scalar = 0x80077F5C");
-	#elif OOT_U_1_0
-		asm("math_vec3f_mul_scalar = 0x80063DDC");
-	#elif MM_U_1_0
-		asm("math_vec3f_mul_scalar = 0x800FF688");
-	#endif
+/* Multiply a vec3f_t by a scalar value.
+* out *= scale;
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_mul_scalar`
+*/
+extern void z_lib_vec3f_scale(
+vec3f_t* out
+, float scale
+);
+#if OOT_DEBUG
+    asm("z_lib_vec3f_scale = 0x80077F5C");
+#elif OOT_U_1_0
+    asm("z_lib_vec3f_scale = 0x80063DDC");
+#elif MM_U_1_0
+    asm("z_lib_vec3f_scale = 0x800FF688");
+#endif
 
-/**
- * calculates distance between two vec3f_t types
- */
-extern float math_vec3f_distance(vec3f_t *a, vec3f_t *b);
-	#if OOT_DEBUG
-		asm("math_vec3f_distance = 0x80077F90");
-	#elif OOT_U_1_0
-		asm("math_vec3f_distance = 0x80063E18");
-	#elif MM_U_1_0
-		asm("math_vec3f_distance = 0x80063E18");
-	#endif
+/* Calculate the xyz distance between two vec3f structures.
+return √(((b->x) - (a->x))^2 + ((b->y) - (a->y))^2 + ((b->z) - (a->z))^2);
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_distance`
+*/
+extern float z_lib_vec3f_dist_xyz(
+vec3f_t* a
+, vec3f_t* b
+);
+#if OOT_DEBUG
+    asm("z_lib_vec3f_dist = 0x80077F90");
+#elif OOT_U_1_0
+    asm("z_lib_vec3f_dist = 0x80063E18");
+#elif MM_U_1_0
+    asm("z_lib_vec3f_dist = 0x800FF884");
+#endif
 
-/**
- * calculates distance between two vec3f_t types and also does subtraction out = b - a
- * TODO math_vec3s_sub does out = a - b, this does b - a, confirm whether this is true...
- * A0 = Coord A ptr | A1 = Coord B ptr | A2 = Result B - A ptr | F0 = Distance
- */
-extern float math_vec3f_distance_sub(vec3f_t *a, vec3f_t *b, vec3f_t *out);
-	#if OOT_DEBUG
-		asm("math_vec3f_distance_sub = 0x80077FD0");
-	#elif OOT_U_1_0
-		asm("math_vec3f_distance_sub = 0x80063E5C");
-	#endif
+/* Calculate the distance between two vec3f structures.
+* Store the difference as a vec3f_t.
+* return √((out->x)^2 + (out->y)^2 + (out->z)^2);
+* out = {(b->x - a->x), (b->y - a->y), (b->z - a->z)};
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_distance_sub`
+*/
+extern float z_lib_vec3f_dist_diff(
+vec3f_t* a
+, vec3f_t* b
+, vec3f_t* out
+);
+#if OOT_DEBUG
+    asm("z_lib_vec3f_dist_diff = 0x80077FD0");
+#elif OOT_U_1_0
+    asm("z_lib_vec3f_dist_diff = 0x80063E5C");
+#elif MM_U_1_0
+    asm("z_lib_vec3f_dist_diff = 0x800FF8D4");
+#endif
 
 /* Utilizes the pythagorean theorem to calculate the distance between two vec3f_t vectors (a, b)
 * c = √(a^2 + b^2)
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_vec3f_distance_xz`
 */
-extern float z_lib_distance_xz_vec3f(
+extern float z_lib_vec3f_dist_xz(
 vec3f_t* a /* Vector A */
 , vec3f_t* b /* Vector B */
 );
 #if OOT_DEBUG
-  asm("z_lib_distance_xz_vec3f = 0x80078028");
+  asm("z_lib_vec3f_dist_xz = 0x80078028");
 #elif OOT_U_1_0
-  asm("z_lib_distance_xz_vec3f = 0x80063EB8");
+  asm("z_lib_vec3f_dist_xz = 0x80063EB8");
 #elif MM_U_1_0
-  /*asm("z_lib_distance_xz_vec3f = 0xDEADBEEF");*/
+  asm("z_lib_vec3f_dist_xz = 0x800FF92C");
 #endif
 
 /* Calculate arctan2 (x, z) of two vec3f_t vectors (a, b)
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_vec3f_atan2_xz`
 */
-extern int16_t z_lib_atan2_xz_vec3f(
+extern int16_t z_lib_vec3f_yaw(
 vec3f_t* a /* Vector A */
 , vec3f_t* b /* Vector B */
 );
 #if OOT_DEBUG
-  asm("z_lib_atan2_xz_vec3f = 0x80078068");
+  asm("z_lib_vec3f_yaw = 0x80078068");
 #elif OOT_U_1_0
-  asm("z_lib_atan2_xz_vec3f = 0x80063F00");
+  asm("z_lib_vec3f_yaw = 0x80063F00");
 #elif MM_U_1_0
-  asm("z_lib_atan2_xz_vec3f = 0x800FFA60");
+  asm("z_lib_vec3f_yaw = 0x800FFA60");
 #endif
 
-/**
- * Calculates Arctan2 (distance(XZ), Y) of two coordinates | (A-B for Y coordinate)
- * TODO These notes need converted into a C function prototype
- * A0 = Coord A ptr | A1 = Coord B ptr | V0 = int16_t rotation
- */
-extern int16_t math_vec3f_atan2_xz_y(vec3f_t* coord1, vec3f_t* coord2);
-	#if OOT_DEBUG
-		asm("external_func_8007809C = 0x8007809C");
-	#elif OOT_U_1_0
-		asm("external_func_8007809C = 0x80063F34");
-	#elif MM_U_1_0
-		asm("external_func_8007809C = 0x800FFA94");
-	#endif
+/* Calculates atan2(z_lib_vec3f_yaw(a, b), (a->y - b->y))
+* Source Code Reference File: "z_lib.c"
+* Formerly `math_vec3f_atan2_xz_y`
+*/
+extern int16_t z_lib_vec3f_pitch(
+vec3f_t* a /* Vector A */
+, vec3f_t* b /* Vector B */
+);
+#if OOT_DEBUG
+  asm("z_lib_vec3f_pitch = 0x8007809C");
+#elif OOT_U_1_0
+  asm("z_lib_vec3f_pitch = 0x80063F34");
+#elif MM_U_1_0
+  asm("z_lib_vec3f_pitch = 0x800FFA94");
+#endif
 
 /* Process a chain of variables for the "compact initialization format".
 * Source Code Reference File: "z_lib.c"
@@ -4743,17 +4771,24 @@ z64_actor_t* a /* Actor to Reference */
   asm("z_lib_ichain_init = 0x800FFADC");
 #endif
 
-/**
- * unknown float func" Args="a0 - actor instance + xxxx (offset of the float that will change) | a1 - float | a2 - float  | a3 - float | 0x0010($sp) float"
- */
-extern void external_func_80078310(float *output, float unk1, float unk2, float unk3, float unk4);
-	#if OOT_DEBUG
-		asm("external_func_80078310 = 0x80078310");
-	#elif OOT_U_1_0
-		asm("external_func_80078310 = 0x80064178");
-	#elif MM_U_1_0
-		asm("external_func_80078310 = 0x800FFCD8");
-	#endif
+/* Smoothly Transition (Scale) float to Target
+* Keywords: Tweening
+* Source Code Reference File: "z_lib.c"
+*/
+extern float z_lib_smooth_scale_max_min_f(
+float* src /* Source Float */
+, float target /* Target Float */
+, float scale /* Scale */
+, float max /* Maximum Value to Change By */
+, float min /* Minimum Value to Change By */
+);
+#if OOT_DEBUG
+  asm("z_lib_smooth_scale_max_min_f = 0x80078310");
+#elif OOT_U_1_0
+  asm("z_lib_smooth_scale_max_min_f = 0x80064178");
+#elif MM_U_1_0
+  asm("z_lib_smooth_scale_max_min_f = 0x800FFCD8");
+#endif
 
 /* Smoothly Transition (Scale) float to Target
 * Keywords: Tweening
@@ -4773,15 +4808,22 @@ float* src /* Source Float */
   asm("z_lib_smooth_scale_max_f = 0x800FFDF8");
 #endif
 
-/**
- * TODO probably some kind of tweening function
- */
-extern void external_func_8007848C(float *value, float a, float b);
-	#if OOT_DEBUG
-		asm("external_func_8007848C = 0x8007848C");
-	#elif OOT_U_1_0
-		asm("external_func_8007848C = 0x800642F0");
-	#endif
+/* Smoothly Transition (Scale) float
+* Keywords: Tweening
+* Source Code Reference File: "z_lib.c"
+*/
+extern void z_lib_smooth_downscale_max_f(
+float* src /* Source Float */
+, float scale /* Scale */
+, float max /* Maximum Value to Change By */
+);
+#if OOT_DEBUG
+  asm("z_lib_smooth_downscale_max_f = 0x8007848C");
+#elif OOT_U_1_0
+  asm("z_lib_smooth_downscale_max_f = 0x800642F0");
+#elif MM_U_1_0
+  asm("z_lib_smooth_downscale_max_f = 0x800FFE68");
+#endif
 
 /* Smoothly Transition (Scale) int16_t to Target
 * Source Code Reference File: "z_lib.c"
@@ -4804,7 +4846,7 @@ int16_t* src /* Source Short */
 /* Smoothly Transition (Scale) int16_t to Target
 * Source Code Reference File: "z_lib.c"
 */
-extern void z_lib_smooth_scale_max_s(
+extern int16_t z_lib_smooth_scale_max_s(
 int16_t* src /* Source Short */
 , int16_t target /* Target Short*/
 , int16_t invScale /* Derived from Decomp */
@@ -4815,19 +4857,25 @@ int16_t* src /* Source Short */
 #elif OOT_U_1_0
   asm("z_lib_smooth_scale_max_s = 0x80064624");
 #elif MM_U_1_0
-  /*asm("z_lib_smooth_scale_max_s = 0xDEADBEEF");*/
+  asm("z_lib_smooth_scale_max_s = 0x800FFFD8");
 #endif
 
-/**
- * Copy uint8_t[4] array
- * A0 = Destination ptr | A1 = Source ptr
- */
-extern void mem_copy_uint8_t_4(void *dest, void *src);
-	#if OOT_DEBUG
-		asm("mem_copy_uint8_t_4 = 0x80078860");
-	#elif OOT_U_1_0
-		asm("mem_copy_uint8_t_4 = 0x800646C8");
-	#endif
+/* Copy 4 bytes from src to dest
+* The decomp calls this `Color_RGBA8_Copy`
+* Source Code Reference File: "z_lib.c"
+* Formerly `mem_copy_uint8_t_4`
+*/
+extern void z_lib_word_copy(
+void* dest
+, void* src
+);
+#if OOT_DEBUG
+  asm("z_lib_word_copy = 0x80078860");
+#elif OOT_U_1_0
+  asm("z_lib_word_copy = 0x800646C8");
+#elif MM_U_1_0
+  asm("z_lib_word_copy = 0x8010007C");
+#endif
 
 /**
  * Play SFX (limited set, identical to 80064738)

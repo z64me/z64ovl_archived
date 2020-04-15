@@ -63,3 +63,14 @@
 #define object_load z_scene_object_load
 #define actor_shadow_circle z_actor_shadow_draw_vec3f
 #define sound_play_general z_sfx_play_system
+#define math_vec3f_from_vec3s z_lib_vec3s_to_vec3f
+#define math_vec3f_add z_lib_vec3f_sum
+#define math_vec3f_sub z_lib_vec3f_diff
+#define math_vec3s_sub z_lib_vec3s_diff_to_vec3f
+#define math_vec3f_mul_scalar z_lib_vec3f_scale
+#define math_vec3f_distance z_lib_vec3f_dist_xyz
+#define math_distance_sub z_lib_vec3f_dist_diff
+#define z_lib_distance_xz_vec3f
+#define z_lib_atan2_xz_vec3f z_lib_vec3f_yaw
+#define math_vec3f_atan2_xz_y z_lib_vec3f_pitch
+#define mem_copy_uint8_t_4 z_lib_word_copy
