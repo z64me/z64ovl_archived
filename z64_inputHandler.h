@@ -141,8 +141,8 @@ void update_z64_inputHandler_t(z64_inputHandler_t* inputHandler, float currentTi
 	buttonDown = inputHandler->controller->cr;
 	updateButton(&inputHandler->cr, buttonDown, currentTime);
 
-	inputHandler->jx = (float)inputHandler->controller->x * 0.0078125f;
-	inputHandler->jy = (float)inputHandler->controller->y * 0.0078125f;
+	inputHandler->jx = (float)inputHandler->controller->x * (1.0f / 128);
+	inputHandler->jy = (float)inputHandler->controller->y * (1.0f / 128);
 }
 
 #endif
