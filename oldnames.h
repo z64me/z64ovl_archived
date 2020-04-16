@@ -74,3 +74,4 @@
 #define z_lib_atan2_xz_vec3f z_lib_vec3f_yaw
 #define math_vec3f_atan2_xz_y z_lib_vec3f_pitch
 #define mem_copy_uint8_t_4 z_lib_word_copy
+#define external_func_800D1A54 z_matrix_top_to_fixed

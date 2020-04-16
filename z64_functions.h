@@ -7421,7 +7421,7 @@ float z /* The angle in degrees to roll the matrix by. */
   asm("z_matrix_roll = 0x80180E90");
 #endif
 
-/* Rotate a matrix along the X, Y, and Z axes.
+/* Rotate a matrix along the Z, Y, and X axes.
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_rotate`
 */
@@ -7437,16 +7437,20 @@ int16_t x, int16_t y, int16_t z /* X, Y, and Z Rotation */
   /*asm("z_matrix_rotate_3s = 0xDEADBEEF");*/
 #endif
 
-/**
- * TODO This function is completely undocumented
- * Matrix_softcv3_mult
- */
-extern void external_func_800D1340(void);
-	#if OOT_DEBUG
-		asm("external_func_800D1340 = 0x800D1340");
-	#elif OOT_U_1_0
-		asm("external_func_800D1340 = 0x800AB1BC");
-	#endif
+/* Translate a matrix and then rotate it.
+* Source Code Reference File: "sys_matrix.c"
+*/
+extern void z_matrix_translate_rotate(
+vec3f_t* translation
+, vec3s_t* rotation
+);
+#if OOT_DEBUG
+  asm("z_matrix_translate_rotate = 0x800D1340");
+#elif OOT_U_1_0
+  asm("z_matrix_translate_rotate = 0x800AB1BC");
+#elif MM_U_1_0
+  /*asm("z_matrix_translate_rotate = 0xDEADBEEF");*/
+#endif
 
 /**
  * Create x,y,z transformation and apply rotation on Float Matrix Stack
@@ -7460,29 +7464,38 @@ extern void external_func_800D1694(void);
 		asm("external_func_800D1694 = 0x800AB510");
 	#endif
 
-/**
- * guMtxF2L -- mtxutil.c from libultra SDK
- */
-extern void _guMtxF2L(float mf[4][4], Mtx *m);
-	#if OOT_DEBUG
-		asm("_guMtxF2L = 0x800D1840");
-	#elif OOT_U_1_0
-		asm("_guMtxF2L = 0x800AB6BC");
-	#elif MM_U_1_0
-		asm("_guMtxF2L = 0x801817FC");
-	#endif
+/* Convert a floating-point matrix to a s15.16 fixed-point matrix.
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `_guMtxF2L`
+*/
+extern Mtx* z_matrix_float_to_fixed(
+float* src
+, Mtx* dest
+);
+#if OOT_DEBUG
+  asm("z_matrix_float_to_fixed = 0x800D1840");
+#elif OOT_U_1_0
+  asm("z_matrix_float_to_fixed = 0x800AB6BC");
+#elif MM_U_1_0
+  asm("z_matrix_float_to_fixed = 0x801817FC");
+#endif
 
-/**
- * Converts the Top in the Float Matrix Stack to a fixed point32_t matrix
- * TODO These notes need converted into a C function prototype
- * A0 = Destination for the Fixed Point32_t Matrix
- */
-extern void external_func_800D1A54(void);
-	#if OOT_DEBUG
-		asm("external_func_800D1A54 = 0x800D1A54");
-	#elif OOT_U_1_0
-		asm("external_func_800D1A54 = 0x800AB8D8");
-	#endif
+/* Convert the top floating-point matrix to a s15.16 fixed-point matrix.
+* Source Code Reference File: "sys_matrix.c"
+* Formerly `external_func_800D1A54`
+*/
+extern Mtx* z_matrix_top_to_fixed(
+Mtx* dest
+, char* file
+, int32_t line
+);
+#if OOT_DEBUG
+  asm("z_matrix_top_to_fixed = 0x800D1A54");
+#elif OOT_U_1_0
+  asm("z_matrix_top_to_fixed = 0x800AB8D8");
+#elif MM_U_1_0
+  /*asm("z_matrix_top_to_fixed = 0xDEADBEEF");*/
+#endif
 
 /**
  * Converts and Appends the Float Matrix Stack's top matrix to POLY_OPA_DISP end
@@ -8178,24 +8191,34 @@ extern void external_func_800FCC6C(void);
 		asm("external_func_800FCC6C = 0x800CCED4");
 	#endif
 
+/* Return tangent of `x`. */
+extern float z_tan_f(float x);
+#if OOT_DEBUG
+  asm("z_tan_f = 0x800FCE80");
+#elif OOT_U_1_0
+  /*asm("z_tan_f = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_tan_f = 0xDEADBEEF");*/
+#endif
+
 /**
- * TODO What does this function do?
+ * Atan
  */
-extern float z_atan_fast(float in);
+extern float z_atanf(float x);
 	#if OOT_DEBUG
-		asm("z_atan_fast = 0x800FD0C4");
+		asm("z_atanf = 0x800FD0C4");
 	#elif OOT_U_1_0
-		asm("z_atan_fast = 0x800CD648");
+		asm("z_atanf = 0x800CD648");
 	#endif
 
 /**
- * TODO What does this function do?
+ * Atan2
  */
-extern float z_atan2_(float y, float x);
+extern float z_atan2f(float y, float x);
 	#if OOT_DEBUG
-		asm("z_atan2_ = 0x800FD250");
+		asm("z_atan2f = 0x800FD250");
 	#elif OOT_U_1_0
-		asm("z_atan2_ = 0x800CD76C");
+		asm("z_atan2f = 0x800CD76C");
 	#endif
 
 /**
