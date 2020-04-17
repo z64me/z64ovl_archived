@@ -206,19 +206,19 @@ extern void* allocate_from_top(void* heap_ptr, int32_t alloc_size);
 	#endif
 
 /**
- * print32_t a debug message to the console
- * use DEBUG_MESSAGE(), which will disable debug_message() calls unless compiling with DEBUG defined
+ * print a debug message to the console
+ * use DEBUG_LOG(), which will disable z_console_log() calls unless compiling with DEBUG defined
  */
-extern void debug_message(const char *msg, ...);
+extern void z_console_log(const char *msg, ...);
 #ifdef DEBUG
-	#define DEBUG_MESSAGE debug_message
+	#define DEBUG_LOG z_console_log
 #else
-	#define DEBUG_MESSAGE
+	#define DEBUG_LOG
 #endif
 	#if OOT_DEBUG
-		asm("debug_message = 0x80002130");
+		asm("z_console_log = 0x80002130");
 	#elif OOT_U_1_0
-		asm("debug_message = 0x800ADBF8"); /* 15BC */
+		asm("z_console_log = 0x800ADBF8"); /* 15BC */
 	#endif
 
 /**
@@ -5697,6 +5697,16 @@ extern Gfx* external_func_800937C0(Gfx *p);
 /**
  * Jump To Display List
  */
+extern void external_func_80094140(z64_gfx_t *g);
+	#if OOT_DEBUG
+		asm("external_func_80094140 = 0x80094140");
+	#elif OOT_U_1_0
+		/*asm("external_func_80094140 = 0xDEADBEEF");*/
+	#endif
+
+/**
+ * Jump To Display List
+ */
 extern void external_func_80094520(z64_gfx_t *g);
 	#if OOT_DEBUG
 		asm("external_func_80094520 = 0x80094520");
@@ -6636,7 +6646,7 @@ extern void external_func_800AA148(void);
  * A0 = VIEW struct ptr | A1 = Graphics Context ptr
  * This function is not used inside any existing overlay
  */
-extern void external_func_800AA278(void);
+extern void external_func_800AA278(void* view, z64_gfx_t* gfx);
 	#if OOT_DEBUG
 		asm("external_func_800AA278 = 0x800AA278");
 	#elif OOT_U_1_0
@@ -6951,6 +6961,17 @@ extern void external_func_800C3770(void);
 		asm("external_func_800C3770 = 0x800C3770");
 	#elif OOT_U_1_0
 		asm("external_func_800C3770 = 0x8009FDEC");
+	#endif
+
+/**
+ * TODO This function is completely undocumented
+ * This function is not used inside any existing overlay
+ */
+extern uint32_t z_game_alloc(z64_global_t* gl, int32_t size, char* file, int32_t line);
+	#if OOT_DEBUG
+		asm("z_game_alloc = 0x800C5484");
+	#elif OOT_U_1_0
+		/*asm("z_game_alloc = 0xDEADBEEF");*/
 	#endif
 
 /**
@@ -8079,7 +8100,7 @@ extern void external_func_800F8FF4(void);
  * Change background music
  * TODO Confirm music_id type
  */
-extern void sound_set_bgm(uint8_t music_id);
+extern void sound_set_bgm(uint32_t music_id);
 	#if OOT_DEBUG
 		asm("sound_set_bgm = 0x800FA00C");
 	#elif OOT_U_1_0
@@ -8131,7 +8152,7 @@ extern void debug_init_text_struct(z64_debug_text_t *text_struct);
  * TODO These notes need converted into a C function prototype
  * This function is not used inside any existing overlay
  */
-extern void external_func_800FBC14(void);
+extern void external_func_800FBC14(z64_debug_text_t* t);
 	#if OOT_DEBUG
 		asm("external_func_800FBC14 = 0x800FBC14");
 	#elif OOT_U_1_0

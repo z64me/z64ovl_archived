@@ -67,7 +67,7 @@ typedef struct z64_game_state_s { /* Game State Structure */
     z64_gfx_t * gfx_ctxt; /* Graphics Context Address */
     void * state_main;
     void * state_dtor;
-    uint32_t next_ctor;
+    void * next_ctor;
     uint32_t next_size;
     z64_input_t input[4];
     uint32_t state_heap_size;
