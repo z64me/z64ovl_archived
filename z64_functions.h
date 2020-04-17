@@ -8492,6 +8492,24 @@ extern uint32_t player_talk_state(z64_global_t *gl_20D8);
 	#endif
 
 /**
+ * Game sound on/off (except global sounds), if off, music volume -50%
+ */
+extern void external_func_800F64E0(u32 onoff);
+	#if OOT_DEBUG
+		asm("external_func_800F64E0 = 0x800F64E0");
+	#endif
+
+
+/**
+ * Unknown (used on unpause) first arg is global+0x7C0
+ */
+extern void external_func_800418D0(u32 global7C0,z64_global_t *global);
+	#if OOT_DEBUG
+		asm("external_func_800418D0 = 0x800418D0");
+	#endif
+
+
+/**
  Refresh Link's instance equipment, a0 = global context, a1 = link instance
  */
 extern uint32_t player_refresh_equipment(z64_global_t *global, z64_actor_t *actor);
