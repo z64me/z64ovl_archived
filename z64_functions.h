@@ -3863,56 +3863,59 @@ extern void external_func_8005D160(void);
 
 /* Subscribe to Collision Pool 1
 * (AT; Attack Toucher)
+* Deal Damage
 * Source Code Reference File: "z_collision_check.c"
 * Formerly `actor_collision_check_set_at`
 */
-extern void z_collider_set_at(
+extern void z_collider_hitbox(
 z64_global_t* gl /* Global Context */
 , z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
 , z64_collider_cylinder_main_t* c /* Collider Structure */
 );
 #if OOT_DEBUG
-  asm("z_collider_set_at = 0x8005D79C");
+  asm("z_collider_hitbox = 0x8005D79C");
 #elif OOT_U_1_0
-  asm("z_collider_set_at = 0x8004BD50");
+  asm("z_collider_hitbox = 0x8004BD50");
 #elif MM_U_1_0
-  asm("z_collider_set_at = 0x800E2634");
+  asm("z_collider_hitbox = 0x800E2634");
 #endif
 
 /* Subscribe to Collision Pool 2
 * (AC; Attack Checker)
+* Take Damage
 * Source Code Reference File: "z_collision_check.c"
 * Formerly `actor_collision_check_set_ac`
 */
-extern void z_collider_set_ac(
+extern void z_collider_hurtbox(
 z64_global_t* gl /* Global Context */
 , z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
 , z64_collider_cylinder_main_t* c /* Collider Structure */
 );
 #if OOT_DEBUG
-  asm("z_collider_set_ac = 0x8005D9F4");
+  asm("z_collider_hurtbox = 0x8005D9F4");
 #elif OOT_U_1_0
-  asm("z_collider_set_ac = 0x8004BF40");
+  asm("z_collider_hurtbox = 0x8004BF40");
 #elif MM_U_1_0
-  asm("z_collider_set_ac = 0x800E2740");
+  asm("z_collider_hurtbox = 0x800E2740");
 #endif
 
 /* Subscribe to Collision Pool 3
 * (OT; (Object?) Toucher)
+* Solid Collision - No Damage
 * Source Code Reference File: "z_collision_check.c"
 * Formerly `actor_collision_check_set_ot`
 */
-extern void z_collider_set_ot(
+extern void z_collider_bumpbox(
 z64_global_t* gl /* Global Context */
 , z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
 , z64_collider_cylinder_main_t* c /* Collider Structure */
 );
 #if OOT_DEBUG
-  asm("z_collider_set_ot = 0x8005DC4C");
+  asm("z_collider_bumpbox = 0x8005DC4C");
 #elif OOT_U_1_0
-  asm("z_collider_set_ot = 0x8004C130");
+  asm("z_collider_bumpbox = 0x8004C130");
 #elif MM_U_1_0
-  asm("z_collider_set_ot = 0x800E2928");
+  asm("z_collider_bumpbox = 0x800E2928");
 #endif
 
 /**
@@ -6623,7 +6626,7 @@ extern void external_func_800A9F6C(float a, uint8_t b, uint8_t c, uint8_t d);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800AA000(float a, uint8_t b, uint8_t c, uint8_t d);
+extern void external_func_800AA000(float a, uint32_t b, uint8_t duration, uint8_t c, uint8_t step);
 	#if OOT_DEBUG
 		asm("external_func_800AA000 = 0x800AA000");
 	#elif OOT_U_1_0

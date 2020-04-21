@@ -75,3 +75,6 @@
 #define math_vec3f_atan2_xz_y z_lib_vec3f_pitch
 #define mem_copy_uint8_t_4 z_lib_word_copy
 #define external_func_800D1A54 z_matrix_top_to_fixed
+#define z_collider_set_ac z_collider_hurtbox
+#define z_collider_set_ot z_collider_bumpbox
+#define z_collider_set_at z_collider_hitbox
