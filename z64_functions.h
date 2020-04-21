@@ -194,15 +194,44 @@ extern void player_swap_age_equipment(void);
         asm("player_swap_age_equipment = 0x8006F804");
     #endif
 
-/**
- * Allocates to the tail end of the given heap (0x10 aligned)
- * A0 = Allocation Handle ptr | A1 = Size | V0 = ptr to free space
+/*
+ * z_assert(condition)
+ *    writes info to the console if a condition is not true;
+ *    you use this for conditions that should always be true
+ *
+ * NOTE
+ *    all assertions are ignored and stripped from the
+ *    binary when the compilation flag -DNDEBUG is used
+ *
+ * USAGE
+ *    if (z_assert(x != 0)) {
+ *       // this block is executed when x == 0
+ *    }
+ * 
+ *    or simply:
+ *       z_assert(x != 0);
  */
-extern void* allocate_from_top(void* heap_ptr, int32_t alloc_size);
+#undef z_assert
+#ifdef NDEBUG
+   #define z_assert(CONDITION) ((void*)0)
+#else
+   #define z_assert(CONDITION)                                   \
+      (                                                          \
+         (CONDITION)                                             \
+         ? 0                                                     \
+         : (z_assert_message(#CONDITION, __FILE__, __LINE__), 1) \
+      )
+#endif
+
+/**
+ * called on assertion failure
+ * [!] don't use this directly; use z_assert instead
+ */
+extern void z_assert_message(char *mesg, char *fn, int line);
 	#if OOT_DEBUG
-		asm("external_func_80001FF0 = 0x80001FF0");
+		asm("z_assert_message = 0x80001FF0");
 	#elif OOT_U_1_0
-		asm("external_func_80001FF0 = 0x800A01B8");
+		asm("z_assert_message = 0x800A01B8");
 	#endif
 
 /**

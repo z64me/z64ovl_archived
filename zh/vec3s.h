@@ -20,7 +20,7 @@
 #define STOR(RHS) (S2RAD * RHS)
 #define STOD(RHS) (S2DEG * RHS)
 #define RTOS(RHS) (RAD2S * RHS)
-#define RTOD(RHS) (RAD2D * RHS)
+#define DTOS(RHS) (DEG2S * RHS)
 #define DTOR(RHS) (DEG2RAD * RHS)
 #define RTOD(RHS) (RAD2DEG * RHS)
 
