@@ -8540,6 +8540,22 @@ extern void external_func_800418D0(u32 global7C0,z64_global_t *global);
 		asm("external_func_800418D0 = 0x800418D0");
 	#endif
 
+/**
+ * Stores permanent flags in the save context (use it before saving the game)
+ */
+extern void save_flags(z64_global_t *global);
+	#if OOT_DEBUG
+		asm("save_flags = 0x800C0A44");
+	#endif
+
+/**
+ * Saves the game (save context) in the current file slot
+ */
+extern void save_game(u32 global1F74,z64_global_t *global);
+	#if OOT_DEBUG
+		asm("save_game = 0x800A88D4");
+	#endif
+
 
 /**
  Refresh Link's instance equipment, a0 = global context, a1 = link instance
