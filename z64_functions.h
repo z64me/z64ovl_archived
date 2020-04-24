@@ -5886,7 +5886,7 @@ extern void external_func_80094968(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80094B58(void);
+extern void external_func_80094B58(z64_gfx_t* gfx_ctxt);
 	#if OOT_DEBUG
 		asm("external_func_80094B58 = 0x80094B58");
 	#elif OOT_U_1_0
