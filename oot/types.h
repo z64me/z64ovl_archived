@@ -1014,7 +1014,7 @@ typedef struct {
 
 typedef struct
 {
-  u8 unk00[0x4C];
+  uint8_t unk00[0x4C];
   z64_skelanime_t skelanime;
 } z64_skelanime_weighted_t;
 

@@ -2511,7 +2511,7 @@ extern void external_func_80033E88(void);
  * TODO These notes need converted into a C function prototype
  * F12 = N, exclusive upper bound | F0 = result
  */
-extern f32 math_rand_f32(float n);
+extern float math_rand_f32(float n);
 	#if OOT_DEBUG
 		asm("math_rand_f32 = 0x80033EF8");
 	#elif OOT_U_1_0
@@ -6925,11 +6925,11 @@ extern void external_func_800C0AF4(void);
  * Triggers a "void out" (where you get reset to the last safe position, i.e when you take too long in the
  * Dampe Race, fall into a pit, etc.
  */
-extern void void_out(z64_global_t *global);
+extern void z_void_out(z64_global_t *global);
 	#if OOT_DEBUG
-		asm("external_func_800C0B60 = 0x800C0B60");
+		asm("z_void_out = 0x800C0B60");
 	#elif OOT_U_1_0
-		asm("external_func_800C0B60 = 0x8009D9B8");
+		asm("z_void_out = 0x8009D9B8");
 	#endif
 
 /**
@@ -8526,7 +8526,7 @@ extern uint32_t player_talk_state(z64_global_t *gl_20D8);
 /**
  * Game sound on/off (except global sounds), if off, music volume -50%
  */
-extern void external_func_800F64E0(u32 onoff);
+extern void external_func_800F64E0(uint32_t onoff);
 	#if OOT_DEBUG
 		asm("external_func_800F64E0 = 0x800F64E0");
 	#endif
@@ -8535,7 +8535,7 @@ extern void external_func_800F64E0(u32 onoff);
 /**
  * Unknown (used on unpause) first arg is global+0x7C0
  */
-extern void external_func_800418D0(u32 global7C0,z64_global_t *global);
+extern void external_func_800418D0(uint32_t global7C0,z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_800418D0 = 0x800418D0");
 	#endif
