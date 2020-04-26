@@ -4711,11 +4711,11 @@ vec3f_t* a
 , vec3f_t* b
 );
 #if OOT_DEBUG
-    asm("z_lib_vec3f_dist = 0x80077F90");
+    asm("z_lib_vec3f_dist_xyz = 0x80077F90");
 #elif OOT_U_1_0
-    asm("z_lib_vec3f_dist = 0x80063E18");
+    asm("z_lib_vec3f_dist_xyz = 0x80063E18");
 #elif MM_U_1_0
-    asm("z_lib_vec3f_dist = 0x800FF884");
+    asm("z_lib_vec3f_dist_xyz = 0x800FF884");
 #endif
 
 /* Calculate the distance between two vec3f structures.
