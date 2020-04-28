@@ -6689,7 +6689,7 @@ extern void external_func_800AA278(void* view, z64_gfx_t* gfx);
  * TODO This function is completely undocumented
  * This function is not used inside any existing overlay
  */
-extern void external_func_800AA358(void);
+extern void external_func_800AA358(void* view, vec3f_t* eye, vec3f_t* vec2, vec3f_t* vec3);
 	#if OOT_DEBUG
 		asm("external_func_800AA358 = 0x800AA358");
 	#elif OOT_U_1_0
