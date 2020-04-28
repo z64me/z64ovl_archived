@@ -1780,7 +1780,7 @@ z64_global_t* gl /* Global Context */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002EABC(void);
+extern void * external_func_8002EABC(vec3f_t* object, vec3f_t* eye, vec3f_t* lightDir, z64_gfx_t* gfx_ctxt);
 	#if OOT_DEBUG
 		asm("external_func_8002EABC = 0x8002EABC");
 	#elif OOT_U_1_0
