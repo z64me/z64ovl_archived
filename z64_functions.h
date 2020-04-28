@@ -7310,7 +7310,7 @@ extern void external_func_800D07D4(void);
  * This function is not used inside any existing overlay
  * new_Matrix
  */
-extern void matrix_stack_new(void);
+extern void matrix_stack_new(void *gameState);
 	#if OOT_DEBUG
 		asm("matrix_stack_new = 0x800D0810");
 	#elif OOT_U_1_0
