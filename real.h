@@ -13,7 +13,7 @@
 */
 extern void _z_skelanime_draw(
 z64_global_t* gl /* Global Context */
-, uint32_t limb_index /* Skelanime Limb Index */
+, void* limb_index /* Skelanime Limb Index */
 , void* dtstart /* Skelanime Draw Table Start */
 , int32_t callback0( /* This must return 0 */
 	z64_global_t* gl /* Global Context */
@@ -52,12 +52,12 @@ extern
 void
 _z_skelanime_draw_mtx(
   z64_global_t *global
-, uint32_t limb_index
-, uint32_t adt
+, void* limb_index
+, void* adt
 , uint8_t limb_dlists_count
 , int32_t callback0(            /* callback0 must return 0 */
 	  z64_global_t *global
-	, uint8_t limb           /* limb index in skeleton */
+	, int limb               /* limb index in skeleton */
 	, uint32_t *dlist        /* *dlist = 0x06xxxxxx changes limb model */
 	, vec3f_t *translation
 	, vec3s_t *rotation
@@ -65,7 +65,7 @@ _z_skelanime_draw_mtx(
   )
 , void callback1(
 	  z64_global_t *global
-	, uint8_t limb
+	, int limb
 	, uint32_t dlist         /* different from callback0, needs more research */
 	, vec3s_t *rotation
 	, void *entity
