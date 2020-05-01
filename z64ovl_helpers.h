@@ -198,7 +198,7 @@ zh_get_pointer_to_object_data(uint16_t object_id, z64_global_t *global)
 		return NULL;
 
 	return
-		(void*)AADDR
+		(void*)*(uint32_t*)AADDR
 		(
 			(((index << 4) + index) << 2) + (u32)global
 			, 0x117B4
