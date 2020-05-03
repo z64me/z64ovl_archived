@@ -7952,9 +7952,9 @@ extern void external_func_800F5A58(void);
  */
 extern void play_midboss_music(uint32_t musicID);
 	#if OOT_DEBUG
-		asm("external_func_800F5ACC = 0x800F5ACC");
+		asm("play_midboss_music = 0x800F5ACC");
 	#elif OOT_U_1_0
-		asm("external_func_800F5ACC = 0x800C6820");
+		asm("play_midboss_music = 0x800C6820");
 	#endif
 
 /**
