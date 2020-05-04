@@ -7606,9 +7606,9 @@ extern void external_func_800D1AF4(vec3f_t *in, vec3f_t *out);
  */
 extern void matrix_copy(void *dst, void *src);
 	#if OOT_DEBUG
-		asm("external_func_800D1BA8 = 0x800D1BA8");
+		asm("matrix_copy = 0x800D1BA8");
 	#elif OOT_U_1_0
-		asm("external_func_800D1BA8 = 0x800ABA10");
+		asm("matrix_copy = 0x800ABA10");
 	#elif MM_U_1_0
 		/* TODO */
 	#endif
