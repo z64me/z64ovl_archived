@@ -7512,17 +7512,19 @@ vec3f_t* translation
   /*asm("z_matrix_translate_rotate = 0xDEADBEEF");*/
 #endif
 
-/**
- * Create x,y,z transformation and apply rotation on Float Matrix Stack
- * TODO These notes need converted into a C function prototype
- * F12 = float x | F14 = float y | A2 = float z | A3 = ptr to uint16_t rotation
- */
-extern void external_func_800D1694(void);
-	#if OOT_DEBUG
-		asm("external_func_800D1694 = 0x800D1694");
-	#elif OOT_U_1_0
-		asm("external_func_800D1694 = 0x800AB510");
-	#endif
+/* Translate the top matrix on the stack along the X, Y, and Z axes.
+* Used in drawing the Bunny Hood Ears
+* Source Code Reference File: "sys_matrix.c"
+*/
+extern void z_matrix_translate_3f_800D1694(
+float x, float y, float z
+, vec3s_t* r
+);
+#if OOT_DEBUG
+	asm("z_matrix_translate_3f_800D1694 = 0x800D1694");
+#elif OOT_U_1_0
+	asm("z_matrix_translate_3f_800D1694 = 0x800AB510");
+#endif
 
 /* Convert a floating-point matrix to a s15.16 fixed-point matrix.
 * Source Code Reference File: "sys_matrix.c"
