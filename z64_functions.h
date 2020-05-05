@@ -1358,9 +1358,9 @@ extern void flag_set_scenecollect(z64_global_t *global, int32_t flag);
 
 /**
  * Boss Title
- * A0 - global context | A1 - A0 + 0x1D4C | A2 - (object pointer + texture offset inside the object)
+ * A0 - global context | A1 - A0 + 0x1D4C (Title Card Context) | A2 - (object pointer + texture offset inside the object)
  */
-extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1D4C, uint32_t texture);
+extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1D4C, uint32_t texture, int16_t arg3, int16_t arg4, uint8_t arg5, uint8_t arg6);
 	#if OOT_DEBUG
 		asm("actor_boss_title = 0x8002CE00");
 	#elif OOT_U_1_0
