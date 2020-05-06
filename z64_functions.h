@@ -8242,7 +8242,7 @@ extern void z_overlay_do_relocation(void* overlay_file, void* overlay_header, vo
 	#elif OOT_U_1_0
 		asm("z_overlay_do_relocation = 0x800CC8F0");
 	#elif MM_U_1_0
- 	 	asm("z_overlay_do_relocation = 0x800849A0");
+ 		asm("z_overlay_do_relocation = 0x800849A0");
 	#endif
 
 /**

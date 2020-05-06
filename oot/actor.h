@@ -30,20 +30,6 @@ typedef struct z64_actor_init_s{
   void *draw;        /* Draw Function */
 } z64_actor_init_t;
 
-typedef struct collision_check_s { /* Substruct 0x0098 */
-  z64_damagechart_t *damage_table;
-  vec3f_t           vel_2;
-  int16_t           unk_0B_0;
-  int16_t           unk_0B_1;
-  uint16_t          unk_0B_2;
-  uint8_t           mass;
-  uint8_t           health;
-  uint8_t           damage;
-  uint8_t           damage_effect;
-  uint8_t           impact_effect;
-  int8_t            unk_0D;
-} z64_collision_check_t;
-
 typedef struct z64_actor_s z64_actor_t;
 struct z64_actor_s {                    /* Common Actor Instance Structure */
     int16_t actor_id;                   /* Actor Number */
