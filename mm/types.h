@@ -835,6 +835,71 @@ typedef struct
     uint32_t        unk_0x164;              /* 0x0168 */
 } z64_view_t;
 
+typedef struct{
+    char        unk_0x00[0x168];    /* 0x0000 */
+    void       *icon_item_static;   /* 0x0168 */
+    void       *icon_item_24;       /* 0x016C */
+    void       *icon_item_map;      /* 0x0170 */
+    void       *icon_text;          /* 0x0174 */
+    void       *unk_text_0x178;     /* 0x0178 */
+    Gfx        *bg_dlist;           /* 0x017C */
+    char        unk_0x180[0x6C];    /* 0x0180 */
+    uint16_t    state;              /* 0x01EC */
+    uint16_t    debug_menu;         /* 0x01EE */
+    char        unk_0x1F0[0x10];    /* 0x01F0 */
+    uint16_t    switching_screen;   /* 0x0200 */
+    uint16_t    unk_0x202;          /* 0x0202 */
+    uint16_t    screen_idx;         /* 0x0204 */
+    char        unk_0x206[0x3C];    /* 0x0206 */
+    uint16_t    item_x;             /* 0x0242 */
+    char        unk_0x244[0x4];     /* 0x0244 */
+    uint16_t    mask_x;             /* 0x0248 */
+    char        unk_0x24A[0x2];     /* 0x024A */
+    uint16_t    item_y;             /* 0x024C */
+    char        unk_0x24E[0x4];     /* 0x024E */
+    uint16_t    mask_y;             /* 0x0252 */
+    char        unk_0x254[0x8];     /* 0x0254 */
+    uint16_t    selected_item;      /* 0x025C */
+    uint16_t    item_item;          /* 0x025E */
+    uint16_t    map_item;           /* 0x0260 */
+    uint16_t    quest_item;         /* 0x0262 */
+    uint16_t    mask_item;          /* 0x0264 */
+    uint16_t    unk_0x266;          /* 0x0266 */
+    uint16_t    item_cell;          /* 0x0268 */
+    uint16_t    map_cell;           /* 0x026A */
+    uint16_t    quest_cell;         /* 0x026C */
+    uint16_t    mask_cell;          /* 0x026E */
+} z2_pause_ctxt_t;                  /* 0x0270 */
+
+typedef struct{
+    char        unk_0x00[0x170];        /* 0x0000 */
+    void       *parameter;       /* 0x0170 */
+    void       *do_action_static;       /* 0x0174 */
+    void       *icon_item_static;       /* 0x0178 */
+    void       *minimap_texture;        /* 0x017C */
+    char        unk_0x180[0x04];        /* 0x0180 */
+    uint32_t    action_rom_addr;        /* 0x0184 */
+    void       *action_ram;             /* 0x0188 */
+    uint32_t    action_size;            /* 0x018C */
+    char        unk_0x190[0xD4];        /* 0x0190 */
+    union{
+        struct{
+            uint16_t    fadeout_alpha;          /* 0x0264 */
+            uint16_t    a_alpha;                /* 0x0266 */
+            uint16_t    b_alpha;                /* 0x0268 */
+            uint16_t    c_left_alpha;           /* 0x026A */
+            uint16_t    c_down_alpha;           /* 0x026C */
+            uint16_t    c_right_alpha;          /* 0x026E */
+            uint16_t    hearts_alpha;           /* 0x0270 */
+            uint16_t    rupees_alpha;           /* 0x0272 */
+        };
+        uint16_t        alphas[0x08];           /* 0x0264 */
+    };               
+    char        unk_0x0274[0x9A];       /* 0x0274 */
+    uint8_t     restriction_flags[0xC]; /* 0x030E */
+    char        unk_0x031A[0x2E];       /* 0x031A */
+} z64_if_ctxt_t;     
+
 /* game context */
 typedef struct {
     z64_game_state_t           common;                 /* 0x00000 */
@@ -860,7 +925,9 @@ typedef struct {
     uint8_t             message_state_2;        /* 0x16928 */
     char                unk_0x16829[0x02];      /* 0x16929 */
     uint8_t             message_state_3;        /* 0x1692B */
-    char                unk_0x1692C[0x145C];    /* 0x1692C */
+    char                unk_0x1692C[0xBC];      /* 0x1692C */
+    z64_if_ctxt_t       if_ctxt;                /* 0x169E8 */
+    char                unk_0x16D30[0x1058]     /* 0x16D30 */
     z64_obj_ctxt_t      obj_ctx;                /* 0x17D88 */
     z64_room_ctxt_t     room_ctx;               /* 0x186E0 */
     uint8_t             room_cnt;               /* 0x18760 */
