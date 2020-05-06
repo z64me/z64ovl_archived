@@ -891,7 +891,7 @@ typedef struct {
     uint8_t             message_state_3;        /* 0x1692B */
     char                unk_0x1692C[0xBC];      /* 0x1692C */
     z64_if_ctxt_t       if_ctxt;                /* 0x169E8 */
-    char                unk_0x16D30[0x1058]     /* 0x16D30 */
+    char                unk_0x16D30[0x1058];     /* 0x16D30 */
     z64_obj_ctxt_t      obj_ctx;                /* 0x17D88 */
     z64_room_ctxt_t     room_ctx;               /* 0x186E0 */
     uint8_t             room_cnt;               /* 0x18760 */
