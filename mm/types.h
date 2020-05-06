@@ -629,42 +629,6 @@ typedef struct
                                               /* 0x0080 */
 } z64_room_ctxt_t;
 
-/* interface context */
-typedef struct
-{
-  char              unk_00_[0x0130];          /* 0x0000 */
-  char             *parameter;                /* 0x0130 */
-  char             *action_texture;           /* 0x0134 */
-  char             *item_texture;             /* 0x0138 */
-  char             *minimap_texture;          /* 0x013C */
-  char              unk_01_[0x00AC];          /* 0x0140 */
-  uint16_t          h1EC;                     /* 0x01EC */
-  char              unk_02_[0x0002];          /* 0x01EE */
-  uint16_t          a_action;                 /* 0x01F0 */
-  char              unk_03_[0x0002];          /* 0x01F2 */
-  float             f1F4;                     /* 0x01F4 */
-  char              unk_04_[0x0004];          /* 0x01F8 */
-  int16_t           b_label;                  /* 0x01FC */
-  char              unk_05_[0x0064];          /* 0x01FE */
-  struct
-  {
-    uint8_t         unk_00_;
-    uint8_t         b_button;
-    uint8_t         unk_01_;
-    uint8_t         bottles;
-    uint8_t         trade_items;
-    uint8_t         hookshot;
-    uint8_t         ocarina;
-    uint8_t         warp_songs;
-    uint8_t         suns_song;
-    uint8_t         farores_wind;
-    uint8_t         dfnl;
-    uint8_t         all;
-  }                 restriction_flags;        /* 0x0262 */
-  char              unk_06_[0x0002];          /* 0x026E */
-                                              /* 0x0270 */
-} z64_if_ctxt_t;
-
 typedef struct
 {
   char              unk_00_[0x0128];          /* 0x0000 */
