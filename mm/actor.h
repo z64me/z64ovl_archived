@@ -53,6 +53,7 @@ struct z64_actor_s {                    /* Common Actor Instance Structure */
     vec3s_t rot_focus;                  /* Rotation to Focus Camera on (Z-Target) */
     uint8_t __pad_0x4A[2];              /* focusPosRot Padding for 4-byte alignment */
     float unk_0x4C;                     /* (NZLE: 8002BF60) */
+    float unk_0x54                      /* Undocumented */
     vec3f_t scale;                      /* Actor Scale */
     vec3f_t velocity;                   /* Velocity */
     float xz_speed;                     /* Speed (X and Z axes) */
