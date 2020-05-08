@@ -98,6 +98,8 @@ extern int32_t z_sprintf(char* dst, const char* fmt, ...);
 		asm("z_sprintf = 0x80002F44");
 	#elif OOT_U_1_0
 		asm("z_sprintf = 0x800CE7B4");
+	#elif MM_U_1_0
+		asm("z_sprintf = 0x800878A4");
 	#endif
 
 /****
@@ -2344,6 +2346,7 @@ extern void external_func_80033260(void);
 
 /**
  * TODO Document arguments more thoroughly. Current arguments are Nokaubure's findings.
+ * Spawns various dust particles.
  */
 extern void external_func_80033480(
 	z64_global_t *global,
@@ -2813,9 +2816,10 @@ z64_actor_t* a
 #endif
 
 /**
- * TODO This function is completely undocumented
+ * TODO
+ * Used in `En_Dha` to rotate the hand to be flat on Link's head.
  */
-extern void external_func_80035844(void);
+extern void z_actor_func_80035844(vec3f_t* a0, vec3f_t* a1, int16_t* a2, int32_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80035844 = 0x80035844");
 	#elif OOT_U_1_0
@@ -3735,6 +3739,7 @@ extern void external_func_8005BE50(void);
 
 /* Initiailize a z64_collider_cylinder_collection_t structure.
 * Source Code Reference File: "z_collision_check.c"
+* Debug Message: "pclobj_jntsph->elem_tbl != NULL"
 * Formerly `actor_collider_cylinder_array_init`
 */
 extern void z_collider_cylinder_list_init(
@@ -3824,7 +3829,7 @@ z64_global_t* gl /* Global Context */
 #elif OOT_U_1_0
   asm("z_collider_cylinder_init = 0x8004ACEC");
 #elif MM_U_1_0
-  asm("z_collider_cylinder_init = 0x800E1374");
+  asm("z_collider_cylinder_init = 0x800E130C");
 #endif
 
 /**
@@ -4047,20 +4052,20 @@ extern void external_func_800627A0(void);
 		asm("external_func_800627A0 = 0x80050BD4");
 	#endif
 
-/* Translate a collider to a predetermined matrix.
+/* Translate a collider given an index and list.
 * Commonly used to assign collision to a particular limb.
 * Source Code Reference File: "z_collision_check.c"
 */
-extern void z_collider_translate_to_matrix(
+extern void z_collider_translate_index(
 int32_t c_index /* Cylinder Index */
 , z64_collider_cylinder_collection_t* clist /* Cylinder List */
 );
 #if OOT_DEBUG
-  asm("z_collider_translate_to_matrix = 0x800628A4");
+  asm("z_collider_translate_index = 0x800628A4");
 #elif OOT_U_1_0
-  asm("z_collider_translate_to_matrix = 0x80050CE4");
+  asm("z_collider_translate_index = 0x80050CE4");
 #elif MM_U_1_0
-  /*asm("z_collider_translate_to_matrix = 0xDEADBEEF");*/
+  /*asm("z_collider_translate_index = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -6154,6 +6159,8 @@ z64_global_t* gl /* Global Context */
   asm("z_skelanime_draw_mtx_lod = 0x800A273C"); /* 0x800A106C */
 #elif OOT_U_1_0
   asm("z_skelanime_draw_mtx_lod = 0x800894A4");
+#elif MM_U_1_0
+  asm("z_skelanime_draw_mtx_lod = 0x80134DBC");
 #endif
 
 /* Draw a `skelanime` structure.
@@ -7337,7 +7344,7 @@ extern void matrix_push(void);
 	#elif OOT_U_1_0
 		asm("matrix_push = 0x800AA6EC");
 	#elif MM_U_1_0
-		/* TODO */
+		asm("matrix_push = 0x8018019C");
 	#endif
 
 /**
@@ -7353,7 +7360,7 @@ extern void matrix_pop(void);
 	#elif OOT_U_1_0
 		asm("matrix_pop = 0x800AA724");
 	#elif MM_U_1_0
-		/* TODO */
+		asm("matrix_pop = 0x801801CC");
 	#endif
 
 /* Copy the floating point matrix from the top of the stack to mf.
@@ -7438,7 +7445,7 @@ float x, float y, float z /* X, Y, and Z Scale */
 * Formerly `matrix_rotate_x`
 */
 extern void z_matrix_pitch(
-float x /* The angle in degrees to pitch the matrix by. */
+int16_t x /* The angle in degrees to pitch the matrix by. */
 , int32_t apply /* 0 initializes a new matrix and pitches it; 1 modifies the current matrix on the stack. */
 );
 #if OOT_DEBUG
@@ -7446,7 +7453,7 @@ float x /* The angle in degrees to pitch the matrix by. */
 #elif OOT_U_1_0
   asm("z_matrix_pitch = 0x800AA9E0");
 #elif MM_U_1_0
-  /*asm("z_matrix_pitch = 0xDEADBEEF");*/
+  asm("z_matrix_pitch = 0x80180478");
 #endif
 
 /* Rotate a matrix along the Y axis (Yaw a matrix).
@@ -7454,7 +7461,7 @@ float x /* The angle in degrees to pitch the matrix by. */
 * Formerly `matrix_rotate_y`
 */
 extern void z_matrix_yaw(
-float y /* The angle in degrees to yaw the matrix by. */
+int16_t y /* The angle in degrees to yaw the matrix by. */
 , int32_t apply /* 0 initializes a new matrix and yaws it; 1 modifies the current matrix on the stack. */
 );
 #if OOT_DEBUG
@@ -7462,7 +7469,7 @@ float y /* The angle in degrees to yaw the matrix by. */
 #elif OOT_U_1_0
   asm("z_matrix_yaw = 0x800AAB94");
 #elif MM_U_1_0
-  /*asm("z_matrix_yaw = 0xDEADBEEF");*/
+  asm("z_matrix_yaw = 0x80180CF8");
 #endif
 
 /* Rotate a matrix along the Z axis (Roll a matrix).
@@ -7478,7 +7485,7 @@ float z /* The angle in degrees to roll the matrix by. */
 #elif OOT_U_1_0
   asm("z_matrix_roll = 0x800AAD4C");
 #elif MM_U_1_0
-  asm("z_matrix_roll = 0x80180E90");
+  asm("z_matrix_roll = 0x801809AC");
 #endif
 
 /* Rotate a matrix along the Z, Y, and X axes.
@@ -7494,7 +7501,7 @@ int16_t x, int16_t y, int16_t z /* X, Y, and Z Rotation */
 #elif OOT_U_1_0
   asm("z_matrix_rotate_3s = 0x800AAF00");
 #elif MM_U_1_0
-  /*asm("z_matrix_rotate_3s = 0xDEADBEEF");*/
+  asm("z_matrix_rotate_3s = 0x8018103C");
 #endif
 
 /* Translate a matrix and then rotate it.
@@ -7584,18 +7591,16 @@ extern uint32_t z_matrix_alloc(
 	#endif
 
 /**
- * transform `in` somehow, store result in `out`
- * Old notes, for reference:
- * Multiply Float Matrix Stack's top matrix by float Vector3
- * A0 = ptr to Vector3 | A1 = ptr to result
+ * Multiply the top floating point matrix by vec3f_t `src`.
+ * Store the result as a vec3f_t `dest`.
  */
-extern void external_func_800D1AF4(vec3f_t *in, vec3f_t *out);
+extern void z_matrix_mult_vec3f(vec3f_t* src, vec3f_t* dest);
 	#if OOT_DEBUG
-		asm("external_func_800D1AF4 = 0x800D1AF4");
+		asm("z_matrix_mult_vec3f = 0x800D1AF4");
 	#elif OOT_U_1_0
-		asm("external_func_800D1AF4 = 0x800AB958");
+		asm("z_matrix_mult_vec3f = 0x800AB958");
 	#elif MM_U_1_0
-		asm("external_func_800D1AF4 = 0x80181A98");
+		asm("z_matrix_mult_vec3f = 0x80181A98");
 	#endif
 
 /**
