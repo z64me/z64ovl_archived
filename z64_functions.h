@@ -8578,6 +8578,19 @@ extern uint32_t player_refresh_equipment(z64_global_t *global, z64_actor_t *acto
 		asm("player_refresh_equipment = 0x80079764");
 	#endif
 
+/*
+ * Determines if the line formed by `lineStart` and `lineEnd` intersect with Triangle formed from
+ * vertices `v0`, `v1`, and `v2` with normal vector `nx`, `ny`, and `nz` with plane distance from origin
+ * `originDist` Outputs the intersection point at to `intersect`
+ * Returns 1 if the line intersects with the triangle, 0 otherwise
+ */
+extern int z_tri_line_intersect(vec3f_t* v0, vec3f_t* v1, vec3f_t* v2, float nx, float ny, float nz, float originDist, vec3f_t* lineStart, vec3f_t* lineEnd, vec3f_t* intersectionPoint, int arg);
+	#ifdef OOT_U_1_0
+		 asm("z_tri_line_intersect = 0x800A80D0");
+	#else
+		 asm("z_tri_line_intersect = 0x800CE258");
+	#endif
+
 // TODO: Reorganize these, also confirm if correct.
 extern void z64_bzero(void *dest, int32_t length);
 asm("bzero = 0x80004450");
