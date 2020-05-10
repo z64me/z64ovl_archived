@@ -22,6 +22,7 @@ typedef enum{
 #define SEXT24(SEXTA0) (((SEXTA0) & 0x800000) ? ((uint32_t)(SEXTA0) | 0xff000000):(uint32_t)(SEXTA0))
 #define FLOOR(FLA0)	((uint32_t)(FLA0))
 #define CEIL(CLA0) (CLA0-(uint32_t)(CLA0)>0?(uint32_t)(CLA0+1):(uint32_t)(CLA0))
+#define SQRARE(x) ((x) * (x))
 #define enum8(x) uint8_t
 
 // Controller Input
@@ -143,6 +144,16 @@ float fminf(float a, float b)
 float fmaxf(float a, float b)
 {
 	return a > b ? a : b;
+}
+
+float pow(float in, int32_t power)
+{
+  float out = in;
+
+  for (int i = 1; i < power; i++)
+    out *= in;
+  
+  return out;
 }
 
 #define min_f(a, b, c) (fminf(a, fminf(b, c)))

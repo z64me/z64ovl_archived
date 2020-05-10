@@ -28,6 +28,7 @@
 
 /* external, self-contained helpers */
 #include "zh/sprintf.h"
+#include "zh/matrix.h"
 /*
 void
 zh_sprintf(char *dst, char *fmt, struct va_arr *va_arr)
@@ -156,7 +157,7 @@ zh_player_textbox_selection(z64_global_t *global)
 			, 0x104BD
 			#elif ZH_MM
 			, 0x16929
-			#warning needs (NZSE) confirmation!
+			//#warning needs (NZSE) confirmation!
 			#endif
 		)
 	;
@@ -187,7 +188,7 @@ zh_get_pointer_to_object_data(uint16_t object_id, z64_global_t *global)
 				, 0x117A4
 				#elif ZH_MM
 				, 0x17D88
-				#warning needs (NZSE) confirmation!
+				//#warning needs (NZSE) confirmation!
 				#endif
 			)
 			, object_id

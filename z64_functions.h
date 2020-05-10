@@ -58,7 +58,7 @@
     V3DST.z = V3A0.z - V3A1.z;        \
 }
 
-#define SQRT(ARG0) sqrtf((ARG0))
+#define SQRT(ARG0) z_sqrt((ARG0))
 
 extern void z_file_load(void *req);
 #if OOT_DEBUG
@@ -72,8 +72,8 @@ extern void z_file_load(void *req);
  ***/
 
 extern uint32_t load_data_from_rom(
-	uint32_t *vram_addr
-	, uint32_t *vrom_addr
+	void* vram_addr
+	, void* vrom_addr
 	, uint32_t size
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
 	, const char *string
@@ -93,7 +93,7 @@ extern uint32_t load_data_from_rom(
 		asm("load_data_from_rom = 0x80080C90");
     #endif
 
-extern int32_t z_sprintf(char* dst, const char* fmt, ...);
+extern int32_t z_sprintf(volatile char* dst, const char* fmt, ...);
 	#if OOT_DEBUG
 		asm("z_sprintf = 0x80002F44");
 	#elif OOT_U_1_0
@@ -762,16 +762,26 @@ extern void effect_spawn_lightning(z64_global_t *global, vec3f_t *position, uint
         asm("effect_spawn_lightning= 0x8001D098");
     #endif
 
-/**
- * Spawn Particle 0x0E
- * TODO These notes need converted into a C function prototype
- */
-extern void external_func_80029618(void);
-	#if OOT_DEBUG
-		asm("external_func_80029618 = 0x80029618");
-	#elif OOT_U_1_0
-		asm("external_func_80029618 = 0x8001D110");
-	#endif
+/* Spawn ovl_Effect_Ss_Dt_Bubble (Big Octo Bubble)
+* Source Code Reference File: "z_effect_soft_sprite.c"
+*/
+extern void z_effect_spawn_dt_bubble_0(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
+, vec3f_t* acceleration /* Acceleration along the X, Y, and Z axes */
+, int16_t drop_scale /* Affects visible scale. */
+, int16_t sp14
+, int16_t color /* Some kind of color index. */
+, int16_t sp1C
+);
+#if OOT_DEBUG
+	asm("z_effect_spawn_dt_bubble_0 = 0x80029618");
+#elif OOT_U_1_0
+	asm("z_effect_spawn_dt_bubble_0 = 0x8001D110");
+#elif MM_U_1_0
+	asm("z_effect_spawn_dt_bubble_0 = 0x800B2090");
+#endif
 
 /**
  * Spawn Particle 0x0E
@@ -7531,6 +7541,8 @@ float x, float y, float z
 	asm("z_matrix_translate_3f_800D1694 = 0x800D1694");
 #elif OOT_U_1_0
 	asm("z_matrix_translate_3f_800D1694 = 0x800AB510");
+#elif MM_U_1_0
+	asm("z_matrix_translate_3f_800D1694 = 0x80181650");
 #endif
 
 /* Convert a floating-point matrix to a s15.16 fixed-point matrix.
@@ -7563,7 +7575,7 @@ Mtx* dest
 #elif OOT_U_1_0
   asm("z_matrix_top_to_fixed = 0x800AB8D8");
 #elif MM_U_1_0
-  /*asm("z_matrix_top_to_fixed = 0xDEADBEEF");*/
+  asm("z_matrix_top_to_fixed = 0x80181A18");
 #endif
 
 /**
@@ -8378,6 +8390,12 @@ extern float z_sqrt(float value);
 		asm("z_sqrt = 0x801031E0");
 	#elif OOT_U_1_0
 		asm("z_sqrt = 0x800D0DC0");
+	#elif MM_U_1_0
+		asm(
+			"z_sqrt:		 	 \n"
+			"jr			$ra		 \n"
+			"sqrt.S 	$f0, $f12\n"
+		);
 	#endif
 
 /**
