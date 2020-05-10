@@ -64,7 +64,9 @@ extern void z_file_load(void *req);
 #if OOT_DEBUG
 	asm("z_file_load = 0x800013FC");
 #elif OOT_U_1_0
+	asm("z_file_load = 0x80000B0C");
 #elif MM_U_1_0
+	asm("z_file_load = 0x80080A08");
 #endif
 
 /****
