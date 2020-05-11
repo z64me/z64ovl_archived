@@ -3757,6 +3757,7 @@ extern void external_func_8005BE50(void);
 extern void z_collider_cylinder_list_init(
 z64_global_t* gl /* Global Context */
 , z64_collider_cylinder_collection_t* c /* Collider List to Initiailize */
+, z64_actor_t* a /* Actor instance */
 , z64_collider_cylinder_collection_init_t* init /* Collider List Header */
 , void* list /* Individual Collider Structures in Instance */
 );
