@@ -2784,7 +2784,7 @@ extern void external_func_800355E4(void);
 /* Apply damage to an actor's health.
 * Source Code Reference File: "z_actor.c"
 */
-extern void z_actor_update_health(
+extern uint8_t z_actor_update_health(
 z64_actor_t* a /* Actor to be damaged. */
 );
 #if OOT_DEBUG
@@ -2833,9 +2833,9 @@ z64_actor_t* a
  */
 extern void z_actor_func_80035844(vec3f_t* a0, vec3f_t* a1, int16_t* a2, int32_t a3);
 	#if OOT_DEBUG
-		asm("external_func_80035844 = 0x80035844");
+		asm("z_actor_func_80035844 = 0x80035844");
 	#elif OOT_U_1_0
-		asm("external_func_80035844 = 0x800285B0");
+		asm("z_actor_func_80035844 = 0x800285B0");
 	#endif
 
 /**
@@ -3757,6 +3757,7 @@ extern void external_func_8005BE50(void);
 extern void z_collider_cylinder_list_init(
 z64_global_t* gl /* Global Context */
 , z64_collider_cylinder_collection_t* c /* Collider List to Initiailize */
+, z64_actor_t* a /* Actor instance */
 , z64_collider_cylinder_collection_init_t* init /* Collider List Header */
 , void* list /* Individual Collider Structures in Instance */
 );
@@ -4884,7 +4885,7 @@ float* src /* Source Float */
 /* Smoothly Transition (Scale) int16_t to Target
 * Source Code Reference File: "z_lib.c"
 */
-extern void z_lib_smooth_scale_max_min_s(
+extern int16_t z_lib_smooth_scale_max_min_s(
 int16_t* src /* Source Short */
 , int16_t target /* Target Short*/
 , int16_t invScale /* Derived from Decomp */
