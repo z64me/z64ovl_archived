@@ -946,7 +946,9 @@ typedef struct
   char              unk_1B_[0x0C8D];          /* 0x10B17 */
   z64_obj_ctxt_t    obj_ctxt;                 /* 0x117A4 */
   z64_room_ctxt_t   room_ctxt;                /* 0x11CBC */
-  char              unk_1C_[0x0064];          /* 0x11D3C */
+  char              unk_11D3C[0x10];          /* 0x11D3C */
+  int16_t         (*unk_11D4C)(z64_global_t *g, z64_actor_t* link);/* 0x11D4C */
+  char              unk_11D50[0x50];          /* 0x11D50 */
   float             unk_player_matrix[16];    /* 0x11DA0 */ /* Float Matrix Related to Link's Coordinates */
   char              unk_1C_2[0x0004];         /* 0x11DE0 */
   uint32_t          gameplay_frames;          /* 0x11DE4 */
