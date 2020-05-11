@@ -16,106 +16,108 @@ typedef enum {
   OVLTYPE_CHEST = 0x0B
 } z64_actor_type_t;
 
-typedef struct z64_actor_init_s{
-  int16_t number;    /* Actor Number */
-  uint8_t type;      /* Actor Type */
-  uint8_t room;      /* Room that the instance was spawned in*/
-  int32_t flags;         /* Not completely documented */
-  int16_t object;    /* Object Number */
-  int16_t padding;
-  int32_t instance_size; /* Size of the actor instance */
-  void *init;        /* Constructor */
-  void *dest;        /* Destructor */
-  void *main;        /* Main Update Function */
-  void *draw;        /* Draw Function */
-} z64_actor_init_t;
+/* Offset / Member / Comment */
+typedef struct z64_actor_init_s{    /* Actor Overlay Initialization Variables */
+/* 0x0000 */ int16_t number;        /* Actor Number */
+/* 0x0002 */ uint8_t type;          /* Actor Type */
+/* 0x0003 */ uint8_t room;          /* Room that the instance was spawned in*/
+/* 0x0004 */ int32_t flags;         /* Not completely documented */
+/* 0x0008 */ int16_t object;        /* Object Number */
+/* 0x000A */ int16_t padding;       /* Padding for alignment */
+/* 0x000C */ int32_t instance_size; /* Size of the actor instance */
+/* 0x0010 */ void *init;            /* Constructor */
+/* 0x0014 */ void *dest;            /* Destructor */
+/* 0x0018 */ void *main;            /* Main Update Function */
+/* 0x001C */ void *draw;            /* Draw Function */
+} z64_actor_init_t;                 /* Length: 0x0020 */
 
+/* Offset / Member / Comment */
 typedef struct z64_actor_s z64_actor_t;
-struct z64_actor_s {                    /* Common Actor Instance Structure */
-    int16_t actor_id;                   /* Actor Number */
-    uint8_t actor_type;                 /* Actor Type */
-    uint8_t room_index;                 /* Room Index (0xFF means actor won't despawn on room change.) */
-    uint32_t flags;                     /* Special Actor Flags */
-    vec3f_t pos_init;                   /* Initial Position */
-    vec3s_t rot_init;                   /* Initial Rotation */
-    uint8_t __pad_0x1A[2];              /* initPosRot Padding for 4-byte alignment */
-    uint16_t variable;                  /* Actor Variable */
-    uint8_t alloc_index;                /* Object Table Allocation Index */
-    uint8_t target_dist_index;          /* Indexes into table at 0x80115FFC */
-    uint16_t sound_effect;              /* Actor Sound Effect (Relative to Actor Location) */
-    uint8_t __pad_0x22[2];              /* Padding for 4-byte alignment */
-    vec3f_t pos;                        /* Active Position */
-    vec3s_t dir;                        /* Direction / Rotation */
-    uint8_t __pad_0x36[2];              /* PosRot Padding for 4-byte alignment */
-    vec3f_t pos_focus;                  /* Position to Focus Camera on (Z-Target) */
-    vec3s_t rot_focus;                  /* Rotation to Focus Camera on (Z-Target) */
-    uint8_t __pad_0x4A[2];              /* focusPosRot Padding for 4-byte alignment */
-    float unk_0x4C;                     /* (NZLE: 8002BF60) */
-    vec3f_t scale;                      /* Actor Scale */
-    vec3f_t velocity;                   /* Velocity */
-    float xz_speed;                     /* Speed (X and Z axes) */
-    float gravity;                      /* Gravity */
-    float min_vel_y;                    /* Minimum Velocity (Y axis) */
-    z64_col_poly_t* wall_poly;          /* Wall Polygon (Actor is touching) */
-    z64_col_poly_t* floor_poly;         /* Floor Polygon (Actor is over or touching) */
-    uint8_t wall_poly_source;           /* Complex Poly Surface Source */
-    uint8_t floor_poly_source;          /* Complex Poly Surface Source */
-    int16_t wall_rot;                   /* Rotation Towards Wall */
-    float floor_height;                 /* Height of Floor (Maybe?) */
-    float water_surface_dist;           /* Distance to Water Surface */
-    uint16_t bgcheck_flags;             /* Bitfield Determining Collision State */
-    int16_t rot_toward_link_y;          /* Y Rotation to face Player */
-    float dist_from_link_squared;       /* Square Distance From Player (dist_xz^2) + (dist_y^2) */
-    float dist_from_link_xz;            /* Distance From Player (X and Z axes) */
-    float dist_from_link_y;             /* Distance From Player (Y axis) */
-    void* damage_table;                 /* Collision Check Substruct / Decomp's "SubActorStruct98" */
-    vec3f_t displacement;               /* Amount to correct velocity by when colliding into a body */
-    int16_t unk_0xA8;                   /* (NZLE: 80061ED4) */
-    int16_t unk_0xAA;                   /* (NZLE: 80061ED4) */
-    uint8_t __pad_0xAC[2];              /* Padding for 4-byte alignment */
-    uint8_t mass;                       /* Used to Calculate Displacement (0xFF is Infinite Mass, 50 is common.) */
-    uint8_t health;                     /* Health */
-    uint8_t damage;                     /* Damage Dealt, Decrement Health by this amount. */
-    uint8_t damage_effect;              /* Elemental Damage Effect */
-    uint8_t impact_effect;              /* Set on Deku Nut when Deku Nut collides with Gossip Stone */
-    uint8_t unk_0xB3;                   /* Undocumented */
-    vec3s_t rot;                        /* Current Rotation / Decomp's "ActorShape" Substruct */
-    int16_t unk_0xBA;                   /* Undocumented */
-    float unk_0xBC;                     /* Model Y Axis Offset; Collision Mesh Related (NZLE: 80030BE8) */
-    void* shadow_func;                  /* Draw Function for Drop Shadow */
-    float shadow_radius;                /* Drop Shadow Radius */
-    uint8_t shadow_alpha;               /* Drop Shadow Opacity */
-    uint8_t unk_0xC9;                   /* Used in Z_SHADOW_TEARDROP */
-    uint8_t __pad_0xCA[2];              /* Padding for 4-byte alignment */
-    vec3f_t unk_0xCC;                   /* Used in Z_SHADOW_TEARDROP */
-    vec3f_t unk_0xD8;                   /* Undocumented */
-    vec3f_t unk_0xE4;                   /* (NZLE: 800314D4), Position Vector */
-    float unk_0xF0;                     /* (NZLE: 800314D4) */
-    float draw_dist;                    /* Draw Distance */
-    float cam_clip_near;                /* Camera Clipping Distance (Near) */
-    float cam_clip_far;                 /* Camera Clipping Distance (Far) */
-    vec3f_t pos_5;                      /* Final Position (5); Last Frame */
-    uint8_t unk_0x10C;                  /* Used for Tade Sequence */
-    uint8_t unk_0x10D;                  /* Undocumented */
-    uint16_t text_id;                   /* Actor Message ID */
-    int16_t frozen;                     /* Used in "ReDead Freeze Attack" */
-    uint16_t damage_color;              /* First 12 bits control color which can only be blue, red, or white. The last 4 bits are unknown, but they can't be zero. */
-    uint8_t damage_color_timer;         /* Damage Color Effect Timer */
-    uint8_t active;                     /* Determines if Actor Instance should be processed. 01 = True, 00 = False */
-    uint8_t unk_0x116;                  /* Sets a collision related routine. (NZLE: 8003573C) */
-    uint8_t navi_enemy_text_id;         /* Navi Info Message ID */
-    z64_actor_t* attached_a;            /* Attached Actor A (Interfacing Actor) */
-    z64_actor_t* attached_b;            /* Attached Actor B (Attached to Actor) */
-    z64_actor_t* prev;                  /* Previous Actor */
-    z64_actor_t* next;                  /* Next Actor */
-    void* ctor;                         /* Constructor */
-    void* dtor;                         /* Destructor */
-    void* main_proc;                    /* Main Function */
-    void* draw_proc;                    /* Draw Function */
-    void* code_entry;                   /* Code Entry */
-#ifdef OOT_DEBUG
-    uint8_t debug_ex[16];               /* Debug Extended Instance Padding */
-#endif
+struct z64_actor_s {                             /* Common Actor Instance Structure */
+/* 0x0000 */ int16_t actor_id;                   /* Actor Number */
+/* 0x0002 */ uint8_t actor_type;                 /* Actor Type */
+/* 0x0003 */ uint8_t room_index;                 /* Room Index (0xFF means actor won't despawn on room change.) */
+/* 0x0004 */ uint32_t flags;                     /* Special Actor Flags */
+/* 0x0005 */ vec3f_t pos_init;                   /* Initial Position */
+/* 0x0014 */ vec3s_t rot_init;                   /* Initial Rotation */
+/* 0x001A */ uint8_t __pad_0x1A[2];              /* initPosRot Padding for 4-byte alignment */
+/* 0x001C */ uint16_t variable;                  /* Actor Variable */
+/* 0x001E */ uint8_t alloc_index;                /* Object Table Allocation Index */
+/* 0x001F */ uint8_t target_dist_index;          /* Indexes into table at 0x80115FFC */
+/* 0x0020 */ uint16_t sound_effect;              /* Actor Sound Effect (Relative to Actor Location) */
+/* 0x0022 */ uint8_t __pad_0x22[2];              /* Padding for 4-byte alignment */
+/* 0x0024 */ vec3f_t pos;                        /* Active Position */
+/* 0x0030 */ vec3s_t dir;                        /* Direction / Rotation */
+/* 0x0036 */ uint8_t __pad_0x36[2];              /* PosRot Padding for 4-byte alignment */
+/* 0x0038 */ vec3f_t pos_focus;                  /* Position to Focus Camera on (Z-Target) */
+/* 0x0044 */ vec3s_t rot_focus;                  /* Rotation to Focus Camera on (Z-Target) */
+/* 0x004A */ uint8_t __pad_0x4A[2];              /* focusPosRot Padding for 4-byte alignment */
+/* 0x004C */ float unk_0x4C;                     /* (NZLE: 8002BF60) */
+/* 0x0050 */ vec3f_t scale;                      /* Actor Scale */
+/* 0x005C */ vec3f_t velocity;                   /* Velocity */
+/* 0x0068 */ float xz_speed;                     /* Speed (X and Z axes) */
+/* 0x006C */ float gravity;                      /* Gravity */
+/* 0x0070 */ float min_vel_y;                    /* Minimum Velocity (Y axis) */
+/* 0x0074 */ z64_col_poly_t* wall_poly;          /* Wall Polygon (Actor is touching) */
+/* 0x0078 */ z64_col_poly_t* floor_poly;         /* Floor Polygon (Actor is over or touching) */
+/* 0x007C */ uint8_t wall_poly_source;           /* Complex Poly Surface Source */
+/* 0x007D */ uint8_t floor_poly_source;          /* Complex Poly Surface Source */
+/* 0x007E */ int16_t wall_rot;                   /* Rotation Towards Wall */
+/* 0x0080 */ float floor_height;                 /* Height of Floor (Maybe?) */
+/* 0x0084 */ float water_surface_dist;           /* Distance to Water Surface */
+/* 0x0088 */ uint16_t bgcheck_flags;             /* Bitfield Determining Collision State */
+/* 0x008A */ int16_t rot_toward_link_y;          /* Y Rotation to face Player */
+/* 0x008C */ float dist_from_link_squared;       /* Square Distance From Player (dist_xz^2) + (dist_y^2) */
+/* 0x0090 */ float dist_from_link_xz;            /* Distance From Player (X and Z axes) */
+/* 0x0094 */ float dist_from_link_y;             /* Distance From Player (Y axis) */
+/* 0x0098 */ void* damage_table;                 /* Collision Check Substruct / Decomp's "SubActorStruct98" */
+/* 0x009C */ vec3f_t displacement;               /* Amount to correct velocity by when colliding into a body */
+/* 0x00A8 */ int16_t unk_0xA8;                   /* (NZLE: 80061ED4) */
+/* 0x00AA */ int16_t unk_0xAA;                   /* (NZLE: 80061ED4) */
+/* 0x00AC */ uint8_t __pad_0xAC[2];              /* Padding for 4-byte alignment */
+/* 0x00AE */ uint8_t mass;                       /* Used to Calculate Displacement (0xFF is Infinite Mass, 50 is common.) */
+/* 0x00AF */ uint8_t health;                     /* Health */
+/* 0x00B0 */ uint8_t damage;                     /* Damage Dealt, Decrement Health by this amount. */
+/* 0x00B1 */ uint8_t damage_effect;              /* Elemental Damage Effect */
+/* 0x00B2 */ uint8_t impact_effect;              /* Set on Deku Nut when Deku Nut collides with Gossip Stone */
+/* 0x00B3 */ uint8_t unk_0xB3;                   /* Undocumented */
+/* 0x00B4 */ vec3s_t rot;                        /* Current Rotation / Decomp's "ActorShape" Substruct */
+/* 0x00BA */ int16_t unk_0xBA;                   /* Undocumented */
+/* 0x00BC */ float unk_0xBC;                     /* Model Y Axis Offset; Collision Mesh Related (NZLE: 80030BE8) */
+/* 0x00C0 */ void* shadow_func;                  /* Draw Function for Drop Shadow */
+/* 0x00C4 */ float shadow_radius;                /* Drop Shadow Radius */
+/* 0x00C8 */ uint8_t shadow_alpha;               /* Drop Shadow Opacity */
+/* 0x00C9 */ uint8_t unk_0xC9;                   /* Used in Z_SHADOW_TEARDROP */
+/* 0x00CA */ uint8_t __pad_0xCA[2];              /* Padding for 4-byte alignment */
+/* 0x00CC */ vec3f_t unk_0xCC;                   /* Used in Z_SHADOW_TEARDROP */
+/* 0x00D8 */ vec3f_t unk_0xD8;                   /* Undocumented */
+/* 0x00E4 */ vec3f_t unk_0xE4;                   /* (NZLE: 800314D4), Position Vector */
+/* 0x00F0 */ float unk_0xF0;                     /* (NZLE: 800314D4) */
+/* 0x00F4 */ float draw_dist;                    /* Draw Distance */
+/* 0x00F8 */ float cam_clip_near;                /* Camera Clipping Distance (Near) */
+/* 0x00FC */ float cam_clip_far;                 /* Camera Clipping Distance (Far) */
+/* 0x0100 */ vec3f_t pos_5;                      /* Final Position (5); Last Frame */
+/* 0x010C */ uint8_t unk_0x10C;                  /* Used for Tade Sequence */
+/* 0x010D */ uint8_t unk_0x10D;                  /* Undocumented */
+/* 0x010E */ uint16_t text_id;                   /* Actor Message ID */
+/* 0x0110 */ int16_t frozen;                     /* Used in "ReDead Freeze Attack" */
+/* 0x0112 */ uint16_t damage_color;              /* First 12 bits control color which can only be blue, red, or white. The last 4 bits are unknown, but they can't be zero. */
+/* 0x0114 */ uint8_t damage_color_timer;         /* Damage Color Effect Timer */
+/* 0x0115 */ uint8_t active;                     /* Determines if Actor Instance should be processed. 01 = True, 00 = False */
+/* 0x0116 */ uint8_t unk_0x116;                  /* Sets a collision related routine. (NZLE: 8003573C) */
+/* 0x0117 */ uint8_t navi_enemy_text_id;         /* Navi Info Message ID */
+/* 0x0118 */ z64_actor_t* attached_a;            /* Attached Actor A (Interfacing Actor) */
+/* 0x011C */ z64_actor_t* attached_b;            /* Attached Actor B (Attached to Actor) */
+/* 0x0120 */ z64_actor_t* prev;                  /* Previous Actor */
+/* 0x0124 */ z64_actor_t* next;                  /* Next Actor */
+/* 0x0128 */ void* ctor;                         /* Constructor */
+/* 0x012C */ void* dtor;                         /* Destructor */
+/* 0x0130 */ void* main_proc;                    /* Main Function */
+/* 0x0134 */ void* draw_proc;                    /* Draw Function */
+/* 0x0138 */ void* code_entry;                   /* Code Entry */
+#ifdef OOT_DEBUG                                 /* Length: 0x013C */
+/* 0x013C */ uint8_t debug_ex[16];               /* Debug Extended Instance Padding */
+#endif                                           /* Length: 0x014C */
 };
 
 typedef void (z64_actorfunc_t)(void *entity, void *global);
