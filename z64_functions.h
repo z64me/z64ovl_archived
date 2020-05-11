@@ -2784,7 +2784,7 @@ extern void external_func_800355E4(void);
 /* Apply damage to an actor's health.
 * Source Code Reference File: "z_actor.c"
 */
-extern void z_actor_update_health(
+extern uint8_t z_actor_update_health(
 z64_actor_t* a /* Actor to be damaged. */
 );
 #if OOT_DEBUG
