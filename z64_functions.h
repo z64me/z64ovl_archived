@@ -4885,7 +4885,7 @@ float* src /* Source Float */
 /* Smoothly Transition (Scale) int16_t to Target
 * Source Code Reference File: "z_lib.c"
 */
-extern void z_lib_smooth_scale_max_min_s(
+extern int16_t z_lib_smooth_scale_max_min_s(
 int16_t* src /* Source Short */
 , int16_t target /* Target Short*/
 , int16_t invScale /* Derived from Decomp */
