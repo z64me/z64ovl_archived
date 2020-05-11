@@ -2833,9 +2833,9 @@ z64_actor_t* a
  */
 extern void z_actor_func_80035844(vec3f_t* a0, vec3f_t* a1, int16_t* a2, int32_t a3);
 	#if OOT_DEBUG
-		asm("external_func_80035844 = 0x80035844");
+		asm("z_actor_func_80035844 = 0x80035844");
 	#elif OOT_U_1_0
-		asm("external_func_80035844 = 0x800285B0");
+		asm("z_actor_func_80035844 = 0x800285B0");
 	#endif
 
 /**
