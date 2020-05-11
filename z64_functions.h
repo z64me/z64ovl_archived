@@ -8186,16 +8186,20 @@ extern void debug_set_text_rgba(z64_debug_text_t *text_struct, uint8_t r, uint8_
 		asm("debug_set_text_rgba = 0x800FB3AC");
 	#elif OOT_U_1_0
 		asm("debug_set_text_rgba = 0x800CBE58");
+	#elif MM_U_1_0
+		asm("debug_set_text_rgba = 0x800859BC");
 	#endif
 
 /**
  * Set X / Y coordinates for a string of Debug Text.
  */
-extern void debug_set_text_xy(z64_debug_text_t *text_struct, uint16_t x, uint16_t y);
+extern void debug_set_text_xy(z64_debug_text_t *text_struct, int32_t x, int32_t y);
 	#if OOT_DEBUG
 		asm("debug_set_text_xy = 0x800FB41C");
 	#elif OOT_U_1_0
 		asm("debug_set_text_xy = 0x800CBEC8");
+	#elif MM_U_1_0
+		asm("debug_set_text_xy = 0x80085A2C");
 	#endif
 
 /**
@@ -8206,6 +8210,8 @@ extern void debug_init_text_struct(z64_debug_text_t *text_struct);
 		asm("debug_init_text_struct = 0x800FBB8C");
 	#elif OOT_U_1_0
 		asm("debug_init_text_struct = 0x800CC4AC");
+	#elif MM_U_1_0
+		asm("debug_init_text_struct = 0x80086010");
 	#endif
 
 /**
@@ -8218,6 +8224,8 @@ extern void external_func_800FBC14(z64_debug_text_t* t);
 		asm("external_func_800FBC14 = 0x800FBC14");
 	#elif OOT_U_1_0
 		asm("external_func_800FBC14 = 0x800CC500");
+	#elif MM_U_1_0
+		asm("external_func_800FBC14 = 0x80086064");
 	#endif
 
 /**
@@ -8229,6 +8237,8 @@ extern void debug_do_text_struct(z64_debug_text_t *text_struct, void *gfx_buffer
 		asm("debug_do_text_struct = 0x800FBC1C");
 	#elif OOT_U_1_0
 		asm("debug_do_text_struct = 0x800CC508");
+	#elif MM_U_1_0
+		asm("debug_do_text_struct = 0x8008606C");
 	#endif
 
 /**
@@ -8241,6 +8251,8 @@ debug_update_text_struct(z64_debug_text_t *text_struct);
 		asm("debug_update_text_struct = 0x800FBC64");
 	#elif OOT_U_1_0
 		asm("debug_update_text_struct = 0x800CC550");
+	#elif MM_U_1_0
+		asm("debug_update_text_struct = 0x800860A0");
 	#endif
 
 /**
@@ -8251,6 +8263,8 @@ extern void debug_set_text_string(z64_debug_text_t *text_struct, const char *for
 		asm("debug_set_text_string = 0x800FBCB4");
 	#elif OOT_U_1_0
 		asm("debug_set_text_string = 0x800CC588");
+	#elif MM_U_1_0
+		asm("debug_set_text_string = 0x800860D8");
 	#endif
 
 /**
