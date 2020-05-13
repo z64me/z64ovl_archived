@@ -3689,7 +3689,7 @@ extern void external_func_8005B1A4(void);
  * TODO These notes need converted into a C function prototype
  * a0 - entry ID of some table? varies between actors | v0 - returns pointer that's used in a1 of damage chart initializer (80061EFC)
  */
-extern void actor_damage_chart_get(void);
+extern void* z_actor_damage_chart_get(int32_t id);
 	#if OOT_DEBUG
 		asm("actor_damage_chart_get = 0x8005B200");
 	#elif OOT_U_1_0
@@ -3858,21 +3858,21 @@ extern void external_func_8005C7E0(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005C8C8(void);
+extern void z_collider_tri_list_free(z64_global_t* gl, z64_collider_tri_collection_t* t);
 	#if OOT_DEBUG
-		asm("external_func_8005C8C8 = 0x8005C8C8");
+		asm("z_collider_tri_list_free = 0x8005C8C8");
 	#elif OOT_U_1_0
-		asm("external_func_8005C8C8 = 0x8004B148");
+		asm("z_collider_tri_list_free = 0x8004B148");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005CBAC(void);
+extern int32_t z_collider_tri_list_init(z64_global_t* gl, z64_collider_tri_collection_t* dest, z64_actor_t* actor, void* src, void* list);
 	#if OOT_DEBUG
-		asm("external_func_8005CBAC = 0x8005CBAC");
+		asm("z_collider_tri_list_init = 0x8005CBAC");
 	#elif OOT_U_1_0
-		asm("external_func_8005CBAC = 0x8004B3EC");
+		asm("z_collider_tri_list_init = 0x8004B3EC");
 	#endif
 
 /**
@@ -4010,13 +4010,17 @@ void* out /* Destination for initialized table. */
  * //Actor 0095
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80061EFC(void);
+extern void z_actor_damage_table_init_80061EFC(
+void* out /* Destination for initialized table. */
+, z64_damagechart_init_t* damage_chart /* Initialization Variables for Damage Table */
+, const uint32_t* init_data
+);
 	#if OOT_DEBUG
-		asm("external_func_80061EFC = 0x80061EFC");
+		asm("z_actor_damage_table_init_80061EFC = 0x80061EFC");
 	#elif OOT_U_1_0
-		asm("external_func_80061EFC = 0x80050370");
+		asm("z_actor_damage_table_init_80061EFC = 0x80050370");
 	#elif MM_U_1_0
-		asm("external_func_80061EFC = 0x800E755C");
+		asm("z_actor_damage_table_init_80061EFC = 0x800E755C");
 	#endif
 
 /* Dynamically Update Collider Structure
@@ -5828,7 +5832,7 @@ z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
 #elif OOT_U_1_0
   asm("z_rcp_append_preset_xlu_80093D84 = 0x80093D84");
 #elif MM_U_1_0
-  /*asm("z_rcp_append_preset_xlu_80093D84 = 0xDEADBEEF");*/
+  asm("z_rcp_append_preset_xlu_80093D84 = 0x8012C3DC");
 #endif
 
 /**
@@ -7647,13 +7651,13 @@ extern void external_func_800D1EF4(void);
  * TODO what does this do?
  * unk0 is consistently either the graphics or global context, + 0x11DA0
  */
-extern void external_func_800D1FD4(void *unk0);
+extern void z_matrix_rotate_vec3f(vec3f_t* rot);
 	#if OOT_DEBUG
-		asm("external_func_800D1FD4 = 0x800D1FD4");
+		asm("z_matrix_rotate_vec3f = 0x800D1FD4");
 	#elif OOT_U_1_0
-		asm("external_func_800D1FD4 = 0x800ABE54");
+		asm("z_matrix_rotate_vec3f = 0x800ABE54");
 	#elif MM_U_1_0
-		asm("external_func_800D1FD4 = 0x801820A0");
+		asm("z_matrix_rotate_vec3f = 0x801820A0");
 	#endif
 
 /* Extract rotations from a 3x3 matrix within a 4x4 transformation matrix.

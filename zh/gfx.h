@@ -25,10 +25,6 @@ typedef struct {
    gfx_screen_tile_t tile;
 } zh_ui_sprite_t;
 
-#define G_IM_TEX_DIGIT_TIMG 0x3040 /* Counter Digits */
-#define G_IM_TEX_DIGIT_AMMO_TIMG 0x35C0 /* Ammo Digits */
-#define G_IM_TEX_CLOCK_TIMG 0x2000 /* Clock Icon */
-#define G_IM_TEX_LETTER 0x0000 /* Char 0 Space */
 #define G_TX_ANCHOR_C  0b0000
 #define G_TX_ANCHOR_U  0b0001
 #define G_TX_ANCHOR_R  0b0010
@@ -202,6 +198,8 @@ static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_scree
 		gSPDisplayList(buf->p++, 0x801269D0);
 	#elif	OOT_U_1_0
 		gSPDisplayList(buf->p++, 0x800F84A0);
+   #elif MM_U_1_0
+      gSPDisplayList(buf->p++, 0x801C1640);
 	#endif
 
 	gDPSetCombineLERP(
@@ -460,6 +458,7 @@ static void zh_draw_ui_message_box(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_
 	);
 }
 
+/* Based on OoT and may not necessarily work with MM because the dialogue system is different. */
 static void zh_draw_message_box(z64_global_t* gl, uint32_t message_static, int32_t box_type, float x, float y)
 {
 	z64_disp_buf_t* ovl = &ZQDL(gl, overlay);
