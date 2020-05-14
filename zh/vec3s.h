@@ -145,7 +145,7 @@ _Generic((_a1),             \
 )(_a0, _a1)
 
 static inline float vec3s_magnitude(vec3s_t lhs) {
-    return z_sqrt_f(lhs.x * lhs.x + lhs.y * lhs.y + lhs.z * lhs.z);
+    return z_sqrt(lhs.x * lhs.x + lhs.y * lhs.y + lhs.z * lhs.z);
 }
 
 static inline vec3s_t vec3s_normalize(vec3s_t lhs) {

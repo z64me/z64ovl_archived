@@ -146,7 +146,7 @@ float fmaxf(float a, float b)
 	return a > b ? a : b;
 }
 
-float pow(float in, int32_t power)
+float zh_pow(float in, int32_t power)
 {
   float out = in;
 
