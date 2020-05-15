@@ -1,0 +1,709 @@
+#ifndef ZH_COLLIDER_VIEW
+#define ZH_COLLIDER_VIEW
+/* TODO clean this up a lot */
+
+
+/* here is a simple actor that demonstrates how to use this:
+
+#include <z64ovl/oot/debug.h>
+#include <z64ovl/oot/helpers.h>
+#include <z64ovl/zh/collider_view.h>
+
+#define OBJ_ID		 0x0001
+
+typedef struct
+{
+	z64_actor_t actor;
+	z64_collider_cylinder_main_t collision;
+} entity_t;
+
+static void dest(entity_t *en, z64_global_t *gl)
+{
+	actor_collider_cylinder_free(gl, &en->collision);
+}
+
+static void init(entity_t *en, z64_global_t *gl)
+{
+	static const z64_collider_cylinder_init_t collision =
+	{
+		.body = {
+			  .unk_0x14 = 0x0A
+			, .collider_flags = 0x00
+			, .collide_flags = 0x11
+			, .mask_a = 0x39
+			, .mask_b = 0x10
+			, .type = 0x01
+			, .body_flags = 0x00
+			, .toucher_mask = 0x00000000
+			, .bumper_effect = 0x00
+			, .toucher_damage = 0x04
+			, .bumper_mask = 0xFFCFFFFF
+			, .toucher_flags = 0x00
+			, .bumper_flags = 0x01
+			, .body_flags_2 = 0x01
+		}
+		, .radius = 0x0010
+		, .height = 0x0022
+		, .y_shift = 0
+		, .position = {
+			  .x = 0
+			, .y = 0
+			, .z = 0
+			}
+	};
+	z_collider_cylinder_alloc(gl, &en->collision);
+	z_collider_cylinder_init(gl, &en->collision, &en->actor, &collision);
+}
+
+static void play(entity_t *en, z64_global_t *gl)
+{
+	actor_collider_cylinder_update(&en->actor, &en->collision);
+	actor_collision_check_set_ot(gl, (AADDR(gl,0x11e60)), &en->collision);
+}
+
+static void draw(entity_t *en, z64_global_t *gl)
+{
+	z_cheap_proc_draw_opa(gl, zh_seg2ram(0x0403A9B0));
+	zh_collider_view(gl, &en->collision);
+}
+
+const z64_actor_init_t init_vars = {
+	.number = 326, .padding = 0,
+	.type = 0x06, // type = stage prop
+	.room = 0x00,
+	.flags = 0x00000010,
+	.object = OBJ_ID,
+	.instance_size = sizeof(entity_t),
+	.init = init,
+	.dest = dest,
+	.main = play,
+	.draw = draw
+};
+*/
+
+
+enum
+{
+  Z64_HIT_SPHERE_LIST,
+  Z64_HIT_CYL,
+  Z64_HIT_TRI_LIST,
+  Z64_HIT_QUAD,
+};
+
+
+
+typedef struct
+{
+  z64_actor_t      *actor;                    /* 0x0000 */
+  char              unk_0x4[0x0011];          /* 0x0004 */
+  uint8_t           type;                     /* 0x0015 */
+  char              unk_0x16[0x0002];         /* 0x0016 */
+                                              /* 0x0018 */
+} z64_hit_t;
+
+typedef struct
+{
+  char              unk_0x0[0x0028];          /* 0x0000 */
+  z64_xyz_t         xyz_0x28;                 /* 0x0028 */
+  int16_t           h_0x2E;                   /* 0x002E */
+  struct
+  {
+    z64_xyz_t       pos;                      /* 0x0030 */
+    /* also the distance from the center to the bottom and top */
+    int16_t         radius;                   /* 0x0036 */
+  };
+  /* not used by hit tests */
+  float             f_0x38;                   /* 0x0038 */
+  uint8_t           b_0x3C;                   /* 0x003C */
+  char              unk_0x3D[0x0003];         /* 0x003D */
+                                              /* 0x0040 */
+} z64_hit_cyl_ent_t;
+
+typedef struct
+{
+  z64_hit_t         base;                     /* 0x0000 */
+  int32_t           n_ent;                    /* 0x0018 */
+  z64_hit_cyl_ent_t*ent_list;                 /* 0x001C */
+                                              /* 0x0020 */
+} z64_hit_cyl_list_t;
+
+typedef struct
+{
+  z64_hit_t         base;                     /* 0x0000 */
+  char              unk_0x18[0x0028];         /* 0x0018 */
+  int16_t           radius;                   /* 0x0040 */
+  int16_t           height;                   /* 0x0042 */
+  /* the y coordinate is offset by this during hit tests */
+  int16_t           y_offset;                 /* 0x0044 */
+  /* the origin is on the bottom center of the cylinder */
+  z64_xyz_t         pos;                      /* 0x0046 */
+                                              /* 0x004C */
+} z64_hit_cyl_t;
+
+typedef struct
+{
+  char              unk_0x0[0x0028];          /* 0x0000 */
+  z64_xyzf_t        v[3];                     /* 0x0028 */
+  char              unk_0x4C[0x0010];         /* 0x004C */
+                                              /* 0x005C */
+} z64_hit_tri_ent_t;
+
+typedef struct
+{
+  z64_hit_t         base;                     /* 0x0000 */
+  int32_t           n_ent;                    /* 0x0018 */
+  z64_hit_tri_ent_t*ent_list;                 /* 0x001C */
+                                              /* 0x0020 */
+} z64_hit_tri_list_t;
+
+typedef struct
+{
+  z64_hit_t         base;                     /* 0x0000 */
+  char              unk_0x18[0x0028];         /* 0x0018 */
+  z64_xyzf_t        v[4];                     /* 0x0040 */
+  char              unk_0x70[0x000C];         /* 0x0070 */
+                                              /* 0x007C */
+} z64_hit_quad_t;
+
+#define sin z_sin_f
+#define cos z_cos
+#define sinf sin
+#define cosf cos
+#define sqrtf z_sqrt
+
+#define memcpy(A,B,C) z_bcopy(B,A,C)
+
+#define guMtxF2L guMtxF2Lxxx
+#define guPerspectiveF guPerspectiveFxxx
+
+static inline float floorf(float v)
+{
+	if (v < 0)
+		return (int)v-1;
+	else
+		return (int)v;
+}
+
+#define                           M_PI 3.14159265358979323846
+#define guDefMtxF(xx,xy,xz,xw,  \
+                  yx,yy,yz,yw,  \
+                  zx,zy,zz,zw,  \
+                  wx,wy,wz,ww,  \
+                  ...)            {.f={xx,xy,xz,xw,                           \
+                                       yx,yy,yz,yw,                           \
+                                       zx,zy,zz,zw,                           \
+                                       wx,wy,wz,ww}}
+
+typedef float MtxF_t[4][4];
+typedef union
+{
+  MtxF_t  mf;
+  float   f[16];
+  struct
+  {
+    float xx, xy, xz, xw,
+          yx, yy, yz, yw,
+          zx, zy, zz, zw,
+          wx, wy, wz, ww;
+  };
+} MtxF;
+
+void guMtxIdent(Mtx *m);
+void guMtxIdentF(MtxF *mf);
+void guPerspectiveF(MtxF *mf, uint16_t *perspNorm, float fovy, float aspect,
+                    float near, float far, float scale);
+void guLookAtF(MtxF *mf,
+               float xEye, float yEye, float zEye,
+               float xAt, float yAt, float zAt,
+               float xUp, float yUp, float zUp);
+void guMtxCatF(const MtxF *m, const MtxF *n, MtxF *r);
+void guRotateF(MtxF *mf, float a, float x, float y, float z);
+void guRotateRPYF(MtxF *mf, float r, float p, float h);
+void guScaleF(MtxF *mf, float x, float y, float z);
+void guTranslateF(MtxF *mf, float x, float y, float z);
+void guMtxF2L(const MtxF *mf, Mtx *m);
+
+
+
+
+
+
+
+
+#if 0 /* memset */
+void guMtxIdent(Mtx *m)
+{
+  *m = (Mtx)gdSPDefMtx(1, 0, 0, 0,
+                       0, 1, 0, 0,
+                       0, 0, 1, 0,
+                       0, 0, 0, 1);
+}
+#endif
+
+void guMtxIdentF(MtxF *mf)
+{
+  *mf = (MtxF)guDefMtxF(1.f, 0.f, 0.f, 0.f,
+                        0.f, 1.f, 0.f, 0.f,
+                        0.f, 0.f, 1.f, 0.f,
+                        0.f, 0.f, 0.f, 1.f);
+}
+
+void guPerspectiveF(MtxF *mf, uint16_t *perspNorm, float fovy, float aspect,
+                    float near, float far, float scale)
+{
+  float cot = cos(fovy / 2.f) / sin(fovy / 2.f);
+  mf->xx = cot / aspect * scale;
+  mf->xy = 0.f;
+  mf->xz = 0.f;
+  mf->xw = 0.f;
+  mf->yx = 0.f;
+  mf->yy = cot * scale;
+  mf->yz = 0.f;
+  mf->yw = 0.f;
+  mf->zx = 0.f;
+  mf->zy = 0.f;
+  mf->zz = (near + far) / (near - far) * scale;
+  mf->zw = -1.f * scale;
+  mf->wx = 0.f;
+  mf->wy = 0.f;
+  mf->wz = 2.f * near * far / (near - far) * scale;
+  mf->ww = 0.f;
+
+  if (perspNorm) {
+    float n = 65536.f * 2.f / (near + far);
+    if (n > 65535.f)
+      n = 65535.f;
+    else if (n < 1.f)
+      n = 1.f;
+    *perspNorm = n;
+  }
+}
+
+void guLookAtF(MtxF *mf,
+               float xEye, float yEye, float zEye,
+               float xAt, float yAt, float zAt,
+               float xUp, float yUp, float zUp)
+{
+  /* compute forward vector */
+  float xFwd = xAt - xEye;
+  float yFwd = yAt - yEye;
+  float zFwd = zAt - zEye;
+  float dFwd = sqrtf(xFwd * xFwd + yFwd * yFwd + zFwd * zFwd);
+  xFwd /= dFwd;
+  yFwd /= dFwd;
+  zFwd /= dFwd;
+
+  /* compute right vector */
+  float xRight = yFwd * zUp - zFwd * yUp;
+  float yRight = zFwd * xUp - xFwd * zUp;
+  float zRight = xFwd * yUp - yFwd * xUp;
+  float dRight = sqrtf(xRight * xRight + yRight * yRight + zRight * zRight);
+  xRight /= dRight;
+  yRight /= dRight;
+  zRight /= dRight;
+
+  /* compute up vector */
+  xUp = yRight * zFwd - zRight * yFwd;
+  yUp = zRight * xFwd - xRight * zFwd;
+  zUp = xRight * yFwd - yRight * xFwd;
+  float dUp = sqrtf(xUp * xUp + yUp * yUp + zUp * zUp);
+  xUp /= dUp;
+  yUp /= dUp;
+  zUp /= dUp;
+
+  /* compute translation vector */
+  float xTrans = -(xEye * xRight + yEye * yRight + zEye * zRight);
+  float yTrans = -(xEye * xUp    + yEye * yUp    + zEye * zUp);
+  float zTrans = -(xEye * xFwd   + yEye * yFwd   + zEye * zFwd);
+
+  *mf = (MtxF)guDefMtxF
+  (
+    xRight, xUp,    -xFwd,   0.f,
+    yRight, yUp,    -yFwd,   0.f,
+    zRight, zUp,    -zFwd,   0.f,
+    xTrans, yTrans, -zTrans, 1.f,
+  );
+}
+
+void guMtxCatF(const MtxF *m, const MtxF *n, MtxF *r)
+{
+  MtxF t;
+  t.xx = m->xx * n->xx + m->xy * n->yx + m->xz * n->zx + m->xw * n->wx;
+  t.xy = m->xx * n->xy + m->xy * n->yy + m->xz * n->zy + m->xw * n->wy;
+  t.xz = m->xx * n->xz + m->xy * n->yz + m->xz * n->zz + m->xw * n->wz;
+  t.xw = m->xx * n->xw + m->xy * n->yw + m->xz * n->zw + m->xw * n->ww;
+  t.yx = m->yx * n->xx + m->yy * n->yx + m->yz * n->zx + m->yw * n->wx;
+  t.yy = m->yx * n->xy + m->yy * n->yy + m->yz * n->zy + m->yw * n->wy;
+  t.yz = m->yx * n->xz + m->yy * n->yz + m->yz * n->zz + m->yw * n->wz;
+  t.yw = m->yx * n->xw + m->yy * n->yw + m->yz * n->zw + m->yw * n->ww;
+  t.zx = m->zx * n->xx + m->zy * n->yx + m->zz * n->zx + m->zw * n->wx;
+  t.zy = m->zx * n->xy + m->zy * n->yy + m->zz * n->zy + m->zw * n->wy;
+  t.zz = m->zx * n->xz + m->zy * n->yz + m->zz * n->zz + m->zw * n->wz;
+  t.zw = m->zx * n->xw + m->zy * n->yw + m->zz * n->zw + m->zw * n->ww;
+  t.wx = m->wx * n->xx + m->wy * n->yx + m->wz * n->zx + m->ww * n->wx;
+  t.wy = m->wx * n->xy + m->wy * n->yy + m->wz * n->zy + m->ww * n->wy;
+  t.wz = m->wx * n->xz + m->wy * n->yz + m->wz * n->zz + m->ww * n->wz;
+  t.ww = m->wx * n->xw + m->wy * n->yw + m->wz * n->zw + m->ww * n->ww;
+  *r = t;
+}
+
+void guRotateF(MtxF *mf, float a, float x, float y, float z)
+{
+  float s = sin(a);
+  float c = cos(a);
+  mf->xx = x * x + c * (1.f - x * x);
+  mf->xy = x * y * (1.f - c) + z * s;
+  mf->xz = x * z * (1.f - c) - y * s;
+  mf->xw = 0.f;
+  mf->yx = y * x * (1.f - c) - z * s;
+  mf->yy = y * y + c * (1.f - y * y);
+  mf->yz = y * z * (1.f - c) + x * s;
+  mf->yw = 0.f;
+  mf->zx = z * x * (1.f - c) + y * s;
+  mf->zy = z * y * (1.f - c) - x * s;
+  mf->zz = z * z + c * (1.f - z * z);
+  mf->zw = 0.f;
+  mf->wx = 0.f;
+  mf->wy = 0.f;
+  mf->wz = 0.f;
+  mf->ww = 1.f;
+}
+
+void guRotateRPYF(MtxF *mf, float r, float p, float h)
+{
+  float sr = sin(r);
+  float cr = cos(r);
+  float sp = sin(p);
+  float cp = cos(p);
+  float sh = sin(h);
+  float ch = cos(h);
+  mf->xx = cp * ch;
+  mf->xy = cp * sh;
+  mf->xz = -sp;
+  mf->xw = 0.f;
+  mf->yx = sr * sp * ch - cr * sh;
+  mf->yy = sr * sp * sh + cr * ch;
+  mf->yz = sr * cp;
+  mf->yw = 0.f;
+  mf->zx = cr * sp * ch + sr * sh;
+  mf->zy = cr * sp * sh - sp * sh;
+  mf->zz = cr * cp;
+  mf->zw = 0.f;
+  mf->wx = 0.f;
+  mf->wy = 0.f;
+  mf->wz = 0.f;
+  mf->ww = 1.f;
+}
+
+void guScaleF(MtxF *mf, float x, float y, float z)
+{
+  *mf = (MtxF)guDefMtxF(x,   0.f, 0.f, 0.f,
+                        0.f, y,   0.f, 0.f,
+                        0.f, 0.f, z,   0.f,
+                        0.f, 0.f, 0.f, 1.f);
+}
+
+void guTranslateF(MtxF *mf, float x, float y, float z)
+{
+  *mf = (MtxF)guDefMtxF(1.f, 0.f, 0.f, 0.f,
+                        0.f, 1.f, 0.f, 0.f,
+                        0.f, 0.f, 1.f, 0.f,
+                        x,   y,   z,   1.f);
+}
+
+void guMtxF2L(const MtxF *mf, Mtx *m)
+{
+  for (int i = 0; i < 16; ++i) {
+    qs1616_t n = qs1616(mf->f[i]);
+    m->i[i] = (n >> 16) & 0x0000FFFF;
+    m->f[i] = (n >> 0)  & 0x0000FFFF;
+  }
+}
+
+
+
+/* translucent material */
+Gfx xlu_material[] = {
+	gsSPTexture(qu016(0.999985), qu016(0.999985), 0, G_TX_RENDERTILE, G_OFF),
+	gsDPPipeSync(),
+	gsDPSetRenderMode(AA_EN | Z_CMP | Z_UPD | IM_RD | FORCE_BL | CVG_DST_CLAMP | ZMODE_XLU | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c1(G_BL_CLR_FOG, G_BL_A_SHADE, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2),
+	gsDPSetCombineLERP(
+		0, 0, 0, ENVIRONMENT
+		, 0, 0, 0, ENVIRONMENT
+		, 0, 0, 0, COMBINED
+		, 0, 0, 0, COMBINED
+	),
+	gsDPSetEnvColor(0xFF, 0xFF, 0xFF, 0x80),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_FOG | G_LIGHTING | G_SHADING_SMOOTH),
+	gsSPClearGeometryMode(G_CULL_BACK),
+	gsSPClearGeometryMode(G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+	gsSPEndDisplayList()
+};
+
+unsigned char cylinder_vbuf[512] = {
+0x00, 0x00, 0x00, 0xC8, 0xFF, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x26, 0x00, 0x00, 0xFF, 0xA4, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x00,
+0xFF, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x26, 0x00, 0xC8, 0xFF, 0xA4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x47, 0x00, 0x00, 0xFF, 0xB9, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x47, 0x00, 0xC8,
+0xFF, 0xB9, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x5C, 0x00, 0x00, 0xFF, 0xDA, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x5C, 0x00, 0xC8, 0xFF, 0xDA, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x64, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x64, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x5C, 0x00, 0x00, 0x00, 0x26, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x5C, 0x00, 0xC8,
+0x00, 0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x47, 0x00, 0x00, 0x00, 0x47, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x47, 0x00, 0xC8, 0x00, 0x47, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x26, 0x00, 0x00,
+0x00, 0x5C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x26, 0x00, 0xC8, 0x00, 0x5C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xC8,
+0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xDA, 0x00, 0x00, 0x00, 0x5C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0xDA, 0x00, 0xC8, 0x00, 0x5C, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xB9, 0x00, 0x00,
+0x00, 0x47, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xB9, 0x00, 0xC8, 0x00, 0x47, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0xA4, 0x00, 0x00, 0x00, 0x26, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xA4, 0x00, 0xC8,
+0x00, 0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0x9C, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xA4, 0x00, 0x00,
+0xFF, 0xDA, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xA4, 0x00, 0xC8, 0xFF, 0xDA, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0xB9, 0x00, 0x00, 0xFF, 0xB9, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xB9, 0x00, 0xC8,
+0xFF, 0xB9, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xDA, 0x00, 0x00, 0xFF, 0xA4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0xDA, 0x00, 0xC8, 0xFF, 0xA4, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF
+};
+
+Gfx cylinder_dlist[] = {
+{ 0x01020040, (uint32_t)cylinder_vbuf },
+{ 0x06000204, 0x00060802 },
+{ 0x060A0C08, 0x000E100C },
+{ 0x06121410, 0x00161814 },
+{ 0x061A1C18, 0x001E201C },
+{ 0x06222420, 0x00262824 },
+{ 0x062A2C28, 0x002E302C },
+{ 0x06323430, 0x00363834 },
+{ 0x060A3A2A, 0x003A3C38 },
+{ 0x063E043C, 0x000C1C2C },
+{ 0x06000602, 0x00060A08 },
+{ 0x060A0E0C, 0x000E1210 },
+{ 0x06121614, 0x00161A18 },
+{ 0x061A1E1C, 0x001E2220 },
+{ 0x06222624, 0x00262A28 },
+{ 0x062A2E2C, 0x002E3230 },
+{ 0x06323634, 0x00363A38 },
+{ 0x060A0600, 0x00003E3A },
+{ 0x063A3632, 0x00322E2A },
+{ 0x062A2622, 0x00221E1A },
+{ 0x061A1612, 0x00120E1A },
+{ 0x060E0A1A, 0x000A003A },
+{ 0x063A322A, 0x002A220A },
+{ 0x06221A0A, 0x003A3E3C },
+{ 0x063E0004, 0x003C0402 },
+{ 0x0602083C, 0x00080C3C },
+{ 0x060C1014, 0x0014180C },
+{ 0x06181C0C, 0x001C202C },
+{ 0x0620242C, 0x0024282C },
+{ 0x062C3034, 0x0034383C },
+{ 0x062C343C, 0x003C0C2C },
+{ 0xDF000000, 0x00000000 }
+};
+static void draw_cyl(z64_global_t *gl, Gfx **p_gfx_p, Gfx **p_gfx_d,
+                     float x, float y, float z, int radius, int height)
+{
+  Mtx m;
+  {
+    MtxF mf;
+    guTranslateF(&mf, x, y, z);
+    MtxF ms;
+    guScaleF(&ms, radius / 128.f, height / 128.f, radius / 128.f);
+    guMtxCatF(&ms, &mf, &mf);
+    guMtxF2L(&mf, &m);
+  }
+  uint32_t matAllocd = matrix_alloc(gl->common.gfx_ctxt, "");
+  z_bcopy(&m, (void*)matAllocd, 0x40);
+  gSPMatrix((*p_gfx_p)++, matAllocd,
+            G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_PUSH);
+  gSPDisplayList((*p_gfx_p)++, xlu_material);
+  gSPDisplayList((*p_gfx_p)++, cylinder_dlist);
+  gSPPopMatrix((*p_gfx_p)++, G_MTX_MODELVIEW);
+}
+
+
+unsigned char sphere_vbuf[480] = {
+0x00, 0x00, 0xFF, 0xD8, 0xFF, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x3B, 0xFF, 0x98, 0xFF, 0xD1, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0xFF, 0x98,
+0xFF, 0xB5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x00, 0x00, 0x68, 0xFF, 0xB5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x5F, 0x00, 0x28, 0xFF, 0xB4, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x28,
+0xFF, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x00, 0xFF, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x5F, 0xFF, 0xD8, 0xFF, 0xB4, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x80,
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x3B, 0x00, 0x68, 0xFF, 0xD1, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x77, 0xFF, 0xD8, 0x00, 0x1B, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x49, 0x00, 0x68,
+0x00, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x49, 0xFF, 0x98, 0x00, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x77, 0x00, 0x28, 0x00, 0x1B, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x35, 0xFF, 0xD8,
+0x00, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0x00, 0x21, 0x00, 0x68, 0x00, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0x00, 0x21, 0xFF, 0x98, 0x00, 0x44, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x35, 0x00, 0x28,
+0x00, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xCB, 0xFF, 0xD8, 0x00, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0xDF, 0x00, 0x68, 0x00, 0x44, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xDF, 0xFF, 0x98,
+0x00, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xCB, 0x00, 0x28, 0x00, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0x89, 0xFF, 0xD8, 0x00, 0x1B, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xB7, 0x00, 0x68,
+0x00, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xB7, 0xFF, 0x98, 0x00, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0x89, 0x00, 0x28, 0x00, 0x1B, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xA1, 0x00, 0x28,
+0xFF, 0xB4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF,
+0xFF, 0xA1, 0xFF, 0xD8, 0xFF, 0xB4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20,
+0x00, 0x00, 0x00, 0xFF, 0xFF, 0xC5, 0x00, 0x68, 0xFF, 0xD1, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xC5, 0xFF, 0x98,
+0xFF, 0xD1, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF
+};
+Gfx sphere_dlist[] = {
+	{ 0x0101E03C, (uint32_t)sphere_vbuf },
+	{ 0x06000204, 0x0006080A },
+	{ 0x060C0402, 0x000A0E00 },
+	{ 0x06061012, 0x0008140E },
+	{ 0x06121016, 0x000E1802 },
+	{ 0x06121A08, 0x000C0218 },
+	{ 0x061A1C14, 0x0016101E },
+	{ 0x06142018, 0x0016221A },
+	{ 0x060C1820, 0x0022241C },
+	{ 0x061E1026, 0x001C2820 },
+	{ 0x061E2A22, 0x000C2028 },
+	{ 0x062A2C24, 0x0026102E },
+	{ 0x06243028, 0x0026322A },
+	{ 0x060C2830, 0x002C3436 },
+	{ 0x062E1038, 0x002C3A30 },
+	{ 0x062E3432, 0x000C303A },
+	{ 0x06360A00, 0x00381006 },
+	{ 0x0636043A, 0x00380A34 },
+	{ 0x060C3A04, 0x00000E02 },
+	{ 0x06061208, 0x000A080E },
+	{ 0x06081A14, 0x000E1418 },
+	{ 0x0612161A, 0x001A221C },
+	{ 0x06141C20, 0x00161E22 },
+	{ 0x06222A24, 0x001C2428 },
+	{ 0x061E262A, 0x002A322C },
+	{ 0x06242C30, 0x00262E32 },
+	{ 0x062C3234, 0x002C363A },
+	{ 0x062E3834, 0x0036340A },
+	{ 0x06360004, 0x0038060A },
+	{ 0xDF000000, 0x00000000 }
+};
+
+static void draw_sph(z64_global_t *gl, Gfx **p_gfx_p, Gfx **p_gfx_d,
+                     float x, float y, float z, int radius)
+{
+  Mtx m;
+  {
+    MtxF mf;
+    guTranslateF(&mf, x, y, z);
+    MtxF ms;
+    guScaleF(&ms, radius / 128.f, radius / 128.f, radius / 128.f);
+    guMtxCatF(&ms, &mf, &mf);
+    guMtxF2L(&mf, &m);
+  }
+  uint32_t matAllocd = matrix_alloc(gl->common.gfx_ctxt, "");
+  z_bcopy(&m, (void*)matAllocd, 0x40);
+  gSPMatrix((*p_gfx_p)++, matAllocd,
+            G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_PUSH);
+  //z_matrix_scale_3f(radius / 128.f, height / 128.f, radius / 128.f, 1);
+  
+  
+  gSPDisplayList((*p_gfx_p)++, xlu_material);
+  gSPDisplayList((*p_gfx_p)++, sphere_dlist);
+  gSPPopMatrix((*p_gfx_p)++, G_MTX_MODELVIEW);
+}
+
+
+static void zh_collider_view(z64_global_t *gl, void *collider)
+{
+  z64_hit_t *hit = collider;
+  z64_disp_buf_t *x = &ZQDL(gl, poly_xlu);
+  Gfx **p_gfx_p = &x->p;
+  Gfx **p_gfx_d = &x->d;
+
+    switch (hit->type) {
+      case Z64_HIT_SPHERE_LIST: {
+        z64_hit_cyl_list_t *hit_cyl_list = (z64_hit_cyl_list_t *)hit;
+
+        for (int j = 0; j < hit_cyl_list->n_ent; ++j) {
+          z64_hit_cyl_ent_t *ent = &hit_cyl_list->ent_list[j];
+
+          /* make zero radius cylinders just appear really small */
+          int radius = ent->radius;
+          if (radius == 0)
+            radius = 1;
+
+          draw_sph(gl, p_gfx_p, p_gfx_d,
+                   ent->pos.x, ent->pos.y,
+                   ent->pos.z, radius);
+        }
+
+        break;
+      }
+      case Z64_HIT_CYL: {
+        z64_hit_cyl_t *hit_cyl = (z64_hit_cyl_t *)hit;
+
+        /* ditto */
+        int radius = hit_cyl->radius;
+        if (radius == 0)
+          radius = 1;
+
+        draw_cyl(gl, p_gfx_p, p_gfx_d,
+                 hit_cyl->pos.x, hit_cyl->pos.y + hit_cyl->y_offset,
+                 hit_cyl->pos.z, radius, hit_cyl->height);
+
+        break;
+      }
+      #if 0 /* TODO these still need adapted for z64ovl */
+      case Z64_HIT_TRI_LIST: {
+        z64_hit_tri_list_t *hit_tri_list = (z64_hit_tri_list_t *)hit;
+
+        for (int j = 0; j < hit_tri_list->n_ent; ++j) {
+          z64_hit_tri_ent_t *ent = &hit_tri_list->ent_list[j];
+
+          draw_tri(p_gfx_p, p_gfx_d, &ent->v[0], &ent->v[2], &ent->v[1]);
+        }
+
+        break;
+      }
+      case Z64_HIT_QUAD: {
+        z64_hit_quad_t *hit_quad = (z64_hit_quad_t *)hit;
+
+        draw_quad(p_gfx_p, p_gfx_d,
+                  &hit_quad->v[0], &hit_quad->v[2],
+                  &hit_quad->v[3], &hit_quad->v[1]);
+
+        break;
+      }
+      #endif
+    }
+}
+#endif /* !ZH_COLLIDER_VIEW */
