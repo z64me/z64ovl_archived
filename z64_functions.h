@@ -8606,7 +8606,7 @@ extern void save_flags(z64_global_t *global);
 /**
  * Saves the game (save context) in the current file slot
  */
-extern void save_game(u32 global1F74,z64_global_t *global);
+extern void save_game(uint32_t global1F74,z64_global_t *global);
 	#if OOT_DEBUG
 		asm("save_game = 0x800A88D4");
 	#endif
