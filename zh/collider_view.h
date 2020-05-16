@@ -58,7 +58,7 @@ static void init(entity_t *en, z64_global_t *gl)
 static void play(entity_t *en, z64_global_t *gl)
 {
 	actor_collider_cylinder_update(&en->actor, &en->collision);
-	actor_collision_check_set_ot(gl, (AADDR(gl,0x11e60)), &en->collision);
+	actor_collision_check_set_ot(gl, &gl->hit_ctxt, &en->collision);
 }
 
 static void draw(entity_t *en, z64_global_t *gl)
