@@ -528,7 +528,7 @@ static void draw_cyl(z64_global_t *gl, Gfx **p_gfx_p, Gfx **p_gfx_d,
     MtxF mf;
     guTranslateF(&mf, x, y, z);
     MtxF ms;
-    guScaleF(&ms, radius / 128.f, height / 128.f, radius / 128.f);
+    guScaleF(&ms, radius / 128.f, height / 204.f, radius / 128.f);
     guMtxCatF(&ms, &mf, &mf);
     guMtxF2L(&mf, &m);
   }
