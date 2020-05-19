@@ -136,17 +136,17 @@ typedef struct PosRot
 	z64_rot_t rot;
 } PosRot_t;
 
-float fminf(float a, float b)
+static float fminf(float a, float b)
 {
 	return a < b ? a : b;
 }
 
-float fmaxf(float a, float b)
+static float fmaxf(float a, float b)
 {
 	return a > b ? a : b;
 }
 
-float zh_pow(float in, int32_t power)
+static float zh_pow(float in, int32_t power)
 {
   float out = in;
 
