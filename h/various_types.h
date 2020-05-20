@@ -3,6 +3,7 @@
 
 #include "mips.h"
 #include "n64.h"
+#include "z64_collision_check.h"
 
 typedef enum{
 	false,
