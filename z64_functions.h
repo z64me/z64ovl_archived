@@ -530,7 +530,7 @@ extern void external_func_8002865C(void);
 * Type 5
 * Source Code Reference File: "z_effect_soft_sprite_old_init.c"
 */
-extern void z_effect_spawn_dust_5(
+extern void z_z_effect_spawn_dust_5(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
@@ -539,11 +539,11 @@ z64_global_t* gl /* Global Context */
 , int16_t sp14
 );
 #if OOT_DEBUG
-  asm("z_effect_spawn_dust_5 = 0x800286CC");
+  asm("z_z_effect_spawn_dust_5 = 0x800286CC");
 #elif OOT_U_1_0
-  asm("z_effect_spawn_dust_5 = 0x8001C1C4");
+  asm("z_z_effect_spawn_dust_5 = 0x8001C1C4");
 #elif MM_U_1_0
-  /*asm("z_effect_spawn_dust_5 = 0xDEADBEEF");*/
+  /*asm("z_z_effect_spawn_dust_5 = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -637,7 +637,7 @@ extern void external_func_80028CEC(void);
 /* Spawn ovl_Effect_Ss_Bomb2 (Bomb Explosion)
 * Source Code Reference File: "z_effect_soft_sprite_old_init.c"
 */
-extern void z_effect_spawn_bomb2(
+extern void z_z_effect_spawn_bomb2(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* burst_gravity /* Gravity along the X, Y, and Z axes */
@@ -646,11 +646,11 @@ z64_global_t* gl /* Global Context */
 , int16_t growth_velocty /* How fast the explosion cloud increases its size */
 );
 #if OOT_DEBUG
-  asm("z_effect_spawn_bomb2 = 0x80028E84");
+  asm("z_z_effect_spawn_bomb2 = 0x80028E84");
 #elif OOT_U_1_0
-  asm("z_effect_spawn_bomb2 = 0x8001C97C");
+  asm("z_z_effect_spawn_bomb2 = 0x8001C97C");
 #elif MM_U_1_0
-  /*asm("z_effect_spawn_bomb2 = 0xDEADBEEF");*/
+  /*asm("z_z_effect_spawn_bomb2 = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -680,94 +680,94 @@ extern void external_func_80029024(void);
  * TODO These notes need converted into a C function prototype
  * Bomb Spark
  */
-extern void effect_spawn_spark(void);
+extern void z_effect_spawn_spark(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_spark = 0x80029184");
+		asm("z_effect_spawn_spark = 0x80029184");
 	#elif OOT_U_1_0
-		asm("effect_spawn_spark = 0x8001CC7C");
+		asm("z_effect_spawn_spark = 0x8001CC7C");
 	#endif
 
 /**
  * Spawn Particle 0x06 (Wrapper for 8001CE18)
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_fire_breath(void);
+extern void z_effect_spawn_fire_breath(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_fire_breath = 0x800293A0");
+		asm("z_effect_spawn_fire_breath = 0x800293A0");
 	#elif OOT_U_1_0
-		asm("effect_spawn_fire_breath = 0x8001CE98");
+		asm("z_effect_spawn_fire_breath = 0x8001CE98");
 	#elif MM_U_1_0
-		asm("effect_spawn_fire_breath = 0x800B1DC8");
+		asm("z_effect_spawn_fire_breath = 0x800B1DC8");
 	#endif
 
 /**
  * Spawn Particle 0x07
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_water_bubble(void);
+extern void z_effect_spawn_water_bubble(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_water_bubble = 0x800293E4");
+		asm("z_effect_spawn_water_bubble = 0x800293E4");
 	#elif OOT_U_1_0
-		asm("effect_spawn_water_bubble = 0x8001CEDC");
+		asm("z_effect_spawn_water_bubble = 0x8001CEDC");
 	#elif MM_U_1_0
-		asm("effect_spawn_water_bubble = 0x800B1E94");
+		asm("z_effect_spawn_water_bubble = 0x800B1E94");
 	#endif
 
 /**
  * Spawn Particle 0x09
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_water_ripple(z64_global_t* global, vec3f_t* pos, int32_t unk0, int32_t unk1, int32_t unk2);
+extern void z_effect_spawn_water_ripple(z64_global_t* global, vec3f_t* pos, int32_t unk0, int32_t unk1, int32_t unk2);
 	#if OOT_DEBUG
-		asm("effect_spawn_water_ripple = 0x80029444");
+		asm("z_effect_spawn_water_ripple = 0x80029444");
 	#elif OOT_U_1_0
-		asm("effect_spawn_water_ripple = 0x8001CF3C");
+		asm("z_effect_spawn_water_ripple = 0x8001CF3C");
 	#elif MM_U_1_0
-		asm("effect_spawn_water_ripple = 0x800B1EF4");
+		asm("z_effect_spawn_water_ripple = 0x800B1EF4");
 	#endif
 
 /**
  * Spawn Particle 0x0A
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_water_splash(
+extern void z_effect_spawn_water_splash(
 	z64_global_t *global, vec3f_t *pos,
 	int32_t unk0, int32_t unk1, int32_t unk2, int32_t unk3
 );
 	#if OOT_DEBUG
-		asm("effect_spawn_water_splash = 0x8002949C");
+		asm("z_effect_spawn_water_splash = 0x8002949C");
 	#elif OOT_U_1_0
-		asm("effect_spawn_water_splash = 0x8001CF94");
+		asm("z_effect_spawn_water_splash = 0x8001CF94");
 	#elif MM_U_1_0
-		asm("effect_spawn_water_splash = 0x800B1F4C");
+		asm("z_effect_spawn_water_splash = 0x800B1F4C");
 	#endif
 
 /**
  * Spawn Particle 0x0B
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_magma(void);
+extern void z_effect_spawn_magma(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_magma = 0x80029530");
+		asm("z_effect_spawn_magma = 0x80029530");
 	#elif OOT_U_1_0
-		asm("effect_spawn_magma = 0x8001D028");
+		asm("z_effect_spawn_magma = 0x8001D028");
 	#endif
 
 /**
  * Spawn Particle 0x0D
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_lightning(z64_global_t *global, vec3f_t *position, uint32_t *opacity, uint32_t *color, uint16_t size);
+extern void z_effect_spawn_lightning(z64_global_t *global, vec3f_t *position, uint32_t *opacity, uint32_t *color, uint16_t size);
     #if OOT_DEBUG
-        asm("effect_spawn_lightning= 0x800295A0");
+        asm("z_effect_spawn_lightning= 0x800295A0");
     #elif OOT_U_1_0
-        asm("effect_spawn_lightning= 0x8001D098");
+        asm("z_effect_spawn_lightning= 0x8001D098");
     #endif
 
 /* Spawn ovl_Effect_Ss_Dt_Bubble (Big Octo Bubble)
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_effect_spawn_dt_bubble_0(
+extern void z_z_effect_spawn_dt_bubble_0(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
@@ -778,11 +778,11 @@ z64_global_t* gl /* Global Context */
 , int16_t sp1C
 );
 #if OOT_DEBUG
-	asm("z_effect_spawn_dt_bubble_0 = 0x80029618");
+	asm("z_z_effect_spawn_dt_bubble_0 = 0x80029618");
 #elif OOT_U_1_0
-	asm("z_effect_spawn_dt_bubble_0 = 0x8001D110");
+	asm("z_z_effect_spawn_dt_bubble_0 = 0x8001D110");
 #elif MM_U_1_0
-	asm("z_effect_spawn_dt_bubble_0 = 0x800B2090");
+	asm("z_z_effect_spawn_dt_bubble_0 = 0x800B2090");
 #endif
 
 /**
@@ -801,7 +801,7 @@ extern void external_func_80029694(void);
 /* Spawn ovl_Effect_Ss_Hahen (Fragment)
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_effect_spawn_hahen(
+extern void z_z_effect_spawn_hahen(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
@@ -811,18 +811,18 @@ z64_global_t* gl /* Global Context */
 , int32_t sp24
 );
 #if OOT_DEBUG
-  asm("z_effect_spawn_hahen = 0x80029724");
+  asm("z_z_effect_spawn_hahen = 0x80029724");
 #elif OOT_U_1_0
-  asm("z_effect_spawn_hahen = 0x8001D21C");
+  asm("z_z_effect_spawn_hahen = 0x8001D21C");
 #elif MM_U_1_0
-  /*asm("z_effect_spawn_hahen = 0xDEADBEEF");*/
+  /*asm("z_z_effect_spawn_hahen = 0xDEADBEEF");*/
 #endif
 
 /* Spawn ovl_Effect_Ss_Hahen
 * Wrapper to modify the amount of particles spawned.
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_effect_spawn_hahen_n(
+extern void z_z_effect_spawn_hahen_n(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , float y_speed /* Acceleration along the Y axis */
@@ -835,44 +835,44 @@ z64_global_t* gl /* Global Context */
 , int32_t sp28
 );
 #if OOT_DEBUG
-  asm("z_effect_spawn_hahen_n = 0x800297A4");
+  asm("z_z_effect_spawn_hahen_n = 0x800297A4");
 #elif OOT_U_1_0
-  asm("z_effect_spawn_hahen_n = 0x8001D29C");
+  asm("z_z_effect_spawn_hahen_n = 0x8001D29C");
 #elif MM_U_1_0
-  /*asm("z_effect_spawn_hahen_n = 0xDEADBEEF");*/
+  /*asm("z_z_effect_spawn_hahen_n = 0xDEADBEEF");*/
 #endif
 
 /**
  * Spawn Particle 0x11 (Wrapper for 8001D438)
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_splash(void);
+extern void z_effect_spawn_splash(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_splash = 0x800299AC");
+		asm("z_effect_spawn_splash = 0x800299AC");
 	#elif OOT_U_1_0
-		asm("effect_spawn_splash = 0x8001D4A8");
+		asm("z_effect_spawn_splash = 0x8001D4A8");
 	#endif
 
 /**
  * Spawn Particle 0x13
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_magma2(void);
+extern void z_effect_spawn_magma2(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_magma2 = 0x80029B90");
+		asm("z_effect_spawn_magma2 = 0x80029B90");
 	#elif OOT_U_1_0
-		asm("effect_spawn_magma2 = 0x8001D68C");
+		asm("z_effect_spawn_magma2 = 0x8001D68C");
 	#endif
 
 /**
  * Spawn Particle 0x14
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_stone1(void);
+extern void z_effect_spawn_stone1(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_stone1 = 0x80029C00");
+		asm("z_effect_spawn_stone1 = 0x80029C00");
 	#elif OOT_U_1_0
-		asm("effect_spawn_stone1 = 0x8001D6FC");
+		asm("z_effect_spawn_stone1 = 0x8001D6FC");
 	#endif
 
 /**
@@ -923,11 +923,11 @@ extern void external_func_80029D5C(void);
  * Spawn Particle 0x17
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_k_fire(void);
+extern void z_effect_spawn_k_fire(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_k_fire = 0x80029DBC");
+		asm("z_effect_spawn_k_fire = 0x80029DBC");
 	#elif OOT_U_1_0
-		asm("effect_spawn_k_fire = 0x8001D8C8");
+		asm("z_effect_spawn_k_fire = 0x8001D8C8");
 	#endif
 
 /**
@@ -961,16 +961,16 @@ Argument Notes
 * display_list = The display list of the particle fragment
 **************
  */
-extern void effect_spawn_fragment(
+extern void z_effect_spawn_fragment(
 	z64_global_t *global,
 	vec3f_t *burst_depth_y, vec3f_t *burst_depth_x, vec3f_t *burst_origin,
 	int16_t gravity_influence,
 	int16_t u0,
 	int16_t rotation_speed,
 	int16_t burst_velocity,
-	uint8_t u1,
+	int16_t u1,
 	int16_t scale,
-	uint8_t u2,
+	int16_t u2,
 	int16_t jitter,
 	int32_t duration,
 	int16_t u3,
@@ -978,11 +978,11 @@ extern void effect_spawn_fragment(
 	uint32_t dlist
 	);
 	#if OOT_DEBUG
-		asm("effect_spawn_fragment = 0x80029E8C");
+		asm("z_effect_spawn_fragment = 0x80029E8C");
 	#elif OOT_U_1_0
-		asm("effect_spawn_fragment = 0x8001D998");
+		asm("z_effect_spawn_fragment = 0x8001D998");
 	#elif MM_U_1_0
-		asm("effect_spawn_fragment = 0x800B2810");
+		asm("z_effect_spawn_fragment = 0x800B2810");
 	#endif
 
 /**
@@ -1022,18 +1022,18 @@ extern void external_func_8002A2A4(void);
  * Spawn Particle 0x1C (Wrapper for 8001DE40)
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_fire_tail(void);
+extern void z_effect_spawn_fire_tail(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_fire_tail = 0x8002A3C4");
+		asm("z_effect_spawn_fire_tail = 0x8002A3C4");
 	#elif OOT_U_1_0
-		asm("effect_spawn_fire_tail = 0x8001DED8");
+		asm("z_effect_spawn_fire_tail = 0x8001DED8");
 	#endif
 
 /* Spawn ovl_Effect_Ss_En_Fire (Fire)
 * Source Code Reference File: "z_effect_soft_sprite_old_init.c"
-* Formerly `effect_spawn_en_fire`
+* Formerly `z_effect_spawn_en_fire`
 */
-extern void z_effect_spawn_fire(
+extern void z_z_effect_spawn_fire(
 z64_global_t* gl /* Global Context */
 , z64_actor_t* a /* Actor to Reference */
 , vec3f_t* position /* X, Y, and Z Position */
@@ -1043,11 +1043,11 @@ z64_global_t* gl /* Global Context */
 , int16_t count /* Particle Count */
 );
 #if OOT_DEBUG
-  asm("z_effect_spawn_fire = 0x8002A4D4");
+  asm("z_z_effect_spawn_fire = 0x8002A4D4");
 #elif OOT_U_1_0
-  asm("z_effect_spawn_fire = 0x8001DFEC");
+  asm("z_z_effect_spawn_fire = 0x8001DFEC");
 #elif MM_U_1_0
-  /*asm("z_effect_spawn_fire = 0xDEADBEEF");*/
+  /*asm("z_z_effect_spawn_fire = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -1064,17 +1064,17 @@ extern void external_func_8002A54C(void);
  * Spawn Particle 0x1E
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_extra(void);
+extern void z_effect_spawn_extra(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_extra = 0x8002A5F4");
+		asm("z_effect_spawn_extra = 0x8002A5F4");
 	#elif OOT_U_1_0
-		asm("effect_spawn_extra = 0x8001E110");
+		asm("z_effect_spawn_extra = 0x8001E110");
 	#endif
 
 /* Spawn Flame Circle
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_effect_spawn_flame_circle(
+extern void z_z_effect_spawn_flame_circle(
 z64_global_t* gl /* Global Context */
 , z64_actor_t* a /* Actor Instance */
 , vec3f_t* position /* X, Y, and Z Position */
@@ -1082,19 +1082,19 @@ z64_global_t* gl /* Global Context */
 , uint16_t height /* Flame Cylinder Height */
 );
 #if OOT_DEBUG
-  asm("z_effect_spawn_flame_circle = 0x8002A65C");
+  asm("z_z_effect_spawn_flame_circle = 0x8002A65C");
 #elif OOT_U_1_0
-  asm("z_effect_spawn_flame_circle = 0x8001E178");
+  asm("z_z_effect_spawn_flame_circle = 0x8001E178");
 #elif MM_U_1_0
 	/* ovl_Effect_Ss_Fcircle does not exist in MM */
-  /*asm("z_effect_spawn_flame_circle = 0xDEADBEEF");*/
+  /*asm("z_z_effect_spawn_flame_circle = 0xDEADBEEF");*/
 #endif
 
 /* Spawn ovl_Effect_Ss_Dead_Db (Dead Deku Baba)
 * Particles on Deku Baba Death
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_effect_spawn_dead_db(
+extern void z_z_effect_spawn_dead_db(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* a2
@@ -1109,55 +1109,55 @@ z64_global_t* gl /* Global Context */
 , uint16_t sp3C
 );
 #if OOT_DEBUG
-  asm("z_effect_spawn_dead_db = 0x8002A6B8");
+  asm("z_z_effect_spawn_dead_db = 0x8002A6B8");
 #elif OOT_U_1_0
-  asm("z_effect_spawn_dead_db = 0x8001E1D4");
+  asm("z_z_effect_spawn_dead_db = 0x8001E1D4");
 #elif MM_U_1_0
-  asm("z_effect_spawn_dead_db = 0x800B2F80");
+  asm("z_z_effect_spawn_dead_db = 0x800B2F80");
 #endif
 
 /**
  * Spawn Particle 0x21
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_dead_dodongo(void);
+extern void z_effect_spawn_dead_dodongo(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_dead_dodongo = 0x8002A770");
+		asm("z_effect_spawn_dead_dodongo = 0x8002A770");
 	#elif OOT_U_1_0
-		asm("effect_spawn_dead_dodongo = 0x8001E28C");
+		asm("z_effect_spawn_dead_dodongo = 0x8001E28C");
 	#endif
 
 /**
  * Spawn Particle 0x22 (Wrapper for 8001E3B0)
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_dead_deku_scrub(void);
+extern void z_effect_spawn_dead_deku_scrub(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_dead_deku_scrub = 0x8002A90C");
+		asm("z_effect_spawn_dead_deku_scrub = 0x8002A90C");
 	#elif OOT_U_1_0
-		asm("effect_spawn_dead_deku_scrub = 0x8001E428");
+		asm("z_effect_spawn_dead_deku_scrub = 0x8001E428");
 	#endif
 
 /**
  * Spawn Particle 0x23 (Wrapper for 8001E478)
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_dead_sound(void);
+extern void z_effect_spawn_dead_sound(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_dead_sound = 0x8002A9F4");
+		asm("z_effect_spawn_dead_sound = 0x8002A9F4");
 	#elif OOT_U_1_0
-		asm("effect_spawn_dead_sound = 0x8001E510");
+		asm("z_effect_spawn_dead_sound = 0x8001E510");
 	#endif
 
 /**
  * Spawn Particle 0x24
  * TODO These notes need converted into a C function prototype
  */
-extern void effect_spawn_ice_smoke(void);
+extern void z_effect_spawn_ice_smoke(void);
 	#if OOT_DEBUG
-		asm("effect_spawn_ice_smoke = 0x8002AA44");
+		asm("z_effect_spawn_ice_smoke = 0x8002AA44");
 	#elif OOT_U_1_0
-		asm("effect_spawn_ice_smoke = 0x8001E560");
+		asm("z_effect_spawn_ice_smoke = 0x8001E560");
 	#endif
 
 /* Initialize the process to draw a drop shadow.
@@ -1449,14 +1449,15 @@ extern void actor_set_object(z64_global_t *global, z64_actor_t *actor);
 /**
  * Physics, updates XYZ coordinates of actor
  */
-extern void actor_update_pos(z64_actor_t *actor);
+extern void z_actor_update_pos(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("actor_update_pos = 0x8002D7EC");
+		asm("z_actor_update_pos = 0x8002D7EC");
 	#elif OOT_U_1_0
-		asm("actor_update_pos = 0x80021124");
+		asm("z_actor_update_pos = 0x80021124");
 	#elif MM_U_1_0
-		asm("actor_update_pos = 0x800B69AC");
+		asm("z_actor_update_pos = 0x800B69AC");
 	#endif
+#define actor_update_pos z_actor_update_pos
 
 /**
  * Physics, updates XYZ velocity vectors (+0x5C) of an actor
@@ -1534,7 +1535,7 @@ z64_actor_t* a /* Actor to Derive Angle */
 #elif OOT_U_1_0
   asm("z_actor_math_yaw_actor = 0x8002140C");
 #elif MM_U_1_0
-  /*asm("z_actor_math_yaw_actor = 0xDEADBEEF");*/
+  asm("z_actor_math_yaw_actor = 0x800B6CD4");
 #endif
 
 /* Return angle of rotation to reach target (provided a vec3f_t)
@@ -2149,12 +2150,13 @@ extern void external_func_8002F7A0(void);
 /**
  * Play Sound Effect (Actor)
  */
-extern void sound_play_actor(z64_actor_t *actor, uint16_t sound_id);
+extern void z_actor_play_sfx(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
-		asm("sound_play_actor = 0x8002F7DC");
+		asm("z_actor_play_sfx = 0x8002F7DC");
 	#elif OOT_U_1_0
-		asm("sound_play_actor = 0x80022F84");
+		asm("z_actor_play_sfx = 0x80022F84");
 	#endif
+#define sound_play_actor z_actor_play_sfx
 
 /* Play a sound effect.
 * Wrapper for 80078914 (a wrapper for sound_play_system)
@@ -2380,7 +2382,7 @@ extern void external_func_80033480(
  * TODO confirm whether "actor collision struct" means the capsule structure, or something else
  * A0 = Global Context | A1 = Actor Collision Struct | V0 = Null or Pointer to Explosive-type actor that collided
  */
-extern z64_actor_t *actor_is_bombed(z64_global_t *global, z64_collider_cylinder_main_t *capsule);
+extern z64_actor_t *actor_is_bombed(z64_global_t *global, void* capsule);
 	#if OOT_DEBUG
 		asm("actor_is_bombed = 0x80033640");
 	#elif OOT_U_1_0
@@ -2816,7 +2818,7 @@ z64_actor_t* a
 */
 extern void z_actor_is_frozen_clist(
 z64_actor_t* a
-, z64_collider_cylinder_collection_t* clist
+, void*  clist
 , int32_t is_frozen
 );
 #if OOT_DEBUG
@@ -3704,7 +3706,7 @@ extern void* z_actor_damage_chart_get(int32_t id);
 */
 extern void z_collider_cylinder_list_alloc(
 z64_global_t* gl /* Global Context */
-, z64_collider_cylinder_collection_t* c /* Collider List to Allocate */
+, void*  c /* Collider List to Allocate */
 );
 #if OOT_DEBUG
   asm("z_collider_cylinder_list_alloc = 0x8005BBF8");
@@ -3729,7 +3731,7 @@ extern void external_func_8005BC28(void);
 */
 extern void z_collider_cylinder_list_free(
 z64_global_t* gl /* Global Context */
-, z64_collider_cylinder_collection_t* c /* Collider List to Deallocate */
+, void*  c /* Collider List to Deallocate */
 );
 #if OOT_DEBUG
   asm("z_collider_cylinder_list_free = 0x8005BCC8");
@@ -3756,9 +3758,9 @@ extern void external_func_8005BE50(void);
 */
 extern void z_collider_cylinder_list_init(
 z64_global_t* gl /* Global Context */
-, z64_collider_cylinder_collection_t* c /* Collider List to Initiailize */
+, void*  c /* Collider List to Initiailize */
 , z64_actor_t* a /* Actor instance */
-, z64_collider_cylinder_collection_init_t* init /* Collider List Header */
+, void*  init /* Collider List Header */
 , void* list /* Individual Collider Structures in Instance */
 );
 #if OOT_DEBUG
@@ -3775,7 +3777,7 @@ z64_global_t* gl /* Global Context */
 */
 extern void z_collider_cylinder_alloc(
 z64_global_t* gl /* Global Context */
-, z64_collider_cylinder_main_t* c /* Collider to Allocate */
+, void*  c /* Collider to Allocate */
 );
 #if OOT_DEBUG
   asm("z_collider_cylinder_alloc = 0x8005C364");
@@ -3791,7 +3793,7 @@ z64_global_t* gl /* Global Context */
 */
 extern void z_collider_cylinder_free(
 z64_global_t* gl /* Global Context */
-, z64_collider_cylinder_main_t* c /* Collider to Deallocate */
+, void*  c /* Collider to Deallocate */
 );
 #if OOT_DEBUG
   asm("z_collider_cylinder_free = 0x8005C3AC");
@@ -3833,7 +3835,7 @@ extern void external_func_8005C450(void);
 */
 extern void z_collider_cylinder_init(
 z64_global_t* gl /* Global Context */
-, z64_collider_cylinder_main_t* c /* Collider to Initialize */
+, void*  c /* Collider to Initialize */
 , z64_actor_t* a /* Actor Instance to Reference */
 , const z64_collider_cylinder_init_t* source /* Initialization Variables */
 );
@@ -3858,7 +3860,7 @@ extern void external_func_8005C7E0(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void z_collider_tri_list_free(z64_global_t* gl, z64_collider_tri_collection_t* t);
+extern void z_collider_tri_list_free(z64_global_t* gl, z64_collider_tris_t* t);
 	#if OOT_DEBUG
 		asm("z_collider_tri_list_free = 0x8005C8C8");
 	#elif OOT_U_1_0
@@ -3868,7 +3870,7 @@ extern void z_collider_tri_list_free(z64_global_t* gl, z64_collider_tri_collecti
 /**
  * TODO This function is completely undocumented
  */
-extern int32_t z_collider_tri_list_init(z64_global_t* gl, z64_collider_tri_collection_t* dest, z64_actor_t* actor, void* src, void* list);
+extern int32_t z_collider_tri_list_init(z64_global_t* gl, z64_collider_tris_t* dest, z64_actor_t* actor, void* src, void* list);
 	#if OOT_DEBUG
 		asm("z_collider_tri_list_init = 0x8005CBAC");
 	#elif OOT_U_1_0
@@ -3924,7 +3926,7 @@ extern void external_func_8005D160(void);
 extern void z_collider_hitbox(
 z64_global_t* gl /* Global Context */
 , z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
-, z64_collider_cylinder_main_t* c /* Collider Structure */
+, void*  c /* Collider Structure */
 );
 #if OOT_DEBUG
   asm("z_collider_hitbox = 0x8005D79C");
@@ -3943,7 +3945,7 @@ z64_global_t* gl /* Global Context */
 extern void z_collider_hurtbox(
 z64_global_t* gl /* Global Context */
 , z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
-, z64_collider_cylinder_main_t* c /* Collider Structure */
+, void*  c /* Collider Structure */
 );
 #if OOT_DEBUG
   asm("z_collider_hurtbox = 0x8005D9F4");
@@ -3962,7 +3964,7 @@ z64_global_t* gl /* Global Context */
 extern void z_collider_bumpbox(
 z64_global_t* gl /* Global Context */
 , z64_hit_ctxt_t* hit_ctxt /* Hitbox Context within Global Context */
-, z64_collider_cylinder_main_t* c /* Collider Structure */
+, void*  c /* Collider Structure */
 );
 #if OOT_DEBUG
   asm("z_collider_bumpbox = 0x8005DC4C");
@@ -4029,7 +4031,7 @@ void* out /* Destination for initialized table. */
 */
 extern void z_collider_cylinder_update(
 z64_actor_t* a /* Actor to Reference */
-, z64_collider_cylinder_main_t* c /* Collider Structure */
+, void*  c /* Collider Structure */
 );
 #if OOT_DEBUG
   asm("z_collider_cylinder_update = 0x800626DC");
@@ -4075,7 +4077,7 @@ extern void external_func_800627A0(void);
 */
 extern void z_collider_translate_index(
 int32_t c_index /* Cylinder Index */
-, z64_collider_cylinder_collection_t* clist /* Cylinder List */
+, void*  clist /* Cylinder List */
 );
 #if OOT_DEBUG
   asm("z_collider_translate_index = 0x800628A4");
@@ -4087,11 +4089,11 @@ int32_t c_index /* Cylinder Index */
 
 /**
  */
-extern void effect_spawn_metalspark(z64_global_t* global, vec3f_t position);
+extern void z_effect_spawn_metalspark(z64_global_t* global, vec3f_t position);
 	#if OOT_DEBUG
-		asm("effect_spawn_metalspark = 0x80062CD4");
+		asm("z_effect_spawn_metalspark = 0x80062CD4");
 	#elif OOT_U_1_0
-		asm("effect_spawn_metalspark = 0x80051124");
+		asm("z_effect_spawn_metalspark = 0x80051124");
 	#endif
 
 /**

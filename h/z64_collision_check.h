@@ -1,5 +1,19 @@
 #ifndef Z64_COLLISION_CHECK_H_INCLUDED
 #define Z64_COLLISION_CHECK_H_INCLUDED
+
+typedef struct z64_collider_s {
+    z64_actor_t * actor;
+    z64_actor_t * at; /* Actor collided with in AT pool */
+    z64_actor_t * ac; /* Actor collided with in AC pool */
+    z64_actor_t * oc; /* Actor collided with in OC pool */
+    uint8_t flags_at; /* Compared to flags_ac */
+    uint8_t flags_ac; /* Compared to flags_at */
+    uint8_t mask_a; /* Bitwise-AND compared to mask_b */
+    uint8_t mask_b; /* Bitwise-AND compared to mask_a */
+    uint8_t type; /* z64_collider_type_t */
+    uint8_t shape; /* z64_collider_shape_t */
+} z64_collider_t;
+
 typedef struct z64_collider_touch_s {
     int32_t flags;
     uint8_t effect; /* Damage Special FX */
@@ -28,20 +42,7 @@ typedef struct z64_collider_bump_s {
     vec3s_t unk_0x06;
 } z64_collider_bump_t;
 
-typedef struct z64_collider_s {
-    z64_actor_t * actor;
-    z64_actor_t * at; /* Actor collided with in AT pool */
-    z64_actor_t * ac; /* Actor collided with in AC pool */
-    z64_actor_t * oc; /* Actor collided with in OC pool */
-    uint8_t flags_at; /* Compared to flags_ac */
-    uint8_t flags_ac; /* Compared to flags_at */
-    uint8_t mask_a; /* Bitwise-AND compared to mask_b */
-    uint8_t mask_b; /* Bitwise-AND compared to mask_a */
-    uint8_t type; /* z64_collider_type_t */
-    uint8_t shape; /* z64_collider_shape_t */
-} z64_collider_t;
-
-typedef z64_collider_body_s z64_collider_body_t;
+typedef struct z64_collider_body_s z64_collider_body_t;
 struct z64_collider_body_s {
     z64_collider_touch_t toucher;
     z64_collider_bump_t bumper;
@@ -140,16 +141,16 @@ typedef struct z64_collider_jntsph_item_dim_init_s {
     int16_t scale;
 } z64_collider_jntsph_item_dim_init_t;
 
+typedef struct z64_collider_jntsph_item_init_s {
+    z64_collider_body_init_t body; /* Body */
+    z64_collider_jntsph_item_dim_init_t dim; /* Dimensions */
+} z64_collider_jntsph_item_init_t;
+
 typedef struct z64_collider_jntsph_init_actor_s {
     z64_collider_init_actor_t base;
     int32_t count;
     z64_collider_jntsph_item_init_t * list;
 } z64_collider_jntsph_init_actor_t;
-
-typedef struct z64_collider_jntsph_item_init_s {
-    z64_collider_body_init_t body; /* Body */
-    z64_collider_jntsph_item_dim_init_t dim; /* Dimensions */
-} z64_collider_jntsph_item_init_t;
 
 typedef struct z64_collider_jntsph_init_set3_s {
     z64_collider_init_set3_t base;
@@ -245,7 +246,7 @@ typedef struct z64_collider_tris_s {
 typedef enum z64_collider_type_t {
     COL_TYPE_SHIELD_METAL=9,
     COL_TYPE_SHIELD_WOOD=11,
-    COL_TYPE_UN10=10,
+    COL_TYPE_UNK10=10,
     COL_TYPE_UNK0=0,
     COL_TYPE_UNK1=1,
     COL_TYPE_UNK12=12,

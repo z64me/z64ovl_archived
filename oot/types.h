@@ -630,6 +630,8 @@ typedef struct z64_dynapoly {
     char        padding[0x0003];
 } z64_dynapoly_t;
 
+#include "../h/z64_collision_check.h"
+
 typedef struct
 {
   int16_t n_at;

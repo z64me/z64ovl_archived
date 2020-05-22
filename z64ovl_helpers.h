@@ -323,13 +323,6 @@ helper_eye_blink(int16_t *frame) {
 	return 2 - *frame; // half-open for a frame, then closed for a frame
 }
 
-/* Return a pointer to a colliding actor */
-/* TODO: Test more */
-static inline z64_actor_t* zh_get_colliding(z64_collider_cylinder_main_t* c)
-{
-	return ((c->base).colliding_actor);
-}
-
 /****
 * Overlay Display List Drawing
 *****/
