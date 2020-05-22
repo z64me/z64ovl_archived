@@ -530,7 +530,7 @@ extern void external_func_8002865C(void);
 * Type 5
 * Source Code Reference File: "z_effect_soft_sprite_old_init.c"
 */
-extern void z_z_effect_spawn_dust_5(
+extern void z_effect_spawn_dust_5(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
@@ -539,11 +539,11 @@ z64_global_t* gl /* Global Context */
 , int16_t sp14
 );
 #if OOT_DEBUG
-  asm("z_z_effect_spawn_dust_5 = 0x800286CC");
+  asm("z_effect_spawn_dust_5 = 0x800286CC");
 #elif OOT_U_1_0
-  asm("z_z_effect_spawn_dust_5 = 0x8001C1C4");
+  asm("z_effect_spawn_dust_5 = 0x8001C1C4");
 #elif MM_U_1_0
-  /*asm("z_z_effect_spawn_dust_5 = 0xDEADBEEF");*/
+  /*asm("z_effect_spawn_dust_5 = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -637,7 +637,7 @@ extern void external_func_80028CEC(void);
 /* Spawn ovl_Effect_Ss_Bomb2 (Bomb Explosion)
 * Source Code Reference File: "z_effect_soft_sprite_old_init.c"
 */
-extern void z_z_effect_spawn_bomb2(
+extern void z_effect_spawn_bomb2(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* burst_gravity /* Gravity along the X, Y, and Z axes */
@@ -646,11 +646,11 @@ z64_global_t* gl /* Global Context */
 , int16_t growth_velocty /* How fast the explosion cloud increases its size */
 );
 #if OOT_DEBUG
-  asm("z_z_effect_spawn_bomb2 = 0x80028E84");
+  asm("z_effect_spawn_bomb2 = 0x80028E84");
 #elif OOT_U_1_0
-  asm("z_z_effect_spawn_bomb2 = 0x8001C97C");
+  asm("z_effect_spawn_bomb2 = 0x8001C97C");
 #elif MM_U_1_0
-  /*asm("z_z_effect_spawn_bomb2 = 0xDEADBEEF");*/
+  /*asm("z_effect_spawn_bomb2 = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -767,7 +767,7 @@ extern void z_effect_spawn_lightning(z64_global_t *global, vec3f_t *position, ui
 /* Spawn ovl_Effect_Ss_Dt_Bubble (Big Octo Bubble)
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_z_effect_spawn_dt_bubble_0(
+extern void z_effect_spawn_dt_bubble_0(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
@@ -778,11 +778,11 @@ z64_global_t* gl /* Global Context */
 , int16_t sp1C
 );
 #if OOT_DEBUG
-	asm("z_z_effect_spawn_dt_bubble_0 = 0x80029618");
+	asm("z_effect_spawn_dt_bubble_0 = 0x80029618");
 #elif OOT_U_1_0
-	asm("z_z_effect_spawn_dt_bubble_0 = 0x8001D110");
+	asm("z_effect_spawn_dt_bubble_0 = 0x8001D110");
 #elif MM_U_1_0
-	asm("z_z_effect_spawn_dt_bubble_0 = 0x800B2090");
+	asm("z_effect_spawn_dt_bubble_0 = 0x800B2090");
 #endif
 
 /**
@@ -801,7 +801,7 @@ extern void external_func_80029694(void);
 /* Spawn ovl_Effect_Ss_Hahen (Fragment)
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_z_effect_spawn_hahen(
+extern void z_effect_spawn_hahen(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
@@ -811,18 +811,18 @@ z64_global_t* gl /* Global Context */
 , int32_t sp24
 );
 #if OOT_DEBUG
-  asm("z_z_effect_spawn_hahen = 0x80029724");
+  asm("z_effect_spawn_hahen = 0x80029724");
 #elif OOT_U_1_0
-  asm("z_z_effect_spawn_hahen = 0x8001D21C");
+  asm("z_effect_spawn_hahen = 0x8001D21C");
 #elif MM_U_1_0
-  /*asm("z_z_effect_spawn_hahen = 0xDEADBEEF");*/
+  /*asm("z_effect_spawn_hahen = 0xDEADBEEF");*/
 #endif
 
 /* Spawn ovl_Effect_Ss_Hahen
 * Wrapper to modify the amount of particles spawned.
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_z_effect_spawn_hahen_n(
+extern void z_effect_spawn_hahen_n(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , float y_speed /* Acceleration along the Y axis */
@@ -835,11 +835,11 @@ z64_global_t* gl /* Global Context */
 , int32_t sp28
 );
 #if OOT_DEBUG
-  asm("z_z_effect_spawn_hahen_n = 0x800297A4");
+  asm("z_effect_spawn_hahen_n = 0x800297A4");
 #elif OOT_U_1_0
-  asm("z_z_effect_spawn_hahen_n = 0x8001D29C");
+  asm("z_effect_spawn_hahen_n = 0x8001D29C");
 #elif MM_U_1_0
-  /*asm("z_z_effect_spawn_hahen_n = 0xDEADBEEF");*/
+  /*asm("z_effect_spawn_hahen_n = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -1033,7 +1033,7 @@ extern void z_effect_spawn_fire_tail(void);
 * Source Code Reference File: "z_effect_soft_sprite_old_init.c"
 * Formerly `z_effect_spawn_en_fire`
 */
-extern void z_z_effect_spawn_fire(
+extern void z_effect_spawn_fire(
 z64_global_t* gl /* Global Context */
 , z64_actor_t* a /* Actor to Reference */
 , vec3f_t* position /* X, Y, and Z Position */
@@ -1043,11 +1043,11 @@ z64_global_t* gl /* Global Context */
 , int16_t count /* Particle Count */
 );
 #if OOT_DEBUG
-  asm("z_z_effect_spawn_fire = 0x8002A4D4");
+  asm("z_effect_spawn_fire = 0x8002A4D4");
 #elif OOT_U_1_0
-  asm("z_z_effect_spawn_fire = 0x8001DFEC");
+  asm("z_effect_spawn_fire = 0x8001DFEC");
 #elif MM_U_1_0
-  /*asm("z_z_effect_spawn_fire = 0xDEADBEEF");*/
+  /*asm("z_effect_spawn_fire = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -1074,7 +1074,7 @@ extern void z_effect_spawn_extra(void);
 /* Spawn Flame Circle
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_z_effect_spawn_flame_circle(
+extern void z_effect_spawn_flame_circle(
 z64_global_t* gl /* Global Context */
 , z64_actor_t* a /* Actor Instance */
 , vec3f_t* position /* X, Y, and Z Position */
@@ -1082,19 +1082,19 @@ z64_global_t* gl /* Global Context */
 , uint16_t height /* Flame Cylinder Height */
 );
 #if OOT_DEBUG
-  asm("z_z_effect_spawn_flame_circle = 0x8002A65C");
+  asm("z_effect_spawn_flame_circle = 0x8002A65C");
 #elif OOT_U_1_0
-  asm("z_z_effect_spawn_flame_circle = 0x8001E178");
+  asm("z_effect_spawn_flame_circle = 0x8001E178");
 #elif MM_U_1_0
 	/* ovl_Effect_Ss_Fcircle does not exist in MM */
-  /*asm("z_z_effect_spawn_flame_circle = 0xDEADBEEF");*/
+  /*asm("z_effect_spawn_flame_circle = 0xDEADBEEF");*/
 #endif
 
 /* Spawn ovl_Effect_Ss_Dead_Db (Dead Deku Baba)
 * Particles on Deku Baba Death
 * Source Code Reference File: "z_effect_soft_sprite.c"
 */
-extern void z_z_effect_spawn_dead_db(
+extern void z_effect_spawn_dead_db(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* a2
@@ -1109,11 +1109,11 @@ z64_global_t* gl /* Global Context */
 , uint16_t sp3C
 );
 #if OOT_DEBUG
-  asm("z_z_effect_spawn_dead_db = 0x8002A6B8");
+  asm("z_effect_spawn_dead_db = 0x8002A6B8");
 #elif OOT_U_1_0
-  asm("z_z_effect_spawn_dead_db = 0x8001E1D4");
+  asm("z_effect_spawn_dead_db = 0x8001E1D4");
 #elif MM_U_1_0
-  asm("z_z_effect_spawn_dead_db = 0x800B2F80");
+  asm("z_effect_spawn_dead_db = 0x800B2F80");
 #endif
 
 /**
