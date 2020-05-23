@@ -1,6 +1,8 @@
 #ifndef __Z64OVL_ACTOR_OOT_H__
 #define __Z64OVL_ACTOR_OOT_H__
 
+typedef void (z64_actorfunc_t)(void *entity, void *global);
+
 typedef enum {
   OVLTYPE_SWITCH = 0x00,
   OVLTYPE_BG = 0x01,
@@ -110,17 +112,15 @@ struct z64_actor_s {                             /* Common Actor Instance Struct
 /* 0x011C */ z64_actor_t* attached_b;            /* Attached Actor B (Attached to Actor) */
 /* 0x0120 */ z64_actor_t* prev;                  /* Previous Actor */
 /* 0x0124 */ z64_actor_t* next;                  /* Next Actor */
-/* 0x0128 */ void* ctor;                         /* Constructor */
-/* 0x012C */ void* dtor;                         /* Destructor */
-/* 0x0130 */ void* main_proc;                    /* Main Function */
-/* 0x0134 */ void* draw_proc;                    /* Draw Function */
+/* 0x0128 */ z64_actorfunc_t* ctor;              /* Constructor */
+/* 0x012C */ z64_actorfunc_t* dtor;              /* Destructor */
+/* 0x0130 */ z64_actorfunc_t* main_proc;         /* Main Function */
+/* 0x0134 */ z64_actorfunc_t* draw_proc;         /* Draw Function */
 /* 0x0138 */ void* code_entry;                   /* Code Entry */
 #ifdef OOT_DEBUG                                 /* Length: 0x013C */
 /* 0x013C */ uint8_t debug_ex[16];               /* Debug Extended Instance Padding */
 #endif                                           /* Length: 0x014C */
 };
-
-typedef void (z64_actorfunc_t)(void *entity, void *global);
 
 /* z64_player_t_old */
   //z64_actor_t       actor;                    /* 0x0000 */
