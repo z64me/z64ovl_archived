@@ -4417,7 +4417,7 @@ extern void external_func_80074CE8(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800773A8(z64_global_t*gl, float a, float b, float c);
+extern void external_func_800773A8(z64_global_t* gl, float a, float b, float c, float d);
 	#if OOT_DEBUG
 		asm("external_func_800773A8 = 0x800773A8");
 	#elif OOT_U_1_0
