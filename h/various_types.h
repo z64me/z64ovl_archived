@@ -3,6 +3,7 @@
 
 #include "mips.h"
 #include "n64.h"
+#include "z64_actor_bgcheck.h"
 
 typedef enum{
 	false,

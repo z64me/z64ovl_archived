@@ -250,7 +250,7 @@ zh_get_player(z64_global_t *global)
 static
 inline
 void
-helper_lift_test(
+zh_lift_test(
 	z64_actor_t *a
 	, z64_global_t *gl
 	, float range_xz
@@ -274,7 +274,7 @@ helper_lift_test(
 		phi_v1 = temp_v0;
 
 	if (phi_v1 >= 0x5556)
-		actor_give_item(a, gl, 0, range_xz, range_y);
+		z_actor_give_item(a, gl, 0, range_xz, range_y);
 }
 
  /****

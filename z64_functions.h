@@ -1980,19 +1980,20 @@ z64_actor_t* a /* Actor to Reference */
  * A3 = float, max xz distance from actor to Link that item will be given
  * SP+10 = float, max y distance from actor to Link that item will be given
  */
-extern void actor_give_item(
+extern void z_actor_give_item(
 	z64_actor_t *actor,
 	z64_global_t *global,
 	uint8_t get_item_id,
 	float range_xz, float range_y
 );
 	#if OOT_DEBUG
-		asm("actor_give_item = 0x8002F434");
+		asm("z_actor_give_item = 0x8002F434");
 	#elif OOT_U_1_0
-		asm("actor_give_item = 0x80022BD4");
+		asm("z_actor_give_item = 0x80022BD4");
 	#elif MM_U_1_0
-		asm("actor_give_item = 0x800B8A1C");
+		asm("z_actor_give_item = 0x800B8A1C");
 	#endif
+#define actor_give_item z_actor_give_item
 
 /* Give Item
 * Wrapper for 8002F434
