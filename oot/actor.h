@@ -143,7 +143,7 @@ struct z64_actor_s {                             /* Common Actor Instance Struct
   //int16_t           drop_y;                   /* 0x0884 */
   //int16_t           drop_distance;            /* 0x0886 */
                                               /* 0x0888 */
-typedef struct {
+typedef struct z64_player_s {
     z64_actor_t actor; /* Base Actor */
     //char debug_ex[16]; /* Debug Extended Actor */
     uint8_t tunic_idx; /* Equipped Tunic Index */
@@ -161,13 +161,13 @@ typedef struct {
     uint8_t shield_in_hand; /* (?) 1 = yes */
     uint8_t field_0x15c;
     uint8_t right_hand_item; /* Possible? 08 = Neutral, 09 = Too heavy to shield, 0A = shielding */
+    uint8_t field_0x15e;
     uint8_t mask_now; /* Current Mask Index */
-    uint8_t inst015F[2];
     uint32_t * rhand_dlist; /* Right Hand Display List */
     uint32_t * lhand_dlist; /* Left Hand Display List */
     uint32_t * sheath_dlist; /* Sheath Display List */
     uint32_t * torso_dlist; /* Torso Display List */
-    uint8_t field_0x174[60];
+    uint8_t field_0x170[64];
     void * title_card; /* Title Card / Get Item Object File */
     uint8_t field_0x1b4;
     uint8_t field_0x1b5[75];
@@ -176,20 +176,57 @@ typedef struct {
     uint8_t anime_now_2[134]; /* Current Animation Raw Data 2 */
     uint8_t field_0x316[148];
     z64_actor_t * held_actor; /* Held Item Actor (Like Arms_Hook) */
-    uint8_t inst03B0[708];
+    uint8_t field_0x3b0[132];
+    uint8_t get_item_id_chest; /* Item Obtained from Nearby Chest */
+    int16_t gi_face_dir; /* Face this direction on Get Item */
+    z64_actor_t * interacted_range_actor; /* Getting Items, Bushed, Rocks, Bugs */
+    uint8_t field_0x43c[4];
+    z64_actor_t * riding_actor; /* Riding Actor (Epona, Horse) */
+    uint8_t field_0x444;
+    uint8_t field_0x445[3];
+    uint8_t col_struct_1[80]; /* [?] */
+    uint8_t col_struct_2[76]; /* Body [?] */
+    uint8_t col_struct_3[128]; /* Sword Attacks 1 [?] */
+    uint8_t col_struct_4[128]; /* Sword Attacks 2 [?] */
+    uint8_t shield_col_struct[128]; /* Shield Collision Structure */
+    uint8_t field_0x664[16];
     void * state_function; /* Machine State */
     uint32_t * age_properties; /* Collision, Sound Effects, Other */
-    uint32_t state_flags_1;
-    uint32_t state_flags_2;
+    int32_t state_flags_1;
+    int32_t state_flags_2;
     uint8_t field_0x684[8];
     z64_actor_t * navi; /* Navi's Instance */
     uint16_t navi_msg; /* Message ID for Navi's Info */
     uint8_t field_0x692[62];
     uint32_t anime_now_id; /* Current Animation ID */
-    uint8_t field_0x6d4[780];
+    uint8_t field_0x6d4[18];
+    void * field_0x6e8;
+    void * field_0x6ec;
+    uint8_t field_0x6f0[8];
+    void * field_0x6f8;
+    uint8_t field_0x6fc[20];
+    uint8_t field_0x710[132];
+    uint8_t field_0x794[152];
+    void * field_0x82c;
+    uint8_t field_0x830[18];
+    uint8_t sword_anim_index; /* [?] */
+    uint8_t field_0x843[21];
+    float field_0x858;
+    float deku_stick_y_scale;
+    int16_t deku_stick_flame_timer;
+    uint8_t get_item_id; /* Obtained Item; Link holds this item over his head. */
+    uint8_t field_0x863[73];
+    float fan_wind_speed; /* Fan Wind Speed */
+    int16_t fan_wind_dir; /* Fan Direction */
+    uint8_t field_0x8b2[6];
+    vec3f_t deku_stick_tip;
+    uint8_t field_0x8c4[68];
+    vec3f_t field_0x908;
+    uint8_t field_0x914[204];
     float sword_mf[4][4]; /* Sword / Left Hand Floating Point Matrix */
     float shield_mf[4][4]; /* Shield / Right Hand Floating Point Matrix */
-    uint8_t field_0xa60[8];
+    uint8_t field_0xa60[24];
+    uint8_t inv_frames; /* Invincibility Frames */
 } z64_player_t;
 
 #endif
