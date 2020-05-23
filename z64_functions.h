@@ -2979,7 +2979,7 @@ extern float external_func_8003C940(void *col_ctxt, void *floorpoly, void *unk_s
  * use RAYCAST_SUCCESS(result) to validate whether successful
  * TODO confirm return type, do something about global_plus_0x7C0, figure out unk[0,1]
  */
-extern float math_raycast(uint32_t global_plus_0x7C0, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
+extern float math_raycast(z64_col_ctxt_t* col_ctxt, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
 	#if OOT_DEBUG
 		#define RAYCAST_FAIL -32000.0f
 		asm("math_raycast = 0x8003C9A4");
