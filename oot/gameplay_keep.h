@@ -5,3 +5,4 @@
 #define DL_M_THUNDER_SPIN_BIG_X   0x04012AF0 /* Large red spin attack, horizontal plane. */
 #define DL_M_THUNDER_SPIN_BIG_Y   0x04012C10 /* Large red spin attack, vertical cylinder. */
 #define DL_M_THUNDER_CHARGE       0x04013610 /* Spin attack charging tube. */
+#define DL_EN_LIGHT_FLAME         0x0404D4E0 /* Decorative Flame for En_Light */

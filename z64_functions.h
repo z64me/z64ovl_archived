@@ -3560,7 +3560,7 @@ extern void external_func_8005A9CC(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Camera related.
  */
 extern int16_t external_func_8005A9F4(void* gl790);
 	#if OOT_DEBUG
@@ -4994,27 +4994,36 @@ void* info
 #endif
 
 /**
- * TODO This function is completely undocumented
+ * Initiailize a positional point light. (Type 2)
+ * Wrapper for 80079D30
+ * Source Code Reference File: "z_lights.c"
  */
-extern void external_func_80079DF0(uint32_t *a0, int32_t a1_x, int32_t a2_y, int32_t a3_z, uint8_t unk_00, uint32_t unk_01);
-	#if OOT_DEBUG
-		asm("external_func_80079DF0 = 0x80079DF0");
-	#elif OOT_U_1_0
-		asm("external_func_80079DF0 = 0x80065C30");
-	#endif
+extern void z_lights_init_pos_2(
+void* info
+, int16_t x, int16_t y, int16_t z
+, uint8_t r, uint8_t g, uint8_t b
+, int16_t radius
+);
+#if OOT_DEBUG
+	asm("z_lights_init_pos_2 = 0x80079DF0");
+#elif OOT_U_1_0
+	asm("z_lights_init_pos_2 = 0x80065C30");
+#endif
 
 /**
- * Initialize Flame Color
- * writes RGBA to A0 + 0x08 (note alpha is short) | Called by 80065B70
- * TODO These notes need converted into a C function prototype
- * A0 = Blue Fire Instance + 0x19C | A1 = byte Red (0x9B this pass) | A2 = byte Green (0xD2 this pass) | A3 = byte Blue | SP + 0x10 = short Alpha?
+ * Set a light color.
+ * Source Code Reference File: "z_lights.c"
  */
-extern void external_func_80079E58(void *a0, uint8_t r, uint8_t g, uint8_t b, uint32_t a1);
-	#if OOT_DEBUG
-		asm("external_func_80079E58 = 0x80079E58");
-	#elif OOT_U_1_0
-		asm("external_func_80079E58 = 0x80065C98");
-	#endif
+extern void z_lights_set_rgb_radius(
+z64_lightinfo_t* info
+, uint8_t r, uint8_t g, uint8_t b
+, int16_t radius
+);
+#if OOT_DEBUG
+	asm("z_lights_set_rgb_radius = 0x80079E58");
+#elif OOT_U_1_0
+	asm("z_lights_set_rgb_radius = 0x80065C98");
+#endif
 
 /**
  * Initializing and allocating a [point?] light strucutre in memory.
