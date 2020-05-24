@@ -5381,13 +5381,13 @@ extern void external_func_800876C8(z64_global_t *gl);
 
 /**
  * Subtract Magic Routine
- * A0 = Global Context, A1 = Magic Amount to Subtract
+ * Global Context, Magic Amount to Subtract
  */
-extern int32_t external_func_80087708(z64_global_t* gl, int16_t a1, int16_t a2);
+extern int32_t z_parameter_subtract_magic(z64_global_t* gl, int16_t amount, int16_t a2);
 	#if OOT_DEBUG
-		asm("external_func_80087708 = 0x80087708");
+		asm("z_parameter_subtract_magic = 0x80087708");
 	#elif OOT_U_1_0
-		asm("external_func_80087708 = 0x80072588");
+		asm("z_parameter_subtract_magic = 0x80072588");
 	#endif
 
 /**
