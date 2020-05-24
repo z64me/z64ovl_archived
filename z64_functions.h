@@ -6687,9 +6687,10 @@ extern void external_func_800A9F6C(float a, uint8_t b, uint8_t c, uint8_t d);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Something to do with initializing the rumble pak.
+ * This contains a loop. What's really happening?
  */
-extern void external_func_800AA000(float a, uint32_t b, uint8_t duration, uint8_t c, uint8_t step);
+extern void external_func_800AA000(float a, uint8_t b, uint8_t duration, uint8_t step);
 	#if OOT_DEBUG
 		asm("external_func_800AA000 = 0x800AA000");
 	#elif OOT_U_1_0
