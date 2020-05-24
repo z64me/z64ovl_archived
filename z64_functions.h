@@ -8112,12 +8112,12 @@ extern void external_func_800F7260(void);
  * Source Code Reference File: `code.c`
  */
 extern void z_sfx_play_system(
-uint16_t sound_id
+uint16_t sfx_id
 , vec3f_t* pos
-, int32_t a2
-, float a3
-, float a4
-, float a5
+, uint32_t a2
+, float* a3
+, float* a4
+, float* a5
 );
 #if OOT_DEBUG
 	asm("z_sfx_play_system = 0x800F738C");
