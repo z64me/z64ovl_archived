@@ -476,11 +476,11 @@ extern void external_func_80027F80(void);
  * Spawn Particle 0x00 Type 0 (Wrapper for 8001BCE0)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002829C(void);
+extern void z_effect_spawn_dust_a(z64_global_t* gl, vec3f_t* pos, vec3f_t* u0, vec3f_t* u1, uint32_t* u2, uint32_t* u3, int16_t u4, int16_t u5);
 	#if OOT_DEBUG
-		asm("external_func_8002829C = 0x8002829C");
+		asm("z_effect_spawn_dust_a = 0x8002829C");
 	#elif OOT_U_1_0
-		asm("external_func_8002829C = 0x8001BD94");
+		asm("z_effect_spawn_dust_a = 0x8001BD94");
 	#endif
 
 /**
@@ -668,11 +668,11 @@ extern void external_func_80028F84(void);
  * Spawn Particle 0x04 (Wrapper for 8001CAD0)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_80029024(void);
+extern void z_effect_spawn_blast_ring(z64_global_t* gl, vec3f_t* position, vec3f_t* grav, vec3f_t* u0);
 	#if OOT_DEBUG
-		asm("external_func_80029024 = 0x80029024");
+		asm("z_effect_spawn_blast_ring = 0x80029024");
 	#elif OOT_U_1_0
-		asm("external_func_80029024 = 0x8001CB1C");
+		asm("z_effect_spawn_blast_ring = 0x8001CB1C");
 	#endif
 
 /**
@@ -680,7 +680,7 @@ extern void external_func_80029024(void);
  * TODO These notes need converted into a C function prototype
  * Bomb Spark
  */
-extern void z_effect_spawn_spark(void);
+extern void z_effect_spawn_spark(z64_global_t* gl, z64_actor_t* a, vec3f_t* pos, vec3f_t* grav, vec3f_t* u0);
 	#if OOT_DEBUG
 		asm("z_effect_spawn_spark = 0x80029184");
 	#elif OOT_U_1_0
@@ -1142,7 +1142,7 @@ extern void z_effect_spawn_dead_deku_scrub(void);
  * Spawn Particle 0x23 (Wrapper for 8001E478)
  * TODO These notes need converted into a C function prototype
  */
-extern void z_effect_spawn_dead_sound(void);
+extern void z_effect_spawn_dead_sound(z64_global_t* gl, vec3f_t* pos, uint16_t sfx, int16_t u0, int16_t u1, uint32_t u2);
 	#if OOT_DEBUG
 		asm("z_effect_spawn_dead_sound = 0x8002A9F4");
 	#elif OOT_U_1_0
@@ -3577,11 +3577,11 @@ extern int16_t external_func_8005A9F4(void* gl790);
  * a2 - u16 earthquake strength
  * a3 - u16 earthquake duration
  */
-extern void camera_earthquake(void* global1E0, uint16_t unk, uint16_t strength, uint16_t duration);
+extern void z_camera_earthquake(void* global1E0, uint16_t unk, uint16_t strength, uint16_t duration);
 	#if OOT_DEBUG
-		asm("camera_earthquake = 0x8005AA1C");
+		asm("z_camera_earthquake = 0x8005AA1C");
 	#elif OOT_U_1_0
-		asm("camera_earthquake = 0x800497A4");
+		asm("z_camera_earthquake = 0x800497A4");
 	#endif
 
 /**
@@ -5568,9 +5568,9 @@ extern void external_func_8008EF44(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * z_player_lib.c
  */
-extern void external_func_8008EF5C(void);
+extern int32_t external_func_8008EF5C(z64_global_t* gl, vec3f_t* pos, float radius, float u0);
 	#if OOT_DEBUG
 		asm("external_func_8008EF5C = 0x8008EF5C");
 	#elif OOT_U_1_0
