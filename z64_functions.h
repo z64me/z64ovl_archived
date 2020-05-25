@@ -3762,7 +3762,7 @@ extern int32_t z_collider_jntsph_init(
 z64_global_t* gl /* Global Context */
 , void*  c /* Collider List to Initiailize */
 , z64_actor_t* a /* Actor instance */
-, void*  init /* Collider List Header */
+, void* init /* Collider List Header */
 , void* list /* Individual Collider Structures in Instance */
 );
 #if OOT_DEBUG
