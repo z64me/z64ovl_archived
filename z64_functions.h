@@ -2021,15 +2021,15 @@ z64_actor_t* a /* Actor to Reference */
  * A0 = Actor Instance | A1 = Global Context
  */
 /*wrapper for actor_give_item_50xz_10y, provides get_item_id*/
-/*void actor_give_item_gid0(z64_actor_t *actor, z64_global_t *global)
+/*void z_actor_give_id_0(z64_actor_t *actor, z64_global_t *global)
 {
    actor_give_item_50xz_10y(actor, global, 0);
 }*/
-extern void actor_give_item_gid0(z64_actor_t *actor, z64_global_t *global);
+extern void z_actor_give_id_0(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
-		asm("actor_give_item_gid0 = 0x8002F580");
+		asm("z_actor_give_id_0 = 0x8002F580");
 	#elif OOT_U_1_0
-		asm("actor_give_item_gid0 = 0x80022D20");
+		asm("z_actor_give_id_0 = 0x80022D20");
 	#endif
 
 /**
@@ -2177,9 +2177,10 @@ z64_actor_t* a /* Actor to derive position */
 #endif
 
 /**
- * TODO This function is completely undocumented
+ * Plays a sound effect based on `actor->bgcheck_flags`
+ * TODO: Document Stuff
  */
-extern void external_func_8002F850(void);
+extern void external_func_8002F850(z64_global_t* gl, z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_8002F850 = 0x8002F850");
 	#elif OOT_U_1_0
@@ -3705,16 +3706,16 @@ extern void* z_actor_damage_chart_get(int32_t id);
 * Source Code Reference File: "z_collision_check.c"
 * Formerly `actor_collider_cylinder_array_alloc`
 */
-extern void z_collider_cylinder_list_alloc(
+extern void z_collider_jntsph_alloc(
 z64_global_t* gl /* Global Context */
 , void*  c /* Collider List to Allocate */
 );
 #if OOT_DEBUG
-  asm("z_collider_cylinder_list_alloc = 0x8005BBF8");
+  asm("z_collider_jntsph_alloc = 0x8005BBF8");
 #elif OOT_U_1_0
-  asm("z_collider_cylinder_list_alloc = 0x8004A484");
+  asm("z_collider_jntsph_alloc = 0x8004A484");
 #elif MM_U_1_0
-  asm("z_collider_cylinder_list_alloc = 0x800E0B4C");
+  asm("z_collider_jntsph_alloc = 0x800E0B4C");
 #endif
 
 /**
@@ -3730,16 +3731,16 @@ extern void external_func_8005BC28(void);
 /* Dellocate a z64_collider_cylinder_collection_t structure.
 * Source Code Reference File: "z_collision_check.c"
 */
-extern void z_collider_cylinder_list_free(
+extern void z_collider_jntsph_free(
 z64_global_t* gl /* Global Context */
 , void*  c /* Collider List to Deallocate */
 );
 #if OOT_DEBUG
-  asm("z_collider_cylinder_list_free = 0x8005BCC8");
+  asm("z_collider_jntsph_free = 0x8005BCC8");
 #elif OOT_U_1_0
-  asm("z_collider_cylinder_list_free = 0x8004A550");
+  asm("z_collider_jntsph_free = 0x8004A550");
 #elif MM_U_1_0
-  asm("z_collider_cylinder_list_free = 0x800E0C18");
+  asm("z_collider_jntsph_free = 0x800E0C18");
 #endif
 
 /**
@@ -3757,7 +3758,7 @@ extern void external_func_8005BE50(void);
 * Debug Message: "pclobj_jntsph->elem_tbl != NULL"
 * Formerly `actor_collider_cylinder_array_init`
 */
-extern void z_collider_cylinder_list_init(
+extern int32_t z_collider_jntsph_init(
 z64_global_t* gl /* Global Context */
 , void*  c /* Collider List to Initiailize */
 , z64_actor_t* a /* Actor instance */
@@ -3765,11 +3766,11 @@ z64_global_t* gl /* Global Context */
 , void* list /* Individual Collider Structures in Instance */
 );
 #if OOT_DEBUG
-  asm("z_collider_cylinder_list_init = 0x8005C050");
+  asm("z_collider_jntsph_init = 0x8005C050");
 #elif OOT_U_1_0
-  asm("z_collider_cylinder_list_init = 0x8004A874");
+  asm("z_collider_jntsph_init = 0x8004A874");
 #elif MM_U_1_0
-  asm("z_collider_cylinder_list_init = 0x800E0E60");
+  asm("z_collider_jntsph_init = 0x800E0E60");
 #endif
 
 /* Allocate a z64_collider_cylinder_main_t structure.

@@ -785,7 +785,9 @@ typedef struct
   uint16_t          death_state;              /* 0x10A20 */
   char              unk_17_[0x0012];          /* 0x10A22 */
   uint8_t           sky_image_idx[2];         /* 0x10A34 */
-  char              unk_18_[0x00CE];          /* 0x10A36 */
+  char              unk_18_[0x007A];          /* 0x10A36 */
+  int16_t           unk_0x10AB0[6];           /* 0x10AB0 */
+  char              unk_18_1[0x48];           /* 0x10ABC */
   uint8_t           day_phase;                /* 0x10B04 */
   char              unk_19_[0x000D];          /* 0x10B05 */
   uint8_t           rain_effect_1;            /* 0x10B12 */
