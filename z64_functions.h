@@ -2033,13 +2033,13 @@ extern void z_actor_give_id_0(z64_actor_t *actor, z64_global_t *global);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Same function as 8002F410?
  */
-extern int32_t external_func_8002F5A0(void);
+extern int32_t z_actor_is_attached2(z64_actor_t* a);
 	#if OOT_DEBUG
-		asm("external_func_8002F5A0 = 0x8002F5A0");
+		asm("z_actor_is_attached2 = 0x8002F5A0");
 	#elif OOT_U_1_0
-		asm("external_func_8002F5A0 = 0x80022D40");
+		asm("z_actor_is_attached2 = 0x80022D40");
 	#endif
 
 /**
