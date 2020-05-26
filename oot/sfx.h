@@ -1339,12 +1339,12 @@
 #define NA_SE_VO_DUMMY_0x47 0x6847
 #define NA_SE_VO_DUMMY_0x48 0x6848
 #define NA_SE_VO_DUMMY_0x49 0x6849
-#define NA_SE_VO_DUMMY_0x4a 0x684A
-#define NA_SE_VO_DUMMY_0x4b 0x684B
-#define NA_SE_VO_DUMMY_0x4c 0x684C
-#define NA_SE_VO_DUMMY_0x4d 0x684D
-#define NA_SE_VO_DUMMY_0x4e 0x684E
-#define NA_SE_VO_DUMMY_0x4f 0x684F
+#define NA_SE_VO_DUMMY_0x4A 0x684A
+#define NA_SE_VO_DUMMY_0x4B 0x684B
+#define NA_SE_VO_DUMMY_0x4C 0x684C
+#define NA_SE_VO_DUMMY_0x4D 0x684D
+#define NA_SE_VO_DUMMY_0x4E 0x684E
+#define NA_SE_VO_DUMMY_0x4F 0x684F
 #define NA_SE_VO_TA_SLEEP 0x6850
 #define NA_SE_VO_TA_SURPRISE 0x6851
 #define NA_SE_VO_TA_CRY_0 0x6852
@@ -1390,9 +1390,9 @@
 #define NA_SE_VO_KZ_MOVE 0x687A
 #define NA_SE_VO_NB_LAUGH 0x687B
 #define NA_SE_VO_IN_LAUGH 0x687C
-#define NA_SE_VO_DUMMY_0x7d 0x687D
-#define NA_SE_VO_DUMMY_0x7e 0x687E
-#define NA_SE_VO_DUMMY_0x7f 0x687F
+#define NA_SE_VO_DUMMY_0x7D 0x687D
+#define NA_SE_VO_DUMMY_0x7E 0x687E
+#define NA_SE_VO_DUMMY_0x7F 0x687F
 #define NA_SE_VO_DUMMY_0x80 0x6880
 #define NA_SE_VO_LI_AUTO_JUMP_DARKLINK 0x6881
 #define NA_SE_VO_DUMMY_0x82_YOBI 0x6882
@@ -1403,5 +1403,25 @@
 #define NA_SE_VO_DUMMY_0x87_YOBI 0x6887
 #define NA_SE_VO_DUMMY_0x88_YOBI 0x6888
 #define NA_SE_VO_DUMMY_0x89_YOBI 0x6889
+
+enum sfx_banks {
+    PL = 0
+    , IT
+    , EV
+    , EN
+    , SY
+    , OC
+    , VO
+};
+
+#define PLAYER      PL
+#define ITEM        IT
+#define ENVIRONMENT EV
+#define ENEMY       EN
+#define SYSTEM      SY
+#define OCARINA     OC
+#define VOICE       VO
+
+#define SFX(SFX0, SFX1, SFX2) ((NA_SE_##SFX0##_##SFX2) | (SFX1 << 8))
 
 #endif
