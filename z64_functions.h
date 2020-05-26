@@ -3384,7 +3384,7 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 		z64_dynapoly_t *dynapoly = (z64_dynapoly_t*)(actor + 1);
 		uint32_t result = 0;
 		dynapoly_alloc(dynacollision, &result);
-		dynapoly->polyID =
+		dynapoly->poly_id =
 		actor_register_dynapoly(
 			global
 			, &global->col_ctxt.unk_00_
