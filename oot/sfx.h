@@ -1422,6 +1422,6 @@ enum sfx_banks {
 #define OCARINA     OC
 #define VOICE       VO
 
-#define SFX(SFX0, SFX1, SFX2) (((NA_SE_##SFX0##_##SFX2) & 0xF0FF) | (SFX1 << 8))
+#define SFX(SFX0, SFX1, SFX2) (((NA_SE_##SFX0##_##SFX2) & 0xF1FF) | (SFX1 << 8))
 
 #endif
