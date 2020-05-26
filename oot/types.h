@@ -620,7 +620,7 @@ typedef void (*z64_light_handler_t)(z64_gbi_lights_t*, z64_lightn_t*,
                                     z64_actor_t*);
 
 typedef struct z64_dynapoly {
-    uint32_t    polyID;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/
+    uint32_t    poly_id;                /* 0x0000  counter, starts from 0, each dynapoly actor gets a new id*/
     float       push_movement;                /* 0x0004 */
     float       unk_03;                /* 0x0008 */
     uint16_t    push_direction;                /* 0x000A */

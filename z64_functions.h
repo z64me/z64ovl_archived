@@ -2211,11 +2211,11 @@ extern void external_func_8002F948(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void actor_flag_play_sound(z64_actor_t *actor, uint16_t sfx_id);
+extern void z_actor_play_sfx_flag(z64_actor_t *actor, uint16_t sfx_id);
 	#if OOT_DEBUG
-		asm("actor_flag_play_sound = 0x8002F974");
+		asm("z_actor_play_sfx_flag = 0x8002F974");
 	#elif OOT_U_1_0
-		asm("actor_flag_play_sound = 0x8002313C");
+		asm("z_actor_play_sfx_flag = 0x8002313C");
 	#endif
 
 /**
@@ -3161,13 +3161,13 @@ extern void external_func_8003ECA8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id
  */
-extern void dynapoly_free(z64_global_t *global, void *global_plus_0x810, uint32_t dynacollision_id);
+extern void z_dynapoly_free(z64_global_t *global, void *global_plus_0x810, uint32_t dynacollision_id);
 	#if OOT_DEBUG
-		asm("dynapoly_free = 0x8003ED58");
+		asm("z_dynapoly_free = 0x8003ED58");
 	#elif OOT_U_1_0
-		asm("dynapoly_free = 0x80031638");
+		asm("z_dynapoly_free = 0x80031638");
 	#elif MM_U_1_0
-		asm("dynapoly_free = 0x800C64CC");
+		asm("z_dynapoly_free = 0x800C64CC");
 	#endif
 
 /**
