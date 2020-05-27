@@ -1,6 +1,15 @@
 #ifndef Z64_COLLISION_CHECK_H_INCLUDED
 #define Z64_COLLISION_CHECK_H_INCLUDED
 
+#define HEARTS(HA0) (uint8_t)((uint8_t)(HA0) * 16)
+
+typedef enum z64_damage_fx_e {
+    DMG_FX_KNOCKBACK
+    , DMG_FX_FIRE
+    , DMG_FX_ICE
+    , DMG_FX_ELECTRIC
+} z64_damage_fx_t;
+
 typedef struct z64_collider_s {
     z64_actor_t * actor;
     z64_actor_t * at; /* Actor collided with in AT pool */

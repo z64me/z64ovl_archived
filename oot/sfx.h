@@ -1404,24 +1404,6 @@
 #define NA_SE_VO_DUMMY_0x88_YOBI 0x6888
 #define NA_SE_VO_DUMMY_0x89_YOBI 0x6889
 
-enum sfx_banks {
-    PL = 0
-    , IT
-    , EV
-    , EN
-    , SY
-    , OC
-    , VO
-};
-
-#define PLAYER      PL
-#define ITEM        IT
-#define ENVIRONMENT EV
-#define ENEMY       EN
-#define SYSTEM      SY
-#define OCARINA     OC
-#define VOICE       VO
-
-#define SFX(SFX0, SFX1, SFX2) (((NA_SE_##SFX0##_##SFX2) & 0xF1FF) | (SFX1 << 8))
+#define FX_BIT                   0x0800 /* (1 < 11) */
 
 #endif
