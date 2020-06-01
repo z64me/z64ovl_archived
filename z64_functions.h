@@ -2659,9 +2659,11 @@ extern void skelanime_draw_mtx_xlu(z64_global_t *global, z64_skelanime_t *skelan
 	#endif
 
 /**
- * TODO This function is completely undocumented
+	* Draw Matrix-Enabled Object with an opacity attribute
+	* Source code reference: "z_skelanime.c"
+	* TODO Determine the difference between this function and "skelanime_draw_mtx_xlu"
  */
-extern void external_func_80034CC4(void);
+extern void skelanime_draw_mtx_xlu2(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, uint8_t opacity);
 	#if OOT_DEBUG
 		asm("external_func_80034CC4 = 0x80034CC4");
 	#elif OOT_U_1_0
