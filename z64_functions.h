@@ -2665,9 +2665,9 @@ extern void skelanime_draw_mtx_xlu(z64_global_t *global, z64_skelanime_t *skelan
  */
 extern void skelanime_draw_mtx_xlu2(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, uint8_t opacity);
 	#if OOT_DEBUG
-		asm("external_func_80034CC4 = 0x80034CC4");
+		asm("skelanime_draw_mtx_xlu2 = 0x80034CC4");
 	#elif OOT_U_1_0
-		asm("external_func_80034CC4 = 0x80027AC4");
+		asm("skelanime_draw_mtx_xlu2 = 0x80027AC4");
 	#endif
 
 /**
