@@ -7786,9 +7786,9 @@ extern void external_func_800F4254(vec3f_t* a0, uint32_t a1);
 	#endif
 
 /**
- * TODO a0 = actor instance + E4 | a1 = sfx id | a2 = unknown float (radius?)
+ * TODO a0 = actor instance + E4 | a1 = sfx id | a2 = float pitch
  */
-extern void sound_play_loop(void *actor_plus_0xE4, uint16_t sfx, float radius);
+extern void sound_play_pitch(void *actor_plus_0xE4, uint16_t sfx, float pitch);
 	#if OOT_DEBUG
 		asm("sound_play_loop = 0x800F436C");
 	#elif OOT_U_1_0
