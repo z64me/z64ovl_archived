@@ -25,13 +25,13 @@ static inline vec3f_t vec3f_new_v3(const vec3f_t rhs) {
     return rhs;
 }
 
-const vec3f_t vec3f_zero        = (vec3f_t) {0, 0, 0};
-const vec3f_t vec3f_right       = (vec3f_t) {1, 0, 0};
-const vec3f_t vec3f_up          = (vec3f_t) {0, 1, 0};
-const vec3f_t vec3f_forward     = (vec3f_t) {0, 0, 1};
-const vec3f_t vec3f_left        = (vec3f_t){-1, 0, 0};
-const vec3f_t vec3f_down        = (vec3f_t){0, -1, 0};
-const vec3f_t vec3f_backward    = (vec3f_t){0, 0, -1};
+static const vec3f_t vec3f_zero        = (vec3f_t) {0, 0, 0};
+static const vec3f_t vec3f_right       = (vec3f_t) {1, 0, 0};
+static const vec3f_t vec3f_up          = (vec3f_t) {0, 1, 0};
+static const vec3f_t vec3f_forward     = (vec3f_t) {0, 0, 1};
+static const vec3f_t vec3f_left        = (vec3f_t){-1, 0, 0};
+static const vec3f_t vec3f_down        = (vec3f_t){0, -1, 0};
+static const vec3f_t vec3f_backward    = (vec3f_t){0, 0, -1};
 
 #define vec3f_new(_a0, ...)  \
 _Generic((_a0),             \
@@ -143,6 +143,5 @@ static inline uint32_t vec3f_is_empty(vec3f_t lhs) {
 #define vec3f_is_zero vec3f_is_empty
 
 #endif
-
 
 
