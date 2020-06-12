@@ -43,13 +43,13 @@ static inline vec3s_t vec3s_new_v3(const vec3s_t rhs) {
     return rhs;
 }
 
-const vec3s_t vec3s_zero        = (vec3s_t) {0, 0, 0};
-const vec3s_t vec3s_right       = (vec3s_t) {1, 0, 0};
-const vec3s_t vec3s_up          = (vec3s_t) {0, 1, 0};
-const vec3s_t vec3s_forward     = (vec3s_t) {0, 0, 1};
-const vec3s_t vec3s_left        = (vec3s_t){-1, 0, 0};
-const vec3s_t vec3s_down        = (vec3s_t){0, -1, 0};
-const vec3s_t vec3s_backward    = (vec3s_t){0, 0, -1};
+static const vec3s_t vec3s_zero        = (vec3s_t) {0, 0, 0};
+static const vec3s_t vec3s_right       = (vec3s_t) {1, 0, 0};
+static const vec3s_t vec3s_up          = (vec3s_t) {0, 1, 0};
+static const vec3s_t vec3s_forward     = (vec3s_t) {0, 0, 1};
+static const vec3s_t vec3s_left        = (vec3s_t){-1, 0, 0};
+static const vec3s_t vec3s_down        = (vec3s_t){0, -1, 0};
+static const vec3s_t vec3s_backward    = (vec3s_t){0, 0, -1};
 
 #define vec3s_new(_a0, ...) \
 _Generic((_a0),             \
@@ -186,4 +186,3 @@ vec3s_t vec3s_toRad(vec3s_t lhs) {
 }*/
 
 #endif
-
