@@ -175,13 +175,13 @@ static inline uint32_t vec3s_is_empty(vec3s_t lhs) {
     return *(uint32_t*)(&lhs.x) | *(uint32_t*)(&lhs.y) | *(uint32_t*)(&lhs.z);
 }
 
-vec3s_t vec3s_toDeg(vec3s_t lhs) {
+static inline vec3s_t vec3s_toDeg(vec3s_t lhs) {
     return vec3s_mul_f(lhs, S2DEG);
 }
 
 /*
 Perhaps we should include vec3s and return that for this?
-vec3s_t vec3s_toRad(vec3s_t lhs) {
+static inline vec3s_t vec3s_toRad(vec3s_t lhs) {
     return vec3s_mul(lhs, S2RAD);
 }*/
 
