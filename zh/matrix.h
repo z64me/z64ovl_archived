@@ -5,7 +5,7 @@
 #include <z64ovl/zh/vec3s.h>
 
 #define	FTOFIX32(x)	(long)((x) * (float)0x00010000)
-static float    dtor = (float)(3.1415926 / 180.0);
+static const float    dtor = (float)(3.1415926 / 180.0);
 
 #define MULTIPLY 0
 #define DIVIDE 1
