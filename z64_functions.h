@@ -2114,14 +2114,14 @@ extern void external_func_8002F6D4(void);
 		asm("external_func_8002F6D4 = 0x800B8D50");
 	#endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_8002F71C(void);
+/* Knocks the player back a certain distance and height in the specified direction.
+ * Used in the original game by the moblin pounds.
+*/
+extern void player_knockback(z64_global_t *gl, z64_actor_t* a, float distance, int16_t direction, float height);
 	#if OOT_DEBUG
-		asm("external_func_8002F71C = 0x8002F71C");
+		asm("player_knockback = 0x8002F71C");
 	#elif OOT_U_1_0
-		asm("external_func_8002F71C = 0x80022EC4");
+		asm("player_knockback = 0x80022EC4");
 	#endif
 
 /**
