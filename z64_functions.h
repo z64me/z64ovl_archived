@@ -327,13 +327,13 @@ z64_global_t* gl /* Global Context */
 #endif
 
 /**
- * TODO This function is completely undocumented
+ * Used for drawing z_eff_blure
  */
-extern void external_func_8001FDF0(void);
+extern void z_eff_blure_vertex_add(z64_eff_blure_t* blureInstance, vec3f_t* p1, vec3f_t* p2);
 	#if OOT_DEBUG
-		asm("external_func_8001FDF0 = 0x8001FDF0");
+		asm("z_eff_blure_vertex_add = 0x8001FDF0");
 	#elif OOT_U_1_0
-		asm("external_func_8001FDF0 = 0x80013F30");
+		asm("z_eff_blure_vertex_add = 0x80013F30");
 	#endif
 
 /**
@@ -347,7 +347,7 @@ extern void external_func_80020120(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * z_eff_ss_dead
  */
 extern void external_func_80026230(void);
 	#if OOT_DEBUG
@@ -397,19 +397,19 @@ extern void external_func_80026A6C(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Return the index of an instance of z_eff_blure
  */
-extern void external_func_80026B0C(void);
+extern void z_eff_blure_get(uint32_t idx);
 	#if OOT_DEBUG
-		asm("external_func_80026B0C = 0x80026B0C");
+		asm("z_eff_blure_get = 0x80026B0C");
 	#elif OOT_U_1_0
-		asm("external_func_80026B0C = 0x8001A890");
+		asm("z_eff_blure_get = 0x8001A890");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void effect_add(void);
+extern void z_effect_add(z64_global_t* gl, int32_t* idx, int32_t type, uint8_t arg3, unit8_t arg4, void* initParams);
 	#if OOT_DEBUG
 		asm("effect_add = 0x80026CD4");
 	#elif OOT_U_1_0
@@ -3884,31 +3884,31 @@ extern int32_t z_collider_tri_list_init(z64_global_t* gl, z64_collider_tris_t* d
 /**
  * TODO This function is completely undocumented
  */
-extern int32_t external_func_8005D018(z64_global_t *gl, int32_t unk0);
+extern int32_t z_collider_quad_alloc(z64_global_t *gl, z64_collider_quad_t* col);
 	#if OOT_DEBUG
-		asm("external_func_8005D018 = 0x8005D018");
+		asm("z_collider_quad_alloc = 0x8005D018");
 	#elif OOT_U_1_0
-		asm("external_func_8005D018 = 0x8004B858");
+		asm("z_collider_quad_alloc = 0x8004B858");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005D060(z64_global_t *gl, void *a1);
+extern void z_collider_quad_free(z64_global_t *gl, z64_collider_quad_t* col);
 	#if OOT_DEBUG
-		asm("external_func_8005D060 = 0x8005D060");
+		asm("z_collider_quad_free = 0x8005D060");
 	#elif OOT_U_1_0
-		asm("external_func_8005D060 = 0x8004B8A8");
+		asm("z_collider_quad_free = 0x8004B8A8");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern int32_t external_func_8005D104(z64_global_t *gl, z64_collider_t *collider, z64_actor_t *a, z64_collider_cylinder_init_t *col_init);
+extern int32_t z_collider_quad_init(z64_global_t *gl, z64_collider_t *collider, z64_actor_t *a, z64_collider_quad_init_t* col_init);
 	#if OOT_DEBUG
-		asm("external_func_8005D104 = 0x8005D104");
+		asm("z_collider_quad_init = 0x8005D104");
 	#elif OOT_U_1_0
-		asm("external_func_8005D104 = 0x8004B960");
+		asm("z_collider_quad_init = 0x8004B960");
 	#endif
 
 /**
@@ -4056,13 +4056,13 @@ extern void external_func_80062718(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Translate a quad collider.
  */
-extern void external_func_80062734(void);
+extern void z_collider_quad_translate(z64_collider_quad_t* col, vec3f_t* a, vec3f_t* b, vec3f_t* c, vec3f_t* d);
 	#if OOT_DEBUG
-		asm("external_func_80062734 = 0x80062734");
+		asm("z_collider_quad_translate = 0x80062734");
 	#elif OOT_U_1_0
-		asm("external_func_80062734 = 0x80050B64");
+		asm("z_collider_quad_translate = 0x80050B64");
 	#endif
 
 /**

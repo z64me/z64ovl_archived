@@ -871,6 +871,43 @@ typedef struct
   z64_skelanime_t skelanime;
 } z64_skelanime_weighted_t;
 
+typedef struct {
+    /* 0x000 */ char unk_00[0x184];
+    /* 0x184 */ rgba8_t p1StartColor;
+    /* 0x188 */ rgba8_t p2StartColor;
+    /* 0x18C */ rgba8_t p1EndColor;
+    /* 0x190 */ rgba8_t p2EndColor;
+    /* 0x194 */ int32_t elemDuration;
+    /* 0x198 */ int32_t unkFlag;
+    /* 0x19C */ int32_t calcMode;
+} z_eff_blure_init_t; // size = 0x1A0
+
+typedef struct {
+    /* 0x00 */ int32_t state;
+    /* 0x04 */ int32_t timer;
+    /* 0x08 */ vec3s_t p1;
+    /* 0x0E */ vec3s_t p2;
+    /* 0x14 */ uint16_t flags;
+} z64_eff_blure_elem_t; // size = 0x18
+
+typedef struct {
+    /* 0x000 */ z64_eff_blure_elem_t elements[16];
+    /* 0x180 */ int32_t calcMode;
+    /* 0x184 */ float mode4Param;
+    /* 0x188 */ uint16_t flags;
+    /* 0x18A */ int16_t addAngleChange;
+    /* 0x18C */ int16_t addAngle;
+    /* 0x18E */ rgba8_t p1StartColor;
+    /* 0x192 */ rgba8_t p2StartColor;
+    /* 0x196 */ rgba8_t p1EndColor;
+    /* 0x19A */ rgba8_t p2EndColor;
+    /* 0x19E */ uint8_t numElements; // "now_edge_num"
+    /* 0x19F */ uint8_t elemDuration;
+    /* 0x1A0 */ uint8_t unkFlag;
+    /* 0x1A1 */ uint8_t drawMode; // 0: simple; 1: simple with alt colors; 2+: smooth
+    /* 0x1A2 */ rgba8_t altPrimColor; // used with drawMode 1
+    /* 0x1A6 */ rgba8_t altEnvColor; // used with drawMode 1
+} z64_eff_blure_t; // size = 0x1AC
 
 /*struct z64_particle_t;
 typedef struct

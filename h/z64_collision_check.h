@@ -1,7 +1,7 @@
 #ifndef Z64_COLLISION_CHECK_H_INCLUDED
 #define Z64_COLLISION_CHECK_H_INCLUDED
 
-#define HEARTS(HA0) (uint8_t)((uint8_t)(HA0) * 16)
+#define HEARTS(HA0) ((uint8_t)(((float)HA0) * 16.0))
 
 typedef enum z64_damage_fx_e {
     DMG_FX_KNOCKBACK
