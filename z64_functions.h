@@ -399,7 +399,7 @@ extern void external_func_80026A6C(void);
 /**
  * Return the index of an instance of z_eff_blure
  */
-extern void z_eff_blure_get(uint32_t idx);
+extern z_eff_blure_t* z_eff_blure_get(uint32_t idx);
 	#if OOT_DEBUG
 		asm("z_eff_blure_get = 0x80026B0C");
 	#elif OOT_U_1_0
