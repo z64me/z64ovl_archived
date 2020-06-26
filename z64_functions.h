@@ -399,7 +399,7 @@ extern void external_func_80026A6C(void);
 /**
  * Return pointer to z_eff_blure matching index `idx`
  */
-extern z_eff_blure_t* z_eff_blure_get(uint32_t idx);
+extern z64_eff_blure_t* z_eff_blure_get(uint32_t idx);
 	#if OOT_DEBUG
 		asm("z_eff_blure_get = 0x80026B0C");
 	#elif OOT_U_1_0
@@ -409,11 +409,11 @@ extern z_eff_blure_t* z_eff_blure_get(uint32_t idx);
 /**
  * TODO This function is completely undocumented
  */
-extern void z_effect_add(z64_global_t* gl, int32_t* idx, int32_t type, uint8_t arg3, unit8_t arg4, void* initParams);
+extern void z_effect_add(z64_global_t* gl, int32_t* idx, int32_t type, uint8_t arg3, uint8_t arg4, void* initParams);
 	#if OOT_DEBUG
-		asm("effect_add = 0x80026CD4");
+		asm("z_effect_add = 0x80026CD4");
 	#elif OOT_U_1_0
-		asm("effect_add = 0x8001AA5C");
+		asm("z_effect_add = 0x8001AA5C");
 	#endif
 
 /**
