@@ -5339,13 +5339,15 @@ extern void external_func_8008708C(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Update Link's Health
+ * Negative Value Subtracts Health
+ * Positive Value Adds Health
  */
-extern void external_func_80087174(void);
+extern void z_player_update_health(z64_global_t* gl, int16_t health);
 	#if OOT_DEBUG
-		asm("external_func_80087174 = 0x80087174");
+		asm("z_player_update_health = 0x80087174");
 	#elif OOT_U_1_0
-		asm("external_func_80087174 = 0x800720BC");
+		asm("z_player_update_health = 0x800720BC");
 	#endif
 
 /**
