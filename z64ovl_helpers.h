@@ -68,6 +68,31 @@ example:
 */
 #define OBJ_IS_LOADED(OBJA0, OBJA1) ((z_scene_object_get_index((OBJA0), (OBJA1)) < 0) ? 0 : 1) 
 
+#define OCARINA_SONG_OCARINA 	 0x00FE /* Bring Ocarina to Mouth */
+#define OCARINA_SONG_SARIA   	 0x0006
+#define OCARINA_SONG_EPONA   	 0x0007
+#define OCARINA_SONG_ZELDA   	 0x0008
+#define OCARINA_SONG_SUN     	 0x0009
+#define OCARINA_SONG_TIME   	 0x000A
+#define OCARINA_SONG_STORMS   	 0x000B
+#define OCARINA_SONG_SCARECROW   0x000C
+#define OCARINA_PLAYED(GLARG0, SONGA1) (((GLARG0)->played_ocarina_song == (SONGA1)) ? 1 : 0)
+
+static inline void zh_explosion_spawn(z64_global_t* gl, vec3f_t* pos)
+{
+	z64_actor_t* en_bom = z_actor_spawn(
+		&gl->actor_ctxt
+		, gl
+		, 0x0010
+		, pos->x, pos->y, pos->z
+		, 0, 0, ROT16(10)
+		, 0x0000
+	);
+
+	if (en_bom != 0)
+		AVAL(en_bom, int16_t, 0x01F8) = 0; /* Set Bomb Timer to 0 */
+}
+
 static inline float zh_math_fminf(float a, float b)
 {
 	return a < b ? a : b;

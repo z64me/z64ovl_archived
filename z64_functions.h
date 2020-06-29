@@ -4526,11 +4526,11 @@ extern float z_coss(
 int16_t angle /* 16-bit Angle */
 );
 #if OOT_DEBUG
-  asm("z_cos_s = 0x80077834"); /* Alternatively 0x80104780 */
+  asm("z_coss = 0x80077834"); /* Alternatively 0x80104780 */
 #elif OOT_U_1_0
-  asm("z_cos_s = 0x80063684");
+  asm("z_coss = 0x80063684");
 #elif MM_U_1_0
-  asm("z_cos_s = 0x800FED44");
+  asm("z_coss = 0x800FED44");
 #endif
 
 /**
@@ -5753,13 +5753,13 @@ extern void external_func_80093370(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Used when setting Link's damage color.
  */
-extern void external_func_80093708(void);
+extern Gfx* z_rcp_fog_set_2(Gfx* gfx, int32_t r, int32_t g, int32_t b, int32_t a, int32_t n, int32_t f);
 	#if OOT_DEBUG
-		asm("external_func_80093708 = 0x80093708");
+		asm("z_rcp_fog_set_2 = 0x80093708");
 	#elif OOT_U_1_0
-		asm("external_func_80093708 = 0x8007DF4C");
+		asm("z_rcp_fog_set_2 = 0x8007DF4C");
 	#endif
 
 /**

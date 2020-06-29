@@ -775,7 +775,9 @@ typedef struct
   uint8_t           message_state_2;          /* 0x104BC */
   char              unk_14_[0x0002];          /* 0x104BD */
   uint8_t           message_state_3;          /* 0x104BF */
-  char              unk_15_[0x0020];          /* 0x104C0 */
+  char              unk_15_[0x0004];          /* 0x104C0 */
+  uint16_t          played_ocarina_song;      /* 0x104C4 */
+  char              unk_15_2[0x001A];         /* 0x104C6 */
   z64_actor_t      *textbox_actor;            /* 0x104E0 */ /* pointer to last actor that called textbox_begin() *
                                                              * also, pulling out the ocarina resets this to 0    */
   char              unk_104E4[0xC];           /* 0x104E4 */
