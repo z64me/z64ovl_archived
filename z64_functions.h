@@ -1587,7 +1587,7 @@ extern float math_distance_xyz_actor_actor(z64_actor_t *a, z64_actor_t *b);
 	#endif
 
 /**
- * Calculates XYZ distance between actor (+0x24) and a point32_t  | Wrapper fo 80063E18
+ * Calculates XYZ distance between actor (+0x24) and a point_t  | Wrapper fo 80063E18
  * TODO These notes need converted into a C function prototype
  * A0 = Actor | A1 = Coordinate ptr | F0 = Result
  */
@@ -1634,6 +1634,16 @@ extern void external_func_8002DBD0(void);
 		asm("external_func_8002DBD0 = 0x8002DBD0");
 	#elif OOT_U_1_0
 		asm("external_func_8002DBD0 = 0x8002154C");
+	#endif
+
+/**
+ * Calculates Y distance between two actors (+0x28)
+ */
+extern float math_distance_y_actor_actor(z64_actor_t *a, z64_actor_t *b);
+	#if OOT_DEBUG
+		asm("math_distance_y_actor_actor = 0x8002DC74");
+	#elif OOT_U_1_0
+		// TODO Find 1.0 Equivalent!
 	#endif
 
 /**
@@ -4508,11 +4518,11 @@ extern void z_memset(void *dst, const uint32_t len, const uint8_t value);
 	#endif
 
 /**
-/* Return Coine of Rotation Angle
+/* Return Cosine of Rotation Angle
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_coss`
 */
-extern float z_cos_s(
+extern float z_coss(
 int16_t angle /* 16-bit Angle */
 );
 #if OOT_DEBUG
@@ -4528,7 +4538,7 @@ int16_t angle /* 16-bit Angle */
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_sins`
 */
-extern float z_sin_s(
+extern float z_sins(
 int16_t angle /* 16-bit Angle */
 );
 #if OOT_DEBUG
@@ -8405,11 +8415,11 @@ extern int32_t z_srand(uint32_t seed);
 	#endif
 
 /**
-/* Return Sine of Rotation Angle
+/* Return Sine (in radians) of Rotation Angle
 * Source Code Reference File: "code.c"
 * Formerly `z_sin`
 */
-extern float z_sin_f(
+extern float z_sinf(
 float angle /* Floating Point Angle */
 );
 #if OOT_DEBUG
@@ -8438,10 +8448,10 @@ extern float z_sqrt(float value);
 	#endif
 
 /**
- * Returns cosine of a floating point value.
+ * Returns cosine (in radians) of a floating point value.
  * formerly math_cosf
  */
-extern float z_cos(float angle);
+extern float z_cosf(float angle);
 	#if OOT_DEBUG
 		asm("z_cos = 0x80104610");
 	#elif OOT_U_1_0
