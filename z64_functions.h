@@ -8423,11 +8423,11 @@ extern float z_sinf(
 float angle /* Floating Point Angle */
 );
 #if OOT_DEBUG
-  asm("z_sin_f = 0x80100290");
+  asm("z_sinf = 0x80100290");
 #elif OOT_U_1_0
-  asm("z_sin_f = 0x800CF470");
+  asm("z_sinf = 0x800CF470");
 #elif MM_U_1_0
-  /*asm("z_sin_f = 0xDEADBEEF");*/
+  /*asm("z_sinf = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -8453,9 +8453,9 @@ extern float z_sqrt(float value);
  */
 extern float z_cosf(float angle);
 	#if OOT_DEBUG
-		asm("z_cos = 0x80104610");
+		asm("z_cosf = 0x80104610");
 	#elif OOT_U_1_0
-		asm("z_cos = 0x800D2CD0");
+		asm("z_cosf = 0x800D2CD0");
 	#endif
 
 /**
