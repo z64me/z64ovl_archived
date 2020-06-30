@@ -91,7 +91,7 @@ typedef struct z64_collider_init_set3_s {
     uint8_t flags_at;
     uint8_t flags_ac;
     uint8_t mask_a;
-    uint8_t mask_b;
+    uint8_t shape;
 } z64_collider_init_set3_t;
 
 typedef struct z64_collider_cylinder_init_set3_s {

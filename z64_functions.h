@@ -4007,7 +4007,7 @@ extern void external_func_8005DFAC(void);
 extern void z_actor_damage_table_init(
 void* out /* Destination for initialized table. */
 , z64_damagechart_init_t* damage_chart /* Initialization Variables for Damage Table */
-, const uint32_t* init_data
+, void* init_data
 );
 #if OOT_DEBUG
   asm("z_actor_damage_table_init = 0x80061ED4");
@@ -4542,11 +4542,11 @@ extern float z_sins(
 int16_t angle /* 16-bit Angle */
 );
 #if OOT_DEBUG
-  asm("z_sin_s = 0x80077870"); /* Alternatively 0x80100450 */
+  asm("z_sins = 0x80077870"); /* Alternatively 0x80100450 */
 #elif OOT_U_1_0
-  asm("z_sin_s = 0x800636C4");
+  asm("z_sins = 0x800636C4");
 #elif MM_U_1_0
-  asm("z_sin_s = 0x800FED84");
+  asm("z_sins = 0x800FED84");
 #endif
 
 /* Approximate to an angle.
