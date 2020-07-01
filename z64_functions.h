@@ -431,11 +431,11 @@ extern void external_func_8002709C(z64_global_t *gl, uint32_t a1);
  * A0 = Particle Instance Ptr
  * This function is not used inside any existing overlay
  */
-extern void particle_kill(void* particle_instance);
+extern void z_particle_kill(void* particle_instance);
 	#if OOT_DEBUG
-		asm("particle_kill = 0x800274E0");
+		asm("z_particle_kill = 0x800274E0");
 	#elif OOT_U_1_0
-		asm("particle_kill = 0x8001B1A4");
+		asm("z_particle_kill = 0x8001B1A4");
 	#endif
 
 /**
