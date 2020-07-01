@@ -218,7 +218,7 @@ extern void player_swap_age_equipment(void);
  *    if (z_assert(x != 0)) {
  *       // this block is executed when x == 0
  *    }
- * 
+ *
  *    or simply:
  *       z_assert(x != 0);
  */
@@ -433,9 +433,9 @@ extern void external_func_8002709C(z64_global_t *gl, uint32_t a1);
  */
 extern void particle_kill(void* particle_instance);
 	#if OOT_DEBUG
-		asm("external_func_800274E0 = 0x800274E0");
+		asm("particle_kill = 0x800274E0");
 	#elif OOT_U_1_0
-		asm("external_func_800274E0 = 0x8001B1A4");
+		asm("particle_kill = 0x8001B1A4");
 	#endif
 
 /**
