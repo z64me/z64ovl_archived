@@ -926,7 +926,7 @@ typedef struct {
 typedef struct {
   z64_actor_t* actor;
   z64_skelanime_t* skelanime;
-  float unk_08
+  float unk_08;
 } z64_animation_type_5_t;
 
 typedef struct {
@@ -953,7 +953,7 @@ typedef struct {
   uint32_t anim; /* Animation Segment Address */
 } z64_animation_entry_link_t;
 
-typedef struct z64_skelanime_s {
+struct z64_skelanime_s {
   /* 0x00 */ uint8_t limb_count;
   /* 0x01 */ uint8_t mode;
   /* 0x02 */ uint8_t dlist_count;
