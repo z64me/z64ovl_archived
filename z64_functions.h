@@ -339,11 +339,11 @@ extern void z_eff_blure_vertex_add(z64_eff_blure_t* blureInstance, vec3f_t* p1, 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80020120(void);
+extern void z_eff_blure_space_add(z64_eff_blure_t* blureInstance);
 	#if OOT_DEBUG
-		asm("external_func_80020120 = 0x80020120");
+		asm("z_eff_blure_space_add = 0x80020120");
 	#elif OOT_U_1_0
-		asm("external_func_80020120 = 0x80014254");
+		asm("z_eff_blure_space_add = 0x80014254");
 	#endif
 
 /**
@@ -1833,11 +1833,11 @@ extern void external_func_8002EB44(void);
  * Sets lighting angles for shiny things or something.
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002EBCC(z64_actor_t *a0, z64_global_t *gl, int32_t a2);
+extern void z_actor_texgen_init(z64_actor_t *a0, z64_global_t *gl, int32_t flag);
 	#if OOT_DEBUG
-		asm("external_func_8002EBCC = 0x8002EBCC");
+		asm("z_actor_texgen_init = 0x8002EBCC");
 	#elif OOT_U_1_0
-		asm("external_func_8002EBCC = 0x80022438");
+		asm("z_actor_texgen_init = 0x80022438");
 	#endif
 
 /**
@@ -2584,7 +2584,7 @@ extern void external_func_80033F54(void);
  * Wrapper for 800511B8
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8003424C(void);
+extern void external_func_8003424C(z64_global_t* gl, vec3f_t* arg1);
 	#if OOT_DEBUG
 		asm("external_func_8003424C = 0x8003424C");
 	#elif OOT_U_1_0
@@ -2748,11 +2748,12 @@ z64_global_t* gl /* Global Context */
  * Finds the closest actor instance of a specified id and type within specified range.
  * a0 - global context | a1 - actor instance | a2 - actor id (-1 = any) | a3 - category | 0x10($sp) distance from actor"
  */
-extern z64_actor_t* find_closest_actor_instance_within_range(z64_global_t *global, z64_actor_t *actor, int16_t actor_id, z64_actor_type_t type, float range);
+#define find_closest_actor_instance_within_range z_actor_detect_nearest
+extern z64_actor_t* z_actor_detect_nearest(z64_global_t *global, z64_actor_t *actor, int16_t actor_id, z64_actor_type_t type, float range);
 	#if OOT_DEBUG
-		asm("find_closest_actor_instance_within_range = 0x800353F4");
+		asm("z_actor_detect_nearest = 0x800353F4");
 	#elif OOT_U_1_0
-		asm("find_closest_actor_instance_within_range = 0x80028158");
+		asm("z_actor_detect_nearest = 0x80028158");
 	#endif
 
 /**
@@ -3864,11 +3865,11 @@ z64_global_t* gl /* Global Context */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005C7E0(void);
+extern int32_t z_collider_tri_list_alloc(z64_global_t* gl, z64_collider_tris_t* t);
 	#if OOT_DEBUG
-		asm("external_func_8005C7E0 = 0x8005C7E0");
+		asm("z_collider_tri_list_alloc = 0x8005C7E0");
 	#elif OOT_U_1_0
-		asm("external_func_8005C7E0 = 0x8004B064");
+		asm("z_collider_tri_list_alloc = 0x8004B064");
 	#endif
 
 /**
@@ -4121,9 +4122,9 @@ extern void external_func_80062D60(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Also spawn metalspark
  */
-extern void external_func_80062DF4(void);
+extern void external_func_80062DF4(z64_global_t* gl, vec3f_t* pos);
 	#if OOT_DEBUG
 		asm("external_func_80062DF4 = 0x80062DF4");
 	#elif OOT_U_1_0
@@ -6238,8 +6239,8 @@ z64_global_t* gl       /* Global Context */
 	if (matrix_limbs)
 		_z_skelanime_draw_mtx(
 			gl
-			, sk->limb_index
-			, sk->draw_table_rot
+			, sk->skeleton
+			, sk->limb_draw_table
 			, matrix_limbs
 			, callback0
 			, callback1
@@ -6248,8 +6249,8 @@ z64_global_t* gl       /* Global Context */
 	else
 		_z_skelanime_draw(
 			gl
-			, sk->limb_index
-			, sk->draw_table_rot
+			, sk->skeleton
+			, sk->limb_draw_table
 			, callback0
 			, callback1
 			, instance
@@ -6380,15 +6381,16 @@ z64_global_t* gl /* Global Context */
 * Source Code Reference File: "z_skelanime.c"
 * Formerly `actor_anime_frame_update_mtx`
 */
-extern int32_t z_skelanime_draw_table(
+#define z_skelanime_draw_table z_skelanime_update_anim
+extern int32_t z_skelanime_update_anim(
 z64_skelanime_t* s /* Skelanime Structure */
 );
 #if OOT_DEBUG
-  asm("z_skelanime_draw_table = 0x800A49FC");
+  asm("z_skelanime_update_anim = 0x800A49FC");
 #elif OOT_U_1_0
-  asm("z_skelanime_draw_table = 0x8008C9C0");
+  asm("z_skelanime_update_anim = 0x8008C9C0");
 #elif MM_U_1_0
-  asm("z_skelanime_draw_table = 0x80136CD0");
+  asm("z_skelanime_update_anim = 0x80136CD0");
 #endif
 
 /**
@@ -8004,21 +8006,22 @@ extern void external_func_800F5A58(void);
  * Change background music until enemies are defeated
  * a0 - music ID
  */
-extern void play_midboss_music(uint32_t musicID);
+#define play_midboss_music z_bgm_play_midboss
+extern void z_bgm_play_midboss(uint32_t musicID);
 	#if OOT_DEBUG
-		asm("play_midboss_music = 0x800F5ACC");
+		asm("z_bgm_play_midboss = 0x800F5ACC");
 	#elif OOT_U_1_0
-		asm("play_midboss_music = 0x800C6820");
+		asm("z_bgm_play_midboss = 0x800C6820");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * TODO Confirm Usage
  */
-extern void external_func_800F5B58(void);
+extern void z_bgm_stop_midboss(void);
 	#if OOT_DEBUG
-		asm("external_func_800F5B58 = 0x800F5B58");
+		asm("z_bgm_stop_midboss = 0x800F5B58");
 	#elif OOT_U_1_0
-		asm("external_func_800F5B58 = 0x800C6894");
+		asm("z_bgm_stop_midboss = 0x800C6894");
 	#endif
 
 /**

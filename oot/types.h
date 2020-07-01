@@ -843,29 +843,144 @@ typedef struct {
 } z64_debug_text_t;
 
 /* skelanime */
+
+typedef struct z64_skelanime_s z64_skelanime_t;
+
+typedef enum {
+  ANIMATION_LINKANIMETION
+  , ANIMATION_TYPE1
+  , ANIMATION_TYPE2
+  , ANIMATION_TYPE3
+  , ANIMATION_TYPE4
+  , ANIMATION_TYPE5
+} z64_animation_type_e;
+
 typedef struct {
+  /* 0x00 */ vec3s_t translation;
+  /* 0x06 */ uint8_t first_child_index;
+  /* 0x07 */ uint8_t sibling_limb_index;
+  /* 0x08 */ Gfx* dlist[1];
+} z64_skel_limb_entry_t;
+
+typedef struct {
+  /* 0x00 */ z64_skel_limb_entry_t* limbs[1];
+} z64_skeleton_t;
+
+typedef struct {
+  /* 0x00 */ z64_skeleton_t* skeleton;
+  /* 0x04 */ uint8_t limb_count;
+  /* 0x05 */ uint8_t ___pad0;
+  /* 0x08 */ uint8_t dlist_count;
+} z64_skeleton_header_t;
+
+typedef struct {
+  int16_t frame_count;
+  int16_t __pad0;
+} z64_anim_header_init_t;
+
+typedef struct {
+  z64_anim_header_init_t common;
+  uint32_t rotation_values;
+  uint32_t rotation_index;
+  uint16_t limit;
+} z64_anim_header_t;
+
+typedef struct {
+  uint8_t req[0x20]; /* DmaRequest */
+  OSMesgQueue msgQueue;
+  OSMesg msg;
+} z64_animation_type_0_t;
+
+typedef struct {
+  uint8_t unk0;
+  uint8_t vec_count;
+  vec3s_t* dst;
+  vec3s_t* src;
+} z64_animation_type_1_t;
+
+typedef struct {
+  uint8_t unk0;
+  uint8_t limb_count;
+  vec3s_t* unk_04;
+  vec3s_t* unk_08;
+  float unk_0C;
+} z64_animation_type_2_t;
+
+typedef struct {
+  uint8_t unk0;
+  uint8_t vec_count;
+  vec3s_t* dst;
+  vec3s_t* src;
+  uint8_t* index;
+} z64_animation_type_3_t;
+
+typedef struct {
+  uint8_t unk0;
+  uint8_t vec_count;
+  uint8_t unk_02[2];
+  vec3s_t* dst;
+  vec3s_t* src;
+  uint8_t* index;
+} z64_animation_type_4_t;
+
+typedef struct {
+  z64_actor_t* actor;
+  z64_skelanime_t* skelanime;
+  float unk_08
+} z64_animation_type_5_t;
+
+typedef struct {
+  uint8_t raw[0x3C];
+} z64_animation_type_raw_t;
+
+typedef union {
+  z64_animation_type_raw_t raw;
+  z64_animation_type_1_t type0;
+  z64_animation_type_2_t type1;
+  z64_animation_type_3_t type2;
+  z64_animation_type_4_t type3;
+  z64_animation_type_5_t type5;
+} z64_animation_type_t;
+
+typedef struct {
+  uint8_t type;
+  uint8_t unk_01;
+  z64_animation_type_t types;
+} z64_animation_entry_t;
+
+typedef struct {
+  z64_anim_header_init_t common;
+  uint32_t anim; /* Animation Segment Address */
+} z64_animation_entry_link_t;
+
+typedef struct z64_skelanime_s {
   /* 0x00 */ uint8_t limb_count;
-  /* 0x01 */ uint8_t unk1; /* Probably Padding*/
+  /* 0x01 */ uint8_t mode;
   /* 0x02 */ uint8_t dlist_count;
-  /* 0x03 */ uint8_t unk2; /* Probably Padding */
-  /* 0x04 */ void* limb_index;
-  /* 0x08 */ uint32_t anim_current;
-  /* 0x0C */ int32_t unk3; /* 0x00000000 */
+  /* 0x03 */ uint8_t _pad0;
+  /* 0x04 */ z64_skeleton_t* skeleton;
+  /* 0x08 */ union {
+    z64_anim_header_t* seg;
+    z64_animation_entry_link_t* link_animetion_seg;
+    z64_anim_header_init_t* common_seg;
+  } anim_current;
+  /* 0x0C */ float start_frame; /* Initial Animation Frame */
   /* 0x10 */ float anim_frame_count;
-  /* 0x14 */ float unk4;
+  /* 0x14 */ float anim_frame_total;
   /* 0x18 */ float anim_current_frame;
   /* 0x1C */ float anim_playback_speed;
-  /* 0x20 */ void* draw_table_rot;/*uint32_t unk5;*/ /* Actor Drawing Table? */
-  /* 0x24 */ void* draw_table_pos;/*uint32_t unk6;*/
-  /* 0x28 */ uint32_t unk7;
-  /* 0x2C */ uint32_t unk8;
-  /* 0x30 */ void* draw_table_func;/*uint32_t func_unk9;*/ /* Some function pointer */
-  /* 0x34 */ int32_t pad1; /* 0x00000000 */
-  /* 0x38 */ int32_t pad2; /* 0x00000000 */
-  /* 0x3C */ uint16_t unk10;
-  /* 0x3E */ uint16_t unk11; /* Probably Padding */
-  /* 0x40 */
-} z64_skelanime_t;
+  /* 0x20 */ vec3s_t* limb_draw_table; /* now_joint */
+  /* 0x24 */ vec3s_t* transition_draw_table; /* morf_joint */
+  /* 0x28 */ float trans_current_frame;
+  /* 0x2C */ float transition_step;
+  /* 0x30 */ int32_t (*anim_update)();
+  /* 0x34 */ int8_t init_flags;
+  /* 0x35 */ uint8_t flags;
+  /* 0x36 */ int16_t prev_frame_rot;
+  /* 0x38 */ vec3s_t prev_frame_pos;
+  /* 0x3E */ vec3s_t unk_0x3E;
+  /* 0x44 */
+};
 
 typedef struct
 {

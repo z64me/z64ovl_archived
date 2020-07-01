@@ -43,7 +43,7 @@
 #define z_rcp_append_preset z_rcp_append_preset_opa
 #define matrix_rotate_z z_matrix_roll
 #define sound_play_position z_sfx_play_position
-#define z_sin z_sin_f
+#define z_sin z_sinf
 #define math_vec3f_atan2_xz z_lib_atan2_xz_vec3f
 #define math_vec3f_distance_xz z_lib_distance_xz_vec3f
 #define actor_angle_link_in_range z_actor_player_in_range
