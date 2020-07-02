@@ -229,7 +229,7 @@ static void zh_draw_ui_sprite(z64_disp_buf_t *buf, gfx_texture_t *img, gfx_scree
       , img->timg, img->fmt, img->bitsiz
       , img->width, img->height
       , 0
-      , G_TX_WRAP, G_TX_WRAP
+      , G_TX_CLAMP, G_TX_CLAMP
       , G_TX_NOMASK, G_TX_NOMASK
       , G_TX_NOLOD, G_TX_NOLOD
    );
