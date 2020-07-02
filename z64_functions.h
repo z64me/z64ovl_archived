@@ -8524,7 +8524,7 @@ extern float z_atanf_cfrac(float x);
 /**
  * Atan2
  */
-extern float z_atan2f(float y, float x);
+extern float z_atan2f2(float y, float x);
 	#if OOT_DEBUG
 		asm("z_atan2f = 0x800FD250");
 	#elif OOT_U_1_0
