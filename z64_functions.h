@@ -229,7 +229,7 @@ extern void z_bcopy(const void *src, void *dst, const uint32_t num);
  *    if (z_assert(x != 0)) {
  *       // this block is executed when x == 0
  *    }
- * 
+ *
  *    or simply:
  *       z_assert(x != 0);
  */
