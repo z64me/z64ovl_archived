@@ -60,6 +60,8 @@
 
 #define SQRT(ARG0) z_sqrt((ARG0))
 
+#define DmaMgr_ProcessMsg z_file_load
+/* DmaRequest Type */
 extern void z_file_load(void *req);
 #if OOT_DEBUG
 	asm("z_file_load = 0x800013FC");
@@ -69,10 +71,11 @@ extern void z_file_load(void *req);
 	asm("z_file_load = 0x80080A08");
 #endif
 
+
 /****
  * Copy data from the ROM into VRAM, using Direct Memory Access (DMA)
  ***/
-
+#define DmaMgr_SendRequest1 load_data_from_rom
 extern uint32_t load_data_from_rom(
 	void* vram_addr
 	, void* vrom_addr
@@ -95,6 +98,7 @@ extern uint32_t load_data_from_rom(
 		asm("load_data_from_rom = 0x80080C90");
     #endif
 
+#define sprintf z_sprintf
 extern int32_t z_sprintf(volatile char* dst, const char* fmt, ...);
 	#if OOT_DEBUG
 		asm("z_sprintf = 0x80002F44");
@@ -119,6 +123,7 @@ extern void osSendMesg(OSMesgQueue* queue, void* dest, int32_t flag);
  * zero `num` bytes starting at `dst`
  * This function is not used inside any existing overlay
  ***/
+#define bzero z_bzero
 extern void z_bzero(void *dst, const int num);
 	#if OOT_DEBUG
 		asm("z_bzero = 0x80004450");
@@ -142,6 +147,24 @@ extern int _Putfld(
 		asm("_Putfld = 0x80005928");
 	#elif OOT_U_1_0
 		asm("_Putfld = 0x800D1690");
+	#endif
+
+#define strchr z_strchr
+// TODO Find 1.0 Equivalent
+extern const uint8_t* z_strchr(const char* str, int32_t ch);
+	#if OOT_DEBUG
+		asm("z_strchr = 0x800060B0");
+	#elif OOT_U_1_0
+		//asm("z_strchr = 0x800D1690");
+	#endif
+
+#define strlen z_strlen
+// TODO Find 1.0 Equivalent
+extern size_t z_strlen(const char* str);
+	#if OOT_DEBUG
+		asm("z_strlen = 0x800060F0");
+	#elif OOT_U_1_0
+		//asm("z_strlen = 0x800D1690");
 	#endif
 
 /****
@@ -168,6 +191,7 @@ extern void osRecvMesg(OSMesgQueue* queue, OSMesg* mesq, int32_t flag);
  * compare byte sequences `s1` and `s2` of length `n`
  * if they are equal, or `n == 0`, z_bcmp returns 0; non-zero otherwise
  ***/
+#define bcmp z_bcmp
 extern int z_bcmp(const void *s1, const void *s2, int n);
 	#if OOT_DEBUG
 		asm("z_bcmp = 0x800068C0");
@@ -182,6 +206,7 @@ extern int z_bcmp(const void *s1, const void *s2, int n);
  * This function is not used inside any existing overlay
  * formerly memory_copy
  ***/
+#define bcopy z_bcopy
 extern void z_bcopy(const void *src, void *dst, const uint32_t num);
 	#if OOT_DEBUG
 		asm("z_bcopy = 0x80006F10");
@@ -190,20 +215,6 @@ extern void z_bcopy(const void *src, void *dst, const uint32_t num);
 	#elif MM_U_1_0
 		asm("z_bcopy = 0x800912C0");
 	#endif
-
-/**
- * Swaps Link's equipment to the adult/child version depending on the current age.
- * It updates boots, tunic, shield, B-Button and C-Button items.
- * NOTE: Only use this function when the button icons are not on-screen. They
-         may get corrupted otherwise.
- * NOTE: This function is not used in any existing actor overlay in OoT.
- */
-extern void player_swap_age_equipment(void);
-    #if OOT_DEBUG
-        asm("player_swap_age_equipment = 0x800846E0");
-    #elif OOT_U_1_0
-        asm("player_swap_age_equipment = 0x8006F804");
-    #endif
 
 /*
  * z_assert(condition)
@@ -238,7 +249,9 @@ extern void player_swap_age_equipment(void);
  * called on assertion failure
  * [!] don't use this directly; use z_assert instead
  */
-extern void z_assert_message(char *mesg, char *fn, int line);
+#define __assert z_assert_message
+#define z_assert_message(x) (z_assert_message)(x, __FILE__, __LINE__)
+extern void (z_assert_message)(char *mesg, char *fn, int line);
 	#if OOT_DEBUG
 		asm("z_assert_message = 0x80001FF0");
 	#elif OOT_U_1_0
@@ -249,6 +262,7 @@ extern void z_assert_message(char *mesg, char *fn, int line);
  * print a debug message to the console
  * use DEBUG_LOG(), which will disable z_console_log() calls unless compiling with DEBUG defined
  */
+#define osSyncPrintf z_console_log
 extern void z_console_log(const char *msg, ...);
 #ifdef DEBUG
 	#define DEBUG_LOG z_console_log
@@ -265,31 +279,36 @@ extern void z_console_log(const char *msg, ...);
  * This prints a debug string that doesn't exist in 1.0
  * Perhaps this function doesn't, either.
  */
-extern void external_func_80002E10(void);
+#define LogUtils_LogThreadId z_thread_log_id
+#define z_thread_log_id(x) (z_thread_log_id)(__FILE__, __LINE__)
+extern void (z_thread_log_id)(const char* name, int32_t line);
 	#if OOT_DEBUG
-		asm("external_func_80002E10 = 0x80002E10");
+		asm("z_thread_log_id = 0x80002E10");
 	#elif OOT_U_1_0
 		#define external_func_80002E10(...) do { /* nothing */ } while (0)
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Returns where a thread is hung up.
  */
-extern void external_func_80002E50(void);
+#define LogUtils_HungupThread z_thread_hungup
+#define z_thread_hungup(x) (z_thread_hungup)(__FILE__, __LINE__)
+extern void (z_thread_hungup)(const char* name, int32_t line);
 	#if OOT_DEBUG
-		asm("external_func_80002E50 = 0x80002E50");
+		asm("z_thread_hungup = 0x80002E50");
 	#elif OOT_U_1_0
-		asm("external_func_80002E50 = 0x80001B38");
+		asm("z_thread_hungup = 0x80001B38");
 	#endif
 
 /* Spawn Collectible Item
 * Source Code Reference File: "z_en_item00.c"
 * Formerly `item_drop_collectible`
 */
+#define Item_DropCollectible z_item_drop
 extern void z_item_drop(
 z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
-, uint32_t id /* Drop Table Item ID */
+, uint16_t id /* Drop Table Item ID */
 );
 #if OOT_DEBUG
   asm("z_item_drop = 0x8001F548");
@@ -299,19 +318,25 @@ z64_global_t* gl /* Global Context */
   /*asm("z_item_drop = 0xDEADBEEF");*/
 #endif
 
-/**
- * TODO This function is completely undocumented
- */
-extern void external_func_8001F77C(void);
-	#if OOT_DEBUG
-		asm("external_func_8001F77C = 0x8001F77C");
-	#elif OOT_U_1_0
-		asm("external_func_8001F77C = 0x800138B0");
-	#endif
+/* Alternate Spawn Collectible Item
+* Source Code Reference File: "z_en_item00.c"
+*/
+#define Item_DropCollectible2 z_item_drop_2
+extern void z_item_drop_2(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, uint16_t id /* Drop Table Item ID */
+);
+#if OOT_DEBUG
+	asm("z_item_drop_2 = 0x8001F77C");
+#elif OOT_U_1_0
+	asm("z_item_drop_2 = 0x800138B0");
+#endif
 
 /* Spawn Random Collectible Item
 * Source Code Reference File: "z_en_item00.c"
 */
+#define Item_DropCollectibleRandom z_item_drop_random
 extern void z_item_drop_random(
 z64_global_t* gl /* Global Context */
 , z64_actor_t* a /* Actor Instance */
@@ -329,6 +354,7 @@ z64_global_t* gl /* Global Context */
 /**
  * Used for drawing z_eff_blure
  */
+#define EffectBlure_AddVertex z_eff_blure_vertex_add
 extern void z_eff_blure_vertex_add(z64_eff_blure_t* blureInstance, vec3f_t* p1, vec3f_t* p2);
 	#if OOT_DEBUG
 		asm("z_eff_blure_vertex_add = 0x8001FDF0");
@@ -337,8 +363,9 @@ extern void z_eff_blure_vertex_add(z64_eff_blure_t* blureInstance, vec3f_t* p1, 
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Used for drawing z_eff_blure
  */
+#define EffectBlure_AddSpace z_eff_blure_space_add
 extern void z_eff_blure_space_add(z64_eff_blure_t* blureInstance);
 	#if OOT_DEBUG
 		asm("z_eff_blure_space_add = 0x80020120");
@@ -349,7 +376,8 @@ extern void z_eff_blure_space_add(z64_eff_blure_t* blureInstance);
 /**
  * z_eff_ss_dead
  */
-extern void external_func_80026230(void);
+#define func_80026230 external_func_80026230
+extern void external_func_80026230(z64_global_t* gl, rgba8_t* color, int16_t a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80026230 = 0x80026230");
 	#elif OOT_U_1_0
@@ -357,9 +385,10 @@ extern void external_func_80026230(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * z_eff_ss_dead
  */
-extern void external_func_80026608(void);
+#define func_80026608 external_func_80026608
+extern void external_func_80026608(z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_80026608 = 0x80026608");
 	#elif OOT_U_1_0
@@ -367,9 +396,10 @@ extern void external_func_80026608(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * z_eff_ss_dead
  */
-extern void external_func_80026690(void);
+#define func_80026690 external_func_80026690
+extern void external_func_80026690(z64_global_t* gl, rgba8_t* color, int16_t a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80026690 = 0x80026690");
 	#elif OOT_U_1_0
@@ -377,9 +407,10 @@ extern void external_func_80026690(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * z_eff_ss_dead
  */
-extern void external_func_80026860(void);
+#define func_80026860 external_func_80026860
+extern void external_func_80026860(z64_global_t* gl, rgba8_t* color, int16_t a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80026860 = 0x80026860");
 	#elif OOT_U_1_0
@@ -387,9 +418,10 @@ extern void external_func_80026860(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * z_eff_ss_dead
  */
-extern void external_func_80026A6C(void);
+#define func_80026A6C external_func_80026A6C
+extern void external_func_80026A6C(z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_80026A6C = 0x80026A6C");
 	#elif OOT_U_1_0
@@ -397,18 +429,20 @@ extern void external_func_80026A6C(void);
 	#endif
 
 /**
- * Return pointer to z_eff_blure matching index `idx`
+ * Return pointer to an effect via index.
  */
-extern z64_eff_blure_t* z_eff_blure_get(uint32_t idx);
+#define Effect_GetByIndex z_eff_index_get
+extern void* z_eff_index_get(uint32_t idx);
 	#if OOT_DEBUG
-		asm("z_eff_blure_get = 0x80026B0C");
+		asm("z_eff_index_get = 0x80026B0C");
 	#elif OOT_U_1_0
-		asm("z_eff_blure_get = 0x8001A890");
+		asm("z_eff_index_get = 0x8001A890");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Add an effect.
  */
+#define Effect_Add z_effect_add
 extern void z_effect_add(z64_global_t* gl, int32_t* idx, int32_t type, uint8_t arg3, uint8_t arg4, void* initParams);
 	#if OOT_DEBUG
 		asm("z_effect_add = 0x80026CD4");
@@ -417,43 +451,48 @@ extern void z_effect_add(z64_global_t* gl, int32_t* idx, int32_t type, uint8_t a
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Delete an effect.
  */
-extern void external_func_8002709C(z64_global_t *gl, uint32_t a1);
+#define Effect_Delete z_effect_remove
+extern void z_effect_remove(z64_global_t *gl, uint32_t index);
 	#if OOT_DEBUG
-		asm("external_func_8002709C = 0x8002709C");
+		asm("z_effect_remove = 0x8002709C");
 	#elif OOT_U_1_0
-		asm("external_func_8002709C = 0x8001AE04");
+		asm("z_effect_remove = 0x8001AE04");
 	#endif
 
 /**
  * Kill Particle
  * A0 = Particle Instance Ptr
- * This function is not used inside any existing overlay
+ * Delete an effect (Soft Sprite)
  */
-extern void particle_kill(void* particle_instance);
+#define EffectSs_Delete z_particle_kill
+extern void z_particle_kill(void* particle_instance);
 	#if OOT_DEBUG
-		asm("external_func_800274E0 = 0x800274E0");
+		asm("z_particle_kill = 0x800274E0");
 	#elif OOT_U_1_0
-		asm("external_func_800274E0 = 0x8001B1A4");
+		asm("z_particle_kill = 0x8001B1A4");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Keyword: Particle
+ * Insert an effect. (Soft Sprite)
  * This function is not used inside any existing overlay
  */
-extern void external_func_80027704(void);
+#define EffectSs_Insert z_particle_insert
+extern void z_particle_insert(z64_global_t* gl, void* particle_instance);
 	#if OOT_DEBUG
-		asm("external_func_80027704 = 0x80027704");
+		asm("z_particle_insert = 0x80027704");
 	#elif OOT_U_1_0
-		asm("external_func_80027704 = 0x8001B3D0");
+		asm("z_particle_insert = 0x8001B3D0");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * if (a2) return (a0 + (a1 - a0) / a2)
  * This function is not used inside any existing overlay
  */
-extern void external_func_80027DD4(void);
+#define func_80027DD4 external_func_80027DD4
+extern void external_func_80027DD4(int16_t a0, int16_t a1, int32_t a2);
 	#if OOT_DEBUG
 		asm("external_func_80027DD4 = 0x80027DD4");
 	#elif OOT_U_1_0
@@ -602,14 +641,14 @@ extern void external_func_80028B18(void);
 	#endif
 
 /**
- * Spawn Particle 0x01 (Wrapper for 8001C6A8)
- * TODO These notes need converted into a C function prototype
+ * Spawn ovl_Effect_Ss_KiraKira (Sparkle Motes - Spawned by Navi)
  */
-extern void external_func_80028B74(void);
+#define func_80028B74 z_effect_spawn_sparkle
+extern void z_effect_spawn_sparkle(z64_global_t* gl, vec3f_t* a1, void* a2, void* a3, rgba8_t a, rgba8_t b);
 	#if OOT_DEBUG
-		asm("external_func_80028B74 = 0x80028B74");
+		asm("z_effect_spawn_sparkle = 0x80028B74");
 	#elif OOT_U_1_0
-		asm("external_func_80028B74 = 0x8001C66C");
+		asm("z_effect_spawn_sparkle = 0x8001C66C");
 	#endif
 
 /**
@@ -701,16 +740,16 @@ extern void z_effect_spawn_fire_breath(void);
 	#endif
 
 /**
- * Spawn Particle 0x07
- * TODO These notes need converted into a C function prototype
+ * Spawn ovl_Effect_Ss_Bubble (A water bubble)
  */
-extern void z_effect_spawn_water_bubble(void);
+#define func_800293E4 z_effect_spawn_bubble
+extern void z_effect_spawn_bubble(z64_global_t* gl, vec3f_t* pos, float a, float b, float c, float d);
 	#if OOT_DEBUG
-		asm("z_effect_spawn_water_bubble = 0x800293E4");
+		asm("z_effect_spawn_bubble = 0x800293E4");
 	#elif OOT_U_1_0
-		asm("z_effect_spawn_water_bubble = 0x8001CEDC");
+		asm("z_effect_spawn_bubble = 0x8001CEDC");
 	#elif MM_U_1_0
-		asm("z_effect_spawn_water_bubble = 0x800B1E94");
+		asm("z_effect_spawn_bubble = 0x800B1E94");
 	#endif
 
 /**
@@ -846,7 +885,7 @@ z64_global_t* gl /* Global Context */
  * Spawn Particle 0x11 (Wrapper for 8001D438)
  * TODO These notes need converted into a C function prototype
  */
-extern void z_effect_spawn_splash(void);
+extern void z_effect_spawn_splash(z64_global_t* gl, vec3f_t* pos);
 	#if OOT_DEBUG
 		asm("z_effect_spawn_splash = 0x800299AC");
 	#elif OOT_U_1_0
@@ -876,14 +915,13 @@ extern void z_effect_spawn_stone1(void);
 	#endif
 
 /**
- * Spawn Particle 0x15 (Wrapper for 8001D750)
- * TODO These notes need converted into a C function prototype
+ * Spawn ovl_Effect_Ss_HitMark (Impact Effect)
  */
-extern void external_func_80029CA4(void);
+extern void z_effect_spawn_hitmark(z64_global_t* gl, int32_t a, vec3f_t* pos);
 	#if OOT_DEBUG
-		asm("external_func_80029CA4 = 0x80029CA4");
+		asm("z_effect_spawn_hitmark = 0x80029CA4");
 	#elif OOT_U_1_0
-		asm("external_func_80029CA4 = 0x8001D7A8");
+		asm("z_effect_spawn_hitmark = 0x8001D7A8");
 	#endif
 
 /**
@@ -1164,6 +1202,7 @@ extern void z_effect_spawn_ice_smoke(void);
 * Source Code Reference File: "z_actor.c"
 * Formerly `actor_init_shadow`
 */
+#define ActorShape_Init z_actor_shadow_init
 extern void z_actor_shadow_init(
 void* a /* Sub Structure at `actor->0x00B4`, formerly `rot_2` */
 , float f0
@@ -1174,6 +1213,8 @@ void* a /* Sub Structure at `actor->0x00B4`, formerly `rot_2` */
   asm("z_actor_shadow_init = 0x8002B1E0");
   asm("Z_SHADOW_CIRCLE = 0x8002B5EC");
   asm("Z_SHADOW_TEARDROP = 0x8002B8C4");
+  //asm("Z_SHADOW_CIRCLE_WHITE = 0x8002B614");
+  //asm("Z_SHADOW_SQUIGGLE = 0x8002B644");
 #elif OOT_U_1_0
   asm("z_actor_shadow_init = 0x8001EC20");
   asm("Z_SHADOW_CIRCLE = 0x8001EFF4");
@@ -1206,181 +1247,212 @@ extern void external_func_8002BDB0(void);
 /**
  * Tests if Switch Flag is Set
  */
-extern int32_t flag_get_switch(z64_global_t *global, int32_t flag);
+#define Flags_GetSwitch z_flags_switch_get
+#define flag_get_switch z_flags_switch_get
+extern int32_t z_flags_switch_get(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_get_switch = 0x8002CB40");
+		asm("z_flags_switch_get = 0x8002CB40");
 	#elif OOT_U_1_0
-		asm("flag_get_switch = 0x8002049C");
+		asm("z_flags_switch_get = 0x8002049C");
 	#elif MM_U_1_0
-		asm("flag_get_switch = 0x800B5BB0");
+		asm("z_flags_switch_get = 0x800B5BB0");
 	#endif
 
 /**
  * Sets Switch Flag to 1
  */
-extern void flag_set_switch(z64_global_t *global, int32_t flag);
+#define Flags_SetSwitch z_flags_switch_set
+#define flag_set_switch z_flags_switch_set
+extern void z_flags_switch_set(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_set_switch = 0x8002CB74");
+		asm("z_flags_switch_set = 0x8002CB74");
 	#elif OOT_U_1_0
-		asm("flag_set_switch = 0x800204D0");
+		asm("z_flags_switch_set = 0x800204D0");
 	#elif MM_U_1_0
-		asm("flag_set_switch = 0x800B5BF4");
+		asm("z_flags_switch_set = 0x800B5BF4");
 	#endif
 
 /**
  * Sets Switch Flag to 0
  */
-extern void flag_unset_switch(z64_global_t *global, int32_t flag);
+#define Flags_UnsetSwitch z_flags_switch_unset
+#define flag_unset_switch z_flags_switch_unset
+extern void z_flags_switch_unset(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_unset_switch = 0x8002CBB4");
+		asm("z_flags_switch_unset = 0x8002CBB4");
 	#elif OOT_U_1_0
-		asm("flag_unset_switch = 0x80020510");
+		asm("z_flags_switch_unset = 0x80020510");
 	#elif MM_U_1_0
-		asm("flag_unset_switch = 0x800B5C34");
+		asm("z_flags_switch_unset = 0x800B5C34");
 	#endif
 
 /**
  * Tests if Unused Scene Flag is Set
  * This function is not used inside any existing overlay
  */
-extern int32_t flag_get_uscene(z64_global_t *global, int32_t flag);
+#define Flags_GetUnknown z_flags_switch_unk_get
+#define flag_get_uscene z_flags_switch_unk_get
+extern int32_t z_flags_switch_unk_get(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_get_uscene = 0x8002CBF8");
+		asm("z_flags_switch_unk_get = 0x8002CBF8");
 	#elif OOT_U_1_0
-		asm("flag_get_uscene = 0x80020554");
+		asm("z_flags_switch_unk_get = 0x80020554");
 	#endif
 
 /**
  * Sets Unused Scene Flag to 1
  * This function is not used inside any existing overlay
  */
-extern void flag_set_uscene(z64_global_t *global, int32_t flag);
+#define Flags_SetUnknown z_flags_switch_unk_set
+#define flag_set_uscene z_flags_switch_unk_set
+extern void z_flags_switch_unk_set(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_set_uscene = 0x8002CC2C");
+		asm("z_flags_switch_unk_set = 0x8002CC2C");
 	#elif OOT_U_1_0
-		asm("flag_set_uscene = 0x80020588");
+		asm("z_flags_switch_unk_set = 0x80020588");
 	#endif
 
 /**
  * Sets Unused Scene Flag to 0
  * This function is not used inside any existing overlay
  */
-extern void flag_unset_uscene(z64_global_t *global, int32_t flag);
+#define Flags_UnsetUnknown z_flags_switch_unk_unset
+#define flag_unset_uscene z_flags_switch_unk_unset
+extern void z_flags_switch_unk_unset(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_unset_uscene = 0x8002CC6C");
+		asm("z_flags_switch_unk_unset = 0x8002CC6C");
 	#elif OOT_U_1_0
-		asm("flag_unset_uscene = 0x800205C8");
+		asm("z_flags_switch_unk_unset = 0x800205C8");
 	#endif
 
 /**
  * Tests if a Chest Flag is set
  */
-extern int32_t flag_get_treasure(z64_global_t *global, int32_t flag);
+#define Flags_GetTreasure z_flags_chest_get
+#define flag_get_treasure z_flags_chest_get
+extern int32_t z_flags_chest_get(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_get_treasure = 0x8002CCB0");
+		asm("z_flags_chest_get = 0x8002CCB0");
 	#elif OOT_U_1_0
-		asm("flag_get_treasure = 0x8002060C");
+		asm("z_flags_chest_get = 0x8002060C");
 	#endif
 
 /**
  * Sets Chest Flag to 1
  */
-extern void flag_set_treasure(z64_global_t *global, int32_t flag);
+#define Flags_SetTreasure z_flags_chest_set
+#define flag_set_treasure z_flags_chest_set
+extern void z_flags_chest_set(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_set_treasure = 0x8002CCC4");
+		asm("z_flags_chest_set = 0x8002CCC4");
 	#elif OOT_U_1_0
-		asm("flag_set_treasure = 0x80020624");
+		asm("z_flags_chest_set = 0x80020624");
 	#endif
 
 /**
  * Test if a Room Clear Flag is set
  */
-extern int32_t flag_get_roomclear(z64_global_t *global, int32_t flag);
+#define Flags_GetClear z_flags_clear_get
+#define flag_get_roomclear z_flags_clear_get
+extern int32_t z_flags_clear_get(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_get_roomclear = 0x8002CCDC");
+		asm("z_flags_clear_get = 0x8002CCDC");
 	#elif OOT_U_1_0
-		asm("flag_get_roomclear = 0x80020640");
+		asm("z_flags_clear_get = 0x80020640");
 	#endif
 
 /**
  * Sets Room Clear Flag to 1
  */
-extern void flag_set_roomclear(z64_global_t *global, int32_t flag);
+#define Flags_SetClear z_flags_clear_set
+#define flag_set_roomclear z_flags_clear_set
+extern void z_flags_clear_set(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_set_roomclear = 0x8002CCF0");
+		asm("z_flags_clear_set = 0x8002CCF0");
 	#elif OOT_U_1_0
-		asm("flag_set_roomclear = 0x80020658");
+		asm("z_flags_clear_set = 0x80020658");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Unset Room Clear Flags
  */
-extern void external_func_8002CD08(void);
+#define Flags_UnsetClear z_flags_clear_unset
+extern void z_flags_clear_unset(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("external_func_8002CD08 = 0x8002CD08");
+		asm("z_flags_clear_unset = 0x8002CD08");
 	#elif OOT_U_1_0
-		asm("external_func_8002CD08 = 0x80020674");
+		asm("z_flags_clear_unset = 0x80020674");
 	#endif
 
 /**
  * Tests if Global Context + 0x1D40 Flag is set
  */
-extern int32_t temp_clear_flag_get(z64_global_t *global, int32_t flag);
+#define Flags_GetTempClear z_flags_clear_temp_get
+#define temp_clear_flag_get z_flags_clear_temp_get
+extern int32_t z_flags_clear_temp_get(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("temp_clear_flag_get = 0x8002CD24");
+		asm("z_flags_clear_temp_get = 0x8002CD24");
 	#elif OOT_U_1_0
-		asm("temp_clear_flag_get = 0x80020694");
+		asm("z_flags_clear_temp_get = 0x80020694");
 	#elif MM_U_1_0
-		asm("temp_clear_flag_get = 0x800B5D18");
+		asm("z_flags_clear_temp_get = 0x800B5D18");
 	#endif
 
 /**
  * Sets Global Context + 0x1D40 Flag to 1
  */
-extern void temp_clear_flag_set(z64_global_t *global, int32_t flag);
+#define Flags_SetTempClear z_flags_clear_temp_set
+#define temp_clear_flag_set z_flags_clear_temp_set
+extern void z_flags_clear_temp_set(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("temp_clear_flag_set = 0x8002CD38");
+		asm("z_flags_clear_temp_set = 0x8002CD38");
 	#elif OOT_U_1_0
-		asm("temp_clear_flag_set = 0x800206AC");
+		asm("z_flags_clear_temp_set = 0x800206AC");
 	#elif MM_U_1_0
-		asm("temp_clear_flag_set = 0x800B5D30");
+		asm("z_flags_clear_temp_set = 0x800B5D30");
 	#endif
 
 /**
  * Tests if Scene Collectible Flag is set
  */
-extern int32_t flag_get_scenecollect(z64_global_t *global, int32_t flag);
+#define Flags_GetCollectible z_flags_collect_get
+#define flag_get_scenecollect z_flags_collect_get
+extern int32_t z_flags_collect_get(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_get_scenecollect = 0x8002CD6C");
+		asm("z_flags_collect_get = 0x8002CD6C");
 	#elif OOT_U_1_0
-		asm("flag_get_scenecollect = 0x800206E8");
+		asm("z_flags_collect_get = 0x800206E8");
 	#elif MM_U_1_0
-		asm("flag_get_scenecollect = 0x800B5D6C");
+		asm("z_flags_collect_get = 0x800B5D6C");
 	#endif
 
 /**
  * Sets Scene Collectible Flag to 1
  */
-extern void flag_set_scenecollect(z64_global_t *global, int32_t flag);
+#define Flags_SetCollectible z_flags_collect_set
+#define flag_set_scenecollect z_flags_collect_set
+extern void z_flags_collect_set(z64_global_t *global, int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_set_scenecollect = 0x8002CDA0");
+		asm("z_flags_collect_set = 0x8002CDA0");
 	#elif OOT_U_1_0
-		asm("flag_set_scenecollect = 0x8002071C");
+		asm("z_flags_collect_set = 0x8002071C");
 	#elif MM_U_1_0
-		asm("flag_set_scenecollect = 0x800B5DB0");
+		asm("z_flags_collect_set = 0x800B5DB0");
 	#endif
 
 /**
  * Boss Title
  * A0 - global context | A1 - A0 + 0x1D4C (Title Card Context) | A2 - (object pointer + texture offset inside the object)
  */
-extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1D4C, uint32_t texture, int16_t arg3, int16_t arg4, uint8_t arg5, uint8_t arg6);
+#define TitleCard_InitBossName z_actor_titlecard_boss
+#define actor_boss_title z_actor_titlecard_boss
+extern void z_actor_titlecard_boss(z64_global_t *global, z64_global_t *global_plus_0x1D4C, uint32_t texture, int16_t arg3, int16_t arg4, uint8_t arg5, uint8_t arg6);
 	#if OOT_DEBUG
-		asm("actor_boss_title = 0x8002CE00");
+		asm("z_actor_titlecard_boss = 0x8002CE00");
 	#elif OOT_U_1_0
-		asm("actor_boss_title = 0x80020780");
+		asm("z_actor_titlecard_boss = 0x80020780");
 	#elif MM_U_1_0
-		asm("actor_boss_title = 0x800B5E0C");
+		asm("z_actor_titlecard_boss = 0x800B5E0C");
 	#endif
 
 /* This kills an actor process.
@@ -1390,6 +1462,7 @@ extern void actor_boss_title(z64_global_t *global, z64_global_t *global_plus_0x1
 * Source Code Reference File: "z_actor.c"
 * Formerly `actor_kill`
 */
+#define Actor_Kill z_actor_kill
 extern void z_actor_kill(
 z64_actor_t* a /* Actor to Kill */
 );
@@ -1406,6 +1479,7 @@ z64_actor_t* a /* Actor to Kill */
 * Source Code Reference File: "z_actor.c"
 * Formerly `actor_set_height`
 */
+#define Actor_SetHeight z_actor_set_height
 extern void z_actor_set_height(
 z64_actor_t* a /* Actor to Reference */
 , float height /* Y position relative to Actor Origin */
@@ -1422,6 +1496,7 @@ z64_actor_t* a /* Actor to Reference */
 * Source Code Reference File: "z_actor.c"
 * Formerly `actor_set_scale`
 */
+#define Actor_SetScale z_actor_set_scale
 extern void z_actor_set_scale(
 z64_actor_t* a /* Actor to Reference */
 , float scale /* X, Y, and Z scale of actor */
@@ -1437,18 +1512,21 @@ z64_actor_t* a /* Actor to Reference */
 /**
  * Update CPU Segment 0x06 to point32_t to actor's defined object dependency
  */
-extern void actor_set_object(z64_global_t *global, z64_actor_t *actor);
+#define Actor_SetObjectDependency z_actor_set_object
+#define actor_set_object z_actor_set_object
+extern void z_actor_set_object(z64_global_t *global, z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("actor_set_object = 0x8002D644");
+		asm("z_actor_set_object = 0x8002D644");
 	#elif OOT_U_1_0
-		asm("actor_set_object = 0x80020FA4");
+		asm("z_actor_set_object = 0x80020FA4");
 	#elif MM_U_1_0
-		asm("actor_set_object = 0x800B67FC");
+		asm("z_actor_set_object = 0x800B67FC");
 	#endif
 
 /**
  * Physics, updates XYZ coordinates of actor
  */
+#define actor_update_pos z_actor_update_pos
 extern void z_actor_update_pos(z64_actor_t *actor);
 	#if OOT_DEBUG
 		asm("z_actor_update_pos = 0x8002D7EC");
@@ -1457,17 +1535,17 @@ extern void z_actor_update_pos(z64_actor_t *actor);
 	#elif MM_U_1_0
 		asm("z_actor_update_pos = 0x800B69AC");
 	#endif
-#define actor_update_pos z_actor_update_pos
 
 /**
  * Physics, updates XYZ velocity vectors (+0x5C) of an actor
  * Only factors y component of speed rotation xyz (+0x30)
  */
-extern void actor_update_vel(z64_actor_t *actor);
+#define actor_update_vel z_actor_update_vel
+extern void z_actor_update_vel(z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("actor_update_vel = 0x8002D868");
+		asm("z_actor_update_vel = 0x8002D868");
 	#elif OOT_U_1_0
-		asm("actor_update_vel = 0x800211A4");
+		asm("z_actor_update_vel = 0x800211A4");
 	#endif
 
 /* Move actor towards direction.
@@ -1476,6 +1554,7 @@ extern void actor_update_vel(z64_actor_t *actor);
 * Source Code Reference File: "z_actor.c"
 * Formerly `actor_move_towards_direction`
 */
+#define Actor_MoveForward z_actor_move_dir_vel
 extern void z_actor_move_dir_vel(
 z64_actor_t* a /* Actor Instance to Modify */
 );
@@ -1504,7 +1583,7 @@ extern void external_func_8002D908(z64_actor_t *actor);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance ptr
  */
-extern void external_func_8002D97C(void);
+extern void external_func_8002D97C(z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_8002D97C = 0x8002D97C");
 	#elif OOT_U_1_0
@@ -1516,7 +1595,7 @@ extern void external_func_8002D97C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002D9A4(void);
+extern void external_func_8002D9A4(z64_actor_t* a, float a1);
 	#if OOT_DEBUG
 		asm("external_func_8002D9A4 = 0x8002D9A4");
 	#elif OOT_U_1_0
@@ -1556,7 +1635,7 @@ z64_actor_t* a /* Actor to Derive Angle */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002DAE0(void);
+extern void external_func_8002DAE0(z64_actor_t* a, z64_actor_t* b);
 	#if OOT_DEBUG
 		asm("external_func_8002DAE0 = 0x8002DAE0");
 	#elif OOT_U_1_0
@@ -1566,7 +1645,7 @@ extern void external_func_8002DAE0(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002DB28(void);
+extern void external_func_8002DB28(z64_actor_t* a, vec3f_t* b);
 	#if OOT_DEBUG
 		asm("external_func_8002DB28 = 0x8002DB28");
 	#elif OOT_U_1_0
@@ -1638,10 +1717,13 @@ extern void external_func_8002DBD0(void);
 
 /**
  * Calculates Y distance between two actors (+0x28)
+ * Height Difference
  */
-extern float math_distance_y_actor_actor(z64_actor_t *a, z64_actor_t *b);
+#define Actor_HeightDiff z_actor_y_distance
+#define math_distance_y_actor_actor z_actor_y_distance
+extern float z_actor_y_distance(z64_actor_t *a, z64_actor_t *b);
 	#if OOT_DEBUG
-		asm("math_distance_y_actor_actor = 0x8002DC74");
+		asm("z_actor_y_distance = 0x8002DC74");
 	#elif OOT_U_1_0
 		// TODO Find 1.0 Equivalent!
 	#endif
@@ -1649,7 +1731,7 @@ extern float math_distance_y_actor_actor(z64_actor_t *a, z64_actor_t *b);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002DD78(void);
+extern void external_func_8002DD78(z64_player_t* player);
 	#if OOT_DEBUG
 		asm("external_func_8002DD78 = 0x8002DD78");
 	#elif OOT_U_1_0
@@ -1657,9 +1739,10 @@ extern void external_func_8002DD78(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Regarding Link's Y Scale
+ * return Link->actor.scale.y & 8
  */
-extern void external_func_8002DDE4(void);
+extern void external_func_8002DDE4(z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_8002DDE4 = 0x8002DDE4");
 	#elif OOT_U_1_0
@@ -1667,9 +1750,10 @@ extern void external_func_8002DDE4(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Regarding Link's Y Scale
+ * return Link->actor.scale.y & 0x1000
  */
-extern void external_func_8002DDF4(void);
+extern void external_func_8002DDF4(z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_8002DDF4 = 0x8002DDF4");
 	#elif OOT_U_1_0
@@ -1679,7 +1763,7 @@ extern void external_func_8002DDF4(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002DE04(void);
+extern void external_func_8002DE04(z64_global_t* gl, z64_actor_t* a, z64_actor_t* b);
 	#if OOT_DEBUG
 		asm("external_func_8002DE04 = 0x8002DE04");
 	#elif OOT_U_1_0
@@ -1689,7 +1773,7 @@ extern void external_func_8002DE04(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002DEEC(void);
+extern void external_func_8002DEEC(z64_global_t* gl, z64_player_t* Link, z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_8002DEEC = 0x8002DEEC");
 	#elif OOT_U_1_0
@@ -1699,7 +1783,7 @@ extern void external_func_8002DEEC(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002DF38(void);
+extern void external_func_8002DF38(z64_global_t* gl, z64_actor_t* a, uint8_t action);
 	#if OOT_DEBUG
 		asm("external_func_8002DF38 = 0x8002DF38");
 	#elif OOT_U_1_0
@@ -1721,21 +1805,22 @@ extern void external_func_8002DF38(void);
              function that is stored in it, for stringing multiple
              actions together?
  */
+#define link_set_cutscene_action z_cutscene_link_action
 extern void link_set_cutscene_action(
 	z64_global_t    *global
 	, z64_actor_t   *actor
 	, uint8_t        action
 );
 	#if OOT_DEBUG
-		asm("link_set_cutscene_action = 0x8002DF54");
+		asm("z_cutscene_link_action = 0x8002DF54");
 	#elif OOT_U_1_0
-		asm("link_set_cutscene_action = 0x800218EC");
+		asm("z_cutscene_link_action = 0x800218EC");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Regarding DynaPoly Actor
  */
-extern void external_func_8002DF90(void);
+extern void external_func_8002DF90(z64_actor_t* dynapoly_actor);
 	#if OOT_DEBUG
 		asm("external_func_8002DF90 = 0x8002DF90");
 	#elif OOT_U_1_0
@@ -1745,7 +1830,7 @@ extern void external_func_8002DF90(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002DFC8(void);
+extern void external_func_8002DFC8(z64_actor_t* actor, int16_t a1, z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_8002DFC8 = 0x8002DFC8");
 	#elif OOT_U_1_0
@@ -1771,7 +1856,7 @@ z64_actor_t* a /* Actor Instance to Reference */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002E12C(void);
+extern int32_t external_func_8002E12C(z64_actor_t* a, float a1, int16_t a2);
 	#if OOT_DEBUG
 		asm("external_func_8002E12C = 0x8002E12C");
 	#elif OOT_U_1_0
@@ -1781,7 +1866,7 @@ extern void external_func_8002E12C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002E1A8(void);
+extern void external_func_8002E1A8(z64_actor_t* a, z64_actor_t* b, float a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_8002E1A8 = 0x8002E1A8");
 	#elif OOT_U_1_0
@@ -1810,7 +1895,7 @@ z64_global_t* gl /* Global Context */
 #endif
 
 /**
- * TODO This function is completely undocumented
+ * Return Hilite*
  */
 extern void * external_func_8002EABC(vec3f_t* object, vec3f_t* eye, vec3f_t* lightDir, z64_gfx_t* gfx_ctxt);
 	#if OOT_DEBUG
@@ -1820,9 +1905,9 @@ extern void * external_func_8002EABC(vec3f_t* object, vec3f_t* eye, vec3f_t* lig
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Return Hilite*
  */
-extern void external_func_8002EB44(void);
+extern void external_func_8002EB44(vec3f_t* object, vec3f_t* eye, vec3f_t* lightDir, z64_gfx_t* gfx_ctxt);
 	#if OOT_DEBUG
 		asm("external_func_8002EB44 = 0x8002EB44");
 	#elif OOT_U_1_0
@@ -1843,7 +1928,7 @@ extern void z_actor_texgen_init(z64_actor_t *a0, z64_global_t *gl, int32_t flag)
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002ED80(void);
+extern void external_func_8002ED80(z64_actor_t *a0, z64_global_t *gl, int32_t flag);
 	#if OOT_DEBUG
 		asm("external_func_8002ED80 = 0x8002ED80");
 	#elif OOT_U_1_0
@@ -1853,7 +1938,7 @@ extern void external_func_8002ED80(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002EF14(void);
+extern void* external_func_8002EF14(void* PosRot, z64_actor_t* actor);
 	#if OOT_DEBUG
 		asm("external_func_8002EF14 = 0x8002EF14");
 	#elif OOT_U_1_0
@@ -1871,7 +1956,7 @@ int32_t func_8002F194(z64_actor_t *a, z64_global_t *g)
 	return 0;
 }
  */
-extern int32_t external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
+extern uint32_t external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
 	#if OOT_DEBUG
 		asm("external_func_8002F194 = 0x8002F194");
 	#elif OOT_U_1_0
@@ -1882,12 +1967,12 @@ extern int32_t external_func_8002F194(z64_actor_t *actor, z64_global_t *global);
  * Makes a cylinder-shaped region around the actor in which Link is able to speak to and trade with the actor.
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xy distance | A3 = float, y distance | SP+0x10 = Trade Item Index
  */
-extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, uint8_t item_index
-);
+#define actor_poll_trade_cylinder z_actor_poll_trade_cylinder
+extern int32_t z_actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float dist_xz, float dist_y, uint32_t item_index);
 	#if OOT_DEBUG
-		asm("actor_npc_trade_request = 0x8002F1C4");
+		asm("z_actor_poll_trade_cylinder = 0x8002F1C4");
 	#elif OOT_U_1_0
-		asm("actor_npc_trade_request = 0x80022960");
+		asm("z_actor_poll_trade_cylinder = 0x80022960");
 	#endif
 
 /**
@@ -1895,11 +1980,12 @@ extern void actor_poll_trade_cylinder(z64_actor_t *actor, z64_global_t *, float 
  * Passes A2 into A2 and A3 of inner function
  * A0 = Actor Instance | A1 = Global Context | A2 = float, xyz distance | A3 = Trade Item Index
  */
-extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, float distance, uint8_t item_index);
+#define actor_poll_trade_cube z_actor_poll_trade_cube
+extern int32_t z_actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, float distance, uint32_t item_index);
 	#if OOT_DEBUG
-		asm("actor_poll_trade_cube = 0x8002F298");
+		asm("z_actor_poll_trade_cube = 0x8002F298");
 	#elif OOT_U_1_0
-		asm("actor_poll_trade_cube = 0x80022A34");
+		asm("z_actor_poll_trade_cube = 0x80022A34");
 	#endif
 
 /**
@@ -1908,11 +1994,12 @@ extern void actor_poll_trade_cube(z64_actor_t *actor, z64_global_t *global, floa
  * TODO These notes need converted into a C function prototype
  * A0 = Actor Instance | A1 = Global Context | A2 = float distance?
  */
-extern void actor_poll_speak_cube(z64_actor_t *actor, z64_global_t *gl, float distance);
+#define actor_poll_speak_cube z_actor_poll_speak_cube
+extern void z_actor_poll_speak_cube(z64_actor_t *actor, z64_global_t *gl, float distance);
 	#if OOT_DEBUG
-		asm("actor_poll_speak_cube = 0x8002F2CC");
+		asm("z_actor_poll_speak_cube = 0x8002F2CC");
 	#elif OOT_U_1_0
-		asm("actor_poll_speak_cube = 0x80022A68");
+		asm("z_actor_poll_speak_cube = 0x80022A68");
 	#endif
 
 /**
@@ -1933,7 +2020,7 @@ extern void external_func_8002F2F4(z64_actor_t *actor, z64_global_t *global);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F334(void);
+extern void external_func_8002F334(z64_actor_t* actor, z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_8002F334 = 0x8002F334");
 	#elif OOT_U_1_0
@@ -1945,11 +2032,12 @@ extern void external_func_8002F334(void);
  * TODO Look into this a bit more, return type
  * Returns Link Instance + 0x0683
  */
-extern int32_t actor_npc_trade_get(z64_global_t *global);
+#define actor_npc_trade_get z_actor_player_trade_item_get
+extern int32_t z_actor_player_trade_item_get(z64_global_t *global);
 	#if OOT_DEBUG
-		asm("actor_npc_trade_get = 0x8002F368");
+		asm("z_actor_player_trade_item_get = 0x8002F368");
 	#elif OOT_U_1_0
-		asm("actor_npc_trade_get = 0x80022B04");
+		asm("z_actor_player_trade_item_get = 0x80022B04");
 	#endif
 
 /**
@@ -1982,8 +2070,6 @@ z64_actor_t* a /* Actor to Reference */
 
 /**
  * Give Item
- * TODO get_item_id, is it uint8_t, uint16_t, or uint32_t?
- * TODO: a different name may be more fitting
  * A0 = Actor instance //Actor giving item
  * A1 = Global Context
  * A2 = Get Item ID
@@ -1993,7 +2079,7 @@ z64_actor_t* a /* Actor to Reference */
 extern void z_actor_give_item(
 	z64_actor_t *actor,
 	z64_global_t *global,
-	uint8_t get_item_id,
+	uint32_t get_item_id,
 	float range_xz, float range_y
 );
 	#if OOT_DEBUG
@@ -2053,9 +2139,9 @@ extern int32_t z_actor_is_attached2(z64_actor_t* a);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Confirm Usage
  */
-extern void external_func_8002F5C4(void);
+extern void external_func_8002F5C4(z64_player_t* Link, z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_8002F5C4 = 0x8002F5C4");
 	#elif OOT_U_1_0
@@ -2065,7 +2151,7 @@ extern void external_func_8002F5C4(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F5F0(void);
+extern void external_func_8002F5F0(z64_actor_t* actor, z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_8002F5F0 = 0x8002F5F0");
 	#elif OOT_U_1_0
@@ -2073,9 +2159,9 @@ extern void external_func_8002F5F0(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * return (a->attached_b != 0x0)
  */
-extern void external_func_8002F618(void);
+extern int32_t external_func_8002F618(z64_global_t* gl, z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_8002F618 = 0x8002F618");
 	#elif OOT_U_1_0
@@ -2083,9 +2169,9 @@ extern void external_func_8002F618(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Check if Link is Riding Epona?
  */
-extern void external_func_8002F63C(void);
+extern int32_t external_func_8002F63C(z64_global_t* gl, z64_actor_t* a, int32_t a2);
 	#if OOT_DEBUG
 		asm("external_func_8002F63C = 0x8002F63C");
 	#elif OOT_U_1_0
@@ -2093,9 +2179,9 @@ extern void external_func_8002F63C(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * return (a->attached_b == 0x0)
  */
-extern void external_func_8002F674(void);
+extern int32_t external_func_8002F674(z64_global_t* gl, z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_8002F674 = 0x8002F674");
 	#elif OOT_U_1_0
@@ -2103,9 +2189,10 @@ extern void external_func_8002F674(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * z_player_
+ * TODO Find usage context.
  */
-extern void external_func_8002F698(void);
+extern void external_func_8002F698(z64_global_t* gl, uint32_t a1, float a2, int16_t a3, float a4, uint32_t a5, uint32_t a6);
 	#if OOT_DEBUG
 		asm("external_func_8002F698 = 0x8002F698");
 	#elif OOT_U_1_0
@@ -2113,9 +2200,9 @@ extern void external_func_8002F698(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Wrapper for 8002F698 (Above)
  */
-extern void external_func_8002F6D4(void);
+extern void external_func_8002F6D4(z64_global_t* gl, uint32_t a1, float a2, int16_t a3, float a4, uint32_t a5);
 	#if OOT_DEBUG
 		asm("external_func_8002F6D4 = 0x8002F6D4");
 	#elif OOT_U_1_0
@@ -2126,8 +2213,9 @@ extern void external_func_8002F6D4(void);
 
 /* Knocks the player back a certain distance and height in the specified direction.
  * Used in the original game by the moblin pounds.
+ * Wrapper for 8002F6D4 (Above)
 */
-extern void player_knockback(z64_global_t *gl, z64_actor_t* a, float distance, int16_t direction, float height);
+extern void z_player_knockback(z64_global_t *gl, z64_actor_t* a, float distance, int16_t direction, float height);
 	#if OOT_DEBUG
 		asm("player_knockback = 0x8002F71C");
 	#elif OOT_U_1_0
@@ -2149,7 +2237,7 @@ extern void external_func_8002F758(z64_global_t *gl, void *gl830, float a, float
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F7A0(void);
+extern void external_func_8002F7A0(z64_global_t* gl, uint32_t a1, float a2, int16_t a3, float a4);
 	#if OOT_DEBUG
 		asm("external_func_8002F7A0 = 0x8002F7A0");
 	#elif OOT_U_1_0
@@ -2161,13 +2249,14 @@ extern void external_func_8002F7A0(void);
 /**
  * Play Sound Effect (Actor)
  */
+#define Audio_PlayActorSound2 z_actor_play_sfx
+#define sound_play_actor z_actor_play_sfx
 extern void z_actor_play_sfx(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("z_actor_play_sfx = 0x8002F7DC");
 	#elif OOT_U_1_0
 		asm("z_actor_play_sfx = 0x80022F84");
 	#endif
-#define sound_play_actor z_actor_play_sfx
 
 /* Play a sound effect.
 * Wrapper for 80078914 (a wrapper for sound_play_system)
@@ -2211,7 +2300,7 @@ extern void sound_play_actor3(z64_actor_t *actor, uint16_t sound_id);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F948(void);
+extern void external_func_8002F948(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("external_func_8002F948 = 0x8002F948");
 	#elif OOT_U_1_0
@@ -2221,7 +2310,7 @@ extern void external_func_8002F948(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void z_actor_play_sfx_flag(z64_actor_t *actor, uint16_t sfx_id);
+extern void z_actor_play_sfx_flag(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("z_actor_play_sfx_flag = 0x8002F974");
 	#elif OOT_U_1_0
@@ -2231,7 +2320,7 @@ extern void z_actor_play_sfx_flag(z64_actor_t *actor, uint16_t sfx_id);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F994(void);
+extern void external_func_8002F994(z64_actor_t *actor, uint16_t sound_id);
 	#if OOT_DEBUG
 		asm("external_func_8002F994 = 0x8002F994");
 	#elif OOT_U_1_0
@@ -2241,7 +2330,7 @@ extern void external_func_8002F994(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8002F9EC(void);
+extern void external_func_8002F9EC(z64_global_t* gl, z64_actor_t* a, void* a2, void* a3, void* a4);
 	#if OOT_DEBUG
 		asm("external_func_8002F9EC = 0x8002F9EC");
 	#elif OOT_U_1_0
@@ -2254,19 +2343,21 @@ extern void external_func_8002F9EC(void);
  * TODO Also do something with a2 and a3, how does this translate to C?
  * A0 = Global Context | A1 = actor instance | A2 = actor instance + 0xE4 | A3 = float at actor instance + 0xF0
  */
-extern void actor_set_draw_distance(z64_global_t *global, z64_actor_t *actor, void *a2 /*actor+0xE4*/, float *a3 /*actor+0xF0*/);
+#define actor_set_draw_distance z_actor_set_draw_distance
+extern void z_actor_set_draw_distance(z64_global_t *global, z64_actor_t *actor, void *a2 /*actor+0xE4*/, float *a3 /*actor+0xF0*/);
 	#if OOT_DEBUG
-		asm("actor_set_draw_distance = 0x800314D4");
+		asm("z_actor_set_draw_distance = 0x800314D4");
 	#elif OOT_U_1_0
-		asm("actor_set_draw_distance = 0x800249DC");
+		asm("z_actor_set_draw_distance = 0x800249DC");
 	#endif
 
 /* Spawn an actor. Returns a pointer to the spawned actor, or NULL if it fails.
 * Source Code Reference File: "z_actor.c"
 * Formerly `actor_spawn`
 */
+#define Actor_Spawn z_actor_spawn
 extern z64_actor_t* z_actor_spawn(
-void* actor_ctxt /* Actor Context within Global Context */
+z64_actor_context_t* actor_ctxt /* Actor Context within Global Context */
 , z64_global_t *gl /* Global Context */
 , int16_t id /* Actor ID */
 , float x, float y, float z /* X, Y, and Z Position */
@@ -2281,6 +2372,7 @@ void* actor_ctxt /* Actor Context within Global Context */
   asm("z_actor_spawn = 0x800BAE14");
 #endif
 
+#define Actor_SpawnAttached z_actor_spawn_attached
 /* Spawn an actor and attach it to `host`. Returns a pointer to the spawned actor, or NULL if it fails.
 * return->attached_a will be set to `id`.
 * host->attached_b will be set to the return value.
@@ -2289,7 +2381,7 @@ void* actor_ctxt /* Actor Context within Global Context */
 * Formerly `actor_spawn_attached`
 */
 extern z64_actor_t* z_actor_spawn_attached(
-void* actor_ctxt /* Actor Context within Global Context */
+z64_actor_context_t* actor_ctxt /* Actor Context within Global Context */
 , z64_actor_t* host /* Actor to Attach To */
 , z64_global_t *gl /* Global Context */
 , int16_t id /* Actor ID */
@@ -2308,11 +2400,12 @@ void* actor_ctxt /* Actor Context within Global Context */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80032C3C(void);
+#define Actor_Find z_actor_find
+extern void z_actor_find(z64_actor_context_t* ctxt, int32_t id, int32_t type);
 	#if OOT_DEBUG
-		asm("external_func_80032C3C = 0x80032C3C");
+		asm("z_actor_find = 0x80032C3C");
 	#elif OOT_U_1_0
-		asm("external_func_80032C3C = 0x80025B0C");
+		asm("z_actor_find = 0x80025B0C");
 	#endif
 
 /* Plays `NA_SE_EN_LAST_DAMAGE` at actor position.
@@ -2333,7 +2426,7 @@ z64_global_t* gl /* Global Context */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80032E24(void);
+extern void external_func_80032E24(void* a0, int32_t a1, z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_80032E24 = 0x80032E24");
 	#elif OOT_U_1_0
@@ -2394,11 +2487,12 @@ extern void external_func_80033480(
  * TODO confirm whether "actor collision struct" means the capsule structure, or something else
  * A0 = Global Context | A1 = Actor Collision Struct | V0 = Null or Pointer to Explosive-type actor that collided
  */
-extern z64_actor_t *actor_is_bombed(z64_global_t *global, void* capsule);
+#define actor_is_bombed z_actor_test_explosive
+extern z64_actor_t* z_actor_test_explosive(z64_global_t *global, z64_collider_t* col);
 	#if OOT_DEBUG
-		asm("actor_is_bombed = 0x80033640");
+		asm("z_actor_test_explosive = 0x80033640");
 	#elif OOT_U_1_0
-		asm("actor_is_bombed = 0x800264C8");
+		asm("z_actor_test_explosive = 0x800264C8");
 	#endif
 
 /**
@@ -2406,16 +2500,17 @@ extern z64_actor_t *actor_is_bombed(z64_global_t *global, void* capsule);
  * TODO These notes need converted into a C function prototype
  * a0 = global context | a1 = actor instance | v0 = unknown
  */
-extern int32_t external_func_80033684(z64_global_t *global, void *actor);
+extern int32_t z_find_explosive(z64_global_t *global, void *explosive);
 	#if OOT_DEBUG
-		asm("external_func_80033684 = 0x80033684");
+		asm("z_find_explosive = 0x80033684");
 	#elif OOT_U_1_0
-		asm("external_func_80033684 = 0x8002650C");
+		asm("z_find_explosive = 0x8002650C");
 	#endif
 
 /* Change Actor Type
 * Source Code Reference File: "z_actor.c"
 */
+#define Actor_ChangeType z_actor_type_change
 extern void z_actor_type_change(
 z64_global_t* gl /* Global Context */
 , void* actor_ctxt /* Actor Context within Global Context */
@@ -2431,9 +2526,9 @@ z64_global_t* gl /* Global Context */
 #endif
 
 /**
- * TODO This function is completely undocumented
+ * Checking for hookshot or arrow.
  */
-extern void external_func_80033780(void);
+extern z64_actor_t* external_func_80033780(z64_global_t* gl, z64_actor_t* a, float a2);
 	#if OOT_DEBUG
 		asm("external_func_80033780 = 0x80033780");
 	#elif OOT_U_1_0
@@ -2441,19 +2536,20 @@ extern void external_func_80033780(void);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Set an actor's text prefix based on the current scene index.
  */
-extern void external_func_80033940(void);
+#define Actor_SetTextWithPrefix z_actor_set_text_scene
+extern void z_actor_set_text_scene(z64_global_t* gl, z64_actor_t* actor, int16_t text_id);
 	#if OOT_DEBUG
-		asm("external_func_80033940 = 0x80033940");
+		asm("z_actor_set_text_scene = 0x80033940");
 	#elif OOT_U_1_0
-		asm("external_func_80033940 = 0x800267D4");
+		asm("z_actor_set_text_scene = 0x800267D4");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800339B8(void);
+extern int16_t external_func_800339B8(z64_actor_t* actor, z64_global_t* gl, float a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_800339B8 = 0x800339B8");
 	#elif OOT_U_1_0
@@ -2465,7 +2561,7 @@ extern void external_func_800339B8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = ?
  */
-extern void external_func_80033A84(void);
+extern int32_t external_func_80033A84(z64_global_t* gl, z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_80033A84 = 0x80033A84");
 	#elif OOT_U_1_0
@@ -2477,7 +2573,7 @@ extern void external_func_80033A84(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = ?
  */
-extern void external_func_80033AB8(void);
+extern int32_t external_func_80033AB8(z64_global_t* gl, z64_actor_t* a);
 	#if OOT_DEBUG
 		asm("external_func_80033AB8 = 0x80033AB8");
 	#elif OOT_U_1_0
@@ -2487,7 +2583,7 @@ extern void external_func_80033AB8(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80033AEC(void);
+extern float external_func_80033AEC(vec3f_t* a0, vec3f_t* a1, float a2, float a3, float a4, float a5);
 	#if OOT_DEBUG
 		asm("external_func_80033AEC = 0x80033AEC");
 	#elif OOT_U_1_0
@@ -2515,7 +2611,7 @@ vec3f_t* pos /* X, Y, and Z Position */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80033DB8(void);
+extern void external_func_80033DB8(z64_global_t* gl, int16_t a1, int16_t a2);
 	#if OOT_DEBUG
 		asm("external_func_80033DB8 = 0x80033DB8");
 	#elif OOT_U_1_0
@@ -2525,7 +2621,7 @@ extern void external_func_80033DB8(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80033E1C(void);
+extern void external_func_80033E1C(z64_global_t* gl, int16_t a1, int16_t a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80033E1C = 0x80033E1C");
 	#elif OOT_U_1_0
@@ -2535,7 +2631,7 @@ extern void external_func_80033E1C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80033E88(void);
+extern void external_func_80033E88(z64_actor_t* actor, z64_global_t* gl, int16_t a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80033E88 = 0x80033E88");
 	#elif OOT_U_1_0
@@ -2543,37 +2639,36 @@ extern void external_func_80033E88(void);
 	#endif
 
 /**
- * Generates a random floating point32_t between 0 and N exclusive
- * TODO These notes need converted into a C function prototype
- * F12 = N, exclusive upper bound | F0 = result
+ * Generates a random floating point in the range [0, n) (0 to n exclusive)
  */
-extern float math_rand_f32(float n);
+#define Math_Rand_ZeroFloat z_math_frand
+extern float z_math_frand(float n);
 	#if OOT_DEBUG
-		asm("math_rand_f32 = 0x80033EF8");
+		asm("z_math_frand = 0x80033EF8");
 	#elif OOT_U_1_0
-		asm("math_rand_f32 = 0x80026D64");
+		asm("z_math_frand= 0x80026D64");
 	#elif MM_U_1_0
-		asm("math_rand_f32 = 0x80179594");
+		asm("z_math_frand = 0x80179594");
 	#endif
 
 /**
- * Multiplies value by a random scalar between -0.5 and 0.5 exclusive
- * TODO These notes need converted into a C function prototype
- * F12 = N | F0 = result
+ * Multiplies a random floating point by a number in the range [-0.5, 0.5)
  */
-extern float external_func_80033F20(float n);
+#define Math_Rand_CenteredFloat z_math_frand_center
+extern float z_math_frand_center(float n);
 	#if OOT_DEBUG
-		asm("external_func_80033F20 = 0x80033F20");
+		asm("z_math_frand_center = 0x80033F20");
 	#elif OOT_U_1_0
-		asm("external_func_80033F20 = 0x80026D90");
+		asm("z_math_frand_center = 0x80026D90");
 	#elif MM_U_1_0
-		asm("external_func_80033F20 = 0x801795C0");
+		asm("z_math_frand_center = 0x801795C0");
 	#endif
 
 /**
  * TODO This function is completely undocumented
+ * Refernce Source File: "z_actor.c"
  */
-extern void external_func_80033F54(void);
+extern void external_func_80033F54(z64_global_t* gl, int32_t a1, int32_t a2);
 	#if OOT_DEBUG
 		asm("external_func_80033F54 = 0x80033F54");
 	#elif OOT_U_1_0
@@ -2581,7 +2676,7 @@ extern void external_func_80033F54(void);
 	#endif
 
 /**
- * Wrapper for 800511B8
+ * Wrapper for 80062D60
  * TODO These notes need converted into a C function prototype
  */
 extern void external_func_8003424C(z64_global_t* gl, vec3f_t* arg1);
@@ -2593,7 +2688,7 @@ extern void external_func_8003424C(z64_global_t* gl, vec3f_t* arg1);
 
 /* Modify Actor Damage Color
 * Commonly used to turn an actor blue when stunned.
-* Plays `NA_SE_EN_LIGHT_ARROW_HIT`
+* Plays `NA_SE_EN_LIGHT_ARROW_HIT` if a2 is within a certain range. (180 degrees?)
 * Source Code Reference File: "z_actor.c"
 */
 extern void z_actor_damage_color(
@@ -2617,8 +2712,9 @@ z64_actor_t* a /* Actor to Modify */
 
 /**
  * TODO This function is completely undocumented
+ * Return a Hilite*
  */
-extern void external_func_8003435C(void);
+extern void external_func_8003435C(vec3f_t* object, z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("external_func_8003435C = 0x8003435C");
 	#elif OOT_U_1_0
@@ -2628,18 +2724,17 @@ extern void external_func_8003435C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800343CC(void);
-	#if OOT_DEBUG
-		asm("external_func_800343CC = 0x800343CC");
-	#elif OOT_U_1_0
-		asm("external_func_800343CC = 0x800271FC");
-	#endif
+extern int32_t external_func_800343CC(z64_global_t* gl, z64_actor_t* a, int16_t* a2, uint16_t (*unkFunc1)(z64_global_t*, z64_actor_t*), int16_t (*unk_Func2)(z64_global_t*, z64_actor_t*));
+#if OOT_DEBUG
+	asm("external_func_800343CC = 0x800343CC");
+#elif OOT_U_1_0
+	asm("external_func_800343CC = 0x800271FC");
+#endif
 
 /**
  * TODO These notes need converted into a C function prototype
- * A0 = int16_t
  */
-extern void external_func_800347E8(void);
+extern int16_t external_func_800347E8(int16_t a0);
 	#if OOT_DEBUG
 		asm("external_func_800347E8 = 0x800347E8");
 	#elif OOT_U_1_0
@@ -2649,7 +2744,7 @@ extern void external_func_800347E8(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80034A14(void);
+extern void external_func_80034A14(z64_actor_t* actor, void* a1, int16_t a2, int16_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80034A14 = 0x80034A14");
 	#elif OOT_U_1_0
@@ -2657,33 +2752,38 @@ extern void external_func_80034A14(void);
 	#endif
 
 /**
-	* Draw Matrix-Enabled Object with an opacity attribute
-	* Wrapper for 800A273C
-	* TODO Variable name cleanup, better notes
+	* Draw Matrix-Enabled Object with an alpha attribute.
+	* Source code reference: "z_actor.c"
+	* Wrapper for SkelAnime_DrawSV2
+	* Draws to poly_opa
  */
-extern void skelanime_draw_mtx_xlu(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, uint8_t opacity);
+#define z_skl_mtx_opa_alpha z_skelanime_draw_mtx_alpha_opa
+extern void z_skelanime_draw_mtx_alpha_opa(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, int16_t opacity);
 	#if OOT_DEBUG
-		asm("skelanime_draw_mtx_xlu = 0x80034BA0");
+		asm("z_skelanime_draw_mtx_alpha_opa = 0x80034BA0");
 	#elif OOT_U_1_0
-		asm("skelanime_draw_mtx_xlu = 0x800279CC");
+		asm("z_skelanime_draw_mtx_alpha_opa = 0x800279CC");
 	#endif
 
 /**
-	* Draw Matrix-Enabled Object with an opacity attribute
-	* Source code reference: "z_skelanime.c"
-	* TODO Determine the difference between this function and "skelanime_draw_mtx_xlu"
+	* Draw Matrix-Enabled Object with an alpha attribute.
+	* Source code reference: "z_actor.c"
+	* Wrapper for SkelAnime_DrawSV2
+	* Draws to poly_xlu
  */
-extern void skelanime_draw_mtx_xlu2(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, uint8_t opacity);
+#define z_skl_mtx_xlu_alpha z_skelanime_draw_mtx_alpha_opa
+extern void z_skelanime_draw_mtx_alpha_xlu(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, int16_t opacity);
 	#if OOT_DEBUG
-		asm("skelanime_draw_mtx_xlu2 = 0x80034CC4");
+		asm("z_skelanime_draw_mtx_alpha_xlu = 0x80034CC4");
 	#elif OOT_U_1_0
-		asm("skelanime_draw_mtx_xlu2 = 0x80027AC4");
+		asm("z_skelanime_draw_mtx_alpha_xlu = 0x80027AC4");
 	#endif
 
 /**
  * TODO This function is completely undocumented
+ * Cutscene Related
  */
-extern void external_func_80034DD4(void);
+extern float external_func_80034DD4(z64_actor_t* actor, z64_global_t* gl, float a2, float a3);
 	#if OOT_DEBUG
 		asm("external_func_80034DD4 = 0x80034DD4");
 	#elif OOT_U_1_0
@@ -2692,8 +2792,9 @@ extern void external_func_80034DD4(void);
 
 /**
  * TODO This function is completely undocumented
+ * An animation changing wrapper.
  */
-extern void external_func_80034EC0(void);
+extern void external_func_80034EC0(z64_skelanime_t* skl, void* a1, int32_t a2);
 	#if OOT_DEBUG
 		asm("external_func_80034EC0 = 0x80034EC0");
 	#elif OOT_U_1_0
@@ -2703,7 +2804,7 @@ extern void external_func_80034EC0(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80034F54(void);
+extern void external_func_80034F54(z64_global_t* gl, int16_t* a1, int16_t* a2, int32_t a3);
 	#if OOT_DEBUG
 		asm("external_func_80034F54 = 0x80034F54");
 	#elif OOT_U_1_0
@@ -2715,6 +2816,7 @@ extern void external_func_80034F54(void);
 * Formerly `draw_dlist_opa`
 */
 #define z_draw_dlist_opa z_cheap_proc_draw_opa //#SHORTNAME
+#define Gfx_DrawDListOpa z_cheap_proc_draw_opa 
 extern void z_cheap_proc_draw_opa(
 z64_global_t* gl /* Global Context */
 , uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
@@ -2732,6 +2834,7 @@ z64_global_t* gl /* Global Context */
 * Formerly `draw_dlist_xlu`
 */
 #define z_draw_dlist_xlu z_cheap_proc_draw_xlu //#SHORTNAME
+#define Gfx_DrawDListXlu z_cheap_proc_draw_xlu 
 extern void z_cheap_proc_draw_xlu(
 z64_global_t* gl /* Global Context */
 , uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
@@ -2749,6 +2852,7 @@ z64_global_t* gl /* Global Context */
  * a0 - global context | a1 - actor instance | a2 - actor id (-1 = any) | a3 - category | 0x10($sp) distance from actor"
  */
 #define find_closest_actor_instance_within_range z_actor_detect_nearest
+#define Actor_FindNearby z_actor_detect_nearest
 extern z64_actor_t* z_actor_detect_nearest(z64_global_t *global, z64_actor_t *actor, int16_t actor_id, z64_actor_type_t type, float range);
 	#if OOT_DEBUG
 		asm("z_actor_detect_nearest = 0x800353F4");
@@ -2761,7 +2865,7 @@ extern z64_actor_t* z_actor_detect_nearest(z64_global_t *global, z64_actor_t *ac
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - actor instance | a2 - float value | a3 - ???? | 0x10($sp) - rotation value? | 0x14($sp) - rotation value 0xB6(s0)? | v0 - returns true/false
  */
-extern void external_func_800354B4(void);
+extern int32_t external_func_800354B4(z64_global_t* gl, z64_actor_t *actor, float range, int16_t a3, int16_t a4, int16_t a5);
 	#if OOT_DEBUG
 		asm("external_func_800354B4 = 0x800354B4");
 	#elif OOT_U_1_0
@@ -2771,7 +2875,7 @@ extern void external_func_800354B4(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8003555C(void);
+extern void external_func_8003555C(z64_global_t* gl, vec3f_t* a1, vec3f_t* a2, vec3f_t* a3);
 	#if OOT_DEBUG
 		asm("external_func_8003555C = 0x8003555C");
 	#elif OOT_U_1_0
@@ -2781,7 +2885,7 @@ extern void external_func_8003555C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800355B8(void);
+extern void external_func_800355B8(z64_global_t* gl, vec3f_t* a1);
 	#if OOT_DEBUG
 		asm("external_func_800355B8 = 0x800355B8");
 	#elif OOT_U_1_0
@@ -2790,8 +2894,9 @@ extern void external_func_800355B8(void);
 
 /**
  * TODO This function is completely undocumented
+ * Change Link->sword_anim_index to 0x16
  */
-extern void external_func_800355E4(void);
+extern uint8_t external_func_800355E4(z64_global_t* gl, z64_collider_t* collider);
 	#if OOT_DEBUG
 		asm("external_func_800355E4 = 0x800355E4");
 	#elif OOT_U_1_0
@@ -2801,6 +2906,7 @@ extern void external_func_800355E4(void);
 /* Apply damage to an actor's health.
 * Source Code Reference File: "z_actor.c"
 */
+#define Actor_ApplyDamage z_actor_update_health
 extern uint8_t z_actor_update_health(
 z64_actor_t* a /* Actor to be damaged. */
 );
@@ -2831,17 +2937,17 @@ z64_actor_t* a
 /* Collision Collection Related
 * Source Code Reference File: "z_actor.c"
 */
-extern void z_actor_is_frozen_clist(
+extern void z_actor_is_frozen_jntsphs(
 z64_actor_t* a
-, void*  clist
+, void*  jntsphs
 , int32_t is_frozen
 );
 #if OOT_DEBUG
-  asm("z_actor_is_frozen_clist = 0x8003573C");
+  asm("z_actor_is_frozen_jntsphs = 0x8003573C");
 #elif OOT_U_1_0
-  asm("z_actor_is_frozen_clist = 0x800284A8");
+  asm("z_actor_is_frozen_jntsphs = 0x800284A8");
 #elif MM_U_1_0
-  /*asm("z_actor_is_frozen_clist = 0xDEADBEEF");*/
+  /*asm("z_actor_is_frozen_jntsphs = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -2856,9 +2962,9 @@ extern void z_actor_func_80035844(vec3f_t* a0, vec3f_t* a1, int16_t* a2, int32_t
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Spawn En_Part (Dissipating Flames).
  */
-extern void external_func_800358DC(void);
+extern void external_func_800358DC(z64_actor_t* host, vec3f_t* pos, vec3s_t* rot, float* physics, int16_t a, int32_t b, z64_global_t* gl, int16_t variable, int32_t c);
 	#if OOT_DEBUG
 		asm("external_func_800358DC = 0x800358DC");
 	#elif OOT_U_1_0
@@ -2868,7 +2974,7 @@ extern void external_func_800358DC(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800359B8(void);
+extern void external_func_800359B8(z64_actor_t* actor, int16_t a1, vec3s_t* a2);
 	#if OOT_DEBUG
 		asm("external_func_800359B8 = 0x800359B8");
 	#elif OOT_U_1_0
@@ -2878,41 +2984,49 @@ extern void external_func_800359B8(void);
 /**
  * Tests if event_chk_inf flag is set
  */
-extern int32_t flag_get_event_chk_inf(int32_t flag);
+#define Flags_GetEventChkInf z_flags_event_get
+#define flag_get_event_chk_inf z_flags_event_get
+extern int32_t z_flags_event_get(int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_get_event_chk_inf = 0x80035B4C");
+		asm("z_flags_event_get = 0x80035B4C");
 	#elif OOT_U_1_0
-		asm("flag_get_event_chk_inf = 0x800288B4");
+		asm("z_flags_event_get = 0x800288B4");
 	#endif
 
 /**
  * Sets event_chk_inf flag to 1
  */
-extern void flag_set_event_chk_inf(int32_t flag);
+#define Flags_SetEventChkInf z_flags_event_set
+#define flag_set_event_chk_inf z_flags_event_set
+extern void z_flags_event_set(int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_set_event_chk_inf = 0x80035B74");
+		asm("z_flags_event_set = 0x80035B74");
 	#elif OOT_U_1_0
-		asm("flag_set_event_chk_inf = 0x800288E0");
+		asm("z_flags_event_set = 0x800288E0");
 	#endif
 
 /**
  * Tests if inf_table flag is set
  */
-extern int32_t flag_get_inf_table(int32_t flag);
+#define Flags_GetInfTable z_flags_inf_table_get
+#define flag_get_inf_table z_flags_inf_table_get
+extern int32_t z_flags_inf_table_get(int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_get_inf_table = 0x80035BA4");
+		asm("z_flags_inf_table_get= 0x80035BA4");
 	#elif OOT_U_1_0
-		asm("flag_get_inf_table = 0x80028914");
+		asm("z_flags_inf_table_get = 0x80028914");
 	#endif
 
 /**
  * Sets inf_table flag to 1
  */
-extern void flag_set_inf_table(int32_t flag);
+#define Flags_SetInfTable z_flags_inf_table_set
+#define flag_set_inf_table z_flags_inf_table_set
+extern void z_flags_inf_table_set(int32_t flag);
 	#if OOT_DEBUG
-		asm("flag_set_inf_table = 0x80035BCC");
+		asm("z_flags_inf_table_set = 0x80035BCC");
 	#elif OOT_U_1_0
-		asm("flag_set_inf_table = 0x80028940");
+		asm("z_flags_inf_table_set = 0x80028940");
 	#endif
 
 /**
@@ -2920,7 +3034,7 @@ extern void flag_set_inf_table(int32_t flag);
  * TODO These notes need converted into a C function prototype
  * a0 - global context | a1 - 0xF (?) | v0 - (?)
  */
-extern void external_func_80037C30(void);
+extern void external_func_80037C30(z64_global_t* gl, int16_t a1);
 	#if OOT_DEBUG
 		asm("external_func_80037C30 = 0x80037C30");
 	#elif OOT_U_1_0
@@ -2932,7 +3046,7 @@ extern void external_func_80037C30(void);
  * TODO These notes need converted into a C function prototype
  * a0 - global context  |  a1 - actor instance  | a2 - 0xF (??? related to what message to display)  | a3 - actor instance + 0x01A0 (not sure what this points to...)
  */
-extern void external_func_80037D98(void);
+extern void external_func_80037D98(z64_global_t* gl, z64_actor_t* a, int16_t a2, int32_t* a3);
 	#if OOT_DEBUG
 		asm("external_func_80037D98 = 0x80037D98");
 	#elif OOT_U_1_0
@@ -2941,8 +3055,9 @@ extern void external_func_80037D98(void);
 
 /**
  * TODO This function has yet to have a name put to it.
+ * Cutscene and camera focus related.
  */
-extern void external_func_80038290(z64_global_t *global, z64_actor_t *actor, void *rot_zx, void *rot_y, float pos_3_x, float pos_3_y, float pos_3_z);
+extern void external_func_80038290(z64_global_t* gl, z64_actor_t* a, vec3s_t* a2, vec3s_t* a3, vec3s_t* a4);
 	#if OOT_DEBUG
 		asm("external_func_80038290 = 0x80038290");
 	#elif OOT_U_1_0
@@ -2991,22 +3106,23 @@ extern float external_func_8003C940(void *col_ctxt, void *floorpoly, void *unk_s
  * raycast
  * returns a Y location of where to place actor on success, otherwise RAYCAST_FAIL (-32000.0f)
  * use RAYCAST_SUCCESS(result) to validate whether successful
- * TODO confirm return type, do something about global_plus_0x7C0, figure out unk[0,1]
+ * Not inherently a mathematical raycast, but is used for something similar.
  */
-extern float math_raycast(z64_col_ctxt_t* col_ctxt, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
+#define math_raycast z_bgcheck_raycast
+extern float z_bgcheck_raycast(z64_col_ctxt_t* col_ctxt, void *unk0, void *unk1, z64_actor_t *actor, vec3f_t *pos);
 	#if OOT_DEBUG
 		#define RAYCAST_FAIL -32000.0f
-		asm("math_raycast = 0x8003C9A4");
+		asm("z_bgcheck_raycast = 0x8003C9A4");
 	#elif OOT_U_1_0
 		#define RAYCAST_FAIL -32000.0f
-		asm("math_raycast = 0x8002F4B8");
+		asm("z_bgcheck_raycast = 0x8002F4B8");
 	#endif
 	#define RAYCAST_SUCCESS(RAYCAST_RESULT) ( RAYCAST_RESULT > RAYCAST_FAIL )
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8003CA0C(void);
+extern void external_func_8003CA0C(z64_global_t* gl, z64_col_ctxt_t* col_ctxt, void** poly, uint32_t* a, z64_actor_t* actor, vec3f_t* b);
 	#if OOT_DEBUG
 		asm("external_func_8003CA0C = 0x8003CA0C");
 	#elif OOT_U_1_0
@@ -3097,28 +3213,28 @@ extern void external_func_8003E0FC(void);
 
 /**
  * test if a sphere touches geometry in a collision context
+ * TODO Confirm Usage
  */
-extern int32_t collision_sphere_test(z64_col_ctxt_t *gcollision, vec3f_t *point, float radius);
+extern int32_t z_collision_sphere_test(z64_col_ctxt_t *gcollision, vec3f_t *point, float radius);
 	#if OOT_DEBUG
-		asm("collision_sphere_test = 0x8003E30C");
+		asm("z_collision_sphere_test = 0x8003E30C");
 	#elif OOT_U_1_0
-		asm("collision_sphere_test = 0x80030D08");
+		asm("z_collision_sphere_test = 0x80030D08");
 	#endif
 
 /**
  * description
- * TODO These notes need converted into a C function prototype
- * TODO + 0x810 = bad, it needs a name
- * TODO Actor Index and entity have different meanings; this documentation is conflicting
- * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id
+ * DynaPolyInfo_setActor()
  */
-extern uint32_t actor_register_dynapoly(z64_global_t *global, void *global_plus_0x810, z64_actor_t *actor, uint32_t dynacollision);
+#define DynaPolyInfo_RegisterActor z_dynapoly_actor_set
+#define actor_register_dynapoly z_dynapoly_actor_set
+extern uint32_t z_dynapoly_actor_set(z64_global_t *global, void *global_plus_0x810, z64_actor_t *actor, uint32_t dynacollision);
 	#if OOT_DEBUG
-		asm("actor_register_dynapoly = 0x8003EA74");
+		asm("z_dynapoly_actor_set = 0x8003EA74");
 	#elif OOT_U_1_0
-		asm("actor_register_dynapoly = 0x800313A4");
+		asm("z_dynapoly_actor_set = 0x800313A4");
 	#elif MM_U_1_0
-		asm("actor_register_dynapoly = 0x800C6188");
+		asm("z_dynapoly_actor_set = 0x800C6188");
 	#endif
 
 /**
@@ -3126,13 +3242,15 @@ extern uint32_t actor_register_dynapoly(z64_global_t *global, void *global_plus_
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Mesh Collision Id | V0 = Actor Instance or null
  */
-extern void dynapolyinfo_get_actor(z64_global_t *gl, uint32_t dynapolyid);
+#define DynaPolyInfo_GetActor z_dynapoly_actor_get
+#define dynapolyinfo_get_actor z_dynapoly_actor_get
+extern void z_dynapoly_actor_get(z64_global_t *gl, uint32_t dynapolyid);
 	#if OOT_DEBUG
-		asm("dynapolyinfo_get_actor = 0x8003EB84");
+		asm("z_dynapoly_actor_get = 0x8003EB84");
 	#elif OOT_U_1_0
-		asm("dynapolyinfo_get_actor = 0x80031464");
+		asm("z_dynapoly_actor_get = 0x80031464");
 	#elif MM_U_1_0
-		asm("dynapolyinfo_get_actor = 0x800C6248");
+		asm("z_dynapoly_actor_get = 0x800C6248");
 	#endif
 
 /**
@@ -3174,6 +3292,7 @@ extern void external_func_8003ECA8(void);
  * TODO These notes need converted into a C function prototype
  * A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id
  */
+#define DynaPolyInfo_Free z_dynapoly_free
 extern void z_dynapoly_free(z64_global_t *global, void *global_plus_0x810, uint32_t dynacollision_id);
 	#if OOT_DEBUG
 		asm("z_dynapoly_free = 0x8003ED58");
@@ -3200,13 +3319,13 @@ extern void external_func_8003EE6C(void);
  * dynacollision_init()?
  * A0 = Segment Offset to Collision Data | A1 = ptr to store result?
  */
-extern void dynapoly_alloc(const uint32_t collision, void *collision_pointer);
+extern void z_dynapoly_alloc(const uint32_t collision, void *collision_pointer);
 	#if OOT_DEBUG
-		asm("dynapoly_alloc = 0x80041880");
+		asm("z_dynapoly_alloc = 0x80041880");
 	#elif OOT_U_1_0
-		asm("dynapoly_alloc = 0x80033EF4");
+		asm("z_dynapoly_alloc = 0x80033EF4");
 	#elif MM_U_1_0
-		asm("dynapoly_alloc = 0x800C9564");
+		asm("z_dynapoly_alloc = 0x800C9564");
 	#endif
 
 /**
@@ -4523,6 +4642,7 @@ extern void z_memset(void *dst, const uint32_t len, const uint8_t value);
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_coss`
 */
+#define Math_Coss z_coss
 extern float z_coss(
 int16_t angle /* 16-bit Angle */
 );
@@ -4539,6 +4659,7 @@ int16_t angle /* 16-bit Angle */
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_sins`
 */
+#define Math_Sins z_sins
 extern float z_sins(
 int16_t angle /* 16-bit Angle */
 );
@@ -4554,6 +4675,7 @@ int16_t angle /* 16-bit Angle */
 * In animal crossing, this is called `chase_angle`
 * Source Code Reference File: "z_lib.c"
 */
+#define Math_ApproxUpdateScaledS z_lib_approx_angle_s
 extern int32_t z_lib_approx_angle_s(
 int16_t* angle /* Angle to Change */
 , int16_t target /* Angle to Approximate To */
@@ -4571,6 +4693,7 @@ int16_t* angle /* Angle to Change */
 * In animal crossing, this is called `chase_s`
 * Source Code Reference File: "z_lib.c"
 */
+#define Math_ApproxS z_lib_approx_s
 extern int16_t z_lib_approx_s(
 int16_t* out /* Integer to Change */
 , int16_t target /* Integer to Approximate To */
@@ -4588,6 +4711,7 @@ int16_t* out /* Integer to Change */
 * In animal crossing, this is called `chase_f`
 * Source Code Reference File: "z_lib.c"
 */
+#define Math_ApproxF z_lib_approx_f
 extern int32_t z_lib_approx_f(
 float* out /* Integer to Change */
 , float target /* Float to Approximate To */
@@ -4631,6 +4755,7 @@ extern void external_func_80077B58(void);
 * Adds `offset` to the generated integer.
 * Source Code Reference File: "z_lib.c"
 */
+#define Math_Rand_S16Offset z_lib_math_rand_s16_offset
 extern int16_t z_lib_math_rand_s16_offset(
 int16_t offset /* Offset to Add */
 , int16_t range /* Range Limit */
@@ -5231,6 +5356,20 @@ extern void external_func_800825E0(void);
 	#elif OOT_U_1_0
 		asm("external_func_800825E0 = 0x8006D8E0");
 	#endif
+
+/**
+ * Swaps Link's equipment to the adult/child version depending on the current age.
+ * It updates boots, tunic, shield, B-Button and C-Button items.
+ * NOTE: Only use this function when the button icons are not on-screen. They
+         may get corrupted otherwise.
+ * NOTE: This function is not used in any existing actor overlay in OoT.
+ */
+extern void player_swap_age_equipment(void);
+    #if OOT_DEBUG
+        asm("player_swap_age_equipment = 0x800846E0");
+    #elif OOT_U_1_0
+        asm("player_swap_age_equipment = 0x8006F804");
+    #endif
 
 /**
  * TODO This function is completely undocumented
@@ -7338,11 +7477,9 @@ extern void external_func_800CE4B8(void);
 /**
  * atan2
  * returns rotation in int16_t format
- * TODO These notes need converted into a C function prototype
- * F12 = x | F14 = y | V0 = int16_t Rotation
  * formerly math_atan2s
  */
-extern int16_t z_atan2_s(float x, float y);
+extern int16_t z_atan2s(float x, float y);
 	#if OOT_DEBUG
 		asm("z_atan2_s = 0x800D0664");
 	#elif OOT_U_1_0
@@ -7352,14 +7489,14 @@ extern int16_t z_atan2_s(float x, float y);
 	#endif
 
 /**
- * padding at func end
- * TODO what does that even mean
+ * atan2
+ * returns rotation in float format
  */
-extern void external_func_800D07D4(void);
+extern void z_atan2f(float x, float y);
 	#if OOT_DEBUG
-		asm("external_func_800D07D4 = 0x800D07D4");
+		asm("z_atan2f = 0x800D07D4");
 	#elif OOT_U_1_0
-		asm("external_func_800D07D4 = 0x800AA670");
+		asm("z_atan2f = 0x800AA670");
 	#elif MM_U_1_0
 		/* TODO */
 	#endif
@@ -8325,19 +8462,59 @@ extern void external_func_800FCC6C(void);
 	#endif
 
 /* Return tangent of `x`. */
-extern float z_tan_f(float x);
+extern float z_tanf(float x);
 #if OOT_DEBUG
-  asm("z_tan_f = 0x800FCE80");
+  asm("z_tanf = 0x800FCE80");
 #elif OOT_U_1_0
-  /*asm("z_tan_f = 0xDEADBEEF");*/
+  /*asm("z_tanf = 0xDEADBEEF");*/
 #elif MM_U_1_0
-  /*asm("z_tan_f = 0xDEADBEEF");*/
+  /*asm("z_tanf = 0xDEADBEEF");*/
+#endif
+
+/* Return floor of `x`. */
+extern float z_floorf(float x);
+#if OOT_DEBUG
+  asm("z_floorf = 0x800FCEB4");
+#elif OOT_U_1_0
+  /*asm("z_floorf = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_floorf = 0xDEADBEEF");*/
+#endif
+
+/* Return ceil of `x`. */
+extern float z_ceilf(float x);
+#if OOT_DEBUG
+  asm("z_ceilf = 0x800FCED4");
+#elif OOT_U_1_0
+  /*asm("z_ceilf = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_ceilf = 0xDEADBEEF");*/
+#endif
+
+/* Round `x`. */
+extern float z_roundf(float x);
+#if OOT_DEBUG
+  asm("z_roundf = 0x800FCEF4");
+#elif OOT_U_1_0
+  /*asm("z_roundf = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_roundf = 0xDEADBEEF");*/
+#endif
+
+/* Truncate `x`. */
+extern float z_truncf(float x);
+#if OOT_DEBUG
+  asm("z_truncf = 0x800FCF14");
+#elif OOT_U_1_0
+  /*asm("z_truncf = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_truncf = 0xDEADBEEF");*/
 #endif
 
 /**
  * Atan
  */
-extern float z_atanf(float x);
+extern float z_atanf_cfrac(float x);
 	#if OOT_DEBUG
 		asm("z_atanf = 0x800FD0C4");
 	#elif OOT_U_1_0
@@ -8355,15 +8532,23 @@ extern float z_atan2f(float y, float x);
 	#endif
 
 /**
- * Wrapper for 800CD860 (subtracts result by 90 degrees)
- * TODO These notes need converted into a C function prototype
- * F12 = ? | F0 = radians
+ * asinf
  */
-extern void external_func_800FD368(void);
+extern void z_asinf(float x);
 	#if OOT_DEBUG
-		asm("external_func_800FD368 = 0x800FD368");
+		asm("z_asinf = 0x800FD338");
 	#elif OOT_U_1_0
-		asm("external_func_800FD368 = 0x800CD890");
+		//asm("z_asinf = 0xDEADBEEF");
+	#endif
+
+/**
+ * acosf
+ */
+extern void z_acosf(float x);
+	#if OOT_DEBUG
+		asm("z_acosf = 0x800FD368");
+	#elif OOT_U_1_0
+		asm("z_acosf = 0x800CD890");
 	#endif
 
 /**

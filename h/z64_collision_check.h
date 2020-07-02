@@ -264,7 +264,7 @@ typedef enum z64_collider_type_t {
     COL_TYPE_UNK3=3,
     COL_TYPE_UNK4=4,
     COL_TYPE_UNK5=5,
-    COL_TYPE_UNK6=6,
+    COL_TYPE_UNK6=6, // Gives a fleshy-sounding green-blooded hit effect.
     COL_TYPE_UNK7=7,
     COL_TYPE_UNK8=8
 } z64_collider_type_t;

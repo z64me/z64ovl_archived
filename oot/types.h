@@ -651,6 +651,84 @@ typedef struct
   int32_t right;  /* Lower Right X */
 } z64_viewport_t;
 
+typedef struct {
+  vec3f_t pos;
+  float unk_0C;
+  rgb8_t color
+} z64_target_context_entry_t;
+
+typedef struct {
+  vec3f_t naviRefPos;
+  vec3f_t targetCenterPos;
+  struct {
+    float red;
+    float green;
+    float blue;
+    float alpha;
+  } naviInner;
+  struct {
+    float red;
+    float green;
+    float blue;
+    float alpha;
+  } naviOuter;
+  z64_actor_t* arrowPointedActor;
+  z64_actor_t* targetedActor;
+  float unk_40;
+  float unk_44;
+  int16_t unk_48;
+  uint8_t activeType;
+  uint8_t unk_4B;
+  int8_t unk_4C;
+  char unk_4D[3];
+  z64_target_context_entry_t arr_50[3];
+  z64_actor_t* unk_8C;
+  z64_actor_t* unk_90;
+  z64_actor_t* unk_94;
+} z64_target_context_t;
+
+typedef struct {
+    /* 0x00 */ u32      texture;
+    /* 0x04 */ s16      unk_4;
+    /* 0x06 */ s16      unk_6;
+    /* 0x08 */ u8       unk_8;
+    /* 0x09 */ u8       unk_9;
+    /* 0x0A */ u8       delayA;
+    /* 0x0B */ u8       delayB;
+    /* 0x0C */ s16      unk_C;
+    /* 0x0E */ s16      unk_E;
+} z64_title_card_context_t;
+
+typedef struct {
+  uint32_t length;
+  z64_actor_t* first;
+} z64_actor_list_entry_t;
+
+typedef struct {
+  uint8_t unk_00;
+  char unk_01[1];
+  uint8_t unk_02;
+  uint8_t unk_03;
+  char unk_04[4];
+  uint8_t total;
+  z64_actor_list_entry_t actor_list[12];
+  z64_target_context_t target_ctxt;
+  struct {
+    uint32_t swch;
+    uint32_t temp_swch;
+    uint32_t unk0;
+    uint32_t unk1;
+    uint32_t chest;
+    uint32_t clear;
+    uint32_t temp_clear;
+    uint32_t collect;
+    uint32_t temp_collect;
+  } flags;
+  z64_title_card_context_t title_ctxt;
+  char unk_138[4];
+  void* absolute_space;
+} z64_actor_context_t;
+
 /* game context */
 typedef struct
 {
@@ -694,31 +772,7 @@ typedef struct
   z64_lighting_t    lighting;                 /* 0x007A8 */
   char              unk_09_[0x0008];          /* 0x007B8 */
   z64_col_ctxt_t    col_ctxt;                 /* 0x007C0 */
-  char              actor_ctxt[0x0008];       /* 0x01C24 */
-  uint8_t           n_actors_loaded;          /* 0x01C2C */
-  char              unk_0A_[0x0003];          /* 0x01C2D */
-  struct
-  {
-    uint32_t        length;
-    z64_actor_t    *first;
-  }                 actor_list[12];           /* 0x01C30 */
-  char              unk_0B_[0x0038];          /* 0x01C90 */
-  z64_actor_t      *arrow_actor;              /* 0x01CC8 */
-  z64_actor_t      *target_actor;             /* 0x01CCC */
-  char              unk_0C_[0x0058];          /* 0x01CD0 */
-  uint32_t          swch_flags;               /* 0x01D28 */
-  uint32_t          temp_swch_flags;          /* 0x01D2C */
-  uint32_t          unk_flags_0;              /* 0x01D30 */
-  uint32_t          unk_flags_1;              /* 0x01D34 */
-  uint32_t          chest_flags;              /* 0x01D38 */
-  uint32_t          clear_flags;              /* 0x01D3C */
-  uint32_t          temp_clear_flags;         /* 0x01D40 */
-  uint32_t          collect_flags;            /* 0x01D44 */
-  uint32_t          temp_collect_flags;       /* 0x01D48 */
-  void             *title_card_texture;       /* 0x01D4C */
-  char              unk_0D_[0x0007];          /* 0x01D50 */
-  uint8_t           title_card_delay;         /* 0x01D57 */
-  char              unk_0E_[0x000C];          /* 0x01D58 */
+  z64_actor_context_t actor_ctxt;             /* 0x01C24*/
   struct
   {
     char            unk_0x01D64[4];           /* 0x01D64 */
