@@ -2217,9 +2217,9 @@ extern void external_func_8002F6D4(z64_global_t* gl, uint32_t a1, float a2, int1
 */
 extern void z_player_knockback(z64_global_t *gl, z64_actor_t* a, float distance, int16_t direction, float height);
 	#if OOT_DEBUG
-		asm("player_knockback = 0x8002F71C");
+		asm("z_player_knockback = 0x8002F71C");
 	#elif OOT_U_1_0
-		asm("player_knockback = 0x80022EC4");
+		asm("z_player_knockback = 0x80022EC4");
 	#endif
 
 /**
