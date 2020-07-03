@@ -7588,11 +7588,12 @@ extern void z_atan2f(float x, float y);
  * This function is not used inside any existing overlay
  * new_Matrix
  */
-extern void matrix_stack_new(void *gameState);
+#define Matrix_Init z_matrix_new
+extern void z_matrix_new(void *gameState);
 	#if OOT_DEBUG
-		asm("matrix_stack_new = 0x800D0810");
+		asm("z_matrix_new = 0x800D0810");
 	#elif OOT_U_1_0
-		asm("matrix_stack_new = 0x800AA6B0");
+		asm("z_matrix_new = 0x800AA6B0");
 	#elif MM_U_1_0
 		/* TODO */
 	#endif
@@ -7602,13 +7603,15 @@ extern void matrix_stack_new(void *gameState);
  * TODO These notes need converted into a C function prototype
  * Matrix_push
  */
-extern void matrix_push(void);
+#define Matrix_Push z_matrix_push
+#define matrix_push z_matrix_push
+extern void z_matrix_push(void);
 	#if OOT_DEBUG
-		asm("matrix_push = 0x800D084C");
+		asm("z_matrix_push = 0x800D084C");
 	#elif OOT_U_1_0
-		asm("matrix_push = 0x800AA6EC");
+		asm("z_matrix_push = 0x800AA6EC");
 	#elif MM_U_1_0
-		asm("matrix_push = 0x8018019C");
+		asm("z_matrix_push = 0x8018019C");
 	#endif
 
 /**
@@ -7618,64 +7621,85 @@ extern void matrix_push(void);
  * aka glPopMatrix
  *
  */
-extern void matrix_pop(void);
+#define Matrix_Pull z_matrix_pop
+#define matrix_pop z_matrix_pop
+extern void z_matrix_pop(void);
 	#if OOT_DEBUG
-		asm("matrix_pop = 0x800D0884");
+		asm("z_matrix_pop = 0x800D0884");
 	#elif OOT_U_1_0
-		asm("matrix_pop = 0x800AA724");
+		asm("z_matrix_pop = 0x800AA724");
 	#elif MM_U_1_0
-		asm("matrix_pop = 0x801801CC");
+		asm("z_matrix_pop = 0x801801CC");
 	#endif
 
 /* Copy the floating point matrix from the top of the stack to mf.
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_get`
 */
-extern void z_mtxf_get_top(
+#define Matrix_Get z_matrix_get
+#define z_mtxf_get_top z_matrix_get
+extern void z_matrix_get(
 float* mf
 );
 #if OOT_DEBUG
-  asm("z_mtxf_get_top = 0x800D08D8");
+  asm("z_matrix_get = 0x800D08D8");
 #elif OOT_U_1_0
-  asm("z_mtxf_get_top = 0x800AA740");
+  asm("z_matrix_get = 0x800AA740");
 #elif MM_U_1_0
-  /*asm("z_mtxf_get_top = 0xDEADBEEF");*/
+  /*asm("z_matrix_get = 0xDEADBEEF");*/
 #endif
 
 /* Copy mf to the matrix at the top of the matrix stack.
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_load`
 */
-extern void z_mtxf_put_top(
+#define Matrix_Put z_matrix_put
+#define z_mtxf_put_top z_matrix_put
+extern void z_matrix_put(
 float* mf
 );
 #if OOT_DEBUG
-  asm("z_mtxf_put_top = 0x800D08FC");
+  asm("z_matrix_put = 0x800D08FC");
 #elif OOT_U_1_0
-  asm("z_mtxf_put_top = 0x800AA764");
+  asm("z_matrix_put = 0x800AA764");
 #elif MM_U_1_0
-  /*asm("z_mtxf_put_top = 0xDEADBEEF");*/
+  /*asm("z_matrix_put = 0xDEADBEEF");*/
+#endif
+
+/*
+* Source Code Reference File: "sys_matrix.c"
+*/
+#define Matrix_GetCurrent z_matrix_get_now
+extern float* z_matrix_get_now(void)
+#if OOT_DEBUG
+  asm("z_matrix_get_now = 0x800D0924");
+#elif OOT_U_1_0
+  /*asm("z_matrix_get_now = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_matrix_get_now = 0xDEADBEEF");*/
 #endif
 
 /* Multiply the top float matrix in the stack by a given float matrix. (?)
 * Source Code Reference File: "sys_matrix.c"
 */
-extern void z_matrixf_top_multiply(
+#define Matrix_Mult z_matrix_multiply
+extern void z_matrix_multiply(
 float* in /* Float Matrix to Multiply By */
 , int32_t apply /* 0 copies the new matrix to the top one in the stack; 1 modifies the current matrix on the stack. */
 );
 #if OOT_DEBUG
-  asm("z_matrixf_top_multiply = 0x800D0930");
+  asm("z_matrix_multiply = 0x800D0930");
 #elif OOT_U_1_0
-  asm("z_matrixf_top_multiply = 0x800AA79C");
+  asm("z_matrix_multiply = 0x800AA79C");
 #elif MM_U_1_0
-  /*asm("z_matrixf_top_multiply = 0xDEADBEEF");*/
+  /*asm("z_matrix_multiply = 0xDEADBEEF");*/
 #endif
 
 /* Translate a matrix along the X, Y, and Z axes.
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_translate`
 */
+#define Matrix_Translate z_matrix_translate_3f
 extern void z_matrix_translate_3f(
 float x, float y, float z /* X, Y, and Z Position */
 , int32_t apply /* 0 initializes a new matrix and translates it; 1 modifies the current matrix on the stack. */
@@ -7692,6 +7716,7 @@ float x, float y, float z /* X, Y, and Z Position */
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_scale`
 */
+#define Matrix_Scale z_matrix_scale_3f
 extern void z_matrix_scale_3f(
 float x, float y, float z /* X, Y, and Z Scale */
 , int32_t apply /* 0 initializes a new matrix and scales it; 1 modifies the current matrix on the stack. */
@@ -7708,6 +7733,7 @@ float x, float y, float z /* X, Y, and Z Scale */
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_rotate_x`
 */
+#define Matrix_RotateX z_matrix_pitch
 extern void z_matrix_pitch(
 int16_t x /* The angle in degrees to pitch the matrix by. */
 , int32_t apply /* 0 initializes a new matrix and pitches it; 1 modifies the current matrix on the stack. */
@@ -7724,6 +7750,7 @@ int16_t x /* The angle in degrees to pitch the matrix by. */
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_rotate_y`
 */
+#define Matrix_RotateY z_matrix_yaw
 extern void z_matrix_yaw(
 int16_t y /* The angle in degrees to yaw the matrix by. */
 , int32_t apply /* 0 initializes a new matrix and yaws it; 1 modifies the current matrix on the stack. */
@@ -7740,6 +7767,7 @@ int16_t y /* The angle in degrees to yaw the matrix by. */
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_rotate_z`
 */
+#define Matrix_RotateZ z_matrix_roll
 extern void z_matrix_roll(
 float z /* The angle in degrees to roll the matrix by. */
 , int32_t apply /* 0 initializes a new matrix and rolls it; 1 modifies the current matrix on the stack. */
@@ -7756,6 +7784,7 @@ float z /* The angle in degrees to roll the matrix by. */
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `matrix_rotate`
 */
+#define Matrix_RotateRPY z_matrix_rotate_3s
 extern void z_matrix_rotate_3s(
 int16_t x, int16_t y, int16_t z /* X, Y, and Z Rotation */
 , int32_t apply /* 0 initializes a new matrix and rotates it; 1 modifies the current matrix on the stack. */
@@ -7771,6 +7800,7 @@ int16_t x, int16_t y, int16_t z /* X, Y, and Z Rotation */
 /* Translate a matrix and then rotate it.
 * Source Code Reference File: "sys_matrix.c"
 */
+#define Matrix_JointPosition z_matrix_translate_rotate
 extern void z_matrix_translate_rotate(
 vec3f_t* translation
 , vec3s_t* rotation
@@ -7803,6 +7833,7 @@ float x, float y, float z
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `_guMtxF2L`
 */
+#define Matrix_MtxFToMtx z_matrix_float_to_fixed
 extern Mtx* z_matrix_float_to_fixed(
 float* src
 , Mtx* dest
@@ -7819,6 +7850,7 @@ float* src
 * Source Code Reference File: "sys_matrix.c"
 * Formerly `external_func_800D1A54`
 */
+#define Matrix_ToMtx z_matrix_top_to_fixed
 extern Mtx* z_matrix_top_to_fixed(
 Mtx* dest
 , char* file
@@ -7836,7 +7868,8 @@ Mtx* dest
  * Converts and Appends the Float Matrix Stack's top matrix to POLY_OPA_DISP end
  * please provide only the first two arguments when using this function
  */
-extern uint32_t z_matrix_alloc(
+#define Matrix_NewMtx z_matrix_alloc
+extern Mtx* z_matrix_alloc(
 	  z64_gfx_t *gfx_ctx
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
 	, const char *string
@@ -7857,9 +7890,23 @@ extern uint32_t z_matrix_alloc(
 	#endif
 
 /**
+ * Allocate a new fixed matrix from a floating point matrix.
+ */
+#define Matrix_MtxFToNewMtx z_matrix_new_f2l
+extern void z_matrix_new_f2l(MtxF* src, z64_gfx_t* gfx);
+	#if OOT_DEBUG
+		asm("z_matrix_new_f2l = 0x800D1AC0");
+	#elif OOT_U_1_0
+		//asm("z_matrix_new_f2l = 0xDEADBEEF");
+	#elif MM_U_1_0
+		//asm("z_matrix_new_f2l = 0xDEADBEEF");
+	#endif
+
+/**
  * Multiply the top floating point matrix by vec3f_t `src`.
  * Store the result as a vec3f_t `dest`.
  */
+#define Matrix_MultVec3f z_matrix_mult_vec3f
 extern void z_matrix_mult_vec3f(vec3f_t* src, vec3f_t* dest);
 	#if OOT_DEBUG
 		asm("z_matrix_mult_vec3f = 0x800D1AF4");
@@ -7875,23 +7922,49 @@ extern void z_matrix_mult_vec3f(vec3f_t* src, vec3f_t* dest);
  * poorly optimized?
  * A0 = Destination | A1 = Source
  */
-extern void matrix_copy(void *dst, void *src);
+#define Matrix_MtxFCopt z_matrix_float_copy
+extern void z_matrix_float_copy(void *dst, void *src);
 	#if OOT_DEBUG
-		asm("matrix_copy = 0x800D1BA8");
+		asm("z_matrix_float_copy = 0x800D1BA8");
 	#elif OOT_U_1_0
-		asm("matrix_copy = 0x800ABA10");
+		asm("z_matrix_float_copy = 0x800ABA10");
 	#elif MM_U_1_0
 		/* TODO */
+	#endif
+
+/* Convert a s15.16 fixed-point matrix to a floating-point matrix.
+* Source Code Reference File: "sys_matrix.c"
+*/
+#define Matrix_MtxToMtxF z_matrix_fixed_to_float
+extern void z_matrix_fixed_to_float(Mtx* src, float dest[4][4]);
+#if OOT_DEBUG
+  asm("z_matrix_fixed_to_float= 0x800D1CAC");
+#elif OOT_U_1_0
+  //asm("z_matrix_fixed_to_float = 0xDEADBEEF");
+#elif MM_U_1_0
+  //asm("z_matrix_fixed_to_float = 0xDEADBEEF");
+#endif
+
+/**
+ * TODO This function is completely undocumented
+ */
+#define Matrix_MultVec3fExt z_matrix_mult_vec3f_ext
+extern void z_matrix_mult_vec3f_ext(vec3f_t* src, vec3f_t* dest, float mf[4][4]);
+	#if OOT_DEBUG
+		asm("z_matrix_mult_vec3f_ext = 0x800D1EF4");
+	#elif OOT_U_1_0
+		asm("z_matrix_mult_vec3f_ext = 0x800ABD6C");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800D1EF4(void);
+#define Matrix_Reverse z_matrix_reverse
+extern void z_matrix_reverse(float mf[4][4]);
 	#if OOT_DEBUG
-		asm("external_func_800D1EF4 = 0x800D1EF4");
+		asm("z_matrix_reverse = 0x800D1FA0");
 	#elif OOT_U_1_0
-		asm("external_func_800D1EF4 = 0x800ABD6C");
+		//asm("z_matrix_reverse = 0xDEADBEEF");
 	#endif
 
 /**
@@ -7912,17 +7985,17 @@ extern void z_matrix_rotate_vec3f(vec3f_t* rot);
 * Source Code Reference File: "code.c"
 * Formerly `external_func_800D20CC`
 */
-extern void z_vec3s_from_mtxf(
+extern void z_matrix_float_to_vec3s(
 float* mf /* Float Matrix for angles to be derived from. */
 , vec3s_t* /* Where the derived vector is stored. */
 , int32_t flag /* Likely, "matrix_has_scale" */
 );
 #if OOT_DEBUG
-  asm("z_vec3s_from_mtxf = 0x800D20CC");
+  asm("z_matrix_float_to_vec3s = 0x800D20CC");
 #elif OOT_U_1_0
-  asm("z_vec3s_from_mtxf = 0x800ABF50");
+  asm("z_matrix_float_to_vec3s = 0x800ABF50");
 #elif MM_U_1_0
-  /*asm("z_vec3s_from_mtxf = 0xDEADBEEF");*/
+  /*asm("z_matrix_float_to_vec3s = 0xDEADBEEF");*/
 #endif
 
 /**
@@ -8606,9 +8679,9 @@ extern float z_atanf_cfrac(float x);
  */
 extern float z_atan2f2(float y, float x);
 	#if OOT_DEBUG
-		asm("z_atan2f = 0x800FD250");
+		asm("z_atan2f2 = 0x800FD250");
 	#elif OOT_U_1_0
-		asm("z_atan2f = 0x800CD76C");
+		asm("z_atan2f2 = 0x800CD76C");
 	#endif
 
 /**
@@ -8731,9 +8804,9 @@ extern float z_cosf(float angle);
  */
 extern int16_t coss(int16_t angle);
 	#if OOT_DEBUG
-		asm("external_func_80104780 = 0x80104780");
+		asm("coss = 0x80104780");
 	#elif OOT_U_1_0
-		asm("external_func_80104780 = 0x800D2FA0");
+		asm("coss = 0x800D2FA0");
 	#endif
 
 /**
@@ -8931,21 +9004,236 @@ extern int z_tri_line_intersect(vec3f_t* v0, vec3f_t* v1, vec3f_t* v2, float nx,
 		 asm("z_tri_line_intersect = 0x800CE258");
 	#endif
 
-// TODO: Reorganize these, also confirm if correct.
-extern void z64_bzero(void *dest, int32_t length);
-asm("bzero = 0x80004450");
-extern int32_t z64_bcmp(const void *s1, const void *s2, int32_t length);
-asm("bcmp = 0x800068C0");
-extern void bcpy(const void *src, void *dst, int32_t length);
-asm("bcpy = 0x80006F10");
+/**
+ * libultra guScale
+ * Keywords: Matrix, Scale
+ */
+extern void guScale(Mtx* m, float x, float y, float z);
+	#if OOT_DEBUG
+		asm("guScale = 0x801001E0");
+	#elif OOT_U_1_0
+		//asm("guScale = 0xDEADBEEF");
+	#endif
 
-// /ultra/user/src/pr/libsrc/libultra/gu
+/**
+ * libultra guPerspectiveF
+ * Keywords: Matrix, Perspective, Float
+ */
+extern void guPerspectiveF(
+	float mf[4][4]
+	, uint16_t* perspNorm, float fovy, float aspect
+	, float near, float far, float scale
+);
+	#if OOT_DEBUG
+		asm("guPerspectiveF = 0x801010D0");
+	#elif OOT_U_1_0
+		//asm("guPerspectiveF = 0xDEADBEEF");
+	#endif
 
-extern void guPerspectiveF(float mf[4][4], uint16_t *perspNorm, float fovy, float aspect, float near, float far, float scale);
-asm("guPerspectiveF = 0x801010D0");
-extern void guPerspective(Mtx *m, uint16_t *perspNorm, float fovy, float aspect, float near, float far, float scale);
-asm("guPerspective = 0x80101300");
-extern void guMtxF2L(float mf[4][4], Mtx *m);
-asm("guMtxF2L = 0x801064E0"); // OOTDBG
+/**
+ * libultra guPerspective
+ * Keywords: Matrix, Perspective
+ */
+extern void guPerspective(
+	Mtx* m
+	uint16_t* perspNorm, float fovy, float aspect
+	, float near, float far, float scale
+);
+	#if OOT_DEBUG
+		asm("guPerspective = 0x80101300");
+	#elif OOT_U_1_0
+		//asm("guPerspective = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guMtxIdentF
+ * Keywords: Matrix, Identity, Float
+ */
+extern void guMtxIdentF(float mf[4][4]);
+	#if OOT_DEBUG
+		asm("guMtxIdentF = 0x80101B40");
+	#elif OOT_U_1_0
+		//asm("guMtxIdentF = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guLookAtF
+ * Keywords: Matrix, LookAt, Float
+ */
+extern void guLookAtF(
+	float mf[4][4],
+	float xEye, float yEye, float zEye
+	, float xAt, float yAt, float zAt
+	, float xUp, float yUp, float zUp
+);
+	#if OOT_DEBUG
+		asm("guLookAtF = 0x80101B90");
+	#elif OOT_U_1_0
+		//asm("guLookAtF = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guLookAt
+ * Keywords: Matrix, LookAt
+ */
+extern void guLookAt(
+	Mtx* m,
+	float xEye, float yEye, float zEye
+	, float xAt, float yAt, float zAt
+	, float xUp, float yUp, float zUp
+);
+	#if OOT_DEBUG
+		asm("guLookAt = 0x80101E34");
+	#elif OOT_U_1_0
+		//asm("guLookAt = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guLookAtHiliteF
+ * Keywords: Matrix, LookAt, Hilite, Float
+ */
+extern void guLookAtHiliteF(
+	float mf[4][4], LookAt* l, Hilite* h
+	, float xEye, float yEye, float zEye,
+	, float xAt, float yAt, float zAt
+	, float xUp, float yUp, float zUp
+	, float xl1, float yl1, float zl1
+	, float xl2, float yl2, float zl2
+	, int32_t hiliteWidth, int32_t hiliteHeight
+);
+	#if OOT_DEBUG
+		asm("guLookAtHiliteF = 0x801032B0");
+	#elif OOT_U_1_0
+		//asm("guLookAtHiliteF = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guLookAtHilite
+ * Keywords: Matrix, LookAt, Hilite
+ */
+extern void guLookAtHilite(
+	Mtx* m, LookAt* l, Hilite* h
+	, float xEye, float yEye, float zEye,
+	, float xAt, float yAt, float zAt
+	, float xUp, float yUp, float zUp
+	, float xl1, float yl1, float zl1
+	, float xl2, float yl2, float zl2
+	, int32_t hiliteWidth, int32_t hiliteHeight
+);
+	#if OOT_DEBUG
+		asm("guLookAtHilite = 0x80103A70");
+	#elif OOT_U_1_0
+		//asm("guLookAtHilite = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guMtxIdent
+ * Keywords: Matrix, Identity
+ */
+extern void guMtxIdent(Mtx* m);
+	#if OOT_DEBUG
+		asm("guMtxIdent = 0x80103B60");
+	#elif OOT_U_1_0
+		//asm("guMtxIdent = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guPositionF
+ * Keywords: Matrix, Position, Float
+ */
+extern void guPositionF(float mf[4][4], float rot, float pitch, float yaw, float scale, float x, float y, float z);
+	#if OOT_DEBUG
+		asm("guPositionF = 0x80103BB0");
+	#elif OOT_U_1_0
+		//asm("guPositionF = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guPosition
+ * Keywords: Matrix, Position
+ */
+extern void guPosition(Mtx* m, float rot, float pitch, float yaw, float scale, float x, float y, float z);
+	#if OOT_DEBUG
+		asm("guPosition = 0x80103D58");
+	#elif OOT_U_1_0
+		//asm("guPosition = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guRotateF
+ * Keywords: Matrix, Rotate, Float
+ */
+extern void guRotateF(float mf[4][4], float a, float x, float y, float z);
+	#if OOT_DEBUG
+		asm("guRotateF = 0x80103E20");
+	#elif OOT_U_1_0
+		//asm("guRotateF = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guRotate
+ * Keywords: Matrix, Rotate
+ */
+extern void guRotate(Mtx* m, float a, float x, float y, float z);
+	#if OOT_DEBUG
+		asm("guRotate = 0x80103FA4");
+	#elif OOT_U_1_0
+		//asm("guRotate = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guNormalize
+ * Keywords: Matrix, Rotate
+ */
+extern void guNormalize(float x, float y, float z);
+	#if OOT_DEBUG
+		asm("guNormalize = 0x80104160");
+	#elif OOT_U_1_0
+		//asm("guNormalize = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guOrthoF
+ * Keywords: Matrix, Orthographic, Float
+ */
+extern void guOrthoF(float mf[4][4], float left, float right, float bottom, float top, float near, float far, float scale);
+	#if OOT_DEBUG
+		asm("guOrthoF = 0x80104450");
+	#elif OOT_U_1_0
+		//asm("guOrthoF = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guOrtho
+ * Keywords: Matrix, Orthographic
+ */
+extern void guOrtho(Mtx* m, float left, float right, float bottom, float top, float near, float far, float scale);
+	#if OOT_DEBUG
+		asm("guOrtho = 0x801045A4");
+	#elif OOT_U_1_0
+		//asm("guOrtho = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guTranslate
+ * Keywords: Matrix, Translate
+ */
+extern void guTranslate(Mtx* m, float x, float y, float z);
+	#if OOT_DEBUG
+		asm("guTranslate = 0x80105C20");
+	#elif OOT_U_1_0
+		//asm("guTranslate = 0xDEADBEEF");
+	#endif
+
+/**
+ * libultra guMtxF2L (Floating Point to Fixed Point)
+ * Keywords: Matrix, Float, Fixed
+ */
+extern void guMtxF2L(float mf[4][4], Mtx* m);
+	#if OOT_DEBUG
+		asm("guMtxF2L = 0x801064E0");
+	#elif OOT_U_1_0
+		//asm("guMtxF2L = 0xDEADBEEF");
+	#endif
 
 #endif // __Z64OVL_H__
