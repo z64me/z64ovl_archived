@@ -6638,7 +6638,7 @@ z64_skelanime_t* sk /* Skelanime Structure */
 /* Change Animation
 * Source Code Reference File: "z_skelanime.c"
 */
-#define SkelAnime_ChangeAnimDefaultStop
+#define SkelAnime_ChangeAnimDefaultStop z_skelanime_change_anim_default_stop
 extern void z_skelanime_change_anim_default_stop(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
