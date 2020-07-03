@@ -4127,7 +4127,7 @@ extern void external_func_8005DFAC(void);
 extern void z_actor_damage_table_init(
 void* out /* Destination for initialized table. */
 , z64_damagechart_init_t* damage_chart /* Initialization Variables for Damage Table */
-, void* init_data
+, z64_collision_check_info_init_t* init /* Stuff including Health and Mass */
 );
 #if OOT_DEBUG
   asm("z_actor_damage_table_init = 0x80061ED4");

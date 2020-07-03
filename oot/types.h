@@ -178,6 +178,14 @@ typedef struct
     } attack[0x20];
 } z64_damagechart_t;
 
+typedef struct
+{
+  uint8_t health;
+  int16_t unk_02;
+  int16_t unk_04;
+  uint8_t mass;
+} z64_collision_check_info_init_t;
+
 #include "actor.h"
 
 typedef struct
