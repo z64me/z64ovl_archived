@@ -255,7 +255,7 @@ inline
 z64_player_t *
 zh_get_player(z64_global_t *global)
 {
-    return (z64_player_t*)globalCtx->actor_ctxt.actor_list[OVLTYPE_PLAYER].first
+    return (z64_player_t*)global->actor_ctxt.actor_list[OVLTYPE_PLAYER].first
 }
 
 /****
