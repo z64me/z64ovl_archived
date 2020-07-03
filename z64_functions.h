@@ -7893,7 +7893,7 @@ extern Mtx* z_matrix_alloc(
  * Allocate a new fixed matrix from a floating point matrix.
  */
 #define Matrix_MtxFToNewMtx z_matrix_new_f2l
-extern void z_matrix_new_f2l(MtxF* src, z64_gfx_t* gfx);
+extern void z_matrix_new_f2l(float src[4][4], z64_gfx_t* gfx);
 	#if OOT_DEBUG
 		asm("z_matrix_new_f2l = 0x800D1AC0");
 	#elif OOT_U_1_0
@@ -9036,7 +9036,7 @@ extern void guPerspectiveF(
  */
 extern void guPerspective(
 	Mtx* m
-	uint16_t* perspNorm, float fovy, float aspect
+	, uint16_t* perspNorm, float fovy, float aspect
 	, float near, float far, float scale
 );
 	#if OOT_DEBUG
@@ -9094,7 +9094,7 @@ extern void guLookAt(
  */
 extern void guLookAtHiliteF(
 	float mf[4][4], LookAt* l, Hilite* h
-	, float xEye, float yEye, float zEye,
+	, float xEye, float yEye, float zEye
 	, float xAt, float yAt, float zAt
 	, float xUp, float yUp, float zUp
 	, float xl1, float yl1, float zl1
@@ -9113,7 +9113,7 @@ extern void guLookAtHiliteF(
  */
 extern void guLookAtHilite(
 	Mtx* m, LookAt* l, Hilite* h
-	, float xEye, float yEye, float zEye,
+	, float xEye, float yEye, float zEye
 	, float xAt, float yAt, float zAt
 	, float xUp, float yUp, float zUp
 	, float xl1, float yl1, float zl1

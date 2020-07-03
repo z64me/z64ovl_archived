@@ -5,7 +5,8 @@
 #include <z64ovl/zh/vec3s.h>
 
 #define	FTOFIX32(x)	(long)((x) * (float)0x00010000)
-#define z_cos z_cosf
+#define cosf z_cosf
+#define sinf z_sinf
 static const float    dtor = (float)(3.1415926 / 180.0);
 
 #define MULTIPLY 0
@@ -13,16 +14,18 @@ static const float    dtor = (float)(3.1415926 / 180.0);
 #define ADD 2
 #define SUBTRACT 3
 
-static void libultra_guMtxIdentF(float mf[4][4]);
-static void libultra_guTranslateF(float mf[4][4], float x, float y, float z);
-static void libultra_guScaleF(float mf[4][4], float x, float y, float z);
-static void libultra_guNormalize(float* x, float* y, float* z);
-static void libultra_guRotateF(float mf[4][4], float a, float x, float y, float z);
-static void libultra_guPositionF(float mf[4][4], float r, float p, float h, float s, float x, float y, float z);
-static void guMtxArithmeticF(float mf[4][4], float mult[4][4], int32_t op);
-static void libultra_guMtxF2L(float mf[4][4], Mtx* m);
+static inline void libultra_guMtxIdentF(float mf[4][4]);
+static inline void libultra_guTranslateF(float mf[4][4], float x, float y, float z);
+static inline void libultra_guScaleF(float mf[4][4], float x, float y, float z);
+static inline void libultra_guNormalize(float* x, float* y, float* z);
+static inline void libultra_guRotateF(float mf[4][4], float a, float x, float y, float z);
+static inline void libultra_guPositionF(float mf[4][4], float r, float p, float h, float s, float x, float y, float z);
+static inline void guMtxArithmeticF(float mf[4][4], float mult[4][4], int32_t op);
+static inline void libultra_guMtxF2L(float mf[4][4], Mtx* m);
+static inline void libulutra_guMtxCatF(float mf[4][4], float nf[4][4], float res[4][4]);
+static inline void libultra_guRotateRPYF(float mf[4][4], float r, float p, float h);
 
-static void libultra_guMtxIdentF(float mf[4][4])
+static inline void libultra_guMtxIdentF(float mf[4][4])
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -36,7 +39,7 @@ static void libultra_guMtxIdentF(float mf[4][4])
 	}
 }
 
-static void libultra_guTranslateF(float mf[4][4], float x, float y, float z)
+static inline void libultra_guTranslateF(float mf[4][4], float x, float y, float z)
 {
 	libultra_guMtxIdentF(mf);
 
@@ -45,7 +48,7 @@ static void libultra_guTranslateF(float mf[4][4], float x, float y, float z)
 	mf[3][2] = z;
 }
 
-static void libultra_guScaleF(float mf[4][4], float x, float y, float z)
+static inline void libultra_guScaleF(float mf[4][4], float x, float y, float z)
 {
 	libultra_guMtxIdentF(mf);
 
@@ -55,7 +58,7 @@ static void libultra_guScaleF(float mf[4][4], float x, float y, float z)
 	mf[3][3] = 1.0f;
 }
 
-static void libultra_guNormalize(float* x, float* y, float* z)
+static inline void libultra_guNormalize(float* x, float* y, float* z)
 {
 	float m;
 
@@ -69,7 +72,7 @@ static void libultra_guNormalize(float* x, float* y, float* z)
 	*z *= m;
 }
 
-static void libultra_guRotateF(float mf[4][4], float a, float x, float y, float z)
+static inline void libultra_guRotateF(float mf[4][4], float a, float x, float y, float z)
 {
 	float	sine;
 	float	cosine;
@@ -77,8 +80,8 @@ static void libultra_guRotateF(float mf[4][4], float a, float x, float y, float 
 
 	libultra_guNormalize(&x, &y, &z);
 	a *= dtor;
-	sine = z_sin(a);
-	cosine = z_cos(a);
+	sine = sinf(a);
+	cosine = cosf(a);
 	t = (1 - cosine);
 	ab = x * y * t;
 	bc = y * z * t;
@@ -114,17 +117,17 @@ static void libultra_guRotateF(float mf[4][4], float a, float x, float y, float 
  *   
  */
 
-static void libultra_guPositionF(float mf[4][4], float r, float p, float h, float s, float x, float y, float z)
+static inline void libultra_guPositionF(float mf[4][4], float r, float p, float h, float s, float x, float y, float z)
 {
     float   sinr, sinp, sinh;
     float   cosr, cosp, cosh;
 
-    sinr = z_sin(r);
-    cosr = z_cos(r);
-    sinp = z_sin(p);
-    cosp = z_cos(p);
-    sinh = z_sin(h);
-    cosh = z_cos(h);
+    sinr = sinf(r);
+    cosr = cosf(r);
+    sinp = sinf(p);
+    cosp = cosf(p);
+    sinh = sinf(h);
+    cosh = cosf(h);
 
     mf[0][0] = (cosp * cosh) * s;
     mf[0][1] = (cosp * sinh) * s;
@@ -147,7 +150,7 @@ static void libultra_guPositionF(float mf[4][4], float r, float p, float h, floa
     mf[3][3] = 1.0;
 }
 
-static void guMtxArithmeticF(float mf[4][4], float mult[4][4], int32_t op)
+static inline void guMtxArithmeticF(float mf[4][4], float mult[4][4], int32_t op)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -172,7 +175,7 @@ static void guMtxArithmeticF(float mf[4][4], float mult[4][4], int32_t op)
 	}
 }
 
-static void libultra_guMtxF2L(float mf[4][4], Mtx* m)
+static inline void libultra_guMtxF2L(float mf[4][4], Mtx* m)
 {
 	int32_t e1, e2;
 	int32_t* ai;
@@ -191,6 +194,59 @@ static void libultra_guMtxF2L(float mf[4][4], Mtx* m)
 			*(af++) = ((e1 << 16) & 0xFFFF0000) | (e2 & 0xFFFF);
 		}
 	}
+}
+
+static inline void libulutra_guMtxCatF(float mf[4][4], float nf[4][4], float res[4][4])
+{
+	int	i, j, k;
+	float	temp[4][4];
+
+	for (i=0; i<4; i++) {
+	    for (j=0; j<4; j++) {
+		temp[i][j] = 0.0;
+		for (k=0; k<4; k++) {
+		    temp[i][j] += mf[i][k] * nf[k][j];
+		}
+	    }
+	}
+
+	/* make sure we handle case where result is an input */
+	for (i=0; i<4; i++) {
+	    for (j=0; j<4; j++) {
+		res[i][j] = temp[i][j];
+	    }
+	}
+}
+
+static inline void libultra_guRotateRPYF(float mf[4][4], float r, float p, float h)
+{
+	static float	dtor = 3.1415926 / 180.0;
+	float	sinr, sinp, sinh;
+	float	cosr, cosp, cosh;
+
+	r *= dtor;
+	p *= dtor;
+	h *= dtor;
+	sinr = sinf(r);
+	cosr = cosf(r);
+	sinp = sinf(p);
+	cosp = cosf(p);
+	sinh = sinf(h);
+	cosh = cosf(h);
+
+	guMtxIdentF(mf);
+
+	mf[0][0] = cosp*cosh;
+	mf[0][1] = cosp*sinh;
+	mf[0][2] = -sinp;
+
+	mf[1][0] = sinr*sinp*cosh - cosr*sinh;
+	mf[1][1] = sinr*sinp*sinh + cosr*cosh;
+	mf[1][2] = sinr*cosp;
+
+	mf[2][0] = cosr*sinp*cosh + sinr*sinh;
+	mf[2][1] = cosr*sinp*sinh - sinr*cosh;
+	mf[2][2] = cosr*cosp;
 }
 
 #endif
