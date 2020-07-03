@@ -2816,7 +2816,7 @@ extern void external_func_80034F54(z64_global_t* gl, int16_t* a1, int16_t* a2, i
 * Formerly `draw_dlist_opa`
 */
 #define z_draw_dlist_opa z_cheap_proc_draw_opa //#SHORTNAME
-#define Gfx_DrawDListOpa z_cheap_proc_draw_opa 
+#define Gfx_DrawDListOpa z_cheap_proc_draw_opa
 extern void z_cheap_proc_draw_opa(
 z64_global_t* gl /* Global Context */
 , uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
@@ -2834,7 +2834,7 @@ z64_global_t* gl /* Global Context */
 * Formerly `draw_dlist_xlu`
 */
 #define z_draw_dlist_xlu z_cheap_proc_draw_xlu //#SHORTNAME
-#define Gfx_DrawDListXlu z_cheap_proc_draw_xlu 
+#define Gfx_DrawDListXlu z_cheap_proc_draw_xlu
 extern void z_cheap_proc_draw_xlu(
 z64_global_t* gl /* Global Context */
 , uint32_t dl /* A segment-relative display list address. (i.e. 0x06021F78)*/
@@ -3057,7 +3057,7 @@ extern void external_func_80037D98(z64_global_t* gl, z64_actor_t* a, int16_t a2,
  * Return rotation vectors towards a specific focus point.
  * Cutscene and camera focus related.
  */
-extern void z_actor_vector_focus(z64_global_t* gl, z64_actor_t* a, vec3s_t* a2, vec3s_t* a3, vec3f_t* a4);
+extern void z_actor_vector_focus(z64_global_t* gl, z64_actor_t* a, vec3s_t* a2, vec3s_t* a3, vec3f_t a4);
 	#if OOT_DEBUG
 		asm("z_actor_vector_focus = 0x80038290");
 	#elif OOT_U_1_0
@@ -6638,7 +6638,7 @@ z64_skelanime_t* sk /* Skelanime Structure */
 /* Change Animation
 * Source Code Reference File: "z_skelanime.c"
 */
-#define SkelAnime_ChangeAnimDefaultStop 
+#define SkelAnime_ChangeAnimDefaultStop
 extern void z_skelanime_change_anim_default_stop(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
