@@ -3054,14 +3054,14 @@ extern void external_func_80037D98(z64_global_t* gl, z64_actor_t* a, int16_t a2,
 	#endif
 
 /**
- * TODO This function has yet to have a name put to it.
+ * Return rotation vectors towards a specific focus point.
  * Cutscene and camera focus related.
  */
-extern void external_func_80038290(z64_global_t* gl, z64_actor_t* a, vec3s_t* a2, vec3s_t* a3, vec3s_t* a4);
+extern void z_actor_vector_focus(z64_global_t* gl, z64_actor_t* a, vec3s_t* a2, vec3s_t* a3, vec3f_t* a4);
 	#if OOT_DEBUG
-		asm("external_func_80038290 = 0x80038290");
+		asm("z_actor_vector_focus = 0x80038290");
 	#elif OOT_U_1_0
-		asm("external_func_80038290 = 0x8002B024");
+		asm("z_actor_vector_focus = 0x8002B024");
 	#endif
 
 /* Initialize a matrix for a collision polytype (?)
@@ -5493,6 +5493,7 @@ extern void external_func_8008708C(void);
  * Negative Value Subtracts Health
  * Positive Value Adds Health
  */
+#define Health_ChangeBy z_player_update_health
 extern void z_player_update_health(z64_global_t* gl, int16_t health);
 	#if OOT_DEBUG
 		asm("z_player_update_health = 0x80087174");
@@ -5504,21 +5505,24 @@ extern void z_player_update_health(z64_global_t* gl, int16_t health);
  * Adds or removes rupees from the counter (Negative values subtract, positive add)
  * a0 - Rupee amount.
  */
-extern void change_rupee_count_by(int32_t num_rupees);
+#define Rupees_ChangeBy z_player_update_rupees
+#define change_rupee_count_by z_player_update_rupees
+extern void z_player_update_rupees(int32_t num_rupees);
 	#if OOT_DEBUG
-		asm("change_rupee_count_by = 0x8008730C");
+		asm("z_player_update_rupees = 0x8008730C");
 	#elif OOT_U_1_0
-		asm("change_rupee_count_by = 0x800721CC");
+		asm("z_player_update_rupees = 0x800721CC");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Update ammo amount given an item and change.
  */
-extern void external_func_80087330(void);
+#define Inventory_ChangeAmmo z_inventory_update_ammo
+extern void z_inventory_update_ammo(int16_t item, int16_t ammo_change);
 	#if OOT_DEBUG
-		asm("external_func_80087330 = 0x80087330");
+		asm("z_inventory_update_ammo = 0x80087330");
 	#elif OOT_U_1_0
-		asm("external_func_80087330 = 0x800721F4");
+		asm("z_inventory_update_ammo = 0x800721F4");
 	#endif
 
 /**
@@ -5557,7 +5561,7 @@ extern int32_t z_parameter_subtract_magic(z64_global_t* gl, int16_t amount, int1
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80088AA0(void);
+extern void external_func_80088AA0(int16_t seconds);
 	#if OOT_DEBUG
 		asm("external_func_80088AA0 = 0x80088AA0");
 	#elif OOT_U_1_0
@@ -5577,7 +5581,7 @@ extern void external_func_80088AF0(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80088B34(void);
+extern void external_func_80088B34(int16_t a);
 	#if OOT_DEBUG
 		asm("external_func_80088B34 = 0x80088B34");
 	#elif OOT_U_1_0
@@ -5585,13 +5589,58 @@ extern void external_func_80088B34(void);
 	#endif
 
 /**
+ * z_parameter
+ */
+#define Interface_DrawActionLabel z_parameter_draw_action_label
+extern void z_parameter_draw_action_label(z64_gfx_t* gfx, uint32_t a1);
+	#if OOT_DEBUG
+		asm("z_parameter_draw_action_label = 0x80088B84");
+	#elif OOT_U_1_0
+		asm("z_parameter_draw_action_label = 0x800739CC");
+	#endif
+
+/**
+ * z_parameter
+ */
+#define Interface_DrawItemButtons z_parameter_draw_item_button
+extern void z_parameter_draw_item_button(z64_gfx_t* gfx, uint32_t a1);
+	#if OOT_DEBUG
+		asm("z_parameter_draw_item_button = 0x80088CBC");
+	#elif OOT_U_1_0
+		asm("z_parameter_draw_item_button = 0x80073AB4");
+	#endif
+
+/**
+ * z_parameter
+ */
+#define Interface_DrawItemIconTexture z_parameter_draw_item_icon
+extern void z_parameter_draw_item_icon(z64_global_t* gl, uint32_t icon_texture, uint32_t button);
+	#if OOT_DEBUG
+		asm("z_parameter_draw_item_icon = 0x80089B00");
+	#elif OOT_U_1_0
+		asm("z_parameter_draw_item_icon = 0x800748DC");
+	#endif
+
+/**
+ * z_parameter
+ */
+#define Interface_DrawAmmoCount z_parameter_draw_ammo
+extern void z_parameter_draw_ammo(z64_global_t* gl, uint32_t icon_texture, uint32_t button);
+	#if OOT_DEBUG
+		asm("z_parameter_draw_ammo = 0x80089CF8");
+	#elif OOT_U_1_0
+		asm("z_parameter_draw_ammo = 0x80074A84");
+	#endif
+
+/**
  * Draw an A button to the HUD overlay.
  */
+#define Interface_DrawActionButton z_parameter_draw_action_button
 extern void z_parameter_draw_action_button(z64_global_t* gl);
 	#if OOT_DEBUG
 		asm("z_parameter_draw_action_button = 0x8008A1BC");
 	#elif OOT_U_1_0
-		/*asm("z_parameter_draw_action_button = 0xDEADBEEF");*/
+		asm("z_parameter_draw_action_button = 0x80074F24");
 	#endif
 
 /**
@@ -5607,11 +5656,12 @@ extern void external_func_8008A3E0(z64_global_t* gl);
 /**
  * TODO This function is completely undocumented
  */
+//Interface_InitVertices
 extern void external_func_8008A8B8(z64_global_t* gl, int32_t a1, int32_t a2, int32_t a3, int32_t sp10);
 	#if OOT_DEBUG
 		asm("external_func_8008A8B8 = 0x8008A8B8");
 	#elif OOT_U_1_0
-		/*asm("external_func_8008A8B8 = 0xDEADBEEF");*/
+		asm("external_func_8008A8B8 = 0x80075108");
 	#endif
 
 /**
@@ -5885,16 +5935,18 @@ extern void external_func_80092F88(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_80093370(void);
+#define Gfx_SetFog z_rcp_fog_set
+extern Gfx* z_rcp_fog_set(Gfx* gfx, int32_t r, int32_t g, int32_t b, int32_t a, int32_t n, int32_t f);
 	#if OOT_DEBUG
-		asm("external_func_80093370 = 0x80093370");
+		asm("z_rcp_fog_set = 0x80093370");
 	#elif OOT_U_1_0
-		asm("external_func_80093370 = 0x8007DC40");
+		asm("z_rcp_fog_set = 0x8007DC40");
 	#endif
 
 /**
  * Used when setting Link's damage color.
  */
+#define Gfx_SetFog2 z_rcp_fog_set_2
 extern Gfx* z_rcp_fog_set_2(Gfx* gfx, int32_t r, int32_t g, int32_t b, int32_t a, int32_t n, int32_t f);
 	#if OOT_DEBUG
 		asm("z_rcp_fog_set_2 = 0x80093708");
@@ -5903,13 +5955,14 @@ extern Gfx* z_rcp_fog_set_2(Gfx* gfx, int32_t r, int32_t g, int32_t b, int32_t a
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Wrapper for 8009373C; Set up a display list.
  */
-extern void external_func_80093774(void);
+#define Gfx_CallSetupDL z_rcp_set_dlist
+extern Gfx* z_rcp_set_dlist(Gfx* gfx, uint32_t i);
 	#if OOT_DEBUG
-		asm("external_func_80093774 = 0x80093774");
+		asm("z_rcp_set_dlist = 0x80093774");
 	#elif OOT_U_1_0
-		asm("external_func_80093774 = 0x8007DFBC");
+		asm("z_rcp_set_dlist = 0x8007DFBC");
 	#endif
 
 /**
@@ -6133,6 +6186,7 @@ extern void external_func_80094E78(void);
 * 0xE8, 0xF2, 0xDF
 * Source Code Reference File: "z_rcp.c"
 */
+#define Gfx_TexScroll z_rcp_gen_1_settilesize
 extern Gfx* z_rcp_gen_1_settilesize(
 z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
 , int32_t tile0 /* Tile Descriptor 0; Layer 1 */
@@ -6155,6 +6209,7 @@ z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
 * Source Code Reference File: "z_rcp.c"
 * Formerly `f3dzex_gen_settilesize`
 */
+#define Gfx_TwoTexScroll z_rcp_gen_2_settilesize
 extern Gfx* z_rcp_gen_2_settilesize(
 z64_gfx_t* gfx_ctxt /* Graphics Context, within Global Context */
 , int32_t tile0 /* Tile Descriptor 0; Layer 1 */
@@ -6244,6 +6299,7 @@ extern void external_func_80097A54(void);
 * Source Code Reference File: "z_scene.c"
 * Formerly `object_load`
 */
+#define Object_Spawn z_scene_object_load
 extern int32_t z_scene_object_load(
 z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 , int32_t id /* The object file ID */
@@ -6264,6 +6320,7 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 * Source Code Reference File: "z_scene.c"
 * Formerly `object_get_index`
 */
+#define Object_GetIndex z_scene_object_get_index
 extern int32_t z_scene_object_get_index(
 z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 , int32_t id /* The object file ID */
@@ -6285,6 +6342,7 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 * Source Code Reference File: "z_scene.c"
 * Formerly `object_is_loaded`
 */
+#define Object_IsLoaded z_scene_object_is_loaded
 extern int32_t z_scene_object_is_loaded(
 z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 , int32_t id /* The object file ID */
@@ -6304,11 +6362,12 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A0B40(void);
+#define SkelAnime_LodDraw z_skelanime_draw_lod
+extern void z_skelanime_draw_lod(z64_global_t* gl, z64_skeleton_t* skel, vec3s_t* limb_draw_table, void* override, void* postdraw, z64_actor_t* actor, int32_t dlist_idx);
 	#if OOT_DEBUG
-		asm("external_func_800A0B40 = 0x800A0B40");
+		asm("z_skelanime_draw_lod = 0x800A0B40");
 	#elif OOT_U_1_0
-		asm("external_func_800A0B40 = 0x8008902C");
+		asm("z_skelanime_draw_lod = 0x8008902C");
 	#endif
 
 /* Draw a `skelanime` structure.
@@ -6316,6 +6375,7 @@ extern void external_func_800A0B40(void);
 * This function is used to draw Link.
 * Source Code Reference File: "z_skelanime.c"
 */
+#define SkelAnime_DrawSV2 z_skelanime_draw_mtx_lod
 extern Gfx* z_skelanime_draw_mtx_lod(
 z64_global_t* gl /* Global Context */
 , uint32_t skeleton
@@ -6400,6 +6460,7 @@ z64_global_t* gl       /* Global Context */
 * Source Code Reference File: "z_skelanime.c"
 * Formerly `anime_get_framecount`
 */
+#define SkelAnime_GetFrameCount z_skelanime_anim_nframes
 extern int32_t z_skelanime_anim_nframes(
 uint32_t anim /* Segment-relative Animation Offset */
 );
@@ -6416,51 +6477,55 @@ uint32_t anim /* Segment-relative Animation Offset */
  * TODO Variable name cleanup, better notes
  * A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = 0 | 0x0010(SP) = 0 | 0x0014(SP) = Actor Instance Address | 0x0018(SP) = Buffer
  */
-extern uint32_t skelanime_draw_destination(z64_global_t *global, uint32_t limb_index, uint32_t adt, void* subr0, void* subr1, z64_actor_t *actor, Gfx *gfx_buffer);
+#define SkelAnime_Draw2 z_skelanime_draw_dest
+extern Gfx* z_skelanime_draw_dest(z64_global_t *global, uint32_t limb_index, uint32_t adt, void* subr0, void* subr1, z64_actor_t *actor, Gfx *gfx_buffer);
 	#if OOT_DEBUG
-		asm("skelanime_draw_destination = 0x800A2288");
+		asm("z_skelanime_draw_dest = 0x800A2288");
 	#elif OOT_U_1_0
-		asm("skelanime_draw_destination = 0x8008A1DC");
+		asm("z_skelanime_draw_dest = 0x8008A1DC");
 	#endif
 
 /**
  * TODO Draw a matrix-enabled object skeleton on a specific destination buffer
  */
-extern uint32_t skelanime_draw_mtx_destination(z64_global_t *global, uint32_t limb_index, void* adt, uint8_t limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
+extern Gfx* z_skelanime_draw_mtx_destination(z64_global_t *global, uint32_t limb_index, void* adt, uint8_t limb_dlists_count, void* subr0, void* subr1, z64_actor_t *actor, void *gfx_buffer);
 	#if OOT_DEBUG
-		asm("skelanime_draw_mtx_destination = 0x800A273C");
+		asm("z_skelanime_draw_mtx_destination = 0x800A273C");
 	#elif OOT_U_1_0
-		asm("skelanime_draw_mtx_destination = 0x8008A608");
+		asm("z_skelanime_draw_mtx_destination = 0x8008A608");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A2E70(void);
+#define SkelAnime_InterpolateVec3s z_skelanime_interpolate_vec3s
+extern void z_skelanime_interpolate_vec3s(int32_t a, vec3s_t* b, vec3s_t* c, vec3s_t* d, float e);
 	#if OOT_DEBUG
-		asm("external_func_800A2E70 = 0x800A2E70");
+		asm("z_skelanime_interpolate_vec3s = 0x800A2E70");
 	#elif OOT_U_1_0
-		asm("external_func_800A2E70 = 0x8008AFB8");
+		asm("z_skelanime_interpolate_vec3s = 0x8008AFB8");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A3548(void);
+#define SkelAnime_LoadAnimationType3 z_skelanime_load_anim_3
+extern void z_skelanime_load_anim_3(z64_global_t* gl, int32_t nvec, vec3s_t* dst, vec3s_t* src, uint8_t* idx);
 	#if OOT_DEBUG
-		asm("external_func_800A3548 = 0x800A3548");
+		asm("z_skelanime_load_anim_3 = 0x800A3548");
 	#elif OOT_U_1_0
-		asm("external_func_800A3548 = 0x8008B698");
+		asm("z_skelanime_load_anim_3 = 0x8008B698");
 	#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A3620(void);
+#define SkelAnime_LoadAnimationType5 z_skelanime_load_anim_5
+extern void z_skelanime_load_anim_5(z64_global_t* gl, z64_actor_t* actor, z64_skelanime_t* skl, float a3);
 	#if OOT_DEBUG
-		asm("external_func_800A3620 = 0x800A3620");
+		asm("z_skelanime_load_anim_5 = 0x800A3620");
 	#elif OOT_U_1_0
-		asm("external_func_800A3620 = 0x8008B778");
+		asm("z_skelanime_load_anim_5 = 0x8008B778");
 	#endif
 
 /**
@@ -6520,6 +6585,7 @@ z64_global_t* gl /* Global Context */
 * Source Code Reference File: "z_skelanime.c"
 * Formerly `actor_anime_frame_update_mtx`
 */
+#define SkelAnime_FrameUpdateMatrix z_skelanime_update_anim
 #define z_skelanime_draw_table z_skelanime_update_anim
 extern int32_t z_skelanime_update_anim(
 z64_skelanime_t* s /* Skelanime Structure */
@@ -6533,15 +6599,17 @@ z64_skelanime_t* s /* Skelanime Structure */
 #endif
 
 /**
- * TODO This function is completely undocumented
+ * Change an actor's current animation.
+ * Source Code Reference File: "z_skelanime.c"
  */
-extern void external_func_800A4FE4(void);
+#define SkelAnime_ChangeAnimImpl z_skelanime_change_anim_impl
+extern void z_skelanime_change_anim_impl(z64_skelanime_t* sk, z64_anim_header_t* anim, float playback_speed, float frame, float nframes, uint8_t unk, float transition_rate, int8_t unk2);
 	#if OOT_DEBUG
-		asm("external_func_800A4FE4 = 0x800A4FE4");
+		asm("z_skelanime_change_anim_impl = 0x800A4FE4");
 	#elif OOT_U_1_0
-		asm("external_func_800A4FE4 = 0x8008CFC0");
+		asm("z_skelanime_change_anim_impl = 0x8008CFC0");
 	#elif MM_U_1_0
-		asm("external_func_800A4FE4 = 0x8013722C");
+		asm("z_skelanime_change_anim_impl = 0x8013722C");
 	#endif
 
 /* Change an actor's current animation.
@@ -6549,6 +6617,7 @@ extern void external_func_800A4FE4(void);
 * Source Code Reference File: "z_skelanime.c"
 * Formerly `actor_anime_change`
 */
+#define SkelAnime_ChangeAnim z_skelanime_change_anim
 extern void z_skelanime_change_anim(
 z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Offset */
@@ -6569,22 +6638,23 @@ z64_skelanime_t* sk /* Skelanime Structure */
 /* Change Animation
 * Source Code Reference File: "z_skelanime.c"
 */
-extern void z_skelanime_change_anim_inst(
+#define SkelAnime_ChangeAnimDefaultStop 
+extern void z_skelanime_change_anim_default_stop(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
-, void* instance /* Actor Instance */
 );
 #if OOT_DEBUG
-  asm("z_skelanime_change_anim_inst = 0x800A51E8");
+  asm("z_skelanime_change_anim_default_stop = 0x800A51E8");
 #elif OOT_U_1_0
-  asm("z_skelanime_change_anim_inst = 0x8008D1C4");
+  asm("z_skelanime_change_anim_default_stop = 0x8008D1C4");
 #elif MM_U_1_0
-  /*asm("z_skelanime_change_anim_inst = 0xDEADBEEF");*/
+  /*asm("z_skelanime_change_anim_default_stop = 0xDEADBEEF");*/
 #endif
 
 /* Change Animation and Transition Rate
 * Source Code Reference File: "z_skelanime.c"
 */
+#define SkelAnime_ChangeAnimTransitionStop z_skelanime_change_anim_trate
 extern void z_skelanime_change_anim_trate(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
@@ -6602,17 +6672,18 @@ z64_skelanime_t* s /* Skelanime Structure */
 * Modify Start Frame
 * Source Code Reference File: "z_skelanime.c"
 */
-extern void z_skelanime_change_anim_bframe(
+#define SkelAnime_ChangeAnimPlaybackStop z_skelanime_change_anim_playback
+extern void z_skelanime_change_anim_playback(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
-, int32_t frame_begin /* Starting Frame */
+, float playback_speed
 );
 #if OOT_DEBUG
-  asm("z_skelanime_change_anim_bframe = 0x800A529C");
+  asm("z_skelanime_change_anim_playback = 0x800A529C");
 #elif OOT_U_1_0
-  asm("z_skelanime_change_anim_bframe = 0x8008D278");
+  asm("z_skelanime_change_anim_playback = 0x8008D278");
 #elif MM_U_1_0
-  /*asm("z_skelanime_change_anim_bframe = 0xDEADBEEF");*/
+  /*asm("z_skelanime_change_anim_playback = 0xDEADBEEF");*/
 #endif
 
 /* Set Animation
@@ -6620,6 +6691,7 @@ z64_skelanime_t* s /* Skelanime Structure */
 * Wrapper for `z_skelanime_get_frame_count`
 * Source Code Reference File: "z_skelanime.c"
 */
+#define SkelAnime_ChangeAnimDefaultRepeat z_skelanime_anim_set
 extern void z_skelanime_anim_set(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
@@ -6637,6 +6709,7 @@ z64_skelanime_t* s /* Skelanime Structure */
 * Start frame defaulted to 0
 * Source Code Reference File: "z_skelanime.c"
 */
+#define SkelAnime_ChangeAnimTransitionRepeat z_skelanime_change_frame_count
 extern void z_skelanime_change_frame_count(
 z64_skelanime_t* s /* Skelanime Structure */
 , uint32_t anim /* Segment-relative Animation Address */
@@ -6653,21 +6726,27 @@ z64_skelanime_t* s /* Skelanime Structure */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A5384(void);
-	#if OOT_DEBUG
-		asm("external_func_800A5384 = 0x800A5384");
-	#elif OOT_U_1_0
-		asm("external_func_800A5384 = 0x8008D360");
-	#endif
+#define SkelAnime_ChangeAnimPlaybackRepeat z_skelanime_change_anim_playback_repeat
+extern void z_skelanime_change_anim_playback_repeat(
+z64_skelanime_t* s /* Skelanime Structure */
+, uint32_t anim /* Segment-relative Animation Address */
+, float playback_speed
+);
+#if OOT_DEBUG
+	asm("z_skelanime_change_anim_playback_repeat = 0x800A5384");
+#elif OOT_U_1_0
+	asm("z_skelanime_change_anim_playback_repeat = 0x8008D360");
+#endif
 
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A5408(void);
+#define SkelAnime_AnimReverse z_skelanime_anim_reverse
+extern void z_skelanime_anim_reverse(z64_skelanime_t* sk);
 	#if OOT_DEBUG
-		asm("external_func_800A5408 = 0x800A5408");
+		asm("z_skelanime_anim_reverse = 0x800A5408");
 	#elif OOT_U_1_0
-		asm("external_func_800A5408 = 0x8008D3E4");
+		asm("z_skelanime_anim_reverse = 0x8008D3E4");
 	#endif
 
 /**
@@ -6698,11 +6777,12 @@ z64_skelanime_t* s /* Skelanime Struct */
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800A56F0(void);
+#define SkelAnime_Free z_skelanime_free
+extern void z_skelanime_free(z64_skelanime_t* skl, z64_global_t* gl);
 	#if OOT_DEBUG
-		asm("external_func_800A56F0 = 0x800A56F0");
+		asm("z_skelanime_free = 0x800A56F0");
 	#elif OOT_U_1_0
-		asm("external_func_800A56F0 = 0x8008D6D0");
+		asm("z_skelanime_free = 0x8008D6D0");
 	#endif
 
 /**
