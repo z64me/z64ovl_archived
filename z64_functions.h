@@ -1670,11 +1670,11 @@ extern float math_distance_xyz_actor_actor(z64_actor_t *a, z64_actor_t *b);
  * TODO These notes need converted into a C function prototype
  * A0 = Actor | A1 = Coordinate ptr | F0 = Result
  */
-extern float math_distance_xyz_actor_point(z64_actor_t *a, z64_point_t *b);
+extern float math_distance_xyz_actor_point(z64_actor_t *a, vec3f_t *b);
 	#if OOT_DEBUG
-		asm("math_distance_xyz_actor_point32_t = 0x8002DB6C");
+		asm("math_distance_xyz_actor_point = 0x8002DB6C");
 	#elif OOT_U_1_0
-		asm("math_distance_xyz_actor_point32_t = 0x800214D8");
+		asm("math_distance_xyz_actor_point = 0x800214D8");
 	#endif
 
 /**

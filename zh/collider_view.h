@@ -16,7 +16,54 @@
 #define guRotateRPYF libultra_guRotateRPYF
 #define M_PI 3.14159265358979323846
 
-static void zh_collider_draw_cylinder(z64_global_t* gl, Gfx** p_gfx_p, Gfx** p_gfx_d, float x, float y, float z, int radius, int height)
+/* Adapted from gz */
+/*static void gz_tri_norm(vec3f_t* v1, vec3f_t* v2, vec3f_t* v3, vec3f_t* norm)
+{
+    norm->x = (v2->y - v1->y) * (v3->z - v1->z) - (v2->z - v1->z) * (v3->y - v1->y);
+    norm->y = (v2->z - v1->z) * (v3->x - v1->x) - (v2->x - v1->x) * (v3->z - v1->z);
+    norm->z = (v2->x - v1->x) * (v3->y - v1->y) - (v2->y - v1->y) * (v3->x - v1->x);
+    float norm_d = sqrtf(norm->x * norm->x + norm->y * norm->y + norm->z * norm->z);
+
+    if (norm_d != 0.0f)
+    {
+        norm->x *= 127.0f / norm_d;
+        norm->y *= 127.0f / norm_d;
+        norm->z *= 127.0f / norm_d;
+    }
+}
+
+static void gz_draw_tri(Gfx** p_gfx_p, Gfx** p_gfx_d, vec3f_t* v1, vec3f_t* v2, vec3f_t* v3)
+{
+    vec3f_t norm;
+    gz_tri_norm(v1, v2, v3, &norm);
+
+    Vtx v[3] = {
+        gdSPDefVtxN(v1->x, v1->y, v1->z, 0, 0, norm.x, norm.y, norm.z, 255)
+        , gdSPDefVtxN(v1->x, v1->y, v1->z, 0, 0, norm.x, norm.y, norm.z, 255)
+        , gdSPDefVtxN(v1->x, v1->y, v1->z, 0, 0, norm.x, norm.y, norm.z, 255)
+    };
+
+    gSPVertex((*p_gfx_p)++, gDisplayListData(p_gfx_d, v), 3, 0);
+    gSP1Triangle((*p_gfx_p)++, 0, 1, 2, 0);
+}
+
+static void gz_draw_quad(Gfx **p_gfx_p, Gfx **p_gfx_d, z64_xyzf_t *v1, z64_xyzf_t *v2, z64_xyzf_t *v3, z64_xyzf_t *v4)
+{
+  z64_xyzf_t norm;
+  tri_norm(v1, v2, v4, &norm);
+
+  Vtx v[4] = {
+    gdSPDefVtxN(v1->x, v1->y, v1->z, 0, 0, norm.x, norm.y, norm.z, 255),
+    gdSPDefVtxN(v2->x, v2->y, v2->z, 0, 0, norm.x, norm.y, norm.z, 255),
+    gdSPDefVtxN(v3->x, v3->y, v3->z, 0, 0, norm.x, norm.y, norm.z, 255),
+    gdSPDefVtxN(v4->x, v4->y, v4->z, 0, 0, norm.x, norm.y, norm.z, 255)
+  };
+
+  gSPVertex((*p_gfx_p)++, gDisplayListData(p_gfx_d, v), 4, 0);
+  gSP2Triangles((*p_gfx_p)++, 0, 1, 2, 0, 0, 2, 3, 0);
+}*/
+
+static void zh_draw_cylinder(z64_global_t* gl, Gfx** p_gfx_p, Gfx** p_gfx_d, float x, float y, float z, int radius, int height)
 {
     Mtx m;
     {
@@ -52,19 +99,30 @@ static void zh_collider_draw(z64_global_t* gl, z64_collider_t* col)
             int radius = cyl->dim.radius;
             if (radius == 0) radius = 1;
 
-            zh_collider_draw_cylinder(
+            zh_draw_cylinder(
                 gl, p_gfx_p, p_gfx_d
                 , cyl->dim.pos.x, cyl->dim.pos.y + cyl->dim.y_shift, cyl->dim.pos.z
                 , radius, cyl->dim.height
             );
             break;
         }
-        case COL_SHAPE_TRIS:
-            //TODO
+        case COL_SHAPE_TRIS: /*{
+            z64_collider_tris_t* tris = (z64_collider_tris_t*)col;
+
+            for (int j = 0; j < tris->count; ++j)
+            {
+                z64_collider_tris_item_t* item = &tris->list[j];
+                gz_draw_tri(p_gfx_p, p_gfx_d, &item->dim.vtx[0], &item->dim.vtx[1], &item->dim.vtx[2]);
+            }
             break;
-        case COL_SHAPE_QUAD:
-            //TODO
+        }*/
+        break;
+        case COL_SHAPE_QUAD: /*{
+            z64_collider_quad_t* quad = (z64_collider_quad_t*)col;
+            gz_draw_quad(p_gfx_p, p_gfx_d, &quad->dim.quad[0], &quad->dim.quad[2], &quad->dim.quad[3], &quad->dim.quad[1]);
             break;
+        }*/
+        break;
     }
 }
 #endif /* !ZH_COLLIDER_VIEW */
