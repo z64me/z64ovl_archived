@@ -16,6 +16,7 @@
 #define ceilf z_ceilf
 #define roundf z_roundf
 #define truncf z_truncf
+#define sqrtf z_sqrt
 #define randf z_math_frand
 
 /* Generate a random floating point number between a lower bound and an upper bound. */
