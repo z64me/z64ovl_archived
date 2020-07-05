@@ -29,6 +29,7 @@
 /* external, self-contained helpers */
 #include "zh/sprintf.h"
 #include "zh/matrix.h"
+#include "zh/zh_math.h"
 /*
 void
 zh_sprintf(char *dst, char *fmt, struct va_arr *va_arr)

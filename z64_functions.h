@@ -8615,6 +8615,7 @@ extern void external_func_800FCC6C(void);
 	#endif
 
 /* Return tangent of `x`. */
+#define Math_tanf z_tanf
 extern float z_tanf(float x);
 #if OOT_DEBUG
   asm("z_tanf = 0x800FCE80");
@@ -8625,6 +8626,7 @@ extern float z_tanf(float x);
 #endif
 
 /* Return floor of `x`. */
+#define Math_floorf z_floorf
 extern float z_floorf(float x);
 #if OOT_DEBUG
   asm("z_floorf = 0x800FCEB4");
@@ -8635,6 +8637,7 @@ extern float z_floorf(float x);
 #endif
 
 /* Return ceil of `x`. */
+#define Math_ceilf z_ceilf
 extern float z_ceilf(float x);
 #if OOT_DEBUG
   asm("z_ceilf = 0x800FCED4");
@@ -8645,6 +8648,7 @@ extern float z_ceilf(float x);
 #endif
 
 /* Round `x`. */
+#define Math_roundf z_roundf
 extern float z_roundf(float x);
 #if OOT_DEBUG
   asm("z_roundf = 0x800FCEF4");
@@ -8655,6 +8659,7 @@ extern float z_roundf(float x);
 #endif
 
 /* Truncate `x`. */
+#define Math_truncf z_truncf
 extern float z_truncf(float x);
 #if OOT_DEBUG
   asm("z_truncf = 0x800FCF14");
@@ -8664,29 +8669,75 @@ extern float z_truncf(float x);
   /*asm("z_truncf = 0xDEADBEEF");*/
 #endif
 
+/* Nearby Integer */
+#define Math_nearbyintf z_nearby_int_f
+extern int32_t z_nearby_int_f(float x);
+#if OOT_DEBUG
+  asm("z_nearby_int_f = 0x800FCF34");
+#elif OOT_U_1_0
+  /*asm("z_nearby_int_f = 0xDEADBEEF");*/
+#elif MM_U_1_0
+  /*asm("z_nearby_int_f = 0xDEADBEEF");*/
+#endif
+
+/**
+ * Atan Taylor Q
+ */
+#define Math_atanf_taylor_q z_atanf_taylor_q
+extern float z_atanf_taylor_q(float x);
+	#if OOT_DEBUG
+		asm("z_atanf_taylor_q = 0x800FCF54");
+	#elif OOT_U_1_0
+		//asm("z_atanf_taylor_q = 0xDEADBEEF");
+	#endif
+
+/**
+ * Atan Taylor
+ */
+#define Math_atanf_taylor z_atanf_taylor
+extern float z_atanf_taylor(float x);
+	#if OOT_DEBUG
+		asm("z_atanf_taylor = 0x800FCFA0");
+	#elif OOT_U_1_0
+		//asm("z_atanf_taylor = 0xDEADBEEF");
+	#endif
+
 /**
  * Atan
  */
 extern float z_atanf_cfrac(float x);
 	#if OOT_DEBUG
-		asm("z_atanf = 0x800FD0C4");
+		asm("z_atanf_cfrac = 0x800FD0C4");
 	#elif OOT_U_1_0
-		asm("z_atanf = 0x800CD648");
+		asm("z_atanf_cfrac = 0x800CD648");
+	#endif
+
+/**
+ * Atan
+ */
+#define Math_atanf z_atanf
+extern float z_atanf(float x);
+	#if OOT_DEBUG
+		asm("z_atanf = 0x800FD210");
+	#elif OOT_U_1_0
+		//asm("z_atanf = 0xDEADBEEF");
 	#endif
 
 /**
  * Atan2
  */
-extern float z_atan2f2(float y, float x);
+#define Math_atan2f z_atan2f_2
+extern float z_atan2f_2(float y, float x);
 	#if OOT_DEBUG
-		asm("z_atan2f2 = 0x800FD250");
+		asm("z_atan2f_2 = 0x800FD250");
 	#elif OOT_U_1_0
-		asm("z_atan2f2 = 0x800CD76C");
+		asm("z_atan2f_2 = 0x800CD76C");
 	#endif
 
 /**
  * asinf
  */
+#define Math_asinf z_asinf
 extern void z_asinf(float x);
 	#if OOT_DEBUG
 		asm("z_asinf = 0x800FD338");
@@ -8697,12 +8748,73 @@ extern void z_asinf(float x);
 /**
  * acosf
  */
+#define Math_acosf z_acosf
 extern void z_acosf(float x);
 	#if OOT_DEBUG
 		asm("z_acosf = 0x800FD368");
 	#elif OOT_U_1_0
 		asm("z_acosf = 0x800CD890");
 	#endif
+
+/**
+ * z_fp_floorf
+ */
+extern float z_fp_floorf(float x);
+	#if OOT_DEBUG
+		asm("z_fp_floorf = 0x800FD390");
+	#elif OOT_U_1_0
+		//asm("z_fp_floorf = 0xDEADBEEF");
+	#endif
+
+/**
+ * z_fp_floor
+ */
+extern double z_fp_floor(double x);
+	#if OOT_DEBUG
+		asm("z_fp_floor = 0x800FD39C");
+	#elif OOT_U_1_0
+		//asm("z_fp_floor = 0xDEADBEEF");
+	#endif
+
+/**
+ * z_fp_lfloorf
+ */
+extern int32_t z_fp_lfloorf(float x);
+	#if OOT_DEBUG
+		asm("z_fp_lfloorf = 0x800FD3A8");
+	#elif OOT_U_1_0
+		//asm("z_fp_lfloorf = 0xDEADBEEF");
+	#endif
+
+/**
+ * z_fp_lfloor
+ */
+extern int32_t z_fp_lfloor(double x);
+	#if OOT_DEBUG
+		asm("z_fp_lfloor = 0x800FD3B8");
+	#elif OOT_U_1_0
+		//asm("z_fp_lfloor = 0xDEADBEEF");
+	#endif
+
+/*
+These all need 1.0 and MM Equivalents.
+asm("z_fp_ceilf = 0x800FD3C8");
+asm("z_fp_ceil = 0x800FD3D4");
+asm("z_fp_lceilf = 0x800FD3E0");
+asm("z_fp_lceil = 0x800FD3F0");
+asm("z_fp_truncf = 0x800FD400");
+asm("z_fp_trunc = 0x800FD40C");
+asm("z_fp_ltruncf = 0x800FD418");
+asm("z_fp_ltrunc = 0x800FD428");
+asm("z_fp_nearbyintf = 0x800FD438");
+asm("z_fp_nearbyint = 0x800FD444");
+asm("z_fp_lnearbyintf = 0x800FD450");
+asm("z_fp_lnearbyint = 0x800FD460");
+asm("z_fp_roundf = 0x800FD470");
+asm("z_fp_round = 0x800FD48C");
+asm("z_fp_lroundf = 0x800FD4AC");
+asm("z_fp_lround = 0x800FD4CC");
+*/
 
 /**
  * Deallocates memory on main heap
@@ -8802,11 +8914,11 @@ extern float z_cosf(float angle);
 /**
  * TODO This function is completely undocumented
  */
-extern int16_t coss(int16_t angle);
+extern int16_t z_coss_2(int16_t angle);
 	#if OOT_DEBUG
-		asm("coss = 0x80104780");
+		asm("z_coss_2 = 0x80104780");
 	#elif OOT_U_1_0
-		asm("coss = 0x800D2FA0");
+		asm("z_coss_2 = 0x800D2FA0");
 	#endif
 
 /**
