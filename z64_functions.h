@@ -3495,18 +3495,17 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 	#endif
 
 /**
- * Wrapper for dynapoly_alloc() and actor_register_dynapoly(), so
+ * Wrapper for z_dynapoly_alloc() and z_dynapoly_actor_set(), so
  * MM-style dynapoly can work in OoT.
  * NOTE: This function appears to only exist in MM. A functionally
  *       identical rewrite for use in OoT has been provided, however.
  * NOTE: in the entity structure, a dynapoly_t must immediately
  *       follow the actor_t whose pointer you provide
- * TODO: Test rewrite in OoT and confirm it works.
  */
 /* TODO: Does OoT have an equivalent of this function? */
 #if OOT_DEBUG || OOT_U_1_0
 	static inline void
-	actor_dynapoly_new(
+	z_dynapoly_new(
 		z64_global_t *global
 		, z64_actor_t *actor
 		, uint32_t dynacollision  /* ex. 0x06000B70 (Obj_Kibako2) */
@@ -3515,9 +3514,9 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 		/* the actor_t is followed by a dynapoly_t */
 		z64_dynapoly_t *dynapoly = (z64_dynapoly_t*)(actor + 1);
 		uint32_t result = 0;
-		dynapoly_alloc(dynacollision, &result);
+		z_dynapoly_alloc(dynacollision, &result);
 		dynapoly->poly_id =
-		actor_register_dynapoly(
+		z_dynapoly_actor_set(
 			global
 			, &global->col_ctxt.unk_00_
 			, actor
@@ -3526,12 +3525,12 @@ extern void actor_dynapoly_set_move(z64_actor_t *actor, enum dynapoly_move_flag 
 	}
 #elif MM_U_1_0
 	extern void
-	actor_dynapoly_new(
+	z_dynapoly_new(
 		z64_global_t *global
 		, z64_actor_t *actor
 		, uint32_t dynacollision
 	);
-	asm("actor_dynapoly_new = 0x800CAE34");
+	asm("z_dynapoly_new = 0x800CAE34");
 #endif
 
 /**
