@@ -6838,14 +6838,13 @@ extern void external_func_800A6408(void);
 
 /**
  * Initialize weighted skeleton object with animation
- * TODO Unknown variables, do something about that
  * a0 = Global Context | a1 = Skeleton) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)
  */
-extern void skelanime_init_weighted(z64_global_t *global, z64_skelanime_weighted_t *weighted_skelanime, uint32_t skeleton, uint32_t animation, uint8_t unk0, uint8_t unk1, uint8_t unk2);
+extern void z_skelanime_init_weighted(z64_global_t *global, z64_skelanime_weighted_t *weighted_skelanime, uint32_t skeleton, uint32_t animation);
 	#if OOT_DEBUG
-		asm("skelanime_init_weighted = 0x800A663C");
+		asm("z_skelanime_init_weighted = 0x800A663C");
 	#elif OOT_U_1_0
-		asm("skelanime_init_weighted = 0x8008E4EC");
+		asm("z_skelanime_init_weighted = 0x8008E4EC");
 	#endif
 
 /**
