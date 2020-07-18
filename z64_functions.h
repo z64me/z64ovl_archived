@@ -5674,13 +5674,14 @@ extern void z_if_viewport_init(z64_if_ctxt_t* if_ctxt);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Returns a pointer to the path index in the current scene.
+ * TODO: Make this return a proper path type, instead of void*.
  */
-extern void external_func_8008E4E0(void);
+extern void* z_get_path_index(z64_global_t* gl, int16_t index, int16_t max);
 	#if OOT_DEBUG
-		asm("external_func_8008E4E0 = 0x8008E4E0");
+		asm("z_get_path_index = 0x8008E4E0");
 	#elif OOT_U_1_0
-		asm("external_func_8008E4E0 = 0x80078F80");
+		asm("z_get_path_index = 0x80078F80");
 	#endif
 
 /**
