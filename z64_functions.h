@@ -4637,7 +4637,7 @@ extern void z_memset(void *dst, const uint32_t len, const uint8_t value);
 	#endif
 
 /**
-/* Return Cosine of Rotation Angle
+* Return Cosine of Rotation Angle
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_coss`
 */
@@ -4654,7 +4654,7 @@ int16_t angle /* 16-bit Angle */
 #endif
 
 /**
-/* Return Sine of Rotation Angle
+* Return Sine of Rotation Angle
 * Source Code Reference File: "z_lib.c"
 * Formerly `math_sins`
 */
@@ -8867,7 +8867,7 @@ extern int32_t z_srand(uint32_t seed);
 	#endif
 
 /**
-/* Return Sine (in radians) of Rotation Angle
+* Return Sine (in radians) of Rotation Angle
 * Source Code Reference File: "code.c"
 * Formerly `z_sin`
 */
