@@ -236,6 +236,6 @@ static inline void zh_color_flash(uint32_t init, float min_val, float timer, hsv
     timer -= 10;
 
   zh_color_rgb2hsv(init, in);
-  float val = ((z_cos(timer) + 1.0f) / 2) * (1.0f - min_val) + min_val;
+  float val = ((z_cosf(timer) + 1.0f) / 2) * (1.0f - min_val) + min_val;
   zh_color_hsv2rgb(in->h, in->s, val, out, init);
 }
