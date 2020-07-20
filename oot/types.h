@@ -662,7 +662,7 @@ typedef struct
 typedef struct {
   vec3f_t pos;
   float unk_0C;
-  rgb8_t color
+  rgb8_t color;
 } z64_target_context_entry_t;
 
 typedef struct {
