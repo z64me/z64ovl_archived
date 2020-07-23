@@ -557,12 +557,20 @@ extern void external_func_8002843C(void);
 /**
  * Spawn Particle 0x00 Type 4 (Wrapper for 8001BCE0)
  * TODO These notes need converted into a C function prototype
+ * Same as z_effect_spawn_dust_5 but much more brighter
  */
-extern void external_func_8002865C(void);
+extern void z_effect_spawn_dust_4(
+z64_global_t* gl /* Global Context */
+, vec3f_t* position /* X, Y, and Z Position */
+, vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
+, vec3f_t* acceleration /* Acceleration along the X, Y, and Z axes */
+, int16_t scale
+, int16_t scaleStep
+);
 	#if OOT_DEBUG
-		asm("external_func_8002865C = 0x8002865C");
+		asm("z_effect_spawn_dust_4 = 0x8002865C");
 	#elif OOT_U_1_0
-		asm("external_func_8002865C = 0x8001C154");
+		asm("z_effect_spawn_dust_4 = 0x8001C154");
 	#endif
 
 /* Spawn ovl_Effect_Ss_Dust (Dust)
@@ -574,8 +582,8 @@ z64_global_t* gl /* Global Context */
 , vec3f_t* position /* X, Y, and Z Position */
 , vec3f_t* velocity /* Velocity along the X, Y, and Z axes */
 , vec3f_t* acceleration /* Acceleration along the X, Y, and Z axes */
-, int16_t sp10
-, int16_t sp14
+, int16_t scale
+, int16_t scaleStep
 );
 #if OOT_DEBUG
   asm("z_effect_spawn_dust_5 = 0x800286CC");
