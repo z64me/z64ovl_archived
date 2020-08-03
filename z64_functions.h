@@ -515,8 +515,8 @@ extern void external_func_80027F80(void);
  * Spawn Particle 0x00 Type 0 (Wrapper for 8001BCE0)
  * TODO These notes need converted into a C function prototype
  */
-extern void z_effect_spawn_dust_a(z64_global_t* globalCtx, vec3f_t* pos, vec3f_t* velocity, vec3f_t* accel, uint32_t* primColor,
-                   uint32_t* envColor, int16_t scale, int16_t scaleStep);
+extern void z_effect_spawn_dust_a(z64_global_t* globalCtx, vec3f_t* pos, vec3f_t* velocity, vec3f_t* accel, rgba8_t* primColor,
+                   rgba8_t* envColor, int16_t scale, int16_t scaleStep);
 	#if OOT_DEBUG
 		asm("z_effect_spawn_dust_a = 0x8002829C");
 	#elif OOT_U_1_0
@@ -538,8 +538,8 @@ extern void external_func_8002836C(z64_global_t* globalCtx, vec3f_t* pos, vec3f_
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800283D4(z64_global_t* globalCtx, vec3f_t* pos, vec3f_t* velocity, vec3f_t* accel, uint32_t* primColor,
-                   uint32_t* envColor, int16_t scale, int16_t scaleStep, int16_t life);
+extern void external_func_800283D4(z64_global_t* globalCtx, vec3f_t* pos, vec3f_t* velocity, vec3f_t* accel, rgba8_t* primColor,
+                   rgba8_t* envColor, int16_t scale, int16_t scaleStep, int16_t life);
 	#if OOT_DEBUG
 		asm("external_func_800283D4 = 0x800283D4");
 	#elif OOT_U_1_0
