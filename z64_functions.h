@@ -515,7 +515,8 @@ extern void external_func_80027F80(void);
  * Spawn Particle 0x00 Type 0 (Wrapper for 8001BCE0)
  * TODO These notes need converted into a C function prototype
  */
-extern void z_effect_spawn_dust_a(z64_global_t* gl, vec3f_t* pos, vec3f_t* u0, vec3f_t* u1, uint32_t* u2, uint32_t* u3, int16_t u4, int16_t u5);
+extern void z_effect_spawn_dust_a(z64_global_t* globalCtx, vec3f_t* pos, vec3f_t* velocity, vec3f_t* accel, uint32_t* primColor,
+                   uint32_t* envColor, int16_t scale, int16_t scaleStep);
 	#if OOT_DEBUG
 		asm("z_effect_spawn_dust_a = 0x8002829C");
 	#elif OOT_U_1_0
@@ -526,7 +527,8 @@ extern void z_effect_spawn_dust_a(z64_global_t* gl, vec3f_t* pos, vec3f_t* u0, v
  * Spawn Particle 0x00 Type 0 (Wrapper for 8001BCE0)
  * TODO These notes need converted into a C function prototype
  */
-extern void external_func_8002836C(void);
+extern void external_func_8002836C(z64_global_t* globalCtx, vec3f_t* pos, vec3f_t* velocity, vec3f_t* accel, rgba8_t* primColor,
+                   rgba8_t* envColor, int16_t scale, int16_t scaleStep, int16_t life);
 	#if OOT_DEBUG
 		asm("external_func_8002836C = 0x8002836C");
 	#elif OOT_U_1_0
@@ -536,7 +538,8 @@ extern void external_func_8002836C(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_800283D4(void);
+extern void external_func_800283D4(z64_global_t* globalCtx, vec3f_t* pos, vec3f_t* velocity, vec3f_t* accel, uint32_t* primColor,
+                   uint32_t* envColor, int16_t scale, int16_t scaleStep, int16_t life);
 	#if OOT_DEBUG
 		asm("external_func_800283D4 = 0x800283D4");
 	#elif OOT_U_1_0
@@ -3682,7 +3685,7 @@ extern void external_func_8005A948(void);
 /**
  * TODO This function is completely undocumented
  */
-extern void external_func_8005A970(void);
+extern void external_func_8005A970(vec3s_t*, z64_gl_camera_t*);
 	#if OOT_DEBUG
 		asm("external_func_8005A970 = 0x8005A970");
 	#elif OOT_U_1_0
@@ -5293,7 +5296,7 @@ extern void external_func_8007C3F4(void);
  * TODO Finish tehse notes, convert to a C function prototype...
  * a0 - global context | a1 = ??? | a2 = frame duration | a3 = ??? | 0x10(sp) = ???
  */
-extern void actor_closeup(void);
+extern void actor_closeup(z64_global_t* globalCtx, int16_t arg1, int16_t arg2, z64_actor_t* actor, int16_t arg4);
 	#if OOT_DEBUG
 		asm("actor_closeup = 0x800800F8");
 	#elif OOT_U_1_0
