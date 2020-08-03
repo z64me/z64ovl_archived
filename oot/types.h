@@ -696,15 +696,15 @@ typedef struct {
 } z64_target_context_t;
 
 typedef struct {
-    /* 0x00 */ u32      texture;
-    /* 0x04 */ s16      unk_4;
-    /* 0x06 */ s16      unk_6;
-    /* 0x08 */ u8       unk_8;
-    /* 0x09 */ u8       unk_9;
-    /* 0x0A */ u8       delayA;
-    /* 0x0B */ u8       delayB;
-    /* 0x0C */ s16      unk_C;
-    /* 0x0E */ s16      unk_E;
+    /* 0x00 */ uint32_t      texture;
+    /* 0x04 */ int16_t       unk_4;
+    /* 0x06 */ int16_t       unk_6;
+    /* 0x08 */ uint8_t       unk_8;
+    /* 0x09 */ uint8_t       unk_9;
+    /* 0x0A */ uint8_t       delayA;
+    /* 0x0B */ uint8_t       delayB;
+    /* 0x0C */ int16_t       unk_C;
+    /* 0x0E */ int16_t       unk_E;
 } z64_title_card_context_t;
 
 typedef struct {
@@ -737,6 +737,148 @@ typedef struct {
   void* absolute_space;
 } z64_actor_context_t;
 
+typedef struct {
+    float                height;
+    int16_t              dist;
+} special0;
+
+typedef struct {
+    /* 0x0000 */ float   unk_00;
+    /* 0x0004 */ float   unk_04;
+    /* 0x0008 */ int16_t unk_08;
+} special9; // size = 0xC
+
+typedef struct {
+    char                 unk_00[0xC];
+    int32_t              unk_0C;
+    float                target_init_zoom; //Kungfu zoom
+    int16_t              unk_14;
+    int16_t              unk_16;
+    int16_t              unk_18;
+    int16_t              unk_1A;
+    float                unk_1C;
+    float                unk_20;
+    int16_t              unk_24;
+    int16_t              unk_26;
+    int16_t              unk_28; //Angle?
+    int16_t              unk_2A;
+} normal3_unk20;
+
+typedef struct {
+    float                height;
+    float                dist; // distance
+    float                angle; //z-targeting
+    float                unk_0C; //same?
+    float                nearby_height;
+    float                dist_height; // fov
+    float                unk_18;
+    int16_t              unk_1C; // theta
+    int16_t              unk_1E;
+    normal3_unk20        unk_20;
+} normal3; //Z-Targeting
+
+typedef struct {
+    /* 0x0000 */ float            unk_00;
+    /* 0x0004 */ int16_t          unk_04;
+} demo1_unk_04; // size = 0x14
+
+typedef struct {
+    /* 0x0000 */ int16_t          unk_00;
+    /* 0x0002 */ int16_t          unk_02;
+    /* 0x0004 */ demo1_unk_04     unk_04;
+} demo1; // size = 0x18
+
+typedef struct {
+    /* 0x0000 */ z64_actor_t*     door;
+    /* 0x0004 */ int16_t          unk_04;
+    /* 0x0006 */ int16_t          unk_06;
+    /* 0x0008 */ int16_t          unk_08;
+    /* 0x000A */ int16_t          unk_0A;
+    /* 0x000C */ special9         spec9;
+    /* 0x0018 */ int16_t          unk_18;
+} z64_camera_door_t; // size = 0x1C
+
+typedef struct {
+    /* 0x00 */ int8_t             continueFlag;
+    /* 0x01 */ int8_t             cameraRoll;
+    /* 0x02 */ uint16_t           nextPointFrame;
+    /* 0x04 */ float              viewAngle; // in degrees
+    /* 0x08 */ vec3s_t            pos;
+} z64_camera_demo_point_t; // size = 0x10
+
+typedef union {
+    char                 data[0x50];
+    int16_t              sh[2];
+    int32_t              w;
+    float                f;
+    z64_camera_door_t    doorCam;
+    special0             spec0;
+    demo1                demo1;
+    normal3              normal3;
+} camera_unk_00;
+
+/* Camera */
+typedef struct {
+    /* 0x0000 */ camera_unk_00            unk_00;
+    /* 0x0050 */ vec3f_t                  at;
+    /* 0x005C */ vec3f_t                  eye;
+    /* 0x0068 */ vec3f_t                  unk_68;
+    /* 0x0074 */ vec3f_t                  eyeNext;
+    /* 0x0080 */ vec3f_t                  unk_80;
+    /* 0x008C */ struct z64_global_t*     globalCtx;
+    /* 0x0090 */ z64_player_t*            player;
+    /* 0x00AC */ vec3f_t                  playerPos;
+    /* 0x00AC */ vec3s_t                  playerRot;
+    /* 0x00A8 */ z64_actor_t*             target;
+    /* 0x00AC */ vec3f_t                  targetPos;
+    /* 0x00AC */ vec3s_t                  targetRot;
+    /* 0x00C0 */ vec3f_t                  unk_C0; // has to do with how quickly the camera rotates link.
+    /* 0x00CC */ vec3f_t                  unk_CC; // has to do with how quickly the camera zooms
+    /* 0x00D8 */ float                    unk_D8;
+    /* 0x00DC */ float                    dist; // possibly a Vec3f
+    /* 0x00E0 */ float                    unk_E0;
+    /* 0x00E4 */ vec3f_t                  unk_E4; //pos offset
+    /* 0x00F0 */ vec3f_t                  unk_F0;
+    /* 0x00FC */ float                    fov;
+    /* 0x0100 */ float                    unk_100; // update rate of distance from link?
+    /* 0x0104 */ float                    unk_104;
+    /* 0x0108 */ vec3f_t                  unk_108;
+    /* 0x0114 */ char                     unk_114[0x4];
+    /* 0x0118 */ int32_t                  unk_118;
+    /* 0x011C */ int32_t                  unk_11C;
+    /* 0x0120 */ char                     unk_120[0x4];
+    /* 0x0124 */ z64_camera_demo_point_t* atPoints;
+    /* 0x0128 */ z64_camera_demo_point_t* eyePoints;
+    /* 0x012C */ int16_t                  relativeToPlayer; // camera Cutscene points are relative to player's position
+    /* 0x012E */ int16_t                  unk_12E;
+    /* 0x0130 */ int16_t                  uid;    // Unique identifier of the camera.
+    /* 0x0132 */ char                     unk_132[0x02];
+    /* 0x0134 */ vec3s_t                  unk_134;
+    /* 0x013A */ vec3s_t                  unk_13A; // seems to be a copy of unk_134, but unused for anything different?
+    /* 0x0140 */ int16_t                  status;
+    /* 0x0142 */ int16_t                  setting; // referred to as set
+    /* 0x0144 */ int16_t                  mode;
+    /* 0x0146 */ int16_t                  unk_146; // unknown if used
+    /* 0x0148 */ int16_t                  unk_148; // ID for door camera? (see func_8005AD40)
+    /* 0x014A */ int16_t                  unk_14A; // unknown if used
+    /* 0x014C */ int16_t                  unk_14C;
+    /* 0x014E */ int16_t                  unk_14E;
+    /* 0x0150 */ int16_t                  unk_150; // unknown if used
+    /* 0x0152 */ int16_t                  unk_152;
+    /* 0x0154 */ uint16_t                 unk_154; // appears to be some clone of setting?
+    /* 0x0156 */ int16_t                  unk_156;
+    /* 0x0158 */ int16_t                  unk_158; // unknown if used
+    /* 0x015A */ int16_t                  roll;
+    /* 0x015C */ int16_t                  unk_15C; // unknown if used
+    /* 0x015E */ int16_t                  unk_15E;
+    /* 0x0160 */ int16_t                  unk_160;
+    /* 0x0162 */ int16_t                  unk_162;
+    /* 0x0164 */ int16_t                  unk_164;
+    /* 0x0166 */ int16_t                  unk_166; // unknown if used
+    /* 0x0168 */ int16_t                  unk_168;
+    /* 0x016A */ int16_t                  unk_16A; // unknown if used
+} z64_gl_camera_t; // size = 0x16C
+
 /* game context */
 typedef struct
 {
@@ -759,28 +901,18 @@ typedef struct
     vec3f_t           eye;                      /* 0x000E0 */
     char              unk_03_[0x00F4];          /* 0x000EC */
   } view; /* starts at 00B8 */
-  struct
-  {
-    char              unk_0[0x90];              /* 0x001E0 */
-    z64_actor_t      *focus;                    /* 0x00270 */
-    char              unk_04_[0x00AE];          /* 0x00274 */
-    uint16_t          mode;                     /* 0x00322 */
-    char              unk_05_[0x001A];          /* 0x00324 */
-    uint16_t          flag_1;                   /* 0x0033E */
-    char              unk_06_[0x016C];          /* 0x00340 */
-    int16_t           event_flag;               /* 0x004AC */
-    char              unk_07_[0x02E2];          /* 0x004AE */
-    void             *pointer[4];               /* 0x00790 */
-    int16_t           active;  /* active cam (0-3) 0x007A0 */
-    int16_t           unk_5C2;                  /* 0x007A2 */
-  } camera;
+
+  z64_gl_camera_t   camera[4];                /* 0x001E0 */
+  z64_gl_camera_t*  pointer[4];               /* 0x00790 */
+  int16_t           active_camera;            /* active cam (0-3) 0x007A0 */
+  int16_t           next_camera;              /* 0x007A2 */
   uint8_t           seq_idx;                  /* 0x007A4 */
   uint8_t           night_sfx;                /* 0x007A5 */
   char              unk_08_[0x0002];          /* 0x007A6 */
   z64_lighting_t    lighting;                 /* 0x007A8 */
   char              unk_09_[0x0008];          /* 0x007B8 */
   z64_col_ctxt_t    col_ctxt;                 /* 0x007C0 */
-  z64_actor_context_t actor_ctxt;             /* 0x01C24*/
+  z64_actor_context_t actor_ctxt;             /* 0x01C24 */
   struct
   {
     char            unk_0x01D64[4];           /* 0x01D64 */
