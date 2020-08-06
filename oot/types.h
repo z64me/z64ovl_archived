@@ -1052,10 +1052,10 @@ typedef enum {
 } z64_animation_type_e;
 
 typedef struct {
-  /* 0x00 */ vec3s_t translation;
-  /* 0x06 */ uint8_t first_child_index;
-  /* 0x07 */ uint8_t sibling_limb_index;
-  /* 0x08 */ Gfx* dlist[1];
+  /* 0x00 */ vec3s_t         translation;
+  /* 0x06 */ uint8_t         first_child_index;
+  /* 0x07 */ uint8_t         sibling_limb_index;
+  /* 0x08 */ Gfx*            dlist[1];
 } z64_skel_limb_entry_t;
 
 typedef struct {
@@ -1064,318 +1064,317 @@ typedef struct {
 
 typedef struct {
   /* 0x00 */ z64_skeleton_t* skeleton;
-  /* 0x04 */ uint8_t limb_count;
-  /* 0x05 */ uint8_t ___pad0;
-  /* 0x08 */ uint8_t dlist_count;
+  /* 0x04 */ uint8_t         limb_count;
+  /* 0x05 */ uint8_t         ___pad0;
+  /* 0x08 */ uint8_t         dlist_count;
 } z64_skeleton_header_t;
 
 typedef struct {
-  int16_t frame_count;
-  int16_t __pad0;
+  int16_t                    frame_count;
+  int16_t                    __pad0;
 } z64_anim_header_init_t;
 
 typedef struct {
-  z64_anim_header_init_t common;
-  uint32_t rotation_values;
-  uint32_t rotation_index;
-  uint16_t limit;
+  z64_anim_header_init_t     common;
+  uint32_t                   rotation_values;
+  uint32_t                   rotation_index;
+  uint16_t                   limit;
 } z64_anim_header_t;
 
 typedef struct {
-  uint8_t req[0x20]; /* DmaRequest */
-  OSMesgQueue msgQueue;
-  OSMesg msg;
+  uint8_t                    req[0x20]; /* DmaRequest */
+  OSMesgQueue                msgQueue;
+  OSMesg                     msg;
 } z64_animation_type_0_t;
 
 typedef struct {
-  uint8_t unk0;
-  uint8_t vec_count;
-  vec3s_t* dst;
-  vec3s_t* src;
+  uint8_t                    unk0;
+  uint8_t                    vec_count;
+  vec3s_t*                   dst;
+  vec3s_t*                   src;
 } z64_animation_type_1_t;
 
 typedef struct {
-  uint8_t unk0;
-  uint8_t limb_count;
-  vec3s_t* unk_04;
-  vec3s_t* unk_08;
-  float unk_0C;
+  uint8_t                    unk0;
+  uint8_t                    limb_count;
+  vec3s_t*                   unk_04;
+  vec3s_t*                   unk_08;
+  float                      unk_0C;
 } z64_animation_type_2_t;
 
 typedef struct {
-  uint8_t unk0;
-  uint8_t vec_count;
-  vec3s_t* dst;
-  vec3s_t* src;
-  uint8_t* index;
+  uint8_t                    unk0;
+  uint8_t                    vec_count;
+  vec3s_t*                   dst;
+  vec3s_t*                   src;
+  uint8_t*                   index;
 } z64_animation_type_3_t;
 
 typedef struct {
-  uint8_t unk0;
-  uint8_t vec_count;
-  uint8_t unk_02[2];
-  vec3s_t* dst;
-  vec3s_t* src;
-  uint8_t* index;
+  uint8_t                    unk0;
+  uint8_t                    vec_count;
+  uint8_t                    unk_02[2];
+  vec3s_t*                   dst;
+  vec3s_t*                   src;
+  uint8_t*                   index;
 } z64_animation_type_4_t;
 
 typedef struct {
-  z64_actor_t* actor;
-  z64_skelanime_t* skelanime;
-  float unk_08;
+  z64_actor_t*               actor;
+  z64_skelanime_t*           skelanime;
+  float                      unk_08;
 } z64_animation_type_5_t;
 
 typedef struct {
-  uint8_t raw[0x3C];
+  uint8_t                    raw[0x3C];
 } z64_animation_type_raw_t;
 
 typedef union {
-  z64_animation_type_raw_t raw;
-  z64_animation_type_1_t type0;
-  z64_animation_type_2_t type1;
-  z64_animation_type_3_t type2;
-  z64_animation_type_4_t type3;
-  z64_animation_type_5_t type5;
+  z64_animation_type_raw_t   raw;
+  z64_animation_type_1_t     type0;
+  z64_animation_type_2_t     type1;
+  z64_animation_type_3_t     type2;
+  z64_animation_type_4_t     type3;
+  z64_animation_type_5_t     type5;
 } z64_animation_type_t;
 
 typedef struct {
-  uint8_t type;
-  uint8_t unk_01;
-  z64_animation_type_t types;
+  uint8_t                    type;
+  uint8_t                    unk_01;
+  z64_animation_type_t       types;
 } z64_animation_entry_t;
 
 typedef struct {
-  z64_anim_header_init_t common;
-  uint32_t anim; /* Animation Segment Address */
+  z64_anim_header_init_t     common;
+  uint32_t                   anim; /* Animation Segment Address */
 } z64_animation_entry_link_t;
 
 struct z64_skelanime_s {
-  /* 0x00 */ uint8_t limb_count;
-  /* 0x01 */ uint8_t mode;
-  /* 0x02 */ uint8_t dlist_count;
-  /* 0x03 */ uint8_t _pad0;
-  /* 0x04 */ z64_skeleton_t* skeleton;
-  /* 0x08 */ union {
-    z64_anim_header_t* seg;
-    z64_animation_entry_link_t* link_animetion_seg;
-    z64_anim_header_init_t* common_seg;
-  } anim_current;
-  /* 0x0C */ float start_frame; /* Initial Animation Frame */
-  /* 0x10 */ float anim_frame_count;
-  /* 0x14 */ float anim_frame_total;
-  /* 0x18 */ float anim_current_frame;
-  /* 0x1C */ float anim_playback_speed;
-  /* 0x20 */ vec3s_t* limb_draw_table; /* now_joint */
-  /* 0x24 */ vec3s_t* transition_draw_table; /* morf_joint */
-  /* 0x28 */ float trans_current_frame;
-  /* 0x2C */ float transition_step;
-  /* 0x30 */ int32_t (*anim_update)();
-  /* 0x34 */ int8_t init_flags;
-  /* 0x35 */ uint8_t flags;
-  /* 0x36 */ int16_t prev_frame_rot;
-  /* 0x38 */ vec3s_t prev_frame_pos;
-  /* 0x3E */ vec3s_t unk_0x3E;
-  /* 0x44 */
-};
+   uint8_t         limb_count;                                /* 0x00 */
+   uint8_t         mode;                                      /* 0x01 */
+   uint8_t         dlist_count;                               /* 0x02 */
+   uint8_t         _pad0;                                     /* 0x03 */
+   z64_skeleton_t* skeleton;                                  /* 0x04 */
+   union {
+    z64_anim_header_t*            seg;
+    z64_animation_entry_link_t*   link_animetion_seg;
+    z64_anim_header_init_t*       common_seg;
+  } anim_current;                                             /* 0x08 */
+   float           start_frame; /* Initial Animation Frame */ /* 0x0C */
+   float           anim_frame_count;                          /* 0x10 */
+   float           anim_frame_total;                          /* 0x14 */
+   float           anim_current_frame;                        /* 0x18 */
+   float           anim_playback_speed;                       /* 0x1C */
+   vec3s_t*        limb_draw_table; /* now_joint */           /* 0x20 */
+   vec3s_t*        transition_draw_table; /* morf_joint */    /* 0x24 */
+   float           trans_current_frame;                       /* 0x28 */
+   float           transition_step;                           /* 0x2C */
+   int32_t         (*anim_update)();                          /* 0x30 */
+   int8_t          init_flags;                                /* 0x34 */
+   uint8_t         flags;                                     /* 0x35 */
+   int16_t         prev_frame_rot;                            /* 0x36 */
+   vec3s_t         prev_frame_pos;                            /* 0x38 */
+   vec3s_t         unk_0x3E;                                  /* 0x3E */
+}; /* Size 0x44 */
 
 typedef struct
 {
-  uint8_t unk00[0x4C];
-  z64_skelanime_t skelanime;
+  uint8_t          unk00[0x4C];
+  z64_skelanime_t  skelanime;
 } z64_skelanime_weighted_t;
 
 typedef struct {
-    /* 0x000 */ char unk_00[0x184];
-    /* 0x184 */ rgba8_t p1StartColor;
-    /* 0x188 */ rgba8_t p2StartColor;
-    /* 0x18C */ rgba8_t p1EndColor;
-    /* 0x190 */ rgba8_t p2EndColor;
-    /* 0x194 */ int32_t elemDuration;
-    /* 0x198 */ int32_t unkFlag;
-    /* 0x19C */ int32_t calcMode;
+     char          unk_00[0x184];                            /* 0x000 */
+     rgba8_t       p1StartColor;                             /* 0x184 */
+     rgba8_t       p2StartColor;                             /* 0x188 */
+     rgba8_t       p1EndColor;                               /* 0x18C */
+     rgba8_t       p2EndColor;                               /* 0x190 */
+     int32_t       elemDuration;                             /* 0x194 */
+     int32_t       unkFlag;                                  /* 0x198 */
+     int32_t       calcMode;                                 /* 0x19C */
 } z_eff_blure_init_t; // size = 0x1A0
 
 typedef struct {
-    /* 0x00 */ int32_t state;
-    /* 0x04 */ int32_t timer;
-    /* 0x08 */ vec3s_t p1;
-    /* 0x0E */ vec3s_t p2;
-    /* 0x14 */ uint16_t flags;
+     int32_t       state;                                    /* 0x00 */
+     int32_t       timer;                                    /* 0x04 */
+     vec3s_t       p1;                                       /* 0x08 */
+     vec3s_t       p2;                                       /* 0x0E */
+     uint16_t      flags;                                    /* 0x14 */
 } z64_eff_blure_elem_t; // size = 0x18
 
 typedef struct {
-    /* 0x000 */ z64_eff_blure_elem_t elements[16];
-    /* 0x180 */ int32_t calcMode;
-    /* 0x184 */ float mode4Param;
-    /* 0x188 */ uint16_t flags;
-    /* 0x18A */ int16_t addAngleChange;
-    /* 0x18C */ int16_t addAngle;
-    /* 0x18E */ rgba8_t p1StartColor;
-    /* 0x192 */ rgba8_t p2StartColor;
-    /* 0x196 */ rgba8_t p1EndColor;
-    /* 0x19A */ rgba8_t p2EndColor;
-    /* 0x19E */ uint8_t numElements; // "now_edge_num"
-    /* 0x19F */ uint8_t elemDuration;
-    /* 0x1A0 */ uint8_t unkFlag;
-    /* 0x1A1 */ uint8_t drawMode; // 0: simple; 1: simple with alt colors; 2+: smooth
-    /* 0x1A2 */ rgba8_t altPrimColor; // used with drawMode 1
-    /* 0x1A6 */ rgba8_t altEnvColor; // used with drawMode 1
+     z64_eff_blure_elem_t elements[16];                      /* 0x000 */
+     int32_t       calcMode;                                 /* 0x180 */
+     float         mode4Param;                               /* 0x184 */
+     uint16_t      flags;                                    /* 0x188 */
+     int16_t       addAngleChange;                           /* 0x18A */
+     int16_t       addAngle;                                 /* 0x18C */
+     rgba8_t       p1StartColor;                             /* 0x18E */
+     rgba8_t       p2StartColor;                             /* 0x192 */
+     rgba8_t       p1EndColor;                               /* 0x196 */
+     rgba8_t       p2EndColor;                               /* 0x19A */
+     uint8_t       numElements; // "now_edge_num"            /* 0x19E */
+     uint8_t       elemDuration;                             /* 0x19F */
+     uint8_t       unkFlag;                                  /* 0x1A0 */
+     uint8_t       drawMode;                                 /* 0x1A1 */ // 0: simple; 1: simple with alt colors; 2+: smooth
+     rgba8_t       altPrimColor; // used with drawMode 1     /* 0x1A2 */
+     rgba8_t       altEnvColor; // used with drawMode 1      /* 0x1A6 */
 } z64_eff_blure_t; // size = 0x1AC
 
 typedef struct {
-    /* 0x00 */ uint8_t    buttonItems[4];
-    /* 0x04 */ uint8_t    cButtonSlots[3];
-    /* 0x08 */ uint16_t   equipment;
+     uint8_t        buttonItems[4];                          /* 0x00 */
+     uint8_t        cButtonSlots[3];                         /* 0x04 */
+     uint16_t       equipment;                               /* 0x08 */
 } ItemEquips; // size = 0x0A
 
 typedef struct {
-    /* 0x00 */ uint32_t   chest;
-    /* 0x04 */ uint32_t   swch;
-    /* 0x08 */ uint32_t   clear;
-    /* 0x0C */ uint32_t   collect;
-    /* 0x10 */ uint32_t   unk;
-    /* 0x14 */ uint32_t   rooms;
-    /* 0x18 */ uint32_t   floors;
+     uint32_t       chest;                                   /* 0x00 */
+     uint32_t       swch;                                    /* 0x04 */
+     uint32_t       clear;                                   /* 0x08 */
+     uint32_t       collect;                                 /* 0x0C */
+     uint32_t       unk;                                     /* 0x10 */
+     uint32_t       rooms;                                   /* 0x14 */
+     uint32_t       floors;                                  /* 0x18 */
 } SaveSceneFlags; // size = 0x1C
 
 typedef struct {
-    /* 0x00 */ int16_t   scene;
-    /* 0x02 */ vec3s_t pos;
-    /* 0x08 */ int16_t   angle;
+     int16_t        scene;                                   /* 0x00 */
+     vec3s_t        pos;                                     /* 0x02 */
+     int16_t        angle;                                   /* 0x08 */
 } HorseData; // size = 0x0A
 
 typedef struct {
-    /* 0x00 */ vec3f_t pos;
-    /* 0x0C */ int16_t   yaw;
-    /* 0x0E */ int16_t   playerParams;
-    /* 0x10 */ int16_t   entranceIndex;
-    /* 0x12 */ uint8_t    roomIndex;
-    /* 0x13 */ int8_t    data;
-    /* 0x14 */ uint32_t   tempSwchFlags;
-    /* 0x18 */ uint32_t   tempCollectFlags;
+     vec3f_t        pos;                                     /* 0x00 */
+     int16_t        yaw;                                     /* 0x0C */
+     int16_t        playerParams;                            /* 0x0E */
+     int16_t        entranceIndex;                           /* 0x10 */
+     uint8_t        roomIndex;                               /* 0x12 */
+     int8_t         data;                                    /* 0x13 */
+     uint32_t       tempSwchFlags;                           /* 0x14 */
+     uint32_t       tempCollectFlags;                        /* 0x18 */
 } RespawnData; // size = 0x1C
 
 // Save Context
 typedef struct {
-    /* 0x0000 */ int32_t          entranceIndex;
-    /* 0x0004 */ int32_t          linkAge; // 0: Adult; 1: Child
-    /* 0x0008 */ int32_t          cutsceneIndex;
-    /* 0x000C */ uint16_t          dayTime; // "zelda_time"
-    /* 0x0010 */ int32_t          nightFlag;
-    /* 0x0014 */ int32_t          unk_14;
-    /* 0x0018 */ int32_t          unk_18;
-    /* 0x001C */ char         newf[6]; // string "ZELDAZ"
-    /* 0x0022 */ int16_t          deaths;
-    /* 0x0024 */ char         playerName[8];
-    /* 0x002C */ int16_t          n64ddFlag;
-    /* 0x002E */ int16_t          healthCapacity; // "max_life"
-    /* 0x0030 */ int16_t          health; // "now_life"
-    /* 0x0032 */ int8_t           magicLevel;
-    /* 0x0033 */ int8_t           magic;
-    /* 0x0034 */ int16_t          rupees;
-    /* 0x0036 */ uint16_t          bgsHitsLeft;
-    /* 0x0038 */ uint16_t          naviTimer;
-    /* 0x003A */ uint8_t           magicAcquired;
-    /* 0x003B */ char         unk_3B[0x0001];
-    /* 0x003C */ uint8_t           doubleMagic;
-    /* 0x003D */ uint8_t           doubleDefense;
-    /* 0x003E */ int8_t           bgsFlag;
-    /* 0x0040 */ ItemEquips   childEquips;
-    /* 0x004A */ ItemEquips   adultEquips;
-    /* 0x0054 */ char         unk_54[0x0014];
-    /* 0x0068 */ ItemEquips   equips;
-    /* 0x0072 */ char         unk_72[0x0002];
-    /* 0x0074 */ uint8_t           items[24];
-    /* 0x008C */ int8_t           ammo[16];
-    /* 0x009C */ uint16_t          equipment;
-    /* 0x00A0 */ uint32_t          upgrades;
-    /* 0x00A4 */ uint32_t          questItems;
-    /* 0x00A8 */ uint8_t           dungeonItems[20];
-    /* 0x00BC */ int8_t           dungeonKeys[19];
-    /* 0x00CF */ int8_t           defenseHearts;
-    /* 0x00D0 */ int16_t          gsTokens;
-    /* 0x00D4 */ SaveSceneFlags sceneFlags[124];
-    struct {
-        /* 0x0E64 */ int32_t  pos[3];
-        /* 0x0E70 */ int32_t  yaw;
-        /* 0x0E74 */ int32_t  playerParams;
-        /* 0x0E78 */ int32_t  entranceIndex;
-        /* 0x0E7C */ int32_t  roomIndex;
-        /* 0x0E80 */ int32_t  set;
-        /* 0x0E84 */ int32_t  tempSwchFlags;
-        /* 0x0E88 */ int32_t  tempCollectFlags;
-    }                         fw;
-    /* 0x0E8C */ char         unk_E8C[0x0010];
-    /* 0x0E9C */ uint8_t           gsFlags[24];
-    /* 0x0EB4 */ char         unk_EB4[0x0010];
-    /* 0x0EC4 */ int32_t          unk_EC4;
-    /* 0x0EC8 */ char         unk_EC8[0x000C];
-    /* 0x0ED4 */ uint16_t          eventChkInf[14]; // "event_chk_inf"
-    /* 0x0EF0 */ uint16_t          itemGetInf[4]; // "item_get_inf"
-    /* 0x0EF8 */ uint16_t          infTable[30]; // "inf_table"
-    /* 0x0F34 */ char         unk_F34[0x0004];
-    /* 0x0F38 */ uint32_t          worldMapAreaData; // "area_arrival"
-    /* 0x0F3C */ char         unk_F3C[0x040C];
-    /* 0x1348 */ HorseData    horseData;
-    /* 0x1352 */ uint16_t          checksum; // "check_sum"
-    /* 0x1354 */ int32_t          fileNum; // "file_no"
-    /* 0x1358 */ char         unk_1358[0x0004];
-    /* 0x135C */ int32_t          gameMode;
-    /* 0x1360 */ int32_t          sceneSetupIndex;
-    /* 0x1364 */ int32_t          respawnFlag; // "restart_flag"
-    /* 0x1368 */ RespawnData  respawn[3]; // "restart_data"
-    /* 0x13BC */ char         unk_13BC[0x0008];
-    /* 0x13C4 */ int16_t          dogParams;
-    /* 0x13C6 */ uint8_t           unk_13C6;
-    /* 0x13C7 */ uint8_t           unk_13C7;
-    /* 0x13C8 */ int16_t          nayrusLoveTimer;
-    /* 0x13CA */ char         unk_13CA[0x0002];
-    /* 0x13CC */ int16_t          rupeeAccumulator;
-    /* 0x13CE */ int16_t          timer1State;
-    /* 0x13D0 */ int16_t          timer1Value;
-    /* 0x13D2 */ int16_t          timer2State;
-    /* 0x13D4 */ int16_t          timer2Value;
-    /* 0x13D6 */ int16_t          timerX[2];
-    /* 0x13DA */ int16_t          timerY[2];
-    /* 0x13DE */ char         unk_13DE[0x0002];
-    /* 0x13E0 */ uint8_t           seqIndex;
-    /* 0x13E1 */ uint8_t           nightSeqIndex;
-    /* 0x13E2 */ uint8_t           buttonStatus[5];
-    /* 0x13E7 */ uint8_t           unk_13E7;
-    /* 0x13E8 */ uint16_t          unk_13E8; // alpha type?
-    /* 0x13EA */ uint16_t          unk_13EA; // also alpha type?
-    /* 0x13EC */ uint16_t          unk_13EC; // alpha type counter?
-    /* 0x13EE */ uint16_t          unk_13EE; // previous alpha type?
-    /* 0x13F0 */ int16_t          unk_13F0;
-    /* 0x13F2 */ int16_t          unk_13F2;
-    /* 0x13F4 */ int16_t          unk_13F4;
-    /* 0x13F6 */ int16_t          unk_13F6;
-    /* 0x13F8 */ int16_t          unk_13F8;
-    /* 0x13FA */ uint16_t          eventInf[4]; // "event_inf"
-    /* 0x1402 */ uint16_t          mapIndex; // intended for maps/minimaps but commonly used as the dungeon index
-    /* 0x1404 */ uint16_t          minigameState;
-    /* 0x1406 */ uint16_t          minigameScore; // "yabusame_total"
-    /* 0x1408 */ char              unk_1408[0x0001];
-    /* 0x1409 */ uint8_t           language;
-    /* 0x140A */ uint8_t           audioSetting;
-    /* 0x140B */ char               unk_140B[0x0001];
-    /* 0x140C */ uint8_t           zTargetingSetting; // 0: Switch; 1: Hold
-    /* 0x140D */ uint16_t          unk_140D; // bgm related
-    /* 0x1410 */ uint8_t           unk_1410;
-    /* 0x1411 */ uint8_t           unk_1411;
-    /* 0x1412 */ uint16_t          nextCutsceneIndex;
-    /* 0x1414 */ uint8_t           cutsceneTrigger;
-    /* 0x1415 */ uint8_t           chamberCutsceneNum;
-    /* 0x1416 */ uint16_t          nextDayTime; // "next_zelda_time"
-    /* 0x1418 */ uint8_t           fadeDuration;
-    /* 0x1419 */ uint8_t           unk_1419; // transition related
-    /* 0x141A */ uint16_t          environmentTime;
-    /* 0x141C */ uint8_t           dogIsLost;
-    /* 0x141D */ uint8_t           nextTransition;
-    /* 0x141E */ char             unk_141E[0x0002];
-    /* 0x1420 */ int16_t          worldMapArea;
-    /* 0x1422 */ int16_t          unk_1422; // day time related
-    /* 0x1424 */ int16_t          healthAccumulator;
+     int32_t        entranceIndex;                           /* 0x0000 */
+     int32_t        linkAge; // 0: Adult; 1: Child           /* 0x0004 */
+     int32_t        cutsceneIndex;                           /* 0x0008 */
+     uint16_t       dayTime; // "zelda_time"                 /* 0x000C */
+     int32_t        nightFlag;                               /* 0x0010 */
+     int32_t        unk_14;                                  /* 0x0014 */
+     int32_t        unk_18;                                  /* 0x0018 */
+     char           newf[6]; // string "ZELDAZ"              /* 0x001C */
+     int16_t        deaths;                                  /* 0x0022 */
+     char           playerName[8];                           /* 0x0024 */
+     int16_t        n64ddFlag;                               /* 0x002C */
+     int16_t        healthCapacity; // "max_life"            /* 0x002E */
+     int16_t        health; // "now_life"                    /* 0x0030 */
+     int8_t         magicLevel;                              /* 0x0032 */
+     int8_t         magic;                                   /* 0x0033 */
+     int16_t        rupees;                                  /* 0x0034 */
+     uint16_t       bgsHitsLeft;                             /* 0x0036 */
+     uint16_t       naviTimer;                               /* 0x0038 */
+     uint8_t        magicAcquired;                           /* 0x003A */
+     char           unk_3B[0x0001];                          /* 0x003B */
+     uint8_t        doubleMagic;                             /* 0x003C */
+     uint8_t        doubleDefense;                           /* 0x003D */
+     int8_t         bgsFlag;                                 /* 0x003E */
+     ItemEquips     childEquips;                             /* 0x0040 */
+     ItemEquips     adultEquips;                             /* 0x004A */
+     char           unk_54[0x0014];                          /* 0x0054 */
+     ItemEquips     equips;                                  /* 0x0068 */
+     char           unk_72[0x0002];                          /* 0x0072 */
+     uint8_t        items[24];                               /* 0x0074 */
+     int8_t         ammo[16];                                /* 0x008C */
+     uint16_t       equipment;                               /* 0x009C */
+     uint32_t       upgrades;                                /* 0x00A0 */
+     uint32_t       questItems;                              /* 0x00A4 */
+     uint8_t        dungeonItems[20];                        /* 0x00A8 */
+     int8_t         dungeonKeys[19];                         /* 0x00BC */
+     int8_t         defenseHearts;                           /* 0x00CF */
+     int16_t        gsTokens;                                /* 0x00D0 */
+     SaveSceneFlags sceneFlags[124];                         /* 0x00D4 */
+     struct {
+       int32_t      pos[3];                                  /* 0x0E64 */
+       int32_t      yaw;                                     /* 0x0E70 */
+       int32_t      playerParams;                            /* 0x0E74 */
+       int32_t      entranceIndex;                           /* 0x0E78 */
+       int32_t      roomIndex;                               /* 0x0E7C */
+       int32_t      set;                                     /* 0x0E80 */
+       int32_t      tempSwchFlags;                           /* 0x0E84 */
+       int32_t      tempCollectFlags;                        /* 0x0E88 */
+     }fw;
+     char           unk_E8C[0x0010];                         /* 0x0E8C */
+     uint8_t        gsFlags[24];                             /* 0x0E9C */
+     char           unk_EB4[0x0010];                         /* 0x0EB4 */
+     int32_t        unk_EC4;                                 /* 0x0EC4 */
+     char           unk_EC8[0x000C];                         /* 0x0EC8 */
+     uint16_t       eventChkInf[14]; // "event_chk_inf"      /* 0x0ED4 */
+     uint16_t       itemGetInf[4]; // "item_get_inf"         /* 0x0EF0 */
+     uint16_t       infTable[30]; // "inf_table"             /* 0x0EF8 */
+     char           unk_F34[0x0004];                         /* 0x0F34 */
+     uint32_t       worldMapAreaData; // "area_arrival"      /* 0x0F38 */
+     char           unk_F3C[0x040C];                         /* 0x0F3C */
+     HorseData      horseData;                               /* 0x1348 */
+     uint16_t       checksum; // "check_sum"                 /* 0x1352 */
+     int32_t        fileNum; // "file_no"                    /* 0x1354 */
+     char           unk_1358[0x0004];                        /* 0x1358 */
+     int32_t        gameMode;                                /* 0x135C */
+     int32_t        sceneSetupIndex;                         /* 0x1360 */
+     int32_t        respawnFlag; // "restart_flag"           /* 0x1364 */
+     RespawnData    respawn[3]; // "restart_data"            /* 0x1368 */
+     char           unk_13BC[0x0008];                        /* 0x13BC */
+     int16_t        dogParams;                               /* 0x13C4 */
+     uint8_t        unk_13C6;                                /* 0x13C6 */
+     uint8_t        unk_13C7;                                /* 0x13C7 */
+     int16_t        nayrusLoveTimer;                         /* 0x13C8 */
+     char           unk_13CA[0x0002];                        /* 0x13CA */
+     int16_t        rupeeAccumulator;                        /* 0x13CC */
+     int16_t        timer1State;                             /* 0x13CE */
+     int16_t        timer1Value;                             /* 0x13D0 */
+     int16_t        timer2State;                             /* 0x13D2 */
+     int16_t        timer2Value;                             /* 0x13D4 */
+     int16_t        timerX[2];                               /* 0x13D6 */
+     int16_t        timerY[2];                               /* 0x13DA */
+     char           unk_13DE[0x0002];                        /* 0x13DE */
+     uint8_t        seqIndex;                                /* 0x13E0 */
+     uint8_t        nightSeqIndex;                           /* 0x13E1 */
+     uint8_t        buttonStatus[5];                         /* 0x13E2 */
+     uint8_t        unk_13E7;                                /* 0x13E7 */
+     uint16_t       unk_13E8; // alpha type?                 /* 0x13E8 */
+     uint16_t       unk_13EA; // also alpha type?            /* 0x13EA */
+     uint16_t       unk_13EC; // alpha type counter?         /* 0x13EC */
+     uint16_t       unk_13EE; // previous alpha type?        /* 0x13EE */
+     int16_t        unk_13F0;                                /* 0x13F0 */
+     int16_t        unk_13F2;                                /* 0x13F2 */
+     int16_t        unk_13F4;                                /* 0x13F4 */
+     int16_t        unk_13F6;                                /* 0x13F6 */
+     int16_t        unk_13F8;                                /* 0x13F8 */
+     uint16_t       eventInf[4]; // "event_inf"              /* 0x13FA */
+     uint16_t       mapIndex; // intended for maps/minimaps  /* 0x1402 */
+     uint16_t       minigameState;                           /* 0x1404 */
+     uint16_t       minigameScore; // "yabusame_total"       /* 0x1406 */
+     char           unk_1408[0x0001];                        /* 0x1408 */
+     uint8_t        language;                                /* 0x1409 */
+     uint8_t        audioSetting;                            /* 0x140A */
+     char           unk_140B[0x0001];                        /* 0x140B */
+     uint8_t        zTargetingSetting; // 0: Switch; 1: Hold /* 0x140C */
+     uint16_t       unk_140D; // bgm related                 /* 0x140D */
+     uint8_t        unk_1410;                                /* 0x1410 */
+     uint8_t        unk_1411;                                /* 0x1411 */
+     uint16_t       nextCutsceneIndex;                       /* 0x1412 */
+     uint8_t        cutsceneTrigger;                         /* 0x1414 */
+     uint8_t        chamberCutsceneNum;                      /* 0x1415 */
+     uint16_t       nextDayTime; // "next_zelda_time"        /* 0x1416 */
+     uint8_t        fadeDuration;                            /* 0x1418 */
+     uint8_t        unk_1419; // transition related          /* 0x1419 */
+     uint16_t       environmentTime;                         /* 0x141A */
+     uint8_t        dogIsLost;                               /* 0x141C */
+     uint8_t        nextTransition;                          /* 0x141D */
+     char           unk_141E[0x0002];                        /* 0x141E */
+     int16_t        worldMapArea;                            /* 0x1420 */
+     int16_t        unk_1422; // day time related            /* 0x1422 */
+     int16_t        healthAccumulator;                       /* 0x1424 */
 } z64_save_context_t; // size = 0x1428
 /* example of how to use save context in custom actor:
 
