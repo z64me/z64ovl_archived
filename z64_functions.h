@@ -7680,7 +7680,7 @@ float* mf
 * Source Code Reference File: "sys_matrix.c"
 */
 #define Matrix_GetCurrent z_matrix_get_now
-extern float* z_matrix_get_now(void)
+extern float* z_matrix_get_now(void);
 #if OOT_DEBUG
   asm("z_matrix_get_now = 0x800D0924");
 #elif OOT_U_1_0
