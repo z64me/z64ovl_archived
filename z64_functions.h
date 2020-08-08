@@ -1719,7 +1719,7 @@ z64_actor_t* a /* Actor to Derive Position */
  * TODO These notes need converted into a C function prototype
  * a0 - actor instance | a1 - $sp + offset to store an array of 3 floats | a2 - array position of Link (and other stuff?)
  */
-extern void external_func_8002DBD0(void);
+extern void external_func_8002DBD0(z64_actor_t *actor, vec3f_t *result, vec3f_t *point);
 	#if OOT_DEBUG
 		asm("external_func_8002DBD0 = 0x8002DBD0");
 	#elif OOT_U_1_0
