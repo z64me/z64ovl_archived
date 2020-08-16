@@ -8943,7 +8943,7 @@ extern float z_fabs(float value);
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
 		//      debug actor that uses it to its retail counterpart
-		inline float z_fabs(float value) {
+		static inline float z_fabs(float value) {
 			if (value < 0)
 				return -value;
 			return value;
@@ -8961,7 +8961,7 @@ extern float z_fmod(float a, float b);
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
 		//      debug actor that uses it to its retail counterpart
-		inline float z_fmod(float a, float b) {
+		static inline float z_fmod(float a, float b) {
 			if (b == 0.00000000)
 				a = 0.00000000;
 			else
