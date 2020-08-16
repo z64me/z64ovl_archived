@@ -8937,8 +8937,8 @@ extern int16_t z_coss_2(int16_t angle);
  * Returns the absolute value of a floating point number.
  * formerly math_fabsf
  */
-extern float z_fabs(float value);
 	#if OOT_DEBUG
+		extern float z_fabs(float value);
 		asm("z_fabs = 0x801067E0");
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
@@ -8955,8 +8955,8 @@ extern float z_fabs(float value);
  * Returns the modulous of two floating point numbers.
  * formerly math_fmodf
  */
-extern float z_fmod(float a, float b);
 	#if OOT_DEBUG
+		extern float z_fmod(float a, float b);
 		asm("z_fmod = 0x801067F0");
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
