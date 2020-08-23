@@ -91,7 +91,13 @@ static inline void zh_explosion_spawn(z64_global_t* gl, vec3f_t* pos)
 	);
 
 	if (en_bom != 0)
-		AVAL(en_bom, int16_t, 0x01F8) = 0; /* Set Bomb Timer to 0 */
+		#if OOT_DEBUG
+			AVAL(en_bom, int16_t, 0x01F8) = 0; /* Set Bomb Timer to 0 */
+		#elif OOT_U_1_0
+			AVAL(en_bom, int16_t, 0x01F8 - 0x10) = 0; /* Set Bomb Timer to 0 */
+		#elif MM_U_1_0
+		#	error z64_helpers.h: zh_explosion_spawn does not support MM!
+		#endif
 }
 
 static inline float zh_math_fminf(float a, float b)
