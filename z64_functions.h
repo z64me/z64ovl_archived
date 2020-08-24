@@ -5220,21 +5220,21 @@ extern void external_func_8007AE10(void);
  * 0x8007AE90 seems to do the same thing?
  */
 extern void *z_malloc(
-	uint32_t size
+    uint32_t size
 #ifndef RETAIL_NUANCES /* debug roms require these arguments, retail roms don't */
-	, const char *string
-	, int32_t line
+    , const char *string
+    , int32_t line
 #endif
 );
 #ifdef RETAIL_NUANCES
-#define z_malloc(SIZE, STR) z_malloc(SIZE)
+#define z_malloc(SIZE) z_malloc(SIZE)
 #else
-#define z_malloc(SIZE, STR) z_malloc(SIZE, STR, __LINE__)
+#define z_malloc(SIZE) z_malloc(SIZE, __FILE__, __LINE__)
 #endif
     #if OOT_DEBUG
         asm("z_malloc = 0x8007AEE0");
-	#elif OOT_U_1_0
-		asm("z_malloc = 0x80066C60");
+    #elif OOT_U_1_0
+        asm("z_malloc = 0x80066C10");
     #endif
 
 /**
@@ -5254,22 +5254,29 @@ extern void *z_malloc_reverse(
 #else
 #define z_malloc_reverse(SIZE, STR) z_malloc_reverse(SIZE, STR, __LINE__)
 #endif
-    #if OOT_DEBUG
+	#if OOT_DEBUG
         asm("z_malloc_reverse = 0x8007AF8C");
 	#elif OOT_U_1_0
 		// TODO Needs 1.0 equivalent!
-    #endif
+	#endif
+
+extern void* z_realloc(void *addr, int32_t size);
+	#if OOT_DEBUG
+		 asm("z_realloc = 0x8007AFE8");
+	#elif OOT_U_1_0
+		 asm("z_realloc = 0x80066C60");
+	#endif
 
 /**
  * Frees bytes from the arena.
  * a0 = allocated address
  */
 extern void z_free(void *address);
-	#if OOT_DEBUG
-		asm("z_free = 0x8007B0D4");
-	#elif OOT_U_1_0
-		asm("z_free = 0x80066C90");
-	#endif
+	 #if OOT_DEBUG
+		  asm("z_free = 0x8007B0D4");
+	 #elif OOT_U_1_0
+		  asm("z_free = 0x80066CB8");
+	 #endif
 
 /**
  * TODO This function is completely undocumented
