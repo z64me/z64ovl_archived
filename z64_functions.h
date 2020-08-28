@@ -5092,10 +5092,8 @@ void* dest
 
 /**
  * Play SFX (limited set, identical to 80064738)
- * TODO These notes need converted into a C function prototype
- * A0 = SFX
  */
-extern void external_func_80078884(void);
+extern void external_func_80078884(int16_t id);
 	#if OOT_DEBUG
 		asm("external_func_80078884 = 0x80078884");
 	#elif OOT_U_1_0
