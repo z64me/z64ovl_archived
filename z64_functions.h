@@ -5462,19 +5462,19 @@ extern int32_t inventory_item_update(uint8_t item_old, uint8_t item_new);
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Returns 1 if the player has an empty bottle in their inventory.
  */
-extern void external_func_80086ABC(void);
+extern int32_t inventory_has_empty_bottle(void);
 	#if OOT_DEBUG
-		asm("external_func_80086ABC = 0x80086ABC");
+		asm("inventory_has_empty_bottle = 0x80086ABC");
 	#elif OOT_U_1_0
-		asm("external_func_80086ABC = 0x80071A94");
+		asm("inventory_has_empty_bottle = 0x80071A94");
 	#endif
 
 /**
- * TODO This function is completely undocumented
+ * Returns 1 if the player has a specific bottle item in their inventory.
  */
-extern void external_func_80086B2C(void);
+extern s32 inventory_has_specific_bottle(u8 bottle_item);
 	#if OOT_DEBUG
 		asm("external_func_80086B2C = 0x80086B2C");
 	#elif OOT_U_1_0
