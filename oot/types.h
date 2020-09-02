@@ -879,6 +879,40 @@ typedef struct {
     /* 0x016A */ int16_t                  unk_16A; // unknown if used
 } z64_gl_camera_t; // size = 0x16C
 
+typedef struct {
+    int8_t          continue_flag;            /* 0x00 */
+    int8_t          roll;                     /* 0x01 */
+    uint16_t        next_point_frame;         /* 0x02 */
+    float           view_angle; // in degrees /* 0x04 */
+    vec3s_t         pos;                      /* 0x08 */
+} z64_cutscene_camera_point_t; // size = 0x10
+
+typedef struct {
+    uint16_t        action;                   /* 0x00 */
+    uint16_t        start_frame;              /* 0x02 */
+    uint16_t        end_frame;                /* 0x04 */
+    vec3s_t         rot;                      /* 0x06 */
+    struct
+    {
+      int32_t       x;
+      int32_t       y;
+      int32_t       z;
+    } start_pos;                              /* 0x0C */
+    struct
+    {
+      int32_t       x;
+      int32_t       y;
+      int32_t       z;
+    } end_pos;                                /* 0x18 */
+    struct
+    {
+      int32_t       x;
+      int32_t       y;
+      int32_t       z;
+    } normal;                                /* 0x24 */
+
+} z64_cutscene_actor_action_t; // size = 0x30
+
 /* game context */
 typedef struct
 {
@@ -915,43 +949,28 @@ typedef struct
   z64_actor_context_t actor_ctxt;             /* 0x01C24 */
   struct
   {
-    char            unk_0x01D64[4];           /* 0x01D64 */
-    void           *ptr;                      /* 0x01D68 */
-    int8_t          state;                    /* 0x01D6C */
-                        /* = 0 : No Cutscene                    *
-                         *   1 : Initializing skippable scene   *
-                         *   2 : Skippable cutscene playing     *
-                         *   3 : Initializing unskippable scene *
-                         *   4 : Unskippable cutscene playing   */
-    char            unk_0x01D6D[3];           /* 0x01D6D */
-    uint16_t        frame;                    /* 0x01D70 */
-    char            unk_0x01D72[6];           /* 0x01D72 */
-    uint16_t        frame_lastcmd;            /* 0x01D78 */ /* frame of last cutscene command executed */
-    char            unk_0x01D7A[0xA];         /* 0x01D7A */
-    void           *camera_current;           /* 0x01D84 */
+    char                           unk_00[0x4];              /* 0x01D64 */
+    void                          *ptr;                      /* 0x01D68 */
+    uint8_t                        state;                    /* 0x01D6C */
+                                   /* = 0 : No Cutscene                    */
+                                   /*   1 : Initializing skippable scene   */
+                                   /*   2 : Skippable cutscene playing     */
+                                   /*   3 : Initializing unskippable scene */
+                                   /*   4 : Unskippable cutscene playing   */
+    float                          unk_0C;                   /* 0x01D70 */
+    uint16_t                       frame;                    /* 0x01D74 */
+    uint16_t                       unk_12;                   /* 0x01D76 */
+    int32_t                        unk_14;                   /* 0x01D78 */
+    uint16_t                       frame_lastcmd;            /* 0x01D7C */ /* frame of last cutscene command executed */
+    uint8_t                        unk_1A;                   /* 0x01D7E */
+    uint8_t                        unk_1B;                   /* 0x01D7F */
+    z64_cutscene_camera_point_t   *cam_focus;                /* 0x01D80 */
+    z64_cutscene_camera_point_t   *cam_pos;                  /* 0x01D84 */
+    z64_cutscene_actor_action_t   *link_action;              /* 0x01D88 */
+    z64_cutscene_actor_action_t   *npc_action[0xA];          /* 0x01D8C */
+  }                 cutscene;                 /* 0x01D64 */
 
-    /* TODO actor command notes courtesy of Noka; implement them...
-     * at 0x1D88 the actor pointers start, there's 11 actor pointers
-     * in total but 2 are always used by link and navi meaning there's
-     * 9 free slots for custom actors
-     * so there's 11 pointers, starting at 0x1D88
-     * then inside each pointer
-     * * 0x0 -> action
-     * * 0x2 -> start frame s16
-     * * 0x4 -> end frame s16
-     * * 0x6 -> x rot
-     * * 0x8 -> y rot
-     * * 0xA -> z rot
-     * * 0xC -> x start
-     * * 0x10 -> y start
-     * * 0x14 -> z start
-     * * 0x18 -> x end
-     * * 0x1C -> y end
-     * * 0x20 -> z end
-     * call these cutscene actor command struct
-     */
-  }                 cutscene;                 /* 0x01D64 through 0x01D88 */
-  char              unk_0F_[0x01F0];          /* 0x01D88 */
+  char              unk_0F_[0x01C4];          /* 0x01DB4 */
   z64_sky_ctxt_t    sky_ctxt;                 /* 0x01F78 */
   char              unk_10_[0xE2C0];          /* 0x020C8 */
   char             *message_texture;          /* 0x10388 */
