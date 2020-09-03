@@ -351,6 +351,7 @@ helper_eye_blink(int16_t *frame) {
 
 #include "zh/colors.h"
 #include "zh/gfx.h"
+#include "zh/cutscene.h"
 
 
 #endif /* Z64OVL_HELPERS_H_INCLUDED_MAIN */
