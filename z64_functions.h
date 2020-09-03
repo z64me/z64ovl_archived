@@ -2782,7 +2782,7 @@ extern void z_skelanime_draw_mtx_alpha_opa(z64_global_t *global, z64_skelanime_t
 	* Wrapper for SkelAnime_DrawSV2
 	* Draws to poly_xlu
  */
-#define z_skl_mtx_xlu_alpha z_skelanime_draw_mtx_alpha_opa
+#define z_skl_mtx_xlu_alpha z_skelanime_draw_mtx_alpha_xlu
 extern void z_skelanime_draw_mtx_alpha_xlu(z64_global_t *global, z64_skelanime_t *skelanime, void *internal0, void *internal1, z64_actor_t *actor, int16_t opacity);
 	#if OOT_DEBUG
 		asm("z_skelanime_draw_mtx_alpha_xlu = 0x80034CC4");
@@ -3752,9 +3752,9 @@ extern void external_func_8005AC60(void);
  */
 extern void cutscene_set_relative_camera_command(void* global1E0, void*focus_tween_list, void*focus_point_list,z64_actor_t *actor);
 	#if OOT_DEBUG
-		asm("external_func_8005AC6C = 0x8005AC6C");
+		asm("cutscene_set_relative_camera_command = 0x8005AC6C");
 	#elif OOT_U_1_0
-		asm("external_func_8005AC6C = 0x80049A00");
+		asm("cutscene_set_relative_camera_command = 0x80049A00");
 	#endif
 
 /**
