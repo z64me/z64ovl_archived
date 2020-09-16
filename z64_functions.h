@@ -3064,11 +3064,22 @@ extern void external_func_80037D98(z64_global_t* gl, z64_actor_t* a, int16_t a2,
 		asm("external_func_80037D98 = 0x8002AB20");
 	#endif
 
+  /**
+   * Return rotation vectors towards a chosen focus point.
+   */
+  extern void z_actor_vector_focus_main(z64_actor_t* actor, vec3f_t* targetVector, vec3s_t* headVector, vec3s_t* waistVector);
+  	#if OOT_DEBUG
+  		asm("z_actor_vector_focus_main = 0x80037FC8");
+  	#elif OOT_U_1_0
+  		asm("z_actor_vector_focus_main = 0xDEADBEEF");
+  	#endif
+
 /**
  * Return rotation vectors towards a specific focus point.
  * Cutscene and camera focus related.
+ * arg4 sets this->actor.pos_focus = arg4;
  */
-extern void z_actor_vector_focus(z64_global_t* gl, z64_actor_t* a, vec3s_t* a2, vec3s_t* a3, vec3f_t a4);
+extern void z_actor_vector_focus(z64_global_t* gl, z64_actor_t* actor, vec3s_t* headVector, vec3s_t* waistVector, vec3f_t arg4);
 	#if OOT_DEBUG
 		asm("z_actor_vector_focus = 0x80038290");
 	#elif OOT_U_1_0
