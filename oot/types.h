@@ -1252,10 +1252,10 @@ typedef struct {
 } z64_eff_blure_t; // size = 0x1AC
 
 typedef struct {
-     uint8_t        buttonItems[4];                          /* 0x00 */
-     uint8_t        cButtonSlots[3];                         /* 0x04 */
+     uint8_t        button_items[4];                          /* 0x00 */
+     uint8_t        c_button_slots[3];                         /* 0x04 */
      uint16_t       equipment;                               /* 0x08 */
-} ItemEquips; // size = 0x0A
+} z64_item_equips; // size = 0x0A
 
 typedef struct {
      uint32_t       chest;                                   /* 0x00 */
@@ -1265,146 +1265,146 @@ typedef struct {
      uint32_t       unk;                                     /* 0x10 */
      uint32_t       rooms;                                   /* 0x14 */
      uint32_t       floors;                                  /* 0x18 */
-} SaveSceneFlags; // size = 0x1C
+} z64_save_scene_flags; // size = 0x1C
 
 typedef struct {
      int16_t        scene;                                   /* 0x00 */
      vec3s_t        pos;                                     /* 0x02 */
      int16_t        angle;                                   /* 0x08 */
-} HorseData; // size = 0x0A
+} z64_horse_data; // size = 0x0A
 
 typedef struct {
      vec3f_t        pos;                                     /* 0x00 */
      int16_t        yaw;                                     /* 0x0C */
-     int16_t        playerParams;                            /* 0x0E */
-     int16_t        entranceIndex;                           /* 0x10 */
-     uint8_t        roomIndex;                               /* 0x12 */
+     int16_t        player_params;                           /* 0x0E */
+     int16_t        entrance_index;                          /* 0x10 */
+     uint8_t        room_index;                              /* 0x12 */
      int8_t         data;                                    /* 0x13 */
-     uint32_t       tempSwchFlags;                           /* 0x14 */
-     uint32_t       tempCollectFlags;                        /* 0x18 */
-} RespawnData; // size = 0x1C
+     uint32_t       temp_swch_flags;                         /* 0x14 */
+     uint32_t       temp_collect_flags;                      /* 0x18 */
+} z64_respawn_data; // size = 0x1C
 
 // Save Context
 typedef struct {
-     int32_t        entranceIndex;                           /* 0x0000 */
-     int32_t        linkAge; // 0: Adult; 1: Child           /* 0x0004 */
-     int32_t        cutsceneIndex;                           /* 0x0008 */
-     uint16_t       dayTime; // "zelda_time"                 /* 0x000C */
-     int32_t        nightFlag;                               /* 0x0010 */
-     int32_t        unk_14;                                  /* 0x0014 */
-     int32_t        unk_18;                                  /* 0x0018 */
-     char           newf[6]; // string "ZELDAZ"              /* 0x001C */
-     int16_t        deaths;                                  /* 0x0022 */
-     char           playerName[8];                           /* 0x0024 */
-     int16_t        n64ddFlag;                               /* 0x002C */
-     int16_t        healthCapacity; // "max_life"            /* 0x002E */
-     int16_t        health; // "now_life"                    /* 0x0030 */
-     int8_t         magicLevel;                              /* 0x0032 */
-     int8_t         magic;                                   /* 0x0033 */
-     int16_t        rupees;                                  /* 0x0034 */
-     uint16_t       bgsHitsLeft;                             /* 0x0036 */
-     uint16_t       naviTimer;                               /* 0x0038 */
-     uint8_t        magicAcquired;                           /* 0x003A */
-     char           unk_3B[0x0001];                          /* 0x003B */
-     uint8_t        doubleMagic;                             /* 0x003C */
-     uint8_t        doubleDefense;                           /* 0x003D */
-     int8_t         bgsFlag;                                 /* 0x003E */
-     ItemEquips     childEquips;                             /* 0x0040 */
-     ItemEquips     adultEquips;                             /* 0x004A */
-     char           unk_54[0x0014];                          /* 0x0054 */
-     ItemEquips     equips;                                  /* 0x0068 */
-     char           unk_72[0x0002];                          /* 0x0072 */
-     uint8_t        items[24];                               /* 0x0074 */
-     int8_t         ammo[16];                                /* 0x008C */
-     uint16_t       equipment;                               /* 0x009C */
-     uint32_t       upgrades;                                /* 0x00A0 */
-     uint32_t       questItems;                              /* 0x00A4 */
-     uint8_t        dungeonItems[20];                        /* 0x00A8 */
-     int8_t         dungeonKeys[19];                         /* 0x00BC */
-     int8_t         defenseHearts;                           /* 0x00CF */
-     int16_t        gsTokens;                                /* 0x00D0 */
-     SaveSceneFlags sceneFlags[124];                         /* 0x00D4 */
+     int32_t        entrance_index;                            /* 0x0000 */
+     int32_t        link_age; // 0: Adult; 1: Child            /* 0x0004 */
+     int32_t        cutscene_index;                            /* 0x0008 */
+     uint16_t       day_time; // "zelda_time"                  /* 0x000C */
+     int32_t        night_flag;                                /* 0x0010 */
+     int32_t        unk_14;                                    /* 0x0014 */
+     int32_t        unk_18;                                    /* 0x0018 */
+     char           newf[6]; // string "ZELDAZ"                /* 0x001C */
+     int16_t        deaths;                                    /* 0x0022 */
+     char           player_name[8];                            /* 0x0024 */
+     int16_t        n64dd_flag;                                /* 0x002C */
+     int16_t        health_capacity; // "max_life"             /* 0x002E */
+     int16_t        health; // "now_life"                      /* 0x0030 */
+     int8_t         magic_level;                               /* 0x0032 */
+     int8_t         magic;                                     /* 0x0033 */
+     int16_t        rupees;                                    /* 0x0034 */
+     uint16_t       bgs_hits_left;                             /* 0x0036 */
+     uint16_t       navi_timer;                                /* 0x0038 */
+     uint8_t        magic_acquired;                            /* 0x003A */
+     char           adult_sword_id[0x0001];                            /* 0x003B */
+     uint8_t        double_magic;                              /* 0x003C */
+     uint8_t        double_defense;                            /* 0x003D */
+     int8_t         bgs_flag;                                  /* 0x003E */
+     z64_item_equips child_equips;                             /* 0x0040 */
+     z64_item_equips adult_equips;                             /* 0x004A */
+     char           unk_54[0x0014];                            /* 0x0054 */
+     z64_item_equips     equips;                               /* 0x0068 */
+     char           unk_72[0x0002];                            /* 0x0072 */
+     uint8_t        items[24];                                 /* 0x0074 */
+     int8_t         ammo[16];                                  /* 0x008C */
+     uint16_t       equipment;                                 /* 0x009C */
+     uint32_t       upgrades;                                  /* 0x00A0 */
+     uint32_t       quest_items;                               /* 0x00A4 */
+     uint8_t        dungeon_items[20];                         /* 0x00A8 */
+     int8_t         dungeon_keys[19];                          /* 0x00BC */
+     int8_t         defense_hearts;                            /* 0x00CF */
+     int16_t        gs_tokens;                                 /* 0x00D0 */
+     z64_save_scene_flags scene_flags[124];                     /* 0x00D4 */
      struct {
-       int32_t      pos[3];                                  /* 0x0E64 */
-       int32_t      yaw;                                     /* 0x0E70 */
-       int32_t      playerParams;                            /* 0x0E74 */
-       int32_t      entranceIndex;                           /* 0x0E78 */
-       int32_t      roomIndex;                               /* 0x0E7C */
-       int32_t      set;                                     /* 0x0E80 */
-       int32_t      tempSwchFlags;                           /* 0x0E84 */
-       int32_t      tempCollectFlags;                        /* 0x0E88 */
+       int32_t      pos[3];                                    /* 0x0E64 */
+       int32_t      yaw;                                       /* 0x0E70 */
+       int32_t      player_params;                             /* 0x0E74 */
+       int32_t      entrance_index;                            /* 0x0E78 */
+       int32_t      room_index;                                /* 0x0E7C */
+       int32_t      set;                                       /* 0x0E80 */
+       int32_t      temp_swch_flags;                           /* 0x0E84 */
+       int32_t      temp_collect_flags;                        /* 0x0E88 */
      }fw;
-     char           unk_E8C[0x0010];                         /* 0x0E8C */
-     uint8_t        gsFlags[24];                             /* 0x0E9C */
-     char           unk_EB4[0x0010];                         /* 0x0EB4 */
-     int32_t        unk_EC4;                                 /* 0x0EC4 */
-     char           unk_EC8[0x000C];                         /* 0x0EC8 */
-     uint16_t       eventChkInf[14]; // "event_chk_inf"      /* 0x0ED4 */
-     uint16_t       itemGetInf[4]; // "item_get_inf"         /* 0x0EF0 */
-     uint16_t       infTable[30]; // "inf_table"             /* 0x0EF8 */
-     char           unk_F34[0x0004];                         /* 0x0F34 */
-     uint32_t       worldMapAreaData; // "area_arrival"      /* 0x0F38 */
-     char           unk_F3C[0x040C];                         /* 0x0F3C */
-     HorseData      horseData;                               /* 0x1348 */
-     uint16_t       checksum; // "check_sum"                 /* 0x1352 */
-     int32_t        fileNum; // "file_no"                    /* 0x1354 */
-     char           unk_1358[0x0004];                        /* 0x1358 */
-     int32_t        gameMode;                                /* 0x135C */
-     int32_t        sceneSetupIndex;                         /* 0x1360 */
-     int32_t        respawnFlag; // "restart_flag"           /* 0x1364 */
-     RespawnData    respawn[3]; // "restart_data"            /* 0x1368 */
-     char           unk_13BC[0x0008];                        /* 0x13BC */
-     int16_t        dogParams;                               /* 0x13C4 */
-     uint8_t        unk_13C6;                                /* 0x13C6 */
-     uint8_t        unk_13C7;                                /* 0x13C7 */
-     int16_t        nayrusLoveTimer;                         /* 0x13C8 */
-     char           unk_13CA[0x0002];                        /* 0x13CA */
-     int16_t        rupeeAccumulator;                        /* 0x13CC */
-     int16_t        timer1State;                             /* 0x13CE */
-     int16_t        timer1Value;                             /* 0x13D0 */
-     int16_t        timer2State;                             /* 0x13D2 */
-     int16_t        timer2Value;                             /* 0x13D4 */
-     int16_t        timerX[2];                               /* 0x13D6 */
-     int16_t        timerY[2];                               /* 0x13DA */
-     char           unk_13DE[0x0002];                        /* 0x13DE */
-     uint8_t        seqIndex;                                /* 0x13E0 */
-     uint8_t        nightSeqIndex;                           /* 0x13E1 */
-     uint8_t        buttonStatus[5];                         /* 0x13E2 */
-     uint8_t        unk_13E7;                                /* 0x13E7 */
-     uint16_t       unk_13E8; // alpha type?                 /* 0x13E8 */
-     uint16_t       unk_13EA; // also alpha type?            /* 0x13EA */
-     uint16_t       unk_13EC; // alpha type counter?         /* 0x13EC */
-     uint16_t       unk_13EE; // previous alpha type?        /* 0x13EE */
-     int16_t        unk_13F0;                                /* 0x13F0 */
-     int16_t        unk_13F2;                                /* 0x13F2 */
-     int16_t        unk_13F4;                                /* 0x13F4 */
-     int16_t        unk_13F6;                                /* 0x13F6 */
-     int16_t        unk_13F8;                                /* 0x13F8 */
-     uint16_t       eventInf[4]; // "event_inf"              /* 0x13FA */
-     uint16_t       mapIndex; // intended for maps/minimaps  /* 0x1402 */
-     uint16_t       minigameState;                           /* 0x1404 */
-     uint16_t       minigameScore; // "yabusame_total"       /* 0x1406 */
-     char           unk_1408[0x0001];                        /* 0x1408 */
-     uint8_t        language;                                /* 0x1409 */
-     uint8_t        audioSetting;                            /* 0x140A */
-     char           unk_140B[0x0001];                        /* 0x140B */
-     uint8_t        zTargetingSetting; // 0: Switch; 1: Hold /* 0x140C */
-     uint16_t       unk_140D; // bgm related                 /* 0x140D */
-     uint8_t        unk_1410;                                /* 0x1410 */
-     uint8_t        unk_1411;                                /* 0x1411 */
-     uint16_t       nextCutsceneIndex;                       /* 0x1412 */
-     uint8_t        cutsceneTrigger;                         /* 0x1414 */
-     uint8_t        chamberCutsceneNum;                      /* 0x1415 */
-     uint16_t       nextDayTime; // "next_zelda_time"        /* 0x1416 */
-     uint8_t        fadeDuration;                            /* 0x1418 */
-     uint8_t        unk_1419; // transition related          /* 0x1419 */
-     uint16_t       environmentTime;                         /* 0x141A */
-     uint8_t        dogIsLost;                               /* 0x141C */
-     uint8_t        nextTransition;                          /* 0x141D */
-     char           unk_141E[0x0002];                        /* 0x141E */
-     int16_t        worldMapArea;                            /* 0x1420 */
-     int16_t        unk_1422; // day time related            /* 0x1422 */
-     int16_t        healthAccumulator;                       /* 0x1424 */
+     char           unk_E8C[0x0010];                           /* 0x0E8C */
+     uint8_t        gs_flags[24];                              /* 0x0E9C */
+     char           unk_EB4[0x0010];                           /* 0x0EB4 */
+     int32_t        unk_EC4;                                   /* 0x0EC4 */
+     char           unk_EC8[0x000C];                           /* 0x0EC8 */
+     uint16_t       event_chk_inf[14]; // "event_chk_inf"      /* 0x0ED4 */
+     uint16_t       item_get_inf[4]; // "item_get_inf"         /* 0x0EF0 */
+     uint16_t       inf_table[30]; // "inf_table"              /* 0x0EF8 */
+     char           unk_F34[0x0004];                           /* 0x0F34 */
+     uint32_t       world_map_area_data; // "area_arrival"     /* 0x0F38 */
+     char           unk_F3C[0x040C];                           /* 0x0F3C */
+     z64_horse_data horse_data;                                /* 0x1348 */
+     uint16_t       checksum; // "check_sum"                   /* 0x1352 */
+     int32_t        file_num; // "file_no"                     /* 0x1354 */
+     char           unk_1358[0x0004];                          /* 0x1358 */
+     int32_t        game_mode;                                 /* 0x135C */
+     int32_t        scene_setup_index;                         /* 0x1360 */
+     int32_t        respawn_flag; // "restart_flag"            /* 0x1364 */
+     z64_respawn_data respawn[3]; // "restart_data"            /* 0x1368 */
+     char           unk_13BC[0x0008];                          /* 0x13BC */
+     int16_t        dog_params;                                /* 0x13C4 */
+     uint8_t        unk_13C6;                                  /* 0x13C6 */
+     uint8_t        unk_13C7;                                  /* 0x13C7 */
+     int16_t        nayrus_love_timer;                         /* 0x13C8 */
+     char           unk_13CA[0x0002];                          /* 0x13CA */
+     int16_t        rupee_accumulator;                         /* 0x13CC */
+     int16_t        timer1_state;                              /* 0x13CE */
+     int16_t        timer1_value;                              /* 0x13D0 */
+     int16_t        timer2_state;                              /* 0x13D2 */
+     int16_t        timer2_value;                              /* 0x13D4 */
+     int16_t        timer_x[2];                                /* 0x13D6 */
+     int16_t        timer_y[2];                                /* 0x13DA */
+     char           unk_13DE[0x0002];                          /* 0x13DE */
+     uint8_t        seq_index;                                 /* 0x13E0 */
+     uint8_t        night_seq_index;                           /* 0x13E1 */
+     uint8_t        button_status[5];                          /* 0x13E2 */
+     uint8_t        unk_13E7;                                  /* 0x13E7 */
+     uint16_t       unk_13E8; // alpha type?                   /* 0x13E8 */
+     uint16_t       unk_13EA; // also alpha type?              /* 0x13EA */
+     uint16_t       unk_13EC; // alpha type counter?           /* 0x13EC */
+     uint16_t       unk_13EE; // previous alpha type?          /* 0x13EE */
+     int16_t        unk_13F0;                                  /* 0x13F0 */
+     int16_t        unk_13F2;                                  /* 0x13F2 */
+     int16_t        unk_13F4;                                  /* 0x13F4 */
+     int16_t        unk_13F6;                                  /* 0x13F6 */
+     int16_t        unk_13F8;                                  /* 0x13F8 */
+     uint16_t       event_inf[4]; // "event_inf"               /* 0x13FA */
+     uint16_t       map_index; // intended for maps/minimaps   /* 0x1402 */
+     uint16_t       minigame_state;                            /* 0x1404 */
+     uint16_t       minigame_score; // "yabusame_total"        /* 0x1406 */
+     char           unk_1408[0x0001];                          /* 0x1408 */
+     uint8_t        language;                                  /* 0x1409 */
+     uint8_t        audio_setting;                             /* 0x140A */
+     char           unk_140B[0x0001];                          /* 0x140B */
+     uint8_t        z_targeting_setting; // 0: Switch; 1: Hold /* 0x140C */
+     uint16_t       unk_140D; // bgm related                   /* 0x140D */
+     uint8_t        unk_1410;                                  /* 0x1410 */
+     uint8_t        unk_1411;                                  /* 0x1411 */
+     uint16_t       next_cutscene_index;                       /* 0x1412 */
+     uint8_t        cutscene_trigger;                          /* 0x1414 */
+     uint8_t        chamber_cutscene_cum;                      /* 0x1415 */
+     uint16_t       next_day_time; // "next_zelda_time"        /* 0x1416 */
+     uint8_t        fade_duration;                             /* 0x1418 */
+     uint8_t        unk_1419; // transition related            /* 0x1419 */
+     uint16_t       environment_time;                          /* 0x141A */
+     uint8_t        dog_is_lost;                               /* 0x141C */
+     uint8_t        next_transition;                           /* 0x141D */
+     char           unk_141E[0x0002];                          /* 0x141E */
+     int16_t        world_map_area;                            /* 0x1420 */
+     int16_t        unk_1422; // day time related              /* 0x1422 */
+     int16_t        health_accumulator;                        /* 0x1424 */
 } z64_save_context_t; // size = 0x1428
 /* example of how to use save context in custom actor:
 
