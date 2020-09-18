@@ -8120,11 +8120,11 @@ extern void external_func_800F4254(vec3f_t* a0, uint32_t a1);
 /**
  * TODO a0 = actor instance + E4 | a1 = sfx id | a2 = float pitch
  */
-extern void sound_play_pitch(void *actor_plus_0xE4, uint16_t sfx, float pitch);
+extern void z_sound_loop_pitch(void *actor_plus_0xE4, uint16_t sfx, float pitch);
 	#if OOT_DEBUG
-		asm("sound_play_pitch = 0x800F436C");
+		asm("z_sound_loop_pitch = 0x800F436C");
 	#elif OOT_U_1_0
-		asm("sound_play_pitch = 0x800C50AC");
+		asm("z_sound_loop_pitch = 0x800C50AC");
 	#endif
 
 /**
