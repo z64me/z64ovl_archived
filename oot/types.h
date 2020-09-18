@@ -609,11 +609,21 @@ typedef struct
   z64_light_params_pos_t params;
 } z64_lightinfo_pos_t;
 
+typedef struct {
+  int16_t posX;
+  int16_t posY;
+  int16_t posZ;
+  uint8_t red;
+  uint8_t green;
+  uint8_t blue;
+  uint8_t unk_09;
+  int16_t radius;
+} z64_lightinfo_params_t;
+
 typedef struct
 {
-  uint8_t type;
-  uint8_t _pad;
-  uint16_t params;
+  uint8_t                type;
+  z64_lightinfo_params_t params;
 } z64_lightinfo_t;
 
 typedef struct
