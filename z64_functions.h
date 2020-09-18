@@ -2412,7 +2412,7 @@ z64_actor_context_t* actor_ctxt /* Actor Context within Global Context */
  * TODO This function is completely undocumented
  */
 #define Actor_Find z_actor_find
-extern void z_actor_find(z64_actor_context_t* ctxt, int32_t id, int32_t type);
+extern z64_actor_t* z_actor_find(z64_actor_context_t* ctxt, int32_t id, int32_t type);
 	#if OOT_DEBUG
 		asm("z_actor_find = 0x80032C3C");
 	#elif OOT_U_1_0
