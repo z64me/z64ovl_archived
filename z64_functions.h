@@ -4296,7 +4296,7 @@ extern void external_func_80063E9C(void);
  * disables Z-Targeting, interface, and adds horizontal black bars
  * `global_cutscene` refers to `&global->cutscene`
  */
-extern void actor_cutscene_enable(z64_global_t *, void *global_cutscene);
+extern void actor_cutscene_enable(z64_global_t *, z64_cutscene_t *global_cutscene);
 	#if OOT_DEBUG
 		asm("actor_cutscene_enable = 0x80064520");
 	#elif OOT_U_1_0
@@ -4308,7 +4308,7 @@ extern void actor_cutscene_enable(z64_global_t *, void *global_cutscene);
  * NOTE: will not work if (global->cutscene.state == 4)
  * `global_cutscene` refers to `&global->cutscene`
  */
-extern void actor_cutscene_disable(z64_global_t *, void *global_cutscene);
+extern void actor_cutscene_disable(z64_global_t *, z64_cutscene_t *global_cutscene);
 	#if OOT_DEBUG
 		asm("actor_cutscene_disable = 0x80064534");
 	#elif OOT_U_1_0
