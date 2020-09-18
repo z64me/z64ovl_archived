@@ -923,6 +923,29 @@ typedef struct {
 
 } z64_cutscene_actor_action_t; // size = 0x30
 
+typedef struct
+{
+  char                           unk_00[0x4];              /* 0x01D64 */
+  void                          *ptr;                      /* 0x01D68 */
+  uint8_t                        state;                    /* 0x01D6C */
+                                 /* = 0 : No Cutscene                    */
+                                 /*   1 : Initializing skippable scene   */
+                                 /*   2 : Skippable cutscene playing     */
+                                 /*   3 : Initializing unskippable scene */
+                                 /*   4 : Unskippable cutscene playing   */
+  float                          unk_0C;                   /* 0x01D70 */
+  uint16_t                       frame;                    /* 0x01D74 */
+  uint16_t                       unk_12;                   /* 0x01D76 */
+  int32_t                        unk_14;                   /* 0x01D78 */
+  uint16_t                       frame_lastcmd;            /* 0x01D7C */ /* frame of last cutscene command executed */
+  uint8_t                        unk_1A;                   /* 0x01D7E */
+  uint8_t                        unk_1B;                   /* 0x01D7F */
+  z64_cutscene_camera_point_t   *cam_focus;                /* 0x01D80 */
+  z64_cutscene_camera_point_t   *cam_pos;                  /* 0x01D84 */
+  z64_cutscene_actor_action_t   *link_action;              /* 0x01D88 */
+  z64_cutscene_actor_action_t   *npc_action[0xA];          /* 0x01D8C */
+}z64_cutscene_t;                 /* 0x01D64 */
+
 /* game context */
 typedef struct
 {
@@ -957,29 +980,7 @@ typedef struct
   char              unk_09_[0x0008];          /* 0x007B8 */
   z64_col_ctxt_t    col_ctxt;                 /* 0x007C0 */
   z64_actor_context_t actor_ctxt;             /* 0x01C24 */
-  struct
-  {
-    char                           unk_00[0x4];              /* 0x01D64 */
-    void                          *ptr;                      /* 0x01D68 */
-    uint8_t                        state;                    /* 0x01D6C */
-                                   /* = 0 : No Cutscene                    */
-                                   /*   1 : Initializing skippable scene   */
-                                   /*   2 : Skippable cutscene playing     */
-                                   /*   3 : Initializing unskippable scene */
-                                   /*   4 : Unskippable cutscene playing   */
-    float                          unk_0C;                   /* 0x01D70 */
-    uint16_t                       frame;                    /* 0x01D74 */
-    uint16_t                       unk_12;                   /* 0x01D76 */
-    int32_t                        unk_14;                   /* 0x01D78 */
-    uint16_t                       frame_lastcmd;            /* 0x01D7C */ /* frame of last cutscene command executed */
-    uint8_t                        unk_1A;                   /* 0x01D7E */
-    uint8_t                        unk_1B;                   /* 0x01D7F */
-    z64_cutscene_camera_point_t   *cam_focus;                /* 0x01D80 */
-    z64_cutscene_camera_point_t   *cam_pos;                  /* 0x01D84 */
-    z64_cutscene_actor_action_t   *link_action;              /* 0x01D88 */
-    z64_cutscene_actor_action_t   *npc_action[0xA];          /* 0x01D8C */
-  }                 cutscene;                 /* 0x01D64 */
-
+  z64_cutscene_t    cutscene;                 /* 0x01D64 */
   char              unk_0F_[0x01C4];          /* 0x01DB4 */
   z64_sky_ctxt_t    sky_ctxt;                 /* 0x01F78 */
   char              unk_10_[0xE2C0];          /* 0x020C8 */
