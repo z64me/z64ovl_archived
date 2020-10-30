@@ -8,7 +8,7 @@
 *
 */
 
-z64_cutscene_actor_action_t* zh_cscmd_get_actor_action(z64_global_t* globalCtx, int32_t npc_slot_id)
+static inline z64_cutscene_actor_action_t* zh_cscmd_get_actor_action(z64_global_t* globalCtx, int32_t npc_slot_id)
 {
   if (globalCtx->cutscene.state != 0)
     return globalCtx->cutscene.npc_action[npc_slot_id];
