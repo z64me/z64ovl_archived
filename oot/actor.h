@@ -40,7 +40,7 @@ struct z64_actor_s {                             /* Common Actor Instance Struct
 /* 0x0002 */ uint8_t actor_type;                 /* Actor Type */
 /* 0x0003 */ uint8_t room_index;                 /* Room Index (0xFF means actor won't despawn on room change.) */
 /* 0x0004 */ uint32_t flags;                     /* Special Actor Flags */
-/* 0x0005 */ vec3f_t pos_init;                   /* Initial Position */
+/* 0x0008 */ vec3f_t pos_init;                   /* Initial Position */
 /* 0x0014 */ vec3s_t rot_init;                   /* Initial Rotation */
 /* 0x001A */ uint8_t __pad_0x1A[2];              /* initPosRot Padding for 4-byte alignment */
 /* 0x001C */ uint16_t variable;                  /* Actor Variable */
