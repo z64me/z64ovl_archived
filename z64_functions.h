@@ -6443,7 +6443,7 @@ z64_global_t* gl /* Global Context */
 */
 static inline void z_skelanime_draw(
 z64_global_t* gl       /* Global Context */
-, int matrix_limbs     /* Number of matrix limbs, or 0 if non-matrix */
+, bool is_matrix       /* false if non-matrix skeleton, non-zero otherwise */
 , void* instance       /* A pointer to the actor instance */
 , z64_skelanime_t *sk  /* Skelanime */
 , int32_t callback0(      /* This must return 0 */
@@ -6462,12 +6462,12 @@ z64_global_t* gl       /* Global Context */
 	, void* instance       /* Current instance pointer (entity_t) */
 	)
 ) {
-	if (matrix_limbs)
+	if (is_matrix)
 		_z_skelanime_draw_mtx(
 			gl
 			, sk->skeleton
 			, sk->limb_draw_table
-			, matrix_limbs
+			, sk->dlist_count
 			, callback0
 			, callback1
 			, instance
@@ -6573,7 +6573,7 @@ extern void external_func_800A3BC0(void);
 */
 static inline void z_skelanime_init(
 z64_global_t* gl /* Global Context */
-, int is_matrix
+, bool is_matrix
 , z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t skeleton /* Segment-relative offset of Skeleton */
 , uint32_t anim /* Segment-relative offset of animation to initialize with */
@@ -6592,7 +6592,7 @@ z64_global_t* gl /* Global Context */
 */
 static inline void z_skelanime_init_ext(
 z64_global_t* gl /* Global Context */
-, int is_matrix
+, bool is_matrix
 , z64_skelanime_t* sk /* Skelanime Structure */
 , uint32_t skeleton /* Segment-relative offset of Skeleton */
 , uint32_t anim /* Segment-relative offset of animation to initialize with */
