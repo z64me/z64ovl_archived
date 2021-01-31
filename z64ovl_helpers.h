@@ -133,6 +133,16 @@ zh_seg2ram(uint32_t addr)
 }
 
 /****
+ * a lame wrapper for putting a pointer in a ram segment (animated eyes)
+ * zh_segment_pointer(global, G_MWO_SEGMENT_8, eyes[helper_eye_blink(&en->eye_index)]);
+ ****/
+static void zh_segment_pointer(z64_global_t *global, int seg, uintptr_t v)
+{
+	z64_disp_buf_t *opa = &ZQDL(global, poly_opa);
+	gMoveWd(opa->p++, G_MW_SEGMENT, seg, zh_seg2ram(v));
+}
+
+/****
  * _Printf printer. Write text to a RAM address.
  ***/
  static
