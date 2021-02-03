@@ -6,6 +6,8 @@
 #include "oldnames.h"
 #include "real.h"
 
+#define ALWAYS_INLINE __attribute__((always_inline))
+
 /****
  * z64ovl.h
  * Either `#define OOT_DEBUG 1` or `#define OOT_U_1_0 1` before `#include`ing.
@@ -8959,7 +8961,7 @@ extern int16_t z_coss_2(int16_t angle);
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
 		//      debug actor that uses it to its retail counterpart
-		static inline float z_fabs(float value) {
+		static inline ALWAYS_INLINE float z_fabs(float value) {
 			if (value < 0)
 				return -value;
 			return value;
@@ -8977,7 +8979,7 @@ extern int16_t z_coss_2(int16_t angle);
 	#elif OOT_U_1_0
 		// TODO does a 1.0 equivalent really not exist? compare a
 		//      debug actor that uses it to its retail counterpart
-		static inline float z_fmod(float a, float b) {
+		static inline ALWAYS_INLINE float z_fmod(float a, float b) {
 			if (b == 0.00000000)
 				a = 0.00000000;
 			else
