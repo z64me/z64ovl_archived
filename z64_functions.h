@@ -110,6 +110,26 @@ extern int32_t z_sprintf(volatile char* dst, const char* fmt, ...);
 		asm("z_sprintf = 0x800878A4");
 	#endif
 
+/* caching magic */
+extern void osWritebackDCache(void *start, unsigned size);
+	#if OOT_DEBUG
+		asm("osWritebackDCache = 0x800046C0");
+	#elif OOT_U_1_0
+		asm("osWritebackDCache = 0xdeadbeef");
+	#elif MM_U_1_0
+		asm("osWritebackDCache = 0xdeadbeef");
+	#endif
+
+/* caching magic */
+extern void osInvalICache(void *start, unsigned size);
+	#if OOT_DEBUG
+		asm("osInvalICache = 0x80006150");
+	#elif OOT_U_1_0
+		asm("osWritebackDCache = 0xdeadbeef");
+	#elif MM_U_1_0
+		asm("osWritebackDCache = 0xdeadbeef");
+	#endif
+
 /****
  * Send OS Message. This function is not used inside any existing overlay.
  * A0 = 0x80013990 for file reads on Debug, A1 = destination buffer, A2 = OS_MESG_NOBLOCK = 0 / OS_MESG_BLOCK = 1
