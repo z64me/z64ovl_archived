@@ -115,7 +115,7 @@ extern void osWritebackDCache(void *start, unsigned size);
 	#if OOT_DEBUG
 		asm("osWritebackDCache = 0x800046C0");
 	#elif OOT_U_1_0
-		asm("osWritebackDCache = 0xdeadbeef");
+		asm("osWritebackDCache = 0x80003440");
 	#elif MM_U_1_0
 		asm("osWritebackDCache = 0xdeadbeef");
 	#endif
@@ -125,9 +125,9 @@ extern void osInvalICache(void *start, unsigned size);
 	#if OOT_DEBUG
 		asm("osInvalICache = 0x80006150");
 	#elif OOT_U_1_0
-		asm("osWritebackDCache = 0xdeadbeef");
+		asm("osInvalICache = 0x800041A0");
 	#elif MM_U_1_0
-		asm("osWritebackDCache = 0xdeadbeef");
+		asm("osInvalICache = 0xdeadbeef");
 	#endif
 
 /****
