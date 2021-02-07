@@ -22,6 +22,9 @@
 #define G_IM_TEX_DIGIT_AMMO_TIMG    0x35C0 /* Ammo Digits */
 #define G_IM_TEX_CLOCK_TIMG         0x2000 /* Clock Icon */
 #define G_IM_TEX_LETTER             0x0000 /* Char 0 Space */
+#define Z64GL_VROM_ICON_ITEM_STATIC 0x007BD000
+#define Z64GL_CODE                  0x800110A0 /* where code lives in ram */
+#define Z64GL_CODE_PAUSEPLAYER      0xED3E0 /* relative to start of code */
 
 #include "shared.h"
 #include "../z64_functions.h"
