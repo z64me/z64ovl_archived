@@ -143,7 +143,7 @@ static void zh_segment_pointer(z64_global_t *global, int seg, uintptr_t v)
 }
 
 /****
- * returns non-zero when the game is paused, 0 otherwise */
+ * returns non-zero when the game is paused, 0 otherwise
  ****/
 static inline uint32_t zh_gameIsPaused(void)
 {
@@ -154,7 +154,7 @@ static inline uint32_t zh_gameIsPaused(void)
 	struct {
 		uint32_t ram;
 		uint32_t ext[6];
-	} *table = (void*)Z64GL_OVERLAYTABLE_PAUSEPLAYER;
+	} *table = (void*)Z64GL_PAUSEPLAYER;
 	return table[0].ram;
 }
 
