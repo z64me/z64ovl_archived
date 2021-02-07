@@ -286,7 +286,7 @@ static void zh_draw_numeric_text(
         n /= 10;
 
 		uint32_t tex = (is_ammo ? G_IM_TEX_DIGIT_AMMO_TIMG : G_IM_TEX_DIGIT_TIMG) + i * sz;
-		digit.texture.timg = (uint32_t)gl->if_ctxt.parameter + tex;
+		digit.texture.timg = (uint32_t)gl->if_ctxt.parameter_frame_vtx + tex;
 
 		digit.tile.x -= lw;
         zh_draw_ui_sprite(ovl, &digit.texture, &digit.tile, rgba); /* Draw digit. */
@@ -308,7 +308,7 @@ static void zh_draw_numeric_timer(
     
 	/* Clock */
 	gfx_texture_t clock = { /* Grab our digit texture. */
-		(uint32_t)gl->if_ctxt.parameter + G_IM_TEX_CLOCK_TIMG
+		(uint32_t)gl->if_ctxt.parameter_frame_vtx + G_IM_TEX_CLOCK_TIMG
 		, 16
 		, 16
 		, G_IM_FMT_IA
@@ -333,7 +333,7 @@ static void zh_draw_numeric_timer(
         int i = *str - '0';
 
         gfx_texture_t digit = { /* Grab our digit texture. */
-            (uint32_t)gl->if_ctxt.parameter + (G_IM_TEX_DIGIT_TIMG + (i * 0x80))
+            (uint32_t)gl->if_ctxt.parameter_frame_vtx + (G_IM_TEX_DIGIT_TIMG + (i * 0x80))
             , 8
             , 16
             , G_IM_FMT_I
