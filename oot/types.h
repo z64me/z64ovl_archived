@@ -451,6 +451,16 @@ typedef struct
                                               /* 0x0080 */
 } z64_room_ctxt_t;
 
+enum button_id_e {
+    BTN_ID_B
+    , BTN_ID_CL
+    , BTN_ID_CD
+    , BTN_ID_CR
+    , INV_OFF_CL
+    , INV_OFF_CD
+    , INV_OFF_CR
+} button_id_t;
+
 /* interface context */
 typedef struct
 {
