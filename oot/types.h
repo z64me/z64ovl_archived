@@ -454,37 +454,90 @@ typedef struct
 /* interface context */
 typedef struct
 {
-  char              unk_00_[0x0130];          /* 0x0000 */
-  char             *parameter;                /* 0x0130 */
-  char             *action_texture;           /* 0x0134 */
-  char             *item_texture;             /* 0x0138 */
-  char             *minimap_texture;          /* 0x013C */
-  char              unk_01_[0x00AC];          /* 0x0140 */
-  uint16_t          h1EC;                     /* 0x01EC */
-  char              unk_02_[0x0002];          /* 0x01EE */
-  uint16_t          a_action;                 /* 0x01F0 */
-  char              unk_03_[0x0002];          /* 0x01F2 */
-  float             f1F4;                     /* 0x01F4 */
-  char              unk_04_[0x0004];          /* 0x01F8 */
-  int16_t           b_label;                  /* 0x01FC */
-  char              unk_05_[0x0064];          /* 0x01FE */
-  struct
-  {
-    uint8_t         unk_00_;
-    uint8_t         b_button;
-    uint8_t         unk_01_;
-    uint8_t         bottles;
-    uint8_t         trade_items;
-    uint8_t         hookshot;
-    uint8_t         ocarina;
-    uint8_t         warp_songs;
-    uint8_t         suns_song;
-    uint8_t         farores_wind;
-    uint8_t         dfnl;
-    uint8_t         all;
-  }                 restriction_flags;        /* 0x0262 */
-  char              unk_06_[0x0002];          /* 0x026E */
-                                              /* 0x0270 */
+    /* 0x000 */ char        view[0x128];
+    /* 0x128 */ void*       parameter_frame_vtx;
+    /* 0x12C */ void*       heart_vtx;
+
+    /* 0x130 */ char*       parameter_segment;          /* Resident parameter segment */
+    /* 0x134 */ char*       do_action_segment;          /* DO action segment */
+    /* 0x138 */ char*       icon_item_segment;          /* Icon item segment */
+    /* 0x13C */ char*       map_segment;                /* MAP segment */
+    /* 0x140 */ char        map_palete[16 * 2];         /* MAP palette */
+
+    /* 0x160 */ char        pad[0x1EC - 0x160];
+
+    /* 0x1EC */ int16_t     do_action_flg;              /* DO action switching flag */
+    /* 0x1EE */ uint16_t    do_action;                  /* DO action pointer */
+    /* 0x1F0 */ uint16_t    do_action_old;              /* DO action pointer old */
+    /* 0x1F4 */ float       do_action_rotate;           /* DO action rotation counter */
+    /* 0x1F8 */ int16_t     navi_flag;                  /* Navi flag */
+    /* 0x1FA */ int16_t     sp_action_flag;             /* Special (B) action switching flag */
+    /* 0x1FC */ int16_t     sp_action;                  /* Special (B) Action pointer */
+
+    /* 0x1FE */ int16_t     health_meter;
+    /* 0x200 */ int16_t     now_mode;
+
+    /* 0x202 */ int16_t     active_heart_fg[3];         /* Beating Heart Foreground Color */
+    /* 0x208 */ int16_t     active_heart_bg[3];         /* Beating Heart Background Color */
+    /* 0x20E */ int16_t     heart_fg_r[2];              /* Heart Foreground Red */
+    /* 0x212 */ int16_t     heart_fg_g[2];              /* Heart Foreground Green */
+    /* 0x216 */ int16_t     heart_fg_b[2];              /* Heart Foreground Blue */
+    /* 0x21A */ int16_t     heart_bg_r[2];              /* Heart Background Red */
+    /* 0x21E */ int16_t     heart_bg_g[2];              /* Heart Background Green */
+    /* 0x222 */ int16_t     heart_bg_b[2];              /* Heart Background Blue */
+
+    /* 0x226 */ int16_t     active_heart_max;
+    /* 0x228 */ int16_t     active_heart_timer;
+    /* 0x22A */ int16_t     active_heart_wait;          /* Current throb amount */
+    /* 0x22C */ int16_t     active_heart_flag;          /* Throb direction. 1 when increasing, 0 when decreasing */
+
+    /* 0x22E */ int16_t     magic_mp_cost;              /* Magic consumption */
+    /* 0x230 */ int16_t     magic_delta;                /* Increase / decrease frame */
+
+    /* 0x232 */ int16_t     rupee_counter[4];			/* Rupee Counter (Used for Rupees and Keys) */
+    /* 0x23A */ uint8_t     carrot_counter;             /* Whip counter */
+
+    /* 0x23C */ uint16_t    horseback_archery_score;    /* Yabusame score */
+    /* 0x23E */ uint16_t    horseback_archery_arrow;    /* Number of Yabusame */
+    /* 0x240 */ uint16_t    yabu_mode;                  /* Yabusame internal state */
+    /* 0x242 */ uint16_t    yabu_score;                 /* Yabusame internal score */
+
+    /* 0x244 */ uint16_t    fill_alpha;                 /* Fill Rectangle Alpha value */
+    /* 0x246 */ uint16_t    a_alpha;
+    /* 0x248 */ uint16_t    b_alpha;
+    /* 0x24A */ uint16_t    cl_alpha;
+    /* 0x24C */ uint16_t    cd_alpha;
+    /* 0x24E */ uint16_t    cr_alpha;
+    /* 0x250 */ uint16_t    heart_alpha;
+    /* 0x252 */ uint16_t    magic_alpha;
+    /* 0x254 */ uint16_t    map_alpha;
+    /* 0x256 */ int16_t     start_alpha;
+
+    /* 0x258 */ int16_t     spot_map_no;                /* SPOTMAP NO. */
+    /* 0x25A */ int16_t     dungeon_map_no;             /* Dungeon MAP NO. */
+    /* 0x25C */ int16_t     room_no;                    /* Currently room No. */
+    /* 0x25E */ int16_t     map_palette_no;             /* Currently Room PALETTE No. */
+
+    /* 0x260 */ uint8_t     fishing_rod_equipped;       /* Flags you have */
+    /* 0x261 */ uint8_t     marathon_flag;
+
+    /* Button control code */
+    struct {
+        /* 0x262 */ uint8_t h_gage;     /* Heart, magic gauge, rupee, key */
+        /* 0x263 */ uint8_t b_button;   /* B button */
+        /* 0x264 */ uint8_t a_button;   /* A button */
+        /* 0x265 */ uint8_t c_bottle;   /* Bottle */
+        /* 0x266 */ uint8_t c_warasibe; /* Straw */
+        /* 0x267 */ uint8_t c_hook;     /* Hook shot */
+        /* 0x268 */ uint8_t c_ocarina;  /* Ocarina */
+        /* 0x269 */ uint8_t c_warp;     /* Ocarina（warp）*/
+        /* 0x26A */ uint8_t c_sunmoon;  /* Ocarina（Song of the sun）*/
+        /* 0x26B */ uint8_t m_wind;     /* Magic (wind) */
+        /* 0x26C */ uint8_t m_magic;    /* Magic (flame / love) */
+        /* 0x26D */ uint8_t another;    /* Other C button */
+    } restrictions;
+
+    /* 0x270 */
 } z64_if_ctxt_t;
 
 typedef struct
