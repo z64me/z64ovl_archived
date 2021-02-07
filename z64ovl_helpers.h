@@ -143,6 +143,22 @@ static void zh_segment_pointer(z64_global_t *global, int seg, uintptr_t v)
 }
 
 /****
+ * returns non-zero when the game is paused, 0 otherwise */
+ ****/
+static inline uint32_t zh_gameIsPaused(void)
+{
+	/* you can check whether the game is paused by referencing
+	 * the "pause/player" overlay table: is kaleido_scope loaded?
+	 * https://wiki.cloudmodding.com/oot/Overlay_Tables
+	 */
+	struct {
+		uint32_t ram;
+		uint32_t ext[6];
+	} *table = (void*)Z64GL_OVERLAYTABLE_PAUSEPLAYER;
+	return table[0].ram;
+}
+
+/****
  * _Printf printer. Write text to a RAM address.
  ***/
  static
