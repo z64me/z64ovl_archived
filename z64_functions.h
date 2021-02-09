@@ -2233,6 +2233,16 @@ extern void external_func_8002F698(z64_global_t* gl, uint32_t a1, float a2, int1
 	#endif
 
 /**
+ * updates something based on which boots are equipped
+ */
+extern void Player_SetBootData(z64_global_t *gl, z64_player_t *p);
+	#if OOT_DEBUG
+		asm("Player_SetBootData = 0x8008E750");
+	#elif OOT_U_1_0
+		asm("Player_SetBootData = 0x80079200");
+	#endif
+
+/**
  * Wrapper for 8002F698 (Above)
  */
 extern void external_func_8002F6D4(z64_global_t* gl, uint32_t a1, float a2, int16_t a3, float a4, uint32_t a5);
