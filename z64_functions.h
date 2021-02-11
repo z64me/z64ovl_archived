@@ -5840,6 +5840,28 @@ extern int32_t external_func_8008EF5C(z64_global_t* gl, vec3f_t* pos, float radi
 		asm("external_func_8008EF5C = 0x80079A20");
 	#endif
 
+/*
+ * Link's main drawing routine
+ */
+extern void z_player_lib_draw_link(
+	z64_global_t *globalCtx
+	, void **skeleton
+	, vec3s_t *jointTable
+	, int32_t dListCount
+	, int32_t lod
+	, int32_t tunic
+	, int32_t boots
+	, int32_t face
+	, void *overrideLimbDraw
+	, void *postLimbDraw
+	, void *data
+);
+	#if OOT_DEBUG
+		asm("z_player_lib_draw_link = 0x80079F48");
+	#elif OOT_U_1_0
+		asm("z_player_lib_draw_link = 0x8008F470");
+	#endif
+
 /**
  * Get Strength Upgrade Power Level
  * TODO These notes need converted into a C function prototype
