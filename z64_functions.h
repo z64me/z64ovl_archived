@@ -5857,9 +5857,9 @@ extern void z_player_lib_draw_link(
 	, void *data
 );
 	#if OOT_DEBUG
-		asm("z_player_lib_draw_link = 0x80079F48");
-	#elif OOT_U_1_0
 		asm("z_player_lib_draw_link = 0x8008F470");
+	#elif OOT_U_1_0
+		asm("z_player_lib_draw_link = 0x80079F48");
 	#endif
 
 /**
