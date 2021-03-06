@@ -1224,10 +1224,11 @@ typedef struct {
 
 typedef union {
   z64_animation_type_raw_t   raw;
-  z64_animation_type_1_t     type0;
-  z64_animation_type_2_t     type1;
-  z64_animation_type_3_t     type2;
-  z64_animation_type_4_t     type3;
+  z64_animation_type_0_t     type0;
+  z64_animation_type_1_t     type1;
+  z64_animation_type_2_t     type2;
+  z64_animation_type_3_t     type3;
+  z64_animation_type_4_t     type4;
   z64_animation_type_5_t     type5;
 } z64_animation_type_t;
 
