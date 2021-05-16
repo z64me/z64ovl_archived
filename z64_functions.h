@@ -7754,11 +7754,12 @@ extern float* z_matrix_get_now(void);
 #if OOT_DEBUG
   asm("z_matrix_get_now = 0x800D0924");
 #elif OOT_U_1_0
-#warning z_matrix_get_now is not implemented
-  asm("z_matrix_get_now = 0xDEADBEEF");
+//z_matrix_get_now is not implemented
+//asm("z_matrix_get_now = 0xDEADBEEF");
+//undefined external if used
 #elif MM_U_1_0
-#warning z_matrix_get_now is not implemented
-  asm("z_matrix_get_now = 0xDEADBEEF");
+//z_matrix_get_now is not implemented
+//asm("z_matrix_get_now = 0xDEADBEEF");
 #endif
 
 /* Multiply the top float matrix in the stack by a given float matrix. (?)
