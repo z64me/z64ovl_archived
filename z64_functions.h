@@ -7380,12 +7380,11 @@ extern uint32_t z_game_alloc(z64_global_t* gl, int32_t size, char* file, int32_t
 	#else
 		// This function seems to only exist in the Debug ROM.
 		// Therefore, we implement it directly in other roms.
-		static void *
+		static inline void *
 		graph_alloc(z64_gfx_t *gfx_ctxt, int32_t size)
 		{
 			/* TODO confirm this works in 1.0 */
-			/* TODO compile-time error checking: #error if (size & 7) */
-			gfx_ctxt->poly_opa.d -= size / 8;
+			gfx_ctxt->poly_opa.d -= (size + 7) >> 3;
 			return gfx_ctxt->poly_opa.d;
 		}
 	#endif
