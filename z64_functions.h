@@ -1244,28 +1244,51 @@ void* a /* Sub Structure at `actor->0x00B4`, formerly `rot_2` */
 );
 #if OOT_DEBUG
   asm("z_actor_shadow_init = 0x8002B1E0");
-  asm("Z_SHADOW_CIRCLE = 0x8002B5EC");
-  asm("Z_SHADOW_TEARDROP = 0x8002B8C4");
-  //asm("Z_SHADOW_CIRCLE_WHITE = 0x8002B614");
-  //asm("Z_SHADOW_SQUIGGLE = 0x8002B644");
 #elif OOT_U_1_0
   asm("z_actor_shadow_init = 0x8001EC20");
-  asm("Z_SHADOW_CIRCLE = 0x8001EFF4");
-  asm("Z_SHADOW_TEARDROP = 0x8001F280");
 #elif MM_U_1_0
   asm("z_actor_shadow_init = 0x800B3BA4");
-  asm("Z_SHADOW_CIRCLE = 0x800B3FC0");
-  asm("Z_SHADOW_TEARDROP = 0x800B42F8");
 #elif MM_J_1_0
   asm("z_actor_shadow_init = 0x800B5784");
-  asm("Z_SHADOW_CIRCLE = 0x800B5BA0");
-  asm("Z_SHADOW_TEARDROP = 0x800B5ED8");
 #elif MM_DEBUG
   asm("z_actor_shadow_init = 0x800C61DC");
-  asm("Z_SHADOW_CIRCLE = 0x800C6634");
-  asm("Z_SHADOW_TEARDROP = 0x800C6A4C");
 #endif
-extern void *Z_SHADOW_CIRCLE, *Z_SHADOW_TEARDROP;
+
+extern void *Z_SHADOW_CIRCLE;
+#if OOT_DEBUG
+  	asm("Z_SHADOW_CIRCLE = 0x8002B5EC");
+#elif OOT_U_1_0
+  	asm("Z_SHADOW_CIRCLE = 0x8001EFF4");
+#elif MM_U_1_0
+  	asm("Z_SHADOW_CIRCLE = 0x800B3FC0");
+#elif MM_J_1_0
+  	asm("Z_SHADOW_CIRCLE = 0x800B5BA0");
+#elif MM_DEBUG
+  	asm("Z_SHADOW_CIRCLE = 0x800C6634");
+#endif
+
+extern void *Z_SHADOW_TEARDROP;
+#if OOT_DEBUG
+  	asm("Z_SHADOW_TEARDROP = 0x8002B8C4");
+#elif OOT_U_1_0
+  	asm("Z_SHADOW_TEARDROP = 0x8001F280");
+#elif MM_U_1_0
+  	asm("Z_SHADOW_TEARDROP = 0x800B42F8");
+#elif MM_J_1_0
+  	asm("Z_SHADOW_TEARDROP = 0x800B5ED8");
+#elif MM_DEBUG
+  	asm("Z_SHADOW_TEARDROP = 0x800C6A4C");
+#endif
+
+extern void *Z_SHADOW_CIRCLE_WHITE;
+#if OOT_DEBUG
+    asm("Z_SHADOW_CIRCLE_WHITE = 0x8002B614");
+#endif
+
+extern void *Z_SHADOW_SQUIGGLE;
+#if OOT_DEBUG
+	asm("Z_SHADOW_SQUIGGLE = 0x8002B644");
+#endif
 
 /**
  * TODO This function is completely undocumented
@@ -2274,7 +2297,7 @@ extern void external_func_8002F758(z64_global_t *gl, void *gl830, float a, float
 	#elif OOT_U_1_0
 		asm("external_func_8002F758 = 0x80022F00");
 	#elif MM_U_1_0
-		asm("external_func_8002F6D4 = 0x800CA1E8");
+		asm("external_func_8002F758 = 0x800CA1E8");
 	#endif
 
 /**
@@ -6414,7 +6437,7 @@ z64_obj_ctxt_t* obj_ctxt /* The Object Context, within the Global Context */
   asm("z_scene_object_get_index = 0x8012F608");
 #elif MM_J_1_0
   asm("z_scene_object_get_index = 0x80131078");
-#elif MM_J_1_0
+#elif MM_DEBUG
   asm("z_scene_object_get_index = 0x80155650");
 #endif
 
@@ -6964,9 +6987,9 @@ extern void external_func_800A6EF4(void);
  */
 extern void z_skin_mtx_multiply(float* in, float* mult, float* out);
 	#if OOT_DEBUG
-		asm("external_func_800A6FA0 = 0x800A6FA0");
+		asm("z_skin_mtx_multiply = 0x800A6FA0");
 	#elif OOT_U_1_0
-		asm("external_func_800A6EF4 = 0x8008EDB8");
+		asm("z_skin_mtx_multiply = 0x8008EDB8");
 	#endif
 
 
@@ -8878,25 +8901,55 @@ extern int32_t z_fp_lfloor(double x);
 		//asm("z_fp_lfloor = 0xDEADBEEF");
 	#endif
 
-/*
-These all need 1.0 and MM Equivalents.
-asm("z_fp_ceilf = 0x800FD3C8");
-asm("z_fp_ceil = 0x800FD3D4");
-asm("z_fp_lceilf = 0x800FD3E0");
-asm("z_fp_lceil = 0x800FD3F0");
-asm("z_fp_truncf = 0x800FD400");
-asm("z_fp_trunc = 0x800FD40C");
-asm("z_fp_ltruncf = 0x800FD418");
-asm("z_fp_ltrunc = 0x800FD428");
-asm("z_fp_nearbyintf = 0x800FD438");
-asm("z_fp_nearbyint = 0x800FD444");
-asm("z_fp_lnearbyintf = 0x800FD450");
-asm("z_fp_lnearbyint = 0x800FD460");
-asm("z_fp_roundf = 0x800FD470");
-asm("z_fp_round = 0x800FD48C");
-asm("z_fp_lroundf = 0x800FD4AC");
-asm("z_fp_lround = 0x800FD4CC");
-*/
+// These all need function prototypes and 1.0 and MM Equivalents.
+#if OOT_DEBUG
+	asm("z_fp_ceilf = 0x800FD3C8");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_ceil = 0x800FD3D4");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_lceilf = 0x800FD3E0");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_lceil = 0x800FD3F0");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_truncf = 0x800FD400");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_trunc = 0x800FD40C");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_ltruncf = 0x800FD418");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_ltrunc = 0x800FD428");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_nearbyintf = 0x800FD438");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_nearbyint = 0x800FD444");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_lnearbyintf = 0x800FD450");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_lnearbyint = 0x800FD460");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_roundf = 0x800FD470");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_round = 0x800FD48C");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_lroundf = 0x800FD4AC");
+#endif
+#if OOT_DEBUG
+	asm("z_fp_lround = 0x800FD4CC");
+#endif
 
 /**
  * Deallocates memory on main heap
@@ -9192,10 +9245,10 @@ extern uint32_t player_refresh_equipment(z64_global_t *global, z64_actor_t *acto
  * Returns 1 if the line intersects with the triangle, 0 otherwise
  */
 extern int z_tri_line_intersect(vec3f_t* v0, vec3f_t* v1, vec3f_t* v2, float nx, float ny, float nz, float originDist, vec3f_t* lineStart, vec3f_t* lineEnd, vec3f_t* intersectionPoint, int arg);
-	#ifdef OOT_U_1_0
-		 asm("z_tri_line_intersect = 0x800A80D0");
-	#else
-		 asm("z_tri_line_intersect = 0x800CE258");
+	#if OOT_DEBUG
+		asm("z_tri_line_intersect = 0x800CE258");
+	#elif OOT_U_1_0
+		asm("z_tri_line_intersect = 0x800A80D0");
 	#endif
 
 /**
